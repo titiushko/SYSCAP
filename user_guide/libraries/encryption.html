@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/encryption.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Encryption Class : CodeIgniter User Guide</title>
+<title>Clase Encrypt : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Encryption Class
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Clase Encrypt
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -55,150 +57,123 @@ Encryption Class
 <!-- START CONTENT -->
 <div id="content">
 
+<h1>Clase Encrypt</h1>
+<p>La clase de encriptacion provee dos formas de encriptacion. Usa un esquema que pre-compila el mensaje usando un algoritmo hash aleatorio XOR esquema de codificaci&oacute;n, el cual es entonces encriptado usando la libreria Mcrypt. Si Mcrypt no esta disponible en el servidor el mensaje codificado todavia proveera aun un razonable grado de seguridad para sesiones encriptadas u otros de proposito "ligero". Si Mcrypt est&aacute; disponible, efectivamente tendr&aacute;s una cadena de mensaje doblemente encriptada, la cual  provee un alto grado de seguridad.</p>
 
-<h1>Encryption Class</h1>
+<h2>Estableciendo tu Clave</h2>
+<p>Una <em>Clave</em> es una pieza de informaci&oacute;n que controla el proceso criptogr&aacute;fico  y permite que una cadena encriptada sea decodificada. De hecho, la clave que elijas proveera el <strong>unico</strong> medio para decodificar el dato que has encriptado con esa clave, as&iacute; no solamente debes elejir cuidadosamente la clave, nunca debes cambiarla si tiene la intenci&oacute;n de usarala para  para mantener los datos persistentes.</p>
 
-<p>The Encryption Class provides two-way data encryption.  It is encrypted using
-the Mcrypt library.  The Encryption Class requires the Mcrypt extension to run.</p>
+<p>Y ni que decir de que debes ser cuidadoso de donde guardas la clave, pues si alguien obtiene acceso a la clave, las informaciones seran facilmente decodificadas. Si tu servidor no esta completamente bajo tu control es imposible asegurar la clave de seguridad, asi que deber&aacute;s pensar cuidadosamente antes de usaala en algo que requiere alta seguridad, como almacenar numeros de tarjetas de credito.</p>
 
+<p>Para tomar la maxima ventaja del algoritmo de encriptaci&oacute;n, tu clave deber&aacute; ser de 32 caracteres de longitud (128 bits). La clave debe ser aleatoriamente una cadena que tu puedes concoct, con numeros y letras tanto mayusculas como minusculas. Tu clave<strong>no</strong> deber&aacute; ser una cadena de texto simple. De manera a que sea lo mas seguara criptograficamente hablando se necesita que la clave sea lo mas aleatoria posible.</p>
 
-<h2>Setting your Key</h2>
+<p>Tu clave tanto puede ser almacenada en tu <dfn>application/config/config.php</dfn>, como puedes dise&ntilde;ar tu propio mecanismo  de almacenamiento y pasarla dinamicamente cuando codificas/decodificas.</p>
 
-<p>A <em>key</em> is a piece of information that controls the cryptographic process and permits an encrypted string to be decoded.
-In fact, the key you chose will provide the <strong>only</strong> means to decode data that was encrypted with that key,
-so not only must you choose the key carefully, you must never change it if you intend use it for persistent data.</p>
+<p>Para guardar tu clave en tu <dfn>application/config/config.php</dfn>, abre el archivo y establece:</p>
 
-<p>It goes without saying that you should guard your key carefully.
-Should someone gain access to your key, the data will be easily decoded.  If your server is not totally under your control
-it's impossible to ensure key security so you may want to think carefully before using it for anything
-that requires high security, like storing credit card numbers.</p>
+<code>$config['encryption_key'] = "TU CLAVE";</code>
 
-<p>To take maximum advantage of the encryption algorithm, your key should be 32 characters in length (128 bits).
-The key should be as random a string as you can concoct, with numbers and uppercase and lowercase letters.
-Your key should <strong>not</strong> be a simple text string. In order to be cryptographically secure it
-needs to be as random as possible.</p>
+<h2>Longitud del Mensaje</h2>
+<p>Es importante para usted saber que los mensajes codificados generan aproximadamente 2.6 veces la longitud del mensaje original Por ejemplo, si encriptas la cadena "mi super dato secret", cuya longitud es de 21 caracteres en longitud, terminaras con una cadena que es de aproximadamente 55 caracteres (decimos aproximadamente debido a que la cadena codificada incrementa en agrupaciones de 64 bit, por tanto no es necesariamente linear). Manteniendo esta informaci&oacute;n en mente cuando seleccione el mecanismo de almacenamietno. Los cookies, por ejemplo pueden mantener solamente 4K de informaci&oacute;n.</p>
 
-<p>Your key can be either stored in your <dfn>application/config/config.php</dfn>, or you can design your own
-storage mechanism and pass the key dynamically when encoding/decoding.</p>
-
-<p>To save your key to your <dfn>application/config/config.php</dfn>, open the file and set:</p>
-<code>$config['encryption_key'] = "YOUR KEY";</code>
-
-
-<h2>Message Length</h2>
-
-<p>It's important for you to know that the encoded messages the encryption function generates will be approximately 2.6 times longer than the original
-message.  For example, if you encrypt the string "my super secret data", which is 21 characters in length, you'll end up
-with an encoded string that is roughly 55 characters (we say "roughly" because the encoded string length increments in
-64 bit clusters, so it's not exactly linear).  Keep this information in mind when selecting your data storage mechanism.  Cookies,
-for example, can only hold 4K of information.</p>
-
-
-<h2>Initializing the Class</h2>
-
-<p>Like most other classes in CodeIgniter, the Encryption class is initialized in your controller using the <dfn>$this->load->library</dfn> function:</p>
+<h2>Inicializando la clase</h2>
+<p>Igual que en las otras clases en CodeIgniter, la clase Encryptation es inicializada en tu controlador usando la funcion: <dfn>$this->load->library</dfn></p>
 
 <code>$this->load->library('encrypt');</code>
-<p>Once loaded, the Encrypt library object will be available using: <dfn>$this->encrypt</dfn></p>
 
+<p>Una vez cargada, el objeto Encrypt estara disponible usando: <dfn>$this->encrypt</dfn></p>
 
 <h2>$this->encrypt->encode()</h2>
+<p>Realizando el cifrado de datos y lo devuelve como una cadena. Ejemplo:</p>
 
-<p>Performs the data encryption and returns it as a string. Example:</p>
 <code>
-$msg = 'My secret message';<br />
+$msg = 'Mi mensaje secreto';<br />
 <br />
 $encrypted_string = $this->encrypt->encode($msg);</code>
 
-<p>You can optionally pass your encryption key via the second parameter if you don't want to use the one in your config file:</p>
+<p>Opcionalmente puedes pasar tu clave de encriptaci&oacute;n en el segundo par&aacute;metro si no quiere usar la clave que esta en tu archivo de configuraci&oacute;n:</p>
 
 <code>
-$msg = 'My secret message';<br />
-$key = 'super-secret-key';<br />
+$msg = 'Mi mensaje secreto';<br />
+$key = 'clave-super-secreta';<br />
 <br />
 $encrypted_string = $this->encrypt->encode($msg, $key);</code>
 
-
 <h2>$this->encrypt->decode()</h2>
 
-<p>Decrypts an encoded string.  Example:</p>
+<p>Desencripta una cadena codificada. Ejemplo:</p>
 
 <code>
 $encrypted_string = 'APANtByIGI1BpVXZTJgcsAG8GZl8pdwwa84';<br />
 <br />
-$plaintext_string = $this->encrypt->decode($encrypted_string);</code>
+$plaintext_string = $this->encrypt->decode($encrypted_string);
+</code>
 
-<p>You can optionally pass your encryption key via the second parameter if you don't want to use the one in your config file:</p>
+<p>Opcionalmente puedes pasar su clave de encriptaci&oacute;n mediante el segundo par&aacute;metro si no quiere usar la de tu archivo de configuraci&oacute;n:</p>
 
 <code>
-$msg = 'My secret message';<br />
-$key = 'super-secret-key';<br />
+$msg = 'Mi mensaje secreto';<br />
+$key = 'clave-super-secreta';<br />
 <br />
 $encrypted_string = $this->encrypt->decode($msg, $key);</code>
 
-
 <h2>$this->encrypt->set_cipher();</h2>
+<p>Te permite establecer un cifrado Mcrypt. Por defeco usa <samp>MCRYPT_RIJNDAEL_256</samp>. Ejemplo:</p>
 
-<p>Permits you to set an Mcrypt cipher.  By default it uses <samp>MCRYPT_RIJNDAEL_256</samp>.  Example:</p>
 <code>$this->encrypt->set_cipher(MCRYPT_BLOWFISH);</code>
-<p>Please visit php.net for a list of  <a href="http://php.net/mcrypt">available ciphers</a>.</p>
 
-<p>If you'd like to manually test whether your server supports Mcrypt you can use:</p>
-<code>echo ( ! function_exists('mcrypt_encrypt')) ? 'Nope' : 'Yup';</code>
+<p>Por favor visite php.net para tener un alista de <a href="http://php.net/mcrypt">cifradores disponibles</a>.</p>
 
+<p>Si prefieres probar manualmente si su servidor soporta Mcrypt puedes usar:</p>
+
+<code>echo ( ! function_exists('mcrypt_encrypt')) ? 'Nop' : 'Sip';</code>
 
 <h2>$this->encrypt->set_mode();</h2>
+<p>Te permite establecer un modo MCRYPT. Por defecto usa <samp>MCRYPT_MODE_ECB</samp>.  Ejemplo:</p>
 
-<p>Permits you to set an Mcrypt mode.  By default it uses <samp>MCRYPT_MODE_CBC</samp>.  Example:</p>
 <code>$this->encrypt->set_mode(MCRYPT_MODE_CFB);</code>
-<p>Please visit php.net for a list of  <a href="http://php.net/mcrypt">available modes</a>.</p>
 
+<p>Por favor visite php.net para tener un alista de  <a href="http://php.net/mcrypt">modos disponibles</a>.</p>
 
 <h2>$this->encrypt->sha1();</h2>
-<p>SHA1 encoding function.  Provide a string and it will return a 160 bit one way hash.  Note:  SHA1, just like MD5 is non-decodable. Example:</p>
-<code>$hash = $this->encrypt->sha1('Some string');</code>
+<p>La funcion de codificacion SHA1. Provee una cadena y la retorna un hash de 160 bit de una sola forma. Nota: SHA1, es como el MD5 es no-decodificable. Ejemplo:</p>
 
-<p>Many PHP installations have SHA1 support by default so if all you need is to encode a hash it's simpler to use the native
-function:</p>
+<code>$hash = $this->encrypt->sha1('alguna cadena');</code>
 
-<code>$hash = sha1('Some string');</code>
+<p>Muchas instalaciones de PHP tienen soporte para SHA1 por defecto, por tanto lo unico que necesitas para codificar es usar la funcion nativa:</p>
 
-<p>If your server does not support SHA1 you can use the provided function.</p>
+<code>$hash = sha1('Alguna Cadena');</code>
+<p>Si tu servidor no soporta SHA1 puedes usar la funcion proveida.</p>
 
 <h2 id="legacy">$this->encrypt->encode_from_legacy(<kbd>$orig_data</kbd>, <kbd>$legacy_mode</kbd> = MCRYPT_MODE_ECB, <kbd>$key</kbd> = '');</h2>
-<p>Enables you to re-encode data that was originally encrypted with CodeIgniter 1.x to be compatible with the Encryption library in CodeIgniter 2.x.  It is only
-	necessary to use this method if you have encrypted data stored permanently such as in a file or database and are on a server that supports Mcrypt.  "Light" use encryption
-	such as encrypted session data or transitory encrypted flashdata require no intervention on your part.  However, existing encrypted Sessions will be
-	destroyed since data encrypted prior to 2.x will not be decoded.</p>
+<p>Le permite recodificar los datos que se encriptaron originalmente con CodeIgniter 1.x para que sean compatibles con la biblioteca Encrypt de CodeIgniter 2.x. Solamente es necesario usar este m&eacute;todo si tiene datos encriptados almacenados permanentemente como en un archivo o base de datos en un servidor que soporte Mcrypt. "Light" usa encriptaci&oacute;n tal como datos de sesi&oacute;n encriptados o flashdata encriptados transitorios que no necesitan intervenci&oacute;n de su parte. Sin embargo, las sesiones existentes encriptadas se destruir&aacute;n ya que los datos encriptados antes de 2.x no se decodificaban.</p>
 
-<p class="important"><strong>Why only a method to re-encode the data instead of maintaining legacy methods for both encoding and decoding?</strong>  The algorithms in
-	the Encryption library have improved in CodeIgniter 2.x	both for performance and security, and we do not wish to encourage continued use of the older methods.
-	You can of course extend the Encryption library if you wish and replace the new methods with the old and retain seamless compatibility with CodeIgniter 1.x
-	encrypted data, but this a decision that a developer should make cautiously and deliberately, if at all.</p>
+<p class="important"><strong>&iquest;Por qu&eacute; solamente un m&eacute;todo para recodificar los datos, en lugar de mantener los m&eacute;todos anteriores tanto para codificaci&oacute;n como para decodificaci&oacute;n?</strong> Los algoritmos de la biblioteca Encrypt se mejoraron en CodeIgniter 2.x, tanto en rendimiento como seguridad y no queremos incentivar que se sigan usando m&eacute;todos viejos. Por supuesto, puede extender la biblioteca Encryption si lo desea y reemplazar los m&eacute;todos nuevos con los viejos y mantener una compatibilidad total con los datos encriptados con CodeIgniter 1.x, pero esta es una decisi&oacute;n que, en todo caso, tiene que hacer con cuidado y deliberadamente un desarrollador.</p>
 
 <code>$new_data = $this->encrypt->encode_from_legacy(<kbd>$old_encrypted_string</kbd>);</code>
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
-<tr>
-	<th>Parameter</th>
-	<th>Default</th>
-	<th>Description</th>
+<tr>  
+	<th>Par&aacute;metro</th>
+	<th>Por Defecto</th>
+	<th>Descripci&oacute;n</th>
 </tr>
 <tr>
 	<td class="td"><strong>$orig_data</strong></td>
 	<td class="td">n/a</td>
-	<td class="td">The original encrypted data from CodeIgniter 1.x's Encryption library</td>
+	<td class="td">Datos originales encriptados con la biblioteca Encryption de
+CodeIgniter 1.x</td>
 </tr>
 <tr>
 	<td class="td"><strong>$legacy_mode</strong></td>
 	<td class="td">MCRYPT_MODE_ECB</td>
-	<td class="td">The Mcrypt mode that was used to generate the original encrypted data.  CodeIgniter 1.x's default was MCRYPT_MODE_ECB, and it will
-		assume that to be the case unless overridden by this parameter.</td>
+	<td class="td">Modo de Mcrypt que se us&oacute; para generar los datos encriptados originales. El valor por defecto de CodeIgniter 1.x era MCRYPT_MODE_ECB y se asumir&aacute; este valor, a menos que se lo anule con este par&aacute;metro.</td>
 </tr>
 <tr>
 	<td class="td"><strong>$key</strong></td>
 	<td class="td">n/a</td>
-	<td class="td">The encryption key.  This it typically specified in your config file as outlined above.</td>
+	<td class="td">Clave de encriptaci&oacute;n. Se lo especifica normalmente en su
+archivo de configuraci&oacute;n como se describe anteriormente.</td>
 </tr>
 </table>
 
@@ -208,14 +183,16 @@ function:</p>
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="email.html">Email Class</a>
+Tema anterior:&nbsp;&nbsp;<a href="email.html">Clase Email</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="file_uploading.html">File Uploading Class</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="form_validation.html">Clase Form Validation</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/encryption.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

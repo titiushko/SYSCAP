@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/database/queries.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:03 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Queries : CodeIgniter User Guide</title>
+<title>Consultas : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,12 +42,12 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-<a href="index.html">Database Library</a> &nbsp;&#8250;&nbsp;
-Queries
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+<a href="index.html">Clase Database</a> &nbsp;&#8250;&nbsp;
+Consultas
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -58,77 +60,44 @@ Queries
 <!-- START CONTENT -->
 <div id="content">
 
-
-<h1>Queries</h1>
+<h1>Consultas</h1>
 
 <h2>$this->db->query();</h2>
+<p>Para realizar una consulta, utilice la siguiente funci&oacute;n:</p>
 
-<p>To submit a query, use the following function:</p>
+<code>$this->db->query('SU CONSULTA AQUI');</code>
 
-<code>$this->db->query('YOUR QUERY HERE');</code>
+<p>La funci&oacute;n <dfn>query()</dfn> devuelve un <strong>objeto</strong> resultante de la base de datos cuando se ejecutan consultas de tipo "lectura", las cuales se pueden usar para <a href="results.html">mostrar sus resultados</a>. Cuando se ejecutan consultas de tipo "escritura" simplemente devuelve VERDADERO o FALSO seg&uacute;n el &eacute;xito o el fracaso. Para la recuperaci&oacute;n de datos se suele asignar t&iacute;picamente la consulta a su propia variable, como esto:</p>
 
-<p>The <dfn>query()</dfn> function returns a database result <strong>object</strong> when "read" type queries are run,
-which you can use to <a href="results.html">show your results</a>.  When "write" type queries are run it simply returns TRUE or FALSE
-depending on success or failure.  When retrieving data you will typically assign the query to your own variable, like this:</p>
-
-<code><var>$query</var> = $this->db->query('YOUR QUERY HERE');</code>
+<code><var>$query</var> = $this->db->query('SU CONSULTA AQUI');</code>
 
 <h2>$this->db->simple_query();</h2>
+<p>Esta es una versi&oacute;n simplificada de la funci&oacute;n <dfn>$this->db->query()</dfn>. Esto SOLO devuelve VERDADERO/FALSO seg&uacute;n el exito o el fracaso. NO retorna un conjunto de resultados de la base de datos, ni establece el tiempo de la consulta, o compila los datos obligatorios, o almacena su consulta para depuraci&oacute;n. Simplemente le permite realizar una consulta. La mayor&iacute;a de los usuarios raramente suelen usar esta funci&oacute;n.</p>
 
-<p>This is a simplified version of the <dfn>$this->db->query()</dfn> function.  It ONLY returns TRUE/FALSE on success or failure.
-It DOES NOT return a database result set, nor does it set the query timer, or compile bind data, or store your query for debugging.
-It simply lets you submit a query. Most users will rarely use this function.</p>
+<h1>Agregar prefijos manualmente a la Base de Datos</h1>
+<p>Si ha configurado un prefijo a la base de datos y desea a&ntilde;adirlo manualmente, puede usar lo siguiente.</p>
 
-
-<h1>Working with Database prefixes manually</h1>
-<p>If you have configured a database prefix and would like to prepend it to a table name for use in a native SQL query for example, then you can use the following:</p>
 <p><code>$this-&gt;db-&gt;dbprefix('tablename');<br />
-// outputs prefix_tablename</code></p>
+// Salida prefix_tablename</code></p>
 
-<p>If for any reason you would like to change the prefix programatically without needing to create a new connection, you can use this method:</p>
-<p><code>$this-&gt;db-&gt;set_dbprefix('newprefix');<br /><br />
-$this-&gt;db-&gt;dbprefix('tablename');<br />
-// outputs newprefix_tablename</code></p>
+<h1>Proteger Identificadores</h1>
+<p>En muchas bases de datos es recomendable proteger las tablas y los nombres de los campos - por ejemplo con backticks en MySQL. Las consultas de Active Record estan autom&aacute;ticamente protegidas, sin embargo si necesita proteger manualmente un identificador puede usar:</p>
 
+<p><code>$this-&gt;db-&gt;protect_identifier('table_name');</code></p>
 
-<h1>Protecting identifiers</h1>
-<p>In many databases it is advisable to protect table and field names - for example with backticks in MySQL. <strong>Active Record queries are automatically protected</strong>, however if you need to manually protect an identifier you can use:</p>
-<p><code>$this-&gt;db-&gt;protect_identifiers('table_name');</code></p>
-
-<p class="important">Although Active Record will try its best to properly quote any field and table names that you feed it, note that it is NOT designed to work with arbitrary user input. DO NOT feed it with unsanitized user data.</p>
-
-<p>This function will also add a table prefix to your table, assuming you have a prefix specified in your database config file. To enable the prefixing set <kbd>TRUE</kbd> (boolen) via the second parameter:</p>
-<p><code>$this-&gt;db-&gt;protect_identifiers('table_name', <kbd>TRUE</kbd>);</code></p>
-
-
-<h1>Escaping Queries</h1>
-<p>It's a very good security practice to escape your data before submitting it into your database.
-CodeIgniter has three methods that help you do this:</p>
+<h1>Escapar Consultas</h1>
+<p>Es una muy buena pr&aacute;ctica de seguridad para escapar de sus datos antes de presentarlos en su base de datos. CodeIgniter tiene dos funciones que lo ayudan a hacer esto:</p>
 
 <ol>
-<li><strong>$this->db->escape()</strong> This function determines the data type so that it
-can escape only string data.  It also automatically adds single quotes around the data so you don't have to:
-
+</li>
+<li><strong>$this->db->escape()</strong> Esta funci&oacute;n determina el tipo de datos a fin de que s&oacute;lo pueda escapar de cadenas de datos. Tambi&eacute;n a&ntilde;ade autom&aacute;ticamente comillas simples alrededor de los datos para que no tenga que:
 <code>$sql = "INSERT INTO table (title) VALUES(".$this->db->escape($title).")";</code></li>
-
-<li><strong>$this->db->escape_str()</strong>  This function escapes the data passed to it, regardless of type.
-Most of the time you'll use the above function rather than this one. Use the function like this:
-
+<li><strong>$this->db->escape_str()</strong> Esta funci&oacute;n escapa a los datos pasados a la misma, independientemente de su tipo. La mayor&iacute;a de las veces debe usar la funci&oacute;n anterior en lugar de &eacute;sta. Utilice la funci&oacute;n de esta manera:
 <code>$sql = "INSERT INTO table (title) VALUES('".$this->db->escape_str($title)."')";</code></li>
-
-<li><strong>$this->db->escape_like_str()</strong>  This method should be used when strings are to be used in LIKE
-conditions so that LIKE wildcards ('%', '_') in the string are also properly escaped.
-
-<code>$search = '20% raise';<br />
-$sql = "SELECT id FROM table WHERE column LIKE '%".$this->db->escape_like_str($search)."%'";</code></li>
-
 </ol>
 
-
-<h1>Query Bindings</h1>
-
-
-<p>Bindings enable you to simplify your query syntax by letting the system put the queries together for you. Consider the following example:</p>
+<h1>Enlazar Consultas</h1>
+<p>Enlazar le permite simplificar la sintaxis de la consulta dejando que el sistema ponga las consultas juntas en lugar de usted. Considere el siguiente ejemplo:</p>
 
 <code>
 $sql = "SELECT * FROM some_table WHERE id = <var>?</var> AND status = <var>?</var> AND author = <var>?</var>";
@@ -136,10 +105,9 @@ $sql = "SELECT * FROM some_table WHERE id = <var>?</var> AND status = <var>?</va
 $this->db->query($sql, array(3, 'live', 'Rick'));
 </code>
 
-<p>The question marks in the query are automatically replaced with the values in the array in the second parameter of the query function.</p>
-<p class="important">The secondary benefit of using binds is that the values are automatically escaped, producing safer queries.  You don't have to remember to manually escape data; the engine does it automatically for you.</p>
+<p>Los signos de interrogaci&oacute;n en la consulta son autom&aacute;ticamente reemplazados con los valores en el arreglo en el segundo par&aacute;metro de la funci&oacute;n de consulta.</p>
 
-
+<p class="important">El beneficio secundario de la utilizaci&oacute;n de enlazar es que los valores son autom&aacute;ticamente escapados, produciendo consultas mas seguras. No tiene que acordarse de escapar los datos manualmente, el motor lo hace autom&aacute;ticamente para usted.</p>
 
 </div>
 <!-- END CONTENT -->
@@ -147,14 +115,16 @@ $this->db->query($sql, array(3, 'live', 'Rick'));
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="connecting.html">Connecting to your Database</a>
+Tema anterior:&nbsp;&nbsp;<a href="connecting.html">Conectar a una Base de Datos</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="results.html">Query Results</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="results.html">Generar Resultados de Consultas</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/database/queries.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:03 GMT -->
 </html>

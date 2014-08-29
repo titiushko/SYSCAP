@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/overview/goals.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Design and Architectural Goals : CodeIgniter User Guide</title>
+<title>Objetivos de Dise&ntilde;o y Arquitectura : Gu&iacute;a del Usuario CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -24,12 +26,12 @@
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -41,43 +43,29 @@
 <tr>
 <td id="breadcrumb">
 <a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Goals
+<a href="../index-2.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+Metas Arquitect&oacute;nicas
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
 
 <br clear="all" />
 
-
 <!-- START CONTENT -->
 <div id="content">
+<h1>Objetivos de Dise&ntilde;o y Arquitectura</h1>
 
-
-
-<h2>Design and Architectural Goals</h2>
-
-<p>Our goal for CodeIgniter is <dfn>maximum performance, capability, and flexibility in the smallest, lightest possible package</dfn>.</p>
-
-<p>To meet this goal we are committed to benchmarking, re-factoring, and simplifying at every step of the development process,
-rejecting anything that doesn't further the stated objective.</p>
-
-<p>From a technical and architectural standpoint, CodeIgniter was created with the following objectives:</p>
-
+<p>Nuestra meta para CodeIgniter es <dfn>m&aacute;xima performance, capacidad, y flexibilidad en el m&aacute;s peque&ntilde;o, liviano paquete posible</dfn>.</p>
+<p>Para llegar a este objetivo estamos comprometidos a utilizar tiempos de referencia, re-factorizar, y simplificar en cada paso del proceso de desarrollo, rechazando cualquier cosa que no avance en el objetivo establecido.</p>
+<p>Desde un punto de vista t&eacute;cnico y arquitectonico, CodeIgniter fue creado con los siguientes objetivos:</p>
 <ul>
-<li><strong>Dynamic Instantiation.</strong>  In CodeIgniter, components are loaded and routines executed only when requested, rather than globally.  No assumptions are made by the system regarding what may be needed beyond the minimal core resources, so the system is very light-weight by default.  The events, as triggered by the HTTP request, and the controllers and views you design will determine what is invoked.</li>
-<li><strong>Loose Coupling.</strong>  Coupling is the degree to which components of a system rely on each other.  The less components depend on each other the more reusable and flexible the system becomes. Our goal was a very loosely coupled system.</li>
-<li><strong>Component Singularity.</strong>  Singularity is the degree to which components have a narrowly focused purpose.  In CodeIgniter, each class and its functions are highly autonomous in order to allow maximum usefulness.</li>
+<li><strong>Instanciaci&oacute;n Din&aacute;mica.</strong>  En CodeIgniter, los componentes son cargados y las rutinas ejecutadas s&oacute;lo cuando se pide, en vez de globalmente. No se hacen suposiciones por el sistema acerca de que puede necesitar adem&aacute;s de los recursos m&iacute;nimos del n&uacute;cleo, as&iacute; que el sistema es muy liviano por defecto. Los eventos, que se desencadenan por la petici&oacute;n HTTP, y los controladores y vistas que dise&ntilde;e determinar&aacute;n que es invocado..</li>
+<li><strong>Poco Acomplamiento.</strong>  Acomplamiento es el grado que los componentes de un sistema dependen entre ellos. Mientras menos componentes dependan de otro, m&aacute;s reusable y flexible el sistema se vuelva. nuestra meta era un sistema con muy poco acoplamiento.</li>
+<li><strong>Singularidad del Componente.</strong> Singularidad es el grado que m&aacute;s componentes tienen un proposito en el que enfocarse m&aacute;s estrecho. En CodeIgniter, cada clase y sus funciones son altamente aut&oacute;nomas para permitir m&aacute;xima utilidad.</li>
 </ul>
-
-<p>CodeIgniter is a dynamically instantiated, loosely coupled system with high component singularity. It strives for simplicity, flexibility, and high performance in a small footprint package.</p>
-
-
-
-
-
+<p>CodeIgniter es un sistema instanciado din&aacute;micamente, poco acoplado con gran singularidad de componente. Se esfuerza para la simplicidad, flexibilidad y alta performance en un paquete de peque&ntilde;a pisada.</p>
 
 </div>
 <!-- END CONTENT -->
@@ -85,14 +73,16 @@ rejecting anything that doesn't further the stated objective.</p>
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="mvc.html">Model-View-Controller</a>
+Tema anterior:&nbsp;&nbsp;<a href="mvc.html">Modelo-Vista-Controlador</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="./getting_started.html">Getting Started</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="../tutorial/index.html">Introducci&oacute;n</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/overview/goals.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

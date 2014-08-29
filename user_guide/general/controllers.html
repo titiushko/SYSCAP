@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/general/controllers.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Controllers : CodeIgniter User Guide</title>
+<title>Controladores : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Controllers
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Controladores
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -53,70 +55,57 @@ Controllers
 
 
 <!-- START CONTENT -->
-<div id="content">
-
-<h1>Controllers</h1>
-
-<p>Controllers are the heart of your application, as they determine how HTTP requests should be handled.</p>
-
+	<div id="content"><h1>Controladores</h1>
+<p>Los controladores son el coraz&oacute;n de tu aplicaci&oacute;n, es el encargado de determinar, como las solicitudes HTTP deben ser manejadas.</p>
 
 <ul>
-<li><a href="#what">What is a Controller?</a></li>
-<li><a href="#hello">Hello World</a></li>
-<li><a href="#functions">Functions</a></li>
-<li><a href="#passinguri">Passing URI Segments to Your Functions</a></li>
-<li><a href="#default">Defining a Default Controller</a></li>
-<li><a href="#remapping">Remapping Function Calls</a></li>
-<li><a href="#output">Controlling Output Data</a></li>
-<li><a href="#private">Private Functions</a></li>
-<li><a href="#subfolders">Organizing Controllers into Sub-folders</a></li>
-<li><a href="#constructors">Class Constructors</a></li>
-<li><a href="#reserved">Reserved Function Names</a></li>
+<li><a href="#what">Qu&eacute; es un controlador?</a></li>
+<li><a href="#hello">Hola mundo</a></li>
+<li><a href="#functions">Funciones</a></li>
+<li><a href="#passinguri">Pasando Segmentos URI a Tus Funciones</a></li>
+<li><a href="#default">Definiendo un Controlador por Defecto</a></li>
+<li><a href="#remapping">Remapeando llamadas a funciones</a></li>
+<li><a href="#output">Controlando la Salida de datos</a></li>
+<li><a href="#private">Funciones Privadas</a></li>
+<li><a href="#subfolders">Organizando los Controladores en Sub-capetas</a></li>
+<li><a href="#constructors">Constructores de Clase</a></li>
+<li><a href="#reserved">Nombres de Funciones Reservados</a></li>
 </ul>
 
+<a name="what"></a><h2>Qu&eacute; es un controlador?</h2>
+<p><dfn>Un controlador es simplemente un archivo de clase que es llamado en una forma que puede ser asociado con un URI.</dfn></p>
 
-<a name="what"></a>
-<h2>What is a Controller?</h2>
+<p>considere esta URI:</p>
 
-<p><dfn>A Controller is simply a class file that is named in a way that can be associated with a URI.</dfn></p>
+<code>www.your-site.com/index.php/<var>blog</var>/</code>
 
-<p>Consider this URI:</p>
+<p>En el ejemplo anterior, Codeigniter tratar&iacute;a de encontrar un controlador llamado <dfn>blog.php</dfn> y lo cargar&iacute;a.</p>
 
-<code>example.com/index.php/<var>blog</var>/</code>
+<p><strong>Cuando el nombre de un controlador coincide con el primer segmento de una URI, esta ser&aacute; cargada.</strong></p>
 
-<p>In the above example, CodeIgniter would attempt to find a controller named <dfn>blog.php</dfn> and load it.</p>
+<a name="hello"></a><h2>Vamos a intentarlo:&nbsp; Hola mundo!</h2>
+<p>Vamos a crear un controlador sencillo, as&iacute; lo podr&aacute;s ver en acci&oacute;n. Usando tu editor de texto, cree un archivo llamado <dfn>blog.php</dfn>, y coloca dentro el siguiente c&oacute;digo:</p>
 
-<p><strong>When a controller's name matches the first segment of a URI, it will be loaded.</strong></p>
-
-<a name="hello"></a>
-<h2>Let's try it:&nbsp; Hello World!</h2>
-
-<p>Let's create a simple controller so you can see it in action.  Using your text editor, create a file called <dfn>blog.php</dfn>, and put the following code in it:</p>
-
-
-<textarea class="textarea" style="width:100%" cols="50" rows="10">
+<pre>
 &lt;?php
 class Blog extends CI_Controller {
-
-	public function index()
+	function index()
 	{
-		echo 'Hello World!';
+		echo 'Hola mundo!';
 	}
 }
-?&gt;
-</textarea>
+?>
+</pre>
 
+<p>Luego guarda el archivo en tu carpeta <dfn>application/controllers/</dfn>.</p>
 
+<p>Ahora vista tu sitio usando una URL similar a esto:</p>
 
-<p>Then save the file to your <dfn>application/controllers/</dfn> folder.</p>
+<code>www.your-site.com/index.php/<var>blog</var>/</code>
 
-<p>Now visit the your site using a URL similar to this:</p>
+<p>Si lo has hecho correctamente, deber&iacute;as ver  <samp>Hola mundo!</samp>.</p>
 
-<code>example.com/index.php/<var>blog</var>/</code>
-
-<p>If you did it right, you should see <samp>Hello World!</samp>.</p>
-
-<p>Note: Class names must start with an uppercase letter.  In other words, this is valid:</p>
+<p>Nota: Los nombres de Clases deben empezar con una letra may&uacute;scula. En otras palabras, esto es v&aacute;lido:</p>
 
 <code>&lt;?php<br />
 class <var>Blog</var> extends CI_Controller {<br />
@@ -124,7 +113,7 @@ class <var>Blog</var> extends CI_Controller {<br />
 }<br />
 ?&gt;</code>
 
-<p>This is <strong>not</strong> valid:</p>
+<p>Esto <strong>no</strong> es v&aacute;lido:</p>
 
 <code>&lt;?php<br />
 class <var>blog</var> extends CI_Controller {<br />
@@ -132,257 +121,181 @@ class <var>blog</var> extends CI_Controller {<br />
 }<br />
 ?&gt;</code>
 
-<p>Also, always make sure your controller <dfn>extends</dfn> the parent controller class so that it can inherit all its functions.</p>
+<p>Tambi&eacute;n, siempre debes asegurarte de que tu controlador <dfn>herede</dfn> de la clase padre "Controller"  as&iacute; podr&aacute; heredar todas sus funciones.</p>
 
+<a name="functions"></a><h2>Funciones</h2>
+<p>En el ejemplo anterior el nombre de la funci&oacute;n es <dfn>index()</dfn>.  La funci&oacute;n "index"  es siempre cargada por defecto si el <strong>segundo segmento</strong> de la URI est&aacute; vac&iacute;a. Otra forma de mostrar tu mensaje "Hola mundo!" podr&iacute;a ser esta: </p>
 
+<code>www.your-site.com/index.php/<var>blog</var>/<samp>index</samp>/</code>
 
-<a name="functions"></a>
-<h2>Functions</h2>
+<p><strong>El segundo segmento de la URI determina que funci&oacute;n en el controlador ser&aacute; llamada.</strong></p>
+<p>Vamos a probarlo. Agrega una nueva funci&oacute;n a tu controlador:</p>
 
-<p>In the above example the function name is <dfn>index()</dfn>.  The "index" function is always loaded by default if the
-<strong>second segment</strong> of the URI is empty.  Another way to show your "Hello World" message would be this:</p>
-
-<code>example.com/index.php/<var>blog</var>/<samp>index</samp>/</code>
-
-<p><strong>The second segment of the URI determines which function in the controller gets called.</strong></p>
-
-<p>Let's try it.  Add a new function to your controller:</p>
-
-
-<textarea class="textarea" style="width:100%" cols="50" rows="15">
+<pre>
 &lt;?php
 class Blog extends CI_Controller {
-
-	public function index()
+	function index()
 	{
-		echo 'Hello World!';
+		echo 'Hola mundo!';
 	}
-
-	public function comments()
+	function comments()
 	{
-		echo 'Look at this!';
+		echo 'Mira esto!';
+	}
+}
+?>
+</pre>
+
+<p>Ahora carga la siguiente URL para ver la funci&oacute;n <dfn>comment</dfn>:</p>
+
+<code>www.your-site.com/index.php/<var>blog</var>/<samp>comments</samp>/</code>
+
+<p>Deberias ver el siguiente mensaje. <samp>Mira esto!</samp></p>
+
+<a name="passinguri"></a><h2>Pasando Segmentos URI a tus funciones</h2>
+<p>Si tu URI contiene mas de dos segmentos, ellos seran pasados a tu funci&oacute;n como par&aacute;metros.</p>
+
+<p>Por ejemplo, digamos que tienes una URI como esta:</p>
+
+<code>www.your-site.com/index.php/<var>products</var>/<samp>shoes</samp>/<kbd>sandals</kbd>/<dfn>123</dfn></code>
+
+<p>A tu funcion se le pasaran los segmentos URI 3 y 4 ("sandals" y "123"):</p>
+
+<pre>
+&lt;?php
+class Products extends CI_Controller {
+
+	function shoes($sandals, $id)
+	{
+		echo $sandals;
+		echo $id;
 	}
 }
 ?&gt;
-</textarea>
+</pre>
 
-<p>Now load the following URL to see the <dfn>comment</dfn> function:</p>
+<p class="important"><strong>Importante:</strong>&nbsp; Si estas usando la caracter&iacute;stica <a href="routing.html">URI Routing</a>, los segmentos pasados a tus funciones seran re-ruteadas.</p>
 
-<code>example.com/index.php/<var>blog</var>/<samp>comments</samp>/</code>
-
-<p>You should see your new message.</p>
-
-<a name="passinguri"></a>
-<h2>Passing URI Segments to your Functions</h2>
-
-<p>If your URI contains more then two segments they will be passed to your function as parameters.</p>
-
-<p>For example, lets say you have a URI like this:</p>
-
-<code>example.com/index.php/<var>products</var>/<samp>shoes</samp>/<kbd>sandals</kbd>/<dfn>123</dfn></code>
-
-<p>Your function will be passed URI segments 3 and 4 ("sandals" and "123"):</p>
-
-<code>
-&lt;?php<br />
-class Products extends CI_Controller {<br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;public function shoes($sandals, $id)<br />
-&nbsp;&nbsp;&nbsp;&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo $sandals;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo $id;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-}<br />
-?&gt;
-</code>
-
-<p class="important"><strong>Important:</strong>&nbsp; If you are using the <a href="routing.html">URI Routing</a> feature, the segments
-passed to your function will be the re-routed ones.</p>
-
-
-<a name="default"></a>
-<h2>Defining a Default Controller</h2>
-
-<p>CodeIgniter can be told to load a default controller when a URI is not present,
-as will be the case when only your site root URL is requested.  To specify a default controller, open
-your <dfn>application/config/routes.php</dfn> file and set this variable:</p>
+<a name="default"></a><h2>Definiendo un Controlador por Defecto</h2>
+<p>Se le puede decir a CodeIgniter que cargue un controlador por defecto, cuando una URI no esta presente, ese ser&iacute;a el caso cuando solamente la ra&iacute;z del sitio es llamada. Para especificar un controlador por defecto abre tu archivo <dfn>application/config/routes.php</dfn> y coloca este valor a la variable:</p>
 
 <code>$route['default_controller'] = '<var>Blog</var>';</code>
+<p>Donde <var>Blog</var> es el nombre de la clase del controlador que t&uacute; quieres usar. Si ahora cargas tu archivo principal index.php  sin especificar ning&uacute;n segmento URI podr&aacute;s ver el mensaje Hola Mundo! por defecto.</p>
 
-<p>Where <var>Blog</var> is the name of the controller class you want used. If you now load your main index.php file without
-specifying any URI segments you'll see your Hello World message by default.</p>
+<a name="remapping"></a><h2>Remapeando llamadas a Funciones</h2>
+<p>Como se&ntilde;alamos anteriormente, el segundo segmento de la URI t&iacute;picamente determina cual funci&oacute;n en el controlador sera llamado. CodeIgniter te permite anular este comportamiento a trav&eacute;s del uso de la funci&oacute;n <kbd>_remap()</kbd>:</p>
 
-
-
-<a name="remapping"></a>
-<h2>Remapping Function Calls</h2>
-
-<p>As noted above, the second segment of the URI typically determines which function in the controller gets called.
-CodeIgniter permits you to override this behavior through the use of the <kbd>_remap()</kbd> function:</p>
-
-<code>public function _remap()<br />
+<code>function _remap()<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;// Some code here...<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Alg&uacute;n codigo por aqu&iacute;...<br />
 }</code>
 
-<p class="important"><strong>Important:</strong>&nbsp; If your controller contains a function named <kbd>_remap()</kbd>, it will <strong>always</strong>
-get called regardless of what your URI contains.  It overrides the normal behavior in which the URI determines which function is called,
-allowing you to define your own function routing rules.</p>
+<p class="important"><strong>Importante:</strong>&nbsp; Si tu controlador contiene una funci&oacute;n llamada <kbd>_remap()</kbd>, esta ser&aacute; <strong>siempre</strong> llamada  independientemente de que contenga tu URI. Esto anula el normal comportamiento en el cual la URI determina que funci&oacute;n es llamada, permiti&eacute;ndote definir tus propias reglas de ruteo.</p>
 
-<p>The overridden function call (typically the second segment of the URI) will be passed as a parameter to the <kbd>_remap()</kbd> function:</p>
+<p>La llamada a la funci&oacute;n anulada (t&iacute;picamente el segundo segmento de la URI) ser&aacute; pasada como par&aacute;metro a la funci&oacute;n <kbd>_remap()</kbd>:</p>
 
-<code>public function _remap(<var>$method</var>)<br />
+<code>function _remap(<var>$method</var>)<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;if ($method == 'some_method')<br />
+&nbsp;&nbsp;&nbsp;&nbsp;if ($method == 'algun_metodo')<br />
 &nbsp;&nbsp;&nbsp;&nbsp;{<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->$method();<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 &nbsp;&nbsp;&nbsp;&nbsp;else<br />
 &nbsp;&nbsp;&nbsp;&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->default_method();<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->metodo_por_defecto();<br />
 &nbsp;&nbsp;&nbsp;&nbsp;}<br />
 }</code>
 
-<p>Any extra segments after the method name are passed into <kbd>_remap()</kbd> as an optional second parameter. This array can be used in combination with PHP's <a href="http://php.net/call_user_func_array">call_user_func_array</a> to emulate CodeIgniter's default behavior.</p>
+<a name="output"></a><h2>Procesando la Salida</h2>
+<p>CodeIgniter tiene una clase de salida que se encarga de enviar tus datos finales al navegador web autom&aacute;ticamente. M&aacute;s informaci&oacute;n sobre esto puede ser encontrado en las  p&aacute;ginas <a href="views.html">Views (vistas)</a> y <a href="../libraries/output.html">Output class (Clase Salida)</a>. En algunos casos, sin embargo, tu podr&iacute;as  querer post-procesar los datos finalizados en alguna forma para enviarlo al navegador por tu cuenta.  CodeIgniter te lo permite agregando una funci&oacute;n llamada <dfn>_output()</dfn>  al controlador que recibe la salida de datos finalizada.</p>
 
-<code>public function _remap($method, $params = array())<br />
-{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;$method = 'process_'.$method;<br />
-&nbsp;&nbsp;&nbsp;&nbsp;if (method_exists($this, $method))<br />
-&nbsp;&nbsp;&nbsp;&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return call_user_func_array(array($this, $method), $params);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-&nbsp;&nbsp;&nbsp;&nbsp;show_404();<br />
-}</code>
+<p><strong>Importante:</strong>&nbsp; Si tu controlador contiene una funci&oacute;n llamada <kbd>_output()</kbd>, esta sera <strong>siempre</strong> llamada por  la clase "Output" en lugar de imprimir el dato finalizado directamente.  El primer parametro de la funci&oacute;n deber&aacute; contener la salida finalizada.</p>
 
-
-<a name="output"></a>
-<h2>Processing Output</h2>
-
-<p>CodeIgniter has an output class that takes care of sending your final rendered data to the web browser automatically.  More information on this can be found in the
-<a href="views.html">Views</a> and <a href="../libraries/output.html">Output class</a> pages.  In some cases, however, you might want to
-post-process the finalized data in some way and send it to the browser yourself.  CodeIgniter permits you to
-add a function named <dfn>_output()</dfn> to your controller that will receive the finalized output data.</p>
-
-<p><strong>Important:</strong>&nbsp; If your controller contains a function named <kbd>_output()</kbd>, it will <strong>always</strong>
-be called by the output class instead of echoing the finalized data directly. The first parameter of the function will contain the finalized output.</p>
-
-<p>Here is an example:</p>
+<p>Aqui tenemos un ejemplo:</p>
 
 <code>
-public function _output($output)<br />
+function _output($output)<br />
 {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;echo $output;<br />
 }</code>
 
-<p class="important">Please note that your <dfn>_output()</dfn> function will receive the data in its finalized state.  Benchmark and memory usage data will be rendered,
-cache files written (if you have caching enabled), and headers will be sent (if you use that <a href="../libraries/output.html">feature</a>)
-before it is handed off to the _output() function.<br />
-<br />
-To have your controller's output cached properly, its <dfn>_output()</dfn> method can use:<br />
+<p class="important">Por favor note que tu funcion <dfn>_output()</dfn> deber&aacute; recibir el dato en su estado finalizado.  El punto de referencia y el uso de memoria, los datos ser&aacute;n prestados, los archivos cache ser&aacute;n escritos (si tu tienes habilitado el cacheo), y las cabeceras ser&aacute;n enviadas  (si usa esa  <a href="../libraries/output.html">carater&iacute;stica</a>) antes de que esta sea entregada a la funci&oacute;n _output(). Si estas usando esta caracter&iacute;stica el tiempo de ejecuc&iacute;on de la p&aacute;gina  y el uso de memoria podr&iacute;a no ser preciso ya que no toma en cuenta ninguno de los procesos que tu haces. Para una alternativa a la forma de controlar la salida <em>antes</em> de que ninguno de los procesos finales est&eacute;n hechos, por favor vea los m&eacute;todos disponibles en <a href="../libraries/output.html"> la clase Output</a>.</p>
 
-<code>if ($this-&gt;output-&gt;cache_expiration &gt; 0)<br />
-{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;$this-&gt;output-&gt;_write_cache($output);<br />
-}</code>
-
-If you are using this feature the page execution timer and memory usage stats might not be perfectly accurate
-since they will not take into acccount any further processing you do.  For an alternate way to control output <em>before</em> any of the final processing is done, please see
-the available methods in the <a href="../libraries/output.html">Output Class</a>.</p>
-
-<a name="private"></a>
-<h2>Private Functions</h2>
-
-
-<p>In some cases you may want certain functions hidden from public access.  To make a function private, simply add an
-underscore as the name prefix and it will not be served via a URL request. For example, if you were to have a function like this:</p>
+<a name="private"></a><h2>Funciones Privadas</h2>
+<p>En algunos casos usted podr&iacute;a querer esconder ciertas funciones del acceso publico. Para hacer una funcion privada, simplemente agregue un guion bajo como prefijo y esta no podr&aacute; ser accedida via pedido URL. Por ejemplo, si tuvieras una funci&oacute;n como esta:</p>
 
 <code>
-private function _utility()<br />
+function _utility()<br />
 {<br />
-&nbsp;&nbsp;// some code<br />
+&nbsp;&nbsp;// alg&uacute;n codigo aqu&iacute;<br />
 }</code>
 
-<p>Trying to access it via the URL, like this, will not work:</p>
+<p>Tratar de accederlo via la URL, como esta, no funcionar&aacute;:</p>
 
-<code>example.com/index.php/<var>blog</var>/<samp>_utility</samp>/</code>
+<code>www.your-site.com/index.php/<var>blog</var>/<samp>_utility</samp>/</code>
 
+<a name="subfolders"></a><h2>Organizando Tus Controladores en sub-carpetas</h2>
+<p>Si tu estas construyendo  una gran aplicaci&oacute;n usted podr&iacute;a encontrar conveniente organizar tus controladores en  sub-carpetas.  CodeIgniter te permite hacer esto.</p>
 
+<p>Simplemente debes crear las carpetas dentro de tu directorio <dfn>application/controllers</dfn> y ubicar tus clases de controladores dentro.</p>
 
-<a name="subfolders"></a>
-<h2>Organizing Your Controllers into Sub-folders</h2>
-
-<p>If you are building a large application you might find it convenient to organize your controllers into sub-folders.  CodeIgniter permits you to do this.</p>
-
-<p>Simply create folders within your <dfn>application/controllers</dfn> directory and place your controller classes within them.</p>
-
-<p><strong>Note:</strong>&nbsp; When using this feature the first segment of your URI must specify the folder.  For example, lets say you have a controller
-located here:</p>
+<p><strong>Nota:</strong>&nbsp; Cuando usamos esta caracter&iacute;stica usando esta caracter&iacute;stica  el primer segmento de tu URI debe especificar la carpeta. Por ejemplo, digamos que tienes un controlador ubicado aqui:</p>
 
 <code>application/controllers/<kbd>products</kbd>/shoes.php</code>
 
-<p>To call the above controller your URI will look something like this:</p>
+<p>Para llamar al controlador anterior tu URI deberia ser algo similar a esto:</p>
 
-<code>example.com/index.php/products/shoes/show/123</code>
+<code>www.your-site.com/index.php/products/shoes/123</code>
 
-<p>Each of your sub-folders may contain a default controller which will be
-called if the URL contains only the sub-folder.  Simply name your default controller as specified in your
-<dfn>application/config/routes.php</dfn> file</p>
+<p>Cada una de tus sub-carpetas deberan contener un controlador por defecto el cual sera llamado si la URL contiene solamente la sub-carpeta. Simplemente nombra a tu controlador por defecto como lo especificaste en tu archivo <dfn>application/config/routes.php</dfn></p>
 
+<p>CodeIgniter tambien te permite remapear tus URIs usando su caracteristica <a href="routing.html">URI Routing</a>.</p>
 
-<p>CodeIgniter also permits you to remap your URIs using its <a href="routing.html">URI Routing</a> feature.</p>
-
-
-<h2><a name="constructors"></a>Class Constructors</h2>
-
-
-<p>If you intend to use a constructor in any of your Controllers, you <strong>MUST</strong> place the following line of code in it:</p>
+<a name="constructors"></a><h2>Constructores de Clase</h2>
+<p>Si tiene la intención de usar un constructor en alguno de sus controladores, <strong>TIENE</strong> que colocar la siguiente línea
+de código en él:</p>
 
 <code>parent::__construct();</code>
 
-<p>The reason this line is necessary is because your local constructor will be overriding the one in the parent controller class so we need to manually call it.</p>
+<p>La razón de porqué esta línea es necesaria se debe a que su constructor local anulará al de su clase padre, por lo que necesitamos llamarlo manualmente.</p>
 
-<code>
-&lt;?php<br />
-class <kbd>Blog</kbd> extends CI_Controller {<br />
-<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public function <kbd>__construct()</kbd><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<var>parent::__construct();</var><br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Your own constructor code<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
-}<br />
-?&gt;</code>
+<pre>
+&lt;?php
+class <kbd>Blog</kbd> extends CI_Controller {
 
-<p>Constructors are useful if you need to set some default values, or run a default process when your class is instantiated.
-Constructors can't return a value, but they can do some default work.</p>
-
-<a name="reserved"></a>
-<h2>Reserved Function Names</h2>
-
-<p>Since your controller classes will extend the main application controller you
-must be careful not to name your functions identically to the ones used by that class, otherwise your local functions
-will override them. See <a href="reserved_names.html">Reserved Names</a> for a full list.</p>
-
-<h2>That's it!</h2>
-
-<p>That, in a nutshell, is all there is to know about controllers.</p>
+public function <kbd>__construct()</kbd>
+	{
+		<var>parent::__construct();</var>
+		// Su propio código de constructor
+	}
+}
+?>
+</pre>
 
 
+<p>Los constructores son útiles si necesita establecer algunos valores por defecto, o ejecutar procesos por defecto cuando se instancia su clase. Los constructores no pueden devolver un valor, pero pueden hacer algún trabajo por defecto.</p>
 
+<a name="reserved"></a><h2>Nombres de Funciones Reservadas</h2>
+<p>Como sus clases controlador extender&aacute;n al controlador principal de la aplicaci&oacute;n, tiene que ser cuidadoso de no nombrar a sus funciones del mismo modo que aquellas usadas por esa clase, sino sus funciones locales las anular&aacute;n. Para conocer la lista completa, vea <a href="reserved_names.html">Nombres Reservados</a>.</p>
+
+<h2>Eso es todo!</h2>
+<p>Eso, en pocas palabras, es todo lo que necesita saber sobre controladores.</p>
 </div>
+
 <!-- END CONTENT -->
 
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="urls.html">CodeIgniter URLs</a>
+Tema anterior:&nbsp;&nbsp;<a href="urls.html">URLs de CodeIgniter</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="reserved_names.html">Reserved Names</a></p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="reserved_names.html">Nombres Reservados</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/general/controllers.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

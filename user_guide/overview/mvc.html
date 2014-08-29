@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/overview/mvc.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Model-View-Controller : CodeIgniter User Guide</title>
+<title>Modelo-Vista-Controlador : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
 MVC
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -56,30 +58,17 @@ MVC
 <div id="content">
 
 
-<h1>Model-View-Controller</h1>
+<h1>Modelo-Vista-Controlador</h1>
 
-<p>CodeIgniter is based on the Model-View-Controller development pattern.
-
-MVC is a software approach that separates application logic from presentation.  In practice, it permits your web pages to contain minimal scripting since the presentation is separate from the PHP scripting.</p>
+<p>CodeIgniter est&aacute; basado en el patr&oacute;n de desarrollo Modelo-Vista-Controlador. MVC es un enfoque de software que separa la l&oacute;gica de la aplicacion de la presentaci&oacute;n. En la pr&aacute;ctica, le permite a sus p&aacute;ginas web contener m&iacute;nimo c&oacute;digo ya que la presentaci&oacute;n est&aacute; separada del c&oacute;digo PHP.</p>
 
 <ul>
-<li>The <strong>Model</strong> represents your data structures. Typically your model classes will contain functions that help you
-retrieve, insert, and update information in your  database.</li>
-<li>The <strong>View</strong> is the information that is being presented to a user.  A View will normally be a web page, but
-in CodeIgniter, a view can also be a page fragment like a header or footer. It can also be an RSS page, or any other type of "page".</li>
-<li>The <strong>Controller</strong> serves as an <em>intermediary</em> between the Model, the View,
-and any other resources needed to process the HTTP request and generate a web page.</li>
-
+<li>El <strong>Modelo</strong> representa sus estructuras de datos. Tipicamente sus clases del modelo contendr&aacute;n funciones que los ayudar&aacute;n a devolver, insertar y actualizar informaci&oacute;n de su base de datos.</li>
+<li>La <strong>Vista</strong> es la informaci&oacute;n que se presenta al usuario. Una vista ser&aacute; normalmente una p&aacute;gina web, pero en CodeIgniter, una vista tambi&eacute;n puede ser un fragmento de p&aacute;gina como el encabezado o pie de p&aacute;gina. Tambi&eacute;n puede ser una p&aacute;gina RSS, o cualquier otro tipo de "p&aacute;gina".</li>
+<li>El <strong>Controlador</strong> sirve como un <em>intermediario</em> entre el Modelo, la Vista y cualquier otro recurso necesario para procesar la solicitud HTTP y generar una p&aacute;gina web.</li>
 </ul>
 
-<p>CodeIgniter has a fairly loose approach to MVC since Models are not required.
-If you don't need the added separation, or find that maintaining models requires more complexity than you
-want, you can ignore them and build your application minimally using Controllers and Views. CodeIgniter also
-enables you to incorporate your own existing scripts, or even develop core libraries for the system,
- enabling you to work in a way that makes the most sense to you.</p>
-
-
-
+<p>CodeIgniter tiene un enfoque bastante flexible del MVC, ya que los Modelos no son requeridos. Si no necesita agregar separaci&oacute;n, o descubre que mantener los modelos requiera m&aacute;s complejidad que quer&iacute;a, puede ignorarlos y construir su aplicaci&oacute;n m&iacute;nimamente usando Controladores y Vista. CodeIgniter tambi&eacute;n le permite incorporar sus c&oacute;digo existentes, o incluso desarrollar librer&iacute;as de n&uacute;cleo para el sistema, habilitandolo a trabajar en una forma que hace que tenga m&aacute;s sentido para usted.</p>
 
 </div>
 <!-- END CONTENT -->
@@ -87,14 +76,16 @@ enables you to incorporate your own existing scripts, or even develop core libra
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="appflow.html">Application Flow Chart</a>
+Tema anterior:&nbsp;&nbsp;<a href="appflow.html">Diagrama de Flujo de la Aplicaci&oacute;n</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="goals.html">Architectural Goals</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="goals.html">Metas Arquitect&oacute;nicas</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/overview/mvc.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

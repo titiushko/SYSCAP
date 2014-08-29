@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/helpers/inflector_helper.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:02 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Inflector Helper : CodeIgniter User Guide</title>
+<title>Helper Inflector : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Inflector Helper
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Helper Inflector
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -55,82 +57,60 @@ Inflector Helper
 <!-- START CONTENT -->
 <div id="content">
 
+<h1>Asistente de Inflecci&oacute;n</h1>
+<p>El archivo Asistente de Inflecci&oacute;n contiene funciones que le permiten cambiar palbras a plural, singular, camel case, etc. (en ingl&eacute;s)</p>
 
-<h1>Inflector Helper</h1>
+<h2>Cargando este Asistente</h2>
+<p>Este asistente es cargado usando el siguiente c&oacute;digo:</p>
 
-<p>The Inflector Helper file contains functions that permits you to change words to plural, singular, camel case, etc.</p>
-
-
-<h2>Loading this Helper</h2>
-
-<p>This helper is loaded using the following code:</p>
 <code>$this->load->helper('inflector');</code>
 
-<p>The following functions are available:</p>
-
+<p>Las siguientes funciones est&aacute;n disponibles:</p>
 
 <h2>singular()</h2>
-
-<p>Changes a plural word to singular.  Example:</p>
+<p>Cambia una palabra plural a singular. Ejemplo:</p>
 
 <code>
-$word = "dogs";<br />
-echo singular($word); // Returns "dog"
+$palabra = "perros";<br />
+echo singular($palabra); // Returns "perro"
 </code>
-
 
 <h2>plural()</h2>
-
-<p>Changes a singular word to plural.  Example:</p>
+<p>Cambia una palabra singular a plural. Ejemplo:</p>
 
 <code>
-$word = "dog";<br />
-echo plural($word); // Returns "dogs"
+$palabra = "perro";<br />
+echo plural($palabra); // Returns "perros"
 </code>
 
+<p>Para forzar una palabra para terminar con &quot;es&quot; use un segundo argumento &quot;true&quot;.</p>
 
-<p>To force a word to end with &quot;es&quot; use a second &quot;true&quot; argument. </p>
-<code> $word = &quot;pass&quot;;<br />
-echo plural($word, TRUE); // Returns &quot;passes&quot; </code>
+<code> $palabra = &quot;pass&quot;;<br />
+echo plural($palabra, TRUE); // Returns &quot;passes&quot; </code>
 
 <h2>camelize()</h2>
-<p>Changes a string of words separated by spaces or underscores to camel case.  Example:</p>
+<p>Cambia una cadena de palabras separada por espacios o guiones bajos a camel case. Ejemplo:</p>
 
 <code>
-$word = "my_dog_spot";<br />
-echo camelize($word); // Returns "myDogSpot"
+$palabra = "my_dog_spot";<br />
+echo camelize($palabra); // Returns "myDogSpot"
 </code>
-
 
 <h2>underscore()</h2>
-
-<p>Takes multiple words separated by spaces and underscores them.  Example:</p>
+<p>Toma m&uacute;ltiples palabras separadas por espacios y le agrega guiones bajos. Ejemplo:</p>
 
 <code>
-$word = "my dog spot";<br />
-echo underscore($word); // Returns "my_dog_spot"
+$palabra = "my dog spot";<br />
+echo underscore($palabra); // Returns "my_dog_spot"
 </code>
-
 
 <h2>humanize()</h2>
-
-<p>Takes multiple words separated by underscores and adds spaces between them.  Each word is capitalized. Example:</p>
+<p>Toma m&uacute;ltiples palabras separadas por guiones bajos y le agrega espacios entre ellos. Cada palabra es capitalizada. Ejemplo:</p>
 
 <code>
-$word = "my_dog_spot";<br />
-echo humanize($word); // Returns "My Dog Spot"
+$palabra = "my_dog_spot";<br />
+echo humanize($palabra); // Returns "My Dog Spot"
 </code>
-
-
-
-
-
-
-
-
-
-
-
 
 </div>
 <!-- END CONTENT -->
@@ -138,14 +118,16 @@ echo humanize($word); // Returns "My Dog Spot"
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="html_helper.html"> HTML Helper</a>
+Tema anterior:&nbsp;&nbsp;<a href="html_helper.html">Helper HTML</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="number_helper.html">Number Helper</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="language_helper.html">Helper Language</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/helpers/inflector_helper.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:02 GMT -->
 </html>

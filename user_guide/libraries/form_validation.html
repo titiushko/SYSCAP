@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/form_validation.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Form Validation : CodeIgniter User Guide</title>
+<title>Clase Form Validation : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,18 +19,18 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -39,11 +41,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Form Validation
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Clase Form Validation
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -54,319 +56,267 @@ Form Validation
 <!-- START CONTENT -->
 <div id="content">
 
-<h1>Form Validation</h1>
+<h1>Clase Form Validation</h1>
 
-<p>CodeIgniter provides a comprehensive form validation and data prepping class that helps minimize the amount of code you'll write.</p>
+<p>CodeIgniter provee una clase para preparaci&oacute;n de datos y validaci&oacute;n de formularios que ayuda a minimizar la cantidad de c&oacute;digo que se escribe.</p>
 
 <ul>
-<li><a href="#overview">Overview</a></li>
-<li><a href="#tutorial">Form Validation Tutorial</a>
+<li><a href="#overview">Introducci&oacute;n</a></li>
+<li><a href="#tutorial">Tutorial de Validaci&oacute;n de Formularios</a>
 
 	<ul>
-		<li><a href="#theform">The Form</a></li>
-		<li><a href="#thesuccesspage">The Success Page</a></li>
-		<li><a href="#thecontroller">The Controller</a></li>
-		<li><a href="#validationrules">Setting Validation Rules</a></li>
-		<li><a href="#validationrulesasarray">Setting Validation Rules Using an Array</a></li>
-		<li><a href="#cascadingrules">Cascading Rules</a></li>
-		<li><a href="#preppingdata">Prepping Data</a></li>
-		<li><a href="#repopulatingform">Re-populating the Form</a></li>
-		<li><a href="#callbacks">Callbacks</a></li>
-		<li><a href="#settingerrors">Setting Error Messages</a></li>
-		<li><a href="#errordelimiters">Changing the Error Delimiters</a></li>
-		<li><a href="#translatingfn">Translating Field Names</a></li>
-		<li><a href="#individualerrors">Showing Errors Individually</a></li>
-		<li><a href="#savingtoconfig">Saving Sets of Validation Rules to a Config File</a></li>
-		<li><a href="#arraysasfields">Using Arrays as Field Names</a></li>
+		<li><a href="#theform">El formulario</a></li>
+		<li><a href="#thesuccesspage">La P&aacute;gina de &Eacute;xito</a></li>
+		<li><a href="#thecontroller">El Controlador</a></li>
+		<li><a href="#validationrules">Establecer Reglas de Validaci&oacute;n</a></li>
+		<li><a href="#validationrulesasarray">Establecer Reglas Usando un Array</a></li>
+		<li><a href="#cascadingrules">Reglas en Cascada</a></li>
+		<li><a href="#preppingdata">Preparar Datos</a></li>
+		<li><a href="#repopulatingform">Volver a Llenar el Formulario</a></li>
+		<li><a href="#callbacks">Callbacks: sus Propias Funciones de Validaci&oacute;n</a></li>
+		<li><a href="#settingerrors">Establecer Mensajes de Error</a></li>
+		<li><a href="#translatingfn">Traducir los Nombres de Campo</a></li>
+		<li><a href="#errordelimiters">Cambiar los Delimitadores de Error</a></li>
+		<li><a href="#individualerrors">Mostrar los Errores Individualmente</a></li>
+		<li><a href="#savingtoconfig">Guardar Conjuntos de Reglas de Validaci&oacute;n en un Archivo de Configuraci&oacute;n</a></li>
+		<li><a href="#arraysasfields">Usar Arrays como Nombres de Campo</a></li>
 	</ul>
 </li>
-<li><a href="#rulereference">Rule Reference</a></li>
-<li><a href="#preppingreference">Prepping Reference</a></li>
-<li><a href="#functionreference">Function Reference</a></li>
-<li><a href="#helperreference">Helper Reference</a></li>
+<li><a href="#rulereference">Referencia de Reglas</a></li>
+<li><a href="#preppingreference">Referencia de Preparaciones</a></li>
+<li><a href="#functionreference">Referencia de Funciones</a></li>
+<li><a href="#helperreference">Referencia de Helpers</a></li>
 
 </ul>
 
+<br/>
 
+<a name="overview"></a><h1>Introducci&oacute;n</h1>
 
-
-
-
-<p>&nbsp;</p>
-
-<a name="overview"></a>
-<h1>Overview</h1>
-
-
-<p>Before explaining CodeIgniter's approach to data validation, let's describe the ideal scenario:</p>
+<p>Antes de explicar el enfoque de CodeIgniter para validar datos, describiremos el escenario ideal:</p>
 
 <ol>
-<li>A form is displayed.</li>
-<li>You fill it in and submit it.</li>
-<li>If you submitted something invalid, or perhaps missed a required item, the form is redisplayed containing your data
-along with an error message describing the problem.</li>
-<li>This process continues until you have submitted a valid form.</li>
+<li>Se muestra un formulario.</li>
+<li>Usted completa los datos y lo env&iacute;a.</li>
+<li>Si el env&iacute;o tiene algo inv&aacute;lido, o falta algo que sea obligatorio, el formulario se muestra nuevamente con los datos que Ud complet&oacute; junto con un mensaje de error que describe el problema.</li>
+<li>Este proceso continua hasta que se env&iacute;e un formulario v&aacute;lido.</li>
 </ol>
 
-<p>On the receiving end, the script must:</p>
+<p>En el receptor, el script debe:</p>
 
 <ol>
-<li>Check for required data.</li>
-<li>Verify that the data is of the correct type, and meets the correct criteria. For example, if a username is submitted
-it must be validated to contain only permitted characters.  It must be of a minimum length,
-and not exceed a maximum length. The username can't be someone else's existing username, or perhaps even a reserved word. Etc.</li>
-<li>Sanitize the data for security.</li>
-<li>Pre-format the data if needed (Does the data need to be trimmed?  HTML encoded?  Etc.)</li>
-<li>Prep the data for insertion in the database.</li>
+<li>Verificar los datos obligatorios.</li>
+<li>Verificar que los datos son del tipo correcto y coinciden con el criterio correcto. Por ejemplo, si se env&iacute;a un usuario, tiene que ser v&aacute;lido y contener solamente caracteres permitidos. Tiene que tener una longitud m&iacute;nima y no exceder la longitud m&aacute;xima. El usuario tiene que existir, no puede ser una palabra reservada, etc.</li>
+<li>Por seguridad, descontaminar los datos.</li>
+<li>Preformatear los datos si es necesario (&iquest;Se necesita recortar espacios al inicio o final? &iquest;Codificaci&oacute;n HTML? Etc.)</li>
+<li>Preparar los datos para insertarlos en la base de datos.</li>
 </ol>
 
+<p>Aunque el proceso anterior no es terriblemente complejo, normalmente requiere de una cantidad significativa de c&oacute;digo, mostrar mensajes de error. Normalmente varias estructuras de control se colocan dentro del formulario HTML. La validaci&oacute;n de formularios, aunque es simple de crear, generalmente es muy tediosa y enmara&ntilde;ada de implementar</p>
 
-<p>Although there is nothing terribly complex about the above process, it usually requires a significant
-amount of code, and to display error messages, various control structures are usually placed within the form HTML.
-Form validation, while simple to create, is generally very messy and tedious to implement.</p>
+<br/>
 
-<p>&nbsp;</p>
+<a name="tutorial"></a><h1>Tutorial de Validaci&oacute;n de Formularios</h1>
 
+<p>Lo que sigue es un tutorial "pr&aacute;ctico" para implementar la Validaci&oacute;n de Formularios de CodeIgniter.</p>
 
-<a name="tutorial"></a>
-<h1>Form Validation Tutorial</h1>
-
-<p>What follows is a "hands on" tutorial for implementing CodeIgniters Form Validation.</p>
-
-
-<p>In order to implement form validation you'll need three things:</p>
+<p>Para implementar la validaci&oacute;n de formularios necesitar&aacute; tres cosas:</p>
 
 <ol>
-<li>A <a href="../general/views.html">View</a> file containing a form.</li>
-<li>A View file containing a "success" message to be displayed upon successful submission.</li>
-<li>A <a href="../general/controllers.html">controller</a> function to receive and process the submitted data.</li>
+<li>Un archivo de <a href="../general/views.html">Vista</a> que contenga un formulario.</li>
+<li>Un archivo de <a href="../general/views.html">Vista</a> que contiene un mensaje de "&eacute;xito" para mostrarse cuando el env&iacute;o sea exitoso.</li>
+<li>Una funci&oacute;n <a href="../general/controllers.html">Controlador</a> para recibir y procesar los datos enviados.</li>
 </ol>
 
-<p>Let's create those three things, using a member sign-up form as the example.</p>
+<p>Vamos a crear esas tres cosas, usando un formulario de registro como ejemplo.</p>
 
+<a name="theform"></a><h2>El formulario</h2>
 
+<p>Usando un editor de texto, crear un formulario llamado <dfn>mi_form.php</dfn>. Dentro suyo, ubicar este c&oacute;digo y guardarlo en su carpeta <samp>application/views/</samp>:</p>
 
-<a name="theform"></a>
-
-<h2>The Form</h2>
-
-<p>Using a text editor, create a form called <dfn>myform.php</dfn>.  In it, place this code and save it to your <samp>applications/views/</samp>
-folder:</p>
-
-
-<textarea class="textarea" style="width:100%" cols="50" rows="30">&lt;html>
-&lt;head>
-&lt;title>My Form&lt;/title>
-&lt;/head>
-&lt;body>
-
-&lt;?php echo validation_errors(); ?>
-
-&lt;?php echo form_open('form'); ?>
-
-&lt;h5>Username&lt;/h5>
-&lt;input type="text" name="username" value="" size="50" />
-
-&lt;h5>Password&lt;/h5>
-&lt;input type="text" name="password" value="" size="50" />
-
-&lt;h5>Password Confirm&lt;/h5>
-&lt;input type="text" name="passconf" value="" size="50" />
-
-&lt;h5>Email Address&lt;/h5>
-&lt;input type="text" name="email" value="" size="50" />
-
-&lt;div>&lt;input type="submit" value="Submit" />&lt;/div>
-
-&lt;/form>
-
-&lt;/body>
+<code>
+&lt;html><br/>
+&lt;head><br/>
+&lt;title>Mi Formulario&lt;/title><br/>
+&lt;/head><br/>
+&lt;body><br/>
+<br/>
+&lt;?php echo validation_errors(); ?><br/>
+<br/>
+&lt;php echo form_open('form'); ?><br/>
+<br/>
+&lt;h5>Usuario&lt;/h5><br/>
+&lt;input type="text" name="username" value="" size="50" /><br/>
+<br/>
+&lt;h5>Contrase&ntilde;a&lt;/h5><br/>
+&lt;input type="text" name="password" value="" size="50" /><br/>
+<br/>
+&lt;h5>Confirmar contrase&ntilde;a&lt;/h5><br/>
+&lt;input type="text" name="passconf" value="" size="50" /><br/>
+<br/>
+&lt;h5>Email&lt;/h5><br/>
+&lt;input type="text" name="email" value="" size="50" /><br/>
+<br/>
+&lt;div>&lt;input type="submit" value="Enviar" />&lt;/div><br/>
+<br/>
+&lt;/form><br/>
+<br/>
+&lt;/body><br/>
 &lt;/html>
-</textarea>
+</code>
 
+<a name="thesuccesspage"></a><h2>La P&aacute;gina de &Eacute;xito</h2>
 
+<p>Usando un editor de texto, crear un formulario llamado <dfn>form_success.php</dfn>. Dentro suyo, colocar este c&oacute;digo y
+guardarlo en su carpeta <samp>application/views/</samp>:</p>
 
-
-<a name="thesuccesspage"></a>
-<h2>The Success Page</h2>
-
-
-<p>Using a text editor, create a form called <dfn>formsuccess.php</dfn>.  In it, place this code and save it to your <samp>applications/views/</samp>
-folder:</p>
-
-
-<textarea class="textarea" style="width:100%" cols="50" rows="14">
-&lt;html>
-&lt;head>
-&lt;title>My Form&lt;/title>
-&lt;/head>
-&lt;body>
-
-&lt;h3>Your form was successfully submitted!&lt;/h3>
-
-&lt;p>&lt;?php echo anchor('form', 'Try it again!'); ?>&lt;/p>
-
-&lt;/body>
-&lt;/html>
-</textarea>
-
-
+<code>
+&lt;html><br/>
+&lt;head><br/>
+&lt;title>Mi Formulario&lt;/title><br/>
+&lt;/head><br/>
+&lt;body><br/>
+<br/>
+&lt;h3>Se envi&oacute; correctamente su formulario!&lt;/h3><br/>
+<br/>
+&lt;p>&lt;?php echo anchor('form', '&iexcl;Int&eacute;ntelo otra vez!'); ?>&lt;/p><br/>
+<br/>
+&lt;/body><br/>
+&lt;/html><br/>
+</code>
 
 <a name="thecontroller"></a>
-<h2>The Controller</h2>
+<h2>El Controlador</h2>
 
-<p>Using a text editor, create a controller called <dfn>form.php</dfn>.  In it, place this code and save it to your <samp>applications/controllers/</samp>
-folder:</p>
+<p>Usando un editor de texto, crear un controlador llamado <dfn>form.php</dfn>. Dentro suyo, colocar este c&oacute;digo y guardarlo en su carpeta <samp>application/controllers/</samp>:</p>
 
+<code>
+&lt;?php<br/>
+<br/>
+class Form extends CI_Controller {<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function index()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->helper(array('form', 'url'));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->library('form_validation');<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($this->form_validation->run() == FALSE)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('myform');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('formsuccess');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+?>
+</code>
 
-<textarea class="textarea" style="width:100%" cols="50" rows="21">&lt;?php
+<h2>Pru&eacute;belo!</h2>
 
-class Form extends CI_Controller {
-
-	function index()
-	{
-		$this->load->helper(array('form', 'url'));
-
-		$this->load->library('form_validation');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->load->view('myform');
-		}
-		else
-		{
-			$this->load->view('formsuccess');
-		}
-	}
-}
-?></textarea>
-
-
-<h2>Try it!</h2>
-
-<p>To try your form, visit your site using a URL similar to this one:</p>
+<p>Para probar su formulario, visite su sitio usando una URL similar a esta:</p>
 
 <code>example.com/index.php/<var>form</var>/</code>
 
-<p><dfn>If you submit the form you should simply see the form reload.  That's because you haven't set up any validation
-rules yet.</dfn></p>
+<p><dfn>Si env&iacute;a el formulario deber&iacute;a ver recargar el formulario. Esto es porque no se estableci&oacute; ninguna regla de validaci&oacute;n todav&iacute;a.</dfn></p>
 
-<p><strong>Since you haven't told the Form Validation class to validate anything yet, it returns <kbd>FALSE</kbd> (boolean false) by default.  The <samp>run()</samp>
-function only returns <kbd>TRUE</kbd> if it has successfully applied your rules without any of them failing.</strong></p>
+<p><strong>Como todav&iacute;a no se le dijo a la Clase Form_validation que valide algo todav&iacute;a, devuelve <kbd>FALSE</kbd> (booleano) por defecto. La funci&oacute;n <samp>run()</samp> solamente devuelve <kbd>TRUE</kbd> si se aplicaron satisfactoriamente las reglas sin que ninguna fallara.</strong></p>
 
+<h2>Explicaci&oacute;n</h2>
 
-<h2>Explanation</h2>
+<p>Advertir&aacute; varias cosas acerca de las p&aacute;ginas anteriores:</p>
 
-<p>You'll notice several things about the above pages:</p>
-
-<p>The <dfn>form</dfn> (myform.php) is a standard web form with a couple exceptions:</p>
+<p>El <dfn>formulario</dfn> (mi_form.php) es un formulario web est&aacute;ndar con algunas excepciones:</p>
 
 <ol>
-<li>It uses a <dfn>form helper</dfn> to create the form opening.
-Technically, this isn't necessary.  You could create the form using standard HTML.  However, the benefit of using the helper
-is that it generates the action URL for you, based on the URL in your config file.  This makes your application more portable in the event your URLs change.</li>
+<li>Usa un <dfn>helper form</dfn> para crear la apertura del formulario. T&eacute;cnicamente esto no es necesario. Podr&iacute;a crear el formulario usando HTML est&aacute;ndar. Sin embargo, el beneficio de usar el helper es que genera la URL de acci&oacute;n por Ud, basado en la URL en su archivo de configuraci&oacute;n. Esto hace su aplicaci&oacute;n m&aacute;s portable en caso que su URL cambie.</li>
+<li>En la parte superior del formulario advertir&aacute; la siguiente llamada de funci&oacute;n:
 
-<li>At the top of the form you'll notice the following function call:
 <code>&lt;?php echo validation_errors(); ?&gt;</code>
 
-<p>This function will return any error messages sent back by the validator. If there are no messages it returns an empty string.</p>
+<p>Esta funci&oacute;n devolver&aacute; cualquier mensaje de error enviado de regreso por el validador. Si no hay mensajes devuelve una cadena vac&iacute;a.</p>
 </li>
 </ol>
 
-<p>The <dfn>controller</dfn> (form.php) has one function: <dfn>index()</dfn>. This function initializes the validation class and
-loads the <var>form helper</var> and <var>URL helper</var> used by your view files. It also <samp>runs</samp>
-the validation routine. Based on
-whether the validation was successful it either presents the form or the success page.</p>
+<p>El<dfn> controlador</dfn> (form.php) tiene una funci&oacute;n: <dfn>index()</dfn>. Esta funci&oacute;n inicializa la clase form_validation y carga los <var>helpers form</var> y <var>URL</var> usados por sus archivos de vista. Tambi&eacute;n <samp>ejecuta</samp> la rutina de validaci&oacute;n. Basado en si la validaci&oacute;n fue exitosa o no, presenta tanto el formulario como la p&aacute;gina de &eacute;xito.</p>
 
+<a name="validationrules"></a><h2>Establecer Reglas de Validaci&oacute;n</h2>
 
-
-
-<a name="validationrules"></a>
-
-<h2>Setting Validation Rules</h2>
-
-<p>CodeIgniter lets you set as many validation rules as you need for a given field, cascading them in order, and it even lets you prep and pre-process the field data
-at the same time. To set validation rules you will use the <dfn>set_rules()</dfn> function:</p>
+<p>CodeIgniter le permite establecer tantas reglas de validaci&oacute;n como necesite para un campo dado, pornerlas en cascada, e incluso preparar y preprocesar los datos de los campos al mismo tiempo. Para establecer las reglas de validaci&oacute;n usar&aacute; la funci&oacute;n <dfn>set_rules()</dfn>:</p>
 
 <code>$this->form_validation->set_rules();</code>
 
-<p>The above function takes <strong>three</strong> parameters as input:</p>
+<p>La funci&oacute;n anterior toma como entrada <strong>tres</strong> par&aacute;metros:</p>
 
 <ol>
-	<li>The field name - the exact name you've given the form field.</li>
-	<li>A "human" name for this field, which will be inserted into the error message. For example, if your field is named "user" you might give it a human name of "Username". <strong>Note:</strong> If you would like the field name to be stored in a language file, please see <a href="#translatingfn">Translating Field Names</a>.</li>
-	<li>The validation rules for this form field.</li>
+	<li>Nombre del campo - el mismo que le dio al campo del formulario.</li>
+	<li>Un nombre "humano" para este campo, que deber&aacute; insertarse en el mensaje de error. Por ejemplo, si el campo se llama "usuario" puede darle un nombre humano como "Nombre de Usuario". <strong>Nota:</strong> Si quisiera que el nombre del campo sea almacenado en un archivo de idioma, por favor lea <a href="#translatingfn">Traducir los Nombres de Campo</a>.</li>
+	<li>Las reglas de validaci&oacute;n para este campo de formulario.</li>
 </ol>
 
-
-<p><br />Here is an example. In your <dfn>controller</dfn> (form.php), add this code just below the validation initialization function:</p>
+<p>Este es un ejemplo. En su <dfn>controlador</dfn> (form.php), agregue este c&oacute;digo justo debajo de la funci&oacute;n de inicializaci&oacute;n de la validaci&oacute;n:</p>
 
 <code>
-$this->form_validation->set_rules('username', 'Username', 'required');<br />
-$this->form_validation->set_rules('password', 'Password', 'required');<br />
-$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');<br />
-$this->form_validation->set_rules('email', 'Email', 'required');<br />
+$this->form_validation->set_rules('username', 'Usuario', 'required');<br/>
+$this->form_validation->set_rules('password', 'Contrase&ntilde;a', 'required');<br/>
+$this->form_validation->set_rules('passconf', 'Confirmar Contrase&ntilde;a', 'required');<br/>
+$this->form_validation->set_rules('email', 'Email', 'required');
 </code>
 
-<p>Your controller should now look like this:</p>
+<p>Su controlador deber&iacute;a verse as&iacute;:</p>
 
-<textarea class="textarea" style="width:100%" cols="50" rows="28">&lt;?php
-
-class Form extends CI_Controller {
-
-	function index()
-	{
-		$this->load->helper(array('form', 'url'));
-
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('username', 'Username', 'required');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->load->view('myform');
-		}
-		else
-		{
-			$this->load->view('formsuccess');
-		}
-	}
+<code>
+&lt;?php<br/>
+class Form extends CI_Controller {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function index()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->helper(array('form', 'url'));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->library('form_validation');<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('username', 'Usuario', 'required');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('password', 'Contrase&ntilde;a', 'required');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('passconf', 'Confirmar Contrase&ntilde;a', 'required');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('email', 'Email', 'required');<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($this->form_validation->run() == FALSE)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('mi_form');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('form_success');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }
-?></textarea>
+?>
+</code>
 
-<p><dfn>Now submit the form with the fields blank and you should see the error messages.
-If you submit the form with all the fields populated you'll see your success page.</dfn></p>
+<p><dfn>Ahora env&iacute;e el formulario con los campos en blanco y deber&iacute;a ver los mensajes de error. Si env&iacute;a el formulario con todos los campos llenos, ver&aacute; la p&aacute;gina de &eacute;xito.</dfn></p>
 
-<p class="important"><strong>Note:</strong> The form fields are not yet being re-populated with the data when
-there is an error.  We'll get to that shortly.</p>
+<p class="important"><strong>Nota:</strong> Cuando hay un error, los campos del formulario no se vuelven a llenar con los datos. Haremos esto en breve.</p>
 
+<a name="validationrulesasarray"></a><h2>Establecer Reglas Usando un Array</h2>
 
-
-
-<a name="validationrulesasarray"></a>
-<h2>Setting Rules Using an Array</h2>
-
-<p>Before moving on it should be noted that the rule setting function can be passed an array if you prefer to set all your rules in one action.
-If you use this approach you must name your array keys as indicated:</p>
+<p>Antes de seguir, debe notarse que la funci&oacute;n que establece la regla se le puede pasar un array si prefiere establecer todas las reglas en una sola acci&oacute;n. Si usa este enfoque, deber&aacute; llamar a las claves del array seg&uacute;n se indica:</p>
 
 <code>
 $config = array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field'&nbsp;&nbsp;&nbsp;=> 'username', <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Username', <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Usuario', <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules'&nbsp;&nbsp;&nbsp;=> 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field'&nbsp;&nbsp;&nbsp;=> 'password', <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Password', <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Contase&ntilde;a', <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules'&nbsp;&nbsp;&nbsp;=> 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field'&nbsp;&nbsp;&nbsp;=> 'passconf', <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Password Confirmation', <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Confirmar Contrase&ntilde;a', <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules'&nbsp;&nbsp;&nbsp;=> 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;&nbsp;&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
@@ -379,336 +329,298 @@ $config = array(<br />
 $this->form_validation->set_rules($config);
 </code>
 
+<a name="cascadingrules"></a><h2>Reglas en Cascada</h2>
 
-
-
-
-
-<a name="cascadingrules"></a>
-<h2>Cascading Rules</h2>
-
-<p>CodeIgniter lets you pipe multiple rules together.  Let's try it. Change your rules in the third parameter of rule setting function, like this:</p>
+<p>CodeIgniter le permite agrupar varias reglas juntas. Prob&eacute;moslo. Cambie sus reglas en el tercer par&aacute;metro de la funci&oacute;n que establece las reglas por esto:</p>
 
 <code>
-$this->form_validation->set_rules('username', 'Username', 'required|min_length[5]|max_length[12]|is_unique[users.username]');<br />
-$this->form_validation->set_rules('password', 'Password', 'required|matches[passconf]');<br />
-$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');<br />
-$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');<br />
+$this->form_validation->set_rules('username', 'Usuario', 'required|min_length[5]|max_length[12]');<br />
+$this->form_validation->set_rules('password', 'Contrase&ntilde;a', 'required|matches[passconf]');<br />
+$this->form_validation->set_rules('passconf', 'Confirmar Contrase&ntilde;a', 'required');<br />
+$this->form_validation->set_rules('email', 'Email', 'required|valid_email');<br />
 </code>
 
-<p>The above code sets the following rules:</p>
+<p>El c&oacute;digo anterior establece las siguiente reglas:</p>
 
 <ol>
-<li>The username field be no shorter than 5 characters and no longer than 12.</li>
-<li>The password field must match the password confirmation field.</li>
-<li>The email field must contain a valid email address.</li>
+<li>El campo usuario no tiene que ser menor que 5 caracteres y no mayor que 12.</li>
+<li>El campo contrase&ntilde;a tiene que coincidir con el campo confirmar contrase&ntilde;a.</li>
+<li>El campo email tiene que contener una direcci&oacute;n de email v&aacute;lida.</li>
 </ol>
 
-<p>Give it a try! Submit your form without the proper data and you'll see new error messages that correspond to your new rules.
-There are numerous rules available which you can read about in the validation reference.</p>
+<p>Pru&eacute;belo! env&iacute;e su formulario sin los datos adecuados y ver&aacute; los nuevos mensajes de error que corresponden a sus nuevas reglas. Hay muchas reglas disponibles, sobre las que puede leer en la referencia de validaci&oacute;n.</p>
 
+<a name="preppingdata"></a><h2>Preparar Datos</h2>
 
-
-<a name="preppingdata"></a>
-<h2>Prepping Data</h2>
-
-<p>In addition to the validation functions like the ones we used above, you can also prep your data in various ways.
-For example, you can set up rules like this:</p>
+<p>Adem&aacute;s de las funciones de validaci&oacute;n como las usadas antes, tambi&eacute;n puede preparar sus datos de otras varias formas. Por ejemplo, puede configurar las reglas as&iacute;:</p>
 
 <code>
-$this->form_validation->set_rules('username', 'Username', '<kbd>trim</kbd>|required|min_length[5]|max_length[12]|<kbd>xss_clean</kbd>');<br />
-$this->form_validation->set_rules('password', 'Password', '<kbd>trim</kbd>|required|matches[passconf]|<kbd>md5</kbd>');<br />
-$this->form_validation->set_rules('passconf', 'Password Confirmation', '<kbd>trim</kbd>|required');<br />
+$this->form_validation->set_rules('username', 'Usuario', '<kbd>trim</kbd>|required|min_length[5]|max_length[12]|<kbd>xss_clean</kbd>');<br />
+$this->form_validation->set_rules('password', 'Contrase&ntilde;a', '<kbd>trim</kbd>|required|matches[passconf]|<kbd>md5</kbd>');<br />
+$this->form_validation->set_rules('passconf', 'Confirmar Contrase&ntilde;a', '<kbd>trim</kbd>|required');<br />
 $this->form_validation->set_rules('email', 'Email', '<kbd>trim</kbd>|required|valid_email');<br />
 </code>
 
+<p>En el ejempo anterior, eliminamos los espacios al comienzo y fin de los campos, convertimos la contrase&ntilde;a a MD5 y aplicamos la funci&oacute;n xss_clean() al usuario, la que remueve datos maliciosos.</p>
 
-<p>In the above example, we are "trimming" the fields, converting the password to MD5, and running the username through
-the "xss_clean" function, which removes malicious data.</p>
+<p><strong>Se puede usar como regla cualquier funci&oacute;n nativa de PHP que acpete solamente un par&aacute;metro, como <dfn>htmlspecialchars</dfn>, <dfn>trim</dfn>, <dfn>MD5</dfn>, etc.</strong></p>
 
-<p><strong>Any native PHP function that accepts one parameter can be used as a rule, like <dfn>htmlspecialchars</dfn>,
-<dfn>trim</dfn>,  <dfn>MD5</dfn>, etc.</strong></p>
+<p><strong>Nota:</strong> En general, tendr&aacute; que usar las funciones de preparaci&oacute;n <strong>despu&eacute;s</strong> de las reglas de validaci&oacute;n, por lo que si hay un error, los datos originales se mostrar&aacute;n en el formulario.</p>
 
-<p><strong>Note:</strong> You will generally want to use the prepping functions <strong>after</strong>
-the validation rules so if there is an error, the original data will be shown in the form.</p>
+<a name="repopulatingform"></a><h2>Volver a Llenar el Formulario</h2>
 
+<p>Hasta ahora s&oacute;lo hemos estado tratando con errores. Es tiempo de volver a llenar los campos del formulario con los datos enviados. CodeIgniter ofrece varias funciones helper que le permiten hacer esto. La que usar&aacute; mayormente es:</p>
 
+<code>set_value('nombre_de_campo')</code>
 
+<p>Abra su archivo de vista <dfn>mi_form.php</dfn> y actualice el <strong>valor</strong> de cada campo usando la funci&oacute;n <dfn>set_value()</dfn>:</p>
 
-<a name="repopulatingform"></a>
-<h2>Re-populating the form</h2>
-
-<p>Thus far we have only been dealing with errors.  It's time to repopulate the form field with the submitted data. CodeIgniter offers several helper functions
-that permit you to do this. The one you will use most commonly is:</p>
-
-<code>set_value('field name')</code>
-
-
-<p>Open your <dfn>myform.php</dfn> view file and update the <strong>value</strong> in each field using the <dfn>set_value()</dfn> function:</p>
-
-<p><strong>Don't forget to include each field name in the <dfn>set_value()</dfn> functions!</strong></p>
-
-
-<textarea class="textarea" style="width:100%" cols="50" rows="30">
-&lt;html>
-&lt;head>
-&lt;title>My Form&lt;/title>
-&lt;/head>
-&lt;body>
-
-&lt;?php echo validation_errors(); ?>
-
-&lt;?php echo form_open('form'); ?>
-
-&lt;h5>Username&lt;/h5>
-&lt;input type="text" name="username" value="&lt;?php echo set_value('username'); ?>" size="50" />
-
-&lt;h5>Password&lt;/h5>
-&lt;input type="text" name="password" value="&lt;?php echo set_value('password'); ?>" size="50" />
-
-&lt;h5>Password Confirm&lt;/h5>
-&lt;input type="text" name="passconf" value="&lt;?php echo set_value('passconf'); ?>" size="50" />
-
-&lt;h5>Email Address&lt;/h5>
-&lt;input type="text" name="email" value="&lt;?php echo set_value('email'); ?>" size="50" />
-
-&lt;div>&lt;input type="submit" value="Submit" />&lt;/div>
-
-&lt;/form>
-
-&lt;/body>
-&lt;/html>
-</textarea>
-
-
-<p><dfn>Now reload your page and submit the form so that it triggers an error.  Your form fields should now be re-populated</dfn></p>
-
-<p class="important"><strong>Note:</strong> The <a href="#functionreference">Function Reference</a> section below contains functions that
-permit you to re-populate &lt;select> menus, radio buttons, and checkboxes.</p>
-
-
-<p><strong>Important Note:</strong> If you use an array as the name of a form field, you must supply it as an array to the function.  Example:</p>
-
-<code>&lt;input type="text" name="<kbd>colors[]</kbd>" value="&lt;?php echo set_value('<kbd>colors[]</kbd>'); ?>" size="50" /></code>
-
-<p>For more info please see the <a href="#arraysasfields">Using Arrays as Field Names</a> section below.</p>
-
-
-
-
-
-<a name="callbacks"></a>
-<h2>Callbacks: Your own Validation Functions</h2>
-
-<p>The validation system supports callbacks to your own validation functions.  This permits you to extend the validation class
-to meet your needs.  For example, if you need to run a database query to see if the user is choosing a unique username, you can
-create a callback function that does that.  Let's create a example of this.</p>
-
-<p>In your controller, change the "username" rule to this:</p>
-
-<code>$this->form_validation->set_rules('username', 'Username', '<kbd>callback_username_check</kbd>');</code>
-
-<p>Then add a new function called <dfn>username_check</dfn> to your controller.  Here's how your controller should now look:</p>
-
-<textarea class="textarea" style="width:100%" cols="50" rows="40">&lt;?php
-
-class Form extends CI_Controller {
-
-	public function index()
-	{
-		$this->load->helper(array('form', 'url'));
-
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('username', 'Username', 'callback_username_check');
-		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
-
-		if ($this->form_validation->run() == FALSE)
-		{
-			$this->load->view('myform');
-		}
-		else
-		{
-			$this->load->view('formsuccess');
-		}
-	}
-
-	public function username_check($str)
-	{
-		if ($str == 'test')
-		{
-			$this->form_validation->set_message('username_check', 'The %s field can not be the word "test"');
-			return FALSE;
-		}
-		else
-		{
-			return TRUE;
-		}
-	}
-
-}
-?></textarea>
-
-<p><dfn>Reload your form and submit it with the word "test" as the username.  You can see that the form field data was passed to your
-callback function for you to process.</dfn></p>
-
-<p>To invoke a callback just put the function name in a rule, with "callback_" as the rule <strong>prefix</strong>. If you need
-to receive an extra parameter in your callback function, just add it normally after the function name between square brackets,
-as in: "callback_foo<strong>[bar]</strong>", then it will be passed as the second argument of your callback function.</p>
-
-<p><strong>Note:</strong> You can also process the form data that is passed to your callback and return it.  If your callback returns anything other than a boolean TRUE/FALSE
-it is assumed that the data is your newly processed form data.</p>
-
-<a name="settingerrors"></a>
-<h2>Setting Error Messages</h2>
-
-
-<p>All of the native error messages are located in the following language file:  <dfn>language/english/form_validation_lang.php</dfn></p>
-
-<p>To set your own custom message you can either edit that file, or use the following function:</p>
-
-<code>$this->form_validation->set_message('<var>rule</var>', '<var>Error Message</var>');</code>
-
-<p>Where <var>rule</var> corresponds to the name of a particular rule, and <var>Error Message</var> is the text you would like displayed.</p>
-
-<p>If you include <dfn>%s</dfn> in your error string, it will be replaced with the "human" name you used for your field when you set your rules.</p>
-
-<p>In the "callback" example above, the error message was set by passing the name of the function:</p>
-
-<code>$this->form_validation->set_message('username_check')</code>
-
-<p>You can also override any error message found in the language file.  For example, to change the message for the "required" rule you will do this:</p>
-
-<code>$this->form_validation->set_message('required', 'Your custom message here');</code>
-
-
-
-<a name="translatingfn"></a>
-<h2>Translating Field Names</h2>
-
-<p>If you would like to store the "human" name you passed to the <dfn>set_rules()</dfn> function in a language file, and therefore make the name able to be translated, here's how:</p>
-
-<p>First, prefix your "human" name with <dfn>lang:</dfn>, as in this example:</p>
+<p><strong>No olvide incluir cada nombre de campo en las funciones <dfn>set_value()</dfn>!</strong></p>
 
 <code>
-$this->form_validation->set_rules('first_name', '<kbd>lang:</kbd>first_name', 'required');<br />
+&lt;html><br/>
+&lt;head><br/>
+&lt;title>Mi Formulario&lt;/title><br/>
+&lt;/head><br/>
+&lt;body><br/>
+<br/>
+&lt;?php echo validation_errors(); ?><br/>
+<br/>
+&lt;php echo form_open('form'); ?><br/>
+<br/>
+&lt;h5>Usuario&lt;/h5><br/>
+&lt;input type="text" name="username" value="&lt;?php echo set_value('username'); ?>" size="50" /><br/>
+<br/>
+&lt;h5>Contrase&ntilde;a&lt;/h5><br/>
+&lt;input type="text" name="password" value="&lt;?php echo set_value('password'); ?>" size="50" /><br/>
+<br/>
+&lt;h5>Confirmar contrase&ntilde;a&lt;/h5><br/>
+&lt;input type="text" name="passconf" value="&lt;?php echo set_value('passconf'); ?>" size="50" /><br/>
+<br/>
+&lt;h5>Email&lt;/h5><br/>
+&lt;input type="text" name="email" value="&lt;?php echo set_value('email'); ?>" size="50" /><br/>
+<br/>
+&lt;div>&lt;input type="submit" value="Enviar" />&lt;/div><br/>
+<br/>
+&lt;/form><br/>
+<br/>
+&lt;/body><br/>
+&lt;/html>
 </code>
 
-<p>Then, store the name in one of your language file arrays (without the prefix):</p>
+<p><dfn>Ahora recargue la p&aacute;gina y env&iacute;e el formulario para que dispare un error. Sus campos de formulario deber&iacute;an llenarse nuevamente.</dfn></p>
 
-<code>$lang['first_name'] = 'First Name';</code>
+<p class="important"><strong>Nota:</strong> La secci&oacute;n <a href="#functionreference">Referencia de Funciones</a> (m&aacute;s abajo) contiene funciones que le permiten volver a llenar men&uacute;s &lt;select>, botones de radio y casillas de verificaci&oacute;n.</p>
 
-<p><strong>Note:</strong> If you store your array item in a language file that is not loaded automatically by CI, you'll need to remember to load it in your controller using:</p>
+<p><strong>Nota Importante:</strong> Si usa un array como nombre del campo de formulario, tiene que proporcionarlo como un array a la funci&oacute;n. Ejemplo:</p>
 
-<code>$this->lang->load('file_name');</code>
+<code>
+&lt;input type="text" name="<kbd>colors[]</kbd>" value="&lt;?php echo set_value('<kbd>colors[]</kbd>'); ?>" size="50" />
+</code>
 
-<p>See the <a href="language.html">Language Class</a> page for more info regarding language files.</p>
+<p>Para mayor informaci&oacute;n, vea m&aacute;s abajo la secci&oacute;n <a href="#arraysasfields">Usar Arrays como Nombres de Campo</a>.</p>
 
+<a name="callbacks"></a><h2>Callbacks: sus Propias Funciones de Validaci&oacute;n</h2>
 
-<a name="errordelimiters"></a>
-<h2>Changing the Error Delimiters</h2>
+<p>El sistema de validaci&oacute;n soporta callbacks para sus propias funciones de validaci&oacute;n. Esto le permite extender la clase de validaci&oacute;n para ajustarla a sus necesidades. Por ejemplo, si necesita ejecutar una consulta de base de datos para ver si un usuario est&aacute; eligiendo un nombre &uacute;nico, puede crear una funci&oacute;n callback que haga eso. Creemos un ejemplo para esto.</p>
 
-<p>By default, the Form Validation class adds a paragraph tag (&lt;p&gt;) around each error message shown. You can either change these delimiters globally or
-individually.</p>
+<p>En su controlador, cambie la regla "username" por esta:</p>
+
+<code>
+	$this->form_validation->set_rules('username', 'Usuario', '<kbd>callback_username_check</kbd>');
+	</code>
+
+<p>Luego agregue una nueva funci&oacute;n llamada <dfn>username_check</dfn> a su controlador. As&iacute; es como se deber&iacute;a ver su controlador ahora:</p>
+
+<code>
+&lt;?php<br/>
+class Form extends CI_Controller {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function index()<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->helper(array('form', 'url'));<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->library('form_validation');<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('username', 'Usuario', 'callback_username_check');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('password', 'Contrase&ntilde;a', 'required');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('passconf', 'Confirmar Contrase&ntilde;a', 'required');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_rules('email', 'Email', 'required');<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($this->form_validation->run() == FALSE)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('mi_form');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('form_success');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;function username_check($str)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($str == 'prueba')<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->form_validation->set_message('username_check', 'El campo %s no puede contener la palabra "prueba"');<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return FALSE;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return TRUE;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+}<br/>
+?>
+</code>
+
+<p><dfn>Recargue su formulario y env&iacute;elo con la palabra "test" como nombre de usuario. Puede ver que el dato del campo de formulario se pasa a su funci&oacute;n callback para procesarlo.</dfn></p>
+
+<p><strong>Para invocar un callback tan solo ponga el nombre de la funci&oacute;n en una regla, con "callback_" como prefijo de la regla.</strong></p>
+
+<p>Tambi&eacute;n puede procesar el dato del formulario que pasa a su callback y recuperarlo. Si su callback devuelve cualquier otra que cosa que un booleano TRUE/FALSE, se asume que esos datos son los recientemente procesados datos de formulario.</p>
+
+<a name="settingerrors"></a><h2>Establecer Mensajes de Error</h2>
+
+<p>Todos los mensajes de error nativos se ubican en el siguiente archivo de idioma:
+<dfn>language/english/form_validation_lang.php.</dfn></p>
+
+<p>Para establecer sus propios mensajes personalizados, puede tanto editar el archivo, como usar la siguiente funci&oacute;n:</p>
+
+<code>
+$this->form_validation->set_message('<var>regla</var>', '<var>Mensaje de error</var>');
+</code>
+
+<p>Donde <var>regla</var> corresponde al nombre de una regla en particular y <var>Mensaje de error</var> es el texto que quiere mostrar.</p>
+
+<p>Si incluye <dfn>%s</dfn> en su cadena de error, se reemplazar&aacute; con el nombre "humano" que us&oacute; para el campo cuando estableci&oacute; su regla.</p>
+
+<p>En el ejemplo de "callback" anterior, el mensaje de error se estableci&oacute; al pasar el nombre de la funci&oacute;n:</p>
+
+<code>
+$this->form_validation->set_message('username_check');
+</code>
+
+<p>Tambi&eacute;n puede anular cualquier mensaje de error que se encuentre en el archivo de idioma. Por ejemplo, para cambiar el mensaje para la regla "required", har&aacute; esto:</p>
+
+<code>
+$this->form_validation->set_message('required', 'Su mensaje personalizado aqu&iacute;');
+</code>
+
+<a name="translatingfn"></a><h2>Traducir los Nombres de Campo</h2>
+
+<p>Si quisiera almacenar el nombre "humano" que le pas&oacute; a la funci&oacute;n <dfn>set_rules()</dfn> en un archivo de idioma y, por lo tanto, hacer que el nombre sea traducible, aqu&iacute; se muestra como:</p>
+
+<p>Primero, prefije el nombre "humano" con <dfn>lang</dfn>:, como en el ejemplo:</p>
+
+<code>
+$this->form_validation->set_rules('first_name', '<kbd>lang:</kbd>first_name', 'required');
+</code>
+
+<p>Luego, almacene el nombre en uno de sus array de archivos de idioma (sin el prefijo):</p>
+
+<code>
+$lang['first_name'] = 'First Name';
+</code>
+
+<p><strong>Nota:</strong> Si almacena su &iacute;tem de array en un archivo de idioma que CI no carga autom&aacute;ticamente, necesitar&aacute; recodar
+cargarlo en su controlador usando:</p>
+
+<code>
+$this->lang->load('file_name');
+</code>
+
+<p>
+Para mayor informaci&oacute;n acerca de los archivos de idioma, vea la p&aacute;gina de la <a href="language.html">Clase Lang</a>.</p>
+
+<a name="errordelimiters"></a><h2>Cambiar los Delimitadores de Error</h2>
+
+<p>Por defecto, la Clase Form_validation agrega una etiqueta de p&aacute;rrafo (&lt;p&gt;) alrededor de cada mensaje que se muestra. Se puede cambiar esos delimitadores, tanto global como individualmente.</p>
 
 <ol>
+<li><strong>Cambiar los Delimitadores Globalmente</strong>
+<p>Para cambiar globalmente los delimitadores de error en su funci&oacute;n controlador, apenas despu&eacute;s de cargar la Clase Form_validation, agregue esto:</p>
 
-<li><strong>Changing delimiters Globally</strong>
+<code>
+$this->form_validation->set_error_delimiters('<kbd>&lt;div class="error"></kbd>', '<kbd>&lt;/div></kbd>');
+</code>
 
-<p>To globally change the error delimiters, in your controller function, just after loading the Form Validation class, add this:</p>
-
-<code>$this->form_validation->set_error_delimiters('<kbd>&lt;div class="error"></kbd>', '<kbd>&lt;/div></kbd>');</code>
-
-<p>In this example, we've switched to using div tags.</p>
-
+<p>En este ejemplo cambiamos los delimitadores a etiquetas div.</p>
 </li>
+<li><strong>Cambiar los Delimitadores Individualmente</strong>
+<p>A cada una de las dos funciones que generan errores que se muestran en este tutorial, se les puede proporcionar sus propios delimitadores seg&uacute;n se muestra:</p>
 
-<li><strong>Changing delimiters Individually</strong>
+<code>
+&lt;?php echo form_error('field name', '<kbd>&lt;div class="error"></kbd>', '<kbd>&lt;/div></kbd>'); ?>
+</code>
 
-<p>Each of the two error generating functions shown in this tutorial can be supplied their own delimiters as follows:</p>
+<p>O:</p>
 
-<code>&lt;?php echo form_error('field name', '<kbd>&lt;div class="error"></kbd>', '<kbd>&lt;/div></kbd>'); ?></code>
-
-<p>Or:</p>
-
-<code>&lt;?php echo validation_errors('<kbd>&lt;div class="error"></kbd>', '<kbd>&lt;/div></kbd>'); ?></code>
-
+<code>
+&lt;?php echo validation_errors('<kbd>&lt;div class="error"></kbd>', '<kbd>&lt;/div></kbd>'); ?>
+</code>
 </li>
 </ol>
 
+<a name="individualerrors"></a><h2>Mostrar los Errores Individualmente</h2>
 
+<p>Si prefiere mostrar un mensaje de error cerca de cada campo de formulario en lugar de una lista, puede usar la funci&oacute;n <dfn>form_error()</dfn>.</p>
 
+<p>Pru&eacute;belo! Cambie su formulario para que luzca as&iacute;:</p>
 
-<a name="individualerrors"></a>
-<h2>Showing Errors Individually</h2>
-
-<p>If you prefer to show an error message next to each form field, rather than as a list, you can use the <dfn>form_error()</dfn> function.</p>
-
-<p>Try it! Change your form so that it looks like this:</p>
-
-<textarea class="textarea" style="width:100%" cols="50" rows="18">
-&lt;h5>Username&lt;/h5>
-&lt;?php echo form_error('username'); ?>
-&lt;input type="text" name="username" value="&lt;?php echo set_value('username'); ?>" size="50" />
-
-&lt;h5>Password&lt;/h5>
-&lt;?php echo form_error('password'); ?>
-&lt;input type="text" name="password" value="&lt;?php echo set_value('password'); ?>" size="50" />
-
-&lt;h5>Password Confirm&lt;/h5>
-&lt;?php echo form_error('passconf'); ?>
-&lt;input type="text" name="passconf" value="&lt;?php echo set_value('passconf'); ?>" size="50" />
-
-&lt;h5>Email Address&lt;/h5>
-&lt;?php echo form_error('email'); ?>
+<code>
+&lt;h5>Usuario&lt;/h5><br/>
+&lt;?php echo form_error('username'); ?><br/>
+&lt;input type="text" name="username" value="&lt;?php echo set_value('username'); ?>" size="50" /><br/>
+<br/>
+&lt;h5>Contrase&ntilde;a&lt;/h5><br/>
+&lt;?php echo form_error('password'); ?><br/>
+&lt;input type="text" name="password" value="&lt;?php echo set_value('password'); ?>" size="50" /><br/>
+<br/>
+&lt;h5>Confirmar Contrase&ntilde;a&lt;/h5><br/>
+&lt;?php echo form_error('passconf'); ?><br/>
+&lt;input type="text" name="passconf" value="&lt;?php echo set_value('passconf'); ?>" size="50" /><br/>
+<br/>
+&lt;h5>Email&lt;/h5><br/>
+&lt;?php echo form_error('email'); ?><br/>
 &lt;input type="text" name="email" value="&lt;?php echo set_value('email'); ?>" size="50" />
-</textarea>
+</code>
 
-<p>If there are no errors, nothing will be shown.  If there is an error, the message will appear.</p>
+<p>Si no hay errores, no se muestra nada. Si hay un error, aparecer&aacute; un mensaje.</p>
 
-<p><strong>Important Note:</strong> If you use an array as the name of a form field, you must supply it as an array to the function.  Example:</p>
+<p><strong>Nota Importante:</strong> Si usa un array como nombre del campo de formulario, tiene que proporcionarlo como un array a la funci&oacute;n. Ejemplo:</p>
 
-<code>&lt;?php echo form_error('<kbd>options[size]</kbd>'); ?><br />
+<code>
+&lt;?php echo form_error('<kbd>options[size]</kbd>'); ?><br />
 &lt;input type="text" name="<kbd>options[size]</kbd>" value="&lt;?php echo set_value("<kbd>options[size]</kbd>"); ?>" size="50" />
 </code>
 
-<p>For more info please see the <a href="#arraysasfields">Using Arrays as Field Names</a> section below.</p>
+<p>
+Para mayor informaci&oacute;n, lea m&aacute;s abajo la secci&oacute;n <a href="#arraysasfields">Usar Arrays como Nombres de Campo</a>.</p>
 
+<br/>
 
+<a name="savingtoconfig"></a><h1>Guardar Conjuntos de Reglas de Validaci&oacute;n en un Archivo de Configuraci&oacute;n</h1>
 
+<p>Una funcionalidad interesante de la Clase Form_validation es que le permite almacenar todas sus reglas de validaci&oacute;n para toda su aplicaci&oacute;n en un archivo de configuraci&oacute;n. Puede organizar estas reglas en "grupos". Estos grupos pueden cargarse sea en forma autom&aacute;tica cuando se llama un controlador/funci&oacute;n coincidente, o manualmente llamando a cada una seg&uacute;n se necesite.</p>
 
-<p>&nbsp;</p>
+<h3>C&oacute;mo Guardar sus Reglas</h3>
 
-
-<a name="savingtoconfig"></a>
-<h1>Saving Sets of Validation Rules to a Config File</h1>
-
-<p>A nice feature of the Form Validation class is that it permits you to store all your validation rules for your entire application in a config file.  You
-can organize these rules into "groups".  These groups can either be loaded automatically when a matching controller/function is called, or
-you can manually call each set as needed.</p>
-
-<h3>How to save your rules</h3>
-
-<p>To store your validation rules, simply create a file named <kbd>form_validation.php</kbd> in your <dfn>application/config/</dfn> folder.
-In that file you will place an array named <kbd>$config</kbd> with your rules. As shown earlier, the validation array will have this prototype:</p>
+<p>Para almacenar sus reglas de validaci&oacute;n, simplemente cree un archivo llamado <kbd>form_validation.php</kbd> en su carpeta <dfn>application/config/</dfn>. En ese archivo colocar&aacute; un array llamado <kbd>$config</kbd> con sus reglas. Como se mostr&oacute; antes, el array de validaci&oacute;n tendr&aacute; este prototipo:</p>
 
 <code>
 $config = array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field'&nbsp;&nbsp;&nbsp;=> 'username', <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Username', <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Usuario', <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules'&nbsp;&nbsp;&nbsp;=> 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field'&nbsp;&nbsp;&nbsp;=> 'password', <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Password', <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Contrase&ntilde;a', <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules'&nbsp;&nbsp;&nbsp;=> 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field'&nbsp;&nbsp;&nbsp;=> 'passconf', <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Password Confirmation', <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label'&nbsp;&nbsp;&nbsp;=> 'Confirmar Contrase&ntilde;a', <br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules'&nbsp;&nbsp;&nbsp;=> 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),&nbsp;&nbsp;&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
@@ -719,14 +631,13 @@ $config = array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
 </code>
 
-<p><dfn>Your validation rule file will be loaded automatically and used when you call the run() function.</dfn></p>
+<p><dfn>Su regla de validaci&oacute;n se cargar&aacute; autom&aacute;ticamente y se usar&aacute; cuando llame a la funci&oacute;n run().</dfn></p>
 
-<p class="important">Please note that you MUST name your array $config.</p>
+<p class="important">Por favor advierta que al array <strong>TIENE</strong> que llamarse $config.</p>
 
-<h3>Creating Sets of Rules</h3>
+<h3>Crear un Conjunto de Reglas</h3>
 
-<p>In order to organize your rules into "sets" requires that you place them into "sub arrays".  Consider the following example, showing two sets of rules.
-We've arbitrarily called these two rules "signup" and "email".  You can name your rules anything you want:</p>
+<p>Para organizar sus reglas en "conjuntos" se necesita que las coloque en "sub arrays". Considere el siguiente ejemplo, que muestra dos conjuntos de reglas. Llamamos arbitrariamente a esas dos reglas "signup" y "email". Puede darles el nombre que guste:</p>
 
 
 <code>$config = array(<br />
@@ -777,28 +688,24 @@ We've arbitrarily called these two rules "signup" and "email".  You can name you
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
 </code>
 
+<h3>Llamar a un Grupo de Reglas Espec&iacute;fico</h3>
 
-<h3>Calling a Specific Rule Group</h3>
-
-<p>In order to call a specific group you will pass its name to the <kbd>run()</kbd> function.  For example, to call the <kbd>signup</kbd> rule you will do this:</p>
+<p>Para llamar a un grupo espec&iacute;fico, deber&aacute; pasar su nombre a la funci&oacute;n <kbd>run()</kbd>. Por ejemplo, para llamar a la regla <kbd>signup</kbd>, har&aacute; esto:</p>
 
 <code>
 if ($this->form_validation->run('<kbd>signup</kbd>') == FALSE)<br />
 {<br />
-&nbsp;&nbsp;&nbsp;$this->load->view('myform');<br />
+&nbsp;&nbsp;&nbsp;$this->load->view('mi_form');<br />
 }<br />
 else<br />
 {<br />
-&nbsp;&nbsp;&nbsp;$this->load->view('formsuccess');<br />
+&nbsp;&nbsp;&nbsp;$this->load->view('form_success');<br />
 }<br />
 </code>
 
+<h3>Asociar una Funci&oacute;n Controlador con un Grupo de Reglas</h3>
 
-
-<h3>Associating a Controller Function with a Rule Group</h3>
-
-<p>An alternate (and more automatic) method of calling a rule group is to name it according to the controller class/function you intend to use it with.  For example, let's say you
-have a controller named <kbd>Member</kbd> and a function named <kbd>signup</kbd>.  Here's what your class might look like:</p>
+<p>Un m&eacute;todo alternativo (y m&aacute;s autom&aacute;tico) de llamar a un grupo de reglas es darle nombre de acuerdo a la clase/funci&oacute;n controlador que piense usar con &eacute;l. Por ejemplo, digamos que tiene un controlador llamado <kbd>Member</kbd> y una funci&oacute;n llamada <kbd>signup</kbd>. As&iacute; es como la clase se podr&iacute;a ver:</p>
 
 <code>
 &lt;?php<br /><br />
@@ -810,34 +717,33 @@ class <kbd>Member</kbd> extends CI_Controller {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($this->form_validation->run() == FALSE)<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('myform');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('mi_form');<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('formsuccess');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->load->view('form_success');<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
 &nbsp;&nbsp;&nbsp;}<br />
 }<br />
 ?></code>
 
-<p>In your validation config file, you will name your rule group <kbd>member/signup</kbd>:</p>
-
+<p>En su archivo de configuraci&oacute;n de validaci&oacute;n, le dar&aacute; nombre a su grupo de reglas <kbd>member/signup</kbd>:</p>
 
 <code>$config = array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'<kbd>member/signup</kbd>' => array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field' => 'username',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => 'Username',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => 'Usuario',<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules' => 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field' => 'password',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => 'Password',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => 'Contrase&ntilde;a',<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules' => 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'field' => 'passconf',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => 'PasswordConfirmation',<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'label' => 'Confirmar Contrase&ntilde;a',<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'rules' => 'required'<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;array(<br />
@@ -849,387 +755,330 @@ class <kbd>Member</kbd> extends CI_Controller {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
 </code>
 
-<p><dfn>When a rule group is named identically to a controller class/function it will be used automatically when the run() function is invoked from that class/function.</dfn></p>
+<p><dfn>Cuando un grupo de reglas se llama igual que una clase/funci&oacute;n controlador, se usar&aacute; autom&aacute;ticamente cuando sea invocada la funci&oacute;n run() function desde esa clase/funci&oacute;n.</dfn></p>
 
-<p>&nbsp;</p>
+<br/>
 
+<a name="arraysasfields"></a><h1>Usar Arrays como Nombres de Campo</h1>
 
-<a name="arraysasfields"></a>
-<h1>Using Arrays as Field Names</h1>
-
-<p>The Form Validation class supports the use of arrays as field names.  Consider this example:</p>
+<p>La Clase Form_validation soporta el uso de arrays como nombres de campo. Considere este ejemplo:</p>
 
 <code>&lt;input type="text" name="<kbd>options[]</kbd>" value="" size="50" /></code>
 
-<p>If you do use an array as a field name, you must use the EXACT array name in the <a href="#helperreference">Helper Functions</a> that require the field name,
-and as your Validation Rule field name.</p>
+<p>Si usa un array como nombre de campo, tiene que usar el <strong>MISMO</strong> nombre de array en las <a href="#helperreference">Funciones Helper</a> que necesitan nombre de campo y como su nombre de campo Regla de Validaci&oacute;n.</p>
 
-<p>For example, to set a rule for the above field you would use:</p>
+<p>Por ejemplo, para establecer una regla para el campo anterior, usar&iacute;a:</p>
 
 <code>$this->form_validation->set_rules('<kbd>options[]</kbd>', 'Options', 'required');</code>
 
-<p>Or, to show an error for the above field you would use:</p>
+<p>O, para mostrar un error para el campo anterior, usar&iacute;a:</p>
 
 <code>&lt;?php echo form_error('<kbd>options[]</kbd>'); ?></code>
 
-<p>Or to re-populate the field you would use:</p>
+<p>O para volver a llenar el campo, usar&iacute;a:</p>
 
-<code>&lt;input type="text" name="<kbd>options[]</kbd>" value="<kbd>&lt;?php echo set_value('<kbd>options[]</kbd>'); ?></kbd>" size="50" /></code>
+<code>
+&lt;input type="text" name="<kbd>options[]</kbd>" value="<kbd>&lt;?php echo set_value('<kbd>options[]</kbd>'); ?></kbd>" size="50" />
+</code>
 
-<p>You can use multidimensional arrays as field names as well. For example:</p>
+<p>Tambi&eacute;n puede usar arrays multidimensionales como nombres de campo. Por ejemplo:</p>
 
 <code>&lt;input type="text" name="<kbd>options[size]</kbd>" value="" size="50" /></code>
 
-<p>Or even:</p>
+<p>O a&uacute;n:</p>
 
-<code>&lt;input type="text" name="<kbd>sports[nba][basketball]</kbd>" value="" size="50" /></code>
+<code>
+&lt;input type="text" name="<kbd>sports[nba][basketball]</kbd>" value="" size="50" />
+</code>
 
-<p>As with our first example, you must use the exact array name in the helper functions:</p>
+<p>Como con nuestro primer ejemplo, tiene que usar el mismo nombre en las funciones helper:</p>
 
 <code>&lt;?php echo form_error('<kbd>sports[nba][basketball]</kbd>'); ?></code>
 
-<p>If you are using checkboxes (or other fields) that have multiple options, don't forget to leave an empty bracket after each option, so that all selections will be added to the
-POST array:</p>
+<p>Si est&aacute; usando casillas de verificaci&oacute;n (u otro campo) que tiene opciones m&uacute;ltiples, no se olvide de dejar un corchete vac&iacute;o despu&eacute;s de cada opci&oacute;n, para que todas las selecciones sean agregadas al array POST:</p>
 
 <code>
-&lt;input type="checkbox" name="<kbd>options[]</kbd>" value="red" /><br />
-&lt;input type="checkbox" name="<kbd>options[]</kbd>" value="blue" /><br />
-&lt;input type="checkbox" name="<kbd>options[]</kbd>" value="green" />
+&lt;input type="checkbox" name="<kbd>options[]</kbd>" value="rojo" /><br />
+&lt;input type="checkbox" name="<kbd>options[]</kbd>" value="azul" /><br />
+&lt;input type="checkbox" name="<kbd>options[]</kbd>" value="verde" />
 </code>
 
 <p>Or if you use a multidimensional array:</p>
 
 <code>
-&lt;input type="checkbox" name="<kbd>options[color][]</kbd>" value="red" /><br />
-&lt;input type="checkbox" name="<kbd>options[color][]</kbd>" value="blue" /><br />
-&lt;input type="checkbox" name="<kbd>options[color][]</kbd>" value="green" />
+&lt;input type="checkbox" name="<kbd>options[color][]</kbd>" value="rojo" /><br />
+&lt;input type="checkbox" name="<kbd>options[color][]</kbd>" value="azul" /><br />
+&lt;input type="checkbox" name="<kbd>options[color][]</kbd>" value="verde" />
 </code>
 
-<p>When you use a helper function you'll include the bracket as well:</p>
+<p>Tambi&eacute;n incluir&aacute; corchetes cuando use una funci&oacute;n helper:</p>
 
 <code>&lt;?php echo form_error('<kbd>options[color][]</kbd>'); ?></code>
 
+<br/>
 
+<a name="rulereference"></a><h1>Referencia de Reglas</h1>
 
-
-<p>&nbsp;</p>
-
-
-<a name="rulereference"></a>
-<h1>Rule Reference</h1>
-
-<p>The following is a list of all the native rules that are available to use:</p>
-
+<p>La siguiente es una lista de todas las reglas nativas que est&aacute;n disponibles para usarse:</p>
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
 	<tr>
-		<th>Rule</th>
-		<th>Parameter</th>
-		<th>Description</th>
-		<th>Example</th>
+		<th>Regla</th>
+		<th>Par&aacute;metro</th>
+		<th>Descripci&oacute;n</th>
+		<th>Ejemplo</th>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>required</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element is empty.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario est&aacute; vac&iacute;o.</td>
 		<td class="td">&nbsp;</td>
-	</tr>
-
-	<tr>
-		<td class="td"><strong>matches</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element does not match the one in the parameter.</td>
-		<td class="td">matches[form_item]</td>
 	</tr>
 
 	<tr>
 		<td class="td"><strong>is_unique</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element is not unique to the table and field name in the parameter.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento del formulario ya existe en la tabla y el nombre del campo en el par&aacute;metro.</td>
 		<td class="td">is_unique[table.field]</td>
 	</tr>
-
+	<tr>
+		<td class="td"><strong>matches</strong></td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario no coincide con el par&aacute;metro.</td>
+		<td class="td">matches[form_item]</td>
+	</tr>
 	<tr>
 		<td class="td"><strong>min_length</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element is shorter then the parameter value.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario es m&aacute;s corto que el valor del par&aacute;metro.</td>
 		<td class="td">min_length[6]</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>max_length</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element is longer then the parameter value.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario es m&aacute;s largo que el valor del par&aacute;metro.</td>
 		<td class="td">max_length[12]</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>exact_length</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element is not exactly the parameter value.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario no es exactamente el valor del par&aacute;metro.</td>
 		<td class="td">exact_length[8]</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>greater_than</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element is less than the parameter value or not numeric.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario es menor que el valor del par&aacute;metro o no es num&eacute;rico.</td>
 		<td class="td">greater_than[8]</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>less_than</strong></td>
-		<td class="td">Yes</td>
-		<td class="td">Returns FALSE if the form element is greater than the parameter value or not numeric.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario es mayor que el valor del par&aacute;metro o no es num&eacute;rico.</td>
 		<td class="td">less_than[8]</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>alpha</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than alphabetical characters.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un caracter alfab&eacute;tico.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>alpha_numeric</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than alpha-numeric characters.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un caracter alfanum&eacute;rico.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>alpha_dash</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than alpha-numeric characters, underscores or dashes.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un caracter alfanum&eacute;rico, gui&oacute;n de subrayado o gui&oacute;n com&uacute;n.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>numeric</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than numeric characters.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un caracter num&eacute;rico.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>integer</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than an integer.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un entero.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>decimal</strong></td>
-		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than a decimal number.</td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario no es exactamente el valor del par&aacute;metro.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>is_natural</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than a natural number: 0, 1, 2, 3, etc.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un n&uacute;mero natural: 0, 1, 2, 3, etc.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>is_natural_no_zero</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element contains anything other than a natural number, but not zero: 1, 2, 3, etc.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario contiene algo que no es un n&uacute;mero natural, pero no cero: 1, 2, 3, etc.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>valid_email</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the form element does not contain a valid email address.</td>
+		<td class="td">Devuelve FALSE si el elemento de formulario no contiene una direcci&oacute;n de email v&aacute;lida.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>valid_emails</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if any value provided in a comma separated list is not a valid email.</td>
+		<td class="td">Devuelve FALSE si cualquier valor provisto en una lista separada por comas no es un email v&aacute;lido.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>valid_ip</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the supplied IP is not valid. Accepts an optional parameter of "IPv4" or "IPv6" to specify an IP format.</td>
+		<td class="td">Devuelve FALSE la IP proporcionada no es v&aacute;lida. Acepta un parámetro opcional de "IPv4" o "IPv6" para especificar un formato IP</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
 	<tr>
 		<td class="td"><strong>valid_base64</strong></td>
 		<td class="td">No</td>
-		<td class="td">Returns FALSE if the supplied string contains anything other than valid Base64 characters.</td>
+		<td class="td">Devuelve FALSE si la cadena proporcionada contiene algo
+que no es un caracter Base64.</td>
 		<td class="td">&nbsp;</td>
 	</tr>
-
-
+	<tr>
+		<td class="td"><strong>regex_match</strong></td>
+		<td class="td">Si</td>
+		<td class="td">Devuelve FALSE si el elmento de formulario contiene algo que no este en la expresi&oacute;n regular.</td>
+		<td class="td">regex_match[/expr_reg/]</td>
+	</tr>
 </table>
 
-<p><strong>Note:</strong> These rules can also be called as discrete functions. For example:</p>
+<p><strong>Nota:</strong> Estas reglas tambi&eacute;n se pueden llamar desde funciones discretas. Por ejemplo:</p>
 
 <code>$this->form_validation->required($string);</code>
 
-<p class="important"><strong>Note:</strong> You can also use any native PHP functions that permit one parameter.</p>
+<p class="important"><strong>Nota:</strong> Tambi&eacute;n puede usar funciones nativas de PHP que permiten un solo par&aacute;metro.</p>
 
+<br/>
 
+<a name="preppingreference"></a><h1>Referencia de Preparaciones</h1>
 
-<p>&nbsp;</p>
-
-<a name="preppingreference"></a>
-<h1>Prepping Reference</h1>
-
-<p>The following is a list of all the prepping functions that are available to use:</p>
-
-
+<p>La siguiente es una lista de todas las funciones de preparaci&oacute;n que est&aacute;n disponibles para usarse:</p>
 
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
 	<tr>
-		<th>Name</th>
-		<th>Parameter</th>
-		<th>Description</th>
+		<th>Nombre</th>
+		<th>Par&aacute;metro</th>
+		<th>Descripci&oacute;n</th>
 	</tr><tr>
-
 		<td class="td"><strong>xss_clean</strong></td>
 		<td class="td">No</td>
-		<td class="td">Runs the data through the XSS filtering function, described in the <a href="input.html">Input Class</a> page.</td>
+		<td class="td">Ejecuta los datos mediante la funci&oacute;n de Filtrado XSS, descripta en la p&aacute;gina <a href="input.html">Clase Input</a>.</td>
 	</tr><tr>
-
 		<td class="td"><strong>prep_for_form</strong></td>
 		<td class="td">No</td>
-		<td class="td">Converts special characters so that HTML data can be shown in a form field without breaking it.</td>
+		<td class="td">Convierte los caracteres especiales para que los datos HTML se puedan
+mostrar en un campo de formulario sin romperlo.</td>
 	</tr><tr>
-
 		<td class="td"><strong>prep_url</strong></td>
 		<td class="td">No</td>
-		<td class="td">Adds "http://" to URLs if missing.</td>
+		<td class="td">Agrega "http://" a las URLs si falta.</td>
 	</tr><tr>
-
 		<td class="td"><strong>strip_image_tags</strong></td>
 		<td class="td">No</td>
-		<td class="td">Strips the HTML from image tags leaving the raw URL.</td>
+		<td class="td">Quita el HTML de las etiquetas de imagen, dejando la URL en crudo.</td>
 	</tr><tr>
-
 		<td class="td"><strong>encode_php_tags</strong></td>
 		<td class="td">No</td>
-		<td class="td">Converts PHP tags to entities.</td>
+		<td class="td">Convierte las etiquetas PHP a entidades.</td>
 	</tr>
-
 </table>
 
-<p class="important"><strong>Note:</strong> You can also use any native PHP functions that permit one parameter,
-like <kbd>trim</kbd>, <kbd>htmlspecialchars</kbd>, <kbd>urldecode</kbd>, etc.</p>
+<p class="important"><strong>Nota:</strong> Tambi&eacute;n puede usar funciones nativas de PHP que permiten un par&aacute;metro, como <kbd>trim</kbd>, <kbd>htmlspecialchars</kbd>, <kbd>urldecode</kbd>, etc.</p>
 
+<br/>
 
+<a name="functionreference"></a><h1>Referencia de Funciones</h1>
 
-
-
-
-
-<p>&nbsp;</p>
-
-<a name="functionreference"></a>
-<h1>Function Reference</h1>
-
-<p>The following functions are intended for use in your controller functions.</p>
+<p>Las siguientes funciones est&aacute;n pensadas para usarse en sus funciones controladoras.</p>
 
 <h2>$this->form_validation->set_rules();</h2>
-
-<p>Permits you to set validation rules, as described in the tutorial sections above:</p>
+<p>Le permite establecer reglas de validaci&oacute;n, como se describe en las secciones anteriores del tutorial:</p>
 
 <ul>
-<li><a href="#validationrules">Setting Validation Rules</a></li>
-<li><a href="#savingtoconfig">Saving Groups of Validation Rules to a Config File</a></li>
+<li><a href="#validationrules">Establecer Reglas de Validaci&oacute;n</a></li>
+<li><a href="#savingtoconfig">Guardar Grupos de Reglas de Validaci&oacute;n en un Archivo de Configuraci&oacute;n</a></li>
 </ul>
 
-
 <h2>$this->form_validation->run();</h2>
-
-<p>Runs the validation routines.  Returns boolean TRUE on success and FALSE on failure. You can optionally pass the name of the validation
-group via the function, as described in: <a href="#savingtoconfig">Saving Groups of Validation Rules to a Config File</a>.</p>
-
+<p>Ejecuta las rutinas de validaci&oacute;n. Devuelve el booleano <strong>TRUE</strong> en caso de &eacute;xito y <strong>FALSE</strong> en caso de falla. Opcionalmente, puede pasar el nombre del grupo de validaci&oacute;n mediante la funci&oacute;n, como se describe en: <a href="#savingtoconfig">Guardar Grupos de Reglas de Validaci&oacute;n en un Archivo de Configuraci&oacute;n.</a>.</p>
 
 <h2>$this->form_validation->set_message();</h2>
+<p>Le permite establecer mensajes de error. Vea m&aacute;s arriba <a href="#settingerrors">Establecer Mensajes de Error.</a></p>
 
-<p>Permits you to set custom error messages.  See <a href="#settingerrors">Setting Error Messages</a> above.</p>
+<br/>
 
+<a name="helperreference"></a><h1>Referencia de Helpers</h1>
 
-<p>&nbsp;</p>
-
-<a name="helperreference"></a>
-<h1>Helper Reference</h1>
-
-<p>The following helper functions are available for use in the view files containing your forms.  Note that these are procedural functions, so they
-<strong>do not</strong> require you to prepend them with $this->form_validation.</p>
+<p>Las siguientes funciones helper est&aacute;n disponibles para usarse en los archivos de vistas que contienen sus formularios. Advierta que &eacute;stos son funciones procedurales, por lo tanto <strong>no</strong> necesitan que les anteponga $this->form_validation.</p>
 
 <h2>form_error()</h2>
 
-<p>Shows an individual error message associated with the field name supplied to the function.  Example:</p>
+<p>Muestra un mensaje de error individual asociado con el nombre del campo suministrado a la funci&oacute;n. Ejemplo:</p>
 
 <code>&lt;?php echo form_error('username'); ?></code>
 
-<p>The error delimiters can be optionally specified.  See the <a href="#errordelimiters">Changing the Error Delimiters</a> section above.</p>
-
-
+<p>Se pueden especificar opcionalmente los delimitadores de error. Vea m&aacute;s arriba la secci&oacute;n <a href="#errordelimiters">Cambiar los Delimitadores de Error</a>.</p>
 
 <h2>validation_errors()</h2>
-<p>Shows all error messages as a string:  Example:</p>
+<p>Muestra todos los mensajes de error como una cadena. Ejemplo:</p>
 
 <code>&lt;?php echo validation_errors(); ?></code>
 
-<p>The error delimiters can be optionally specified.  See the <a href="#errordelimiters">Changing the Error Delimiters</a> section above.</p>
-
-
+<p>Se pueden especificar opcinalmente los delimitadores de error. Vea m&aacute;s arriba la secci&oacute;n <a href="#errordelimiters">Cambiar los Delimitadores de Error.</a></p>
 
 <h2>set_value()</h2>
 
-<p>Permits you to set the value of an input form or textarea. You must supply the field name via the first parameter of the function.
-The second (optional) parameter allows you to set a default value for the form. Example:</p>
+<p>Le permite establecer un valor de un campo de texto o un textarea. Tiene que proporcionar el nombre del campo mediante el primer par&aacute;metro de la funci&oacute;n. El segundo pr&aacute;metro (opcional) le permite establecer un valor por defecto para el formulario. Ejemplo:</p>
 
 <code>&lt;input type="text" name="quantity" value="<dfn>&lt;?php echo set_value('quantity', '0'); ?></dfn>" size="50" /></code>
 
-<p>The above form will show "0" when loaded for the first time.</p>
+<p>El formulario anterior mostrar&aacute; "0" cuando se cargue por primera vez.</p>
 
 <h2>set_select()</h2>
 
-<p>If you use a <dfn>&lt;select></dfn> menu, this function permits you to display the menu item that was selected.  The first parameter
-must contain the name of the select menu, the second parameter must contain the value of
-each item, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE).</p>
+<p>Si usa un men&uacute; <dfn>&lt;select></dfn>, esta funci&oacute;n le permite mostrar el &iacute;tem de men&uacute; que se seleccion&oacute;. El primer par&aacute;metro tiene que contener el nombre del men&uacute; select, el segundo par&aacute;metro tiene que contener el valor de cada &iacute;tem y el tercer par&aacute;metro (opcional) le permite establecer un &iacute;tem como valor por defecto (usar booleano TRUE/FALSE). Ejemplo:</p>
 
 <p>Example:</p>
 
 <code>
 &lt;select name="myselect"><br />
-&lt;option value="one" <dfn>&lt;?php echo  set_select('myselect', 'one', TRUE); ?></dfn> >One&lt;/option><br />
-&lt;option value="two" <dfn>&lt;?php echo  set_select('myselect', 'two'); ?></dfn> >Two&lt;/option><br />
-&lt;option value="three" <dfn>&lt;?php echo  set_select('myselect', 'three'); ?></dfn> >Three&lt;/option><br />
+&lt;option value="one" <dfn>&lt;?php echo  set_select('mi_select', 'uno', TRUE); ?></dfn> >One&lt;/option><br />
+&lt;option value="two" <dfn>&lt;?php echo  set_select('mi_select', 'dos'); ?></dfn> >Two&lt;/option><br />
+&lt;option value="three" <dfn>&lt;?php echo  set_select('mi_select', 'tres'); ?></dfn> >Three&lt;/option><br />
 &lt;/select>
 </code>
 
-
 <h2>set_checkbox()</h2>
 
-<p>Permits you to display a checkbox in the state it was submitted.  The first parameter
-must contain the name of the checkbox, the second parameter must contain its value, and the third (optional) parameter lets you set an item as the default (use boolean TRUE/FALSE). Example:</p>
+<p>Le permite mostrar una casilla de verificaci&oacute;n en el estado en que se envi&oacute;. El primer par&aacute;metro tiene que contener el nombre de la casilla de verificaci&oacute;n, el segundo par&aacute;metro tiene que contener su valor y el tercer par&aacute;metro (opcional) le permite establecer un &iacute;tem como valor por defecto (usar booleano TRUE/FALSE). Ejemplo:</p>
 
-<code>&lt;input type="checkbox" name="mycheck[]" value="1" <dfn>&lt;?php echo set_checkbox('mycheck[]', '1'); ?></dfn> /><br />
-&lt;input type="checkbox" name="mycheck[]" value="2" <dfn>&lt;?php echo set_checkbox('mycheck[]', '2'); ?></dfn> /></code>
-
+<code>&lt;input type="checkbox" name="mi_check[]" value="1" <dfn>&lt;?php echo set_checkbox('mycheck[]', '1'); ?></dfn> /><br />
+&lt;input type="checkbox" name="mi_check[]" value="2" <dfn>&lt;?php echo set_checkbox('mycheck[]', '2'); ?></dfn> /></code>
 
 <h2>set_radio()</h2>
 
-<p>Permits you to display radio buttons in the state they were submitted. This function is identical to the <strong>set_checkbox()</strong> function above.</p>
+<p>Le permite mostrar botones de radio en el estado en que fueron enviados. Esta funci&oacute;n es id&eacute;ntica a la funci&oacute;n <strong>set_checkbox()</strong> anterior.</p>
 
-<code>&lt;input type="radio" name="myradio" value="1" <dfn>&lt;?php echo  set_radio('myradio', '1', TRUE); ?></dfn> /><br />
-&lt;input type="radio" name="myradio" value="2" <dfn>&lt;?php echo  set_radio('myradio', '2'); ?></dfn> /></code>
-
-
+<code>
+&lt;input type="radio" name="mi_radio" value="1" <dfn>&lt;?php echo  set_radio('myradio', '1', TRUE); ?></dfn> /><br />
+&lt;input type="radio" name="mi_radio" value="2" <dfn>&lt;?php echo  set_radio('myradio', '2'); ?></dfn> />
+</code>
 
 </div>
 <!-- END CONTENT -->
@@ -1237,14 +1086,16 @@ must contain the name of the checkbox, the second parameter must contain its val
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="file_uploading.html">File Uploading Class</a>
+Tema anterior:&nbsp;&nbsp;<a href="encryption.html">Clase Encrypt</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="ftp.html">FTP Class</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="ftp.html">Clase FTP</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/form_validation.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>
