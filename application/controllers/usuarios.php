@@ -86,11 +86,6 @@ class Usuarios extends CI_Controller{
 	public function validaciones(){
 		$reglas = array(
 			array(
-				'field' => 'username',
-				'label' => 'Nombre de Usuario',
-				'rules' => 'trim|required|min_length[6]' 
-			),
-			array(
 				'field' => 'firstname',
 				'label' => 'Nombres',
 				'rules' => 'trim|required' 
@@ -101,9 +96,44 @@ class Usuarios extends CI_Controller{
 				'rules' => 'trim|required' 
 			),
 			array(
+				'field' => 'dui',
+				'label' => 'DUI',
+				'rules' => 'trim|required' 
+			),
+			array(
+				'field' => 'email',
+				'label' => 'Correo Electrónico',
+				'rules' => 'trim|required|email' 
+			),
+			array(
+				'field' => 'profesion',
+				'label' => 'Profesión',
+				'rules' => 'trim|required' 
+			),
+			array(
+				'field' => 'centro_educativo',
+				'label' => 'Centro Educativo',
+				'rules' => 'trim|required' 
+			),
+			array(
+				'field' => 'direccion',
+				'label' => 'Dirección',
+				'rules' => 'trim|required' 
+			),
+			array(
+				'field' => 'username',
+				'label' => 'Nombre de Usuario',
+				'rules' => 'trim|required|min_length[6]' 
+			),
+			array(
 				'field' => 'password',
 				'label' => 'Contraseña',
 				'rules' => 'trim|required|min_length[6]' 
+			),
+			array(
+				'field' => 'tipo_usuario',
+				'label' => 'Tipo Usuario',
+				'rules' => 'trim|required' 
 			)
 		);
 		

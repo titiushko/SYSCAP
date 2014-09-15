@@ -7,7 +7,7 @@ class Usuarios_model extends CI_Model{
 	}
 	
 	function usuarios(){
-		$query = $this->db->get('mdl_user', 10, 1);
+		$query = $this->db->get('mdl_user', 10, 81);
 		return $query->result();
 	}
 	

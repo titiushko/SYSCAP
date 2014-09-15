@@ -2,7 +2,7 @@
 	<head>
 		<title>SYSCAP</title>
 		<?php echo link_tag('librerias/plugins/bootstrap/css/bootstrap.min.css'); ?>
-		<?php echo link_tag('librerias/css/patron.css'); ?>
+		<?php echo link_tag('librerias/css/estilo.css'); ?>
 	</head>
 	<body id="formato">
 		<div id="cabeza">
