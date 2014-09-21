@@ -1,42 +1,48 @@
-<html>
-	<head>
-		<title>SYSCAP</title>
-		<?php echo link_tag('librerias/plugins/bootstrap/css/bootstrap.min.css'); ?>
-		<?php echo link_tag('librerias/css/estilo.css'); ?>
-	</head>
-	<body id="formato">
-		<div id="cabeza">
-			<?php echo heading('SYSCAP', 1); ?>
+<div id="page-wrapper">
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">Modulo de Usuarios</h1>
 		</div>
-		<div id="cuerpo" class="container">
-			<?php echo heading('LISTA DE USUARIOS', 2); ?>
-			<?php echo anchor('usuarios/agregar', 'Agregar', 'title=title="Agregar Nuevo Usuario"').br(2); ?>
-			<?php if(empty($usuarios)){ ?>
-			<b>No hay Usuarios.</b>
-			<?php } else{ ?>
-			<table border="1" class="cuadricula table table-bordered table-hover">
-				<thead>
-					<tr>
-						<th>Usuario</th>
-						<th>Nombres</th>
-						<th>Apellidos</th>
-						<th colspan="2">Mantenimiento</th>
-					</tr>
-				</thead>
-				<tbody>
-					<?php foreach ($usuarios as $usuario){ ?>
-					<tr>
-						<td><?php echo $usuario->username; ?></td>
-						<td><?php echo $usuario->firstname; ?></td>
-						<td><?php echo $usuario->lastname; ?></td>
-						<td><?php echo anchor('usuarios/modificar/'.$usuario->id, '<span class="icon-pencil"></span> Editar', 'title="Editar a '.$usuario->id.'"'); ?></td>
-						<td><?php echo anchor('usuarios/eliminar/'.$usuario->id, '<span class="icon-trash"></span> Eliminar', 'title="Eliminar a '.$usuario->id.'"'); ?></td>
-					</tr>
-					<?php } ?>
-				</tbody>
-			</table>
-			<?php } ?>
-			<?php echo br().anchor('menu/', 'Volver', 'title="Volver a la Pagina de Inicio"'); ?>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<?= heading('Lista de Usuarios', 3); ?>
+				</div>
+				<div class="panel-body">
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover" id="data-tables-usuarios">
+							<thead>
+								<tr>
+									<th>Usuario</th>
+									<th>Nombres</th>
+									<th>Apellidos</th>
+									<th colspan="2">Mantenimiento</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php foreach ($lista_usuarios as $usuario){ ?>
+								<tr>
+									<td><?= $usuario->username; ?></td>
+									<td><?= $usuario->firstname; ?></td>
+									<td><?= $usuario->lastname; ?></td>
+									<td class="center"><?= anchor(base_url().'usuarios/modificar/'.$usuario->id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.$usuario->username.'"'); ?></td>
+									<td class="center"><?= anchor(base_url().'usuarios/eliminar/'.$usuario->id, '<span class="fa fa-trash fa-fw"></span>', 'title="Eliminar a '.$usuario->username.'"'); ?></td>
+								</tr>
+								<?php } ?>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
 		</div>
-	</body>
-</html>
+	</div>
+</div>
+<script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script>
+$(document).ready(function() {
+	$('#data-tables-usuarios').dataTable();
+});
+</script>

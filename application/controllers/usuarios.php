@@ -10,13 +10,22 @@ class Usuarios extends CI_Controller{
 	}
 	
 	public function index(){
-		$datos['usuarios'] = $this->usuarios_model->usuarios();
-		$this->load->view('usuarios/consultar_usuarios_view', $datos);
+		$data['usuario_actual'] = "Tito Miguel";
+		$data['opcion_menu'] = array('modulo_usuarios'					=>	'active',
+									 'modulo_centros_educativos'		=>	'',
+									 'modulo_consultas_estadisticas'	=>	'',
+									 'modulo_mapa_estadistico'			=>	''
+		);
+		$data['lista_usuarios'] = $this->usuarios_model->usuarios();
+		
+		$this->load->view('cabecera_pagina_view', $data);
+		$this->load->view('usuarios/consultar_usuarios_view', $data);
+		$this->load->view('pie_pagina_view');
 	}
 	
 	public function agregar(){
-		$data['operacion'] = "AGREGAR USUARIO";
-		$data['opcion'] = "AGREGAR";
+		$data['operacion'] = "Agregar Usuario";
+		$data['opcion'] = "Agregar";
 		
 		if($this->input->post()){
 			
@@ -39,8 +48,14 @@ class Usuarios extends CI_Controller{
 	}
 	
 	public function eliminar($codigo_usuario = NULL){
-		$data['operacion'] = "ELIMINAR USUARIO";
-		$data['opcion'] = "ELIMINAR";
+		$data['operacion'] = "Eliminar Usuario";
+		$data['opcion'] = "Eliminar";
+		$data['usuario_actual'] = "Tito Miguel";
+		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
+									 'modulo_centros_educativos'		=>	'',
+									 'modulo_consultas_estadisticas'	=>	'',
+									 'modulo_mapa_estadistico'			=>	'active'
+									 );
 		
 		if ($this->input->post('estado') == '1'){
 			echo "eliminar registro";
@@ -54,14 +69,22 @@ class Usuarios extends CI_Controller{
 				echo 'ID Invalido';
 			}
 			else{
-				$this->load->view('usuarios/formulario_usuarios_view', $data);
+				$this->load->view('cabecera_pagina_view', $data);
+				$this->load->view('usuarios/formulario_usuarios_view');
+				$this->load->view('pie_pagina_view');
 			}
 		}
 	}
 	
 	public function modificar($codigo_usuario = NULL){
-		$data['operacion'] = "EDITAR USUARIO";
-		$data['opcion'] = "GUARDAR";
+		$data['operacion'] = "Editar Usuario";
+		$data['opcion'] = "Guardar";
+		$data['usuario_actual'] = "Tito Miguel";
+		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
+									 'modulo_centros_educativos'		=>	'',
+									 'modulo_consultas_estadisticas'	=>	'',
+									 'modulo_mapa_estadistico'			=>	'active'
+									 );
 	
 		if ($this->input->post('estado') == '1'){
 			$update_usuario = $this->input->post('id');
@@ -74,7 +97,9 @@ class Usuarios extends CI_Controller{
 				echo 'ID Invalido';
 			}
 			else{
-				$this->load->view('usuarios/formulario_usuarios_view', $data);
+				$this->load->view('cabecera_pagina_view', $data);
+				$this->load->view('usuarios/formulario_usuarios_view');
+				$this->load->view('pie_pagina_view');
 			}
 		}
 	}
