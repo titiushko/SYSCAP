@@ -7,6 +7,7 @@ class Mapa extends CI_Controller{
 		$this->load->helper(array('url', 'html'));
 	}
 	public function index(){
+		$data['pagina'] = 'mapa/consultar_mapa_view';
 		$data['usuario_actual'] = "Tito Miguel";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
@@ -14,9 +15,7 @@ class Mapa extends CI_Controller{
 									 'modulo_mapa_estadistico'			=>	'active'
 									 );
 		
-		$this->load->view('cabecera_pagina_view', $data);
-		$this->load->view('mapa/consultar_mapa_view');
-		$this->load->view('pie_pagina_view');
+		$this->load->view('plantilla_pagina_view', $data);
 	}
 }
 

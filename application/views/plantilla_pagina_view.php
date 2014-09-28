@@ -3,16 +3,19 @@
 <head>
 	<?php
 	$metainformaciones = array(
-		array('name'	=>	'robots', 'content'			=>	'no-cache'),
-		array('name'	=>	'description', 'content'	=>	'Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP'),
-		array('name'	=>	'keywords', 'content'		=>	'mined, grado digital, capacitaciones, syscap'),
-		// array('name'	=>	'Content-type', 'content'	=>	'text/html; charset=utf-8', 'type' => 'equiv'),
-		array('name'	=>	'Content-type', 'content'	=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
+		array('name'	=>	'robots', 'content'				=>	'no-cache'),
+		array('name'	=>	'description', 'content'		=>	'Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP'),
+		array('name'	=>	'keywords', 'content'			=>	'mined, grado digital, capacitaciones, syscap'),
+		array('name'	=>	'X-UA-Compatible', 'content'	=>	'IE=edge', 'type' => 'equiv'),
+		array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1'),
+		// array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=utf-8', 'type' => 'equiv'),
+		array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
 	);
 	echo meta($metainformaciones);
 	?>
     <title>SYSCAP</title>
     <?= link_tag('libraries/plugins/bootstrap/css/bootstrap.min.css'); ?>
+    <!-- <?= link_tag('libraries/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
     <?= link_tag('libraries/plugins/metis-menu/css/metis-menu.min.css'); ?>
     <?= link_tag('libraries/plugins/sb-admin/css/sb-admin.css'); ?>
     <?= link_tag('libraries/plugins/bootstrap/modern-business.css'); ?>
@@ -85,7 +88,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?= base_url(); ?>inicio">Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP</a>
+                <a class="navbar-brand" href="<?= base_url(); ?>inicio">
+                	<span class="visible-desktop" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP</span>
+                	<span class="visible-phone visible-tablet" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">SYSCAP</span>
+                </a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
@@ -95,11 +101,6 @@
                         <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> Perfil</a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuración</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href="<?= base_url(); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
                         </li>
                     </ul>
@@ -125,4 +126,10 @@
                 </div>
             </div>
         </nav>
-        <!-- Page Content -->
+        <!-- Contenido de una Página -->
+        <?php if(isset($pagina)){
+        $this->load->view($pagina);
+        } ?>
+	</div>
+</body>
+</html>

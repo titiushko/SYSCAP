@@ -10,6 +10,7 @@ class Usuarios extends CI_Controller{
 	}
 	
 	public function index(){
+		$data['pagina'] = 'usuarios/consultar_usuarios_view';
 		$data['usuario_actual'] = "Tito Miguel";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'active',
 									 'modulo_centros_educativos'		=>	'',
@@ -18,14 +19,13 @@ class Usuarios extends CI_Controller{
 		);
 		$data['lista_usuarios'] = $this->usuarios_model->usuarios();
 		
-		$this->load->view('cabecera_pagina_view', $data);
-		$this->load->view('usuarios/consultar_usuarios_view', $data);
-		$this->load->view('pie_pagina_view');
+		$this->load->view('plantilla_pagina_view', $data);
 	}
 	
 	public function agregar(){
 		$data['operacion'] = "Agregar Usuario";
 		$data['opcion'] = "Agregar";
+		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		
 		if($this->input->post()){
 			
@@ -39,17 +39,18 @@ class Usuarios extends CI_Controller{
 				$this->resultado($codigo_usuario);
 			}
 			else{
-				$this->load->view('usuarios/formulario_usuarios_view', $data);
+				$this->load->view('plantilla_pagina_view', $data);
 			}
 		}
 		else{
-			$this->load->view('usuarios/formulario_usuarios_view', $data);
+			$this->load->view('plantilla_pagina_view', $data);
 		}
 	}
 	
 	public function eliminar($codigo_usuario = NULL){
 		$data['operacion'] = "Eliminar Usuario";
 		$data['opcion'] = "Eliminar";
+		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		$data['usuario_actual'] = "Tito Miguel";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
@@ -69,9 +70,7 @@ class Usuarios extends CI_Controller{
 				echo 'ID Invalido';
 			}
 			else{
-				$this->load->view('cabecera_pagina_view', $data);
-				$this->load->view('usuarios/formulario_usuarios_view');
-				$this->load->view('pie_pagina_view');
+				$this->load->view('plantilla_pagina_view', $data);
 			}
 		}
 	}
@@ -79,6 +78,7 @@ class Usuarios extends CI_Controller{
 	public function modificar($codigo_usuario = NULL){
 		$data['operacion'] = "Editar Usuario";
 		$data['opcion'] = "Guardar";
+		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		$data['usuario_actual'] = "Tito Miguel";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
@@ -97,15 +97,14 @@ class Usuarios extends CI_Controller{
 				echo 'ID Invalido';
 			}
 			else{
-				$this->load->view('cabecera_pagina_view', $data);
-				$this->load->view('usuarios/formulario_usuarios_view');
-				$this->load->view('pie_pagina_view');
+				$this->load->view('plantilla_pagina_view', $data);
 			}
 		}
 	}
 	
 	public function resultado($codigo_usuario = NULL){
-		$this->load->view('usuarios/resultado_usuarios_view');
+		$data['pagina'] = 'usuarios/resultado_usuarios_view';
+		$this->load->view('plantilla_pagina_view', $data);
 	}
 	
 	public function validaciones(){

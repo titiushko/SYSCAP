@@ -3,16 +3,19 @@
 <head>
 	<?php
 	$metainformaciones = array(
-		array('name'	=>	'robots', 'content'			=>	'no-cache'),
-		array('name'	=>	'description', 'content'	=>	'Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP'),
-		array('name'	=>	'keywords', 'content'		=>	'mined, grado digital, capacitaciones, syscap'),
-		// array('name'	=>	'Content-type', 'content'	=>	'text/html; charset=utf-8', 'type' => 'equiv'),
-		array('name'	=>	'Content-type', 'content'	=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
+		array('name'	=>	'robots', 'content'				=>	'no-cache'),
+		array('name'	=>	'description', 'content'		=>	'Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP'),
+		array('name'	=>	'keywords', 'content'			=>	'mined, grado digital, capacitaciones, syscap'),
+		array('name'	=>	'X-UA-Compatible', 'content'	=>	'IE=edge', 'type' => 'equiv'),
+		array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1'),
+		// array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=utf-8', 'type' => 'equiv'),
+		array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
 	);
 	echo meta($metainformaciones);
 	?>
     <title>SYSCAP</title>
     <?= link_tag('libraries/plugins/bootstrap/css/bootstrap.min.css'); ?>
+    <?= link_tag('libraries/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?>
     <?= link_tag('libraries/plugins/metis-menu/css/metis-menu.min.css'); ?>
     <?= link_tag('libraries/plugins/sb-admin/css/sb-admin.css'); ?>
     <?= link_tag('libraries/plugins/bootstrap/modern-business.css'); ?>
