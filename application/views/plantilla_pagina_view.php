@@ -7,7 +7,7 @@
 		array('name'	=>	'description', 'content'		=>	'Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP'),
 		array('name'	=>	'keywords', 'content'			=>	'mined, grado digital, capacitaciones, syscap'),
 		array('name'	=>	'X-UA-Compatible', 'content'	=>	'IE=edge', 'type' => 'equiv'),
-		array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1'),
+		array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"'),
 		// array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=utf-8', 'type' => 'equiv'),
 		array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
 	);
