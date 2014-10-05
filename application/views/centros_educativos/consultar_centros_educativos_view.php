@@ -17,13 +17,27 @@
 								<tr>
 									<th>Código</th>
 									<th>Nombre</th>
-									<th>Director</th>
 									<th>Departamento</th>
 									<th>Municipio</th>
+									<th></th>
 								</tr>
 							</thead>
+							
 							<tbody>
+								<?php foreach ($lista_centros_educativos as $centro_educativo){ ?>
+								<tr>
+									<td><?= $centro_educativo->codigo_entidad; ?></td>
+									<td><?= $centro_educativo->nombre; ?></td>
+									<td><?= $centro_educativo->depto; ?></td>
+									<td><?= $centro_educativo->muni; ?></td>
+									<td class="center"><?= anchor(base_url().'centros_educativos/modificar/'.$centro_educativo->row_id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.$centro_educativo->nombre.'"'); ?></td>
+									
+								
+								</tr>
+								<?php } ?>
 							</tbody>
+							
+							
 						</table>
 					</div>
 				</div>
