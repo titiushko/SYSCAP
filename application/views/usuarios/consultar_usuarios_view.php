@@ -18,17 +18,16 @@
 									<th>Usuario</th>
 									<th>Nombres</th>
 									<th>Apellidos</th>
-									<th colspan="2">Mantenimiento</th>
+									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach ($lista_usuarios as $usuario){ ?>
 								<tr>
-									<td><?= $usuario->username; ?></td>
-									<td><?= $usuario->firstname; ?></td>
-									<td><?= $usuario->lastname; ?></td>
-									<td class="center"><?= anchor(base_url().'usuarios/modificar/'.$usuario->id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.$usuario->username.'"'); ?></td>
-									<td class="center"><?= anchor(base_url().'usuarios/eliminar/'.$usuario->id, '<span class="fa fa-trash fa-fw"></span>', 'title="Eliminar a '.$usuario->username.'"'); ?></td>
+									<td><?= htmlentities($usuario->username, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($usuario->firstname, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($usuario->lastname, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td class="center"><?= anchor(base_url().'usuarios/modificar/'.$usuario->id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.htmlentities($usuario->username, ENT_COMPAT, 'UTF-8').'"'); ?></td>
 								</tr>
 								<?php } ?>
 							</tbody>
@@ -42,7 +41,11 @@
 <script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script>
-$(document).ready(function() {
-	$('#data-tables-usuarios').dataTable();
+$(document).ready(function(){
+	$('#data-tables-usuarios').dataTable({
+		language:{
+			url: '<?= base_url(); ?>libraries/plugins/data-tables/js/spanish_language.json'
+		}
+	});
 });
 </script>

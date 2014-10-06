@@ -22,22 +22,17 @@
 									<th></th>
 								</tr>
 							</thead>
-							
 							<tbody>
 								<?php foreach ($lista_centros_educativos as $centro_educativo){ ?>
 								<tr>
-									<td><?= $centro_educativo->codigo_entidad; ?></td>
-									<td><?= $centro_educativo->nombre; ?></td>
-									<td><?= $centro_educativo->depto; ?></td>
-									<td><?= $centro_educativo->muni; ?></td>
-									<td class="center"><?= anchor(base_url().'centros_educativos/modificar/'.$centro_educativo->row_id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.$centro_educativo->nombre.'"'); ?></td>
-									
-								
+									<td><?= htmlentities($centro_educativo->codigo_entidad, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($centro_educativo->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($centro_educativo->depto, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($centro_educativo->muni, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td class="center"><?= anchor(base_url().'centros_educativos/modificar/'.$centro_educativo->row_id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.htmlentities($centro_educativo->nombre, ENT_COMPAT, 'UTF-8').'"'); ?></td>
 								</tr>
 								<?php } ?>
 							</tbody>
-							
-							
 						</table>
 					</div>
 				</div>

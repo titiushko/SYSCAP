@@ -5,8 +5,9 @@ class Centros_educativos extends CI_Controller{
 		parent::__construct();
 
 		$this->load->helper(array('url', 'html', 'form'));
-		$this->load->model('centros_educativos_model'); /*cargar el modelo */
+		$this->load->model('centros_educativos_model');
 	}
+	
 	public function index(){
 		$data['pagina'] = 'centros_educativos/consultar_centros_educativos_view';
 		$data['usuario_actual'] = "Tito Miguel";
@@ -15,13 +16,12 @@ class Centros_educativos extends CI_Controller{
 									 'modulo_consultas_estadisticas'	=>	'',
 									 'modulo_mapa_estadistico'			=>	''
 									 );
+		$data['lista_centros_educativos'] = $this->centros_educativos_model->centros_educativos();
 		
-		$data['lista_centros_educativos']= $this->centros_educativos_model->centros_educativos(); /*se usa la funcion del modelo */ 
 		$this->load->view('plantilla_pagina_view', $data);
-		
 	}
 	
-	public function modificar($codigo_centro_educativo= NULL){
+	public function modificar($codigo_centro_educativo = NULL){
 		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
 		$data['usuario_actual'] = "Tito Miguel";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
@@ -30,7 +30,7 @@ class Centros_educativos extends CI_Controller{
 									 'modulo_mapa_estadistico'			=>	''
 									 );
 		
-		if ($this->input->post('estado') == '1'){                /*formas de usar el formulario lo que hacemos es utilizar postpara saber si los valores estan editados y actualizar base de datos */
+		if ($this->input->post('estado') == '1'){
 			$update_centro_educativo = $this->input->post('row_id');
 			$this->centros_educativos_model->modificar($update_centro_educativo);
 			redirect('centros_educativos');
@@ -44,12 +44,8 @@ class Centros_educativos extends CI_Controller{
 				$this->load->view('plantilla_pagina_view', $data);
 			}
 		}
-	}
+	}	
 }
 
 /* End of file centros_educativos.php */
 /* Location: ./application/controllers/centros_educativos.php */
-		
-	
-
-

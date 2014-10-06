@@ -7,7 +7,7 @@
 		array('name'	=>	'description', 'content'		=>	'Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP'),
 		array('name'	=>	'keywords', 'content'			=>	'mined, grado digital, capacitaciones, syscap'),
 		array('name'	=>	'X-UA-Compatible', 'content'	=>	'IE=edge', 'type' => 'equiv'),
-		array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"'),
+		array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'),
 		// array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=utf-8', 'type' => 'equiv'),
 		array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
 	);
@@ -115,10 +115,17 @@
                         <li class="<?= $opcion_menu['modulo_consultas_estadisticas']; ?>">
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Modulo Estadísticas<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li><a href="<?= base_url(); ?>estadisticas/consulta/1">Consultar Usuarios por Modalidad de Capacitación</a></li>
-                                <li><a href="<?= base_url(); ?>estadisticas/consulta/2">Consultar Usuarios por Departamento y Rango de Fechas</a></li>
-                                <li><a href="<?= base_url(); ?>estadisticas/consulta/3">Consultar Total de Usuarios por Departamento y Rango de Fechas</a></li>
-                                <li><a href="<?= base_url(); ?>estadisticas/consulta/4">Consultar Usuarios por Departamento, Municipio y Rango de Fechas</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/1">Modalidad de Capacitación</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/2">Departamento y Rango de Fechas</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/3">Total por Departamento y Rango de Fechas</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/4">Departamento, Municipio y Rango de Fechas</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/5">Tipo de Capacitados y Fecha a Nivel Nacional</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/6">Tipo de Capacitados, Departamento y Fecha</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/7">Tipo de Capacitados, Departamento y Municipio</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/8">Departamento, Tipo de Capacitados y Fecha</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/9">Tipo de Capacitados y Centro Educativo</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/10">Nivel Nacional</a></li>
+                                <li><a href="<?= base_url(); ?>estadisticas/consulta/11">Grado Digital</a></li>
                             </ul>
                         </li>
                         <li class="<?= $opcion_menu['modulo_mapa_estadistico']; ?>"><a href="<?= base_url(); ?>mapa"><i class="fa fa-map-marker fa-fw"></i> Modulo Mapa Estadístico</a></li>

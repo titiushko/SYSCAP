@@ -22,59 +22,6 @@ class Usuarios extends CI_Controller{
 		$this->load->view('plantilla_pagina_view', $data);
 	}
 	
-	public function agregar(){
-		$data['operacion'] = "Agregar Usuario";
-		$data['opcion'] = "Agregar";
-		$data['pagina'] = 'usuarios/formulario_usuarios_view';
-		
-		if($this->input->post()){
-			
-			$this->validaciones();
-			
-			if($this->form_validation->run() == TRUE){
-				$insert_usuario = $this->input->post();
-				unset($insert_usuario['btn_guardar'], $insert_usuario['btn_cancelar']);
-				
-				$codigo_usuario = $this->usuarios_model->agregar($insert_usuario);
-				$this->resultado($codigo_usuario);
-			}
-			else{
-				$this->load->view('plantilla_pagina_view', $data);
-			}
-		}
-		else{
-			$this->load->view('plantilla_pagina_view', $data);
-		}
-	}
-	
-	public function eliminar($codigo_usuario = NULL){
-		$data['operacion'] = "Eliminar Usuario";
-		$data['opcion'] = "Eliminar";
-		$data['pagina'] = 'usuarios/formulario_usuarios_view';
-		$data['usuario_actual'] = "Tito Miguel";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active'
-									 );
-		
-		if ($this->input->post('estado') == '1'){
-			echo "eliminar registro";
-			$delete_usuario = $this->input->post('id');
-			$this->usuarios_model->eliminar($delete_usuario);
-			redirect('usuarios');
-		}
-		else{
-			$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
-			if(empty($data['usuario'])){
-				echo 'ID Invalido';
-			}
-			else{
-				$this->load->view('plantilla_pagina_view', $data);
-			}
-		}
-	}
-	
 	public function modificar($codigo_usuario = NULL){
 		$data['operacion'] = "Editar Usuario";
 		$data['opcion'] = "Guardar";

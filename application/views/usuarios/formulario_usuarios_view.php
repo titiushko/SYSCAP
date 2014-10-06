@@ -11,7 +11,7 @@ $firstname = array(
 	'id'		=>	'firstname',
 	'maxlength'	=>	'60',
 	'size'		=>	'20',
-	'value'		=>	set_value('firstname', @$usuario[0]->firstname),
+	'value'		=>	htmlentities(set_value('firstname', @$usuario[0]->firstname), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -21,7 +21,7 @@ $lastname = array(
 	'id'		=>	'lastname',
 	'maxlength'	=>	'60',
 	'size'		=>	'20',
-	'value'		=>	set_value('lastname', @$usuario[0]->lastname),
+	'value'		=>	htmlentities(set_value('lastname', @$usuario[0]->lastname), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -31,7 +31,7 @@ $dui = array(
 	'id'		=>	'dui',
 	'maxlength'	=>	'12',
 	'size'		=>	'20',
-	'value'		=>	set_value('dui', @$usuario[0]->dui),
+	'value'		=>	htmlentities(set_value('dui', @$usuario[0]->dui), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -41,7 +41,7 @@ $email = array(
 	'id'		=>	'email',
 	'maxlength'	=>	'40',
 	'size'		=>	'30',
-	'value'		=>	set_value('email', @$usuario[0]->email),
+	'value'		=>	htmlentities(set_value('email', @$usuario[0]->email), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -51,7 +51,7 @@ $profesion = array(
 	'id'		=>	'profesion',
 	'maxlength'	=>	'30',
 	'size'		=>	'20',
-	'value'		=>	set_value('profesion', @$usuario[0]->profesion),
+	'value'		=>	htmlentities(set_value('profesion', @$usuario[0]->profesion), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -61,7 +61,7 @@ $centro_educativo = array(
 	'id'		=>	'centro_educativo',
 	'maxlength'	=>	'50',
 	'size'		=>	'20',
-	'value'		=>	set_value('centro_educativo', @$usuario[0]->centro_educativo),
+	'value'		=>	htmlentities(set_value('centro_educativo', @$usuario[0]->centro_educativo), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -70,7 +70,7 @@ $direccion = array(
 	'name'		=>	'direccion',
 	'id'		=>	'direccion',
 	'rows'		=>	'3',
-	'value'		=>	set_value('direccion', @$usuario[0]->direccion),
+	'value'		=>	htmlentities(set_value('direccion', @$usuario[0]->direccion), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -82,7 +82,7 @@ $username = array(
 	'id'		=>	'username',
 	'maxlength'	=>	'30',
 	'size'		=>	'20',
-	'value'		=>	set_value('username', @$usuario[0]->username),
+	'value'		=>	htmlentities(set_value('username', @$usuario[0]->username), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -92,7 +92,7 @@ $password = array(
 	'id'		=>	'password',
 	'maxlength'	=>	'20',
 	'size'		=>	'20',
-	'value'		=>	set_value('password', @$usuario[0]->password),
+	'value'		=>	htmlentities(set_value('password', @$usuario[0]->password), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -116,7 +116,7 @@ $modalidad_capacitacion = array(
 	'id'		=>	'modalidad_capacitacion',
 	'maxlength'	=>	'30',
 	'size'		=>	'20',
-	'value'		=>	set_value('modalidad_capacitacion', @$usuario[0]->modalidad_capacitacion),
+	'value'		=>	htmlentities(set_value('modalidad_capacitacion', @$usuario[0]->modalidad_capacitacion), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueado	=>	$valor
 );
@@ -242,7 +242,7 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'u
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Tipo de Usuario:'); ?>
-											<?= form_dropdown('tipo_usuario', $tipo_usuario, set_value('tipo_usuario', @$usuario[0]->tipo_usuario), 'class="form-control", '.$bloqueado.'="'.$valor.'"'); ?>
+											<?= form_dropdown('tipo_usuario', $tipo_usuario, htmlentities(set_value('tipo_usuario', @$usuario[0]->tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueado.'="'.$valor.'"'); ?>
 											<?= form_error('tipo_usuario'); ?>
 										</div>
 									</div>
