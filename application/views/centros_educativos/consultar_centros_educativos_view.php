@@ -44,6 +44,10 @@
 <script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script>
 $(document).ready(function() {
-	$('#data-tables-centros_educativos').dataTable();
+	$('#data-tables-centros_educativos').dataTable({
+		language:{
+			url: '<?= base_url(); ?>libraries/plugins/data-tables/js/spanish_language.json'
+		}
+	});
 });
 </script>
