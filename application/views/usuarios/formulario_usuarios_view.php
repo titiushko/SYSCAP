@@ -127,7 +127,7 @@ $modalidad_capacitacion = array(
 	'disabled'	=>	'disabled'
 );
 
-// Atributos para el Formulario
+// Atributos del Formulario
 
 $formulario = array(
 	1	=>	array(
@@ -147,13 +147,21 @@ $formulario = array(
 			)
 );
 
-$campos_ocultos = array('id' => set_value('id', @$usuario[0]->id));
+$campos_ocultos = array(
+	'id' => htmlentities(set_value('id', @$centro_educativo[0]->id), ENT_COMPAT, 'UTF-8'),
+	'estado' => '0'
+);
+
 if($operacion == "Mostrar"){
 	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/modificar/'.@$usuario[0]->id.'\';"';
 	$boton_secundario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id.'\';"';
+	$boton_regresar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios\';"';
 }
-else{
-	$boton_primario = 'class="btn btn-primary" onclick="usuarios.estado.value=\'1\';"';
+if($operacion == "Editar"){
+	$boton_primario = 'class="btn btn-primary" onclick="document.datos_personales.estado.value=\'1\';"';
+}
+if($operacion == "Recuperar Contraseña"){
+	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\';"';
 }
 $boton_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id.'\';"';
 ?>
@@ -236,6 +244,7 @@ $boton_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().
 										<div class="form-group">
 											<?php if($operacion == "Mostrar"){ ?>
 											<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
+											<?= form_button('boton_regresar','Regresar', $boton_regresar); ?>
 											<?php } else if($operacion == "Editar"){ ?>
 											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
 											<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>

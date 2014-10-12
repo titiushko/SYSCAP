@@ -15,8 +15,7 @@ class Usuarios extends CI_Controller{
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'active',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	''
-		);
+									 'modulo_mapa_estadistico'			=>	'');
 		$data['lista_usuarios'] = $this->usuarios_model->usuarios();
 		
 		$this->load->view('plantilla_pagina_view', $data);
@@ -29,12 +28,11 @@ class Usuarios extends CI_Controller{
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active'
-									 );
-		
+									 'modulo_mapa_estadistico'			=>	'active');
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+		
 		if(empty($data['usuario'])){
-			echo 'ID Invalido';
+			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $data);
@@ -48,10 +46,9 @@ class Usuarios extends CI_Controller{
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active'
-									 );
+									 'modulo_mapa_estadistico'			=>	'active');
 	
-		if ($this->input->post('estado') == '1'){
+		if($this->input->post('estado') == '1'){
 			$update_usuario = $this->input->post('id');
 			$this->usuarios_model->modificar($update_usuario);
 			redirect('usuarios');
@@ -59,7 +56,7 @@ class Usuarios extends CI_Controller{
 		else{
 			$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
 			if(empty($data['usuario'])){
-				echo 'ID Invalido';
+				echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $data);
@@ -74,12 +71,11 @@ class Usuarios extends CI_Controller{
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active'
-									 );
-		
+									 'modulo_mapa_estadistico'			=>	'active');
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+		
 		if(empty($data['usuario'])){
-			echo 'ID Invalido';
+			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $data);

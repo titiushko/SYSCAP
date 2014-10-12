@@ -1,4 +1,9 @@
 <?php
+$bloqueo_informacion_general = $valor_bloqueo_informacion_general = '';
+if($operacion == "Mostrar"){
+	$bloqueo_informacion_general = $valor_bloqueo_informacion_general = 'disabled';
+}
+
 // Definición de los campos Información General
 
 $nombre = array(
@@ -7,7 +12,8 @@ $nombre = array(
 	'maxlength'	=> '60',
 	'size'		=> '20',
 	'value'		=> htmlentities(set_value('nombre', @$centro_educativo[0]->nombre), ENT_COMPAT, 'UTF-8'),
-	'class'		=> 'form-control'
+	'class'		=> 'form-control',
+	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
 
 $codigo_entidad = array(
@@ -16,7 +22,8 @@ $codigo_entidad = array(
 	'maxlength'	=> '60',
 	'size'		=> '20',
 	'value'		=> htmlentities(set_value('codigo_entidad', @$centro_educativo[0]->codigo_entidad), ENT_COMPAT, 'UTF-8'),
-	'class'		=> 'form-control'
+	'class'		=> 'form-control',
+	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
 
 $lista_departamentos = array(
@@ -39,10 +46,19 @@ $formulario = array(
 	'role'		=> 'form'
 );
 
-$campos_ocultos = array('row_id' => htmlentities(set_value('row_id', @$centro_educativo[0]->row_id), ENT_COMPAT, 'UTF-8'));
+$campos_ocultos = array(
+	'row_id' => htmlentities(set_value('row_id', @$centro_educativo[0]->row_id), ENT_COMPAT, 'UTF-8'),
+	'estado' => '0'
+);
 
-$btn_guardar = 'class="btn btn-primary" onclick="centros_educativos.estado.value=\'1\';"';
-$btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/\';"';
+if($operacion == "Mostrar"){
+	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->row_id.'\';"';
+	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos\';"';
+}
+else{
+	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
+	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->row_id.'\';"';
+}
 ?>
 <div id="page-wrapper">
 	<div class="row">
@@ -54,7 +70,7 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'c
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<?= heading('Editar Centro Educativo', 3); ?>
+					<?= heading($operacion.' Centro Educativo', 3); ?>
 				</div>
 				<div class="panel-body">
 					<div class="row">
@@ -81,14 +97,14 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'c
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Departamento'); ?>
-											<?= form_dropdown('depto', $lista_departamentos, htmlentities(set_value('depto', @$centro_educativo[0]->depto), ENT_COMPAT, 'UTF-8'), 'class="form-control"'); ?>
+											<?= form_dropdown('depto', $lista_departamentos, htmlentities(set_value('depto', @$centro_educativo[0]->depto), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
 											<?= form_error('depto'); ?>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Municipio'); ?>
-											<?= form_dropdown('muni', $lista_municipios, htmlentities(set_value('muni', @$centro_educativo[0]->muni), ENT_COMPAT, 'UTF-8'), 'class="form-control"'); ?>
+											<?= form_dropdown('muni', $lista_municipios, htmlentities(set_value('muni', @$centro_educativo[0]->muni), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
 											<?= form_error('muni'); ?>
 										</div>
 									</div>
@@ -96,8 +112,14 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'c
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
-											<?= form_submit('btn_guardar', 'Guardar', $btn_guardar); ?>
-											<?= form_button('btn_cancelar','Cancelar', $btn_cancelar); ?>
+											<?php if($operacion == "Mostrar"){ ?>
+											<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
+											<?= form_button('boton_secundario','Regresar', $boton_secundario); ?>
+											<?php } else{ ?>
+											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
+											<?= form_button('boton_secundario','Cancelar', $boton_secundario); ?>
+											<script>document.centros_educativos.nombre.focus();</script>
+											<?php } ?>
 										</div>
 									</div>
 								</div>
