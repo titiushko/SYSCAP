@@ -1,7 +1,13 @@
 <?php
-$bloqueado = $valor = '';
-if($opcion == "Eliminar"){
-	$bloqueado = $valor = 'disabled';
+$bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = '';
+if($operacion == "Mostrar"){
+	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
+}
+if($operacion == "Editar"){
+	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
+}
+if($operacion == "Recuperar Contraseña"){
+	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = 'disabled';
 }
 
 // Definición de los campos Datos Personales
@@ -13,7 +19,7 @@ $firstname = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('firstname', @$usuario[0]->firstname), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 $lastname = array(
@@ -23,7 +29,7 @@ $lastname = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('lastname', @$usuario[0]->lastname), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 $dui = array(
@@ -33,7 +39,7 @@ $dui = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('dui', @$usuario[0]->dui), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 $email = array(
@@ -43,7 +49,7 @@ $email = array(
 	'size'		=>	'30',
 	'value'		=>	htmlentities(set_value('email', @$usuario[0]->email), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 $profesion = array(
@@ -53,7 +59,7 @@ $profesion = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('profesion', @$usuario[0]->profesion), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 $centro_educativo = array(
@@ -63,7 +69,7 @@ $centro_educativo = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('centro_educativo', @$usuario[0]->centro_educativo), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 $direccion = array(
@@ -72,7 +78,7 @@ $direccion = array(
 	'rows'		=>	'3',
 	'value'		=>	htmlentities(set_value('direccion', @$usuario[0]->direccion), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 
 // Definición de los campos Información de Usuario
@@ -84,7 +90,7 @@ $username = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('username', @$usuario[0]->username), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
 
 $password = array(
@@ -94,7 +100,7 @@ $password = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('password', @$usuario[0]->password), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
 
 $tipo_usuario = array(
@@ -118,21 +124,38 @@ $modalidad_capacitacion = array(
 	'size'		=>	'20',
 	'value'		=>	htmlentities(set_value('modalidad_capacitacion', @$usuario[0]->modalidad_capacitacion), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
-	$bloqueado	=>	$valor
+	'disabled'	=>	'disabled'
 );
 
 // Atributos para el Formulario
 
 $formulario = array(
-	'name'		=>	'usuarios',
-	'id'		=>	'usuarios',
-	'role'		=>	'form'
+	1	=>	array(
+				'name'		=>	'datos_personales',
+				'id'		=>	'datos_personales',
+				'role'		=>	'form'
+			),
+	2	=>	array(
+				'name'		=>	'informacion_usuario',
+				'id'		=>	'informacion_usuario',
+				'role'		=>	'form'
+			),
+	3	=>	array(
+				'name'		=>	'informacion_cursos',
+				'id'		=>	'informacion_cursos',
+				'role'		=>	'form'
+			)
 );
 
 $campos_ocultos = array('id' => set_value('id', @$usuario[0]->id));
-
-$btn_guardar = 'class="btn btn-primary" onclick="usuarios.estado.value=\'1\';"';
-$btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios/\';"';
+if($operacion == "Mostrar"){
+	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/modificar/'.@$usuario[0]->id.'\';"';
+	$boton_secundario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id.'\';"';
+}
+else{
+	$boton_primario = 'class="btn btn-primary" onclick="usuarios.estado.value=\'1\';"';
+}
+$boton_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id.'\';"';
 ?>
 <div id="page-wrapper">
 	<div class="row">
@@ -144,12 +167,12 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'u
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<?= heading($operacion, 3); ?>
+					<?= heading($operacion.' Usuario', 3); ?>
 				</div>
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<?= form_open('', $formulario, $campos_ocultos); ?>
+							<?= form_open('', $formulario[1], $campos_ocultos); ?>
 								<?= form_fieldset('Datos Personales'); ?>
 								<div class="row">
 									<div class="col-lg-6">
@@ -211,14 +234,19 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'u
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="form-group">
-											<?= form_submit('btn_guardar', $opcion, $btn_guardar); ?>
-											<?= form_button('btn_cancelar','Cancelar', $btn_cancelar); ?>
+											<?php if($operacion == "Mostrar"){ ?>
+											<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
+											<?php } else if($operacion == "Editar"){ ?>
+											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
+											<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
+											<script>document.datos_personales.firstname.focus();</script>
+											<?php } ?>
 										</div>
 									</div>
 								</div>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
-							<?= form_open('#', 'role="form"'); ?>
+							<?= form_open('', $formulario[2], $campos_ocultos); ?>
 								<?= form_fieldset('Información de Usuario'); ?>
 								<div class="row">
 									<div class="col-lg-6">
@@ -242,14 +270,29 @@ $btn_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'u
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Tipo de Usuario:'); ?>
-											<?= form_dropdown('tipo_usuario', $tipo_usuario, htmlentities(set_value('tipo_usuario', @$usuario[0]->tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueado.'="'.$valor.'"'); ?>
+											<?= form_dropdown('tipo_usuario', $tipo_usuario, htmlentities(set_value('tipo_usuario', @$usuario[0]->tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"'); ?>
 											<?= form_error('tipo_usuario'); ?>
 										</div>
 									</div>
 									<div class="col-lg-3">
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<?php if($operacion == "Mostrar"){ ?>
+											<?= form_button('boton_primario', 'Recuperar Contraseña', $boton_secundario); ?>
+											<?php } else if($operacion == "Recuperar Contraseña"){ ?>
+											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
+											<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
+											<script>document.informacion_usuario.username.focus();</script>
+											<?php } ?>
+										</div>
+									</div>
+								</div>
 								<?= form_fieldset_close(); ?>
+							<?= form_close(); ?>
+							<?= form_open('', $formulario[3], $campos_ocultos); ?>
 								<?= form_fieldset('Información de Cursos'); ?>
 								<div class="row">
 									<div class="col-lg-3">

@@ -76,10 +76,6 @@ footer {
 		margin-bottom: 30px;
 	}
 	
-	header.margin-slide {
-		margin: 0px;
-	}
-	
 	body {
 		padding-top: 0px;
 	}
@@ -103,6 +99,7 @@ footer {
 	}
 }
 
+/* Visivilidad de diferentes dispositivos */
 .visible-tablet {
 	display: none !important
 }

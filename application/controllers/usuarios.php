@@ -22,9 +22,27 @@ class Usuarios extends CI_Controller{
 		$this->load->view('plantilla_pagina_view', $data);
 	}
 	
+	public function mostrar($codigo_usuario = NULL){
+		$data['operacion'] = "Mostrar";
+		$data['pagina'] = 'usuarios/formulario_usuarios_view';
+		$data['usuario_actual'] = "Tito Miguel";
+		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
+									 'modulo_centros_educativos'		=>	'',
+									 'modulo_consultas_estadisticas'	=>	'',
+									 'modulo_mapa_estadistico'			=>	'active'
+									 );
+		
+		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+		if(empty($data['usuario'])){
+			echo 'ID Invalido';
+		}
+		else{
+			$this->load->view('plantilla_pagina_view', $data);
+		}
+	}
+	
 	public function modificar($codigo_usuario = NULL){
-		$data['operacion'] = "Editar Usuario";
-		$data['opcion'] = "Guardar";
+		$data['operacion'] = "Editar";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		$data['usuario_actual'] = "Tito Miguel";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
@@ -46,6 +64,25 @@ class Usuarios extends CI_Controller{
 			else{
 				$this->load->view('plantilla_pagina_view', $data);
 			}
+		}
+	}
+	
+	public function recuperar_contrasena($codigo_usuario = NULL){
+		$data['operacion'] = "Recuperar Contraseña";
+		$data['pagina'] = 'usuarios/formulario_usuarios_view';
+		$data['usuario_actual'] = "Tito Miguel";
+		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
+									 'modulo_centros_educativos'		=>	'',
+									 'modulo_consultas_estadisticas'	=>	'',
+									 'modulo_mapa_estadistico'			=>	'active'
+									 );
+		
+		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+		if(empty($data['usuario'])){
+			echo 'ID Invalido';
+		}
+		else{
+			$this->load->view('plantilla_pagina_view', $data);
 		}
 	}
 	

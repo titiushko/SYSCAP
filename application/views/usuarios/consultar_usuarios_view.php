@@ -18,16 +18,14 @@
 									<th>Usuario</th>
 									<th>Nombres</th>
 									<th>Apellidos</th>
-									<th></th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach ($lista_usuarios as $usuario){ ?>
-								<tr>
+								<tr onclick="location.href='<?= base_url().'usuarios/mostrar/'.$usuario->id; ?>';" style="cursor: pointer;" title="Clic para ver información de <?= htmlentities($usuario->firstname.' '.$usuario->lastname, ENT_COMPAT, 'UTF-8'); ?>">
 									<td><?= htmlentities($usuario->username, ENT_COMPAT, 'UTF-8'); ?></td>
 									<td><?= htmlentities($usuario->firstname, ENT_COMPAT, 'UTF-8'); ?></td>
 									<td><?= htmlentities($usuario->lastname, ENT_COMPAT, 'UTF-8'); ?></td>
-									<td class="center"><?= anchor(base_url().'usuarios/modificar/'.$usuario->id, '<span class="fa fa-pencil fa-fw"></span>', 'title="Editar a '.htmlentities($usuario->username, ENT_COMPAT, 'UTF-8').'"'); ?></td>
 								</tr>
 								<?php } ?>
 							</tbody>
