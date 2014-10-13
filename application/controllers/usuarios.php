@@ -6,7 +6,7 @@ class Usuarios extends CI_Controller{
 		
 		$this->load->helper(array('form', 'url', 'html'));
 		$this->load->library('form_validation');
-		$this->load->model(array('usuarios_model', 'centros_educativos_model', 'profesiones_model'));
+		$this->load->model(array('usuarios_model', 'centros_educativos_model', 'profesiones_model', 'tipos_usuarios_model'));
 	}
 	
 	public function index(){
@@ -32,6 +32,7 @@ class Usuarios extends CI_Controller{
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
+		$data['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 		
 		if(empty($data['usuario'])){
 			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
@@ -51,6 +52,7 @@ class Usuarios extends CI_Controller{
 									 'modulo_mapa_estadistico'			=>	'active');
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
+		$data['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 	
 		if($this->input->post('estado') == '1'){
 			$update_usuario = $this->input->post('id');
@@ -79,6 +81,7 @@ class Usuarios extends CI_Controller{
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
+		$data['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 		
 		if(empty($data['usuario'])){
 			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
@@ -96,24 +99,24 @@ class Usuarios extends CI_Controller{
 	public function validaciones(){
 		$reglas = array(
 			array(
-				'field' => 'firstname',
+				'field' => 'nombres_usuario',
 				'label' => 'Nombres',
 				'rules' => 'trim|required' 
 			),
 			array(
-				'field' => 'lastname',
+				'field' => 'apellido1_usuario',
 				'label' => 'Apellidos',
 				'rules' => 'trim|required' 
 			),
 			array(
-				'field' => 'dui',
+				'field' => 'dui_usuario',
 				'label' => 'DUI',
 				'rules' => 'trim|required' 
 			),
 			array(
-				'field' => 'email',
+				'field' => 'correo_electronico_usuario',
 				'label' => 'Correo Electrónico',
-				'rules' => 'trim|required|email' 
+				'rules' => 'trim|required|correo_electronico_usuario' 
 			),
 			array(
 				'field' => 'profesion',
@@ -126,17 +129,17 @@ class Usuarios extends CI_Controller{
 				'rules' => 'trim|required' 
 			),
 			array(
-				'field' => 'direccion',
+				'field' => 'direccion_usuario',
 				'label' => 'Dirección',
 				'rules' => 'trim|required' 
 			),
 			array(
-				'field' => 'username',
+				'field' => 'nombre_usuario',
 				'label' => 'Nombre de Usuario',
 				'rules' => 'trim|required|min_length[6]' 
 			),
 			array(
-				'field' => 'password',
+				'field' => 'contrasena_usuario',
 				'label' => 'Contraseña',
 				'rules' => 'trim|required|min_length[6]' 
 			),

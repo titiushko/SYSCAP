@@ -44,10 +44,10 @@
 						<form role="form">
 							<fieldset>
 								<div class="form-group">
-									<input class="form-control" placeholder="Correo electrónico" name="email" type="email" autofocus>
+									<input class="form-control" placeholder="Correo electrónico" name="correo_electronico_usuario" type="correo_electronico_usuario" autofocus>
 								</div>
 								<div class="form-group">
-									<input class="form-control" placeholder="Contraseña" name="password" type="password" value="">
+									<input class="form-control" placeholder="Contraseña" name="contrasena_usuario" type="password" value="">
 								</div>
 								<div class="checkbox">
 									<label>

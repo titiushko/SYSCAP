@@ -6,36 +6,24 @@ if($operacion == "Mostrar"){
 
 // Definición de los campos Información General
 
-$nombre = array(
-	'name'		=> 'nombre',
-	'id'		=> 'nombre',
+$nombre_centro_educativo = array(
+	'name'		=> 'nombre_centro_educativo',
+	'id'		=> 'nombre_centro_educativo',
 	'maxlength'	=> '60',
 	'size'		=> '20',
-	'value'		=> htmlentities(set_value('nombre', @$centro_educativo[0]->nombre), ENT_COMPAT, 'UTF-8'),
+	'value'		=> htmlentities(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo), ENT_COMPAT, 'UTF-8'),
 	'class'		=> 'form-control',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
 
-$codigo_entidad = array(
-	'name'		=> 'codigo_entidad',
-	'id'		=> 'codigo_entidad',
+$codigo_centro_educativo = array(
+	'name'		=> 'codigo_centro_educativo',
+	'id'		=> 'codigo_centro_educativo',
 	'maxlength'	=> '60',
 	'size'		=> '20',
-	'value'		=> htmlentities(set_value('codigo_entidad', @$centro_educativo[0]->codigo_entidad), ENT_COMPAT, 'UTF-8'),
+	'value'		=> htmlentities(set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo), ENT_COMPAT, 'UTF-8'),
 	'class'		=> 'form-control',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
-);
-
-$lista_departamentos = array(
-	'0'		=> '',
-	'1'		=> 'San Salvador',
-	'2'		=> 'La Libertad'
-);
-
-$lista_municipios = array(
-	'0'		=> '',
-	'1'		=> 'San Marcos',
-	'2'		=> 'Apopa'
 );
 
 // Atributos del Formulario
@@ -47,17 +35,17 @@ $formulario = array(
 );
 
 $campos_ocultos = array(
-	'row_id' => htmlentities(set_value('row_id', @$centro_educativo[0]->row_id), ENT_COMPAT, 'UTF-8'),
+	'row_id' => htmlentities(set_value('id_centro_educativo', @$centro_educativo[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'),
 	'estado' => '0'
 );
 
 if($operacion == "Mostrar"){
-	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->row_id.'\';"';
+	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
 	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos\';"';
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->row_id.'\';"';
+	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
 }
 ?>
 <div id="page-wrapper">
@@ -81,15 +69,15 @@ else{
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Nombre'); ?>
-											<?= form_input($nombre); ?>
-											<?= form_error('nombre'); ?>
+											<?= form_input($nombre_centro_educativo); ?>
+											<?= form_error('nombre_centro_educativo'); ?>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Código'); ?>
-											<?= form_input($codigo_entidad); ?>
-											<?= form_error('codigo_entidad'); ?>
+											<?= form_input($codigo_centro_educativo); ?>
+											<?= form_error('codigo_centro_educativo'); ?>
 										</div>
 									</div>
 								</div>
@@ -97,15 +85,15 @@ else{
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Departamento'); ?>
-											<?= form_dropdown('depto', $lista_departamentos, htmlentities(set_value('depto', @$centro_educativo[0]->depto), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
-											<?= form_error('depto'); ?>
+											<?= form_dropdown('departamento', $lista_departamentos, htmlentities(set_value('departamento', @$centro_educativo[0]->id_departamento), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+											<?= form_error('departamento'); ?>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Municipio'); ?>
-											<?= form_dropdown('muni', $lista_municipios, htmlentities(set_value('muni', @$centro_educativo[0]->muni), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
-											<?= form_error('muni'); ?>
+											<?= form_dropdown('municipio', $lista_municipios, htmlentities(set_value('municipio', @$centro_educativo[0]->id_municipio), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+											<?= form_error('municipio'); ?>
 										</div>
 									</div>
 								</div>
@@ -118,7 +106,7 @@ else{
 											<?php } else{ ?>
 											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
 											<?= form_button('boton_secundario','Cancelar', $boton_secundario); ?>
-											<script>document.centros_educativos.nombre.focus();</script>
+											<script>document.centros_educativos.nombre_centro_educativo.focus();</script>
 											<?php } ?>
 										</div>
 									</div>

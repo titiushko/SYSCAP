@@ -8,10 +8,10 @@ class Profesiones_model extends CI_Model{
 	
 	function lista_profesiones(){
 		$lista_profesiones[''] = '';
-		$this->db->select('row_id, descripcion');
-		$query = $this->db->get('mdl_cat_profesion');
+		$this->db->select('id_profesion, descripcion_profesion');
+		$query = $this->db->get('profesiones');
 		foreach($query->result() as $profesion){
-			$lista_profesiones[$profesion->row_id] = $profesion->descripcion;
+			$lista_profesiones[$profesion->id_profesion] = $profesion->descripcion_profesion;
 		}
 		return $lista_profesiones;
 	}

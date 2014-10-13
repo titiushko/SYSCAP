@@ -22,12 +22,12 @@
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($lista_centros_educativos as $centro_educativo){ ?>
-								<tr onclick="location.href='<?= base_url().'centros_educativos/mostrar/'.$centro_educativo->row_id; ?>'" style="cursor: pointer;" title="Clic para ver información de <?= htmlentities($centro_educativo->nombre, ENT_COMPAT, 'UTF-8'); ?>">
-									<td><?= htmlentities($centro_educativo->codigo_entidad, ENT_COMPAT, 'UTF-8'); ?></td>
-									<td><?= htmlentities($centro_educativo->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
-									<td><?= htmlentities($centro_educativo->depto, ENT_COMPAT, 'UTF-8'); ?></td>
-									<td><?= htmlentities($centro_educativo->muni, ENT_COMPAT, 'UTF-8'); ?></td>
+								<?php foreach($lista_centros_educativos as $centro_educativo){ ?>
+								<tr onclick="location.href='<?= base_url().'centros_educativos/mostrar/'.$centro_educativo->id_centro_educativo; ?>'" style="cursor: pointer;" title="Clic para ver información de <?= htmlentities($centro_educativo->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?>">
+									<td><?= htmlentities($centro_educativo->codigo_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($centro_educativo->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($this->departamentos_model->nombre_departamento($centro_educativo->id_departamento), ENT_COMPAT, 'UTF-8'); ?></td>
+									<td><?= htmlentities($this->municipios_model->nombre_municipio($centro_educativo->id_municipio), ENT_COMPAT, 'UTF-8'); ?></td>
 								</tr>
 								<?php } ?>
 							</tbody>
