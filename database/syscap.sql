@@ -167,3 +167,6 @@ FOREIGN KEY(id_departamento) REFERENCES departamentos(id_departamento);
 
 ALTER TABLE usuarios ADD CONSTRAINT fk_usuarios_municipios
 FOREIGN KEY(id_municipio) REFERENCES municipios(id_municipio);
+
+ALTER TABLE usuarios ADD CONSTRAINT fk_usuarios_profesiones
+FOREIGN KEY(id_profesion) REFERENCES profesiones(id_profesion);

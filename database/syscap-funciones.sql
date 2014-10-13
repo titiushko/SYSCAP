@@ -24,7 +24,24 @@ CREATE FUNCTION departamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
 COMMENT 'funcion que devuelve el identificador de un departamento a partir del nombre.'
 BEGIN
 	DECLARE v_id_departamento CHAR(2);
-	SELECT syscap.departamentos.id_departamento INTO v_id_departamento FROM syscap.departamentos WHERE initcap(syscap.departamentos.nombre_departamento) = syscap.initcap(p_nombre_departamento);
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_departamento CURSOR FOR
+		SELECT syscap.departamentos.id_departamento
+		FROM syscap.departamentos
+		WHERE initcap(syscap.departamentos.nombre_departamento) = syscap.initcap(p_nombre_departamento);
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_departamento;
+	recorre_cursor: LOOP
+		FETCH c_departamento INTO v_id_departamento;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_departamento;
+	
 	RETURN v_id_departamento;
 END$$
 DELIMITER ;
@@ -33,11 +50,28 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS municipio $$
-CREATE FUNCTION municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(2)
+CREATE FUNCTION municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
 COMMENT 'funcion que devuelve el identificador de un municipio a partir del nombre.'
 BEGIN
-	DECLARE v_id_municipio CHAR(2);
-	SELECT syscap.municipios.id_municipio INTO v_id_municipio FROM syscap.municipios WHERE initcap(syscap.municipios.nombre_municipio) = syscap.initcap(p_nombre_municipio);
+	DECLARE v_id_municipio CHAR(3);
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_municipio CURSOR FOR
+		SELECT syscap.municipios.id_municipio
+		FROM syscap.municipios
+		WHERE initcap(syscap.municipios.nombre_municipio) = syscap.initcap(p_nombre_municipio);
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_municipio;
+	recorre_cursor: LOOP
+		FETCH c_municipio INTO v_id_municipio;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_municipio;
+	
 	RETURN v_id_municipio;
 END$$
 DELIMITER ;
