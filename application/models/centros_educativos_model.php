@@ -6,6 +6,16 @@ class Centros_educativos_model extends CI_Model{
 		$this->load->database();
 	}
 	
+	function lista_centros_educativos(){
+		$lista_centros_educativos[''] = '';
+		$this->db->select('row_id, nombre');
+		$query = $this->db->get('mdl_cat_educativa', 100, 0);
+		foreach($query->result() as $centro_educativo){
+			$lista_centros_educativos[$centro_educativo->row_id] = $centro_educativo->nombre;
+		}
+		return $lista_centros_educativos;
+	}
+	
 	function centros_educativos(){
 		$query = $this->db->get('mdl_cat_educativa', 100, 0);
 		return $query->result();

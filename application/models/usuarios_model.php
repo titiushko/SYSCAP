@@ -7,6 +7,7 @@ class Usuarios_model extends CI_Model{
 	}
 	
 	function usuarios(){
+		$query = $this->db->where('tinstitucion IS NOT NULL', null);
 		$query = $this->db->get('mdl_user', 100, 100);
 		return $query->result();
 	}

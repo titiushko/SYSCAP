@@ -6,7 +6,7 @@ class Usuarios extends CI_Controller{
 		
 		$this->load->helper(array('form', 'url', 'html'));
 		$this->load->library('form_validation');
-		$this->load->model('usuarios_model');
+		$this->load->model(array('usuarios_model', 'centros_educativos_model', 'profesiones_model'));
 	}
 	
 	public function index(){
@@ -30,6 +30,8 @@ class Usuarios extends CI_Controller{
 									 'modulo_consultas_estadisticas'	=>	'',
 									 'modulo_mapa_estadistico'			=>	'active');
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
+		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 		
 		if(empty($data['usuario'])){
 			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
@@ -47,6 +49,8 @@ class Usuarios extends CI_Controller{
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
 									 'modulo_mapa_estadistico'			=>	'active');
+		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
+		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 	
 		if($this->input->post('estado') == '1'){
 			$update_usuario = $this->input->post('id');
@@ -73,6 +77,8 @@ class Usuarios extends CI_Controller{
 									 'modulo_consultas_estadisticas'	=>	'',
 									 'modulo_mapa_estadistico'			=>	'active');
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
+		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 		
 		if(empty($data['usuario'])){
 			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.

@@ -218,14 +218,14 @@ $boton_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Profesión:'); ?>
-											<?= form_input($profesion); ?>
+											<?= form_dropdown('profesion', $lista_profesiones, htmlentities(set_value('profesion', @$usuario[0]->profesion), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"'); ?>
 											<?= form_error('profesion'); ?>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Centro Educativo:'); ?>
-											<?= form_input($centro_educativo); ?>
+											<?= form_dropdown('centro_educativo', $lista_centros_educativos, htmlentities(set_value('centro_educativo', @$usuario[0]->tinstitucion), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"'); ?>
 											<?= form_error('centro_educativo'); ?>
 										</div>
 									</div>
