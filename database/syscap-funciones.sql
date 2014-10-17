@@ -75,3 +75,38 @@ BEGIN
 	RETURN v_id_municipio;
 END$$
 DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
+CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(300)
+NOT DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'funcion que devuelve el nombre completo de un usuario'
+BEGIN
+	DECLARE v_nombre_completo_usuario VARCHAR(300);
+	DECLARE v_termina INT DEFAULT FALSE;
+	
+	DECLARE c_nombre_completo_usuario CURSOR FOR
+		SELECT CONCAT(nombres_usuario, ' ', apellido1_usuario, ' ', apellido2_usuario) nombre_completo_usuario
+		FROM usuarios
+		WHERE id_usuario = p_codigo_usuario;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_completo_usuario;
+	recorre_cursor: LOOP
+		FETCH c_nombre_completo_usuario INTO v_nombre_completo_usuario;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_completo_usuario;
+	
+	RETURN v_nombre_completo_usuario;
+END;
+$$
+DELIMITER ;

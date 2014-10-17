@@ -19,6 +19,14 @@ class Usuarios_model extends CI_Model{
 		return $query->result();
 	}
 	
+	function nombre_completo_usuario($codigo_usuario){
+		$query = $this->db->query('SELECT F_NombreCompletoUsuario(?) AS nombre_completo_usuario', array($codigo_usuario));
+		foreach($query->result() as $usuario){
+			$nombre_completo_usuario = $usuario->nombre_completo_usuario;
+		}
+		return $nombre_completo_usuario;
+	}
+	
 	function agregar($insert_usuario){
 		$this->db->insert('usuarios', $insert_usuario);
 		return $this->db->insert_id();
