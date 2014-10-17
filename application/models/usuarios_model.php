@@ -27,16 +27,6 @@ class Usuarios_model extends CI_Model{
 		return $nombre_completo_usuario;
 	}
 	
-	function agregar($insert_usuario){
-		$this->db->insert('usuarios', $insert_usuario);
-		return $this->db->insert_id();
-	}
-	
-	function eliminar($codigo_usuario){
-		$this->db->where('id_usuario', $codigo_usuario);
-		$this->db->delete('usuarios');
-	}
-	
 	function modificar($data, $codigo_usuario){
 		$this->db->where('id_usuario', $codigo_usuario);
 		$this->db->update('usuarios', $data);
