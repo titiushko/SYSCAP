@@ -8,7 +8,7 @@ class Inicio extends CI_Controller{
 	}
 	public function index(){
 		$data['pagina'] = 'inicio_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',

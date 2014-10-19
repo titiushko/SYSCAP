@@ -20,7 +20,7 @@ class Estadisticas extends CI_Controller{
 										11 => 'Usuarios por Grado Digital');
 		$data['nombre_estadistica'] = $consultas_estadisticas[$opcion];
 		$data['pagina'] = 'estadisticas/consultar_estadisticas_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'active',

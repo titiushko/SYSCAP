@@ -11,7 +11,7 @@ class Usuarios extends CI_Controller{
 	
 	public function index(){
 		$data['pagina'] = 'usuarios/consultar_usuarios_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'active',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
@@ -24,7 +24,7 @@ class Usuarios extends CI_Controller{
 	public function mostrar($codigo_usuario = NULL){
 		$data['operacion'] = "Mostrar";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
@@ -45,7 +45,7 @@ class Usuarios extends CI_Controller{
 	public function modificar($codigo_usuario = NULL){
 		$data['operacion'] = "Editar";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',
@@ -73,7 +73,7 @@ class Usuarios extends CI_Controller{
 	public function recuperar_contrasena($codigo_usuario = NULL){
 		$data['operacion'] = "Recuperar Contraseña";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'',
 									 'modulo_consultas_estadisticas'	=>	'',

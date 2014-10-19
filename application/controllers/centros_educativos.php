@@ -10,7 +10,7 @@ class Centros_educativos extends CI_Controller{
 	
 	public function index(){
 		$data['pagina'] = 'centros_educativos/consultar_centros_educativos_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'active',
 									 'modulo_consultas_estadisticas'	=>	'',
@@ -23,7 +23,7 @@ class Centros_educativos extends CI_Controller{
 	public function mostrar($codigo_centro_educativo = NULL){
 		$data['operacion'] = "Mostrar";
 		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'active',
 									 'modulo_consultas_estadisticas'	=>	'',
@@ -43,7 +43,7 @@ class Centros_educativos extends CI_Controller{
 	public function modificar($codigo_centro_educativo = NULL){
 		$data['operacion'] = "Editar";
 		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
-		$data['usuario_actual'] = "Tito Miguel";
+		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
 									 'modulo_centros_educativos'		=>	'active',
 									 'modulo_consultas_estadisticas'	=>	'',
