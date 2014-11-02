@@ -17,6 +17,7 @@ class Municipios_model extends CI_Model{
 	}
 	
 	function nombre_municipio($codigo_municipio = NULL){
+		$nombre_municipio = '';
 		$this->db->select('nombre_municipio');
 		$this->db->where('id_municipio', $codigo_municipio);
 		$query = $this->db->get('municipios');

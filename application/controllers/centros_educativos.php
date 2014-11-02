@@ -4,7 +4,7 @@ class Centros_educativos extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		
-		$this->load->helper(array('url', 'html', 'form'));
+		$this->load->helper(array('url', 'html', 'form', 'funciones_helper'));
 		$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model'));
 	}
 	

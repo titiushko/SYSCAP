@@ -17,6 +17,7 @@ class Departamentos_model extends CI_Model{
 	}
 	
 	function nombre_departamento($codigo_departamento = NULL){
+		$nombre_departamento = '';
 		$this->db->select('nombre_departamento');
 		$this->db->where('id_departamento', $codigo_departamento);
 		$query = $this->db->get('departamentos');

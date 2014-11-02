@@ -3,7 +3,7 @@ USE syscap;
 DELIMITER $$
 DROP FUNCTION IF EXISTS initcap $$
 CREATE FUNCTION initcap(p_cadena char(255)) RETURNS CHAR(255) CHARSET utf8
-COMMENT 'funcion que devuelve la primera letra de cada palabra en mayúsculas.'
+COMMENT 'Función que devuelve la primera letra de cada palabra en mayúsculas.'
 BEGIN
 	SET @v_string1 ='';
 	SET @v_string2 ='';
@@ -21,7 +21,7 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS departamento $$
 CREATE FUNCTION departamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
-COMMENT 'funcion que devuelve el identificador de un departamento a partir del nombre.'
+COMMENT 'Función que devuelve el identificador de un departamento a partir del nombre.'
 BEGIN
 	DECLARE v_id_departamento CHAR(2);
 	DECLARE v_termina INT DEFAULT FALSE;
@@ -51,7 +51,7 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS municipio $$
 CREATE FUNCTION municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
-COMMENT 'funcion que devuelve el identificador de un municipio a partir del nombre.'
+COMMENT 'Función que devuelve el identificador de un municipio a partir del nombre.'
 BEGIN
 	DECLARE v_id_municipio CHAR(3);
 	DECLARE v_termina INT DEFAULT FALSE;
@@ -83,7 +83,7 @@ DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
 CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(300)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'funcion que devuelve el nombre completo de un usuario'
+COMMENT 'Función que devuelve el nombre completo de un usuario.'
 BEGIN
 	DECLARE v_nombre_completo_usuario VARCHAR(300);
 	DECLARE v_termina INT DEFAULT FALSE;
