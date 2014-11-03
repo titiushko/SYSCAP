@@ -116,7 +116,7 @@ else{
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover">
+											<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_capacitados">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -124,21 +124,25 @@ else{
 													</tr>
 												</thead>
 												<tbody>
+													<?php
+													$docentes_capacitados = 1;
+													foreach($lista_docentes_capacitados as $docente_capacitado){
+													?>
 													<tr>
-														<td>1</td>
-														<td>Tito Miguel</td>
+														<td><?= $docentes_capacitados; ?></td>
+														<td><?= $docente_capacitado->nombre_completo_usuario; ?></td>
 													</tr>
-													<tr>
-														<td>2</td>
-														<td>Javier Galdámez</td>
-													</tr>
+													<?php
+														$docentes_capacitados++;
+													}
+													?>
 												</tbody>
 											</table>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover">
+											<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_certificados">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -146,18 +150,18 @@ else{
 													</tr>
 												</thead>
 												<tbody>
+													<?php
+													$docentes_certificados = 1;
+													foreach($lista_docentes_certificados as $docente_certificado){
+													?>
 													<tr>
-														<td>1</td>
-														<td>Tito</td>
+														<td><?= $docentes_certificados; ?></td>
+														<td><?= $docente_certificado->nombre_completo_usuario; ?></td>
 													</tr>
-													<tr>
-														<td>2</td>
-														<td>Javier</td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td>Francisco</td>
-													</tr>
+													<?php
+														$docentes_certificados++;
+													}
+													?>
 												</tbody>
 											</table>
 										</div>
@@ -165,6 +169,19 @@ else{
 								</div>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
+							<?php
+							if($operacion == "Mostrar"){
+							?>
+							<div class="row">
+								<div class="col-lg-12">&nbsp;</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 text-center">
+									<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+									<a class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								</div>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -172,3 +189,25 @@ else{
 		</div>
 	</div>
 </div>
+<script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script>
+$(document).ready(function() {
+	$('#data-tables-docentes_capacitados').dataTable({
+		"searching":		false,
+        "scrollY":			"200px",
+        "scrollCollapse":	true,
+        "info":				false,
+        "ordering":			false,
+        "paging":			false
+	});
+	$('#data-tables-docentes_certificados').dataTable({
+		"searching":		false,
+        "scrollY":			"200px",
+        "scrollCollapse":	true,
+        "info":				false,
+        "ordering":			false,
+        "paging":			false
+	});
+});
+</script>

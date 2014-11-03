@@ -35,7 +35,7 @@ WHERE moodle19.mdl_cat_nestudio.cod_nestudio IS NOT NULL AND moodle19.mdl_cat_ne
 /* PROFESIONES */
 -- copiar a syscap.profesiones los registros de moodle19.mdl_cat_profesion
 TRUNCATE syscap.profesiones;
-INSERT INTO syscap.profesiones(syscap.profesiones.id_profesion, syscap.profesiones.descripcion_profesion)
+INSERT INTO syscap.profesiones(syscap.profesiones.id_profesion, syscap.profesiones.nombre_profesion)
 SELECT IF(moodle19.mdl_cat_profesion.row_id < 10, CONCAT('0', moodle19.mdl_cat_profesion.row_id), moodle19.mdl_cat_profesion.row_id) row_id, syscap.initcap(moodle19.mdl_cat_profesion.descripcion)
 FROM moodle19.mdl_cat_profesion
 WHERE moodle19.mdl_cat_profesion.row_id IS NOT NULL AND moodle19.mdl_cat_profesion.descripcion IS NOT NULL;

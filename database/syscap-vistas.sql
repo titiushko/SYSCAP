@@ -1,3 +1,5 @@
+USE syscap;
+
 DELIMITER $$
 DROP VIEW IF EXISTS V_UsuariosCursosExamenesCalificaciones $$
 CREATE VIEW V_UsuariosCursosExamenesCalificaciones AS
