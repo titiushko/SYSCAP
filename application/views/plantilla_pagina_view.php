@@ -31,9 +31,15 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+	<script>
+	$('#menu-toggle').on('click', function(){
+		$('#colMain').toggleClass('span12 span9');
+		$('#colPush').toggleClass('span0 span3');
+	});
+    </script>
 </head>
 <body>
-	 <!-- Header Carousel -->
+	<!-- Header Carousel -->
 	<header id="myCarousel" class="carousel slide margin-slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -92,20 +98,20 @@
                 	<span class="visible-desktop" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP</span>
                 	<span class="visible-phone visible-tablet" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">SYSCAP</span>
                 </a>
-	            <ul class="nav navbar-top-links navbar-right">
-	                <li class="dropdown">
-	                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-	                        <i class="fa fa-user fa-fw"></i>
-	                        <?= $usuario_actual; ?>
-	                        <i class="fa fa-caret-down"></i>
-	                    </a>
-	                    <ul class="dropdown-menu dropdown-user">
-	                        <li><a href="<?= base_url(); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
-	                        </li>
-	                    </ul>
-	                </li>
-	            </ul>
             </div>
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-user fa-fw"></i>
+						<?= $usuario_actual; ?>
+						<i class="fa fa-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="<?= base_url(); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
@@ -131,6 +137,7 @@
                         </li>
                         <li class="<?= $opcion_menu['modulo_mapa_estadistico']; ?>"><a href="<?= base_url(); ?>mapa"><i class="fa fa-map-marker fa-fw"></i> Modulo Mapa Estadístico</a></li>
 						<li><a href="javascript:window.open('','','width=600,height=400,left=50,top=50,toolbar=yes');void 0"><i class="fa fa-life-ring fa-fw"></i> Ayuda</a></li>
+						<li><a href="#menu-toggle" id="menu-toggle"><i class="fa fa-chevron-left"></i></a></li>
                     </ul>
                 </div>
             </div>

@@ -12,7 +12,7 @@ $nombre_centro_educativo = array(
 	'maxlength'	=> '60',
 	'size'		=> '20',
 	'value'		=> htmlentities(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo), ENT_COMPAT, 'UTF-8'),
-	'class'		=> 'form-control',
+	'class'		=> 'form-control text-capitalize',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
 
@@ -199,7 +199,10 @@ $(document).ready(function() {
         "scrollCollapse":	true,
         "info":				false,
         "ordering":			false,
-        "paging":			false
+        "paging":			false,
+        "oLanguage": {
+            "sEmptyTable": "No hay Docentes Capacitados en éste Centro Educativo."
+          }
 	});
 	$('#data-tables-docentes_certificados').dataTable({
 		"searching":		false,
@@ -207,7 +210,10 @@ $(document).ready(function() {
         "scrollCollapse":	true,
         "info":				false,
         "ordering":			false,
-        "paging":			false
+        "paging":			false,
+        "oLanguage": {
+        	"sEmptyTable": "No hay Docentes Certificados en éste Centro Educativo."
+          }
 	});
 });
 </script>
