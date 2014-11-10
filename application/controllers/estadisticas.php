@@ -4,7 +4,7 @@ class Estadisticas extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 
-		$this->load->helper(array('url', 'html'));
+		$this->load->helper(array('url', 'html', 'funciones_helper'));
 	}
 	public function consulta($opcion = 1){
 		$consultas_estadisticas = array(1 => 'Usuarios por Modalidad de Capacitación',
@@ -21,11 +21,12 @@ class Estadisticas extends CI_Controller{
 		$data['nombre_estadistica'] = $consultas_estadisticas[$opcion];
 		$data['pagina'] = 'estadisticas/consultar_estadisticas_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'active',
-									 'modulo_mapa_estadistico'			=>	''
-									 );
+		$data['opcion_menu'] = modulo_actual('modulo_consultas_estadisticas');
+		$estadistica = array();
+		for($i = 1; $i <= 11; $i++)
+			if($i == $opcion) $estadistica[$i] = 'active';
+			else $estadistica[$i] = '';
+		$data['estadistica'] = $estadistica;
 		
 		$this->load->view('plantilla_pagina_view', $data);
 	}

@@ -51,12 +51,12 @@ else{
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Modulo de Centros Educativos</h1>
+			<h1 class="well page-header">Modulo de Centros Educativos</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="panel panel-default">
+			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<?= heading($operacion.' Centro Educativo', 3); ?>
 				</div>

@@ -41,6 +41,16 @@ if(!function_exists('invierte_date_time')){
 		);
 		return $cadena;
 	}
+	
+	function modulo_actual($modulo){
+		$listado_modulos = array('inicio'							=>	'',
+					 			 'modulo_usuarios'					=>	'',
+					 			 'modulo_centros_educativos'		=>	'',
+					 			 'modulo_consultas_estadisticas'	=>	'',
+					 			 'modulo_mapa_estadistico'			=>	'');
+		$listado_modulos[$modulo] = 'active';
+		return $listado_modulos;
+	}
 }
 
 /* End of file funciones_helper.php */

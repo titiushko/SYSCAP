@@ -11,10 +11,7 @@ class Centros_educativos extends CI_Controller{
 	public function index(){
 		$data['pagina'] = 'centros_educativos/consultar_centros_educativos_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'active',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'');
+		$data['opcion_menu'] = modulo_actual('modulo_centros_educativos');
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->centros_educativos();
 		
 		$this->load->view('plantilla_pagina_view', $data);
@@ -24,10 +21,7 @@ class Centros_educativos extends CI_Controller{
 		$data['operacion'] = "Mostrar";
 		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'active',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'');
+		$data['opcion_menu'] = modulo_actual('modulo_centros_educativos');
 		$data['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 		$data['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
 		$data['lista_municipios'] = $this->municipios_model->lista_municipios();
@@ -46,10 +40,7 @@ class Centros_educativos extends CI_Controller{
 		$data['operacion'] = "Editar";
 		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'active',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'');
+		$data['opcion_menu'] = modulo_actual('modulo_centros_educativos');
 		$data['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
 		$data['lista_municipios'] = $this->municipios_model->lista_municipios();
 		$data['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');

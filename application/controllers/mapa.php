@@ -4,16 +4,12 @@ class Mapa extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 
-		$this->load->helper(array('url', 'html'));
+		$this->load->helper(array('url', 'html', 'funciones_helper'));
 	}
 	public function index(){
 		$data['pagina'] = 'mapa/consultar_mapa_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active'
-									 );
+		$data['opcion_menu'] = modulo_actual('modulo_mapa_estadistico');
 		
 		$this->load->view('plantilla_pagina_view', $data);
 	}

@@ -4,7 +4,9 @@
  * For details, see http://www.apache.org/licenses/LICENSE-2.0.
  */
 body {
-	background-color: #f8f8f8;
+	background-color: #ffffff;
+	background: url("../../../img/fondo-inicio-sesion.jpg") 50% no-repeat;
+	/*-webkit-filter: blur(5px);*/
 }
 
 #wrapper {
@@ -196,11 +198,12 @@ body {
 
 .login-panel {
 	margin-top: 25%;
+	background: rgba(66, 139, 202, 0.4);
 }
 
 @media(max-width: 767px) {
 	.login-panel {
-		margin-top: 0%;
+		margin-top: 25%;
 	}
 }
 

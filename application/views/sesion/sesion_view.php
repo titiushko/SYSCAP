@@ -36,9 +36,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-4">
-				<div class="login-panel panel panel-default">
+				<div class="login-panel panel panel-primary">
 					<div class="panel-heading">
-						<h3 class="panel-title">Por favor inicie sesión</h3>
+						<h3 class="panel-title">Acceder a SYSCAP</h3>
 					</div>
 					<div class="panel-body">
 						<form role="form">
@@ -55,7 +55,7 @@
 									</label>
 								</div>
 								<!-- Change this to a button or input when using this as a form -->
-								<a href="<?= base_url(); ?>inicio" class="btn btn-lg btn-success btn-block">Iniciar sesión</a>
+								<a href="<?= base_url(); ?>inicio" class="btn btn-lg btn-success btn-block">Iniciar Sesión</a>
 							</fieldset>
 						</form>
 					</div>

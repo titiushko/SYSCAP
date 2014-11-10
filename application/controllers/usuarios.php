@@ -12,10 +12,7 @@ class Usuarios extends CI_Controller{
 	public function index(){
 		$data['pagina'] = 'usuarios/consultar_usuarios_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'active',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'');
+		$data['opcion_menu'] = modulo_actual('modulo_usuarios');
 		$data['lista_usuarios'] = $this->usuarios_model->usuarios();
 		
 		$this->load->view('plantilla_pagina_view', $data);
@@ -25,10 +22,7 @@ class Usuarios extends CI_Controller{
 		$data['operacion'] = "Mostrar";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active');
+		$data['opcion_menu'] = modulo_actual('modulo_usuarios');
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
@@ -46,10 +40,7 @@ class Usuarios extends CI_Controller{
 		$data['operacion'] = "Editar";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active');
+		$data['opcion_menu'] = modulo_actual('modulo_usuarios');
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 		$data['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
@@ -74,10 +65,7 @@ class Usuarios extends CI_Controller{
 		$data['operacion'] = "Recuperar Contraseña";
 		$data['pagina'] = 'usuarios/formulario_usuarios_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = array('modulo_usuarios'					=>	'',
-									 'modulo_centros_educativos'		=>	'',
-									 'modulo_consultas_estadisticas'	=>	'',
-									 'modulo_mapa_estadistico'			=>	'active');
+		$data['opcion_menu'] = modulo_actual('modulo_usuarios');
 		$data['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
 		$data['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$data['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
@@ -96,7 +84,7 @@ class Usuarios extends CI_Controller{
 		$this->load->view('plantilla_pagina_view', $data);
 	}
 	
-	public function validaciones(){
+	function validaciones(){
 		$reglas = array(
 			array(
 				'field' => 'nombres_usuario',
