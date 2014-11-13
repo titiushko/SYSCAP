@@ -18,7 +18,7 @@
 	    <!-- <?= link_tag('libraries/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
 	    <?= link_tag('libraries/plugins/metis-menu/css/metis-menu.min.css'); ?>
 	    <!-- <?= link_tag('libraries/plugins/sb-admin/css/sb-admin.css'); ?> -->
-	    <?= link_tag('libraries/plugins/bootstrap/modern-business.css'); ?>
+	    <!-- <?= link_tag('libraries/plugins/bootstrap/modern-business.css'); ?> -->
 	    <?= link_tag('libraries/plugins/font-awesome/css/font-awesome.min.css'); ?>
 	    <?= link_tag('libraries/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
 	    <?= link_tag('libraries/plugins/dashgumfree/css/dashgumfree.css'); ?>
@@ -62,7 +62,7 @@
 							<i class="fa fa-user fa-fw"></i> <?= $usuario_actual; ?> <i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user-name">
-							<li><a href="<?= base_url(); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</li>
+							<li><a href="<?= base_url(); ?>"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
 						</ul>
 					</div>
 				</div>
@@ -114,7 +114,7 @@
 								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
 							</a>
 						</li>
-						<li><?= anchor_popup('ayuda', '<i class="fa fa-life-ring fa-fw"></i> Ayuda', array('width'=>'600', 'height'=>'400', 'left'=>'50', 'top'=>'50', 'toolbar'=>'yes')); ?></li>
+						<li><?= anchor_popup('ayuda', '<i class="fa fa-life-ring fa-fw"></i> Ayuda', array('width'=>'600', 'height'=>'800', 'left'=>'50', 'top'=>'50', 'toolbar'=>'yes')); ?></li>
 					</ul>
 					<!-- sidebar menu end-->
 				</div>
@@ -136,7 +136,7 @@
 			<footer id="footer" class="site-footer">
 				<div class="text-center">
 					SYSCAP - 2014
-					<a href="<?= base_url().uri_string(); ?>#" class="go-top">
+					<a href="<?= base_url().uri_string().'#'; ?>" class="go-top">
 						<i class="fa fa-angle-up"></i>
 					</a>
 				</div>

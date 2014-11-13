@@ -23,6 +23,10 @@ body {
 }
 
 /* Home Page Carousel */
+#myCarousel {
+	margin-left: 307px;
+}
+
 header.carousel {
 	height: 30%;
 }
