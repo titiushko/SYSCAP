@@ -19,10 +19,7 @@ $formulario = array(
 		)
 );
 
-$campos_ocultos = array(
-		'id' => htmlentities(set_value('id', @$usuario[0]->id_usuario), ENT_COMPAT, 'UTF-8'),
-		'estado' => '0'
-);
+$campos_ocultos = array('estado' => '0');
 
 $bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = '';
 
@@ -142,6 +139,30 @@ $modalidad_capacitacion = array(
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Resultado</h4>
+						</div>
+						<div class="modal-body">
+							<?= @$mensaje_notificacion; ?>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<?= heading($operacion.' Usuario', 3); ?>
@@ -149,7 +170,7 @@ $modalidad_capacitacion = array(
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<?= form_open('', $formulario[1], $campos_ocultos); ?>
+							<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[1], $campos_ocultos); ?>
 								<?= form_fieldset('Datos Personales'); ?>
 								<div class="row">
 									<div class="col-lg-6">
@@ -187,15 +208,15 @@ $modalidad_capacitacion = array(
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Profesión:'); ?>
-											<?= form_dropdown('profesion', $lista_profesiones, htmlentities(set_value('profesion', @$usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
-											<?= form_error('profesion'); ?>
+											<?= form_dropdown('id_profesion', $lista_profesiones, htmlentities(set_value('id_profesion', @$usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
+											<?= form_error('id_profesion'); ?>
 										</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Centro Educativo:'); ?>
-											<?= form_dropdown('centro_educativo', $lista_centros_educativos, htmlentities(set_value('centro_educativo', @$usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
-											<?= form_error('centro_educativo'); ?>
+											<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, htmlentities(set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
+											<?= form_error('id_centro_educativo'); ?>
 										</div>
 									</div>
 								</div>
@@ -224,7 +245,7 @@ $modalidad_capacitacion = array(
 								</div>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
-							<?= form_open('', $formulario[2], $campos_ocultos); ?>
+							<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[2], $campos_ocultos); ?>
 								<?= form_fieldset('Información de Usuario'); ?>
 								<div class="row">
 									<div class="col-lg-6">
@@ -248,8 +269,8 @@ $modalidad_capacitacion = array(
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Tipo de Usuario:'); ?>
-											<?= form_dropdown('tipo_usuario', $lista_tipos_usuarios, htmlentities(set_value('tipo_usuario', @$usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_informacion_usuario); ?>
-											<?= form_error('tipo_usuario'); ?>
+											<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, htmlentities(set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_informacion_usuario); ?>
+											<?= form_error('id_tipo_usuario'); ?>
 										</div>
 									</div>
 									<div class="col-lg-3">
@@ -270,7 +291,7 @@ $modalidad_capacitacion = array(
 								</div>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
-							<?= form_open('', $formulario[3], $campos_ocultos); ?>
+							<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[3], $campos_ocultos); ?>
 								<?= form_fieldset('Información de Cursos'); ?>
 								<div class="row">
 									<div class="col-lg-3">

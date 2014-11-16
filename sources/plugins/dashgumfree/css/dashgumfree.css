@@ -44,6 +44,7 @@ a, a:hover, a:focus {
 }
 
 /* Bootstrap Modifications */
+/*
 .modal-header {
 	background: #68dff0;
 }
@@ -51,6 +52,7 @@ a, a:hover, a:focus {
 .modal-title {
 	color: white;
 }
+*/
 
 .btn-round {
 	border-radius: 20px;

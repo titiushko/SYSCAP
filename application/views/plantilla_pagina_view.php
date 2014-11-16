@@ -36,7 +36,7 @@
 	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
-	<body>
+	<body <?= @$notificacion; ?>>
 		<section id="container" >
 			<!-- **********************************************************************************************************************************************************
 			TOP BAR CONTENT & NOTIFICATIONS

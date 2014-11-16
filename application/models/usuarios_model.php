@@ -28,9 +28,9 @@ class Usuarios_model extends CI_Model{
 		return $nombre_completo_usuario;
 	}
 	
-	function modificar($data, $codigo_usuario){
+	function modificar($datos_usuario, $codigo_usuario){
 		$this->db->where('id_usuario', $codigo_usuario);
-		$this->db->update('usuarios', $data);
+		$this->db->update('usuarios', $datos_usuario);
 	}
 	
 	/**
