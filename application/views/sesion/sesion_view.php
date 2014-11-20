@@ -14,18 +14,18 @@
 	echo meta($metainformaciones);
 	?>
     <title>SYSCAP</title>
-    <?= link_tag('libraries/plugins/bootstrap/css/bootstrap.min.css'); ?>
-    <?= link_tag('libraries/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?>
-    <?= link_tag('libraries/plugins/metis-menu/css/metis-menu.min.css'); ?>
-    <?= link_tag('libraries/plugins/sb-admin/css/sb-admin.css'); ?>
-    <?= link_tag('libraries/plugins/bootstrap/modern-business.css'); ?>
-    <?= link_tag('libraries/plugins/font-awesome/css/font-awesome.min.css'); ?>
-    <?= link_tag('libraries/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
-    <?= link_tag('libraries/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
-    <script src="<?= base_url(); ?>libraries/plugins/jquery/jquery.min.js"></script>
-    <script src="<?= base_url(); ?>libraries/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="<?= base_url(); ?>libraries/plugins/metis-menu/js/metis-menu.min.js"></script>
-    <script src="<?= base_url(); ?>libraries/plugins/sb-admin/js/sb-admin.js"></script>
+    <?= link_tag('sources/plugins/bootstrap/css/bootstrap.min.css'); ?>
+    <?= link_tag('sources/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?>
+    <?= link_tag('sources/plugins/metis-menu/css/metis-menu.min.css'); ?>
+    <?= link_tag('sources/plugins/sb-admin/css/sb-admin.css'); ?>
+    <?= link_tag('sources/plugins/bootstrap/modern-business.css'); ?>
+    <?= link_tag('sources/plugins/font-awesome/css/font-awesome.min.css'); ?>
+    <?= link_tag('sources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
+    <?= link_tag('sources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
+    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?= base_url(); ?>sources/plugins/metis-menu/js/metis-menu.min.js"></script>
+    <script src="<?= base_url(); ?>sources/plugins/sb-admin/js/sb-admin.js"></script>
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>

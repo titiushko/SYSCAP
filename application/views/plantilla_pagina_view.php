@@ -14,27 +14,27 @@
 		echo meta($metainformaciones);
 		?>
 	    <title>SYSCAP</title>
-	    <?= link_tag('libraries/plugins/bootstrap/css/bootstrap.min.css'); ?>
-	    <!-- <?= link_tag('libraries/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
-	    <?= link_tag('libraries/plugins/metis-menu/css/metis-menu.min.css'); ?>
-	    <!-- <?= link_tag('libraries/plugins/sb-admin/css/sb-admin.css'); ?> -->
-	    <!-- <?= link_tag('libraries/plugins/bootstrap/modern-business.css'); ?> -->
-	    <?= link_tag('libraries/plugins/font-awesome/css/font-awesome.min.css'); ?>
-	    <?= link_tag('libraries/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
-	    <?= link_tag('libraries/plugins/dashgumfree/css/dashgumfree.css'); ?>
-	    <?= link_tag('libraries/plugins/dashgumfree/css/dashgumfree-responsive.css'); ?>
-	    <?= link_tag('libraries/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
+	    <?= link_tag('sources/plugins/bootstrap/css/bootstrap.min.css'); ?>
+	    <!-- <?= link_tag('sources/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
+	    <?= link_tag('sources/plugins/metis-menu/css/metis-menu.min.css'); ?>
+	    <!-- <?= link_tag('sources/plugins/sb-admin/css/sb-admin.css'); ?> -->
+	    <!-- <?= link_tag('sources/plugins/bootstrap/modern-business.css'); ?> -->
+	    <?= link_tag('sources/plugins/font-awesome/css/font-awesome.min.css'); ?>
+	    <?= link_tag('sources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
+	    <?= link_tag('sources/plugins/dashgumfree/css/dashgumfree.css'); ?>
+	    <?= link_tag('sources/plugins/dashgumfree/css/dashgumfree-responsive.css'); ?>
+	    <?= link_tag('sources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
 	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script src="<?= base_url(); ?>libraries/plugins/bootstrap/js/bootstrap.min.js"></script>
-	    <script src="<?= base_url(); ?>libraries/plugins/metis-menu/js/metis-menu.min.js"></script>
-	    <!-- <script src="<?= base_url(); ?>libraries/plugins/sb-admin/js/sb-admin.js"></script> -->
-	    <script src="<?= base_url(); ?>libraries/plugins/jquery/jquery.min.js"></script>
-	    <script src="<?= base_url(); ?>libraries/plugins/jquery/jquery.dcjqaccordion.js"></script>
-	    <script src="<?= base_url(); ?>libraries/plugins/jquery/jquery.scrollTo.min.js"></script>
+	    <script src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap.min.js"></script>
+	    <script src="<?= base_url(); ?>sources/plugins/metis-menu/js/metis-menu.min.js"></script>
+	    <!-- <script src="<?= base_url(); ?>sources/plugins/sb-admin/js/sb-admin.js"></script> -->
+	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
+	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
 	<body>
 		<section id="container" >
@@ -143,7 +143,7 @@
 			</footer>
 			<!--footer end-->
 		</section>
-		<script src="<?= base_url(); ?>libraries/plugins/dashgumfree/js/dashgumfree.js"></script>
-	    <script src="<?= base_url(); ?>libraries/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script src="<?= base_url(); ?>sources/plugins/dashgumfree/js/dashgumfree.js"></script>
+	    <script src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>

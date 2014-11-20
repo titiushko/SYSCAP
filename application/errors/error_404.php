@@ -8,24 +8,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
 		<title>SYSCAP</title>
-		<link href="../syscap/libraries/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/libraries/img/syscap.ico" rel="shortcut icon" type="image/ico" />
+		<link href="../syscap/sources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
+		<link href="../syscap/sources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script src="../syscap/libraries/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script src="../syscap/libraries/plugins/metis-menu/js/metis-menu.min.js"></script>
-		<script src="../syscap/libraries/plugins/jquery/jquery.min.js"></script>
-		<script src="../syscap/libraries/plugins/jquery/jquery.dcjqaccordion.js"></script>
-		<script src="../syscap/libraries/plugins/jquery/jquery.scrollTo.min.js"></script>
+		<script src="../syscap/sources/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../syscap/sources/plugins/metis-menu/js/metis-menu.min.js"></script>
+		<script src="../syscap/sources/plugins/jquery/jquery.min.js"></script>
+		<script src="../syscap/sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+		<script src="../syscap/sources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
 	<body>
 		<section id="container" >
@@ -129,7 +129,7 @@
 				</div>
 			</footer>
 		</section>
-		<script src="../syscap/libraries/plugins/dashgumfree/js/dashgumfree.js"></script>
-		<script src="../syscap/libraries/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script src="../syscap/sources/plugins/dashgumfree/js/dashgumfree.js"></script>
+		<script src="../syscap/sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>

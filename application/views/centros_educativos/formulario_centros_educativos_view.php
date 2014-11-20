@@ -178,7 +178,7 @@ else{
 							<div class="row">
 								<div class="col-lg-12 text-center">
 									<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-									<a class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+									<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 								</div>
 							</div>
 							<?php } ?>
@@ -189,8 +189,8 @@ else{
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>libraries/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script src="<?= base_url(); ?>sources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script src="<?= base_url(); ?>sources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script>
 $(document).ready(function() {
 	$('#data-tables-docentes_capacitados').dataTable({
