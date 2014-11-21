@@ -3,8 +3,8 @@
 class Usuarios extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->helper(array('form', 'url', 'html', 'funciones_helper'));
-		$this->load->library('form_validation');
+		$this->load->helper(array('form', 'url', 'html', 'funciones_helper', 'file'));
+		$this->load->library(array('form_validation', 'pdf'));
 		$this->load->model(array('usuarios_model', 'centros_educativos_model', 'profesiones_model', 'tipos_usuarios_model'));
 	}
 	
@@ -81,6 +81,8 @@ class Usuarios extends CI_Controller{
 		$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 		$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 		$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
+		$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
+		$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
 		return $datos;
 	}
 	
@@ -142,6 +144,42 @@ class Usuarios extends CI_Controller{
 		
 		/*$this->form_validation->set_message('required','El Campo: %s, Es Obligatorio');
 		$this->form_validation->set_message('min_length','El Campo: %s, Debe tener al Menos %s Caracteres');*/
+	}
+	
+	function exportar(){
+		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+		$pdf->SetCreator(PDF_CREATOR);
+		$pdf->SetTitle('Reporte de Usuarios');
+		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config_alt.php de libraries/config
+		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'Reporte de Usuarios', PDF_HEADER_STRING, array(0, 64, 255), array(0, 64, 128));
+		$pdf->setFooterData($tc = array(0, 64, 0), $lc = array(0, 64, 128));
+		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config.php de libraries/config
+		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
+		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
+		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
+		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+		//relación utilizada para ajustar la conversión de los píxeles
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+		// establecer el modo de fuente por defecto
+		$pdf->setFontSubsetting(true);
+		// establecer el tipo de letra: si se tiene que imprimir carácteres ASCII estándar, se puede utilizar las fuentes básicas como Helvetica para reducir el tamaño del archivo
+		$pdf->SetFont('freemono', '', 14, '', true);
+		// añadir una página: este método tiene varias opciones, consultar la documentación para más información
+		$pdf->AddPage();
+		// fijar efecto de sombra en el texto
+		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
+		// establecer el contenido para generar el pdf
+		$plantilla_pdf = read_file('sources/templates/pdf/usuarios.php');
+		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+		$nombre_archivo = utf8_decode("Reporte de Usuarios.pdf");
+		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
+		$pdf->Output($nombre_archivo, 'I');
 	}
 }
 

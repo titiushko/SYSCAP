@@ -121,12 +121,12 @@ $contrasena_usuario = array(
 
 // Definición de los campos Información de Cursos
 
-$modalidad_capacitacion = array(
-	'name'		=>	'modalidad_capacitacion',
-	'id'		=>	'modalidad_capacitacion',
+$modalidad_usuario = array(
+	'name'		=>	'modalidad_usuario',
+	'id'		=>	'modalidad_usuario',
 	'maxlength'	=>	'30',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('modalidad_capacitacion', @$usuario[0]->modalidad_capacitacion), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	htmlentities(set_value('modalidad_usuario', @$usuario[0]->modalidad_usuario), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	'disabled'	=>	'disabled'
 );
@@ -299,8 +299,8 @@ $modalidad_capacitacion = array(
 									<div class="col-lg-6">
 										<div class="form-group">
 											<?= form_label('Modalidad de Capacitación:'); ?>
-											<?= form_input($modalidad_capacitacion); ?>
-											<?= form_error('modalidad_capacitacion'); ?>
+											<?= form_input($modalidad_usuario); ?>
+											<?= form_error('modalidad_usuario'); ?>
 										</div>
 									</div>
 									<div class="col-lg-3">
@@ -310,7 +310,7 @@ $modalidad_capacitacion = array(
 									<div class="col-lg-6">
 										<?= form_label('Certificaciones Obtenidas:'); ?>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover">
+											<table class="table table-striped table-bordered table-hover" id="data-tables-certificaciones_usuario">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -318,93 +318,26 @@ $modalidad_capacitacion = array(
 													</tr>
 												</thead>
 												<tbody>
+													<?php
+													$certificaciones = 1;
+													foreach($lista_certificaciones_usuario as $certificacion){
+													?>
 													<tr>
-														<td>1</td>
-														<td>Grado Digital 1, Software Propietario</td>
+														<td><?= $certificaciones; ?></td>
+														<td><?= htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
 													</tr>
-													<tr>
-														<td>2</td>
-														<td>Grado Digital 2, Software Libre (Moodle)</td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td>Grado Digital 3, Software Libre (Web 2.0)</td>
-													</tr>
+													<?php
+														$certificaciones++;
+													}
+													?>
 												</tbody>
 											</table>
 										</div>
 									</div>
 									<div class="col-lg-6">
-										<?= form_label('Cursos Recibidos:'); ?>
+										<?= form_label('Cursos Recibidos y Calificaciones Obtenidas:'); ?>
 										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Nombre del Curso</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>1</td>
-														<td>Curso Sistema Operativo Windows Vista</td>
-													</tr>
-													<tr>
-														<td>2</td>
-														<td>Curso Sistema Operativo Windows XP</td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td>Curso Procesador de Texto Microsoft Word</td>
-													</tr>
-													<tr>
-														<td>4</td>
-														<td>Curso Hoja de Calculo Microsoft Excel</td>
-													</tr>
-													<tr>
-														<td>5</td>
-														<td>Curso Microsoft Visual Basic 2008</td>
-													</tr>
-													<tr>
-														<td>6</td>
-														<td>Curso Microsoft Acces 2007</td>
-													</tr>
-													<tr>
-														<td>7</td>
-														<td>Curso Microsoft SQL Server 2008</td>
-													</tr>
-													<tr>
-														<td>8</td>
-														<td>Curso Moodle Estudiantes</td>
-													</tr>
-													<tr>
-														<td>9</td>
-														<td>Curso Moodle Administradores</td>
-													</tr>
-													<tr>
-														<td>10</td>
-														<td>Curso Moodle Tutores</td>
-													</tr>
-													<tr>
-														<td>11</td>
-														<td>Curso Herramientas de WEB 2.0</td>
-													</tr>
-													<tr>
-														<td>12</td>
-														<td>Curso Sistema Operativo Linux Ubuntu</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-3">
-									</div>
-									<div class="col-lg-6">
-										<?= form_label('Calificaciones Obtenidas por Cursos:'); ?>
-										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover">
+											<table class="table table-striped table-bordered table-hover" id="data-tables-calificaciones_usuario">
 												<thead>
 													<tr>
 														<th>#</th>
@@ -413,66 +346,19 @@ $modalidad_capacitacion = array(
 													</tr>
 												</thead>
 												<tbody>
+													<?php
+													$cursos = 1;
+													foreach($lista_calificaciones_usuario as $curso){
+													?>
 													<tr>
-														<td>1</td>
-														<td>Curso Sistema Operativo Windows Vista</td>
-														<td>7.2</td>
+														<td><?= $cursos; ?></td>
+														<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+														<td><?= htmlentities($curso->nota, ENT_COMPAT, 'UTF-8'); ?></td>
 													</tr>
-													<tr>
-														<td>2</td>
-														<td>Curso Sistema Operativo Windows XP</td>
-														<td>7.0</td>
-													</tr>
-													<tr>
-														<td>3</td>
-														<td>Curso Procesador de Texto Microsoft Word</td>
-														<td>8.0</td>
-													</tr>
-													<tr>
-														<td>4</td>
-														<td>Curso Hoja de Calculo Microsoft Excel</td>
-														<td>7.5</td>
-													</tr>
-													<tr>
-														<td>5</td>
-														<td>Curso Microsoft Visual Basic 2008</td>
-														<td>6.3</td>
-													</tr>
-													<tr>
-														<td>6</td>
-														<td>Curso Microsoft Acces 2007</td>
-														<td>7.1</td>
-													</tr>
-													<tr>
-														<td>7</td>
-														<td>Curso Microsoft SQL Server 2008</td>
-														<td>6.0</td>
-													</tr>
-													<tr>
-														<td>8</td>
-														<td>Curso Moodle Estudiantes</td>
-														<td>9.0</td>
-													</tr>
-													<tr>
-														<td>9</td>
-														<td>Curso Moodle Administradores</td>
-														<td>8.8</td>
-													</tr>
-													<tr>
-														<td>10</td>
-														<td>Curso Moodle Tutores</td>
-														<td>8.0</td>
-													</tr>
-													<tr>
-														<td>11</td>
-														<td>Curso Herramientas de WEB 2.0</td>
-														<td>9.7</td>
-													</tr>
-													<tr>
-														<td>12</td>
-														<td>Curso Sistema Operativo Linux Ubuntu</td>
-														<td>6.0</td>
-													</tr>
+													<?php
+														$cursos++;
+													}
+													?>
 												</tbody>
 											</table>
 										</div>
@@ -482,6 +368,19 @@ $modalidad_capacitacion = array(
 								</div>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
+							<?php
+							if($operacion == "Mostrar"){
+							?>
+							<div class="row">
+								<div class="col-lg-12">&nbsp;</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12 text-center">
+									<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+									<a href="<?= base_url(); ?>usuarios/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								</div>
+							</div>
+							<?php } ?>
 						</div>
 					</div>
 				</div>
@@ -489,3 +388,31 @@ $modalidad_capacitacion = array(
 		</div>
 	</div>
 </div>
+<script src="<?= base_url(); ?>sources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script src="<?= base_url(); ?>sources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script>
+$(document).ready(function() {
+	$('#data-tables-certificaciones_usuario').dataTable({
+		"searching":		false,
+        "scrollY":			"200px",
+        "scrollCollapse":	true,
+        "info":				false,
+        "ordering":			false,
+        "paging":			false,
+        "oLanguage": {
+            "sEmptyTable": "El usuario no tiene certificaciones."
+          }
+	});
+	$('#data-tables-calificaciones_usuario').dataTable({
+		"searching":		false,
+        "scrollY":			"200px",
+        "scrollCollapse":	true,
+        "info":				false,
+        "ordering":			false,
+        "paging":			false,
+        "oLanguage": {
+        	"sEmptyTable": "El usuario no a recibido cursos."
+          }
+	});
+});
+</script>
