@@ -29,10 +29,10 @@
 	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
+	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
 	    <script src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap.min.js"></script>
 	    <script src="<?= base_url(); ?>sources/plugins/metis-menu/js/metis-menu.min.js"></script>
 	    <!-- <script src="<?= base_url(); ?>sources/plugins/sb-admin/js/sb-admin.js"></script> -->
-	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
 	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
@@ -125,6 +125,43 @@
 			*********************************************************************************************************************************************************** -->
 			<!--main content start-->
 			<section id="main-content">
+				<!-- Carousel -->
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
+					<!-- Indicators -->
+					<ol class="carousel-indicators">
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+					</ol>
+					<!-- Wrapper for slides -->
+					<div class="carousel-inner">
+						<div class="item active" align="center">
+							<img src="<?= base_url(); ?>sources/img/slide01.png">
+							<div class="carousel-caption">
+								<!-- <h3>Caption Text</h3> -->
+							</div>
+						</div>
+						<div class="item" align="center">
+							<img src="<?= base_url(); ?>sources/img/slide02.png">
+							<div class="carousel-caption">
+								<!-- <h3>Caption Text</h3> -->
+							</div>
+						</div>
+						<div class="item" align="center">
+							<img src="<?= base_url(); ?>sources/img/slide03.png">
+							<div class="carousel-caption">
+								<!-- <h3>Caption Text</h3> -->
+							</div>
+						</div>
+					</div>
+					<!-- Controls -->
+					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+						<span class="glyphicon glyphicon-chevron-left"></span>
+					</a>
+					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+						<span class="glyphicon glyphicon-chevron-right"></span>
+					</a>
+				</div>
 				<section class="wrapper">
 					<?php if(isset($pagina)){
 			        $this->load->view($pagina);

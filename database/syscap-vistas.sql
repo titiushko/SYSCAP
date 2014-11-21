@@ -4,6 +4,7 @@ DELIMITER $$
 DROP VIEW IF EXISTS V_UsuariosCursosExamenesCalificaciones $$
 CREATE VIEW V_UsuariosCursosExamenesCalificaciones AS
 SELECT
+	u.id_usuario u_id_usuario,
 	u.nombre_usuario u_nombre_usuario,
 	u.id_tipo_usuario u_id_tipo_usuario,
 	tu.nombre_tipo_usuario tu_nombre_tipo_usuario,
@@ -21,6 +22,7 @@ SELECT
     u.id_municipio u_id_municipio,
     m.nombre_municipio m_nombre_municipio,
     u.modalidad_usuario u_modalidad_usuario,
+	ec.id_usuario ec_id_usuario,
 	ec.nota_examen_calificacion ec_nota_examen_calificacion,
 	e.nombre_examen e_nombre_examen,
 	c.nombre_completo_curso c_nombre_completo_curso,

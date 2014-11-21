@@ -248,7 +248,7 @@ ul.top-menu>li>.logout {
 	height: 17px;
 	width: 17px;
 	display: inline-block;
-	background: url("../img/nav-expand.png") no-repeat top;
+	/* background: url("../img/nav-expand.png") no-repeat top; */
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -258,7 +258,7 @@ ul.top-menu>li>.logout {
 }
 
 .active .dcjq-icon {
-	background: url("../img/nav-expand.png") no-repeat bottom;
+	/* background: url("../img/nav-expand.png") no-repeat bottom; */
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -274,7 +274,7 @@ ul.sidebar-menu, ul.sidebar-menu li ul.sub {
 }
 
 ul.sidebar-menu {
-	margin-top: 75px;
+	margin-top: 15px;
 }
 
 #sidebar>ul>li>ul.sub {
@@ -411,7 +411,7 @@ ul.sidebar-menu li a.active i {
 
 .wrapper {
 	display: inline-block;
-	margin-top: 60px;
+	/* margin-top: 60px; */
 	padding-left: 15px;
 	padding-right: 15px;
 	padding-bottom: 15px;
@@ -2360,4 +2360,8 @@ footer {
 	.hidden-phone {
 		display: none !important
 	}
+}
+
+#carousel-example-generic.carousel.slide {
+	margin-top: 60px;
 }
