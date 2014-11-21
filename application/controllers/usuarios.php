@@ -13,7 +13,6 @@ class Usuarios extends CI_Controller{
 		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
 		$datos['lista_usuarios'] = $this->usuarios_model->usuarios();
-		
 		$this->load->view('plantilla_pagina_view', $datos);
 	}
 	
@@ -146,7 +145,7 @@ class Usuarios extends CI_Controller{
 		$this->form_validation->set_message('min_length','El Campo: %s, Debe tener al Menos %s Caracteres');*/
 	}
 	
-	function exportar(){
+	public function exportar(){
 		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
 		$pdf->SetTitle('Reporte de Usuarios');

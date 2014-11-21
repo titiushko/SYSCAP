@@ -13,13 +13,16 @@
 		<h1>Reporte de Centros Educativos</h1>
 		<fieldset id="informacion-primaria">
 			<legend>Informacion General</legend>
+			<hr/>
 			<p><label>Nombre:</label> Centro Escolar Isidro Menendez</p>
 			<p><label>Codigo:</label> 10001</p>
 			<p><label>Departamento:</label> Ahuachapan</p>
 			<p><label>Municipio:</label> Ahuachapan</p>
 		</fieldset>
+		<br/><br/>
 		<fieldset>
 			<legend>Certificaciones</legend>
+			<hr/>
 			<p>
 				<table>
 					<thead>

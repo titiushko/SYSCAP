@@ -34,10 +34,7 @@ $formulario = array(
 	'role'		=> 'form'
 );
 
-$campos_ocultos = array(
-	'row_id' => htmlentities(set_value('id_centro_educativo', @$centro_educativo[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'),
-	'estado' => '0'
-);
+$campos_ocultos = array('estado' => '0');
 
 if($operacion == "Mostrar"){
 	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
@@ -48,141 +45,139 @@ else{
 	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
 }
 ?>
-<div id="page-wrapper">
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="well page-header">Modulo de Centros Educativos</h1>
-		</div>
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="well page-header">Modulo de Centros Educativos</h1>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<?= heading($operacion.' Centro Educativo', 3); ?>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-lg-12">
-							<?= form_open('', $formulario, $campos_ocultos); ?>
-								<?= form_fieldset('Información General'); ?>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Nombre'); ?>
-											<?= form_input($nombre_centro_educativo); ?>
-											<?= form_error('nombre_centro_educativo'); ?>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Código'); ?>
-											<?= form_input($codigo_centro_educativo); ?>
-											<?= form_error('codigo_centro_educativo'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Departamento'); ?>
-											<?= form_dropdown('departamento', $lista_departamentos, htmlentities(set_value('departamento', @$centro_educativo[0]->id_departamento), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
-											<?= form_error('departamento'); ?>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Municipio'); ?>
-											<?= form_dropdown('municipio', $lista_municipios, htmlentities(set_value('municipio', @$centro_educativo[0]->id_municipio), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
-											<?= form_error('municipio'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<?php if($operacion == "Mostrar"){ ?>
-											<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
-											<?= form_button('boton_secundario','Regresar', $boton_secundario); ?>
-											<?php } else{ ?>
-											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
-											<?= form_button('boton_secundario','Cancelar', $boton_secundario); ?>
-											<script>document.centros_educativos.nombre_centro_educativo.focus();</script>
-											<?php } ?>
-										</div>
-									</div>
-								</div>
-								<?= form_fieldset_close(); ?>
-								<?= form_fieldset('Certificaciones'); ?>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_capacitados">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Docentes Capacitados</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$docentes_capacitados = 1;
-													foreach($lista_docentes_capacitados as $docente_capacitado){
-													?>
-													<tr>
-														<td><?= $docentes_capacitados; ?></td>
-														<td><?= $docente_capacitado->nombre_completo_usuario; ?></td>
-													</tr>
-													<?php
-														$docentes_capacitados++;
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_certificados">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Docentes Certificados</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$docentes_certificados = 1;
-													foreach($lista_docentes_certificados as $docente_certificado){
-													?>
-													<tr>
-														<td><?= $docentes_certificados; ?></td>
-														<td><?= $docente_certificado->nombre_completo_usuario; ?></td>
-													</tr>
-													<?php
-														$docentes_certificados++;
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								<?= form_fieldset_close(); ?>
-							<?= form_close(); ?>
-							<?php
-							if($operacion == "Mostrar"){
-							?>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<?= heading($operacion.' Centro Educativo', 3); ?>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<?= form_open('index.php/centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo, $formulario, $campos_ocultos); ?>
+							<?= form_fieldset('Información General'); ?>
 							<div class="row">
-								<div class="col-lg-12">&nbsp;</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Nombre'); ?>
+										<?= form_input($nombre_centro_educativo); ?>
+										<?= form_error('nombre_centro_educativo'); ?>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Código'); ?>
+										<?= form_input($codigo_centro_educativo); ?>
+										<?= form_error('codigo_centro_educativo'); ?>
+									</div>
+								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-12 text-center">
-									<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-									<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Departamento'); ?>
+										<?= form_dropdown('id_departamento', $lista_departamentos, htmlentities(set_value('id_departamento', @$centro_educativo[0]->id_departamento), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+										<?= form_error('id_departamento'); ?>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Municipio'); ?>
+										<?= form_dropdown('id_municipio', $lista_municipios, htmlentities(set_value('id_municipio', @$centro_educativo[0]->id_municipio), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+										<?= form_error('id_municipio'); ?>
+									</div>
 								</div>
 							</div>
-							<?php } ?>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<?php if($operacion == "Mostrar"){ ?>
+										<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
+										<?= form_button('boton_secundario','Regresar', $boton_secundario); ?>
+										<?php } else{ ?>
+										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
+										<?= form_button('boton_secundario','Cancelar', $boton_secundario); ?>
+										<script>document.centros_educativos.nombre_centro_educativo.focus();</script>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+							<?= form_fieldset_close(); ?>
+							<?= form_fieldset('Certificaciones'); ?>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_capacitados">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Docentes Capacitados</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$docentes_capacitados = 1;
+												foreach($lista_docentes_capacitados as $docente_capacitado){
+												?>
+												<tr>
+													<td><?= $docentes_capacitados; ?></td>
+													<td><?= $docente_capacitado->nombre_completo_usuario; ?></td>
+												</tr>
+												<?php
+													$docentes_capacitados++;
+												}
+												?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_certificados">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Docentes Certificados</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$docentes_certificados = 1;
+												foreach($lista_docentes_certificados as $docente_certificado){
+												?>
+												<tr>
+													<td><?= $docentes_certificados; ?></td>
+													<td><?= $docente_certificado->nombre_completo_usuario; ?></td>
+												</tr>
+												<?php
+													$docentes_certificados++;
+												}
+												?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<?= form_fieldset_close(); ?>
+						<?= form_close(); ?>
+						<?php
+						if($operacion == "Mostrar"){
+						?>
+						<div class="row">
+							<div class="col-lg-12">&nbsp;</div>
 						</div>
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+							</div>
+						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

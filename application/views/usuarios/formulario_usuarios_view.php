@@ -131,257 +131,231 @@ $modalidad_usuario = array(
 	'disabled'	=>	'disabled'
 );
 ?>
-<div id="page-wrapper">
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="well page-header">Modulo de Usuarios</h1>
-		</div>
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="well page-header">Modulo de Usuarios</h1>
 	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Resultado</h4>
-						</div>
-						<div class="modal-body">
-							<?= @$mensaje_notificacion; ?>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<?= heading($operacion.' Usuario', 3); ?>
 			</div>
-			<!-- /.modal -->
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<?= heading($operacion.' Usuario', 3); ?>
-				</div>
-				<div class="panel-body">
-					<div class="row">
-						<div class="col-lg-12">
-							<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[1], $campos_ocultos); ?>
-								<?= form_fieldset('Datos Personales'); ?>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Nombres:'); ?>
-											<?= form_input($nombres_usuario); ?>
-											<?= form_error('nombres_usuario'); ?>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Apellidos:'); ?>
-											<?= form_input($apellido1_usuario); ?>
-											<?= form_error('apellido1_usuario'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('DUI:'); ?>
-											<?= form_input($dui_usuario); ?>
-											<?= form_error('dui_usuario'); ?>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Correo Electrónico:'); ?>
-											<?= form_input($correo_electronico_usuario); ?>
-											<?= form_error('correo_electronico_usuario'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Profesión:'); ?>
-											<?= form_dropdown('id_profesion', $lista_profesiones, htmlentities(set_value('id_profesion', @$usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
-											<?= form_error('id_profesion'); ?>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Centro Educativo:'); ?>
-											<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, htmlentities(set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
-											<?= form_error('id_centro_educativo'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<?= form_label('Dirección:'); ?>
-											<?= form_textarea($direccion_usuario); ?>
-											<?= form_error('direccion_usuario'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<?php if($operacion == "Mostrar"){ ?>
-											<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
-											<?= form_button('boton_regresar','Regresar', $boton_regresar); ?>
-											<?php } else if($operacion == "Editar"){ ?>
-											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
-											<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
-											<script>document.datos_personales.nombres_usuario.focus();</script>
-											<?php } ?>
-										</div>
-									</div>
-								</div>
-								<?= form_fieldset_close(); ?>
-							<?= form_close(); ?>
-							<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[2], $campos_ocultos); ?>
-								<?= form_fieldset('Información de Usuario'); ?>
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Nombre de Usuario:'); ?>
-											<?= form_input($nombre_usuario); ?>
-											<?= form_error('nombre_usuario'); ?>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Contraseña:'); ?>
-											<?= form_password($contrasena_usuario); ?>
-											<?= form_error('contrasena_usuario'); ?>
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-3">
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Tipo de Usuario:'); ?>
-											<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, htmlentities(set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_informacion_usuario); ?>
-											<?= form_error('id_tipo_usuario'); ?>
-										</div>
-									</div>
-									<div class="col-lg-3">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<?php if($operacion == "Mostrar"){ ?>
-											<?= form_button('boton_primario', 'Recuperar Contraseña', $boton_secundario); ?>
-											<?php } else if($operacion == "Recuperar Contraseña"){ ?>
-											<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
-											<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
-											<script>document.informacion_usuario.nombre_usuario.focus();</script>
-											<?php } ?>
-										</div>
-									</div>
-								</div>
-								<?= form_fieldset_close(); ?>
-							<?= form_close(); ?>
-							<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[3], $campos_ocultos); ?>
-								<?= form_fieldset('Información de Cursos'); ?>
-								<div class="row">
-									<div class="col-lg-3">
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<?= form_label('Modalidad de Capacitación:'); ?>
-											<?= form_input($modalidad_usuario); ?>
-											<?= form_error('modalidad_usuario'); ?>
-										</div>
-									</div>
-									<div class="col-lg-3">
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-6">
-										<?= form_label('Certificaciones Obtenidas:'); ?>
-										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover" id="data-tables-certificaciones_usuario">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Nombre de la Certificación</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$certificaciones = 1;
-													foreach($lista_certificaciones_usuario as $certificacion){
-													?>
-													<tr>
-														<td><?= $certificaciones; ?></td>
-														<td><?= htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
-													</tr>
-													<?php
-														$certificaciones++;
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<?= form_label('Cursos Recibidos y Calificaciones Obtenidas:'); ?>
-										<div class="table-responsive">
-											<table class="table table-striped table-bordered table-hover" id="data-tables-calificaciones_usuario">
-												<thead>
-													<tr>
-														<th>#</th>
-														<th>Nombre del Curso</th>
-														<th>Calificación</th>
-													</tr>
-												</thead>
-												<tbody>
-													<?php
-													$cursos = 1;
-													foreach($lista_calificaciones_usuario as $curso){
-													?>
-													<tr>
-														<td><?= $cursos; ?></td>
-														<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
-														<td><?= htmlentities($curso->nota, ENT_COMPAT, 'UTF-8'); ?></td>
-													</tr>
-													<?php
-														$cursos++;
-													}
-													?>
-												</tbody>
-											</table>
-										</div>
-									</div>
-									<div class="col-lg-3">
-									</div>
-								</div>
-								<?= form_fieldset_close(); ?>
-							<?= form_close(); ?>
-							<?php
-							if($operacion == "Mostrar"){
-							?>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+						<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[1], $campos_ocultos); ?>
+							<?= form_fieldset('Datos Personales'); ?>
 							<div class="row">
-								<div class="col-lg-12">&nbsp;</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Nombres:'); ?>
+										<?= form_input($nombres_usuario); ?>
+										<?= form_error('nombres_usuario'); ?>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Apellidos:'); ?>
+										<?= form_input($apellido1_usuario); ?>
+										<?= form_error('apellido1_usuario'); ?>
+									</div>
+								</div>
 							</div>
 							<div class="row">
-								<div class="col-lg-12 text-center">
-									<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-									<a href="<?= base_url(); ?>usuarios/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('DUI:'); ?>
+										<?= form_input($dui_usuario); ?>
+										<?= form_error('dui_usuario'); ?>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Correo Electrónico:'); ?>
+										<?= form_input($correo_electronico_usuario); ?>
+										<?= form_error('correo_electronico_usuario'); ?>
+									</div>
 								</div>
 							</div>
-							<?php } ?>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Profesión:'); ?>
+										<?= form_dropdown('id_profesion', $lista_profesiones, htmlentities(set_value('id_profesion', @$usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_error('id_profesion'); ?>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Centro Educativo:'); ?>
+										<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, htmlentities(set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_error('id_centro_educativo'); ?>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<?= form_label('Dirección:'); ?>
+										<?= form_textarea($direccion_usuario); ?>
+										<?= form_error('direccion_usuario'); ?>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<?php if($operacion == "Mostrar"){ ?>
+										<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
+										<?= form_button('boton_regresar','Regresar', $boton_regresar); ?>
+										<?php } else if($operacion == "Editar"){ ?>
+										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
+										<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
+										<script>document.datos_personales.nombres_usuario.focus();</script>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+							<?= form_fieldset_close(); ?>
+						<?= form_close(); ?>
+						<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[2], $campos_ocultos); ?>
+							<?= form_fieldset('Información de Usuario'); ?>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Nombre de Usuario:'); ?>
+										<?= form_input($nombre_usuario); ?>
+										<?= form_error('nombre_usuario'); ?>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Contraseña:'); ?>
+										<?= form_password($contrasena_usuario); ?>
+										<?= form_error('contrasena_usuario'); ?>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-3">
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Tipo de Usuario:'); ?>
+										<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, htmlentities(set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_informacion_usuario); ?>
+										<?= form_error('id_tipo_usuario'); ?>
+									</div>
+								</div>
+								<div class="col-lg-3">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="form-group">
+										<?php if($operacion == "Mostrar"){ ?>
+										<?= form_button('boton_primario', 'Recuperar Contraseña', $boton_secundario); ?>
+										<?php } else if($operacion == "Recuperar Contraseña"){ ?>
+										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
+										<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
+										<script>document.informacion_usuario.nombre_usuario.focus();</script>
+										<?php } ?>
+									</div>
+								</div>
+							</div>
+							<?= form_fieldset_close(); ?>
+						<?= form_close(); ?>
+						<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[3], $campos_ocultos); ?>
+							<?= form_fieldset('Información de Cursos'); ?>
+							<div class="row">
+								<div class="col-lg-3">
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<?= form_label('Modalidad de Capacitación:'); ?>
+										<?= form_input($modalidad_usuario); ?>
+										<?= form_error('modalidad_usuario'); ?>
+									</div>
+								</div>
+								<div class="col-lg-3">
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<?= form_label('Certificaciones Obtenidas:'); ?>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="data-tables-certificaciones_usuario">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Nombre de la Certificación</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$certificaciones = 1;
+												foreach($lista_certificaciones_usuario as $certificacion){
+												?>
+												<tr>
+													<td><?= $certificaciones; ?></td>
+													<td><?= htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+												</tr>
+												<?php
+													$certificaciones++;
+												}
+												?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<?= form_label('Cursos Recibidos y Calificaciones Obtenidas:'); ?>
+									<div class="table-responsive">
+										<table class="table table-striped table-bordered table-hover" id="data-tables-calificaciones_usuario">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Nombre del Curso</th>
+													<th>Calificación</th>
+												</tr>
+											</thead>
+											<tbody>
+												<?php
+												$cursos = 1;
+												foreach($lista_calificaciones_usuario as $curso){
+												?>
+												<tr>
+													<td><?= $cursos; ?></td>
+													<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+													<td><?= htmlentities($curso->nota, ENT_COMPAT, 'UTF-8'); ?></td>
+												</tr>
+												<?php
+													$cursos++;
+												}
+												?>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-lg-3">
+								</div>
+							</div>
+							<?= form_fieldset_close(); ?>
+						<?= form_close(); ?>
+						<?php
+						if($operacion == "Mostrar"){
+						?>
+						<div class="row">
+							<div class="col-lg-12">&nbsp;</div>
 						</div>
+						<div class="row">
+							<div class="col-lg-12 text-center">
+								<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url(); ?>usuarios/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+							</div>
+						</div>
+						<?php } ?>
 					</div>
 				</div>
 			</div>

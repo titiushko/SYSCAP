@@ -163,9 +163,35 @@
 					</a>
 				</div>
 				<section class="wrapper">
-					<?php if(isset($pagina)){
-			        $this->load->view($pagina);
-			        } ?>
+					<div id="page-wrapper">
+						<div class="row">
+							<div class="col-lg-12">
+								<!-- Modal -->
+								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+												<h4 class="modal-title" id="myModalLabel">Resultado</h4>
+											</div>
+											<div class="modal-body">
+												<?= @$mensaje_notificacion; ?>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+											</div>
+										</div>
+										<!-- /.modal-content -->
+									</div>
+									<!-- /.modal-dialog -->
+								</div>
+								<!-- /.modal -->
+							</div>
+						</div>
+						<?php if(isset($pagina)){
+				        $this->load->view($pagina);
+				        } ?>
+					</div>
 				</section>
 			</section>
 			<!--main content end-->

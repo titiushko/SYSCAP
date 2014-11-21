@@ -3,64 +3,73 @@
 class Centros_educativos extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		
-		$this->load->helper(array('url', 'html', 'form', 'funciones_helper', 'file'));
-		$this->load->library('pdf');
+		$this->load->helper(array('form', 'url', 'html', 'funciones_helper', 'file'));
+		$this->load->library(array('form_validation', 'pdf'));
 		$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model', 'usuarios_model'));
 	}
 	
 	public function index(){
-		$data['pagina'] = 'centros_educativos/consultar_centros_educativos_view';
-		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = modulo_actual('modulo_centros_educativos');
-		$data['lista_centros_educativos'] = $this->centros_educativos_model->centros_educativos();
-		
-		$this->load->view('plantilla_pagina_view', $data);
+		$datos['pagina'] = 'centros_educativos/consultar_centros_educativos_view';
+		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+		$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
+		$datos['lista_centros_educativos'] = $this->centros_educativos_model->centros_educativos();
+		$this->load->view('plantilla_pagina_view', $datos);
 	}
 	
 	public function mostrar($codigo_centro_educativo = NULL){
-		$data['operacion'] = "Mostrar";
-		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
-		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = modulo_actual('modulo_centros_educativos');
-		$data['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
-		$data['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-		$data['lista_municipios'] = $this->municipios_model->lista_municipios();
-		$data['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
-		$data['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
 		
-		if(empty($data['centro_educativo'])){
-			echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+		if(empty($datos['centro_educativo'])){
+			echo 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
 		}
 		else{
-			$this->load->view('plantilla_pagina_view', $data);
+			$this->load->view('plantilla_pagina_view', $datos);
 		}
 	}
 	
 	public function modificar($codigo_centro_educativo = NULL){
-		$data['operacion'] = "Editar";
-		$data['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
-		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = modulo_actual('modulo_centros_educativos');
-		$data['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-		$data['lista_municipios'] = $this->municipios_model->lista_municipios();
-		$data['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
-		$data['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		$datos = $this->datos_formulario_centros_educativos_view("Editar", $codigo_centro_educativo);
 		
-		if($this->input->post('estado', TRUE)){
+		if($this->input->post('estado') == '1'){
 			$update_centro_educativo = $this->input->post();
+			unset($update_centro_educativo['estado'], $update_centro_educativo['boton_primario']);
 			$this->centros_educativos_model->modificar($update_centro_educativo, $codigo_centro_educativo);
-			redirect('centros_educativos');
+			redirect('centros_educativos/resultado/'.$codigo_centro_educativo);
 		}
 		else{
-			$data['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
-			if(empty($data['centro_educativo'])){
-				echo 'ID Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido. 
+			if(empty($datos['centro_educativo'])){
+				echo 'modificar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido. 
 			}
 			else{
-				$this->load->view('plantilla_pagina_view', $data);
+				$this->load->view('plantilla_pagina_view', $datos);
 			}
 		}
+	}
+	
+	public function resultado($codigo_centro_educativo = NULL){
+		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
+		$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
+		$datos['mensaje_notificacion'] = 'Se guardaron los cambios del centro educativo.';
+	
+		if(empty($datos['centro_educativo'])){
+				echo 'resultado(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido. 
+		}
+		else{
+			$this->load->view('plantilla_pagina_view', $datos);
+		}
+	}
+	
+	private function datos_formulario_centros_educativos_view($operacion = '', $codigo_centro_educativo = NULL){
+		$datos['operacion'] = $operacion;
+		$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
+		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+		$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
+		$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
+		$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
+		$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
+		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
+		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		return $datos;
 	}
 	
 	function exportar(){
