@@ -5,30 +5,22 @@ class Estadisticas extends CI_Controller{
 		parent::__construct();
 
 		$this->load->helper(array('url', 'html', 'funciones_helper'));
+		$this->load->model('estadisticas_model');
 	}
 	public function consulta($opcion = 1){
-		$consultas_estadisticas = array(1 => 'Usuarios por Modalidad de Capacitación',
-										2 => 'Usuarios por Departamento y Rango de Fechas',
-										3 => 'Total de Usuarios por Departamento y Rango de Fechas',
-										4 => 'Usuarios por Departamento, Municipio y Rango de Fechas',
-										5 => 'Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional',
-										6 => 'Usuarios por Tipo de Capacitados, Departamento y Fecha',
-										7 => 'Usuarios por Tipo de Capacitados, Departamento y Municipio',
-										8 => 'Usuarios por Departamento, Tipo de Capacitados y Fecha',
-										9 => 'Usuarios por Tipo de Capacitados y Centro Educativo',
-										10 => 'Usuarios a Nivel Nacional',
-										11 => 'Usuarios por Grado Digital');
-		$data['nombre_estadistica'] = $consultas_estadisticas[$opcion];
-		$data['pagina'] = 'estadisticas/consultar_estadisticas_view';
-		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$data['opcion_menu'] = modulo_actual('modulo_consultas_estadisticas');
-		$estadistica = array();
-		for($i = 1; $i <= 11; $i++)
-			if($i == $opcion) $estadistica[$i] = 'active';
-			else $estadistica[$i] = '';
-		$data['estadistica'] = $estadistica;
+		$datos['nombre_estadistica'] = listado_estadisticas($opcion);
+		$datos['pagina'] = 'estadisticas/consultar_estadisticas_view';
+		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+		$datos['opcion_menu'] = modulo_actual('modulo_consultas_estadisticas');
 		
-		$this->load->view('plantilla_pagina_view', $data);
+		switch($opcion){
+			case 1:
+				$datos['modalidades_capacitados'] = $this->estadisticas_model->modalidades_capacitados('');
+				$datos['participantes_modalidades'] = $this->estadisticas_model->modalidades_capacitados('participantes');
+				break;
+		}
+		
+		$this->load->view('plantilla_pagina_view', $datos);
 	}
 }
 
