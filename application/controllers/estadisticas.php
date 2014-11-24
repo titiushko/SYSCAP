@@ -3,15 +3,15 @@
 class Estadisticas extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-
-		$this->load->helper(array('url', 'html', 'funciones_helper'));
 		$this->load->model('estadisticas_model');
 	}
+	
 	public function consulta($opcion = 1){
-		$datos['nombre_estadistica'] = listado_estadisticas($opcion);
 		$datos['pagina'] = 'estadisticas/consultar_estadisticas_view';
 		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$datos['opcion_menu'] = modulo_actual('modulo_consultas_estadisticas');
+		$datos['nombre_estadistica'] = listado_estadisticas($opcion);
+		$datos['estadistica'] = array($opcion => 'active');
 		
 		switch($opcion){
 			case 1:

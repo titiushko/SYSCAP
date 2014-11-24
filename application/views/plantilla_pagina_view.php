@@ -26,15 +26,36 @@
 	    <?= link_tag('sources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
-	    <script src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap.min.js"></script>
-	    <script src="<?= base_url(); ?>sources/plugins/metis-menu/js/metis-menu.min.js"></script>
-	    <!-- <script src="<?= base_url(); ?>sources/plugins/sb-admin/js/sb-admin.js"></script> -->
-	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
-	    <script src="<?= base_url(); ?>sources/plugins/jquery/jquery.scrollTo.min.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/metis-menu/js/metis-menu.min.js"></script>
+	    <!-- <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/sb-admin/js/sb-admin.js"></script> -->
+	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/jquery/jquery.scrollTo.min.js"></script>
+	    <script type="text/javascript">
+		    $(function(){
+			    var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+			    if(carousel == 'TRUE'){
+			    	$('.wrapper').css({
+			    		"margin-top": "0px"
+			    	});
+			    	$('ul.sidebar-menu').css({
+			    		"margin-top": "15px"
+			    	});
+			    }
+			    else{
+			    	$('.wrapper').css({
+			    		"margin-top": "60px"
+			    	});
+			    	$('ul.sidebar-menu').css({
+			    		"margin-top": "75px"
+			    	});
+			    }
+		    });
+	    </script>
 	</head>
 	<body <?= @$notificacion; ?>>
 		<section id="container" >
@@ -125,6 +146,7 @@
 			*********************************************************************************************************************************************************** -->
 			<!--main content start-->
 			<section id="main-content">
+				<?php if($this->config->item('carousel')){ ?>
 				<!-- Carousel -->
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="3000">
 					<!-- Indicators -->
@@ -133,24 +155,21 @@
 						<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 						<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 					</ol>
-					<!-- Wrapper for slides -->
+					<!-- Wrapper for Slides -->
 					<div class="carousel-inner">
 						<div class="item active" align="center">
 							<img src="<?= base_url(); ?>sources/img/slide01.png">
 							<div class="carousel-caption">
-								<!-- <h3>Caption Text</h3> -->
 							</div>
 						</div>
 						<div class="item" align="center">
 							<img src="<?= base_url(); ?>sources/img/slide02.png">
 							<div class="carousel-caption">
-								<!-- <h3>Caption Text</h3> -->
 							</div>
 						</div>
 						<div class="item" align="center">
 							<img src="<?= base_url(); ?>sources/img/slide03.png">
 							<div class="carousel-caption">
-								<!-- <h3>Caption Text</h3> -->
 							</div>
 						</div>
 					</div>
@@ -162,11 +181,12 @@
 						<span class="glyphicon glyphicon-chevron-right"></span>
 					</a>
 				</div>
+				<?php } ?>
 				<section class="wrapper">
 					<div id="page-wrapper">
+						<!-- Modal -->
 						<div class="row">
 							<div class="col-lg-12">
-								<!-- Modal -->
 								<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 									<div class="modal-dialog">
 										<div class="modal-content">
@@ -181,11 +201,8 @@
 												<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
 											</div>
 										</div>
-										<!-- /.modal-content -->
 									</div>
-									<!-- /.modal-dialog -->
 								</div>
-								<!-- /.modal -->
 							</div>
 						</div>
 						<?php if(isset($pagina)){
@@ -206,7 +223,7 @@
 			</footer>
 			<!--footer end-->
 		</section>
-		<script src="<?= base_url(); ?>sources/plugins/dashgumfree/js/dashgumfree.js"></script>
-	    <script src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script type="text/javascript" src="<?= base_url(); ?>sources/plugins/dashgumfree/js/dashgumfree.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>

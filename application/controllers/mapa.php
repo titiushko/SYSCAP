@@ -3,9 +3,8 @@
 class Mapa extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-
-		$this->load->helper(array('url', 'html', 'funciones_helper'));
 	}
+	
 	public function index(){
 		$data['pagina'] = 'mapa/consultar_mapa_view';
 		$data['usuario_actual'] = "&lt;nombre_usuario&gt;";

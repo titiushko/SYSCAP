@@ -18,14 +18,14 @@
 		<link href="../syscap/sources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+			<script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script src="../syscap/sources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script src="../syscap/sources/plugins/metis-menu/js/metis-menu.min.js"></script>
-		<script src="../syscap/sources/plugins/jquery/jquery.min.js"></script>
-		<script src="../syscap/sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
-		<script src="../syscap/sources/plugins/jquery/jquery.scrollTo.min.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/metis-menu/js/metis-menu.min.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
 	<body>
 		<section id="container" >
@@ -47,14 +47,14 @@
 							<i class="fa fa-user fa-fw"></i> &lt;nombre_usuario&gt; <i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user-name">
-							<li><a href="../syscap/"><i class="fa fa-sign-out fa-fw"></i> Salir</li>
+							<li><a href="../syscap/"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
 						</ul>
 					</div>
 				</div>
 			</header>
 			<aside>
 				<div id="sidebar"  class="nav-collapse">
-					<ul class="sidebar-menu" id="nav-accordion">
+					<ul class="error sidebar-menu" id="nav-accordion">
 						<li class="sub-menu">
 							<a class="" href="../syscap/inicio">
 								<i class="fa fa-home fa-fw"></i> Inicio
@@ -89,7 +89,7 @@
 							</ul>
 						</li>
 						<li class="sub-menu">
-							<a class="active" href="../syscap/mapa">
+							<a href="../syscap/mapa">
 								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
 							</a>
 						</li>
@@ -98,7 +98,7 @@
 				</div>
 			</aside>
 			<section id="main-content">
-				<section class="wrapper">
+				<section class="error wrapper">
 					<div id="page-wrapper">
 						<div class="row">
 							<div class="col-lg-12">
@@ -129,7 +129,7 @@
 				</div>
 			</footer>
 		</section>
-		<script src="../syscap/sources/plugins/dashgumfree/js/dashgumfree.js"></script>
-		<script src="../syscap/sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/dashgumfree/js/dashgumfree.js"></script>
+		<script type="text/javascript" src="../syscap/sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>

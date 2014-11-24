@@ -6,6 +6,7 @@ class Sesion extends CI_Controller{
 
 		$this->load->helper(array('url', 'html'));
 	}
+	
 	public function index(){
 		$this->load->view('sesion/sesion_view');
 	}

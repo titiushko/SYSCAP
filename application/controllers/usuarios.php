@@ -3,8 +3,6 @@
 class Usuarios extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->helper(array('form', 'url', 'html', 'funciones_helper', 'file'));
-		$this->load->library(array('form_validation', 'pdf'));
 		$this->load->model(array('usuarios_model', 'centros_educativos_model', 'profesiones_model', 'tipos_usuarios_model'));
 	}
 	

@@ -411,7 +411,6 @@ ul.sidebar-menu li a.active i {
 
 .wrapper {
 	display: inline-block;
-	/* margin-top: 60px; */
 	padding-left: 15px;
 	padding-right: 15px;
 	padding-bottom: 15px;
@@ -2364,4 +2363,12 @@ footer {
 
 #carousel-example-generic.carousel.slide {
 	margin-top: 60px;
+}
+
+.error.wrapper {
+	margin-top: 60px;
+}
+
+ul.error.sidebar-menu {
+	margin-top: 75px;
 }
