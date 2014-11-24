@@ -126,7 +126,7 @@ else{
 												?>
 												<tr>
 													<td><?= $docentes_capacitados; ?></td>
-													<td><?= $docente_capacitado->nombre_completo_usuario; ?></td>
+													<td><?= htmlentities($docente_capacitado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
 												</tr>
 												<?php
 													$docentes_capacitados++;
@@ -152,7 +152,7 @@ else{
 												?>
 												<tr>
 													<td><?= $docentes_certificados; ?></td>
-													<td><?= $docente_certificado->nombre_completo_usuario; ?></td>
+													<td><?= htmlentities($docente_certificado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
 												</tr>
 												<?php
 													$docentes_certificados++;

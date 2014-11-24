@@ -1,8 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Usuarios extends CI_Controller{
+	private $notificacion;
+	
 	function __construct(){
 		parent::__construct();
+		$this->notificacion = FALSE;
 		$this->load->model(array('usuarios_model', 'centros_educativos_model', 'profesiones_model', 'tipos_usuarios_model'));
 	}
 	
@@ -16,6 +19,13 @@ class Usuarios extends CI_Controller{
 	
 	public function mostrar($codigo_usuario = NULL){
 		$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
+		
+		if($this->notificacion){
+			$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
+			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Usuario';
+			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->usuarios_model->nombre_completo_usuario($codigo_usuario), ENT_COMPAT, 'UTF-8').'.';
+			$this->notificacion = FALSE;
+		}
 		
 		if(empty($datos['usuario'])){
 			echo 'mostrar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
@@ -32,8 +42,8 @@ class Usuarios extends CI_Controller{
 			$update_usuario = $this->input->post();
 			unset($update_usuario['estado'], $update_usuario['boton_primario']);
 			$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
-			//redirect('usuarios/mostrar/'.$codigo_usuario);
-			redirect('usuarios/resultado/'.$codigo_usuario);
+			$this->notificacion = TRUE;
+			$this->mostrar($codigo_usuario);
 		}
 		else{
 			if(empty($datos['usuario'])){
@@ -50,19 +60,6 @@ class Usuarios extends CI_Controller{
 		
 		if(empty($datos['usuario'])){
 			echo 'recuperar_contrasena(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
-		}
-		else{
-			$this->load->view('plantilla_pagina_view', $datos);
-		}
-	}
-	
-	public function resultado($codigo_usuario = NULL){
-		$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
-		$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
-		$datos['mensaje_notificacion'] = 'Se guardaron los cambios del usuario.';
-		
-		if(empty($datos['usuario'])){
-			echo 'resultado(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $datos);

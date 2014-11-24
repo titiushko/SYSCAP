@@ -27,9 +27,18 @@ class Centros_educativos_model extends CI_Model{
 		return $query->result();
 	}
 	
-	function modificar($data, $codigo_centro_educativo){
+	function nombre_centro_educativo($codigo_centro_educativo){
+		$nombre_centro_educativo = '';
+		$query = $this->db->query('SELECT F_NombreCentroEducativo(?) AS nombre_centro_educativo', array($codigo_centro_educativo));
+		foreach($query->result() as $centro_educativo){
+			$nombre_centro_educativo = $centro_educativo->nombre_centro_educativo;
+		}
+		return $nombre_centro_educativo;
+	}
+	
+	function modificar($datos, $codigo_centro_educativo){
 		$this->db->where('id_centro_educativo', $codigo_centro_educativo);
-		$this->db->update('centros_educativos', $data);
+		$this->db->update('centros_educativos', $datos);
 	}
 }
 

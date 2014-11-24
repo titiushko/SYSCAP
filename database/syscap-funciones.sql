@@ -89,7 +89,7 @@ BEGIN
 	DECLARE v_termina INT DEFAULT FALSE;
 	
 	DECLARE c_nombre_completo_usuario CURSOR FOR
-		SELECT CONCAT(nombres_usuario, ' ', apellido1_usuario, ' ', apellido2_usuario) nombre_completo_usuario
+		SELECT CONCAT(IF(nombres_usuario IS NOT NULL, nombres_usuario, ''), ' ', IF(apellido1_usuario IS NOT NULL, apellido1_usuario, ''), ' ', IF(apellido2_usuario IS NOT NULL, apellido2_usuario, '')) nombre_completo_usuario
 		FROM usuarios
 		WHERE id_usuario = p_codigo_usuario;
 	
@@ -107,6 +107,41 @@ BEGIN
 	CLOSE c_nombre_completo_usuario;
 	
 	RETURN v_nombre_completo_usuario;
+END;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
+CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(300)
+NOT DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'Función que devuelve el nombre de un centro educativo.'
+BEGIN
+	DECLARE v_nombre_centro_educativo VARCHAR(300);
+	DECLARE v_termina INT DEFAULT FALSE;
+	
+	DECLARE c_nombre_centro_educativo CURSOR FOR
+		SELECT nombre_centro_educativo
+		FROM centros_educativos
+		WHERE id_centro_educativo = p_codigo_centro_educativo;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_centro_educativo;
+	recorre_cursor: LOOP
+		FETCH c_nombre_centro_educativo INTO v_nombre_centro_educativo;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_centro_educativo;
+	
+	RETURN v_nombre_centro_educativo;
 END;
 $$
 DELIMITER ;

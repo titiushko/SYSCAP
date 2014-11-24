@@ -1,8 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Centros_educativos extends CI_Controller{
+	private $notificacion;
+	
 	function __construct(){
 		parent::__construct();
+		$this->notificacion = FALSE;
 		$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model', 'usuarios_model'));
 	}
 	
@@ -16,6 +19,13 @@ class Centros_educativos extends CI_Controller{
 	
 	public function mostrar($codigo_centro_educativo = NULL){
 		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
+		
+		if($this->notificacion){
+			$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
+			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Centro Educativo';
+			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo), ENT_COMPAT, 'UTF-8').'.';
+			$this->notificacion = FALSE;
+		}
 		
 		if(empty($datos['centro_educativo'])){
 			echo 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
@@ -32,7 +42,8 @@ class Centros_educativos extends CI_Controller{
 			$update_centro_educativo = $this->input->post();
 			unset($update_centro_educativo['estado'], $update_centro_educativo['boton_primario']);
 			$this->centros_educativos_model->modificar($update_centro_educativo, $codigo_centro_educativo);
-			redirect('centros_educativos/resultado/'.$codigo_centro_educativo);
+			$this->notificacion = TRUE;
+			$this->mostrar($codigo_centro_educativo);
 		}
 		else{
 			if(empty($datos['centro_educativo'])){
@@ -41,19 +52,6 @@ class Centros_educativos extends CI_Controller{
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
 			}
-		}
-	}
-	
-	public function resultado($codigo_centro_educativo = NULL){
-		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
-		$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
-		$datos['mensaje_notificacion'] = 'Se guardaron los cambios del centro educativo.';
-	
-		if(empty($datos['centro_educativo'])){
-				echo 'resultado(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido. 
-		}
-		else{
-			$this->load->view('plantilla_pagina_view', $datos);
 		}
 	}
 	
