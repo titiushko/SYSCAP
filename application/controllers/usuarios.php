@@ -171,9 +171,14 @@ class Usuarios extends CI_Controller{
 		// establecer el contenido para generar el pdf
 		$plantilla_pdf = read_file('sources/templates/pdf/usuarios.php');
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
-		$nombre_archivo = utf8_decode("Reporte de Usuarios.pdf");
+		$nombre_archivo = utf8_decode("Reporte%20de%20Usuarios.pdf");
 		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
 		$pdf->Output($nombre_archivo, 'I');
+	}
+	
+	public function imprimir(){
+		$plantilla_pdf = read_file('sources/templates/print/usuarios.php');
+		echo $plantilla_pdf;
 	}
 }
 

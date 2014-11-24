@@ -103,7 +103,7 @@ class Usuarios_model extends CI_Model{
 	 * @return array de objetos con el listado de certificaciones obtenidas un usuario.
 	 */
 	function certificaciones_usuario($codigo_usuario){
-		$sql = 'SELECT SUBSTRING(c.nombre_completo_curso, LENGTH(\'Examen de Certificación\')+1) nombre
+		$sql = 'SELECT SUBSTRING(c.nombre_completo_curso, LENGTH(\'Examen de Certificación\')+2) nombre
 				FROM matriculas m LEFT JOIN roles_asignados ra ON(m.id_matricula = ra.id_matricula)
 				LEFT JOIN cursos c ON(m.id_curso = c.id_curso)
 				WHERE ra.id_usuario = ?

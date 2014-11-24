@@ -351,7 +351,7 @@ $modalidad_usuario = array(
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url(); ?>usuarios/imprimir" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<a href="<?= base_url(); ?>usuarios/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
