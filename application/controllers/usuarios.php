@@ -169,7 +169,7 @@ class Usuarios extends CI_Controller{
 		// fijar efecto de sombra en el texto
 		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
 		// establecer el contenido para generar el pdf
-		$plantilla_pdf = read_file('sources/templates/pdf/usuarios.php');
+		$plantilla_pdf = read_file('resources/templates/pdf/usuarios.php');
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
 		$nombre_archivo = utf8_decode("Reporte%20de%20Usuarios.pdf");
 		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
@@ -177,7 +177,7 @@ class Usuarios extends CI_Controller{
 	}
 	
 	public function imprimir(){
-		$plantilla_pdf = read_file('sources/templates/print/usuarios.php');
+		$plantilla_pdf = read_file('resources/templates/print/usuarios.php');
 		echo $plantilla_pdf;
 	}
 }

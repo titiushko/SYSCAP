@@ -14,27 +14,27 @@
 		echo meta($metainformaciones);
 		?>
 	    <title>SYSCAP</title>
-	    <?= link_tag('sources/plugins/bootstrap/css/bootstrap.min.css'); ?>
-	    <!-- <?= link_tag('sources/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
-	    <?= link_tag('sources/plugins/metis-menu/css/metis-menu.min.css'); ?>
-	    <!-- <?= link_tag('sources/plugins/sb-admin/css/sb-admin.css'); ?> -->
-	    <!-- <?= link_tag('sources/plugins/bootstrap/modern-business.css'); ?> -->
-	    <?= link_tag('sources/plugins/font-awesome/css/font-awesome.min.css'); ?>
-	    <?= link_tag('sources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
-	    <?= link_tag('sources/plugins/dashgumfree/css/dashgumfree.css'); ?>
-	    <?= link_tag('sources/plugins/dashgumfree/css/dashgumfree-responsive.css'); ?>
-	    <?= link_tag('sources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
+	    <?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
+	    <!-- <?= link_tag('resources/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
+	    <?= link_tag('resources/plugins/metis-menu/css/metis-menu.min.css'); ?>
+	    <!-- <?= link_tag('resources/plugins/sb-admin/css/sb-admin.css'); ?> -->
+	    <!-- <?= link_tag('resources/plugins/bootstrap/modern-business.css'); ?> -->
+	    <?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
+	    <?= link_tag('resources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
+	    <?= link_tag('resources/plugins/dashgumfree/css/dashgumfree.css'); ?>
+	    <?= link_tag('resources/plugins/dashgumfree/css/dashgumfree-responsive.css'); ?>
+	    <?= link_tag('resources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
 	        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/jquery/jquery.min.js"></script>
-	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap.min.js"></script>
-	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/metis-menu/js/metis-menu.min.js"></script>
-	    <!-- <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/sb-admin/js/sb-admin.js"></script> -->
-	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
-	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/jquery/jquery.scrollTo.min.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/metis-menu/js/metis-menu.min.js"></script>
+	    <!-- <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/sb-admin/js/sb-admin.js"></script> -->
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	    <script type="text/javascript">
 		    $(function(){
 			    var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
@@ -158,17 +158,17 @@
 					<!-- Wrapper for Slides -->
 					<div class="carousel-inner">
 						<div class="item active" align="center">
-							<img src="<?= base_url(); ?>sources/img/slide01.png">
+							<img src="<?= base_url(); ?>resources/img/slide01.png">
 							<div class="carousel-caption">
 							</div>
 						</div>
 						<div class="item" align="center">
-							<img src="<?= base_url(); ?>sources/img/slide02.png">
+							<img src="<?= base_url(); ?>resources/img/slide02.png">
 							<div class="carousel-caption">
 							</div>
 						</div>
 						<div class="item" align="center">
-							<img src="<?= base_url(); ?>sources/img/slide03.png">
+							<img src="<?= base_url(); ?>resources/img/slide03.png">
 							<div class="carousel-caption">
 							</div>
 						</div>
@@ -223,7 +223,7 @@
 			</footer>
 			<!--footer end-->
 		</section>
-		<script type="text/javascript" src="<?= base_url(); ?>sources/plugins/dashgumfree/js/dashgumfree.js"></script>
-	    <script type="text/javascript" src="<?= base_url(); ?>sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/dashgumfree/js/dashgumfree.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>

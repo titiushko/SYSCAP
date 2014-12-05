@@ -1,0 +1,23 @@
+html, body {
+	height: 100%;
+}
+
+.login-panel.panel.panel-primary, h3 /*, .checkbox label*/ {
+	color: #ffffff;
+	font-weight: bold;
+}
+
+input[type="email"], input[type="password"] {
+	font-weight: normal;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										esconde o muestra un elemento										*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.oculto {
+    display: none;
+}
+
+.visto {
+    display: inline;
+}
