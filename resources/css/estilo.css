@@ -2,12 +2,16 @@ html, body {
 	height: 100%;
 }
 
-.login-panel.panel.panel-primary, h3 /*, .checkbox label*/ {
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo de inicio de sesion											*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.login-panel.panel.panel-primary, .login-panel.panel.panel-primary .panel-heading .panel-title /*, .checkbox label*/ {
 	color: #ffffff;
 	font-weight: bold;
 }
 
-input[type="email"], input[type="password"] {
+/*input[type="email"], input[type="password"] {*/
+#login .form-group .form-control {
 	font-weight: normal;
 }
 

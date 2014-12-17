@@ -65,16 +65,16 @@
 									<div class="form-group">
 										<?= form_input($correo_electronico_usuario); ?>
 										<div id="wrong_email" class="oculto" title="¡Error!">
-											<span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> Correo electr&oacute;nico incorrecto.
+											<?= icono_notificacion('error'); ?>Correo electr&oacute;nico incorrecto.
 										</div>
 									</div>
 									<div class="form-group">
 										<?= form_input($contrasena_usuario); ?>
 										<div id="wrong_password" class="oculto" title="¡Error!">
-											<span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> Contrase&ntilde;a incorrecta.
+											<?= icono_notificacion('error'); ?>Contrase&ntilde;a incorrecta.
 										</div>
 										<div id="caplock" class="oculto" title="¡Advertencia!">
-											<span style="color: #f0ad4e;"><i class="fa fa-exclamation-triangle"></i></span> BLOQ MAY&Uacute;S est&aacute; activado.
+											<?= icono_notificacion('alerta'); ?>BLOQ MAY&Uacute;S est&aacute; activado.
 										</div>
 									</div>
 									<div class="checkbox">

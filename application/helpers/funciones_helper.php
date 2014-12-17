@@ -1,5 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-if(!function_exists('invierte_date_time')){	
+
+if(!function_exists('acentos')){
 	function acentos($cadena){
 		$cadena = trim($cadena);
 		$cadena = str_replace(
@@ -41,7 +42,9 @@ if(!function_exists('invierte_date_time')){
 		);
 		return $cadena;
 	}
-	
+}
+
+if(!function_exists('modulo_actual')){
 	function modulo_actual($modulo){
 		$listado_modulos = array('inicio'							=>	'',
 					 			 'modulo_usuarios'					=>	'',
@@ -51,8 +54,10 @@ if(!function_exists('invierte_date_time')){
 		$listado_modulos[$modulo] = 'active';
 		return $listado_modulos;
 	}
+}
 	
-	function listado_estadisticas($opcion){
+if(!function_exists('listado_estadisticas')){
+	function listado_estadisticas($estadistica){
 		$nombres_estadisticas = array(1 => 'Usuarios por Modalidad de Capacitaci&oacute;n',
 									  2 => 'Usuarios por Departamento y Rango de Fechas',
 									  3 => 'Total de Usuarios por Departamento y Rango de Fechas',
@@ -64,7 +69,16 @@ if(!function_exists('invierte_date_time')){
 									  9 => 'Usuarios por Tipo de Capacitados y Centro Educativo',
 									  10 => 'Usuarios a Nivel Nacional',
 									  11 => 'Usuarios por Grado Digital');
-		return $nombres_estadisticas[$opcion];
+		return $nombres_estadisticas[$estadistica];
+	}
+}
+
+if(!function_exists('icono_notificacion')){
+	function icono_notificacion($notificacion){
+		$iconos = array('informacion' => '<span style="color: #428bca;"><i class="fa fa-info-circle"></i></span> ',
+						'alerta' => '<span style="color: #f0ad4e;"><i class="fa fa-exclamation-triangle"></i></span> ',
+						'error' => '<span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> ');
+		return $iconos[$notificacion];
 	}
 }
 
