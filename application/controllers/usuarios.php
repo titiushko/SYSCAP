@@ -37,13 +37,27 @@ class Usuarios extends CI_Controller{
 	
 	public function modificar($codigo_usuario = NULL){
 		$datos = $this->datos_formulario_usuarios_view("Editar", $codigo_usuario);
-	
+		
 		if($this->input->post('estado') == '1'){
-			$update_usuario = $this->input->post();
-			unset($update_usuario['estado'], $update_usuario['boton_primario']);
-			$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
-			$this->notificacion = TRUE;
-			$this->mostrar($codigo_usuario);
+			if($this->input->post('grupo_campos') == 'datos_personales'){
+				$this->validaciones('datos_personales');
+				$datos = $this->datos_formulario_usuarios_view("Editar", $codigo_usuario);
+			}
+			if($this->input->post('grupo_campos') == 'informacion_usuario'){
+				$this->validaciones('informacion_usuario');
+				$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
+			}
+			
+			if($this->form_validation->run() == TRUE){
+				$update_usuario = $this->input->post();
+				unset($update_usuario['estado'], $update_usuario['boton_primario']);
+				$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
+				$this->notificacion = TRUE;
+				$this->mostrar($codigo_usuario);
+			}
+			else{
+				$this->load->view('plantilla_pagina_view', $datos);
+			}
 		}
 		else{
 			if(empty($datos['usuario'])){
@@ -80,64 +94,67 @@ class Usuarios extends CI_Controller{
 		return $datos;
 	}
 	
-	private function validaciones(){
+	private function validaciones($grupo_campos){
 		$reglas = array(
-			array(
-				'field' => 'nombres_usuario',
-				'label' => 'Nombres',
-				'rules' => 'trim|required' 
+			'datos_personales' => array(
+				array(
+					'field' => 'nombres_usuario',
+					'label' => 'Nombres del Usuario',
+					'rules' => 'trim|required' 
+				),
+				array(
+					'field' => 'apellido1_usuario',
+					'label' => 'Apellidos del Usuario',
+					'rules' => 'trim|required' 
+				),
+				array(
+					'field' => 'dui_usuario',
+					'label' => 'DUI del Usuario',
+					'rules' => 'trim|required' 
+				),
+				array(
+					'field' => 'correo_electronico_usuario',
+					'label' => 'Correo Electrónico del Usuario',
+					'rules' => 'trim|required|valid_email' 
+				),
+				array(
+					'field' => 'id_profesion',
+					'label' => 'Profesión del Usuario',
+					'rules' => 'trim|required' 
+				),
+				array(
+					'field' => 'id_centro_educativo',
+					'label' => 'Centro Educativo del Usuario',
+					'rules' => 'trim|required' 
+				),
+				array(
+					'field' => 'direccion_usuario',
+					'label' => 'Dirección del Usuario',
+					'rules' => 'trim|required' 
+				)
 			),
-			array(
-				'field' => 'apellido1_usuario',
-				'label' => 'Apellidos',
-				'rules' => 'trim|required' 
-			),
-			array(
-				'field' => 'dui_usuario',
-				'label' => 'DUI',
-				'rules' => 'trim|required' 
-			),
-			array(
-				'field' => 'correo_electronico_usuario',
-				'label' => 'Correo Electrónico',
-				'rules' => 'trim|required|correo_electronico_usuario' 
-			),
-			array(
-				'field' => 'id_profesion',
-				'label' => 'Profesión',
-				'rules' => 'trim|required' 
-			),
-			array(
-				'field' => 'id_centro_educativo',
-				'label' => 'Centro Educativo',
-				'rules' => 'trim|required' 
-			),
-			array(
-				'field' => 'direccion_usuario',
-				'label' => 'Dirección',
-				'rules' => 'trim|required' 
-			),
-			array(
-				'field' => 'nombre_usuario',
-				'label' => 'Nombre de Usuario',
-				'rules' => 'trim|required|min_length[6]' 
-			),
-			array(
-				'field' => 'contrasena_usuario',
-				'label' => 'Contraseña',
-				'rules' => 'trim|required|min_length[6]' 
-			),
-			array(
-				'field' => 'id_tipo_usuario',
-				'label' => 'Tipo Usuario',
-				'rules' => 'trim|required' 
+			'informacion_usuario' => array(
+				array(
+					'field' => 'nombre_usuario',
+					'label' => 'Nombre de Usuario',
+					'rules' => 'trim|required|min_length[6]' 
+				),
+				array(
+					'field' => 'contrasena_usuario',
+					'label' => 'Contraseña',
+					'rules' => 'trim|required|min_length[6]' 
+				),
+				array(
+					'field' => 'id_tipo_usuario',
+					'label' => 'Tipo Usuario',
+					'rules' => 'trim|required' 
+				)
 			)
 		);
 		
-		$this->form_validation->set_rules($reglas);
-		
-		/*$this->form_validation->set_message('required','El Campo: %s, Es Obligatorio');
-		$this->form_validation->set_message('min_length','El Campo: %s, Debe tener al Menos %s Caracteres');*/
+		$this->form_validation->set_rules($reglas[$grupo_campos]);
+		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
+		$this->form_validation->set_message('min_length', icono_notificacion('error').'El campo: '.bold('%s').', debe tener al menos %s caracteres.');
 	}
 	
 	public function exportar(){

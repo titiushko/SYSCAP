@@ -23,6 +23,7 @@
 	    <?= link_tag('resources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
 	    <?= link_tag('resources/plugins/dashgumfree/css/dashgumfree.css'); ?>
 	    <?= link_tag('resources/plugins/dashgumfree/css/dashgumfree-responsive.css'); ?>
+	    <?= link_tag('resources/css/estilo.css'); ?>
 	    <?= link_tag('resources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>

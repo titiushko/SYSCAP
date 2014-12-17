@@ -19,7 +19,7 @@ $formulario = array(
 		)
 );
 
-$campos_ocultos = array('estado' => '0');
+$campos_ocultos = array('estado' => '0', 'grupo_campos' => '');
 
 $bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = '';
 
@@ -36,13 +36,13 @@ if($operacion == "Editar"){
 	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
 	
-	$boton_primario = 'class="btn btn-primary" onclick="document.datos_personales.estado.value=\'1\';"';
+	$boton_primario = 'class="btn btn-primary" onclick="document.datos_personales.estado.value=\'1\'; document.datos_personales.grupo_campos.value=\'datos_personales\';"';
 }
 if($operacion == "Recuperar Contraseña"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	
-	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\';"';
+	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';"';
 }
 $boton_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id_usuario.'\';"';
 
@@ -131,6 +131,7 @@ $modalidad_usuario = array(
 	'disabled'	=>	'disabled'
 );
 ?>
+<script src="<?= base_url(); ?>resources/js/validaciones-usuarios.js"></script>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="well page-header">Modulo de Usuarios</h1>
@@ -213,7 +214,6 @@ $modalidad_usuario = array(
 										<?php } else if($operacion == "Editar"){ ?>
 										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
 										<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
-										<script>document.datos_personales.nombres_usuario.focus();</script>
 										<?php } ?>
 									</div>
 								</div>
@@ -259,7 +259,6 @@ $modalidad_usuario = array(
 										<?php } else if($operacion == "Recuperar Contraseña"){ ?>
 										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
 										<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
-										<script>document.informacion_usuario.nombre_usuario.focus();</script>
 										<?php } ?>
 									</div>
 								</div>
@@ -347,7 +346,7 @@ $modalidad_usuario = array(
 						if($operacion == "Mostrar"){
 						?>
 						<div class="row">
-							<div class="col-lg-12">&nbsp;</div>
+							<div class="col-lg-12"><?= nbsp(); ?></div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
