@@ -65,14 +65,14 @@ else{
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<?= form_label('Nombre'); ?>
+										<?= form_label('Nombre:'); ?>
 										<?= form_input($nombre_centro_educativo); ?>
 										<?= form_error('nombre_centro_educativo'); ?>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<?= form_label('Código'); ?>
+										<?= form_label('Código:'); ?>
 										<?= form_input($codigo_centro_educativo); ?>
 										<?= form_error('codigo_centro_educativo'); ?>
 									</div>
@@ -81,14 +81,14 @@ else{
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<?= form_label('Departamento'); ?>
+										<?= form_label('Departamento:'); ?>
 										<?= form_dropdown('id_departamento', $lista_departamentos, htmlentities(set_value('id_departamento', @$centro_educativo[0]->id_departamento), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
 										<?= form_error('id_departamento'); ?>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
-										<?= form_label('Municipio'); ?>
+										<?= form_label('Municipio:'); ?>
 										<?= form_dropdown('id_municipio', $lista_municipios, htmlentities(set_value('id_municipio', @$centro_educativo[0]->id_municipio), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
 										<?= form_error('id_municipio'); ?>
 									</div>

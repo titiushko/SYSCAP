@@ -3,7 +3,7 @@
 class Estadisticas extends CI_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->model('estadisticas_model');
+		$this->load->model(array('estadisticas_model', 'departamentos_model'));
 	}
 	
 	public function consulta($opcion = 1){
@@ -18,8 +18,14 @@ class Estadisticas extends CI_Controller{
 				$datos['modalidades_capacitados'] = $this->estadisticas_model->modalidades_capacitados('');
 				$datos['participantes_modalidades'] = $this->estadisticas_model->modalidades_capacitados('participantes');
 				break;
+			case 2:
+				$datos['cantidad_usuarios_municipio'] = $this->estadisticas_model->cantidad_usuarios_municipio('01');
+				$datos['usuarios_municipio'] = $this->estadisticas_model->usuarios_municipio('01');
+				$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
+				break;
 		}
 		
+		$datos['datos'] = $datos;
 		$this->load->view('plantilla_pagina_view', $datos);
 	}
 }
