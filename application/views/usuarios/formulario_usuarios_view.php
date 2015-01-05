@@ -83,6 +83,7 @@ $correo_electronico_usuario = array(
 	'id'		=>	'correo_electronico_usuario',
 	'maxlength'	=>	'40',
 	'size'		=>	'30',
+	'type'		=>	'email',
 	'value'		=>	htmlentities(set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario), ENT_COMPAT, 'UTF-8'),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales

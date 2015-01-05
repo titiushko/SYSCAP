@@ -39,11 +39,17 @@ class Centros_educativos extends CI_Controller{
 		$datos = $this->datos_formulario_centros_educativos_view("Editar", $codigo_centro_educativo);
 		
 		if($this->input->post('estado') == '1'){
-			$update_centro_educativo = $this->input->post();
-			unset($update_centro_educativo['estado'], $update_centro_educativo['boton_primario']);
-			$this->centros_educativos_model->modificar($update_centro_educativo, $codigo_centro_educativo);
-			$this->notificacion = TRUE;
-			$this->mostrar($codigo_centro_educativo);
+			$this->validaciones();
+			if($this->form_validation->run() == TRUE){
+				$update_centro_educativo = $this->input->post();
+				unset($update_centro_educativo['estado'], $update_centro_educativo['boton_primario']);
+				$this->centros_educativos_model->modificar($update_centro_educativo, $codigo_centro_educativo);
+				$this->notificacion = TRUE;
+				$this->mostrar($codigo_centro_educativo);
+			}
+			else{
+				$this->load->view('plantilla_pagina_view', $datos);
+			}
 		}
 		else{
 			if(empty($datos['centro_educativo'])){
@@ -66,6 +72,29 @@ class Centros_educativos extends CI_Controller{
 		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
 		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
 		return $datos;
+	}
+	
+	private function validaciones(){
+		$reglas = array(
+			array(
+				'field' => 'nombre_centro_educativo',
+				'label' => 'Nombre del Centro Educativo',
+				'rules' => 'trim|required'
+			),
+			array(
+				'field' => 'id_departamento',
+				'label' => 'Departamento del Centro Educativo',
+				'rules' => 'trim|required'
+			),
+			array(
+				'field' => 'id_municipio',
+				'label' => 'Municipio del Centro Educativo',
+				'rules' => 'trim|required'
+			)
+		);
+	
+		$this->form_validation->set_rules($reglas);
+		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
 	}
 	
 	function exportar(){

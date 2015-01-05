@@ -78,4 +78,34 @@ $(document).ready(function(){
 			}
 		}
 	});
+	
+	$('#nombre_usuario').blur(function(){
+		var nombre_usuario = $(this).val();
+		if(nombre_usuario == ''){
+			$('#nombre_usuario').addClass('error_validacion');
+		}
+		else{
+			$('#nombre_usuario').removeClass('error_validacion');
+		}
+	});
+	
+	$('#contrasena_usuario').blur(function(){
+		var contrasena_usuario = $(this).val();
+		if(contrasena_usuario == ''){
+			$('#contrasena_usuario').addClass('error_validacion');
+		}
+		else{
+			$('#contrasena_usuario').removeClass('error_validacion');
+		}
+	});
+	
+	$('#id_tipo_usuario').blur(function(){
+		var id_tipo_usuario = $(this).val();
+		if(id_tipo_usuario == ''){
+			$('#id_tipo_usuario').addClass('error_validacion');
+		}
+		else{
+			$('#id_tipo_usuario').removeClass('error_validacion');
+		}
+	});
 });

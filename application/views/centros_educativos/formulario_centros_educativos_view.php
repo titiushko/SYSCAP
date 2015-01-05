@@ -23,7 +23,7 @@ $codigo_centro_educativo = array(
 	'size'		=> '20',
 	'value'		=> htmlentities(set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo), ENT_COMPAT, 'UTF-8'),
 	'class'		=> 'form-control',
-	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
+	'disabled'	=> 'disabled'
 );
 
 // Atributos del Formulario
@@ -45,6 +45,7 @@ else{
 	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
 }
 ?>
+<script src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="well page-header">Modulo de Centros Educativos</h1>
@@ -102,7 +103,6 @@ else{
 										<?php } else{ ?>
 										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
 										<?= form_button('boton_secundario','Cancelar', $boton_secundario); ?>
-										<script>document.centros_educativos.nombre_centro_educativo.focus();</script>
 										<?php } ?>
 									</div>
 								</div>
@@ -169,7 +169,7 @@ else{
 						if($operacion == "Mostrar"){
 						?>
 						<div class="row">
-							<div class="col-lg-12"><?= nbsp(); ?></div>
+							<div class="col-lg-12"><?= nbs(); ?></div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
