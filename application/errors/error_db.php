@@ -2,30 +2,30 @@
 <html lang="en">
 	<head>
 		<meta name="robots" content="no-cache" />
-		<meta name="description" content="Sistema Informático para apoyar el Control y Administración de Capacitaciones - SYSCAP" />
+		<meta name="description" content="Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones - SYSCAP" />
 		<meta name="keywords" content="mined, grado digital, capacitaciones, syscap" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
 		<title>SYSCAP</title>
-		<link href="../syscap/sources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
-		<link href="../syscap/sources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
+		<link href="../../resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
+		<link href="../../resources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="../syscap/sources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../syscap/sources/plugins/metis-menu/js/metis-menu.min.js"></script>
-		<script type="text/javascript" src="../syscap/sources/plugins/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../syscap/sources/plugins/jquery/jquery.dcjqaccordion.js"></script>
-		<script type="text/javascript" src="../syscap/sources/plugins/jquery/jquery.scrollTo.min.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/metis-menu/js/metis-menu.min.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
 	<body>
 		<section id="container" >
@@ -37,8 +37,8 @@
 				</div>
 				<div>
 					<a class="logo" href="../syscap/inicio">
-						<b class="visible-desktop" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">Sistema Informático para apoyar el Control y Administración de Capacitaciones</b>
-						<b class="visible-phone visible-tablet" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">SYSCAP</b>
+						<b class="visible-desktop" title="Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones">Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones</b>
+						<b class="visible-phone visible-tablet" title="Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones">SYSCAP</b>
 					</a>
 				</div>
 				<div class="top-menu btn-toolbar dropdown-user">
@@ -72,10 +72,10 @@
 						</li>
 						<li class="sub-menu">
 							<a class="" href="javascript:;" >
-								<i class="fa fa-bar-chart-o fa-fw"></i> Modulo Estadísticas
+								<i class="fa fa-bar-chart-o fa-fw"></i> Modulo Estad&iacute;sticas
 							</a>
 							<ul class="sub">
-								<li class=""><a href="../syscap/estadisticas/consulta/1">Modalidad de Capacitación</a></li>
+								<li class=""><a href="../syscap/estadisticas/consulta/1">Modalidad de Capacitaci&oacute;n</a></li>
 								<li class=""><a href="../syscap/estadisticas/consulta/2">Departamento y Rango de Fechas</a></li>
 								<li class=""><a href="../syscap/estadisticas/consulta/3">Total por Departamento y Rango de Fechas</a></li>
 								<li class=""><a href="../syscap/estadisticas/consulta/4">Departamento, Municipio y Rango de Fechas</a></li>
@@ -129,7 +129,7 @@
 				</div>
 			</footer>
 		</section>
-		<script type="text/javascript" src="../syscap/sources/plugins/dashgumfree/js/dashgumfree.js"></script>
-		<script type="text/javascript" src="../syscap/sources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/dashgumfree/js/dashgumfree.js"></script>
+		<script type="text/javascript" src="../../resources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>
