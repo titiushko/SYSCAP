@@ -82,7 +82,7 @@ $boton_primario = 'class="btn btn-primary"';
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<div id="morris-bar-chart"></div>
+				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica2-1"></div></a>
 			</div>
 		</div>
 	</div>
@@ -107,7 +107,8 @@ $boton_primario = 'class="btn btn-primary"';
 						<tbody>
 							<?php
 							$municipios = 1;
-							foreach($usuarios_municipio as $cantidad_municipio){ ?>
+							foreach($usuarios_municipio as $cantidad_municipio){
+							?>
 							<tr>
 								<td><?= $municipios; ?></td>
 								<td><?= htmlentities($cantidad_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
@@ -125,28 +126,52 @@ $boton_primario = 'class="btn btn-primary"';
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript">
 	$(document).ready(function() {
 		$('#data-tables-estadistica2-1').dataTable({
-			"searching":		false,
-			"lengthChange":		false,
-	        "oLanguage": {
-	        	"oPaginate": {
-	        		"sFirst": "Primero",
-	        		"sLast": "Último",
-	        		"sNext": ">>",
-	        		"sPrevious": "<<"
-	        	},
-	        	"sInfo": "_START_/_END_ de _TOTAL_ registros",
-	            "sEmptyTable": "No hay Docentes Capacitados en éste Centro Educativo."
-	          }
+			"searching": false,
+			"lengthChange": false,
+			"oLanguage": {
+				"oPaginate": {
+					"sFirst": "Primero",
+					"sLast": "Último",
+					"sNext": ">>",
+					"sPrevious": "<<"
+				},
+				"sInfo": "_START_/_END_ de _TOTAL_ registros",
+				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
+			  }
 		});
 		$('#data-tables-estadistica2-2').dataTable({
 			language:{
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 			}
+		});
+	});
+</script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		Morris.Bar({
+			element: 'morris-bar-chart-estadistica2-1',
+			data: [<?= $cantidad_usuarios_municipio_json; ?>],
+			xkey: 'y',
+			ykeys: ['a', 'b'],
+			labels: ['Capacitados', 'Certificados'],
+			hideHover: 'auto',
+			resize: true
+		});
+		Morris.Bar({
+			element: 'morris-bar-chart-estadistica2-2',
+			data: [<?= $cantidad_usuarios_municipio_json; ?>],
+			xkey: 'y',
+			ykeys: ['a', 'b'],
+			labels: ['Capacitados', 'Certificados'],
+			hideHover: 'auto',
+			resize: true
 		});
 	});
 </script>
