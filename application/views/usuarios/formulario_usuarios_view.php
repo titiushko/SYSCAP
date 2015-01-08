@@ -2,21 +2,21 @@
 // Atributos del Formulario
 
 $formulario = array(
-		1	=>	array(
-				'name'		=>	'datos_personales',
-				'id'		=>	'datos_personales',
-				'role'		=>	'form'
-		),
-		2	=>	array(
-				'name'		=>	'informacion_usuario',
-				'id'		=>	'informacion_usuario',
-				'role'		=>	'form'
-		),
-		3	=>	array(
-				'name'		=>	'informacion_cursos',
-				'id'		=>	'informacion_cursos',
-				'role'		=>	'form'
-		)
+	1	=>	array(
+		'name'		=>	'datos_personales',
+		'id'		=>	'datos_personales',
+		'role'		=>	'form'
+	),
+	2	=>	array(
+		'name'		=>	'informacion_usuario',
+		'id'		=>	'informacion_usuario',
+		'role'		=>	'form'
+	),
+	3	=>	array(
+		'name'		=>	'informacion_cursos',
+		'id'		=>	'informacion_cursos',
+		'role'		=>	'form'
+	)
 );
 
 $campos_ocultos = array('estado' => '0', 'grupo_campos' => '');
@@ -368,25 +368,25 @@ $modalidad_usuario = array(
 $(document).ready(function() {
 	$('#data-tables-certificaciones_usuario').dataTable({
 		"searching":		false,
-        "scrollY":			"200px",
-        "scrollCollapse":	true,
-        "info":				false,
-        "ordering":			false,
-        "paging":			false,
-        "oLanguage": {
-            "sEmptyTable": "El usuario no tiene certificaciones."
-          }
+		"scrollY":			"200px",
+		"scrollCollapse":	true,
+		"info":				false,
+		"ordering":			false,
+		"paging":			false,
+		"oLanguage": {
+			"sEmptyTable": "El usuario no tiene certificaciones."
+		  }
 	});
 	$('#data-tables-calificaciones_usuario').dataTable({
 		"searching":		false,
-        "scrollY":			"200px",
-        "scrollCollapse":	true,
-        "info":				false,
-        "ordering":			false,
-        "paging":			false,
-        "oLanguage": {
-        	"sEmptyTable": "El usuario no a recibido cursos."
-          }
+		"scrollY":			"200px",
+		"scrollCollapse":	true,
+		"info":				false,
+		"ordering":			false,
+		"paging":			false,
+		"oLanguage": {
+			"sEmptyTable": "El usuario no a recibido cursos."
+		  }
 	});
 });
 </script>

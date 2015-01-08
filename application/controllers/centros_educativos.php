@@ -21,7 +21,8 @@ class Centros_educativos extends CI_Controller{
 		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
 		
 		if($this->notificacion){
-			$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
+			$datos['id_modal'] = 'myModal';
+			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.$codigo_centro_educativo.'\';"';
 			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Centro Educativo';
 			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo), ENT_COMPAT, 'UTF-8').'.';
 			$this->notificacion = FALSE;

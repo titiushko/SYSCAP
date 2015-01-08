@@ -21,7 +21,8 @@ class Usuarios extends CI_Controller{
 		$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
 		
 		if($this->notificacion){
-			$datos['notificacion'] = 'onload="$(\'#myModal\').modal(\'show\');"';
+			$datos['id_modal'] = 'myModal';
+			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="location.href=\''.base_url().'usuarios/mostrar/'.$codigo_usuario.'\';"';
 			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Usuario';
 			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->usuarios_model->nombre_completo_usuario($codigo_usuario), ENT_COMPAT, 'UTF-8').'.';
 			$this->notificacion = FALSE;
@@ -50,7 +51,7 @@ class Usuarios extends CI_Controller{
 			
 			if($this->form_validation->run() == TRUE){
 				$update_usuario = $this->input->post();
-				unset($update_usuario['estado'], $update_usuario['boton_primario']);
+				unset($update_usuario['estado'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 				$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
 				$this->notificacion = TRUE;
 				$this->mostrar($codigo_usuario);

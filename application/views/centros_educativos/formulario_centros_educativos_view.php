@@ -190,25 +190,25 @@ else{
 $(document).ready(function() {
 	$('#data-tables-docentes_capacitados').dataTable({
 		"searching":		false,
-        "scrollY":			"200px",
-        "scrollCollapse":	true,
-        "info":				false,
-        "ordering":			false,
-        "paging":			false,
-        "oLanguage": {
-            "sEmptyTable": "No hay Docentes Capacitados en éste Centro Educativo."
-          }
+		"scrollY":			"200px",
+		"scrollCollapse":	true,
+		"info":				false,
+		"ordering":			false,
+		"paging":			false,
+		"oLanguage": {
+			"sEmptyTable": "No hay Docentes Capacitados en éste Centro Educativo."
+		  }
 	});
 	$('#data-tables-docentes_certificados').dataTable({
 		"searching":		false,
-        "scrollY":			"200px",
-        "scrollCollapse":	true,
-        "info":				false,
-        "ordering":			false,
-        "paging":			false,
-        "oLanguage": {
-        	"sEmptyTable": "No hay Docentes Certificados en éste Centro Educativo."
-          }
+		"scrollY":			"200px",
+		"scrollCollapse":	true,
+		"info":				false,
+		"ordering":			false,
+		"paging":			false,
+		"oLanguage": {
+			"sEmptyTable": "No hay Docentes Certificados en éste Centro Educativo."
+		  }
 	});
 });
 </script>

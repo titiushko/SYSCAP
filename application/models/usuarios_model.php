@@ -39,21 +39,21 @@ class Usuarios_model extends CI_Model{
 	* @param nota_minima: para buscar usuarios certificados nota_minima debe ser 7, de lo contrario será 0.
 	* @param tipo_capacitado: para buscar usuarios certificados tipo_capacitado de ser '%certificacion%', de lo contrario será '%'.
 	* @param tipo_usuario: array con los tipos de usuarios a buscar.
-	* 				  valores:
-	* 						   'ciudadano',
-	* 						   'estudiantes',
-	* 						   'docentes'
-	* 				  ejemplos:
-	* 							array('ciudadano'),
-	* 							array('ciudadano', 'estudiantes'),
-	* 							array('ciudadano', 'estudiantes', 'docentes'),
-	* 							array('ciudadano', 'docentes'),
-	* 							array('estudiantes', 'docentes')
+	* valores:
+	* 		'ciudadano',
+	* 		'estudiantes',
+	* 		'docentes'
+	* ejemplos:
+	* 		array('ciudadano'),
+	* 		array('ciudadano', 'estudiantes'),
+	* 		array('ciudadano', 'estudiantes', 'docentes'),
+	* 		array('ciudadano', 'docentes'),
+	* 		array('estudiantes', 'docentes')
 	* @param tipo_modalidad: para buscar usuarios en la modalidad de tutorizado o autoformacion.
-	* 				  valores:
-	* 						   'tutorizado',
-	* 						   'autoformacion',
-	* 						   '%': busca por los dos tipos de modalidad.
+	* valores:
+	* 		'tutorizado',
+	* 		'autoformacion',
+	* 		'%': busca por los dos tipos de modalidad.
 	* @return array de objetos con el listado de usuarios capacitados o certificados.
 	*/
 	function tipos_capacitados_usuarios($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_usuario, $tipo_modalidad){
@@ -70,15 +70,14 @@ class Usuarios_model extends CI_Model{
 			}
 		}
 		$sql = 'SELECT CONCAT(IF(u_nombres_usuario IS NOT NULL, u_nombres_usuario, \'\'), \' \',
-				              IF(u_apellido1_usuario IS NOT NULL, u_apellido1_usuario, \'\'), \' \',
-				              IF(u_apellido2_usuario IS NOT NULL, u_apellido2_usuario, \'\')) nombre_completo_usuario
+				IF(u_apellido1_usuario IS NOT NULL, u_apellido1_usuario, \'\'), \' \',
+				IF(u_apellido2_usuario IS NOT NULL, u_apellido2_usuario, \'\')) nombre_completo_usuario
 				FROM V_UsuariosCursosExamenesCalificaciones
-				WHERE
-				    u_id_centro_educativo = ?
-				    AND ec_nota_examen_calificacion >= ?
-				    AND e_nombre_examen LIKE ?
-				    '.$tipos_usuarios.'
-				    AND u_modalidad_usuario LIKE ?
+				WHERE u_id_centro_educativo = ?
+				AND ec_nota_examen_calificacion >= ?
+				AND e_nombre_examen LIKE ?
+				'.$tipos_usuarios.'
+				AND u_modalidad_usuario LIKE ?
 				ORDER BY c_nombre_completo_curso';
 		$query = $this->db->query($sql, array($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_modalidad));
 		return $query->result();
