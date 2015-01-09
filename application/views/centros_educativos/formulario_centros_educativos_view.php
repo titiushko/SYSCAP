@@ -173,10 +173,11 @@ else{
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url(); ?>centros_educativos/imprimir" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
+						
 						<?php } ?>
 					</div>
 				</div>

@@ -98,7 +98,7 @@ class Centros_educativos extends CI_Controller{
 		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
 	}
 	
-	function exportar(){
+public function exportar(){
 		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
 		$pdf->SetTitle('Reporte de Centros Educativos');
@@ -126,12 +126,18 @@ class Centros_educativos extends CI_Controller{
 		$pdf->AddPage();
 		// fijar efecto de sombra en el texto
 		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
+
 		// establecer el contenido para generar el pdf
 		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
-		$nombre_archivo = utf8_decode("Reporte de Centros Educativos.pdf");
+		$nombre_archivo = utf8_decode("Reporte%20de%20Centros_educativos.pdf");
 		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
 		$pdf->Output($nombre_archivo, 'I');
+	}
+	
+	public function imprimir(){
+		$plantilla_pdf = read_file('resources/templates/print/centros_educativos.php');
+		echo $plantilla_pdf;
 	}
 }
 
