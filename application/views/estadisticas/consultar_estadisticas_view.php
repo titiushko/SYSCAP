@@ -17,7 +17,18 @@
 				if($this->uri->uri_string() == 'estadisticas/consulta/2'){
 					$this->load->view('estadisticas/estadistica_02_view', $datos);
 				}
-				
+				if($this->uri->uri_string() == 'estadisticas/consulta/3'){
+					$this->load->view('estadisticas/estadistica_03_view', $datos);
+				}
+				if($this->uri->uri_string() == 'estadisticas/consulta/4'){
+					$this->load->view('estadisticas/estadistica_04_view', $datos);
+				}
+                if($this->uri->uri_string() == 'estadisticas/consulta/6'){
+					$this->load->view('estadisticas/estadistica_06_view', $datos);
+				}
+                if($this->uri->uri_string() == 'estadisticas/consulta/7'){
+					$this->load->view('estadisticas/estadistica_07_view', $datos);
+				}
 				if($habilitar_generar_reporte){
 				?>
 				<div class="row">
