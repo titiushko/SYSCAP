@@ -116,6 +116,7 @@ class Estadisticas_model extends CI_Model{
 		$query = $this->db->query($sql);
 		return $query->result();
 	}
+    
 }
 
 /* End of file estadisticas_model.php */

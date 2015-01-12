@@ -15,7 +15,21 @@ $boton_primario = 'class="btn btn-primary"';
 ?>
 <?= form_open(); ?>
 	<div class="row">
-		<div class="col-lg-6">
+        <div class="col-lg-6">
+			<div class="form-group">
+				<?= form_label('Tipo de capasitados:'); ?>
+				<?= form_dropdown('id_tipo_capasitados', $lista_tipo_capasitados, 'Evaluacion', 'class="form-control" required'); ?>
+				<?= form_error('id_tipop_capasitado'); ?>
+			</div>
+		</div>
+        <div class="col-lg-6">
+			<div class="form-group">
+				<?= form_label('Departamento:'); ?>
+				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required'); ?>
+				<?= form_error('id_municipio'); ?>
+			</div>
+		</div>
+		<div class="col-lg-6">            
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
 				<div class="row">
@@ -63,9 +77,9 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $tbl->row_number; ?></td>
-								<td><?= htmlentities($tbl->nombre_departamento, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= $tbl->capacitados; ?></td>
-								<td><?= $tbl->certificados; ?></td>
+								<td><?= htmlentities($tbl->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= htmlentities($tbl->capacitados, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= htmlentities($tbl->certificados, ENT_COMPAT, 'UTF-8'); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>
