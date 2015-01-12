@@ -51,11 +51,11 @@ class Estadisticas extends CI_Controller{
 				$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
 			break;
 			case 3: // Total de Usuarios por Departamento y Rango de Fechas
-                $datos['tabla'] = $this->estadisticas_model->estaditicas_departamento_fechas('tabla');
-                $datos['grafica_estaditicas_departamento_json'] = '';
+                $datos['tabla'] = $this->estadisticas_model->estaditicas_depertamento_fechas('tabla');
+                $datos['grafica_estaditicas_depertamento_json'] = '';
                 $contador = 1;
 				foreach($datos['tabla'] as $data){
-					$datos['grafica_estaditicas_departamento_json'] = $datos['grafica_estaditicas_departamento_json'].'{y: \''.($contador++).'\', a: \''.$data->certificados.'\', b: \''.$data->capacitados.'\'},';
+					$datos['grafica_estaditicas_depertamento_json'] = $datos['grafica_estaditicas_depertamento_json'].'{y: \''.($contador++).'\', a: \''.$data->certificados.'\', b: \''.$data->capacitados.'\'},';
 				}
                             
                 $datos['id_modal'] = 'myModalChart';
@@ -81,6 +81,7 @@ class Estadisticas extends CI_Controller{
 			
 			break;
 			case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+            break;
 			case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
                 $datos['tabla'] = $this->estadisticas_model->estaditicas_depertamento_tipo_fechas('tabla');
                 $datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
@@ -96,7 +97,7 @@ class Estadisticas extends CI_Controller{
                 $datos['id_modal'] = 'myModalChart';
 		        $datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
 				$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
-
+            break;    
 			case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
                 $datos['tabla'] = $this->estadisticas_model->usuarios_departamento_municipio('tabla');
 				$datos['grafica'] = $this->estadisticas_model->usuarios_departamento_municipio('grafica');
@@ -117,13 +118,13 @@ class Estadisticas extends CI_Controller{
                 $datos['id_modal'] = 'myModalChart';
 		        $datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
 				$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
-						
+            break;    
 			case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
-			    $datos['tabla'] = $this->estadisticas_model->estaditicas_depertamento_fechas('tabla');
+                $datos['tabla'] = $this->estadisticas_model->estaditicas_depertamento_fechas('tabla');
                 $datos['grafica_estaditicas_depertamento_json'] = '';
-                $datos['lista_tipo_capasitados'] =  array(
+                $datos['lista_tipo_capacitados'] =  array(
                     'Evaluacion' => 'Certificados',
-                    'Examen' => 'Capasitados');
+                    'Examen' => 'Capacitados');
                 $contador = 1;
 				foreach($datos['tabla'] as $data){
 					$datos['grafica_estaditicas_depertamento_json'] = $datos['grafica_estaditicas_depertamento_json'].'{y: \''.($contador++).'\', a: \''.$data->certificados.'\', b: \''.$data->capacitados.'\'},';
@@ -132,7 +133,7 @@ class Estadisticas extends CI_Controller{
                 $datos['id_modal'] = 'myModalChart';
 		        $datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
 				$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
-            break;
+            break;    
 			case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
 			case 10: // Usuarios a Nivel Nacional
 			case 11: // Usuarios por Grado Digital

@@ -17,9 +17,9 @@ $boton_primario = 'class="btn btn-primary"';
 	<div class="row">
         <div class="col-lg-6">
 			<div class="form-group">
-				<?= form_label('Tipo de capasitados:'); ?>
-				<?= form_dropdown('id_tipo_capasitados', $lista_tipo_capasitados, 'Evaluacion', 'class="form-control" required'); ?>
-				<?= form_error('id_tipop_capasitado'); ?>
+				<?= form_label('Tipo de capacitados:'); ?>
+				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required'); ?>
+				<?= form_error('id_tipo_capacitado'); ?>
 			</div>
 		</div>
         <div class="col-lg-6">
@@ -69,7 +69,7 @@ $boton_primario = 'class="btn btn-primary"';
 								<th>#</th>
 								<th>Municipio</th>
 								<th>Autoformacion</th>
-								<th>Certidficados</th>
+								<th>Certificados</th>
 							</tr>
 						</thead>
 						<tbody>
