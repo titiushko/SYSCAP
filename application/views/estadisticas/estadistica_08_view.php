@@ -15,6 +15,13 @@ $boton_primario = 'class="btn btn-primary"';
 ?>
 <?= form_open(); ?>
 	<div class="row">
+        <div class="col-lg-6">
+			<div class="form-group">
+				<?= form_label('Tipo de capasitados:'); ?>
+				<?= form_dropdown('id_tipo_capasitados', $lista_tipo_capasitados, 'Evaluacion', 'class="form-control" required'); ?>
+				<?= form_error('id_tipop_capasitado'); ?>
+			</div>
+		</div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -109,7 +116,7 @@ $boton_primario = 'class="btn btn-primary"';
 	$(function() {
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica2-1',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $grafica_estaditicas_depertamento_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],
@@ -118,7 +125,7 @@ $boton_primario = 'class="btn btn-primary"';
 		});
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica2-2',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $grafica_estaditicas_depertamento_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],
