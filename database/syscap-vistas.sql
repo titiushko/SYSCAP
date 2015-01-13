@@ -39,3 +39,44 @@ FROM
     LEFT JOIN municipios m ON(u.id_municipio = m.id_municipio);
 $$
 DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_EstadisticaDepartamentoFecha $$
+CREATE VIEW V_EstadisticaDepartamentoFecha AS
+SELECT
+	u.nombres_usuario nombres_usuario,
+	u.apellido1_usuario apellido1_usuario,
+	u.apellido2_usuario apellido2_usuario,
+	ec.nota_examen_calificacion nota_examen_calificacion,
+	u.modalidad_usuario modalidad_usuario,
+	e.nombre_examen nombre_examen,
+	IF(e.nombre_examen LIKE 'Evaluaci%', 'Capacitado', 'Certificado') tipo_capacitado,
+	ec.fecha_examen_calificacion fecha_examen_calificacion,
+	d.id_departamento id_departamento,
+	d.nombre_departamento nombre_departamento,
+	m.nombre_municipio nombre_municipio,
+	ce.nombre_centro_educativo nombre_centro_educativo
+FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	JOIN examenes e ON(ec.id_examen = e.id_examen)
+	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
+	JOIN municipios m ON(u.id_municipio = m.id_municipio)
+	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo);
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_EstadisticaModalidad $$
+CREATE VIEW V_EstadisticaModalidad AS
+SELECT
+	ec.nota_examen_calificacion nota_examen_calificacion,
+	u.modalidad_usuario modalidad_usuario,
+	e.nombre_examen nombre_examen,
+	ec.fecha_examen_calificacion fecha_examen_calificacion
+FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	JOIN examenes e ON(ec.id_examen = e.id_examen);
+$$
+DELIMITER ;

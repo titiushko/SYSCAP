@@ -4,6 +4,8 @@ DELIMITER $$
 DROP FUNCTION IF EXISTS initcap $$
 CREATE FUNCTION initcap(p_cadena char(255)) RETURNS CHAR(255) CHARSET utf8
 COMMENT 'Función que devuelve la primera letra de cada palabra en mayúsculas.'
+DETERMINISTIC
+READS SQL DATA
 BEGIN
 	SET @v_string1 ='';
 	SET @v_string2 ='';
@@ -22,6 +24,8 @@ DELIMITER $$
 DROP FUNCTION IF EXISTS departamento $$
 CREATE FUNCTION departamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
 COMMENT 'Función que devuelve el identificador de un departamento a partir del nombre.'
+DETERMINISTIC
+READS SQL DATA
 BEGIN
 	DECLARE v_id_departamento CHAR(2);
 	DECLARE v_termina INT DEFAULT FALSE;
@@ -52,6 +56,8 @@ DELIMITER $$
 DROP FUNCTION IF EXISTS municipio $$
 CREATE FUNCTION municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
 COMMENT 'Función que devuelve el identificador de un municipio a partir del nombre.'
+DETERMINISTIC
+READS SQL DATA
 BEGIN
 	DECLARE v_id_municipio CHAR(3);
 	DECLARE v_termina INT DEFAULT FALSE;
@@ -84,6 +90,8 @@ CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VAR
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
 COMMENT 'Función que devuelve el nombre completo de un usuario.'
+DETERMINISTIC
+READS SQL DATA
 BEGIN
 	DECLARE v_nombre_completo_usuario VARCHAR(300);
 	DECLARE v_termina INT DEFAULT FALSE;
@@ -116,8 +124,8 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
 CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(300)
-NOT DETERMINISTIC
-SQL SECURITY DEFINER
+DETERMINISTIC
+READS SQL DATA
 COMMENT 'Función que devuelve el nombre de un centro educativo.'
 BEGIN
 	DECLARE v_nombre_centro_educativo VARCHAR(300);
