@@ -338,8 +338,6 @@ $modalidad_usuario = array(
 										</table>
 									</div>
 								</div>
-								<div class="col-lg-3">
-								</div>
 							</div>
 							<?= form_fieldset_close(); ?>
 						<?= form_close(); ?>
@@ -351,7 +349,7 @@ $modalidad_usuario = array(
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a href="<?= base_url(); ?>usuarios/imprimir" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<a href="<?= base_url(); ?>usuarios/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>

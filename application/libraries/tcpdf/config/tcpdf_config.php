@@ -64,7 +64,7 @@
  * By default it is automatically set but you can also set it as a fixed string to improve performances.
  */
 //define ('K_PATH_IMAGES', '');
-define ('K_PATH_IMAGES', base_url().'sources/img/');
+define ('K_PATH_IMAGES', base_url().'resources/img/');
 
 /**
  * Deafult image logo used be the default Header() method.

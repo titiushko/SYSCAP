@@ -38,6 +38,36 @@ html, body {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 @media screen and (min-width: 768px) {
 	#myModalChart .modal-dialog {
-		width:90%;
+		width: 90%;
 	}
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo para vista de impresion										*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.column-title {
+	width: 100px;
+	border-bottom
+}
+
+.column-value {
+	width: 250px;
+	border-bottom: 1px #000000 dotted;
+}
+
+.column-nbs {
+	width: 10px;
+}
+
+.column-modality {
+	width: 200px;
+}
+
+table.cursos tr th, table.cursos tr td {
+	padding: 5px;
+}
+
+.container {
+	padding-top: 15px;
+	padding-bottom: 15px;
 }

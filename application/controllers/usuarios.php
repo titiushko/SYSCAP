@@ -82,14 +82,21 @@ class Usuarios extends CI_Controller{
 	}
 	
 	private function datos_formulario_usuarios_view($operacion = '', $codigo_usuario = NULL){
-		$datos['operacion'] = $operacion;
-		$datos['pagina'] = 'usuarios/formulario_usuarios_view';
-		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
 		$datos['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
-		$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
-		$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
-		$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
+		if($operacion != ''){
+			$datos['operacion'] = $operacion;
+			$datos['pagina'] = 'usuarios/formulario_usuarios_view';
+			$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
+			$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
+			$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
+			$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
+		}
+		else{
+			$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo);
+			$datos['nombre_profesion'] = $this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion);
+			$datos['nombre_tipo_usuario'] = $this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario);
+		}
 		$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
 		$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
 		return $datos;
@@ -194,9 +201,14 @@ class Usuarios extends CI_Controller{
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
-	public function imprimir(){
-		$plantilla_pdf = read_file('resources/templates/print/usuarios.php');
-		echo $plantilla_pdf;
+	public function imprimir($codigo_usuario = NULL){
+		$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
+		if(empty($datos['usuario'])){
+			echo 'mostrar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+		}
+		else{
+			$this->load->view('usuarios/imprimir_usuarios_view', $datos);
+		}
 	}
 }
 

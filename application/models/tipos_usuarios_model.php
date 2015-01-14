@@ -14,6 +14,13 @@ class Tipos_usuarios_model extends CI_Model{
 		}
 		return $lista_tipos_usuarios;
 	}
+	
+	function nombre_tipo_usuario($codigo_tipo_usuario){
+		$query = $this->db->select('nombre_tipo_usuario');
+		$query = $this->db->where('id_tipo_usuario', $codigo_tipo_usuario);
+		$query = $this->db->get('tipos_usuarios');
+		return $query->result()[0]->nombre_tipo_usuario;
+	}
 }
 
 /* End of file tipos_usuarios_model.php */

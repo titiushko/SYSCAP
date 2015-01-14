@@ -14,6 +14,13 @@ class Profesiones_model extends CI_Model{
 		}
 		return $lista_profesiones;
 	}
+	
+	function nombre_profesion($codigo_profesion){
+		$query = $this->db->select('nombre_profesion');
+		$query = $this->db->where('id_profesion', $codigo_profesion);
+		$query = $this->db->get('profesiones');
+		return $query->result()[0]->nombre_profesion;
+	}
 }
 
 /* End of file profesiones_model.php */

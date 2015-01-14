@@ -82,5 +82,26 @@ if(!function_exists('icono_notificacion')){
 	}
 }
 
+if(!function_exists('encabezado_reporte')){
+	function encabezado_reporte(){
+		$html = '<table align="center" border="0" width="100%">
+				<tr>
+					<td align="center"><img src="'.base_url().'/resources/img/escudo-nacional-de-el-salvador.jpg" height="100px"/></td>
+					<td align="center">
+						<b>
+						MINISTERIO DE EDUCACIÓN<br/>
+						VICEMINISTERIO DE CIENCIA Y TECNOLOGÍA<br/>
+						DIRECCIÓN NACIONAL DE EDUCACIÓN EN CIENCIA, TECNOLOGÍA E INNOVACIÓN<br/>
+						GERENCIA DE TECNOLOGÍAS EDUCATIVAS<br/>
+						ÁREA DE FORMACIÓN VIRTUAL
+						</b>
+					</td>
+					<td align="center"><img src="'.base_url().'/resources/img/logo-mined.jpg" height="100px"/></td>
+				</tr>
+			</table>';
+		return $html;
+	}
+}
+
 /* End of file funciones_helper.php */
 /* Location: ./application/helpers/funciones_helper.php */

@@ -16,14 +16,10 @@ class Municipios_model extends CI_Model{
 	}
 	
 	function nombre_municipio($codigo_municipio = NULL){
-		$nombre_municipio = '';
-		$this->db->select('nombre_municipio');
-		$this->db->where('id_municipio', $codigo_municipio);
+		$query = $this->db->select('nombre_municipio');
+		$query = $this->db->where('id_municipio', $codigo_municipio);
 		$query = $this->db->get('municipios');
-		foreach($query->result() as $municipio){
-			$nombre_municipio = $municipio->nombre_municipio;
-		}
-		return $nombre_municipio;
+		return $query->result()[0]->nombre_municipio;
 	}
 }
 

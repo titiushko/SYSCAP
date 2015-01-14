@@ -20,12 +20,8 @@ class Usuarios_model extends CI_Model{
 	}
 	
 	function nombre_completo_usuario($codigo_usuario){
-		$nombre_completo_usuario = '';
 		$query = $this->db->query('SELECT F_NombreCompletoUsuario(?) AS nombre_completo_usuario', array($codigo_usuario));
-		foreach($query->result() as $usuario){
-			$nombre_completo_usuario = $usuario->nombre_completo_usuario;
-		}
-		return $nombre_completo_usuario;
+		return $query->result()[0]->nombre_completo_usuario;
 	}
 	
 	function modificar($datos_usuario, $codigo_usuario){
