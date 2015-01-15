@@ -66,8 +66,6 @@
 //define ('K_PATH_IMAGES', '');
 define ('K_PATH_IMAGES', base_url().'resources/img/');
 
-//define ('K_PATH_IMAGES', base_url().'resources/img/');
-
 /**
  * Deafult image logo used be the default Header() method.
  * Please set here your own logo or an empty string to disable it.
