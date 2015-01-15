@@ -185,14 +185,14 @@ $modalidad_usuario = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Profesión:'); ?>
-										<?= form_dropdown('id_profesion', $lista_profesiones, htmlentities(set_value('id_profesion', @$usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_dropdown('id_profesion', $lista_profesiones, set_value('id_profesion', @$usuario[0]->id_profesion), 'class="form-control" '.@$listas_datos_personales); ?>
 										<?= form_error('id_profesion'); ?>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Centro Educativo:'); ?>
-										<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, htmlentities(set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), 'class="form-control" '.@$listas_datos_personales); ?>
 										<?= form_error('id_centro_educativo'); ?>
 									</div>
 								</div>
@@ -245,7 +245,7 @@ $modalidad_usuario = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Tipo de Usuario:'); ?>
-										<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, htmlentities(set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'), 'class="form-control" '.@$listas_informacion_usuario); ?>
+										<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), 'class="form-control" '.@$listas_informacion_usuario); ?>
 										<?= form_error('id_tipo_usuario'); ?>
 									</div>
 								</div>
