@@ -161,8 +161,8 @@ class Usuarios extends CI_Controller{
 		);
 		
 		$this->form_validation->set_rules($reglas[$grupo_campos]);
-		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
-		$this->form_validation->set_message('min_length', icono_notificacion('error').'El campo: '.bold('%s').', debe tener al menos %s caracteres.');
+		$this->form_validation->set_message('required', icono_notificacion('error').'El campo '.bold('%s').' es obligatorio.');
+		$this->form_validation->set_message('min_length', icono_notificacion('error').'El campo '.bold('%s').' debe tener al menos %s caracteres.');
 	}
 	
 	public function exportar(){
