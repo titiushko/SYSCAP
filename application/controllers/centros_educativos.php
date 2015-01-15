@@ -62,18 +62,52 @@ class Centros_educativos extends CI_Controller{
 		}
 	}
 	
+	
+	
+	//==========================Funcion Original =====================================//
+	
+//	private function datos_formulario_centros_educativos_view($operacion = '', $codigo_centro_educativo = NULL){
+//		$datos['operacion'] = $operacion;
+//		$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
+//		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+//		$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
+//		$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
+//		$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
+//		$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
+//		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
+//		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+//	return $datos;
+//	$pdf->Output($nombre_archivo, 'I');
+//	}
+	
+
+//=======================================================================================================================//
+	
 	private function datos_formulario_centros_educativos_view($operacion = '', $codigo_centro_educativo = NULL){
-		$datos['operacion'] = $operacion;
-		$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
-		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
-		$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
-		$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
-		$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-		$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
-		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
-		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		 if($operacion != ''){
+			$datos['operacion'] = $operacion;
+			$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
+			$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+			$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
+			$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
+			$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
+			$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
+			$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
+			$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		}
+		else{
+			$datos['departamentos'] = $this->departamentos_model->lista_departamentos();
+			$datos['municipios'] = $this->municipios_model->lista_municipios();
+			$datos['docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
+			$datos['docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		}
+		
 		return $datos;
+		$pdf->Output($nombre_archivo, 'I');
 	}
+	
+	
+//========================================================================================================================//
 	
 	private function validaciones(){
 		$reglas = array(
@@ -97,6 +131,8 @@ class Centros_educativos extends CI_Controller{
 		$this->form_validation->set_rules($reglas);
 		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
 	}
+	
+//===================================================================================================================//
 	
 public function exportar(){
 		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -135,11 +171,27 @@ public function exportar(){
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
-	public function imprimir(){
-		$plantilla_pdf = read_file('resources/templates/print/centros_educativos.php');
-		echo $plantilla_pdf;
+	//================================================================================================================//
+	
+			public function imprimir($codigo_usuario = NULL){
+					$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
+					if(empty($datos['centro_educativo'])){
+							echo 'mostrar(): id_centro_educativo = '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+						}
+						else{
+								$this->load->view('centro_educativo/imprimir_centro_educativo_view', $datos);
+						}
+		}
 	}
-}
+	
+//=============================================================================================================//	
+//     public function imprimir(){
+//	            $plantilla_pdf = read_file('resources/templates/print/centros_educativos.php');
+//		        echo $plantilla_pdf;
+//      }
+
+	
+
 
 /* End of file centros_educativos.php */
 /* Location: ./application/controllers/centros_educativos.php */

@@ -4,39 +4,39 @@ if(!function_exists('acentos')){
 	function acentos($cadena){
 		$cadena = trim($cadena);
 		$cadena = str_replace(
-				array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
+				array('Ã¡', 'Ã ', 'Ã¤', 'Ã¢', 'Âª', 'Ã�', 'Ã€', 'Ã‚', 'Ã„'),
 				array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
 				$cadena
 		);
 		$cadena = str_replace(
-				array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
+				array('Ã©', 'Ã¨', 'Ã«', 'Ãª', 'Ã‰', 'Ãˆ', 'ÃŠ', 'Ã‹'),
 				array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
 				$cadena
 		);
 		$cadena = str_replace(
-				array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
+				array('Ã­', 'Ã¬', 'Ã¯', 'Ã®', 'Ã�', 'ÃŒ', 'Ã�', 'ÃŽ'),
 				array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
 				$cadena
 		);
 		$cadena = str_replace(
-				array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
+				array('Ã³', 'Ã²', 'Ã¶', 'Ã´', 'Ã“', 'Ã’', 'Ã–', 'Ã”'),
 				array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
 				$cadena
 		);
 		$cadena = str_replace(
-				array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
+				array('Ãº', 'Ã¹', 'Ã¼', 'Ã»', 'Ãš', 'Ã™', 'Ã›', 'Ãœ'),
 				array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
 				$cadena
 		);
 		$cadena = str_replace(
-				array('ñ', 'Ñ', 'ç', 'Ç'),
+				array('Ã±', 'Ã‘', 'Ã§', 'Ã‡'),
 				array('n', 'N', 'c', 'C'),
 				$cadena
 		);
 		// $cadena = str_replace(' ', '_', $cadena);
 		$cadena = str_replace('&', 'y', $cadena);
 		$cadena = str_replace(
-				array("\\", "¨", "º", "~", "#", "@", "|", "!", "\"", "·", "$", "%", "/", "(", ")", "?", "'", "¡", "¿", "[", "^", "`", "]", "+", "}", "{", "¨", "´", ">", "< ", ";", ":"),
+				array("\\", "Â¨", "Âº", "~", "#", "@", "|", "!", "\"", "Â·", "$", "%", "/", "(", ")", "?", "'", "Â¡", "Â¿", "[", "^", "`", "]", "+", "}", "{", "Â¨", "Â´", ">", "< ", ";", ":"),
 				'',
 				$cadena
 		);
@@ -89,6 +89,28 @@ if(!function_exists('encabezado_reporte')){
 					<td align="center"><img src="'.base_url().'/resources/img/escudo-nacional-de-el-salvador.jpg" height="100px"/></td>
 					<td align="center">
 						<b>
+						MINISTERIO DE EDUCACIÃ“N<br/>
+						VICEMINISTERIO DE CIENCIA Y TECNOLOGÃ�A<br/>
+						DIRECCIÃ“N NACIONAL DE EDUCACIÃ“N EN CIENCIA, TECNOLOGÃ�A E INNOVACIÃ“N<br/>
+						GERENCIA DE TECNOLOGÃ�AS EDUCATIVAS<br/>
+						Ã�REA DE FORMACIÃ“N VIRTUAL
+						</b>
+					</td>
+					<td align="center"><img src="'.base_url().'/resources/img/logo-mined.jpg" height="100px"/></td>
+				</tr>
+			</table>';
+		return $html;
+	}
+}
+
+if(!function_exists('encabezado_reporte')){
+
+function encabezado_reporte(){
+			$html = '<table align="center" border="0" width="100%">
+				<tr>
+					<td align="center"><img src="'.base_url().'/resources/img/escudo-nacional-de-el-salvador.jpg" height="100px"/></td>
+					<td align="center">
+						<b>
 						MINISTERIO DE EDUCACIÓN<br/>
 						VICEMINISTERIO DE CIENCIA Y TECNOLOGÍA<br/>
 						DIRECCIÓN NACIONAL DE EDUCACIÓN EN CIENCIA, TECNOLOGÍA E INNOVACIÓN<br/>
@@ -99,9 +121,11 @@ if(!function_exists('encabezado_reporte')){
 					<td align="center"><img src="'.base_url().'/resources/img/logo-mined.jpg" height="100px"/></td>
 				</tr>
 			</table>';
-		return $html;
-	}
-}
-
+			return $html;
+		}
+ 
+}	
+	/* End of file funciones_helper.php */
+	/* Location: ./application/helpers/funciones_helper.php */
 /* End of file funciones_helper.php */
 /* Location: ./application/helpers/funciones_helper.php */
