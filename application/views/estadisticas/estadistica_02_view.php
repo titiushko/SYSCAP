@@ -11,12 +11,12 @@ $fecha = array(
 
 $boton_primario = 'class="btn btn-primary"';
 ?>
-<?= form_open(); ?>
+<?= form_open('index.php/estadisticas/consulta/2'); ?>
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
-				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required'); ?>
+				<?= form_dropdown('id_departamento', $lista_departamentos, set_value('id_departamento', @$campos['id_departamento']), 'class="form-control" required'); ?>
 				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
@@ -66,14 +66,27 @@ $boton_primario = 'class="btn btn-primary"';
 						<tbody>
 							<?php
 							$municipios = 1;
-							foreach($cantidad_usuarios_municipio as $cantidad_municipio){ ?>
+							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
+								if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+							?>
 							<tr>
 								<td><?= $municipios; ?></td>
 								<td><?= htmlentities($cantidad_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= $cantidad_municipio->total; ?></td>
-								<td><?= $cantidad_municipio->total; ?></td>
+								<td><?= $cantidad_municipio->capacitados; ?></td>
+								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
 							<?php
+								}
+								else{
+							?>
+							<tr>
+								<td style="color: #ffffff;"><?= $municipios; ?></td>
+								<td><?= bold($cantidad_municipio->nombre_municipio); ?></td>
+								<td><?= bold($cantidad_municipio->capacitados); ?></td>
+								<td><?= bold($cantidad_municipio->certificados); ?></td>
+							</tr>
+							<?php
+								}
 							$municipios++;
 							}
 							?>

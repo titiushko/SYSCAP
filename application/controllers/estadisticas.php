@@ -37,18 +37,21 @@ class Estadisticas extends CI_Controller{
                                         
 			break;
 			case 2: // Usuarios por Departamento y Rango de Fechas
-				$datos['cantidad_usuarios_municipio'] = $this->estadisticas_model->cantidad_usuarios_municipio('01');
-				$datos['cantidad_usuarios_municipio_json'] = '';
-				$municipios = 1;
-				foreach($datos['cantidad_usuarios_municipio'] as $cantidad_municipio){
-					$datos['cantidad_usuarios_municipio_json'] = $datos['cantidad_usuarios_municipio_json'].'{y: \''.$municipios++.'\', a: '.$cantidad_municipio->total.', b: '.$cantidad_municipio->total.'},';
+				if($this->input->post()){
+					$this->form_validation->set_rules('id_departamento', 'Departamento', 'trim|required');
+					$this->form_validation->set_rules('fecha1', 'Fecha 1', 'trim|required');
+					$this->form_validation->set_rules('fecha2', 'Fecha 2', 'trim|required');
+					
+					if ($this->form_validation->run() == TRUE){
+						$datos = array_merge($this->datos_estadistica_02_view($this->input->post('id_departamento'), $this->input->post('fecha1'), $this->input->post('fecha2')), $datos);
+					}
+					else{
+						$datos = array_merge($this->datos_estadistica_02_view(), $datos);
+					}
 				}
-				$datos['usuarios_municipio'] = $this->estadisticas_model->usuarios_municipio('01');
-				$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-				
-				$datos['id_modal'] = 'myModalChart';
-				$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
-				$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
+				else{
+					$datos = array_merge($this->datos_estadistica_02_view(), $datos);
+				}
 			break;
 			case 3: // Total de Usuarios por Departamento y Rango de Fechas
                 $datos['tabla'] = $this->estadisticas_model->estaditicas_depertamento_fechas('tabla');
@@ -144,6 +147,28 @@ class Estadisticas extends CI_Controller{
 		
 		$datos['datos'] = $datos;
 		$this->load->view('plantilla_pagina_view', $datos);
+	}
+	
+	private function datos_estadistica_02_view($codigo_departamento = '01', $fecha1 = '', $fecha2 = ''){
+		$datos['campos'] = array('id_departamento' => $codigo_departamento, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
+		$datos['cantidad_usuarios_municipio'] = $this->estadisticas_model->cantidad_usuarios_municipio($codigo_departamento);
+		
+		$municipios = 1;
+		$datos['cantidad_usuarios_municipio_json'] = '';
+		foreach($datos['cantidad_usuarios_municipio'] as $cantidad_municipio){
+			if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+				$datos['cantidad_usuarios_municipio_json'] = $datos['cantidad_usuarios_municipio_json'].'{y: \''.$municipios++.'\', a: '.$cantidad_municipio->capacitados.', b: '.$cantidad_municipio->certificados.'},';
+			}
+		}
+		
+		$datos['usuarios_municipio'] = $this->estadisticas_model->usuarios_municipio($codigo_departamento);
+		$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
+		
+		$datos['id_modal'] = 'myModalChart';
+		$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.listado_estadisticas(2);
+		$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
+		
+		return $datos;
 	}
 }
 

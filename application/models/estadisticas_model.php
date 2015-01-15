@@ -26,18 +26,15 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_municipio($id_departamento){
-		/* 
-		$this->db->select('m.nombre_municipio, COUNT(u.id_municipio) total');
-		$this->db->from('usuarios u');
-		$this->db->join('municipios m', 'u.id_municipio = m.id_municipio', 'inner');
-		$this->db->where('u.id_departamento', $id_departamento);
-		$this->db->order_by('m.nombre_municipio', 'asc');
-		$query = $this->db->get();
-		 */
-		$query = $this->db->query('SELECT m.nombre_municipio, COUNT(u.id_municipio) total
-								   FROM usuarios u INNER JOIN municipios m ON(u.id_municipio = m.id_municipio)
-								   WHERE u.id_departamento = ?
-								   GROUP BY m.nombre_municipio', array($id_departamento));
+		$query = $this->db->query('SELECT capacitados.m_nombre_municipio nombre_municipio, capacitados.total capacitados, CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END certificados
+FROM (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Evaluaci%\' GROUP BY m_nombre_municipio) capacitados
+LEFT JOIN (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Examen%\' GROUP BY m_nombre_municipio) certificados
+ON(capacitados.m_nombre_municipio = certificados.m_nombre_municipio)
+UNION
+SELECT \'TOTAL\' nombre_municipio, SUM(capacitados.total) capacitados, SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+FROM (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Evaluaci%\' GROUP BY m_nombre_municipio) capacitados
+LEFT JOIN (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Examen%\' GROUP BY m_nombre_municipio) certificados
+ON(capacitados.m_nombre_municipio = certificados.m_nombre_municipio)', array($id_departamento, $id_departamento, $id_departamento, $id_departamento));
 		return $query->result();
 	}
 	

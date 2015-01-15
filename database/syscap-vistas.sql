@@ -24,6 +24,7 @@ SELECT
     u.modalidad_usuario u_modalidad_usuario,
 	ec.id_usuario ec_id_usuario,
 	ec.nota_examen_calificacion ec_nota_examen_calificacion,
+	ec.fecha_examen_calificacion ec_fecha_examen_calificacion,
 	e.nombre_examen e_nombre_examen,
 	c.nombre_completo_curso c_nombre_completo_curso,
     c.nombre_corto_curso c_nombre_corto_curso
