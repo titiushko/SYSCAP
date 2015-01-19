@@ -73,7 +73,7 @@ $dui_usuario = array(
 	'id'		=>	'dui_usuario',
 	'maxlength'	=>	'12',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('dui_usuario', @$usuario[0]->dui_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	set_value('dui_usuario', @$usuario[0]->dui_usuario),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
@@ -84,7 +84,7 @@ $correo_electronico_usuario = array(
 	'maxlength'	=>	'40',
 	'size'		=>	'30',
 	'type'		=>	'email',
-	'value'		=>	htmlentities(set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
@@ -105,7 +105,7 @@ $nombre_usuario = array(
 	'id'		=>	'nombre_usuario',
 	'maxlength'	=>	'30',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('nombre_usuario', @$usuario[0]->nombre_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	set_value('nombre_usuario', @$usuario[0]->nombre_usuario),
 	'class'		=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
@@ -115,7 +115,7 @@ $contrasena_usuario = array(
 	'id'		=>	'contrasena_usuario',
 	'maxlength'	=>	'20',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario),
 	'class'		=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
@@ -328,7 +328,7 @@ $modalidad_usuario = array(
 												<tr>
 													<td><?= $cursos; ?></td>
 													<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
-													<td><?= htmlentities($curso->nota, ENT_COMPAT, 'UTF-8'); ?></td>
+													<td><?= $curso->nota; ?></td>
 												</tr>
 												<?php
 													$cursos++;
@@ -350,7 +350,7 @@ $modalidad_usuario = array(
 						<div class="row">
 							<div class="col-lg-12 text-center">
 								<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-								<a href="<?= base_url(); ?>usuarios/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
 						<?php } ?>

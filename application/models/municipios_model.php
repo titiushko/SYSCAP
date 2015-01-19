@@ -10,7 +10,7 @@ class Municipios_model extends CI_Model{
 		$this->db->select('id_municipio, nombre_municipio');
 		$query = $this->db->get('municipios');
 		foreach($query->result() as $municipio){
-			$lista_municipios[$municipio->id_municipio] = $municipio->nombre_municipio;
+			$lista_municipios[$municipio->id_municipio] = htmlentities($municipio->nombre_municipio, ENT_COMPAT, 'UTF-8');
 		}
 		return $lista_municipios;
 	}

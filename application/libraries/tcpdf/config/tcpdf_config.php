@@ -117,12 +117,12 @@ define ('PDF_HEADER_TITLE', 'TCPDF Example');
  * Header description string.
  */
 //define ('PDF_HEADER_STRING', "by Nicola Asuni - Tecnick.com\nwww.tcpdf.org");
-define ('PDF_HEADER_STRING', "Sistema Informatico para Apoyar el Control y Administracion de Capacitaciones");
+define ('PDF_HEADER_STRING', "Sistema Informático para Apoyar el Control y Administración de Capacitaciones");
 
 /**
  * Document unit of measure [pt=point, mm=millimeter, cm=centimeter, in=inch].
  */
-define ('PDF_UNIT', 'mm');
+define ('PDF_UNIT', 'cm');
 
 /**
  * Header margin.
@@ -132,27 +132,27 @@ define ('PDF_MARGIN_HEADER', 5);
 /**
  * Footer margin.
  */
-define ('PDF_MARGIN_FOOTER', 10);
+define ('PDF_MARGIN_FOOTER', 5);
 
 /**
  * Top margin.
  */
-define ('PDF_MARGIN_TOP', 27);
+define ('PDF_MARGIN_TOP', 15);
 
 /**
  * Bottom margin.
  */
-define ('PDF_MARGIN_BOTTOM', 25);
+define ('PDF_MARGIN_BOTTOM', 2);
 
 /**
  * Left margin.
  */
-define ('PDF_MARGIN_LEFT', 15);
+define ('PDF_MARGIN_LEFT', 2);
 
 /**
  * Right margin.
  */
-define ('PDF_MARGIN_RIGHT', 15);
+define ('PDF_MARGIN_RIGHT', 2);
 
 /**
  * Default main font name.
@@ -162,7 +162,7 @@ define ('PDF_FONT_NAME_MAIN', 'helvetica');
 /**
  * Default main font size.
  */
-define ('PDF_FONT_SIZE_MAIN', 10);
+define ('PDF_FONT_SIZE_MAIN', 8);
 
 /**
  * Default data font name.
@@ -172,7 +172,7 @@ define ('PDF_FONT_NAME_DATA', 'helvetica');
 /**
  * Default data font size.
  */
-define ('PDF_FONT_SIZE_DATA', 8);
+define ('PDF_FONT_SIZE_DATA', 6);
 
 /**
  * Default monospaced font name.
@@ -192,7 +192,7 @@ define('HEAD_MAGNIFICATION', 1.1);
 /**
  * Height of cell respect font height.
  */
-define('K_CELL_HEIGHT_RATIO', 1.25);
+define('K_CELL_HEIGHT_RATIO', 1);
 
 /**
  * Title magnification respect main font size.

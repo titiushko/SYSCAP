@@ -10,7 +10,7 @@ class Tipos_usuarios_model extends CI_Model{
 		$this->db->select('id_tipo_usuario, nombre_tipo_usuario');
 		$query = $this->db->get('tipos_usuarios');
 		foreach($query->result() as $tipo_usuario){
-			$lista_tipos_usuarios[$tipo_usuario->id_tipo_usuario] = $tipo_usuario->nombre_tipo_usuario;
+			$lista_tipos_usuarios[$tipo_usuario->id_tipo_usuario] = htmlentities($tipo_usuario->nombre_tipo_usuario, ENT_COMPAT, 'UTF-8');
 		}
 		return $lista_tipos_usuarios;
 	}

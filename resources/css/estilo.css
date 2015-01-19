@@ -47,7 +47,7 @@ html, body {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .column-title {
 	width: 100px;
-	border-bottom
+	text-align: left;
 }
 
 .column-value {
@@ -61,6 +61,10 @@ html, body {
 
 .column-modality {
 	width: 200px;
+}
+
+table.cursos tr th {
+	text-align: center;
 }
 
 table.cursos tr th, table.cursos tr td {

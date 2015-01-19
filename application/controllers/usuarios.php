@@ -165,8 +165,8 @@ class Usuarios extends CI_Controller{
 		$this->form_validation->set_message('min_length', icono_notificacion('error').'El campo '.bold('%s').' debe tener al menos %s caracteres.');
 	}
 	
-	public function exportar(){
-		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+	public function exportar($codigo_usuario = NULL){
+		$pdf = new Pdf('P', 'cm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
 		$pdf->SetTitle('Reporte de Usuarios');
 		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config_alt.php de libraries/config
@@ -194,11 +194,59 @@ class Usuarios extends CI_Controller{
 		// fijar efecto de sombra en el texto
 		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
 		// establecer el contenido para generar el pdf
-		$plantilla_pdf = read_file('resources/templates/pdf/usuarios.php');
+		$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_usuario);
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
-		$nombre_archivo = utf8_decode("Reporte%20de%20Usuarios.pdf");
+		$nombre_archivo = utf8_decode(acentos($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.pdf');
 		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
 		$pdf->Output($nombre_archivo, 'I');
+	}
+	
+	private function cargar_plantilla_pdf($codigo_usuario = NULL){
+		$usuario = $this->usuarios_model->usuario($codigo_usuario);
+		
+		$lista_certificaciones_usuario = ''; $certificaciones = 1;
+		foreach($this->usuarios_model->certificaciones_usuario($codigo_usuario) as $certificacion){
+			$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8').'</td></tr>';
+		}
+		if($lista_certificaciones_usuario == ''){
+			$lista_certificaciones_usuario = 'El usuario no tiene certificaciones.';
+		}
+		
+		$lista_cursos_usuario = ''; $cursos = 1;
+		foreach($this->usuarios_model->calificaciones_usuario($codigo_usuario) as $curso){
+			$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8').'</td><td>'.$curso->nota.'</td></tr>';
+		}
+		if($lista_cursos_usuario == ''){
+			$lista_cursos_usuario = 'El usuario no a recibido cursos.';
+		}
+		
+		$plantilla_pdf = read_file('resources/templates/pdf/usuarios.php');
+		$plantilla_pdf = str_replace(array('<NOMBRES_USUARIO>',
+										   '<APELLIDO1_USUARIO>',
+										   '<DUI_USUARIO>',
+										   '<CORREO_USUARIO>',
+										   '<PROFESION_USUARIO>',
+										   '<CENTRO_EDUCATIVO_USUARIO>',
+										   '<DIRECCION_USUARIO>',
+										   '<NOMBRE_USUARIO>',
+										   '<TIPO_USUARIO>',
+										   '<MODALIDAD_USUARIO>',
+										   '<CERTIFICACIONES_USUARIO>',
+										   '<CURSOS_USUARIO>'),
+									 array(htmlentities($usuario[0]->nombres_usuario, ENT_COMPAT, 'UTF-8'),
+										   htmlentities($usuario[0]->apellido1_usuario, ENT_COMPAT, 'UTF-8'),
+										   $usuario[0]->dui_usuario,
+										   $usuario[0]->correo_electronico_usuario,
+										   htmlentities($this->profesiones_model->nombre_profesion($usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'),
+										   htmlentities($this->centros_educativos_model->nombre_centro_educativo($usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'),
+										   htmlentities($usuario[0]->direccion_usuario, ENT_COMPAT, 'UTF-8'),
+										   htmlentities($usuario[0]->nombre_usuario, ENT_COMPAT, 'UTF-8'),
+										   htmlentities($this->tipos_usuarios_model->nombre_tipo_usuario($usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'),
+										   $usuario[0]->modalidad_usuario,
+										   $lista_certificaciones_usuario,
+										   $lista_cursos_usuario),
+									 $plantilla_pdf);
+		return $plantilla_pdf;
 	}
 	
 	public function imprimir($codigo_usuario = NULL){
@@ -211,8 +259,6 @@ class Usuarios extends CI_Controller{
 		}
 	}
 }
-
-
 
 /* End of file usuarios.php */
 /* Location: ./application/controllers/usuarios.php */

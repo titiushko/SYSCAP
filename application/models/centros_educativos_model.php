@@ -11,7 +11,7 @@ class Centros_educativos_model extends CI_Model{
 		$this->db->select('id_centro_educativo, nombre_centro_educativo');
 		$query = $this->db->get('centros_educativos', 100, 0);
 		foreach($query->result() as $centro_educativo){
-			$lista_centros_educativos[$centro_educativo->id_centro_educativo] = $centro_educativo->nombre_centro_educativo;
+			$lista_centros_educativos[$centro_educativo->id_centro_educativo] = htmlentities($centro_educativo->nombre_centro_educativo, ENT_COMPAT, 'UTF-8');
 		}
 		return $lista_centros_educativos;
 	}

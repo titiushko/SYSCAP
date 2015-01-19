@@ -10,7 +10,7 @@ class Departamentos_model extends CI_Model{
 		$this->db->select('id_departamento, nombre_departamento');
 		$query = $this->db->get('departamentos');
 		foreach($query->result() as $departamento){
-			$lista_departamentos[$departamento->id_departamento] = $departamento->nombre_departamento;
+			$lista_departamentos[$departamento->id_departamento] = htmlentities($departamento->nombre_departamento, ENT_COMPAT, 'UTF-8');
 		}
 		return $lista_departamentos;
 	}

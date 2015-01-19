@@ -10,7 +10,7 @@ class Profesiones_model extends CI_Model{
 		$this->db->select('id_profesion, nombre_profesion');
 		$query = $this->db->get('profesiones');
 		foreach($query->result() as $profesion){
-			$lista_profesiones[$profesion->id_profesion] = $profesion->nombre_profesion;
+			$lista_profesiones[$profesion->id_profesion] = htmlentities($profesion->nombre_profesion, ENT_COMPAT, 'UTF-8');
 		}
 		return $lista_profesiones;
 	}

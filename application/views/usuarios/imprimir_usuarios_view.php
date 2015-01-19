@@ -40,9 +40,9 @@
 							</tr>
 							<tr><td colspan="5"><?= nbs(); ?></td></tr>
 							<tr>
-								<th class="column-title">DUI:</th><td class="column-value"><?= htmlentities(@$usuario[0]->dui_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">DUI:</th><td class="column-value"><?= @$usuario[0]->dui_usuario; ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Correo Electrónico:</th><td class="column-value"><?= htmlentities(@$usuario[0]->correo_electronico_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Correo Electrónico:</th><td class="column-value"><?= @$usuario[0]->correo_electronico_usuario; ?></td>
 							</tr>
 							<tr><td colspan="5"><?= nbs(); ?></td></tr>
 							<tr>
@@ -64,7 +64,7 @@
 					<?= form_fieldset(heading('Información de Usuario', 3)); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
-								<th class="column-title">Nombre de Usuario:</th><td class="column-value"><?= htmlentities(@$usuario[0]->nombre_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Nombre de Usuario:</th><td class="column-value"><?= @$usuario[0]->nombre_usuario; ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
 								<th class="column-title">Tipo de Usuario:</th><td class="column-value"><?= htmlentities(@$nombre_tipo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
 							</tr>
@@ -127,7 +127,7 @@
 											<tr>
 												<td><?= $cursos; ?></td>
 												<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
-												<td><?= htmlentities($curso->nota, ENT_COMPAT, 'UTF-8'); ?></td>
+												<td><?= $curso->nota; ?></td>
 											</tr>
 											<?php
 												$cursos++;
