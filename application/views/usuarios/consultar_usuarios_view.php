@@ -8,7 +8,7 @@
 		<div class="col-lg-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<?= heading('Lista de Usuarios', 3); ?>
+					<?= heading('Lista de Usuarios', 2); ?>
 				</div>
 				<div class="panel-body">
 					<div class="table-responsive">

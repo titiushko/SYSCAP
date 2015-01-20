@@ -39,9 +39,6 @@ $campos_ocultos = array('estado' => '0');
 if($operacion == "Mostrar"){
 	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
 	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos\';"';
-	
-	
-	
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
@@ -58,13 +55,13 @@ else{
 	<div class="col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<?= heading($operacion.' Centro Educativo', 3); ?>
+				<?= heading($operacion.' Centro Educativo', 2); ?>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
 						<?= form_open('index.php/centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo, $formulario, $campos_ocultos); ?>
-							<?= form_fieldset('Información General'); ?>
+							<?= form_fieldset(heading('Información General', 3)); ?>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
@@ -111,15 +108,16 @@ else{
 								</div>
 							</div>
 							<?= form_fieldset_close(); ?>
-							<?= form_fieldset('Certificaciones'); ?>
+							<?= form_fieldset(heading('Certificaciones', 3)); ?>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="table-responsive">
+										<?= heading('Docentes Capacitados', 4); ?>
 										<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_capacitados">
 											<thead>
 												<tr>
 													<th>#</th>
-													<th>Docentes Capacitados</th>
+													<th>Nombre</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -141,11 +139,12 @@ else{
 								</div>
 								<div class="col-lg-6">
 									<div class="table-responsive">
+										<?= heading('Docentes Certificados', 4); ?>
 										<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_certificados">
 											<thead>
 												<tr>
 													<th>#</th>
-													<th>Docentes Certificados</th>
+													<th>Nombre</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -178,10 +177,8 @@ else{
 							<div class="col-lg-12 text-center">
 								<a href="<?= base_url().'centros_educativos/imprimir/'.@$centro_educativo[0]->id_centro_educativo;?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
-	
 							</div>
 						</div>
-						
 						<?php } ?>
 					</div>
 				</div>
@@ -216,6 +213,4 @@ $(document).ready(function() {
 		  }
 	});
 });
-
-
 </script>

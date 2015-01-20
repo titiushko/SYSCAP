@@ -22,7 +22,7 @@ class Centros_educativos extends CI_Controller{
 		
 		if($this->notificacion){
 			$datos['id_modal'] = 'myModal';
-			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.$codigo_centro_educativo.'\';"';	
+			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.$codigo_centro_educativo.'\';"';
 			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Centro Educativo';
 			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo), ENT_COMPAT, 'UTF-8').'.';
 			$this->notificacion = FALSE;
@@ -64,29 +64,22 @@ class Centros_educativos extends CI_Controller{
 	
 		
 	private function datos_formulario_centros_educativos_view($operacion = '', $codigo_centro_educativo = NULL){
+		$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 		 if($operacion != ''){
 			$datos['operacion'] = $operacion;
 			$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
 			$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
 			$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
-			$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 			$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
 			$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
-			$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
-			$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
 		}
 		else{
-	     	$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
-			$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-			$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
-			$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
-			$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
-				
-		
+			$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
+			$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
 		}
-		
+		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
+		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
 		return $datos;
-	
 	}
 	
 	private function validaciones(){
@@ -116,7 +109,6 @@ class Centros_educativos extends CI_Controller{
 public function exportar(){
 		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
-		
 		$pdf->SetTitle('Reporte de Centros Educativos');
 		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config_alt.php de libraries/config
 		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'Reporte de Centros Educativos', PDF_HEADER_STRING, array(0, 64, 255), array(0, 64, 128));
@@ -142,7 +134,6 @@ public function exportar(){
 		$pdf->AddPage();
 		// fijar efecto de sombra en el texto
 		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
-
 		// establecer el contenido para generar el pdf
 		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
@@ -151,23 +142,16 @@ public function exportar(){
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
-
-			
-			public function imprimir($codigo_centro_educativo = NULL){
-					$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
-					if(empty($datos['centro_educativo'])){
-							echo 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido' ;	//TODO: crear algo en respuesta, cuando sea un id no valido.
-					}
-	 		else{
-					$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
-						}
+	public function imprimir($codigo_centro_educativo = NULL){
+		$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
+		if(empty($datos['centro_educativo'])){
+			echo 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido' ;	//TODO: crear algo en respuesta, cuando sea un id no valido.
+		}
+		else{
+			$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
 		}
 	}
+}
 
-	
-	
-	
-	
-	
 /* End of file centros_educativos.php */
 /* Location: ./application/controllers/centros_educativos.php */

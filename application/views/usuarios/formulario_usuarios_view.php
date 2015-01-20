@@ -142,13 +142,13 @@ $modalidad_usuario = array(
 	<div class="col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<?= heading($operacion.' Usuario', 3); ?>
+				<?= heading($operacion.' Usuario', 2); ?>
 			</div>
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
 						<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[1], $campos_ocultos); ?>
-							<?= form_fieldset('Datos Personales'); ?>
+							<?= form_fieldset(heading('Datos Personales', 3)); ?>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
@@ -222,7 +222,7 @@ $modalidad_usuario = array(
 							<?= form_fieldset_close(); ?>
 						<?= form_close(); ?>
 						<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[2], $campos_ocultos); ?>
-							<?= form_fieldset('Información de Usuario'); ?>
+							<?= form_fieldset(heading('Información de Usuario', 3)); ?>
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="form-group">
@@ -267,7 +267,7 @@ $modalidad_usuario = array(
 							<?= form_fieldset_close(); ?>
 						<?= form_close(); ?>
 						<?= form_open('index.php/usuarios/modificar/'.@$usuario[0]->id_usuario, $formulario[3], $campos_ocultos); ?>
-							<?= form_fieldset('Información de Cursos'); ?>
+							<?= form_fieldset(heading('Información de Cursos', 3)); ?>
 							<div class="row">
 								<div class="col-lg-3">
 								</div>
@@ -283,7 +283,7 @@ $modalidad_usuario = array(
 							</div>
 							<div class="row">
 								<div class="col-lg-6">
-									<?= form_label('Certificaciones Obtenidas:'); ?>
+									<?= heading('Certificaciones Obtenidas', 4); ?>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered table-hover" id="data-tables-certificaciones_usuario">
 											<thead>
@@ -310,7 +310,7 @@ $modalidad_usuario = array(
 									</div>
 								</div>
 								<div class="col-lg-6">
-									<?= form_label('Cursos Recibidos y Calificaciones Obtenidas:'); ?>
+									<?= heading('Cursos Recibidos y Calificaciones Obtenidas', 4); ?>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered table-hover" id="data-tables-calificaciones_usuario">
 											<thead>

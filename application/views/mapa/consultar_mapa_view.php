@@ -7,7 +7,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<?= heading('Mapa de El Salvador', 3); ?>
+				<?= heading('Mapa de El Salvador', 2); ?>
 			</div>
 			<div class="panel-body">
 			</div>

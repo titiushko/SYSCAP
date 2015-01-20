@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Usuarios', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Información General', 3)); ?>
+					<?= form_fieldset(heading('Datos Personales', 3)); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Nombres:</th><td class="column-value"><?= htmlentities(@$usuario[0]->nombres_usuario, ENT_COMPAT, 'UTF-8'); ?></td>

@@ -7,7 +7,7 @@
 	<div class="col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<?= heading($nombre_estadistica, 3); ?>
+				<?= heading($nombre_estadistica, 2); ?>
 			</div>
 			<div class="panel-body">
 				<?php
