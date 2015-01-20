@@ -76,10 +76,13 @@ class Centros_educativos extends CI_Controller{
 			$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
 		}
 		else{
+	     	$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 			$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
 			$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
 			$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
 			$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+				
+		
 		}
 		
 		return $datos;
