@@ -212,5 +212,7 @@ class Usuarios extends CI_Controller{
 	}
 }
 
+
+
 /* End of file usuarios.php */
 /* Location: ./application/controllers/usuarios.php */

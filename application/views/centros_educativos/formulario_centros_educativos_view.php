@@ -39,6 +39,9 @@ $campos_ocultos = array('estado' => '0');
 if($operacion == "Mostrar"){
 	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
 	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos\';"';
+	
+	
+	
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
@@ -173,8 +176,9 @@ else{
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a href="<?= base_url(); ?>centros_educativos/imprimir" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url().'centros_educativos/imprimir/'.@$centro_educativo[0]->id_centro_educativo;?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+	
 							</div>
 						</div>
 						
@@ -212,4 +216,6 @@ $(document).ready(function() {
 		  }
 	});
 });
+
+
 </script>
