@@ -106,8 +106,10 @@ class Centros_educativos extends CI_Controller{
 	}
 	
 	
-public function exportar(){
-		$pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+														
+		
+public function exportar($codigo_centro_educativo = NULL){
+		$pdf = new Pdf('P', 'cm', 'A4', true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
 		$pdf->SetTitle('Reporte de Centros Educativos');
 		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config_alt.php de libraries/config
@@ -134,12 +136,52 @@ public function exportar(){
 		$pdf->AddPage();
 		// fijar efecto de sombra en el texto
 		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
-		// establecer el contenido para generar el pdf
-		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
+		// establecer el contenido para generar el pdf		
+		$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_centro_educativo);		
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
-		$nombre_archivo = utf8_decode("Reporte%20de%20Centros_educativos.pdf");
+		$nombre_archivo = utf8_decode(acentos($this->centros_educativos_model->nombre_completo_centro_educativo($codigo_centro_educativo)).'.pdf');
 		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
 		$pdf->Output($nombre_archivo, 'I');
+	}
+	
+	private function cargar_plantilla_pdf($codigo_centro_educativo = NULL){
+		$centro_educativo = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
+		$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
+	   foreach($this-> usuario_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'),'tutorizado') as $docente_capacitado){
+			$lista_docentes_capacitados.='<tr><td>'.$docentes_capacitados++.'</td></td>'.htmlentities($docente_capacitado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8').'</td></td>';
+			
+		}
+		if(lista_docentes_capacitados== ''){
+			$lista_docentes_capacitados ='No hay docentes capacitados en este centro educativo. ';
+			}
+		
+		
+	$lista_docentes_certificados =  ''; $docentes_certificados= 1;
+	     foreach( $this-> usuario_model->tipos_capacitados_usuarios($codigo_centro_educativo,7, '%certificacion%', array('docentes'),'tutorizado') as $docente_certificado){
+			$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td></td>'.htmlentities($docente_certificado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8').'</td></td>';
+			
+		}
+		if(lista_docentes_certifidos== ''){
+			$lista_docentes_certificados ='';
+			}
+	
+		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
+		$plantilla_pdf = str_replace(array('<NOMBRE_CENTRO_EDUCATIVO>',
+						 	               '<CODIGO_CENTRO_EDUCATIVO>',
+				                           '<DEPARTAMENTO_CENTRO_EDUCATIVO>',
+											'<MUNICIPIO_CENTRO_EDUCATIVO>',
+											'<CERTIFICACIONES>', 
+											'<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>',
+											'<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>',),
+				                        array(htmlentities($centro_educativo[0]->nombres_centro_educativo, ENT_COMPAT, 'UTF-8'),
+                                             $centro_educativo[0]->codigo_centro_educativo, 
+	                                          htmlentities( $this->departamentos_model->nombre_departamento($centro_educativo[0]->id_departamento),ENT_COMPAT, 'UTF-8'),
+	                                          htmlentities($this->municipio_model->nombre_municipio($centro_educativo[0]-> id_municipio),ENT_COMPAT, 'UTF-8'), 
+			                                $lista_docentes_capacitados, 
+				                            $lista_docentes_certificados), plantilla_pdf);
+		
+		return $plantilla_pdf;
+	
 	}
 	
 	public function imprimir($codigo_centro_educativo = NULL){
@@ -151,7 +193,9 @@ public function exportar(){
 			$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
 		}
 	}
+
 }
+
 
 /* End of file centros_educativos.php */
 /* Location: ./application/controllers/centros_educativos.php */

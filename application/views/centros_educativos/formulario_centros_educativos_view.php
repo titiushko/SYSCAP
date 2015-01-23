@@ -11,7 +11,7 @@ $nombre_centro_educativo = array(
 	'id'		=> 'nombre_centro_educativo',
 	'maxlength'	=> '60',
 	'size'		=> '20',
-	'value'		=> htmlentities(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo), ENT_COMPAT, 'UTF-8'),
+	'value'		=> set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo),	
 	'class'		=> 'form-control text-capitalize',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
@@ -21,7 +21,7 @@ $codigo_centro_educativo = array(
 	'id'		=> 'codigo_centro_educativo',
 	'maxlength'	=> '60',
 	'size'		=> '20',
-	'value'		=> htmlentities(set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo), ENT_COMPAT, 'UTF-8'),
+	'value'		=> set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo), 
 	'class'		=> 'form-control',
 	'disabled'	=> 'disabled'
 );
@@ -176,7 +176,9 @@ else{
 						<div class="row">
 							<div class="col-lg-12 text-center">
 								<a href="<?= base_url().'centros_educativos/imprimir/'.@$centro_educativo[0]->id_centro_educativo;?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-								<a href="<?= base_url(); ?>centros_educativos/exportar" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<a href="<?= base_url().'centros_educativos/exportar/'.@$centro_educativo[0]->id_centro_educativo;?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+						    	
+ 	
 							</div>
 						</div>
 						<?php } ?>
