@@ -25,23 +25,29 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	function cantidad_usuarios_municipio($id_departamento){
-		$query = $this->db->query('SELECT capacitados.m_nombre_municipio nombre_municipio, capacitados.total capacitados, CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END certificados
-FROM (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Evaluaci%\' GROUP BY m_nombre_municipio) capacitados
-LEFT JOIN (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Examen%\' GROUP BY m_nombre_municipio) certificados
-ON(capacitados.m_nombre_municipio = certificados.m_nombre_municipio)
-UNION
-SELECT \'TOTAL\' nombre_municipio, SUM(capacitados.total) capacitados, SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
-FROM (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Evaluaci%\' GROUP BY m_nombre_municipio) capacitados
-LEFT JOIN (SELECT m_nombre_municipio, COUNT(u_id_municipio) total FROM V_UsuariosCursosExamenesCalificaciones WHERE u_id_departamento = ? AND m_nombre_municipio IS NOT NULL AND ec_nota_examen_calificacion >= 7.00 AND e_nombre_examen LIKE \'Examen%\' GROUP BY m_nombre_municipio) certificados
-ON(capacitados.m_nombre_municipio = certificados.m_nombre_municipio)', array($id_departamento, $id_departamento, $id_departamento, $id_departamento));
+	function cantidad_usuarios_municipio($id_departamento, $fecha1, $fecha2){
+		if($id_departamento == '' && $fecha1 == '' && $fecha2 == ''){
+			$query = $this->db->query('SELECT * FROM V_UsuariosTotalDepartamento');
+		}
+		else{
+			$query = $this->db->query('SELECT capacitados.nombre_municipio nombre_municipio, capacitados.total capacitados, (CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+									   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) capacitados
+									   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) certificados
+									   ON capacitados.nombre_municipio = certificados.nombre_municipio
+									   UNION
+									   SELECT \'TOTAL\' nombre_municipio, SUM(capacitados.total) capacitados, SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+									   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) capacitados
+									   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) certificados
+									   ON capacitados.nombre_municipio = certificados.nombre_municipio',
+									  array($id_departamento, $fecha1, $fecha2, $id_departamento, $fecha1, $fecha2, $id_departamento, $fecha1, $fecha2, $id_departamento, $fecha1, $fecha2));
+		}
 		return $query->result();
 	}
 	
 	function usuarios_municipio($id_departamento){
-		$query = $this->db->query('SELECT m.nombre_municipio, F_NombreCompletoUsuario(u.id_usuario) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
+		$query = $this->db->query('SELECT DISTINCT m.nombre_municipio, F_NombreCompletoUsuario(u.id_usuario) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
 								   FROM usuarios u INNER JOIN municipios m ON(u.id_municipio = m.id_municipio)
-								   WHERE u.id_departamento = ?
+								   WHERE u.id_departamento LIKE '.($id_departamento == '' ? '\'%\'' : '?').'
 								   ORDER BY 1', array($id_departamento));
 		return $query->result();
 	}

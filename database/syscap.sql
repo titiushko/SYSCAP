@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS examenes_calificaciones(
 	id_examen BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del examen al que pertenece la calificación un examen final. Los valores de esté campo se obtendrán del campo <quiz> de Moodle usando ETL.',
 	id_usuario BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del usuario al que pertenece la calificación un examen final. Los valores de esté campo se obtendrán del campo <userid> de Moodle usando ETL.',
 	nota_examen_calificacion DOUBLE NOT NULL COMMENT 'Calificación de un examen final. Los valores de esté campo se obtendrán del campo <grade> de Moodle usando ETL.',
-	fecha_examen_calificacion TIMESTAMP NULL DEFAULT NULL COMMENT 'Fecha de un examen final. Los valores de esté campo se obtendrán del campo <timemodified> de Moodle usando ETL.',
+	fecha_examen_calificacion DATE NULL DEFAULT NULL COMMENT 'Fecha de un examen final. Los valores de esté campo se obtendrán del campo <timemodified> de Moodle usando ETL.',
 	PRIMARY KEY(id_examen_calificacion)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información de las calificaciones de cada examen final. Los registros de está tabla se obtendrán de la tabla <mdl_quiz_grades> de Moodle usando ETL.' AUTO_INCREMENT=1;
 

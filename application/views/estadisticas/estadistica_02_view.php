@@ -4,6 +4,7 @@ $fecha = array(
 	'id'		=> '',
 	'maxlength'	=> '60',
 	'size'		=> '20',
+	'value'		=> '',
 	'type'		=> 'date',
 	'required'	=> 'required',
 	'class'		=> 'form-control text-capitalize'
@@ -25,12 +26,12 @@ $boton_primario = 'class="btn btn-primary"';
 				<?= form_label('Periodo:'); ?>
 				<div class="row">
 					<div class="col-lg-6">
-						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; $fecha['value'] = set_value('fecha1', @$campos['fecha1']); ?>
 						<?= form_input($fecha); ?>
 						<?= form_error('fecha1'); ?>
 					</div>
 					<div class="col-lg-6">
-						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; $fecha['value'] = set_value('fecha2', @$campos['fecha2']); ?>
 						<?= form_input($fecha); ?>
 						<?= form_error('fecha2'); ?>
 					</div>
@@ -65,12 +66,12 @@ $boton_primario = 'class="btn btn-primary"';
 						</thead>
 						<tbody>
 							<?php
-							$municipios = 1;
+							$cantidades = 1;
 							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
 								if($cantidad_municipio->nombre_municipio != 'TOTAL'){
 							?>
 							<tr>
-								<td><?= $municipios; ?></td>
+								<td><?= $cantidades; ?></td>
 								<td><?= htmlentities($cantidad_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
@@ -80,14 +81,14 @@ $boton_primario = 'class="btn btn-primary"';
 								else{
 							?>
 							<tr>
-								<td style="color: #ffffff;"><?= $municipios; ?></td>
+								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
 								<td><?= bold($cantidad_municipio->nombre_municipio); ?></td>
 								<td><?= bold($cantidad_municipio->capacitados); ?></td>
 								<td><?= bold($cantidad_municipio->certificados); ?></td>
 							</tr>
 							<?php
 								}
-							$municipios++;
+							$cantidades++;
 							}
 							?>
 						</tbody>
@@ -119,17 +120,17 @@ $boton_primario = 'class="btn btn-primary"';
 						</thead>
 						<tbody>
 							<?php
-							$municipios = 1;
-							foreach($usuarios_municipio as $cantidad_municipio){
+							$usuarios = 1;
+							foreach($usuarios_municipio as $usuario_municipio){
 							?>
 							<tr>
-								<td><?= $municipios; ?></td>
-								<td><?= htmlentities($cantidad_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($cantidad_municipio->nombre_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($cantidad_municipio->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= $usuarios; ?></td>
+								<td><?= htmlentities($usuario_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= htmlentities($usuario_municipio->nombre_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= htmlentities($usuario_municipio->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
 							</tr>
 							<?php
-							$municipios++;
+							$usuarios++;
 							}
 							?>
 						</tbody>
@@ -146,6 +147,7 @@ $boton_primario = 'class="btn btn-primary"';
 		$('#data-tables-estadistica2-1').dataTable({
 			"searching": false,
 			"lengthChange": false,
+			"info": false,
 			"oLanguage": {
 				"oPaginate": {
 					"sFirst": "Primero",
@@ -153,7 +155,6 @@ $boton_primario = 'class="btn btn-primary"';
 					"sNext": ">>",
 					"sPrevious": "<<"
 				},
-				"sInfo": "_START_/_END_ de _TOTAL_ registros",
 				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
 			  }
 		});

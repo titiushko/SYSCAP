@@ -62,7 +62,6 @@ class Centros_educativos extends CI_Controller{
 		}
 	}
 	
-	
 	private function datos_formulario_centros_educativos_view($operacion = '', $codigo_centro_educativo = NULL){
 		$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 		 if($operacion != ''){

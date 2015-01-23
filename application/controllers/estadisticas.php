@@ -149,9 +149,9 @@ class Estadisticas extends CI_Controller{
 		$this->load->view('plantilla_pagina_view', $datos);
 	}
 	
-	private function datos_estadistica_02_view($codigo_departamento = '01', $fecha1 = '', $fecha2 = ''){
+	private function datos_estadistica_02_view($codigo_departamento = '', $fecha1 = '', $fecha2 = ''){
 		$datos['campos'] = array('id_departamento' => $codigo_departamento, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
-		$datos['cantidad_usuarios_municipio'] = $this->estadisticas_model->cantidad_usuarios_municipio($codigo_departamento);
+		$datos['cantidad_usuarios_municipio'] = $this->estadisticas_model->cantidad_usuarios_municipio($codigo_departamento, $fecha1, $fecha2);
 		
 		$municipios = 1;
 		$datos['cantidad_usuarios_municipio_json'] = '';
