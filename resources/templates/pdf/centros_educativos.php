@@ -9,8 +9,6 @@
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 		<title>SYSCAP</title>
 	</head>
-	
-	
 	<body style="font-size: 12px;">
 		<h1 align="center">Reporte de Centros Educativos</h1>
 		<fieldset>
@@ -19,7 +17,7 @@
 			<table border="0">
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Nombre:</td>
-					<td style="widtd: 250px;"><NOMBRES_CENTRO_EDUCATIVO></td>
+					<td style="widtd: 250px;"><NOMBRE_CENTRO_EDUCATIVO></td>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Codigo:</td>
 					<td style="widtd: 250px;"><CODIGO_CENTRO_EDUCATIVO></td>
 				</tr>
@@ -30,40 +28,37 @@
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Municipio:</td>
 					<td style="widtd: 250px;"><MUNICIPIO_CENTRO_EDUCATIVO></td>
 				</tr>
-	         </table>				
+			</table>
 		</fieldset>
 		<br/>
-	<fieldset>
+		<fieldset>
 			<legend><h3>Certificaciones</h3></legend>
 			<hr/>
 			<h4>Docentes Capacitados</h4>
-				<table border="1">
-				  <tdead>
-				  <tr>
-					<td style="text-align: center; font-weight: bold;">#</td>
-					<td style="text-align: center; font-weight: bold;">Nombre</td>
-				</tr>
+			<table border="1">
+				<tdead>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">#</td>
+						<td style="text-align: center; font-weight: bold;">Nombre</td>
+					</tr>
 				</tdead>
-				<tbody> 
-				<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO> 
+				<tbody>
+					<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>
 				</tbody>
 			</table>
-			<br/>			
+			<br/>
 			<h4>Docentes Certificados</h4>
-				<table border="1">
-				  <tdead>
-				  <tr>
-					<td style="text-align: center; font-weight: bold;">#</td>
-					<td style="text-align: center; font-weight: bold;">Nombre</td>
-				</tr>
+			<table border="1">
+				<tdead>
+					<tr>
+						<td style="text-align: center; font-weight: bold;">#</td>
+						<td style="text-align: center; font-weight: bold;">Nombre</td>
+					</tr>
 				</tdead>
-				<tbody> <DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO> </tbody>
-			 </table>
-		 </br>
-	   </fieldset>
+				<tbody>
+					<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>
+				</tbody>
+			</table>
+		</fieldset>
 	</body>
 </html>
-	
-	
-	
-	
