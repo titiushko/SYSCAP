@@ -1,12 +1,13 @@
 DROP DATABASE IF EXISTS syscap;
-CREATE DATABASE IF NOT EXISTS syscap DEFAULT CHARACTER SET latin1 COLLATE latin1_bin;
+CREATE DATABASE IF NOT EXISTS syscap DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
 USE syscap;
 
 CREATE TABLE IF NOT EXISTS departamentos(
 	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador de un departamento. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	nombre_departamento VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un departamento. Los valores de esté campo se obtendrán del campo <deptos> de Moodle usando ETL.',
+	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un departamento en el mapa.',
 	PRIMARY KEY(id_departamento)
-) ENGINE=MyISAM	DEFAULT CHARSET=latin1 COMMENT 'Catálogo de nombres de los departamentos de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_deptos> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de nombres de los departamentos de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_deptos> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS centros_educativos(
 	id_centro_educativo INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un centro educativo. Los valores de esté campo se obtendrán del campo <row_id> de Moodle usando ETL.',
@@ -14,27 +15,29 @@ CREATE TABLE IF NOT EXISTS centros_educativos(
 	nombre_centro_educativo VARCHAR(150) DEFAULT NULL COMMENT 'Nombre completo de un centro educativo. Los valores de esté campo se obtendrán del campo <nombre> de Moodle usando ETL.',
 	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un centro educativo. Los valores de esté campo se obtendrán del campo <depto> de Moodle usando ETL.',
 	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador del municipio al que pertenece un centro educativo. Los valores de esté campo se obtendrán del campo <muni> de Moodle usando ETL.',
+	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un centro educativo en el mapa.',
 	PRIMARY KEY(id_centro_educativo)
-) ENGINE=MyISAM	DEFAULT CHARSET=latin1 COMMENT 'Catálogo de centros educativos. Los registros de está tabla se obtendrán de la tabla <mdl_cat_educativa> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de centros educativos. Los registros de está tabla se obtendrán de la tabla <mdl_cat_educativa> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS municipios(
 	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador de un municipio. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un municipio. Los valores de esté campo se obtendrán del campo <relacion> de Moodle usando ETL.',
 	nombre_municipio VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un municipio. Los valores de esté campo se obtendrán del campo <opcion> de Moodle usando ETL.',
+	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un municipio en el mapa.',
 	PRIMARY KEY(id_municipio)
-) ENGINE=MyISAM	DEFAULT CHARSET=latin1 COMMENT 'Catálogo de nombres de los municipios de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_municip> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de nombres de los municipios de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_municip> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS niveles_estudios(
 	id_nivel_estudio INT(4) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un nivel de estudio. Los valores de esté campo se obtendrán del campo <cod_nestudio> de Moodle usando ETL.',
 	nombre_nivel_estudio VARCHAR(100) NOT NULL COMMENT 'Nombre completo de un nivel de estudio. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
 	PRIMARY KEY(id_nivel_estudio)
-) ENGINE=MyISAM	DEFAULT CHARSET=latin1 COMMENT 'Catálogo de niveles de estudios. Los registros de está tabla se obtendrán de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de niveles de estudios. Los registros de está tabla se obtendrán de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS profesiones(
   id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesión. Los valores de esté campo se obtendrán del campo <cod_profesion> de Moodle usando ETL.',
   nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesión. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
   PRIMARY KEY(id_profesion)
-) ENGINE=MyISAM	DEFAULT CHARSET=latin1 COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS matriculas(
 	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  una matricula. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -122,14 +125,27 @@ CREATE TABLE IF NOT EXISTS tipos_usuarios(
 	PRIMARY KEY(id_tipo_usuario)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de los tipos de usuarios.' AUTO_INCREMENT=1;
 
+CREATE TABLE IF NOT EXISTS mapas(
+	id_mapa BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de una coordenada en el mapa.',
+	longitud_mapa DOUBLE NOT NULL COMMENT 'Posición en el eje X de una coordenada del mapa.',
+	latitud_mapa DOUBLE NOT NULL COMMENT 'Posición en el eje Y de una coordenada del mapa.',
+	PRIMARY KEY(id_mapa)
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Coordenadas de puntos en el mapa.' AUTO_INCREMENT=1;
+
 ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_usuarios
 FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario);
 
 ALTER TABLE centros_educativos ADD CONSTRAINT fk_centros_educativos_departamentos
 FOREIGN KEY(id_departamento) REFERENCES departamentos(id_departamento);
 
+ALTER TABLE centros_educativos ADD CONSTRAINT fk_centros_educativos_mapas
+FOREIGN KEY(id_mapa) REFERENCES mapas(id_mapa);
+
 ALTER TABLE centros_educativos ADD CONSTRAINT fk_centros_educativos_municipios
 FOREIGN KEY(id_municipio) REFERENCES municipios(id_municipio);
+
+ALTER TABLE departamentos ADD CONSTRAINT fk_departamentos_mapas
+FOREIGN KEY(id_mapa) REFERENCES mapas(id_mapa);
 
 ALTER TABLE matriculas ADD CONSTRAINT fk_matriculas_cursos
 FOREIGN KEY(id_curso) REFERENCES cursos(id_curso) ON DELETE RESTRICT ON UPDATE RESTRICT;
@@ -145,6 +161,9 @@ FOREIGN KEY(id_examen) REFERENCES examenes(id_examen);
 
 ALTER TABLE municipios ADD CONSTRAINT fk_municipios_departamentos
 FOREIGN KEY(id_departamento) REFERENCES departamentos(id_departamento);
+
+ALTER TABLE municipios ADD CONSTRAINT fk_municipios_mapas
+FOREIGN KEY(id_mapa) REFERENCES mapas(id_mapa);
 
 ALTER TABLE roles_asignados ADD CONSTRAINT fk_roles_asignados_roles
 FOREIGN KEY(id_rol) REFERENCES roles(id_rol);

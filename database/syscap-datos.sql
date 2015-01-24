@@ -108,3 +108,59 @@ INSERT INTO syscap.tipos_usuarios(syscap.tipos_usuarios.id_tipo_usuario, syscap.
 (6, 'Docente de Media'),
 (7, 'Docente Tecnólogo'),
 (8, 'Docente Universitario');
+
+/* MAPAS */
+-- almacenar en syscap.mapas los registros de las coordenadas en el mapa
+TRUNCATE syscap.mapas;
+INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, syscap.mapas.latitud_mapa) VALUES
+								-- Municipio, Departamento
+(1, 13.9344628, -89.0239548),	-- Suchitoto, Cuscatlan
+(2, 13.6914782, -89.2146939),	-- San Salvador, San Salvador
+(3, 13.6405872, -88.7839214),	-- San Vicente, San Vicente
+(4, 13.71045, -89.1435517),		-- Soyapango, San Salvador
+(5, 13.4910976, -89.3170369),	-- Puerto De La Libertad, La Libertad
+(6, 13.8150632, -89.1726215),	-- Apopa, San Salvador
+(7, 13.6771271, -89.331572),	-- Nueva San Salvador, La Libertad
+(8, 13.4785173, -88.1690892),	-- San Miguel, San Miguel
+(9, 13.9866054, -89.6780062),	-- Chalchuapa, Santa Ana
+(10, 13.9837933, -89.5628214),	-- Santa Ana, Santa Ana
+(11, 13.7391679, -89.2104026),	-- Mejicanos, San Salvador
+(12, 13.6247163, -87.8940153),	-- Santa Rosa De Lima, La Union
+(13, 13.7103248, -89.7300196),	-- Sonsonate, Sonsonate
+(14, 13.7210174, -88.938373),	-- Cojutepeque, Cuscatlan
+(15, 13.7503845, -89.057579),	-- San Martin, San Salvador
+(16, 13.3432736, -88.4427738),	-- Usulutan, Usulutan
+(17, 13.8762505, -89.3583689),	-- San Juan Opico, La Libertad
+(18, 13.9290675, -89.8436594),	-- Ahuachapan, Ahuachapan
+(19, 13.5788318, -89.2671776),	-- San Jose Villanueva, La Libertad
+(20, 13.7632123, -89.0487634),	-- San Bartolome Perulapia, Cuscatlan
+(21, 13.6603945, -89.1769482),	-- San Marcos, San Salvador
+(22, 13.7083268, -89.3482965),	-- Colon, La Libertad
+(23, 13.7534692, -89.1586547),	-- Ciudad Delgado, San Salvador
+(24, 13.830604, -89.2692803),	-- Quezaltepeque, La Libertad
+(25, 13.4296472, -88.5936102);	-- San Agustin, Usulutan
+UPDATE municipios SET id_mapa = 1 WHERE id_municipio = '188';
+UPDATE municipios SET id_mapa = 2 WHERE id_municipio = '01';
+UPDATE municipios SET id_mapa = 3 WHERE id_municipio = '241';
+UPDATE municipios SET id_mapa = 4 WHERE id_municipio = '04';
+UPDATE municipios SET id_mapa = 5 WHERE id_municipio = '58';
+UPDATE municipios SET id_mapa = 6 WHERE id_municipio = '09';
+UPDATE municipios SET id_mapa = 7 WHERE id_municipio = '53';
+UPDATE municipios SET id_mapa = 8 WHERE id_municipio = '33';
+UPDATE municipios SET id_mapa = 9 WHERE id_municipio = '21';
+UPDATE municipios SET id_mapa = 10 WHERE id_municipio = '20';
+UPDATE municipios SET id_mapa = 11 WHERE id_municipio = '03';
+UPDATE municipios SET id_mapa = 12 WHERE id_municipio = '115';
+UPDATE municipios SET id_mapa = 13 WHERE id_municipio = '98';
+UPDATE municipios SET id_mapa = 14 WHERE id_municipio = '187';
+UPDATE municipios SET id_mapa = 15 WHERE id_municipio = '10';
+UPDATE municipios SET id_mapa = 16 WHERE id_municipio = '203';
+UPDATE municipios SET id_mapa = 17 WHERE id_municipio = '56';
+UPDATE municipios SET id_mapa = 18 WHERE id_municipio = '75';
+UPDATE municipios SET id_mapa = 19 WHERE id_municipio = '70';
+UPDATE municipios SET id_mapa = 20 WHERE id_municipio = '06';
+UPDATE municipios SET id_mapa = 21 WHERE id_municipio = '198';
+UPDATE municipios SET id_mapa = 22 WHERE id_municipio = '57';
+UPDATE municipios SET id_mapa = 23 WHERE id_municipio = '02';
+UPDATE municipios SET id_mapa = 24 WHERE id_municipio = '82';
+UPDATE municipios SET id_mapa = 25 WHERE id_municipio = '54';
