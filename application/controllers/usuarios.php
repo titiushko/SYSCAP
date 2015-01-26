@@ -24,7 +24,7 @@ class Usuarios extends CI_Controller{
 			$datos['id_modal'] = 'myModal';
 			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="location.href=\''.base_url().'usuarios/mostrar/'.$codigo_usuario.'\';"';
 			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Usuario';
-			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->usuarios_model->nombre_completo_usuario($codigo_usuario), ENT_COMPAT, 'UTF-8').'.';
+			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.';
 			$this->notificacion = FALSE;
 		}
 		
@@ -206,7 +206,7 @@ class Usuarios extends CI_Controller{
 		
 		$lista_certificaciones_usuario = ''; $certificaciones = 1;
 		foreach($this->usuarios_model->certificaciones_usuario($codigo_usuario) as $certificacion){
-			$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8').'</td></tr>';
+			$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.utf8($certificacion->nombre).'</td></tr>';
 		}
 		if($lista_certificaciones_usuario == ''){
 			$lista_certificaciones_usuario = 'El usuario no tiene certificaciones.';
@@ -214,7 +214,7 @@ class Usuarios extends CI_Controller{
 		
 		$lista_cursos_usuario = ''; $cursos = 1;
 		foreach($this->usuarios_model->calificaciones_usuario($codigo_usuario) as $curso){
-			$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8').'</td><td>'.$curso->nota.'</td></tr>';
+			$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.utf8($curso->nombre).'</td><td>'.$curso->nota.'</td></tr>';
 		}
 		if($lista_cursos_usuario == ''){
 			$lista_cursos_usuario = 'El usuario no a recibido cursos.';
@@ -233,15 +233,15 @@ class Usuarios extends CI_Controller{
 										   '<MODALIDAD_USUARIO>',
 										   '<CERTIFICACIONES_USUARIO>',
 										   '<CURSOS_USUARIO>'),
-									 array(htmlentities($usuario[0]->nombres_usuario, ENT_COMPAT, 'UTF-8'),
-										   htmlentities($usuario[0]->apellido1_usuario, ENT_COMPAT, 'UTF-8'),
+									 array(utf8($usuario[0]->nombres_usuario),
+										   utf8($usuario[0]->apellido1_usuario),
 										   $usuario[0]->dui_usuario,
 										   $usuario[0]->correo_electronico_usuario,
-										   htmlentities($this->profesiones_model->nombre_profesion($usuario[0]->id_profesion), ENT_COMPAT, 'UTF-8'),
-										   htmlentities($this->centros_educativos_model->nombre_centro_educativo($usuario[0]->id_centro_educativo), ENT_COMPAT, 'UTF-8'),
-										   htmlentities($usuario[0]->direccion_usuario, ENT_COMPAT, 'UTF-8'),
-										   htmlentities($usuario[0]->nombre_usuario, ENT_COMPAT, 'UTF-8'),
-										   htmlentities($this->tipos_usuarios_model->nombre_tipo_usuario($usuario[0]->id_tipo_usuario), ENT_COMPAT, 'UTF-8'),
+										   utf8($this->profesiones_model->nombre_profesion($usuario[0]->id_profesion)),
+										   utf8($this->centros_educativos_model->nombre_centro_educativo($usuario[0]->id_centro_educativo)),
+										   utf8($usuario[0]->direccion_usuario),
+										   utf8($usuario[0]->nombre_usuario),
+										   utf8($this->tipos_usuarios_model->nombre_tipo_usuario($usuario[0]->id_tipo_usuario)),
 										   $usuario[0]->modalidad_usuario,
 										   $lista_certificaciones_usuario,
 										   $lista_cursos_usuario),

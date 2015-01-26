@@ -11,7 +11,7 @@ $nombre_centro_educativo = array(
 	'id'		=> 'nombre_centro_educativo',
 	'maxlength'	=> '60',
 	'size'		=> '20',
-	'value'		=> htmlentities(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo), ENT_COMPAT, 'UTF-8'),
+	'value'		=> utf8(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo)),
 	'class'		=> 'form-control text-capitalize',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
@@ -82,14 +82,14 @@ else{
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Departamento:'); ?>
-										<?= form_dropdown('id_departamento', $lista_departamentos, htmlentities(set_value('id_departamento', @$centro_educativo[0]->id_departamento), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+										<?= form_dropdown('id_departamento', $lista_departamentos, utf8(set_value('id_departamento', @$centro_educativo[0]->id_departamento)), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
 										<?= form_error('id_departamento'); ?>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Municipio:'); ?>
-										<?= form_dropdown('id_municipio', $lista_municipios, htmlentities(set_value('id_municipio', @$centro_educativo[0]->id_municipio), ENT_COMPAT, 'UTF-8'), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+										<?= form_dropdown('id_municipio', $lista_municipios, utf8(set_value('id_municipio', @$centro_educativo[0]->id_municipio)), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
 										<?= form_error('id_municipio'); ?>
 									</div>
 								</div>
@@ -127,7 +127,7 @@ else{
 												?>
 												<tr>
 													<td><?= $docentes_capacitados; ?></td>
-													<td><?= htmlentities($docente_capacitado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+													<td><?= utf8($docente_capacitado->nombre_completo_usuario); ?></td>
 												</tr>
 												<?php
 													$docentes_capacitados++;
@@ -154,7 +154,7 @@ else{
 												?>
 												<tr>
 													<td><?= $docentes_certificados; ?></td>
-													<td><?= htmlentities($docente_certificado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+													<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
 												</tr>
 												<?php
 													$docentes_certificados++;

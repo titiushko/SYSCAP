@@ -12,13 +12,13 @@
 	<body style="font-size: 12px;">
 		<h1 align="center">Reporte de Centros Educativos</h1>
 		<fieldset>
-			<legend><h3>Informacion General</h3></legend>
+			<legend><h3>Información General</h3></legend>
 			<hr/>
 			<table border="0">
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Nombre:</td>
 					<td style="widtd: 250px;"><NOMBRE_CENTRO_EDUCATIVO></td>
-					<td style="text-align: left; font-weight: bold; widtd: 100px;">Codigo:</td>
+					<td style="text-align: left; font-weight: bold; widtd: 100px;">Código:</td>
 					<td style="widtd: 250px;"><CODIGO_CENTRO_EDUCATIVO></td>
 				</tr>
 				<tr><td colspan="4">&nbsp;</td></tr>

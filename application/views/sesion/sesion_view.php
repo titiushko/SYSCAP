@@ -82,7 +82,7 @@
 											<input name="remember" type="checkbox" value="Remember Me">Recordarme
 										</label>
 									</div>
-									<?= form_submit('boton_primario', htmlentities('Iniciar Sesion', ENT_COMPAT, 'UTF-8'), $boton_primario); ?>
+									<?= form_submit('boton_primario', utf8('Iniciar Sesion'), $boton_primario); ?>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
 						</div>

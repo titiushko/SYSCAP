@@ -76,7 +76,7 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $centroseducativos; ?></td>
-								<td><?= htmlentities($tbl->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($tbl->nombre_centro_educativo); ?></td>
 								<td><?= $tbl->capacitados; ?></td>
 								<td><?= $tbl->certificados; ?></td>
 							</tr>
@@ -120,11 +120,11 @@ $boton_primario = 'class="btn btn-primary"';
 							?>
 							<tr>
 								<td><?= $centroseducativos; ?></td>
-								<td><?= htmlentities($lst->nombres_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->apellido1_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->apellido2_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->tipo_capacitado, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($lst->nombres_usuario); ?></td>
+								<td><?= utf8($lst->apellido1_usuario); ?></td>
+								<td><?= utf8($lst->apellido2_usuario); ?></td>
+								<td><?= utf8($lst->tipo_capacitado); ?></td>
+								<td><?= utf8($lst->modalidad_usuario); ?></td>
 							</tr>
 							<?php
 							$centroseducativos++;

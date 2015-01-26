@@ -63,7 +63,7 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $tbl->row_number; ?></td>
-								<td><?= htmlentities($tbl->nombre_departamento, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($tbl->nombre_departamento); ?></td>
 								<td><?= $tbl->capacitados; ?></td>
 								<td><?= $tbl->certificados; ?></td>
 							</tr>

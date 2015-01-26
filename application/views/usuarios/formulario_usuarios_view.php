@@ -53,7 +53,7 @@ $nombres_usuario = array(
 	'id'		=>	'nombres_usuario',
 	'maxlength'	=>	'60',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('nombres_usuario', @$usuario[0]->nombres_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	utf8(set_value('nombres_usuario', @$usuario[0]->nombres_usuario)),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
@@ -63,7 +63,7 @@ $apellido1_usuario = array(
 	'id'		=>	'apellido1_usuario',
 	'maxlength'	=>	'60',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('apellido1_usuario', @$usuario[0]->apellido1_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	utf8(set_value('apellido1_usuario', @$usuario[0]->apellido1_usuario)),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
@@ -93,7 +93,7 @@ $direccion_usuario = array(
 	'name'		=>	'direccion_usuario',
 	'id'		=>	'direccion_usuario',
 	'rows'		=>	'3',
-	'value'		=>	htmlentities(set_value('direccion_usuario', @$usuario[0]->direccion_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	utf8(set_value('direccion_usuario', @$usuario[0]->direccion_usuario)),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
@@ -127,7 +127,7 @@ $modalidad_usuario = array(
 	'id'		=>	'modalidad_usuario',
 	'maxlength'	=>	'30',
 	'size'		=>	'20',
-	'value'		=>	htmlentities(set_value('modalidad_usuario', @$usuario[0]->modalidad_usuario), ENT_COMPAT, 'UTF-8'),
+	'value'		=>	utf8(set_value('modalidad_usuario', @$usuario[0]->modalidad_usuario)),
 	'class'		=>	'form-control',
 	'disabled'	=>	'disabled'
 );
@@ -299,7 +299,7 @@ $modalidad_usuario = array(
 												?>
 												<tr>
 													<td><?= $certificaciones; ?></td>
-													<td><?= htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+													<td><?= utf8($certificacion->nombre); ?></td>
 												</tr>
 												<?php
 													$certificaciones++;
@@ -327,7 +327,7 @@ $modalidad_usuario = array(
 												?>
 												<tr>
 													<td><?= $cursos; ?></td>
-													<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+													<td><?= utf8($curso->nombre); ?></td>
 													<td><?= $curso->nota; ?></td>
 												</tr>
 												<?php

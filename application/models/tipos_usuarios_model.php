@@ -7,19 +7,21 @@ class Tipos_usuarios_model extends CI_Model{
 	
 	function lista_tipos_usuarios(){
 		$lista_tipos_usuarios[''] = '';
-		$this->db->select('id_tipo_usuario, nombre_tipo_usuario');
+		$query = $this->db->select('id_tipo_usuario, acentos(nombre_tipo_usuario) nombre_tipo_usuario');
 		$query = $this->db->get('tipos_usuarios');
 		foreach($query->result() as $tipo_usuario){
-			$lista_tipos_usuarios[$tipo_usuario->id_tipo_usuario] = htmlentities($tipo_usuario->nombre_tipo_usuario, ENT_COMPAT, 'UTF-8');
+			$lista_tipos_usuarios[$tipo_usuario->id_tipo_usuario] = utf8($tipo_usuario->nombre_tipo_usuario);
 		}
 		return $lista_tipos_usuarios;
 	}
 	
 	function nombre_tipo_usuario($codigo_tipo_usuario){
-		$query = $this->db->select('nombre_tipo_usuario');
-		$query = $this->db->where('id_tipo_usuario', $codigo_tipo_usuario);
-		$query = $this->db->get('tipos_usuarios');
-		return $query->result()[0]->nombre_tipo_usuario;
+		if($codigo_tipo_usuario != 0){
+			$query = $this->db->select('acentos(nombre_tipo_usuario) nombre_tipo_usuario');
+			$query = $this->db->where('id_tipo_usuario', $codigo_tipo_usuario);
+			$query = $this->db->get('tipos_usuarios');
+			return $query->result()[0]->nombre_tipo_usuario;
+		}
 	}
 }
 

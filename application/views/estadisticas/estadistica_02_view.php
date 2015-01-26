@@ -72,7 +72,7 @@ $boton_primario = 'class="btn btn-primary"';
 							?>
 							<tr>
 								<td><?= $cantidades; ?></td>
-								<td><?= htmlentities($cantidad_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
@@ -125,9 +125,9 @@ $boton_primario = 'class="btn btn-primary"';
 							?>
 							<tr>
 								<td><?= $usuarios; ?></td>
-								<td><?= htmlentities($usuario_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($usuario_municipio->nombre_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($usuario_municipio->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($usuario_municipio->nombre_municipio); ?></td>
+								<td><?= utf8($usuario_municipio->nombre_usuario); ?></td>
+								<td><?= utf8($usuario_municipio->modalidad_usuario); ?></td>
 							</tr>
 							<?php
 							$usuarios++;

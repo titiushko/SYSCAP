@@ -8,28 +8,30 @@ class Centros_educativos_model extends CI_Model{
 	
 	function lista_centros_educativos(){
 		$lista_centros_educativos[''] = '';
-		$this->db->select('id_centro_educativo, nombre_centro_educativo');
+		$query = $this->db->select('id_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo');
 		$query = $this->db->get('centros_educativos', 100, 0);
 		foreach($query->result() as $centro_educativo){
-			$lista_centros_educativos[$centro_educativo->id_centro_educativo] = htmlentities($centro_educativo->nombre_centro_educativo, ENT_COMPAT, 'UTF-8');
+			$lista_centros_educativos[$centro_educativo->id_centro_educativo] = utf8($centro_educativo->nombre_centro_educativo);
 		}
 		return $lista_centros_educativos;
 	}
 	
 	function centros_educativos(){
+		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo, id_departamento, id_municipio');
 		$query = $this->db->get('centros_educativos', 100, 0);
 		return $query->result();
 	}
 	
 	function centro_educativo($codigo_centro_educativo){
+		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo, id_departamento, id_municipio');
 		$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
 		$query = $this->db->get('centros_educativos');
 		return $query->result();
 	}
 	
 	function nombre_centro_educativo($codigo_centro_educativo){
-		$query = $this->db->query('SELECT F_NombreCentroEducativo(?) AS nombre_centro_educativo', array($codigo_centro_educativo));
-		return $query->result()[0]->nombre_centro_educativo;
+		$query = $this->db->query('SELECT acentos(F_NombreCentroEducativo(?)) nombre_centro_educativo', array($codigo_centro_educativo));
+		return utf8($query->result()[0]->nombre_centro_educativo);
 	}
 	
 	function modificar($datos, $codigo_centro_educativo){

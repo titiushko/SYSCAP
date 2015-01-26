@@ -30,7 +30,7 @@ class Estadisticas_model extends CI_Model{
 			$query = $this->db->query('SELECT * FROM V_UsuariosTotalDepartamento');
 		}
 		else{
-			$query = $this->db->query('SELECT capacitados.nombre_municipio nombre_municipio, capacitados.total capacitados, (CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+			$query = $this->db->query('SELECT acentos(capacitados.nombre_municipio) nombre_municipio, capacitados.total capacitados, (CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
 									   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) capacitados
 									   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) certificados
 									   ON capacitados.nombre_municipio = certificados.nombre_municipio
@@ -45,7 +45,7 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	function usuarios_municipio($id_departamento){
-		$query = $this->db->query('SELECT DISTINCT m.nombre_municipio, F_NombreCompletoUsuario(u.id_usuario) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
+		$query = $this->db->query('SELECT DISTINCT acentos(m.nombre_municipio) nombre_municipio, acentos(F_NombreCompletoUsuario(u.id_usuario)) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
 								   FROM usuarios u INNER JOIN municipios m ON(u.id_municipio = m.id_municipio)
 								   WHERE u.id_departamento LIKE '.($id_departamento == '' ? '\'%\'' : '?').'
 								   ORDER BY 1', array($id_departamento));

@@ -77,9 +77,9 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $tbl->row_number; ?></td>
-								<td><?= htmlentities($tbl->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($tbl->capacitados, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($tbl->certificados, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($tbl->nombre_municipio); ?></td>
+								<td><?= utf8($tbl->capacitados); ?></td>
+								<td><?= utf8($tbl->certificados); ?></td>
 							</tr>
 							<?php } ?>
 						</tbody>

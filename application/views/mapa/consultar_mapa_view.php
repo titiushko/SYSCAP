@@ -39,8 +39,8 @@
 									<?php foreach($coordenadas as $coordenada) { ?>
 									<tr onclick="datos_coordenada(<?= $coordenada->longitud_mapa; ?>, <?= $coordenada->latitud_mapa; ?>, marker_<?= $coordenada->id_mapa; ?>);" style="cursor: pointer;">
 										<td><?= $coordenada->id_mapa; ?></td>
-										<td><?= htmlentities($coordenada->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
-										<td><?= htmlentities($coordenada->nombre_departamento, ENT_COMPAT, 'UTF-8'); ?></td>
+										<td><?= utf8($coordenada->nombre_municipio); ?></td>
+										<td><?= utf8($coordenada->nombre_departamento); ?></td>
 									</tr>
 									<?php } ?>
 								</tbody>

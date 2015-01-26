@@ -24,7 +24,7 @@ class Centros_educativos extends CI_Controller{
 			$datos['id_modal'] = 'myModal';
 			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.$codigo_centro_educativo.'\';"';
 			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Centro Educativo';
-			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.htmlentities($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo), ENT_COMPAT, 'UTF-8').'.';
+			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.';
 			$this->notificacion = FALSE;
 		}
 		
@@ -145,7 +145,7 @@ class Centros_educativos extends CI_Controller{
 		
 		$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
 		foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'),'tutorizado') as $docente_capacitado){
-			$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.htmlentities($docente_capacitado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8').'</td></tr>';
+			$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
 		}
 		if($lista_docentes_capacitados == ''){
 			$lista_docentes_capacitados ='No hay docentes capacitados en este centro educativo.';
@@ -153,7 +153,7 @@ class Centros_educativos extends CI_Controller{
 		
 		$lista_docentes_certificados =  ''; $docentes_certificados= 1;
 		foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo,7, '%certificacion%', array('docentes'),'tutorizado') as $docente_certificado){
-			$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.htmlentities($docente_certificado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8').'</td></tr>';
+			$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td></tr>';
 		}
 		if($lista_docentes_certificados == ''){
 			$lista_docentes_certificados ='';
@@ -166,10 +166,10 @@ class Centros_educativos extends CI_Controller{
 										   '<MUNICIPIO_CENTRO_EDUCATIVO>',
 										   '<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>',
 										   '<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>',),
-									 array(htmlentities($centro_educativo[0]->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'),
+									 array(utf8($centro_educativo[0]->nombre_centro_educativo),
 										   $centro_educativo[0]->codigo_centro_educativo, 
-										   htmlentities($this->departamentos_model->nombre_departamento($centro_educativo[0]->id_departamento), ENT_COMPAT, 'UTF-8'),
-										   htmlentities($this->municipios_model->nombre_municipio($centro_educativo[0]->id_municipio), ENT_COMPAT, 'UTF-8'), 
+										   utf8($this->departamentos_model->nombre_departamento($centro_educativo[0]->id_departamento)),
+										   utf8($this->municipios_model->nombre_municipio($centro_educativo[0]->id_municipio)), 
 										   $lista_docentes_capacitados, 
 										   $lista_docentes_certificados),
 									 $plantilla_pdf);

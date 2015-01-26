@@ -7,16 +7,16 @@ class Municipios_model extends CI_Model{
 	
 	function lista_municipios(){
 		$lista_municipios[''] = '';
-		$this->db->select('id_municipio, nombre_municipio');
+		$query = $this->db->select('id_municipio, acentos(nombre_municipio) nombre_municipio');
 		$query = $this->db->get('municipios');
 		foreach($query->result() as $municipio){
-			$lista_municipios[$municipio->id_municipio] = htmlentities($municipio->nombre_municipio, ENT_COMPAT, 'UTF-8');
+			$lista_municipios[$municipio->id_municipio] = utf8($municipio->nombre_municipio);
 		}
 		return $lista_municipios;
 	}
 	
-	function nombre_municipio($codigo_municipio = NULL){
-		$query = $this->db->select('nombre_municipio');
+	function nombre_municipio($codigo_municipio){
+		$query = $this->db->select('acentos(nombre_municipio) nombre_municipio');
 		$query = $this->db->where('id_municipio', $codigo_municipio);
 		$query = $this->db->get('municipios');
 		return $query->result()[0]->nombre_municipio;

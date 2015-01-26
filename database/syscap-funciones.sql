@@ -2,13 +2,13 @@ USE syscap;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS initcap $$
-CREATE FUNCTION initcap(p_cadena char(255)) RETURNS CHAR(255) CHARSET utf8
+CREATE FUNCTION initcap(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
 COMMENT 'Función que devuelve la primera letra de cada palabra en mayúsculas.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
-	SET @v_string1 ='';
-	SET @v_string2 ='';
+	SET @v_string1 = '';
+	SET @v_string2 = '';
 	WHILE p_cadena REGEXP ' ' DO
 		SELECT SUBSTRING_INDEX(p_cadena, ' ', 1) INTO @v_string2;
 		SELECT SUBSTRING(p_cadena, LOCATE(' ', p_cadena) + 1) INTO p_cadena;
@@ -94,10 +94,16 @@ DETERMINISTIC
 READS SQL DATA
 BEGIN
 	DECLARE v_nombre_completo_usuario VARCHAR(300);
+	DECLARE v_nombres_usuario VARCHAR(100);
+	DECLARE v_apellido1_usuario VARCHAR(100);
+	DECLARE v_apellido2_usuario VARCHAR(100);
 	DECLARE v_termina INT DEFAULT FALSE;
 	
 	DECLARE c_nombre_completo_usuario CURSOR FOR
-		SELECT CONCAT(IF(nombres_usuario IS NOT NULL, nombres_usuario, ''), ' ', IF(apellido1_usuario IS NOT NULL, apellido1_usuario, ''), ' ', IF(apellido2_usuario IS NOT NULL, apellido2_usuario, '')) nombre_completo_usuario
+		SELECT
+			IF(nombres_usuario IS NOT NULL, nombres_usuario, '') nombres_usuario,
+			IF(apellido1_usuario IS NOT NULL, apellido1_usuario, '') apellido1_usuario,
+			IF(apellido2_usuario IS NOT NULL, apellido2_usuario, '') apellido2_usuario
 		FROM usuarios
 		WHERE id_usuario = p_codigo_usuario;
 	
@@ -105,7 +111,14 @@ BEGIN
 	
 	OPEN c_nombre_completo_usuario;
 	recorre_cursor: LOOP
-		FETCH c_nombre_completo_usuario INTO v_nombre_completo_usuario;
+		FETCH c_nombre_completo_usuario
+		INTO v_nombres_usuario, v_apellido1_usuario, v_apellido2_usuario;
+		
+		IF LOCATE(' ', v_apellido1_usuario) <> 0 THEN
+			SET v_nombre_completo_usuario = (SELECT CONCAT(IF(v_nombres_usuario IS NOT NULL, v_nombres_usuario, ''), ' ', IF(v_apellido1_usuario IS NOT NULL, v_apellido1_usuario, '')) nombre_completo_usuario);
+		ELSE
+			SET v_nombre_completo_usuario = (SELECT CONCAT(IF(v_nombres_usuario IS NOT NULL, v_nombres_usuario, ''), ' ', IF(v_apellido1_usuario IS NOT NULL, v_apellido1_usuario, ''), ' ', IF(v_apellido2_usuario IS NOT NULL, v_apellido2_usuario, '')) nombre_completo_usuario);
+		END IF;
 		
 		IF v_termina THEN
 			LEAVE recorre_cursor;
@@ -152,4 +165,39 @@ BEGIN
 	RETURN v_nombre_centro_educativo;
 END;
 $$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS acentos $$
+CREATE FUNCTION acentos(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
+COMMENT 'Función que corrige los problemas de tildes.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_cadena CHAR(255);
+	
+	SET v_cadena = p_cadena;
+	SET v_cadena = REPLACE(v_cadena, 'Ã', 'Á');
+	SET v_cadena = REPLACE(v_cadena, 'ã¡', 'á');
+	SET v_cadena = REPLACE(v_cadena, 'ã©', 'é');
+	SET v_cadena = REPLACE(v_cadena, 'í¨', 'é');
+	SET v_cadena = REPLACE(v_cadena, 'í‰', 'é');
+	SET v_cadena = REPLACE(v_cadena, 'í¨', 'é');
+	SET v_cadena = REPLACE(v_cadena, 'ã¬', 'í');
+	SET v_cadena = REPLACE(v_cadena, 'ã', 'í');
+	SET v_cadena = REPLACE(v_cadena, 'ã²', 'ó');
+	SET v_cadena = REPLACE(v_cadena, 'ã³', 'ó');
+	SET v_cadena = REPLACE(v_cadena, 'í³', 'ó');
+	SET v_cadena = REPLACE(v_cadena, 'í²', 'ó');
+	SET v_cadena = REPLACE(v_cadena, 'íº', 'ú');
+	SET v_cadena = REPLACE(v_cadena, 'í¹', 'ú');
+	SET v_cadena = REPLACE(v_cadena, 'ã‘', 'ñ');
+	SET v_cadena = REPLACE(v_cadena, 'í‘', 'ñ');
+	SET v_cadena = REPLACE(v_cadena, 'í±', 'ñ');
+	SET v_cadena = REPLACE(v_cadena, 'ã±', 'ñ');
+	
+	RETURN v_cadena;
+END$$
 DELIMITER ;

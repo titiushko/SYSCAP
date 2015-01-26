@@ -13,7 +13,7 @@
 		);
 		echo meta($metainformaciones);
 		?>
-		<title><?= htmlentities(@$usuario[0]->nombres_usuario.' '.@$usuario[0]->apellido1_usuario, ENT_COMPAT, 'UTF-8'); ?></title>
+		<title><?= utf8(@$usuario[0]->nombres_usuario.' '.@$usuario[0]->apellido1_usuario); ?></title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
 		<?= link_tag('resources/css/estilo.css'); ?>
@@ -34,9 +34,9 @@
 					<?= form_fieldset(heading('Datos Personales', 3)); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
-								<th class="column-title">Nombres:</th><td class="column-value"><?= htmlentities(@$usuario[0]->nombres_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Nombres:</th><td class="column-value"><?= utf8(@$usuario[0]->nombres_usuario); ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Apellidos:</th><td class="column-value"><?= htmlentities(@$usuario[0]->apellido1_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Apellidos:</th><td class="column-value"><?= utf8(@$usuario[0]->apellido1_usuario); ?></td>
 							</tr>
 							<tr><td colspan="5"><?= nbs(); ?></td></tr>
 							<tr>
@@ -46,13 +46,13 @@
 							</tr>
 							<tr><td colspan="5"><?= nbs(); ?></td></tr>
 							<tr>
-								<th class="column-title">Profesión:</th><td class="column-value"><?= htmlentities(@$nombre_profesion, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Profesión:</th><td class="column-value"><?= utf8(@$nombre_profesion); ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Centro Educativo:</th><td class="column-value"><?= htmlentities(@$nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Centro Educativo:</th><td class="column-value"><?= utf8(@$nombre_centro_educativo); ?></td>
 							</tr>
 							<tr><td colspan="5"><?= nbs(); ?></td></tr>
 							<tr>
-								<th class="column-title">Dirección:</th><td colspan="4" class="column-value"><?= htmlentities(@$usuario[0]->direccion_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Dirección:</th><td colspan="4" class="column-value"><?= utf8(@$usuario[0]->direccion_usuario); ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -66,7 +66,7 @@
 							<tr>
 								<th class="column-title">Nombre de Usuario:</th><td class="column-value"><?= @$usuario[0]->nombre_usuario; ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Tipo de Usuario:</th><td class="column-value"><?= htmlentities(@$nombre_tipo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Tipo de Usuario:</th><td class="column-value"><?= utf8(@$nombre_tipo_usuario); ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -78,7 +78,7 @@
 					<?= form_fieldset(heading('Información de Cursos', 3)); ?>
 						<table align="center" border="0">
 							<tr>
-								<th class="column-modality">Modalidad de Capacitación:</th><td class="column-value"><?= htmlentities(@$usuario[0]->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-modality">Modalidad de Capacitación:</th><td class="column-value"><?= utf8(@$usuario[0]->modalidad_usuario); ?></td>
 							</tr>
 						</table>
 						<table align="center" border="0" width="100%">
@@ -99,7 +99,7 @@
 											?>
 											<tr>
 												<td><?= $certificaciones; ?></td>
-												<td><?= htmlentities($certificacion->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+												<td><?= utf8($certificacion->nombre); ?></td>
 											</tr>
 											<?php
 												$certificaciones++;
@@ -126,7 +126,7 @@
 											?>
 											<tr>
 												<td><?= $cursos; ?></td>
-												<td><?= htmlentities($curso->nombre, ENT_COMPAT, 'UTF-8'); ?></td>
+												<td><?= utf8($curso->nombre); ?></td>
 												<td><?= $curso->nota; ?></td>
 											</tr>
 											<?php

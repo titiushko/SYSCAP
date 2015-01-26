@@ -9,8 +9,8 @@ class Mapa_model extends CI_Model{
 		$query = $this->db->query('SELECT mapas.id_mapa id_mapa,
 								   mapas.longitud_mapa longitud_mapa,
 								   mapas.latitud_mapa latitud_mapa,
-								   municipios.nombre_municipio nombre_municipio,
-								   departamentos.nombre_departamento nombre_departamento
+								   acentos(municipios.nombre_municipio) nombre_municipio,
+								   acentos(departamentos.nombre_departamento) nombre_departamento
 								   FROM mapas LEFT JOIN municipios ON mapas.id_mapa = municipios.id_mapa
 								   LEFT JOIN departamentos ON departamentos.id_departamento = municipios.id_departamento');
 		return $query->result();

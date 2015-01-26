@@ -1,5 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/* Convierte todos los caracteres aplicables a entidades HTML. */
+if(!function_exists('utf8')){
+	function utf8($cadena){
+		return htmlentities($cadena, ENT_COMPAT, 'UTF-8');
+	}
+}
+
+/* Elimina caracteres especiales. */
 if(!function_exists('acentos')){
 	function acentos($cadena){
 		$cadena = trim($cadena);

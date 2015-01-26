@@ -7,19 +7,21 @@ class Profesiones_model extends CI_Model{
 	
 	function lista_profesiones(){
 		$lista_profesiones[''] = '';
-		$this->db->select('id_profesion, nombre_profesion');
+		$query = $this->db->select('id_profesion, acentos(nombre_profesion) nombre_profesion');
 		$query = $this->db->get('profesiones');
 		foreach($query->result() as $profesion){
-			$lista_profesiones[$profesion->id_profesion] = htmlentities($profesion->nombre_profesion, ENT_COMPAT, 'UTF-8');
+			$lista_profesiones[$profesion->id_profesion] = utf8($profesion->nombre_profesion);
 		}
 		return $lista_profesiones;
 	}
 	
 	function nombre_profesion($codigo_profesion){
-		$query = $this->db->select('nombre_profesion');
-		$query = $this->db->where('id_profesion', $codigo_profesion);
-		$query = $this->db->get('profesiones');
-		return $query->result()[0]->nombre_profesion;
+		if($codigo_profesion != NULL){
+			$query = $this->db->select('acentos(nombre_profesion) nombre_profesion');
+			$query = $this->db->where('id_profesion', $codigo_profesion);
+			$query = $this->db->get('profesiones');
+			return $query->result()[0]->nombre_profesion;
+		}
 	}
 }
 

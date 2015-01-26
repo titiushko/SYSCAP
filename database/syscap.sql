@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS departamentos(
 	nombre_departamento VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un departamento. Los valores de esté campo se obtendrán del campo <deptos> de Moodle usando ETL.',
 	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un departamento en el mapa.',
 	PRIMARY KEY(id_departamento)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de nombres de los departamentos de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_deptos> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de nombres de los departamentos de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_deptos> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS centros_educativos(
 	id_centro_educativo INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un centro educativo. Los valores de esté campo se obtendrán del campo <row_id> de Moodle usando ETL.',
@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS centros_educativos(
 	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador del municipio al que pertenece un centro educativo. Los valores de esté campo se obtendrán del campo <muni> de Moodle usando ETL.',
 	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un centro educativo en el mapa.',
 	PRIMARY KEY(id_centro_educativo)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de centros educativos. Los registros de está tabla se obtendrán de la tabla <mdl_cat_educativa> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de centros educativos. Los registros de está tabla se obtendrán de la tabla <mdl_cat_educativa> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS municipios(
 	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador de un municipio. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -25,39 +25,39 @@ CREATE TABLE IF NOT EXISTS municipios(
 	nombre_municipio VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un municipio. Los valores de esté campo se obtendrán del campo <opcion> de Moodle usando ETL.',
 	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un municipio en el mapa.',
 	PRIMARY KEY(id_municipio)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de nombres de los municipios de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_municip> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de nombres de los municipios de El Salvador. Los registros de está tabla se obtendrán de la tabla <mdl_cat_municip> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS niveles_estudios(
 	id_nivel_estudio INT(4) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un nivel de estudio. Los valores de esté campo se obtendrán del campo <cod_nestudio> de Moodle usando ETL.',
 	nombre_nivel_estudio VARCHAR(100) NOT NULL COMMENT 'Nombre completo de un nivel de estudio. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
 	PRIMARY KEY(id_nivel_estudio)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de niveles de estudios. Los registros de está tabla se obtendrán de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de niveles de estudios. Los registros de está tabla se obtendrán de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS profesiones(
   id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesión. Los valores de esté campo se obtendrán del campo <cod_profesion> de Moodle usando ETL.',
   nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesión. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
   PRIMARY KEY(id_profesion)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS matriculas(
 	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  una matricula. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece una matricula. Los valores de esté campo se obtendrán del campo <instanceid> de Moodle usando ETL.',
 	PRIMARY KEY(id_matricula)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información de las matriculas de usuarios con mdl_course. Los registros de está tabla se obtendrán de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las matriculas de usuarios con mdl_course. Los registros de está tabla se obtendrán de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS cursos(
 	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un curso. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	nombre_completo_curso VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un curso. Los valores de esté campo se obtendrán del campo <fullname> de Moodle usando ETL.',
 	nombre_corto_curso VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un curso. Los valores de esté campo se obtendrán del campo <shortname> de Moodle usando ETL.',
 	PRIMARY KEY(id_curso)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información central de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información central de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS examenes(
 	id_examen BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un examen. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece un examen. Los valores de esté campo se obtendrán del campo <course> de Moodle usando ETL.',
 	nombre_examen VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un examen. Los valores de esté campo se obtendrán del campo <name> de Moodle usando ETL.',
 	PRIMARY KEY(id_examen)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información principal de cada examen. Los registros de está tabla se obtendrán de la tabla <mdl_quiz> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información principal de cada examen. Los registros de está tabla se obtendrán de la tabla <mdl_quiz> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS examenes_calificaciones(
 	id_examen_calificacion BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la calificación un examen final. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS examenes_calificaciones(
 	nota_examen_calificacion DOUBLE NOT NULL COMMENT 'Calificación de un examen final. Los valores de esté campo se obtendrán del campo <grade> de Moodle usando ETL.',
 	fecha_examen_calificacion DATE NULL DEFAULT NULL COMMENT 'Fecha de un examen final. Los valores de esté campo se obtendrán del campo <timemodified> de Moodle usando ETL.',
 	PRIMARY KEY(id_examen_calificacion)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información de las calificaciones de cada examen final. Los registros de está tabla se obtendrán de la tabla <mdl_quiz_grades> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las calificaciones de cada examen final. Los registros de está tabla se obtendrán de la tabla <mdl_quiz_grades> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS roles(
 	id_rol BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un rol de Moodle. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS roles(
 	descripcion_rol TEXT NOT NULL COMMENT 'Descripción de un rol de Moodle. Los valores de esté campo se obtendrán del campo <description> de Moodle usando ETL.',
 	criterio_rol BIGINT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Criterio de un rol de Moodle. Los valores de esté campo se obtendrán del campo <sortorder> de Moodle usando ETL.',
 	PRIMARY KEY(id_rol)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de roles de Moodle. Los registros de está tabla se obtendrán de la tabla <mdl_role> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de roles de Moodle. Los registros de está tabla se obtendrán de la tabla <mdl_role> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS roles_asignados(
 	id_rol_asignado BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un rol asignado. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS roles_asignados(
 	id_matricula BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la matricula al que pertenece un rol asignado. Los valores de esté campo se obtendrán del campo <contextid> de Moodle usando ETL.',
 	id_usuario BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del usuario al que pertenece un rol asignado. Los valores de esté campo se obtendrán del campo <userid> de Moodle usando ETL.',
 	PRIMARY KEY(id_rol_asignado)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información de la asignación de roles o funciones a diferentes matriculas o contexts. Los registros de está tabla se obtendrán de la tabla <mdl_role_assignments> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de la asignación de roles o funciones a diferentes matriculas o contexts. Los registros de está tabla se obtendrán de la tabla <mdl_role_assignments> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS usuarios(
 	id_usuario BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un usuario. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -109,7 +109,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
 	fecha_nacimiento_usuario DATE DEFAULT NULL COMMENT 'Fecha de nacimiento de un usuario. Los valores de esté campo se obtendrán del campo <fnacimiento> de Moodle usando ETL.',
 	modalidad_usuario VARCHAR(30) DEFAULT NULL COMMENT 'Modalidad de capacitación de un usuario. Los valores de esté campo se obtendrán del campo <auth> de Moodle usando ETL.',
 	PRIMARY KEY(id_usuario)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información de usuarios. Los registros de está tabla se obtendrán de la tabla <mdl_user> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de usuarios. Los registros de está tabla se obtendrán de la tabla <mdl_user> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS bitacoras(
 	id_bitacora BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -117,20 +117,20 @@ CREATE TABLE IF NOT EXISTS bitacoras(
 	fecha_bitacora DATETIME NOT NULL,
 	accion_bitacora VARCHAR(255) NOT NULL,
 	PRIMARY KEY(id_bitacora)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Información de las acciones realizadas por los usuarios.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las acciones realizadas por los usuarios.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS tipos_usuarios(
 	id_tipo_usuario INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
 	nombre_tipo_usuario VARCHAR(255),
 	PRIMARY KEY(id_tipo_usuario)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Catálogo de los tipos de usuarios.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de los tipos de usuarios.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS mapas(
 	id_mapa BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de una coordenada en el mapa.',
 	longitud_mapa DOUBLE NOT NULL COMMENT 'Posición en el eje X de una coordenada del mapa.',
 	latitud_mapa DOUBLE NOT NULL COMMENT 'Posición en el eje Y de una coordenada del mapa.',
 	PRIMARY KEY(id_mapa)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COMMENT 'Coordenadas de puntos en el mapa.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Coordenadas de puntos en el mapa.' AUTO_INCREMENT=1;
 
 ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_usuarios
 FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario);

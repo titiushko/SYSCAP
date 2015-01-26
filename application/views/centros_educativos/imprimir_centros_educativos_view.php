@@ -13,7 +13,7 @@
 		);
 		echo meta($metainformaciones);
 		?>
-		<title><?= htmlentities(@$centro_educativo[0]->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></title>
+		<title><?= utf8(@$centro_educativo[0]->nombre_centro_educativo); ?></title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
 		<?= link_tag('resources/css/estilo.css'); ?>
@@ -31,18 +31,18 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Centro Educativo', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Información General', 3)); ?>
+					<?= form_fieldset(heading('Informaci&oacute;n General', 3)); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
-								<th class="column-title">Nombres:</th><td class="column-value"><?= htmlentities(@$centro_educativo[0]->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Nombres:</th><td class="column-value"><?= utf8(@$centro_educativo[0]->nombre_centro_educativo); ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Codigo:</th><td class="column-value"><?= htmlentities(@$centro_educativo[0]->codigo_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">C&oacute;digo:</th><td class="column-value"><?= utf8(@$centro_educativo[0]->codigo_centro_educativo); ?></td>
 							</tr>
 							<tr><td colspan="5"><?= nbs(); ?></td></tr>
 							<tr>
-								<th class="column-title">Departamento:</th><td class="column-value"><?= htmlentities(@$nombre_departamento, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Departamento:</th><td class="column-value"><?= utf8(@$nombre_departamento); ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Municipio:</th><td class="column-value"><?= htmlentities(@$nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
+								<th class="column-title">Municipio:</th><td class="column-value"><?= utf8(@$nombre_municipio); ?></td>
 							</tr>
 						</table>
 					  <?= form_fieldset_close(); ?>
@@ -70,7 +70,7 @@
 											?>
 											<tr>
 												<td><?= $docentes_capacitados; ?></td>
-												<td><?= htmlentities($docente_capacitado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+												<td><?= utf8($docente_capacitado->nombre_completo_usuario); ?></td>
 											</tr>
 											<?php
 												$docentes_capacitados++;
@@ -96,7 +96,7 @@
 											?>
 											<tr>
 												<td><?= $docentes_certificados; ?></td>
-												<td><?= htmlentities($docente_certificado->nombre_completo_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+												<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
 											</tr>
 											<?php
 												$docentes_certificados++;
