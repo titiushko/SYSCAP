@@ -76,8 +76,8 @@ class Centros_educativos extends CI_Controller{
 			$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
 			$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
 		}
-		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, '%certificacion%', array('docentes'), 'tutorizado');
-		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'), 'tutorizado');
+		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
+		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
 		return $datos;
 	}
 	
@@ -105,74 +105,60 @@ class Centros_educativos extends CI_Controller{
 	}
 	
 	public function exportar($codigo_centro_educativo = NULL){
-		$pdf = new Pdf('P', 'cm', 'A4', true, 'UTF-8', false);
-		$pdf->SetCreator(PDF_CREATOR);
-		$pdf->SetTitle('Reporte de Centros Educativos');
-		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config_alt.php de libraries/config
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'Reporte de Centros Educativos', PDF_HEADER_STRING, array(0, 64, 255), array(0, 64, 128));
-		$pdf->setFooterData($tc = array(0, 64, 0), $lc = array(0, 64, 128));
-		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config.php de libraries/config
-		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
+		$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
+		$pdf->setPrintHeader(FALSE);
+		$pdf->setPrintFooter(FALSE);
 		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
 		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-		//relación utilizada para ajustar la conversión de los píxeles
 		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-		// establecer el modo de fuente por defecto
-		$pdf->setFontSubsetting(true);
-		// establecer el tipo de letra: si se tiene que imprimir carácteres ASCII estándar, se puede utilizar las fuentes básicas como Helvetica para reducir el tamaño del archivo
-		$pdf->SetFont('freemono', '', 14, '', true);
-		// añadir una página: este método tiene varias opciones, consultar la documentación para más información
+		$pdf->SetFont('helvetica', '', 13, '', true);
 		$pdf->AddPage();
-		// fijar efecto de sombra en el texto
-		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
-		// establecer el contenido para generar el pdf
 		$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_centro_educativo);
-		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 		$nombre_archivo = utf8_decode(acentos($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.pdf');
-		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
 	private function cargar_plantilla_pdf($codigo_centro_educativo = NULL){
 		$centro_educativo = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
-		
-		$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
-		foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 0, '%', array('docentes'),'tutorizado') as $docente_capacitado){
-			$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
-		}
-		if($lista_docentes_capacitados == ''){
-			$lista_docentes_capacitados ='No hay docentes capacitados en este centro educativo.';
-		}
-		
-		$lista_docentes_certificados =  ''; $docentes_certificados= 1;
-		foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo,7, '%certificacion%', array('docentes'),'tutorizado') as $docente_certificado){
-			$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td></tr>';
-		}
-		if($lista_docentes_certificados == ''){
-			$lista_docentes_certificados ='';
-		}
-		
 		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
-		$plantilla_pdf = str_replace(array('<NOMBRE_CENTRO_EDUCATIVO>',
-										   '<CODIGO_CENTRO_EDUCATIVO>',
-										   '<DEPARTAMENTO_CENTRO_EDUCATIVO>',
-										   '<MUNICIPIO_CENTRO_EDUCATIVO>',
-										   '<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>',
-										   '<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>',),
-									 array(utf8($centro_educativo[0]->nombre_centro_educativo),
-										   $centro_educativo[0]->codigo_centro_educativo, 
-										   utf8($this->departamentos_model->nombre_departamento($centro_educativo[0]->id_departamento)),
-										   utf8($this->municipios_model->nombre_municipio($centro_educativo[0]->id_municipio)), 
-										   $lista_docentes_capacitados, 
-										   $lista_docentes_certificados),
-									 $plantilla_pdf);
+		if(empty($centro_educativo)){
+			$plantilla_pdf = 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido' ;		//TODO: crear algo en respuesta, cuando sea un id no valido.
+		}
+		else{
+			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
+			foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'),'tutorizado') as $docente_capacitado){
+				$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
+			}
+			if($lista_docentes_capacitados == ''){
+				$lista_docentes_capacitados ='No hay docentes capacitados en el centro educativo.';
+			}
+			
+			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
+			foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'),'tutorizado') as $docente_certificado){
+				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td></tr>';
+			}
+			if($lista_docentes_certificados == ''){
+				$lista_docentes_certificados ='No hay docentes certificados en el centro educativo.';
+			}
+			
+			$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+											   '<NOMBRE_CENTRO_EDUCATIVO>',
+											   '<CODIGO_CENTRO_EDUCATIVO>',
+											   '<DEPARTAMENTO_CENTRO_EDUCATIVO>',
+											   '<MUNICIPIO_CENTRO_EDUCATIVO>',
+											   '<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>',
+											   '<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>',),
+										 array(encabezado_reporte(),
+											   utf8($centro_educativo[0]->nombre_centro_educativo),
+											   $centro_educativo[0]->codigo_centro_educativo,
+											   utf8($this->departamentos_model->nombre_departamento($centro_educativo[0]->id_departamento)),
+											   utf8($this->municipios_model->nombre_municipio($centro_educativo[0]->id_municipio)), 
+											   $lista_docentes_capacitados, 
+											   $lista_docentes_certificados),
+										 $plantilla_pdf);
+		}
 		return $plantilla_pdf;
 	}
 	

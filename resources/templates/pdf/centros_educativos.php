@@ -10,6 +10,7 @@
 		<title>SYSCAP</title>
 	</head>
 	<body style="font-size: 12px;">
+		<ENCABEZADO_REPORTE>
 		<h1 align="center">Reporte de Centros Educativos</h1>
 		<fieldset>
 			<legend><h3>Información General</h3></legend>
@@ -21,7 +22,6 @@
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Código:</td>
 					<td style="widtd: 250px;"><CODIGO_CENTRO_EDUCATIVO></td>
 				</tr>
-				<tr><td colspan="4">&nbsp;</td></tr>
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Departamento:</td>
 					<td style="widtd: 250px;"><DEPARTAMENTO_CENTRO_EDUCATIVO></td>
@@ -30,34 +30,41 @@
 				</tr>
 			</table>
 		</fieldset>
-		<br/>
 		<fieldset>
 			<legend><h3>Certificaciones</h3></legend>
 			<hr/>
-			<h4>Docentes Capacitados</h4>
-			<table border="1">
-				<tdead>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">#</td>
-						<td style="text-align: center; font-weight: bold;">Nombre</td>
-					</tr>
-				</tdead>
-				<tbody>
-					<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>
-				</tbody>
-			</table>
-			<br/>
-			<h4>Docentes Certificados</h4>
-			<table border="1">
-				<tdead>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">#</td>
-						<td style="text-align: center; font-weight: bold;">Nombre</td>
-					</tr>
-				</tdead>
-				<tbody>
-					<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>
-				</tbody>
+			<table border="0">
+				<tr>
+					<td style="width: 310px;" valign="top">
+						<h4 align="center">Docentes Capacitados</h4>
+						<table border="1">
+							<tdead>
+								<tr>
+									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
+									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre</td>
+								</tr>
+							</tdead>
+							<tbody>
+								<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>
+							</tbody>
+						</table>
+					</td>
+					<td style="width: 50px;">&nbsp;</td>
+					<td style="width: 310px;" valign="top">
+						<h4 align="center">Docentes Certificados</h4>
+						<table border="1">
+							<tdead>
+								<tr>
+									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
+									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre</td>
+								</tr>
+							</tdead>
+							<tbody>
+								<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>
+							</tbody>
+						</table>
+					</td>
+				</tr>
 			</table>
 		</fieldset>
 	</body>

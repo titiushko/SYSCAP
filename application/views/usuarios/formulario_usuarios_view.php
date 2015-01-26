@@ -283,7 +283,7 @@ $modalidad_usuario = array(
 							</div>
 							<div class="row">
 								<div class="col-lg-6">
-									<?= heading('Certificaciones Obtenidas', 4); ?>
+									<?= heading('Certificaciones Obtenidas', 4, 'class="text-center"'); ?>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered table-hover" id="data-tables-certificaciones_usuario">
 											<thead>
@@ -310,7 +310,7 @@ $modalidad_usuario = array(
 									</div>
 								</div>
 								<div class="col-lg-6">
-									<?= heading('Cursos Recibidos y Calificaciones Obtenidas', 4); ?>
+									<?= heading('Cursos Recibidos y Calificaciones Obtenidas', 4, 'class="text-center"'); ?>
 									<div class="table-responsive">
 										<table class="table table-striped table-bordered table-hover" id="data-tables-calificaciones_usuario">
 											<thead>

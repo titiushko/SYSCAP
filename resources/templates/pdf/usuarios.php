@@ -10,6 +10,7 @@
 		<title>SYSCAP</title>
 	</head>
 	<body style="font-size: 12px;">
+		<ENCABEZADO_REPORTE>
 		<h1 align="center">Reporte de Usuarios</h1>
 		<fieldset>
 			<legend><h3>Información General</h3></legend>
@@ -21,28 +22,24 @@
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Apellidos:</td>
 					<td style="widtd: 250px;"><APELLIDO1_USUARIO></td>
 				</tr>
-				<tr><td colspan="4">&nbsp;</td></tr>
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">DUI:</td>
 					<td style="widtd: 250px;"><DUI_USUARIO></td>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Correo Electrónico:</td>
 					<td style="widtd: 250px;"><CORREO_USUARIO></td>
 				</tr>
-				<tr><td colspan="4">&nbsp;</td></tr>
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Profesión:</td>
 					<td style="widtd: 250px;"><PROFESION_USUARIO></td>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Centro Educativo:</td>
 					<td style="widtd: 250px;"><CENTRO_EDUCATIVO_USUARIO></td>
 				</tr>
-				<tr><td colspan="4">&nbsp;</td></tr>
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Dirección:</td>
 					<td colspan="3" style="widtd: 250px;"><DIRECCION_USUARIO></td>
 				</tr>
 			</table>
 		</fieldset>
-		<br/>
 		<fieldset>
 			<legend><h3>Información de Usuario</h3></legend>
 			<hr/>
@@ -55,7 +52,6 @@
 				</tr>
 			</table>
 		</fieldset>
-		<br/>
 		<fieldset>
 			<legend><h3>Información de Cursos</h3></legend>
 			<hr/>
@@ -65,32 +61,40 @@
 					<td style="widtd: 250px;"><MODALIDAD_USUARIO></td>
 				</tr>
 			</table>
-			<br/>
-			<h4>Certificaciones Obtenidas</h4>
-			<table border="1">
-				<tdead>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">#</td>
-						<td style="text-align: center; font-weight: bold;">Nombre de la Certificación</td>
-					</tr>
-				</tdead>
-				<tbody>
-					<CERTIFICACIONES_USUARIO>
-				</tbody>
-			</table>
-			<br/>
-			<h4>Cursos Recibidos y Calificaciones Obtenidas</h4>
-			<table border="1">
-				<tdead>
-					<tr>
-						<td style="text-align: center; font-weight: bold;">#</td>
-						<td style="text-align: center; font-weight: bold;">Nombre del Curso</td>
-						<td style="text-align: center; font-weight: bold;">Calificación</td>
-					</tr>
-				</tdead>
-				<tbody>
-					<CURSOS_USUARIO>
-				</tbody>
+			<br/><br/>
+			<table border="0">
+				<tr>
+					<td style="width: 310px;" valign="top">
+						<h4 align="center">Certificaciones Obtenidas</h4>
+						<table border="1">
+							<tdead>
+								<tr>
+									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
+									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre de la Certificación</td>
+								</tr>
+							</tdead>
+							<tbody>
+								<CERTIFICACIONES_USUARIO>
+							</tbody>
+						</table>
+					</td>
+					<td style="width: 50px;">&nbsp;</td>
+					<td style="width: 310px;" valign="top">
+						<h4 align="center">Cursos Recibidos y Calificaciones Obtenidas</h4>
+						<table border="1">
+							<tdead>
+								<tr>
+									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
+									<td style="text-align: center; font-weight: bold; width: 240px;">Nombre del Curso</td>
+									<td style="text-align: center; font-weight: bold; width: 72px;">Calificación</td>
+								</tr>
+							</tdead>
+							<tbody>
+								<CURSOS_USUARIO>
+							</tbody>
+						</table>
+					</td>
+				</tr>
 			</table>
 		</fieldset>
 	</body>

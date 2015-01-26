@@ -166,86 +166,72 @@ class Usuarios extends CI_Controller{
 	}
 	
 	public function exportar($codigo_usuario = NULL){
-		$pdf = new Pdf('P', 'cm', 'A4', true, 'UTF-8', false);
-		$pdf->SetCreator(PDF_CREATOR);
-		$pdf->SetTitle('Reporte de Usuarios');
-		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config_alt.php de libraries/config
-		$pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, 'Reporte de Usuarios', PDF_HEADER_STRING, array(0, 64, 255), array(0, 64, 128));
-		$pdf->setFooterData($tc = array(0, 64, 0), $lc = array(0, 64, 128));
-		// datos por defecto de cabecera, se pueden modificar en el archivo tcpdf_config.php de libraries/config
-		$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-		$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
+		$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
+		$pdf->setPrintHeader(FALSE);
+		$pdf->setPrintFooter(FALSE);
 		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
 		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-		$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-		$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-		// se pueden modificar en el archivo tcpdf_config.php de libraries/config
 		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-		//relación utilizada para ajustar la conversión de los píxeles
 		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-		// establecer el modo de fuente por defecto
-		$pdf->setFontSubsetting(true);
-		// establecer el tipo de letra: si se tiene que imprimir carácteres ASCII estándar, se puede utilizar las fuentes básicas como Helvetica para reducir el tamaño del archivo
-		$pdf->SetFont('freemono', '', 14, '', true);
-		// añadir una página: este método tiene varias opciones, consultar la documentación para más información
+		$pdf->SetFont('helvetica', '', 13, '', true);
 		$pdf->AddPage();
-		// fijar efecto de sombra en el texto
-		$pdf->setTextShadow(array('enabled' => true, 'depth_w' => 0.2, 'depth_h' => 0.2, 'color' => array(196, 196, 196), 'opacity' => 1, 'blend_mode' => 'Normal'));
-		// establecer el contenido para generar el pdf
 		$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_usuario);
-		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 		$nombre_archivo = utf8_decode(acentos($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.pdf');
-		// cerrar el documento pdf y prepar la salida: este método tiene varias opciones, consultar la documentación para más información
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
 	private function cargar_plantilla_pdf($codigo_usuario = NULL){
 		$usuario = $this->usuarios_model->usuario($codigo_usuario);
-		
-		$lista_certificaciones_usuario = ''; $certificaciones = 1;
-		foreach($this->usuarios_model->certificaciones_usuario($codigo_usuario) as $certificacion){
-			$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.utf8($certificacion->nombre).'</td></tr>';
-		}
-		if($lista_certificaciones_usuario == ''){
-			$lista_certificaciones_usuario = 'El usuario no tiene certificaciones.';
-		}
-		
-		$lista_cursos_usuario = ''; $cursos = 1;
-		foreach($this->usuarios_model->calificaciones_usuario($codigo_usuario) as $curso){
-			$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.utf8($curso->nombre).'</td><td>'.$curso->nota.'</td></tr>';
-		}
-		if($lista_cursos_usuario == ''){
-			$lista_cursos_usuario = 'El usuario no a recibido cursos.';
-		}
-		
 		$plantilla_pdf = read_file('resources/templates/pdf/usuarios.php');
-		$plantilla_pdf = str_replace(array('<NOMBRES_USUARIO>',
-										   '<APELLIDO1_USUARIO>',
-										   '<DUI_USUARIO>',
-										   '<CORREO_USUARIO>',
-										   '<PROFESION_USUARIO>',
-										   '<CENTRO_EDUCATIVO_USUARIO>',
-										   '<DIRECCION_USUARIO>',
-										   '<NOMBRE_USUARIO>',
-										   '<TIPO_USUARIO>',
-										   '<MODALIDAD_USUARIO>',
-										   '<CERTIFICACIONES_USUARIO>',
-										   '<CURSOS_USUARIO>'),
-									 array(utf8($usuario[0]->nombres_usuario),
-										   utf8($usuario[0]->apellido1_usuario),
-										   $usuario[0]->dui_usuario,
-										   $usuario[0]->correo_electronico_usuario,
-										   utf8($this->profesiones_model->nombre_profesion($usuario[0]->id_profesion)),
-										   utf8($this->centros_educativos_model->nombre_centro_educativo($usuario[0]->id_centro_educativo)),
-										   utf8($usuario[0]->direccion_usuario),
-										   utf8($usuario[0]->nombre_usuario),
-										   utf8($this->tipos_usuarios_model->nombre_tipo_usuario($usuario[0]->id_tipo_usuario)),
-										   $usuario[0]->modalidad_usuario,
-										   $lista_certificaciones_usuario,
-										   $lista_cursos_usuario),
-									 $plantilla_pdf);
+		if(empty($usuario)){
+			$plantilla_pdf = 'mostrar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+		}
+		else{
+			$lista_certificaciones_usuario = ''; $certificaciones = 1;
+			foreach($this->usuarios_model->certificaciones_usuario($codigo_usuario) as $certificacion){
+				$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.utf8($certificacion->nombre).'</td></tr>';
+			}
+			if($lista_certificaciones_usuario == ''){
+				$lista_certificaciones_usuario = 'El usuario no tiene certificaciones.';
+			}
+			
+			$lista_cursos_usuario = ''; $cursos = 1;
+			foreach($this->usuarios_model->calificaciones_usuario($codigo_usuario) as $curso){
+				$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.utf8($curso->nombre).'</td><td>'.$curso->nota.'</td></tr>';
+			}
+			if($lista_cursos_usuario == ''){
+				$lista_cursos_usuario = 'El usuario no a recibido cursos.';
+			}
+			
+			$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+											   '<NOMBRES_USUARIO>',
+											   '<APELLIDO1_USUARIO>',
+											   '<DUI_USUARIO>',
+											   '<CORREO_USUARIO>',
+											   '<PROFESION_USUARIO>',
+											   '<CENTRO_EDUCATIVO_USUARIO>',
+											   '<DIRECCION_USUARIO>',
+											   '<NOMBRE_USUARIO>',
+											   '<TIPO_USUARIO>',
+											   '<MODALIDAD_USUARIO>',
+											   '<CERTIFICACIONES_USUARIO>',
+											   '<CURSOS_USUARIO>'),
+										 array(encabezado_reporte(),
+											   utf8($usuario[0]->nombres_usuario),
+											   utf8($usuario[0]->apellido1_usuario),
+											   $usuario[0]->dui_usuario,
+											   $usuario[0]->correo_electronico_usuario,
+											   utf8($this->profesiones_model->nombre_profesion($usuario[0]->id_profesion)),
+											   utf8($this->centros_educativos_model->nombre_centro_educativo($usuario[0]->id_centro_educativo)),
+											   utf8($usuario[0]->direccion_usuario),
+											   utf8($usuario[0]->nombre_usuario),
+											   utf8($this->tipos_usuarios_model->nombre_tipo_usuario($usuario[0]->id_tipo_usuario)),
+											   $usuario[0]->modalidad_usuario,
+											   $lista_certificaciones_usuario,
+											   $lista_cursos_usuario),
+										 $plantilla_pdf);
+		}
 		return $plantilla_pdf;
 	}
 	

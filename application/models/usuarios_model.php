@@ -65,7 +65,7 @@ class Usuarios_model extends CI_Model{
 				$tipos_usuarios = 'AND u_id_tipo_usuario BETWEEN 5 AND 8'.' '.$tipos_usuarios;
 			}
 		}
-		$sql = 'SELECT acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
+		$sql = 'SELECT DISTINCT acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
 				FROM V_UsuariosCursosExamenesCalificaciones
 				WHERE u_id_centro_educativo = ?
 				AND ec_nota_examen_calificacion >= ?

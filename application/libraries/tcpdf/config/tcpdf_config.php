@@ -137,22 +137,22 @@ define ('PDF_MARGIN_FOOTER', 5);
 /**
  * Top margin.
  */
-define ('PDF_MARGIN_TOP', 15);
+define ('PDF_MARGIN_TOP', 5);
 
 /**
  * Bottom margin.
  */
-define ('PDF_MARGIN_BOTTOM', 2);
+define ('PDF_MARGIN_BOTTOM', 5);
 
 /**
  * Left margin.
  */
-define ('PDF_MARGIN_LEFT', 2);
+define ('PDF_MARGIN_LEFT', 5);
 
 /**
  * Right margin.
  */
-define ('PDF_MARGIN_RIGHT', 2);
+define ('PDF_MARGIN_RIGHT', 5);
 
 /**
  * Default main font name.
@@ -162,7 +162,7 @@ define ('PDF_FONT_NAME_MAIN', 'helvetica');
 /**
  * Default main font size.
  */
-define ('PDF_FONT_SIZE_MAIN', 8);
+define ('PDF_FONT_SIZE_MAIN', 13);
 
 /**
  * Default data font name.
@@ -172,7 +172,7 @@ define ('PDF_FONT_NAME_DATA', 'helvetica');
 /**
  * Default data font size.
  */
-define ('PDF_FONT_SIZE_DATA', 6);
+define ('PDF_FONT_SIZE_DATA', 13);
 
 /**
  * Default monospaced font name.
@@ -192,7 +192,7 @@ define('HEAD_MAGNIFICATION', 1.1);
 /**
  * Height of cell respect font height.
  */
-define('K_CELL_HEIGHT_RATIO', 1);
+define('K_CELL_HEIGHT_RATIO', 1.5);
 
 /**
  * Title magnification respect main font size.

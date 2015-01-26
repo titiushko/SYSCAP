@@ -112,7 +112,7 @@ else{
 							<div class="row">
 								<div class="col-lg-6">
 									<div class="table-responsive">
-										<?= heading('Docentes Capacitados', 4); ?>
+										<?= heading('Docentes Capacitados', 4, 'class="text-center"'); ?>
 										<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_capacitados">
 											<thead>
 												<tr>
@@ -139,7 +139,7 @@ else{
 								</div>
 								<div class="col-lg-6">
 									<div class="table-responsive">
-										<?= heading('Docentes Certificados', 4); ?>
+										<?= heading('Docentes Certificados', 4, 'class="text-center"'); ?>
 										<table class="table table-striped table-bordered table-hover" id="data-tables-docentes_certificados">
 											<thead>
 												<tr>
@@ -198,7 +198,7 @@ $(document).ready(function() {
 		"ordering":			false,
 		"paging":			false,
 		"oLanguage": {
-			"sEmptyTable": "No hay Docentes Capacitados en éste Centro Educativo."
+			"sEmptyTable": "No hay docentes capacitados en el centro educativo."
 		  }
 	});
 	$('#data-tables-docentes_certificados').dataTable({
@@ -209,7 +209,7 @@ $(document).ready(function() {
 		"ordering":			false,
 		"paging":			false,
 		"oLanguage": {
-			"sEmptyTable": "No hay Docentes Certificados en éste Centro Educativo."
+			"sEmptyTable": "No hay docentes certificados en el centro educativo."
 		  }
 	});
 });
