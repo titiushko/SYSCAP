@@ -30,57 +30,9 @@ class Usuarios_model extends CI_Model{
 	}
 	
 	/**
-	* Método que utiliza la vista MySQL V_UsuariosCursosExamenesCalificaciones de la base de datos de SYSCAP y devuelve el listado de usuarios capacitados o certificados.
-	* @param codigo_centro_educativo: id_centro_educativo.
-	* @param nota_minima: para buscar usuarios certificados nota_minima debe ser 7, de lo contrario será 0.
-	* @param tipo_capacitado: para buscar usuarios certificados tipo_capacitado de ser '%certificacion%', de lo contrario será '%'.
-	* @param tipo_usuario: array con los tipos de usuarios a buscar.
-	* valores:
-	* 		'ciudadano',
-	* 		'estudiantes',
-	* 		'docentes'
-	* ejemplos:
-	* 		array('ciudadano'),
-	* 		array('ciudadano', 'estudiantes'),
-	* 		array('ciudadano', 'estudiantes', 'docentes'),
-	* 		array('ciudadano', 'docentes'),
-	* 		array('estudiantes', 'docentes')
-	* @param tipo_modalidad: para buscar usuarios en la modalidad de tutorizado o autoformacion.
-	* valores:
-	* 		'tutorizado',
-	* 		'autoformacion',
-	* 		'%': busca por los dos tipos de modalidad.
-	* @return array de objetos con el listado de usuarios capacitados o certificados.
-	*/
-	function tipos_capacitados_usuarios($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_usuario, $tipo_modalidad){
-		$tipos_usuarios = '';
-		for($i = 0; $i < count($tipo_usuario); $i++){
-			if($tipo_usuario[$i] == 'ciudadano'){
-				$tipos_usuarios = 'AND u_id_tipo_usuario = 1'.' '.$tipos_usuarios;
-			}
-			if($tipo_usuario[$i] == 'estudiantes'){
-				$tipos_usuarios = 'AND u_id_tipo_usuario BETWEEN 2 AND 4'.' '.$tipos_usuarios;
-			}
-			if($tipo_usuario[$i] == 'docentes'){
-				$tipos_usuarios = 'AND u_id_tipo_usuario BETWEEN 5 AND 8'.' '.$tipos_usuarios;
-			}
-		}
-		$sql = 'SELECT DISTINCT acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
-				FROM V_UsuariosCursosExamenesCalificaciones
-				WHERE u_id_centro_educativo = ?
-				AND ec_nota_examen_calificacion >= ?
-				AND e_nombre_examen LIKE ?
-				'.$tipos_usuarios.'
-				AND u_modalidad_usuario LIKE ?
-				ORDER BY c_nombre_completo_curso';
-		$query = $this->db->query($sql, array($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_modalidad));
-		return $query->result();
-	}
-	
-	/**
 	 * Método que utiliza la vista MySQL V_UsuariosCursosExamenesCalificaciones de la base de datos de SYSCAP y devuelve el listado de cursos recibidos y calificaciones obtenidas un usuario.
 	 * @param codigo_usuario: id_usuario.
-	 * @return array de objetos con el listado de cursos recibidos y calificaciones obtenidas un usuario.
+	 * @return array de objetos con el listado de cursos recibidos y calificaciones obtenidas de un usuario.
 	 */
 	function calificaciones_usuario($codigo_usuario){
 		$sql = 'SELECT acentos(c_nombre_completo_curso) nombre, ROUND(ec_nota_examen_calificacion, 2) nota
@@ -93,7 +45,7 @@ class Usuarios_model extends CI_Model{
 	/**
 	 * Método que utiliza la vista MySQL V_UsuariosCursosExamenesCalificaciones de la base de datos de SYSCAP y devuelve el listado de certificaciones obtenidas un usuario.
 	 * @param codigo_usuario: id_usuario.
-	 * @return array de objetos con el listado de certificaciones obtenidas un usuario.
+	 * @return array de objetos con el listado de certificaciones obtenidas de un usuario.
 	 */
 	function certificaciones_usuario($codigo_usuario){
 		$sql = 'SELECT acentos(SUBSTRING(c.nombre_completo_curso, LENGTH(\'Examen de Certificación\') + 2)) nombre

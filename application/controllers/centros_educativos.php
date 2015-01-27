@@ -6,7 +6,7 @@ class Centros_educativos extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		$this->notificacion = FALSE;
-		$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model', 'usuarios_model'));
+		$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model'));
 	}
 	
 	public function index(){
@@ -76,8 +76,8 @@ class Centros_educativos extends CI_Controller{
 			$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
 			$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
 		}
-		$datos['lista_docentes_certificados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
-		$datos['lista_docentes_capacitados'] = $this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
+		$datos['lista_docentes_certificados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
+		$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
 		return $datos;
 	}
 	
@@ -128,7 +128,7 @@ class Centros_educativos extends CI_Controller{
 		}
 		else{
 			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
-			foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'),'tutorizado') as $docente_capacitado){
+			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'),'tutorizado') as $docente_capacitado){
 				$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_capacitados == ''){
@@ -136,7 +136,7 @@ class Centros_educativos extends CI_Controller{
 			}
 			
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
-			foreach($this->usuarios_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'),'tutorizado') as $docente_certificado){
+			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'),'tutorizado') as $docente_certificado){
 				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){

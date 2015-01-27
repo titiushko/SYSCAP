@@ -1,8 +1,8 @@
 <script type="text/javascript">
-	function datos_coordenada(longitud, latitud, coordenada) {
-		var mi_coordenada = new google.maps.LatLng(longitud, latitud);
-		map.panTo(mi_coordenada);
+	function datos_coordenada(longitud, latitud, coordenada){
+		map.panTo(new google.maps.LatLng(longitud, latitud));
 		google.maps.event.trigger(coordenada, 'click');
+		map.setZoom(11);
 	}
 </script>
 <?= $mapa['js']; ?>
@@ -20,6 +20,7 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-lg-12">
+						<?= $breadcrumbs; ?>
 						<?= $mapa['html']; ?>
 					</div>
 				</div>
@@ -30,7 +31,6 @@
 							<table class="table table-striped table-bordered table-hover" id="data-tables-mapa">
 								<thead>
 									<tr>
-										<th>#</th>
 										<th>Municipio</th>
 										<th>Departamento</th>
 									</tr>
@@ -38,7 +38,6 @@
 								<tbody>
 									<?php foreach($coordenadas as $coordenada) { ?>
 									<tr onclick="datos_coordenada(<?= $coordenada->longitud_mapa; ?>, <?= $coordenada->latitud_mapa; ?>, marker_<?= $coordenada->id_mapa; ?>);" style="cursor: pointer;">
-										<td><?= $coordenada->id_mapa; ?></td>
 										<td><?= utf8($coordenada->nombre_municipio); ?></td>
 										<td><?= utf8($coordenada->nombre_departamento); ?></td>
 									</tr>
@@ -55,7 +54,7 @@
 <script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script>
-$(document).ready(function() {
+$(document).ready(function(){
 	$('#data-tables-mapa').dataTable({
 		language:{
 			url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'

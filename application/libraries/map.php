@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once dirname(__FILE__).'/googlemaps/googlemaps.php';
+require_once dirname(__FILE__).'/googlemaps/Googlemaps.php';
 
 class Map extends Googlemaps{
     function __construct(){

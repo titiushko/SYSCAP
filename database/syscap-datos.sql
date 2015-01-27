@@ -129,9 +129,9 @@ INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, sysca
 (13, 13.7103248, -89.7300196),	-- Sonsonate, Sonsonate
 (14, 13.7210174, -88.938373),	-- Cojutepeque, Cuscatlan
 (15, 13.7503845, -89.057579),	-- San Martin, San Salvador
-(16, 13.3432736, -88.4427738),	-- Usulutan, Usulutan
+(16, 13.3432736, -88.4427738),	-- Ahuachapan, Ahuachapan
 (17, 13.8762505, -89.3583689),	-- San Juan Opico, La Libertad
-(18, 13.9290675, -89.8436594),	-- Ahuachapan, Ahuachapan
+(18, 13.9290675, -89.8436594),	-- Usulutan, Usulutan
 (19, 13.5788318, -89.2671776),	-- San Jose Villanueva, La Libertad
 (20, 13.7632123, -89.0487634),	-- San Bartolome Perulapia, Cuscatlan
 (21, 13.6603945, -89.1769482),	-- San Marcos, San Salvador
@@ -154,13 +154,21 @@ UPDATE municipios SET id_mapa = 12 WHERE id_municipio = '115';
 UPDATE municipios SET id_mapa = 13 WHERE id_municipio = '98';
 UPDATE municipios SET id_mapa = 14 WHERE id_municipio = '187';
 UPDATE municipios SET id_mapa = 15 WHERE id_municipio = '10';
-UPDATE municipios SET id_mapa = 16 WHERE id_municipio = '203';
+UPDATE municipios SET id_mapa = 16 WHERE id_municipio = '75';
 UPDATE municipios SET id_mapa = 17 WHERE id_municipio = '56';
-UPDATE municipios SET id_mapa = 18 WHERE id_municipio = '75';
+UPDATE municipios SET id_mapa = 18 WHERE id_municipio = '203';
 UPDATE municipios SET id_mapa = 19 WHERE id_municipio = '70';
-UPDATE municipios SET id_mapa = 20 WHERE id_municipio = '06';
-UPDATE municipios SET id_mapa = 21 WHERE id_municipio = '198';
+UPDATE municipios SET id_mapa = 20 WHERE id_municipio = '198';
+UPDATE municipios SET id_mapa = 21 WHERE id_municipio = '06';
 UPDATE municipios SET id_mapa = 22 WHERE id_municipio = '57';
 UPDATE municipios SET id_mapa = 23 WHERE id_municipio = '02';
 UPDATE municipios SET id_mapa = 24 WHERE id_municipio = '82';
 UPDATE municipios SET id_mapa = 25 WHERE id_municipio = '54';
+UPDATE departamentos SET id_mapa = 16 WHERE id_departamento = '11';
+UPDATE departamentos SET id_mapa = 10 WHERE id_departamento = '02';
+UPDATE departamentos SET id_mapa = 13 WHERE id_departamento = '06';
+UPDATE departamentos SET id_mapa = 2 WHERE id_departamento = '01';
+UPDATE departamentos SET id_mapa = 14 WHERE id_departamento = '10';
+UPDATE departamentos SET id_mapa = 3 WHERE id_departamento = '13';
+UPDATE departamentos SET id_mapa = 18 WHERE id_departamento = '05';
+UPDATE departamentos SET id_mapa = 8 WHERE id_departamento = '03';

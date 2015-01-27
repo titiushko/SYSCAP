@@ -90,6 +90,7 @@ CREATE VIEW V_UsuariosCapacitadosDepartamento AS
 SELECT
 	ec.fecha_examen_calificacion fecha_examen_calificacion,
 	u.id_departamento id_departamento,
+	u.id_municipio id_municipio,
 	m.nombre_municipio nombre_municipio,
 	COUNT(u.id_municipio) total
 FROM usuarios u
@@ -111,6 +112,7 @@ CREATE VIEW V_UsuariosCertificadosDepartamento AS
 SELECT
 	ec.fecha_examen_calificacion fecha_examen_calificacion,
 	u.id_departamento id_departamento,
+	u.id_municipio id_municipio,
 	m.nombre_municipio nombre_municipio,
 	COUNT(u.id_municipio) total
 FROM usuarios u
