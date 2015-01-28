@@ -113,7 +113,6 @@ INSERT INTO syscap.tipos_usuarios(syscap.tipos_usuarios.id_tipo_usuario, syscap.
 -- almacenar en syscap.mapas los registros de las coordenadas en el mapa
 TRUNCATE syscap.mapas;
 INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, syscap.mapas.latitud_mapa) VALUES
-								-- Municipio, Departamento
 (1, 13.9344628, -89.0239548),	-- Suchitoto, Cuscatlan
 (2, 13.6914782, -89.2146939),	-- San Salvador, San Salvador
 (3, 13.6405872, -88.7839214),	-- San Vicente, San Vicente
@@ -138,7 +137,10 @@ INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, sysca
 (22, 13.7083268, -89.3482965),	-- Colon, La Libertad
 (23, 13.7534692, -89.1586547),	-- Ciudad Delgado, San Salvador
 (24, 13.830604, -89.2692803),	-- Quezaltepeque, La Libertad
-(25, 13.4296472, -88.5936102);	-- San Agustin, Usulutan
+(25, 13.4296472, -88.5936102),	-- San Agustin, Usulutan
+(26, 13.9153632, -89.8470068),	-- Centro Escolar Isidro Menendez
+(27, 13.924497, -89.85044),		-- Centro Escolar Alejandro De Humboldt
+(28, 13.917568, -89.846442);		-- Centro Escolar Primero De Julio De 1823
 UPDATE municipios SET id_mapa = 1 WHERE id_municipio = '188';
 UPDATE municipios SET id_mapa = 2 WHERE id_municipio = '01';
 UPDATE municipios SET id_mapa = 3 WHERE id_municipio = '241';
@@ -164,11 +166,14 @@ UPDATE municipios SET id_mapa = 22 WHERE id_municipio = '57';
 UPDATE municipios SET id_mapa = 23 WHERE id_municipio = '02';
 UPDATE municipios SET id_mapa = 24 WHERE id_municipio = '82';
 UPDATE municipios SET id_mapa = 25 WHERE id_municipio = '54';
-UPDATE departamentos SET id_mapa = 16 WHERE id_departamento = '11';
+UPDATE departamentos SET id_mapa = 16 WHERE id_departamento = '05';
 UPDATE departamentos SET id_mapa = 10 WHERE id_departamento = '02';
 UPDATE departamentos SET id_mapa = 13 WHERE id_departamento = '06';
 UPDATE departamentos SET id_mapa = 2 WHERE id_departamento = '01';
 UPDATE departamentos SET id_mapa = 14 WHERE id_departamento = '10';
 UPDATE departamentos SET id_mapa = 3 WHERE id_departamento = '13';
-UPDATE departamentos SET id_mapa = 18 WHERE id_departamento = '05';
+UPDATE departamentos SET id_mapa = 18 WHERE id_departamento = '11';
 UPDATE departamentos SET id_mapa = 8 WHERE id_departamento = '03';
+UPDATE centros_educativos SET id_mapa = 26 WHERE id_centro_educativo = 1;
+UPDATE centros_educativos SET id_mapa = 27 WHERE id_centro_educativo = 3;
+UPDATE centros_educativos SET id_mapa = 28 WHERE id_centro_educativo = 4;

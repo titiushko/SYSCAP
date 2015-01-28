@@ -38,7 +38,7 @@ $campos_ocultos = array('estado' => '0');
 
 if($operacion == "Mostrar"){
 	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos\';"';
+	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\'javascript:window.history.back()\';"';
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';

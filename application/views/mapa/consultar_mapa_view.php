@@ -2,7 +2,7 @@
 	function datos_coordenada(longitud, latitud, coordenada){
 		map.panTo(new google.maps.LatLng(longitud, latitud));
 		google.maps.event.trigger(coordenada, 'click');
-		map.setZoom(11);
+		map.setZoom(<?= $zoom; ?>);
 	}
 </script>
 <?= $mapa['js']; ?>
@@ -33,6 +33,7 @@
 									<tr>
 										<th>Municipio</th>
 										<th>Departamento</th>
+										<th>Centro Educativo</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -40,6 +41,7 @@
 									<tr onclick="datos_coordenada(<?= $coordenada->longitud_mapa; ?>, <?= $coordenada->latitud_mapa; ?>, marker_<?= $coordenada->id_mapa; ?>);" style="cursor: pointer;">
 										<td><?= utf8($coordenada->nombre_municipio); ?></td>
 										<td><?= utf8($coordenada->nombre_departamento); ?></td>
+										<td><?= utf8($coordenada->nombre_centro_educativo); ?></td>
 									</tr>
 									<?php } ?>
 								</tbody>

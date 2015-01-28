@@ -152,8 +152,8 @@ $boton_primario = 'class="btn btn-primary"';
 				"oPaginate": {
 					"sFirst": "Primero",
 					"sLast": "Último",
-					"sNext": ">>",
-					"sPrevious": "<<"
+					"sNext": ">",
+					"sPrevious": "<"
 				},
 				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
 			  }
