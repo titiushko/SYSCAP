@@ -128,9 +128,9 @@ INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, sysca
 (13, 13.7103248, -89.7300196),	-- Sonsonate, Sonsonate
 (14, 13.7210174, -88.938373),	-- Cojutepeque, Cuscatlan
 (15, 13.7503845, -89.057579),	-- San Martin, San Salvador
-(16, 13.3432736, -88.4427738),	-- Ahuachapan, Ahuachapan
+(16, 13.3432736, -88.4427738),	-- Usulutan, Usulutan
 (17, 13.8762505, -89.3583689),	-- San Juan Opico, La Libertad
-(18, 13.9290675, -89.8436594),	-- Usulutan, Usulutan
+(18, 13.9290675, -89.8436594),	-- Ahuachapan, Ahuachapan
 (19, 13.5788318, -89.2671776),	-- San Jose Villanueva, La Libertad
 (20, 13.7632123, -89.0487634),	-- San Bartolome Perulapia, Cuscatlan
 (21, 13.6603945, -89.1769482),	-- San Marcos, San Salvador
