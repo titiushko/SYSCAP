@@ -23,7 +23,9 @@ class Mapas_model extends CI_Model{
 								   mapas.latitud_mapa latitud_mapa
 								   FROM mapas INNER JOIN departamentos ON mapas.id_mapa = departamentos.id_mapa
 								   WHERE departamentos.id_departamento = ?', array($codigo_departamento));
-		return $query->result()[0]->longitud_mapa.', '.$query->result()[0]->latitud_mapa;
+		$coordenadas_departamento = $query->result();
+		$coordenadas_departamento = empty($coordenadas_departamento) ? '13.802994, -88.9053364' : $coordenadas_departamento[0]->longitud_mapa.', '.$coordenadas_departamento[0]->latitud_mapa;
+		return $coordenadas_departamento;
 	}
 	
 	function cantidad_usuarios_departamento($codigo_departamento){
@@ -54,12 +56,14 @@ class Mapas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	public function coordenadas_municipio($codigo_municipio){
+	public function coordenadas_municipio($codigo_municipio, $codigo_departamento){
 		$query = $this->db->query('SELECT mapas.longitud_mapa longitud_mapa,
 								   mapas.latitud_mapa latitud_mapa
 								   FROM mapas INNER JOIN municipios ON mapas.id_mapa = municipios.id_mapa
 								   WHERE municipios.id_municipio = ?', array($codigo_municipio));
-		return $query->result()[0]->longitud_mapa.', '.$query->result()[0]->latitud_mapa;
+		$coordenadas_municipio = $query->result();
+		$coordenadas_municipio = empty($coordenadas_municipio) ? $this->coordenadas_departamento($codigo_departamento) : $coordenadas_municipio[0]->longitud_mapa.', '.$coordenadas_municipio[0]->latitud_mapa;
+		return $coordenadas_municipio;
 	}
 	
 	function cantidad_usuarios_municipio($codigo_municipio){
@@ -75,9 +79,10 @@ class Mapas_model extends CI_Model{
 								   mapas.longitud_mapa longitud_mapa,
 								   mapas.latitud_mapa latitud_mapa,
 								   centros_educativos.id_centro_educativo id_centro_educativo,
+								   acentos(centros_educativos.nombre_centro_educativo) nombre_centro_educativo,
 								   acentos(municipios.nombre_municipio) nombre_municipio,
-								   acentos(departamentos.nombre_departamento) nombre_departamento,
-								   acentos(centros_educativos.nombre_centro_educativo) nombre_centro_educativo
+								   departamentos.id_departamento id_departamento,
+								   acentos(departamentos.nombre_departamento) nombre_departamento
 								   FROM mapas INNER JOIN centros_educativos ON mapas.id_mapa = centros_educativos.id_mapa
 								   INNER JOIN municipios ON centros_educativos.id_municipio = municipios.id_municipio
 								   INNER JOIN departamentos ON centros_educativos.id_departamento = departamentos.id_departamento
@@ -88,14 +93,6 @@ class Mapas_model extends CI_Model{
 								   INNER JOIN examenes e ON ec.id_examen = e.id_examen
 								   WHERE ec.nota_examen_calificacion >= 7.00)', array($codigo_municipio));
 		return $query->result();
-	}
-	
-	public function coordenadas_centro_educativo($codigo_centro_educativo){
-		$query = $this->db->query('SELECT mapas.longitud_mapa longitud_mapa,
-								   mapas.latitud_mapa latitud_mapa
-								   FROM mapas INNER JOIN centros_educativos ON mapas.id_mapa = centros_educativos.id_mapa
-								   WHERE centros_educativos.id_centro_educativo = ?', array($codigo_centro_educativo));
-		return $query->result()[0]->longitud_mapa.', '.$query->result()[0]->latitud_mapa;
 	}
 	
 	function cantidad_usuarios_centro_educativo($codigo_centro_educativo, $codigo_departamento){

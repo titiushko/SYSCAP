@@ -8,8 +8,8 @@ class Mapa extends CI_Controller{
 	}
 	
 	public function index(){
-		$datos = $this->datos_consultar_mapa_view();
 		$coordenadas = $this->mapas_model->coordenadas_departamentos();
+		$datos = $this->datos_consultar_mapa_view('13.802994, -88.9053364', 9, $coordenadas, array('El Salvador'));
 		foreach($coordenadas as $informacion_coordenada){
 			$coordenada = array();
 			$coordenada['animation'] = 'DROP';
@@ -18,9 +18,7 @@ class Mapa extends CI_Controller{
 			$coordenada['infowindow_content'] = $this->estadistica_departamento($informacion_coordenada->id_departamento);
 			$this->map->add_marker($coordenada);
 		}
-		$datos['coordenadas'] = $coordenadas;
 		$datos['mapa'] = $this->map->create_map();
-		$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array('El Salvador'), 'class="breadcrumb"'));
 		$this->load->view('plantilla_pagina_view', $datos);
 	}
 	
@@ -35,23 +33,26 @@ class Mapa extends CI_Controller{
 	}
 	
 	public function departamento($codigo_departamento = NULL){
-		$datos = $this->datos_consultar_mapa_view($this->mapas_model->coordenadas_departamento($codigo_departamento), '12');
 		$coordenadas = $this->mapas_model->coordenadas_municipios($codigo_departamento);
-		foreach($coordenadas as $informacion_coordenada){
-			$coordenada = array();
-			$coordenada['animation'] = 'DROP';
-			$coordenada['position'] = $informacion_coordenada->longitud_mapa.', '.$informacion_coordenada->latitud_mapa;
-			$coordenada['id'] = $informacion_coordenada->id_mapa;
-			$coordenada['infowindow_content'] = $this->estadistica_municipio($codigo_departamento, $informacion_coordenada->id_municipio);
-			$this->map->add_marker($coordenada);
+		if($this->validar_parametros($codigo_departamento, FALSE, $coordenadas)){
+			foreach($coordenadas as $informacion_coordenada){
+				$coordenada = array();
+				$coordenada['animation'] = 'DROP';
+				$coordenada['position'] = $informacion_coordenada->longitud_mapa.', '.$informacion_coordenada->latitud_mapa;
+				$coordenada['id'] = $informacion_coordenada->id_mapa;
+				$coordenada['infowindow_content'] = $this->estadistica_municipio($codigo_departamento, $informacion_coordenada->id_municipio);
+				$this->map->add_marker($coordenada);
+			}
+			$datos = $this->datos_consultar_mapa_view($this->mapas_model->coordenadas_departamento($codigo_departamento), '12', $coordenadas, array('El Salvador', $codigo_departamento));
+			$datos['mapa'] = $this->map->create_map();
+			$this->load->view('plantilla_pagina_view', $datos);
 		}
-		$datos['coordenadas'] = $coordenadas;
-		$datos['mapa'] = $this->map->create_map();
-		$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array(anchor('mapa', 'El Salvador'), utf8($this->departamentos_model->nombre_departamento($codigo_departamento))), 'class="breadcrumb"'));
-		$this->load->view('plantilla_pagina_view', $datos);
+		else{
+			show_404();
+		}
 	}
 	
-	private function estadistica_municipio($codigo_departamento = NULL, $codigo_municipio = NULL){
+	private function estadistica_municipio($codigo_departamento, $codigo_municipio){
 		$estadistica_municipio = heading(utf8($this->municipios_model->nombre_municipio($codigo_municipio)), 3).br();
 		$cantidad_usuarios_municipio = $this->mapas_model->cantidad_usuarios_municipio($codigo_municipio);
 		$estadistica_municipio .= bold('Usuarios Capacitados: ').$cantidad_usuarios_municipio->capacitados.br();
@@ -62,20 +63,23 @@ class Mapa extends CI_Controller{
 	}
 	
 	public function municipio($codigo_departamento = NULL, $codigo_municipio = NULL){
-		$datos = $this->datos_consultar_mapa_view($this->mapas_model->coordenadas_municipio($codigo_municipio), '15');
 		$coordenadas = $this->mapas_model->coordenadas_centros_educativos($codigo_municipio);
-		foreach($coordenadas as $informacion_coordenada){
-			$coordenada = array();
-			$coordenada['animation'] = 'DROP';
-			$coordenada['position'] = $informacion_coordenada->longitud_mapa.', '.$informacion_coordenada->latitud_mapa;
-			$coordenada['id'] = $informacion_coordenada->id_mapa;
-			$coordenada['infowindow_content'] = $this->estadistica_centro_educativo($informacion_coordenada->id_centro_educativo, $codigo_departamento);
-			$this->map->add_marker($coordenada);
+		if($this->validar_parametros($codigo_departamento, $codigo_municipio, $coordenadas)){
+			foreach($coordenadas as $informacion_coordenada){
+				$coordenada = array();
+				$coordenada['animation'] = 'DROP';
+				$coordenada['position'] = $informacion_coordenada->longitud_mapa.', '.$informacion_coordenada->latitud_mapa;
+				$coordenada['id'] = $informacion_coordenada->id_mapa;
+				$coordenada['infowindow_content'] = $this->estadistica_centro_educativo($informacion_coordenada->id_centro_educativo, $codigo_departamento);
+				$this->map->add_marker($coordenada);
+			}
+			$datos = $this->datos_consultar_mapa_view($this->mapas_model->coordenadas_municipio($codigo_municipio, $codigo_departamento), '15', $coordenadas, array('El Salvador', $codigo_departamento, $codigo_municipio));
+			$datos['mapa'] = $this->map->create_map();
+			$this->load->view('plantilla_pagina_view', $datos);
 		}
-		$datos['coordenadas'] = $coordenadas;
-		$datos['mapa'] = $this->map->create_map();
-		$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array(anchor('mapa', 'El Salvador'), anchor('mapa/departamento/'.$codigo_departamento, utf8($this->departamentos_model->nombre_departamento($codigo_departamento))), utf8($this->municipios_model->nombre_municipio($codigo_municipio))), 'class="breadcrumb"'));
-		$this->load->view('plantilla_pagina_view', $datos);
+		else{
+			show_404();
+		}
 	}
 	
 	private function estadistica_centro_educativo($codigo_centro_educativo, $codigo_departamento){
@@ -88,21 +92,58 @@ class Mapa extends CI_Controller{
 		return $estadistica_centro_educativo;
 	}
 	
-	private function datos_consultar_mapa_view($coordenada = '13.802994, -88.9053364', $zoom = '9'){
+	private function datos_consultar_mapa_view($centro, $zoom, $coordenadas, $breadcrumbs){
 		$datos['pagina'] = 'mapa/consultar_mapa_view';
 		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$datos['opcion_menu'] = modulo_actual('modulo_mapa_estadistico');
 		$datos['zoom'] = $zoom + 3;
-		
+		$datos['coordenadas'] = $coordenadas;
+		switch(count($breadcrumbs)){
+			case 1:
+				$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol($breadcrumbs[0], 'class="breadcrumb"'));
+				break;
+			case 2:
+				$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array(anchor('mapa', $breadcrumbs[0]), utf8($this->departamentos_model->nombre_departamento($breadcrumbs[1]))), 'class="breadcrumb"'));
+				break;
+			case 3:
+				$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array(anchor('mapa', $breadcrumbs[0]), anchor('mapa/departamento/'.$breadcrumbs[1], utf8($this->departamentos_model->nombre_departamento($breadcrumbs[1]))), utf8($this->municipios_model->nombre_municipio($breadcrumbs[2]))), 'class="breadcrumb"'));
+				break;
+		}
 		$configuracion = array();
-		$configuracion['center'] = $coordenada;
+		$configuracion['center'] = $centro;
 		$configuracion['zoom'] = $zoom;
 		$configuracion['map_type'] = 'ROADMAP';
 		$configuracion['map_width'] = '100%';
 		$configuracion['map_height'] = '600px';
 		$this->map->initialize($configuracion);
-		
 		return $datos;
+	}
+	
+	private function validar_parametros($codigo_departamento, $codigo_municipio, $coordenadas){
+		if(!$codigo_municipio){
+			$opcional = $codigo_municipio;
+			$codigo_municipio = '01';
+		}
+		else{
+			$opcional = TRUE;
+		}
+		if(!empty($codigo_departamento) && ($codigo_departamento >= 1 && $codigo_departamento <= 14) && !empty($codigo_municipio) && ($codigo_municipio >= 1 && $codigo_municipio <= 262) && !empty($coordenadas)){
+			if($opcional){
+				$validar_municipio = $this->municipios_model->validar_municipio($codigo_municipio, $codigo_departamento);
+				if(!empty($validar_municipio)){
+					return TRUE;
+				}
+				else{
+					return FALSE;
+				}
+			}
+			else{
+				return TRUE;
+			}
+		}
+		else{
+			return FALSE;
+		}
 	}
 }
 

@@ -8,24 +8,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 		<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
 		<title>SYSCAP</title>
-		<link href="../../resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
-		<link href="../../resources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src="../../resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="../../resources/plugins/metis-menu/js/metis-menu.min.js"></script>
-		<script type="text/javascript" src="../../resources/plugins/jquery/jquery.min.js"></script>
-		<script type="text/javascript" src="../../resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
-		<script type="text/javascript" src="../../resources/plugins/jquery/jquery.scrollTo.min.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/metis-menu/js/metis-menu.min.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	</head>
 	<body>
 		<section id="container" >
@@ -129,7 +129,7 @@
 				</div>
 			</footer>
 		</section>
-		<script type="text/javascript" src="../../resources/plugins/dashgumfree/js/dashgumfree.js"></script>
-		<script type="text/javascript" src="../../resources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/dashgumfree/js/dashgumfree.js"></script>
+		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/js/bootstrap-hover-dropdown.min.js"></script>
 	</body>
 </html>
