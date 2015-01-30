@@ -30,7 +30,7 @@ if($operacion == "Mostrar"){
 	
 	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\';"';
 	$boton_secundario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\';"';
-	$boton_regresar = 'class="btn btn-danger" onclick="location.href=\'javascript:window.history.back()\';"';
+	$boton_regresar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios\';"';
 }
 if($operacion == "Editar"){
 	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';

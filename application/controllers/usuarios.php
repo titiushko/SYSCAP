@@ -29,7 +29,7 @@ class Usuarios extends CI_Controller{
 		}
 		
 		if(empty($datos['usuario'])){
-			echo 'mostrar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+			show_404();
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $datos);
@@ -49,7 +49,7 @@ class Usuarios extends CI_Controller{
 				$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
 			}
 			
-			if($this->form_validation->run() == TRUE){
+			if($this->form_validation->run()){
 				$update_usuario = $this->input->post();
 				unset($update_usuario['estado'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 				$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
@@ -62,7 +62,7 @@ class Usuarios extends CI_Controller{
 		}
 		else{
 			if(empty($datos['usuario'])){
-				echo 'modificar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+				show_404();
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
@@ -74,32 +74,38 @@ class Usuarios extends CI_Controller{
 		$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
 		
 		if(empty($datos['usuario'])){
-			echo 'recuperar_contrasena(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+			show_404();
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 	}
 	
-	private function datos_formulario_usuarios_view($operacion = '', $codigo_usuario = NULL){
-		$datos['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
-		if($operacion != ''){
-			$datos['operacion'] = $operacion;
-			$datos['pagina'] = 'usuarios/formulario_usuarios_view';
-			$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
-			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-			$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
-			$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
-			$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
+	private function datos_formulario_usuarios_view($operacion, $codigo_usuario){
+		$validar_usuario = $this->usuarios_model->validar_usuario($codigo_usuario);
+		if(empty($validar_usuario)){
+			return NULL;
 		}
 		else{
-			$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo);
-			$datos['nombre_profesion'] = $this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion);
-			$datos['nombre_tipo_usuario'] = $this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario);
+			$datos['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
+			if($operacion != ''){
+				$datos['operacion'] = $operacion;
+				$datos['pagina'] = 'usuarios/formulario_usuarios_view';
+				$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+				$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
+				$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
+				$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
+				$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
+			}
+			else{
+				$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo);
+				$datos['nombre_profesion'] = $this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion);
+				$datos['nombre_tipo_usuario'] = $this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario);
+			}
+			$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
+			$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
+			return $datos;
 		}
-		$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
-		$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
-		return $datos;
 	}
 	
 	private function validaciones($grupo_campos){
@@ -181,11 +187,11 @@ class Usuarios extends CI_Controller{
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
-	private function cargar_plantilla_pdf($codigo_usuario = NULL){
+	private function cargar_plantilla_pdf($codigo_usuario){
 		$usuario = $this->usuarios_model->usuario($codigo_usuario);
 		$plantilla_pdf = read_file('resources/templates/pdf/usuarios.php');
 		if(empty($usuario)){
-			$plantilla_pdf = 'mostrar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+			show_404();
 		}
 		else{
 			$lista_certificaciones_usuario = ''; $certificaciones = 1;
@@ -236,12 +242,22 @@ class Usuarios extends CI_Controller{
 	}
 	
 	public function imprimir($codigo_usuario = NULL){
-		$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
-		if(empty($datos['usuario'])){
-			echo 'mostrar(): id_usuario= '.$codigo_usuario.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+		if(empty($codigo_usuario)){
+			show_404();
 		}
 		else{
-			$this->load->view('usuarios/imprimir_usuarios_view', $datos);
+			if(is_numeric($codigo_usuario)){
+				$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
+				if(empty($datos['usuario'])){
+					show_404();
+				}
+				else{
+					$this->load->view('usuarios/imprimir_usuarios_view', $datos);
+				}
+			}
+			else{
+				show_404();
+			}
 		}
 	}
 }

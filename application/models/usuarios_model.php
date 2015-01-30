@@ -56,6 +56,12 @@ class Usuarios_model extends CI_Model{
 		$query = $this->db->query($sql, array($codigo_usuario));
 		return $query->result();
 	}
+	
+	function validar_usuario($codigo_usuario){
+		$query = $this->db->where('id_usuario', $codigo_usuario);
+		$query = $this->db->get('usuarios');
+		return $query->result();
+	}
 }
 
 /* End of file usuarios_model.php */
