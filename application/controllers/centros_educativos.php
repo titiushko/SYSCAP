@@ -29,7 +29,7 @@ class Centros_educativos extends CI_Controller{
 		}
 		
 		if(empty($datos['centro_educativo'])){
-			echo 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+			show_404();
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $datos);
@@ -41,7 +41,7 @@ class Centros_educativos extends CI_Controller{
 		
 		if($this->input->post('estado') == '1'){
 			$this->validaciones();
-			if($this->form_validation->run() == TRUE){
+			if($this->form_validation->run()){
 				$update_centro_educativo = $this->input->post();
 				unset($update_centro_educativo['estado'], $update_centro_educativo['boton_primario']);
 				$this->centros_educativos_model->modificar($update_centro_educativo, $codigo_centro_educativo);
@@ -54,7 +54,7 @@ class Centros_educativos extends CI_Controller{
 		}
 		else{
 			if(empty($datos['centro_educativo'])){
-				echo 'modificar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido';		//TODO: crear algo en respuesta, cuando sea un id no valido.
+				show_404();
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
@@ -62,23 +62,29 @@ class Centros_educativos extends CI_Controller{
 		}
 	}
 	
-	private function datos_formulario_centros_educativos_view($operacion = '', $codigo_centro_educativo = NULL){
-		$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
-		 if($operacion != ''){
-			$datos['operacion'] = $operacion;
-			$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
-			$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
-			$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
-			$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-			$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
+	private function datos_formulario_centros_educativos_view($operacion, $codigo_centro_educativo){
+		$validar_centro_educativo = $this->centros_educativos_model->validar_centro_educativo($codigo_centro_educativo);
+		if(empty($validar_centro_educativo)){
+			return NULL;
 		}
 		else{
-			$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
-			$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
+			$datos['centro_educativo'] = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
+			if($operacion != ''){
+				$datos['operacion'] = $operacion;
+				$datos['pagina'] = 'centros_educativos/formulario_centros_educativos_view';
+				$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
+				$datos['opcion_menu'] = modulo_actual('modulo_centros_educativos');
+				$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
+				$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
+			}
+			else{
+				$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
+				$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
+			}
+			$datos['lista_docentes_certificados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
+			$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
+			return $datos;
 		}
-		$datos['lista_docentes_certificados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
-		$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
-		return $datos;
 	}
 	
 	private function validaciones(){
@@ -120,11 +126,11 @@ class Centros_educativos extends CI_Controller{
 		$pdf->Output($nombre_archivo, 'I');
 	}
 	
-	private function cargar_plantilla_pdf($codigo_centro_educativo = NULL){
+	private function cargar_plantilla_pdf($codigo_centro_educativo){
 		$centro_educativo = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
 		if(empty($centro_educativo)){
-			$plantilla_pdf = 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido' ;		//TODO: crear algo en respuesta, cuando sea un id no valido.
+			show_404();
 		}
 		else{
 			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
@@ -163,12 +169,22 @@ class Centros_educativos extends CI_Controller{
 	}
 	
 	public function imprimir($codigo_centro_educativo = NULL){
-		$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
-		if(empty($datos['centro_educativo'])){
-			echo 'mostrar(): id_centro_educativo= '.$codigo_centro_educativo.' Invalido' ;		//TODO: crear algo en respuesta, cuando sea un id no valido.
+		if(empty($codigo_centro_educativo)){
+			show_404();
 		}
 		else{
-			$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
+			if(is_numeric($codigo_centro_educativo)){
+				$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
+				if(empty($datos['centro_educativo'])){
+					show_404();
+				}
+				else{
+					$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
+				}
+			}
+			else{
+				show_404();
+			}
 		}
 	}
 }

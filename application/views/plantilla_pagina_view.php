@@ -9,17 +9,16 @@
 			array('name'	=>	'X-UA-Compatible', 'content'	=>	'IE=edge', 'type' => 'equiv'),
 			array('name'	=>	'viewport', 'content'			=>	'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'),
 			// array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=utf-8', 'type' => 'equiv'),
-			array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv')
+			array('name'	=>	'Content-type', 'content'		=>	'text/html; charset=ISO-8859-1', 'type' => 'equiv'),
+			array('name'	=>	'expires', 'content'			=>	'0', 'type' => 'equiv'),
+			array('name'	=>	'pragma', 'content'				=>	'no-cache', 'type' => 'equiv')
 		);
 		echo meta($metainformaciones);
 		?>
 		<title>SYSCAP</title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
-		<!-- <?= link_tag('resources/plugins/bootstrap/css/bootstrap-responsive.min.css'); ?> -->
 		<?= link_tag('resources/plugins/metis-menu/css/metis-menu.min.css'); ?>
-		<!-- <?= link_tag('resources/plugins/sb-admin/css/sb-admin.css'); ?> -->
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
-		<!-- <?= link_tag('resources/plugins/bootstrap/modern-business.css'); ?> -->
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
 		<?= link_tag('resources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
 		<?= link_tag('resources/plugins/dashgumfree/css/dashgumfree.css'); ?>
@@ -34,7 +33,6 @@
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/metis-menu/js/metis-menu.min.js"></script>
-		<!-- <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/sb-admin/js/sb-admin.js"></script> -->
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 		<script type="text/javascript">
@@ -56,6 +54,13 @@
 						"margin-top": "75px"
 					});
 				}
+				/*
+				window.location.hash = "no-back-button";
+				window.location.hash = "again-no-back-button";
+				window.onhashchange = function(){
+					window.location.hash = "no-back-button";
+				}
+				*/
 			});
 		</script>
 	</head>

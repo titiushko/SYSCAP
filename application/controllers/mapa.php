@@ -100,7 +100,7 @@ class Mapa extends CI_Controller{
 		$datos['coordenadas'] = $coordenadas;
 		switch(count($breadcrumbs)){
 			case 1:
-				$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol($breadcrumbs[0], 'class="breadcrumb"'));
+				$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array($breadcrumbs[0]), 'class="breadcrumb"'));
 				break;
 			case 2:
 				$datos['breadcrumbs'] = str_replace('<li>', '<li class="active">', ol(array(anchor('mapa', $breadcrumbs[0]), utf8($this->departamentos_model->nombre_departamento($breadcrumbs[1]))), 'class="breadcrumb"'));

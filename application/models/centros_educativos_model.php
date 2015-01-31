@@ -86,6 +86,12 @@ class Centros_educativos_model extends CI_Model{
 		$query = $this->db->query($sql, array($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_modalidad));
 		return $query->result();
 	}
+	
+	function validar_centro_educativo($codigo_centro_educativo){
+		$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
+		$query = $this->db->get('centros_educativos');
+		return $query->result();
+	}
 }
 
 /* End of file centros_educativos_model.php */
