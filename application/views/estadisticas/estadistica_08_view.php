@@ -19,7 +19,7 @@ $boton_primario = 'class="btn btn-primary"';
 			<div class="form-group">
 				<?= form_label('Tipo de capacitados:'); ?>
 				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required'); ?>
-				<?= form_error('id_tipo_capacitado'); ?>
+				<?= form_error('id_tipo_capacitados'); ?>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -70,7 +70,7 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $tbl->row_number; ?></td>
-								<td><?= utf8($tbl->nombre_departamento); ?></td>
+								<td><?= htmlentities($tbl->nombre_departamento, ENT_COMPAT, 'UTF-8'); ?></td>
 								<td><?= $tbl->capacitados; ?></td>
 								<td><?= $tbl->certificados; ?></td>
 							</tr>
@@ -116,7 +116,7 @@ $boton_primario = 'class="btn btn-primary"';
 	$(function() {
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica2-1',
-			data: [<?= $grafica_estaditicas_depertamento_json; ?>],
+			data: [<?= $grafica_estaditicas_departamento_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],
@@ -125,7 +125,7 @@ $boton_primario = 'class="btn btn-primary"';
 		});
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica2-2',
-			data: [<?= $grafica_estaditicas_depertamento_json; ?>],
+			data: [<?= $grafica_estaditicas_departamento_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],

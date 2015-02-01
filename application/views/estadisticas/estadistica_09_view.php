@@ -1,88 +1,64 @@
 <?php
-$fecha_ini = array(
-	'name'		=> 'fecha_ini',
-	'id'		=> 'fecha_ini',
+$fecha = array(
+	'name'		=> '',
+	'id'		=> '',
 	'maxlength'	=> '60',
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
 	'class'		=> 'form-control text-capitalize'
-);
-$fecha_fin = array(
-	'name'		=> 'fecha_fin',
-	'id'		=> 'fecha_fin',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
-);
-$attr = array("id" => "formulario",
-              "name" => "formulario"
 );
 
-$boton_primario = array('id'    => 'boton_primario',
-						'class' => 'btn btn-primary',
-						'name'	=> 'boton_primario',
-						'value' => 'Consultar',
-);
+$boton_primario = 'class="btn btn-primary"';
 ?>
-<?= form_open('',$attr); ?>
+<?= form_open(); ?>
 	<div class="row">
-		<div class="col-lg-6">
+        <div class="col-lg-6">
 			<div class="form-group">
-				<?= form_label('Periodo:'); ?>
-				<div class="row">
-					<div class="col-lg-6">
-						<?= form_input($fecha_ini); ?>
-						<?= form_error('fecha_ini'); ?>
-					</div>
-					<div class="col-lg-6">
-						<?= form_input($fecha_fin); ?>
-						<?= form_error('fecha_fin'); ?>
-					</div>
-				</div>
+				<?= form_label('Tipo de Capacitados:'); ?>
+				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required'); ?>
+				<?= form_error('id_tipo_capacitados'); ?>
 			</div>
 		</div>
+        <div class="col-lg-6">
+			<div class="form-group">
+				<?= form_label('Centro Educativo:'); ?>
+				<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, '', 'class="form-control" required'); ?>
+				<?= form_error('id_centro_educativo'); ?>
+			</div>
+		</div>		   
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
-				<?= form_submit($boton_primario); ?>
+				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
 			</div>
 		</div>
 	</div>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
-	</div>
-	<div class="panel-body">
-	<div class="row">
-		<div class="col-lg-6">
-			<div class="table-responsive">        
-				<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
-					<thead>
+<?= form_close(); ?>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="table-responsive">        
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
 					<tr>
 						<th></th>
-						<th>Tutorizado</th>
-						<th>Autoformacion</th>
+						<th>Cantidades</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>Certificados</td>
-						<td><?= $certificados[0]->tutorizado?></td>
-						<td><?= $certificados[0]->autoformacion ?></td>
+						<td>Tutorizado</td>
+						<td><?= $certificados[0]->tutorizado?></td>				
 					</tr>
 					<tr>
-						<td>Capacitados</td>
+						<td>Autoformacion</td>
 						<td><?= $capacitados[0]->tutorizado?></td>
-						<td><?= $capacitados[0]->autoformacion ?></td>
 					</tr>
 					<tr>
 						<th>TOTAL</th>
-						<td><?= $total[0]->tutorizado ?></td>
-						<td><?= $total[0]->autoformacion ?></td>
+						<td><?= $total[0]->tutorizado?></td>						
 					</tr>
 				</tbody>
 			</table>

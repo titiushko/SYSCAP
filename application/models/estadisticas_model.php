@@ -9,12 +9,14 @@ class Estadisticas_model extends CI_Model{
 		if($tipo_resultado == 'certificados'){
 			$sql = 'select sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
 	                sum(case when a.modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion 
-					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00 and a.nombre_examen like \'Examen%\'';
+					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00 
+                    and a.nombre_examen like \'Examen%\'';
 		}
 		if($tipo_resultado == 'capacitados'){
 			$sql = 'select sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
 	                sum(case when a.modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion 
-					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00 and a.nombre_examen like \'Evaluaci%\'';
+					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00 
+                    and a.nombre_examen like \'Evaluaci%\'';
 		}
 		if($tipo_resultado == 'total'){
 			$sql = 'select sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
@@ -30,7 +32,7 @@ class Estadisticas_model extends CI_Model{
 			$query = $this->db->query('SELECT * FROM V_UsuariosTotalDepartamento');
 		}
 		else{
-			$query = $this->db->query('SELECT acentos(capacitados.nombre_municipio) nombre_municipio, capacitados.total capacitados, (CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+			$query = $this->db->query('SELECT capacitados.nombre_municipio nombre_municipio, capacitados.total capacitados, (CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
 									   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) capacitados
 									   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) certificados
 									   ON capacitados.nombre_municipio = certificados.nombre_municipio
@@ -45,9 +47,9 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	function usuarios_municipio($id_departamento){
-		$query = $this->db->query('SELECT DISTINCT acentos(m.nombre_municipio) nombre_municipio, acentos(F_NombreCompletoUsuario(u.id_usuario)) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
+		$query = $this->db->query('SELECT m.nombre_municipio, F_NombreCompletoUsuario(u.id_usuario) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
 								   FROM usuarios u INNER JOIN municipios m ON(u.id_municipio = m.id_municipio)
-								   WHERE u.id_departamento LIKE '.($id_departamento == '' ? '\'%\'' : '?').'
+								   WHERE u.id_departamento = ?
 								   ORDER BY 1', array($id_departamento));
 		return $query->result();
 	}
@@ -55,23 +57,23 @@ class Estadisticas_model extends CI_Model{
 	function usuarios_departamento_municipio($tipo_resultado = ''){
 		if($tipo_resultado == 'tabla'){
 			$sql = '(select @row_num := @row_num + 1 as row_number, nombre_centro_educativo ,
-					sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) certificados,
-					sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) capacitados
+					sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) capacitados,
+					sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) certificados
 					from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00 
 					group by nombre_municipio order by row_number)
 					union(
 					select @row_num := @row_num + 1 as row_number,
 					"TOTAL"as nombre_centro_educativo,
-					sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) certificados,
-					sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) capacitados
+					sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) capacitados,
+					sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) certificados
 					from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00 
 					)';
 		}
 		
 		if($tipo_resultado == 'grafica'){
 			$sql = '(select @row_num := @row_num + 1 as row_number, nombre_centro_educativo ,
-					sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) certificados,
-					sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) capacitados
+					sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) capacitados,
+					sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) certificados
 					from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00 
 					group by nombre_municipio order by row_number)
 					';
@@ -90,13 +92,13 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	function estaditicas_depertamento_fechas($tipo_resultado = ''){
+	function estaditicas_departamento_fechas($tipo_resultado = ''){
 		if($tipo_resultado == 'tabla'){
 		  $query = $this->db->query('set @row_num = 0');
           $sql = 'select @row_num := @row_num + 1 as row_number,
                     	   nombre_departamento,
-                    	   sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) certificados,
-                    	   sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) capacitados
+                    	   sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) capacitados,
+                    	   sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) certificados 
                     from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00 
                     group by nombre_departamento order by row_number';
 		}
@@ -105,16 +107,77 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
     
-    function estaditicas_depertamento_tipo_fechas($tipo_resultado = ''){
-		if($tipo_resultado == 'tabla'){
-		  $query = $this->db->query('set @row_num = 0');
-          $sql = 'select @row_num := @row_num + 1 as row_number,
-                    	   nombre_municipio,
-                    	   sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) certificados,
-                    	   sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) capacitados
-                    from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00 
+    function estaditicas_departamento_tipo_fechas($tipo_resultado = ''){
+		$query = $this->db->query('set @row_num = 0');
+		$sql = 'select @row_num := @row_num + 1 as row_number,
+					nombre_municipio,
+                    sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) capacitados,
+                    sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) certificados
+                    from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00  
                     group by nombre_municipio order by row_number';
+		
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+        
+	function centro_educativo_capacitado($tipo_resultado = ''){
+				
+		if($tipo_resultado == 'certificados'){
+		
+		$sql = " select sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
+            	    sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
+                    from v_estadisticadepartamentofecha a
+                    where a.nota_examen_calificacion >= 7.00 
+                    and a.nombre_examen like 'Examen%'
+                    and a.nombre_centro_educativo='Centro Escolar  Isidro Menendez'";
 		}
+		if($tipo_resultado == 'capacitados'){
+		
+		$sql = " select sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
+                    sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
+					from v_estadisticadepartamentofecha a
+                    where a.nota_examen_calificacion >= 7.00 
+                    and a.nombre_examen like 'Evaluaci%'
+                    and a.nombre_centro_educativo='Centro Escolar  Isidro Menendez'";
+        }           
+    	if($tipo_resultado == 'total'){		
+		$sql = " select sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
+	                sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
+					from v_estadisticadepartamentofecha a 
+                    where a.nota_examen_calificacion >= 7.00
+                    and a.nombre_centro_educativo='Centro Escolar  Isidro Menendez'";           
+        }                     
+		$query = $this->db->query($sql);
+		return $query->result();
+	}
+ // CONSULTA ESTADISTICA 10 
+	function usuarios_nivel_nacional($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin){
+		$sql ='';
+		$query = $this->db->query('set @row_num = 0');
+		$tipo_resultado= '';
+		//set @row_num = 0;
+		$sql = "select @row_num := @row_num + 1 as row_number,
+				a.nombre_centro_educativo,
+				sum(case when a.modalidad_usuario =  'tutorizado' then 1 else 0 end ) tutorizado,
+				sum(case when a.modalidad_usuario =  'autoformacion' then 1 else 0 end ) autoformacion 
+		from v_estadisticadepartamentofecha a
+		where a.nota_examen_calificacion >= 7.00 
+		and a.nombre_examen like '".$id_tipo_capacitados."%'
+		and a.id_departamento = $id_departamento
+		and a.id_municipio = $id_municipio
+		and a.fecha_examen_calificacion between '".$fecha_ini."' and '".$fecha_fin."'
+		group by a.nombre_centro_educativo
+		union 
+		select @row_num := @row_num + 1 as row_number,
+			   'TOTAL' as nombre_centro_educativo,
+			   sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
+			   sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
+		from v_estadisticadepartamentofecha a 
+		where a.nota_examen_calificacion >= 7.00
+		and a.nombre_examen like '".$id_tipo_capacitados."%'
+		and a.id_departamento = $id_departamento
+		and a.id_municipio = $id_municipio
+		and a.fecha_examen_calificacion between '".$fecha_ini."' and '".$fecha_fin."'";
 		
 		$query = $this->db->query($sql);
 		return $query->result();
