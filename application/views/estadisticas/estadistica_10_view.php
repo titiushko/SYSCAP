@@ -17,10 +17,9 @@ $fecha_fin = array(
 	'required'	=> 'required',
 	'class'		=> 'form-control text-capitalize'
 );
-$attr = array("id" => "formulario",
+$attr = array("id"   => "formulario",
               "name" => "formulario"
 );
-
 $boton_primario = array('id'    => 'boton_primario',
 						'class' => 'btn btn-primary',
 						'name'	=> 'boton_primario',
@@ -29,27 +28,30 @@ $boton_primario = array('id'    => 'boton_primario',
 ?>
 <?= form_open('',$attr); ?>
 	<div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
 			<div class="form-group">
 				<?= form_label('Tipo de Capacitado:'); ?>
 				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, '', 'class="form-control" required id="id_tipo_capacitados"'); ?>
 				<?= form_error('id_tipo_capacitados'); ?>
 			</div>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-4">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
 				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required id="id_departamento"'); ?>
 				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
 			<div class="form-group">
 				<?= form_label('Municipio:'); ?>
 				<?= form_dropdown('id_municipio', $lista_municipios, '', 'class="form-control" required id="id_municipio"'); ?>
 				<?= form_error('id_municipio'); ?>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -82,13 +84,13 @@ $boton_primario = array('id'    => 'boton_primario',
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica10-1">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Centros Educativos</th>
-								<th>Autoformacion</th>
+								<th>Centro Educativo</th>
 								<th>Tutorizados</th>
+								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -98,7 +100,7 @@ $boton_primario = array('id'    => 'boton_primario',
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica2-1"></div></a>
+				<!--<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica10-1"></div></a>-->
 			</div>
 		</div>
 	</div>
@@ -111,18 +113,17 @@ $boton_primario = array('id'    => 'boton_primario',
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-2">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica10-2">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Nombres</th>
-								<th>Apellido</th>
-								<th>Apellido</th>
+								<th>Nombre</th>
 								<th>Tipo de Capacitado</th>
-								<th>Modalidad de Capacitacion</th>
+								<th>Modalidad de Capacitaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
+							
 						</tbody>
 					</table>
 				</div>
@@ -130,8 +131,6 @@ $boton_primario = array('id'    => 'boton_primario',
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
@@ -190,7 +189,7 @@ $boton_primario = array('id'    => 'boton_primario',
 					respuesta = jQuery.parseJSON(jqXHR.responseText);
 					console.log(respuesta);
 					
-					$('#data-tables-estadistica2-1').dataTable({
+					$('#data-tables-estadistica10-1').dataTable({
 						searching: false,
 						lengthChange: false,
 						oLanguage: {
@@ -213,10 +212,10 @@ $boton_primario = array('id'    => 'boton_primario',
 						]
 					});
 					
-					//$('#data-tables-estadistica2-1').DataTable().ajax.reload();
+					//$('#data-tables-estadistica10-1').DataTable().ajax.reload();
 					
 					Morris.Bar({
-				element: 'morris-bar-chart-estadistica2-1',
+				element: 'morris-bar-chart-estadistica10-1',
 				data: respuesta,
 				xkey: 'nombre_centro_educativo',
 				ykeys: ['tutorizado', 'autoformacion'],
@@ -226,7 +225,7 @@ $boton_primario = array('id'    => 'boton_primario',
 			});
 			/*
 			Morris.Bar({
-				element: 'morris-bar-chart-estadistica2-2',
+				element: 'morris-bar-chart-estadistica10-2',
 				data: respuesta,
 				xkey: 'nombre_centro_educativo',
 				ykeys: ['tutorizado', 'autoformacion'],
@@ -241,7 +240,7 @@ $boton_primario = array('id'    => 'boton_primario',
                 }
 			});
 			
-			$('#data-tables-estadistica2-1 tbody').on('click', 'tr', function () {
+			$('#data-tables-estadistica10-1 tbody').on('click', 'tr', function () {
 				var name = $('td', this).eq(1).text();
 				alert(name);
 				var respuesta = null;
@@ -266,7 +265,7 @@ $boton_primario = array('id'    => 'boton_primario',
                 {
 					respuesta = jQuery.parseJSON(jqXHR.responseText);
 					console.log(respuesta);
-					$('#data-tables-estadistica2-1').dataTable({
+					$('#data-tables-estadistica10-1').dataTable({
 						searching: false,
 						lengthChange: false,
 						oLanguage: {
@@ -301,7 +300,7 @@ $boton_primario = array('id'    => 'boton_primario',
 	/*	
 	$(function() {
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-1',
+			element: 'morris-bar-chart-estadistica10-1',
 			data: [<?= $grafica_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
@@ -310,7 +309,7 @@ $boton_primario = array('id'    => 'boton_primario',
 			resize: true
 		});
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-2',
+			element: 'morris-bar-chart-estadistica10-2',
 			data: [<?= $grafica_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],

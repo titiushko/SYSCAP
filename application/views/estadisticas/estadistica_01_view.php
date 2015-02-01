@@ -6,7 +6,7 @@ $fecha_ini = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
 $fecha_fin = array(
 	'name'		=> 'fecha_fin',
@@ -15,12 +15,11 @@ $fecha_fin = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
-$attr = array("id" => "formulario",
-              "name" => "formulario"
+$attr = array('id'   => 'formulario',
+              'name' => 'formulario'
 );
-
 $boton_primario = array('id'    => 'boton_primario',
 						'class' => 'btn btn-primary',
 						'name'	=> 'boton_primario',
@@ -29,6 +28,7 @@ $boton_primario = array('id'    => 'boton_primario',
 ?>
 <?= form_open('',$attr); ?>
 	<div class="row">
+		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -46,7 +46,8 @@ $boton_primario = array('id'    => 'boton_primario',
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-3"><?= nbs(); ?></div>
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_submit($boton_primario); ?>
 			</div>
@@ -57,51 +58,54 @@ $boton_primario = array('id'    => 'boton_primario',
 		<?= heading('Resultado', 4); ?>
 	</div>
 	<div class="panel-body">
-	<div class="row">
-		<div class="col-lg-6">
-			<div class="table-responsive">        
-				<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
-					<thead>
-					<tr>
-						<th></th>
-						<th>Tutorizado</th>
-						<th>Autoformacion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Certificados</td>
-						<td><?= $certificados[0]->tutorizado?></td>
-						<td><?= $certificados[0]->autoformacion ?></td>
-					</tr>
-					<tr>
-						<td>Capacitados</td>
-						<td><?= $capacitados[0]->tutorizado?></td>
-						<td><?= $capacitados[0]->autoformacion ?></td>
-					</tr>
-					<tr>
-						<th>TOTAL</th>
-						<td><?= $total[0]->tutorizado ?></td>
-						<td><?= $total[0]->autoformacion ?></td>
-					</tr>
-				</tbody>
-			</table>
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="table-responsive">        
+					<table class="table table-striped table-bordered table-hover">
+						<thead>
+							<tr>
+								<th></th>
+								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
+							</tr>
+							<tr>
+								<th rowspan="2">Tipo de Capacitado</th>
+								<th>Tutorizados</th>
+								<th>Autoformaci&oacute;n</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>Capacitados</th>
+								<td><?= $capacitados[0]->tutorizado?></td>
+								<td><?= $capacitados[0]->autoformacion ?></td>
+							</tr>
+							<tr>
+								<th>Certificados</th>
+								<td><?= $certificados[0]->tutorizado?></td>
+								<td><?= $certificados[0]->autoformacion ?></td>
+							</tr>
+							<tr>
+								<th>TOTAL</th>
+								<th><?= $total[0]->tutorizado ?></th>
+								<th><?= $total[0]->autoformacion ?></th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica1-1"></div></a>
+			</div>
 		</div>
 	</div>
 </div>
-    <div class="col-lg-6">
-	   <a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica2-1"></div></a>
-    </div>
-</div>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-1',
-			data: [<?= $estadistica; ?>],
+			element: 'morris-bar-chart-estadistica1-1',
+			data: [<?= $grafica_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],
@@ -109,8 +113,8 @@ $boton_primario = array('id'    => 'boton_primario',
 			resize: true
 		});
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-2',
-			data: [<?= $estadistica; ?>],
+			element: 'morris-bar-chart-estadistica1-2',
+			data: [<?= $grafica_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],

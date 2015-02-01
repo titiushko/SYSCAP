@@ -7,9 +7,8 @@ $fecha = array(
 	'value'		=> '',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
-
 $boton_primario = 'class="btn btn-primary"';
 ?>
 <?= form_open('index.php/estadisticas/consulta/2'); ?>
@@ -59,7 +58,7 @@ $boton_primario = 'class="btn btn-primary"';
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Municipio</th>
+								<th class="text-center">Municipio</th>
 								<th>Capacitados</th>
 								<th>Certificados</th>
 							</tr>
@@ -72,7 +71,7 @@ $boton_primario = 'class="btn btn-primary"';
 							?>
 							<tr>
 								<td><?= $cantidades; ?></td>
-								<td><?= htmlentities($cantidad_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
@@ -125,9 +124,9 @@ $boton_primario = 'class="btn btn-primary"';
 							?>
 							<tr>
 								<td><?= $usuarios; ?></td>
-								<td><?= htmlentities($usuario_municipio->nombre_municipio, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($usuario_municipio->nombre_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($usuario_municipio->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($usuario_municipio->nombre_municipio); ?></td>
+								<td><?= utf8($usuario_municipio->nombre_usuario); ?></td>
+								<td><?= utf8($usuario_municipio->modalidad_usuario); ?></td>
 							</tr>
 							<?php
 							$usuarios++;
@@ -152,8 +151,8 @@ $boton_primario = 'class="btn btn-primary"';
 				"oPaginate": {
 					"sFirst": "Primero",
 					"sLast": "Último",
-					"sNext": ">>",
-					"sPrevious": "<<"
+					"sNext": ">",
+					"sPrevious": "<"
 				},
 				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
 			  }

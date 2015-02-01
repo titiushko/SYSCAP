@@ -47,9 +47,7 @@ DELIMITER $$
 DROP VIEW IF EXISTS V_EstadisticaDepartamentoFecha $$
 CREATE VIEW V_EstadisticaDepartamentoFecha AS
 SELECT
-	u.nombres_usuario nombres_usuario,
-	u.apellido1_usuario apellido1_usuario,
-	u.apellido2_usuario apellido2_usuario,
+	F_NombreCompletoUsuario(u.id_usuario) nombre_usuario,
 	ec.nota_examen_calificacion nota_examen_calificacion,
 	u.modalidad_usuario modalidad_usuario,
 	e.nombre_examen nombre_examen,

@@ -6,34 +6,36 @@ $fecha = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
-
 $boton_primario = 'class="btn btn-primary"';
 ?>
 <?= form_open(); ?>
 	<div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
 			<div class="form-group">
-				<?= form_label('Tipo de Capacitados:'); ?>
+				<?= form_label('Tipo de Capacitado:'); ?>
 				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required'); ?>
 				<?= form_error('id_tipo_capacitados'); ?>
 			</div>
 		</div>
-		<div class="col-lg-6">
+		<div class="col-lg-4">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
 				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required'); ?>
 				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
 			<div class="form-group">
 				<?= form_label('Municipio:'); ?>
 				<?= form_dropdown('id_municipio', $lista_municipios, '', 'class="form-control" required'); ?>
 				<?= form_error('id_municipio'); ?>
 			</div>
 		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -68,13 +70,13 @@ $boton_primario = 'class="btn btn-primary"';
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica7-1">
 						<thead>
 							<tr>
 								<th>#</th>
 								<th>Centros Educativos</th>
-								<th>Autoformacion</th>
 								<th>Tutorizados</th>
+								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -83,7 +85,7 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $centroseducativos; ?></td>
-								<td><?= htmlentities($tbl->nombre_centro_educativo, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($tbl->nombre_centro_educativo); ?></td>
 								<td><?= $tbl->capacitados; ?></td>
 								<td><?= $tbl->certificados; ?></td>
 							</tr>
@@ -96,7 +98,7 @@ $boton_primario = 'class="btn btn-primary"';
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica2-1"></div></a>
+				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica7-1"></div></a>
 			</div>
 		</div>
 	</div>
@@ -109,15 +111,13 @@ $boton_primario = 'class="btn btn-primary"';
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-2">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica7-2">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Nombres</th>
-								<th>Apellido</th>
-								<th>Apellido</th>
+								<th>Nombre</th>
 								<th>Tipo de Capacitado</th>
-								<th>Modalidad de Capacitacion</th>
+								<th>Modalidad de Capacitaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -127,11 +127,9 @@ $boton_primario = 'class="btn btn-primary"';
 							?>
 							<tr>
 								<td><?= $centroseducativos; ?></td>
-								<td><?= htmlentities($lst->nombres_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->apellido1_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->apellido2_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->tipo_capacitado, ENT_COMPAT, 'UTF-8'); ?></td>
-								<td><?= htmlentities($lst->modalidad_usuario, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($lst->nombre_usuario); ?></td>
+								<td><?= utf8($lst->tipo_capacitado); ?></td>
+								<td><?= utf8($lst->modalidad_usuario); ?></td>
 							</tr>
 							<?php
 							$centroseducativos++;
@@ -148,21 +146,21 @@ $boton_primario = 'class="btn btn-primary"';
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#data-tables-estadistica2-1').dataTable({
+		$('#data-tables-estadistica7-1').dataTable({
 			"searching": false,
 			"lengthChange": false,
 			"oLanguage": {
 				"oPaginate": {
 					"sFirst": "Primero",
 					"sLast": "Último",
-					"sNext": ">>",
-					"sPrevious": "<<"
+					"sNext": ">",
+					"sPrevious": "<"
 				},
 				"sInfo": "_START_/_END_ de _TOTAL_ registros",
 				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
 			  }
 		});
-		$('#data-tables-estadistica2-2').dataTable({
+		$('#data-tables-estadistica7-2').dataTable({
 			language:{
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 			}
@@ -174,20 +172,20 @@ $boton_primario = 'class="btn btn-primary"';
 <script type="text/javascript">
 	$(function() {
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-1',
+			element: 'morris-bar-chart-estadistica7-1',
 			data: [<?= $grafica_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
 			hideHover: 'auto',
 			resize: true
 		});
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-2',
+			element: 'morris-bar-chart-estadistica7-2',
 			data: [<?= $grafica_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
 			hideHover: 'auto',
 			resize: true
 		});

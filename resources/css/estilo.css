@@ -75,3 +75,10 @@ table.cursos tr th, table.cursos tr td {
 	padding-top: 15px;
 	padding-bottom: 15px;
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo para titulos de tablas bootstrap								*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+div.table-responsive table.table.table-striped.table-bordered.table-hover thead tr th {
+	text-align: center;
+}

@@ -6,15 +6,13 @@ $fecha = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
-
 $boton_primario = 'class="btn btn-primary"';
-
-
 ?>
 <?= form_open(); ?>
 	<div class="row">
+		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -34,7 +32,8 @@ $boton_primario = 'class="btn btn-primary"';
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-12">
+		<div class="col-lg-3"><?= nbs(); ?></div>
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
 			</div>
@@ -49,7 +48,7 @@ $boton_primario = 'class="btn btn-primary"';
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica3-1">
 						<thead>
 							<tr>
 								<th>#</th>
@@ -63,7 +62,7 @@ $boton_primario = 'class="btn btn-primary"';
 							foreach($tabla as $tbl){ ?>
 							<tr>
 								<td><?= $tbl->row_number; ?></td>
-								<td><?= htmlentities($tbl->nombre_departamento, ENT_COMPAT, 'UTF-8'); ?></td>
+								<td><?= utf8($tbl->nombre_departamento); ?></td>
 								<td><?= $tbl->capacitados; ?></td>
 								<td><?= $tbl->certificados; ?></td>
 							</tr>
@@ -73,7 +72,7 @@ $boton_primario = 'class="btn btn-primary"';
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica2-1"></div></a>
+				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica3-1"></div></a>
 			</div>
 		</div>
 	</div>
@@ -82,24 +81,19 @@ $boton_primario = 'class="btn btn-primary"';
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#data-tables-estadistica2-1').dataTable({
+		$('#data-tables-estadistica3-1').dataTable({
 			"searching": false,
 			"lengthChange": false,
 			"oLanguage": {
 				"oPaginate": {
 					"sFirst": "Primero",
 					"sLast": "Último",
-					"sNext": ">>",
-					"sPrevious": "<<"
+					"sNext": ">",
+					"sPrevious": "<"
 				},
 				"sInfo": "_START_/_END_ de _TOTAL_ registros",
 				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
 			  }
-		});
-		$('#data-tables-estadistica2-2').dataTable({
-			language:{
-				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
-			}
 		});
 	});
 </script>
@@ -108,7 +102,7 @@ $boton_primario = 'class="btn btn-primary"';
 <script type="text/javascript">
 	$(function() {
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-1',
+			element: 'morris-bar-chart-estadistica3-1',
 			data: [<?= $grafica_estaditicas_departamento_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
@@ -117,7 +111,7 @@ $boton_primario = 'class="btn btn-primary"';
 			resize: true
 		});
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica2-2',
+			element: 'morris-bar-chart-estadistica3-2',
 			data: [<?= $grafica_estaditicas_departamento_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
