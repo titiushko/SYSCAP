@@ -58,7 +58,7 @@ $boton_primario = 'class="btn btn-primary"';
 						<thead>
 							<tr>
 								<th>#</th>
-								<th class="text-center">Municipio</th>
+								<th>Municipio</th>
 								<th>Capacitados</th>
 								<th>Certificados</th>
 							</tr>

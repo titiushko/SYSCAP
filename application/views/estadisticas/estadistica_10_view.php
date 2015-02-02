@@ -6,7 +6,7 @@ $fecha_ini = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
 $fecha_fin = array(
 	'name'		=> 'fecha_fin',
@@ -15,7 +15,7 @@ $fecha_fin = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
 $attr = array("id"   => "formulario",
               "name" => "formulario"

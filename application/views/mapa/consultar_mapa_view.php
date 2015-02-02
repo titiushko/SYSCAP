@@ -31,16 +31,16 @@
 							<table class="table table-striped table-bordered table-hover" id="data-tables-mapa">
 								<thead>
 									<tr>
-										<th>Municipio</th>
 										<th>Departamento</th>
+										<th>Municipio</th>
 										<th>Centro Educativo</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php foreach($coordenadas as $coordenada) { ?>
 									<tr onclick="datos_coordenada(<?= $coordenada->longitud_mapa; ?>, <?= $coordenada->latitud_mapa; ?>, marker_<?= $coordenada->id_mapa; ?>);" style="cursor: pointer;">
-										<td><?= utf8($coordenada->nombre_municipio); ?></td>
 										<td><?= utf8($coordenada->nombre_departamento); ?></td>
+										<td><?= utf8($coordenada->nombre_municipio); ?></td>
 										<td><?= utf8($coordenada->nombre_centro_educativo); ?></td>
 									</tr>
 									<?php } ?>

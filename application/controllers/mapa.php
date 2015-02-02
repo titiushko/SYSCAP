@@ -34,7 +34,7 @@ class Mapa extends CI_Controller{
 	
 	public function departamento($codigo_departamento = NULL){
 		$coordenadas = $this->mapas_model->coordenadas_municipios($codigo_departamento);
-		if($this->validar_parametros($codigo_departamento, FALSE, $coordenadas)){
+		if($this->validar_parametros($codigo_departamento, FALSE)){
 			foreach($coordenadas as $informacion_coordenada){
 				$coordenada = array();
 				$coordenada['animation'] = 'DROP';
@@ -64,7 +64,7 @@ class Mapa extends CI_Controller{
 	
 	public function municipio($codigo_departamento = NULL, $codigo_municipio = NULL){
 		$coordenadas = $this->mapas_model->coordenadas_centros_educativos($codigo_municipio);
-		if($this->validar_parametros($codigo_departamento, $codigo_municipio, $coordenadas)){
+		if($this->validar_parametros($codigo_departamento, $codigo_municipio)){
 			foreach($coordenadas as $informacion_coordenada){
 				$coordenada = array();
 				$coordenada['animation'] = 'DROP';
@@ -119,7 +119,7 @@ class Mapa extends CI_Controller{
 		return $datos;
 	}
 	
-	private function validar_parametros($codigo_departamento, $codigo_municipio, $coordenadas){
+	private function validar_parametros($codigo_departamento, $codigo_municipio){
 		if(!$codigo_municipio){
 			$opcional = $codigo_municipio;
 			$codigo_municipio = '01';
@@ -127,7 +127,7 @@ class Mapa extends CI_Controller{
 		else{
 			$opcional = TRUE;
 		}
-		if(!empty($codigo_departamento) && ($codigo_departamento >= 1 && $codigo_departamento <= 14) && !empty($codigo_municipio) && ($codigo_municipio >= 1 && $codigo_municipio <= 262) && !empty($coordenadas)){
+		if(!empty($codigo_departamento) && ($codigo_departamento >= 1 && $codigo_departamento <= 14) && !empty($codigo_municipio) && ($codigo_municipio >= 1 && $codigo_municipio <= 262)){
 			if($opcional){
 				$validar_municipio = $this->municipios_model->validar_municipio($codigo_municipio, $codigo_departamento);
 				if(!empty($validar_municipio)){
