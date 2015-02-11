@@ -49,11 +49,14 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 2: Usuarios por Departamento y Rango de Fechas
-	function usuarios_municipio($id_departamento){
-		$query = $this->db->query('SELECT DISTINCT acentos(m.nombre_municipio) nombre_municipio, acentos(F_NombreCompletoUsuario(u.id_usuario)) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
-								   FROM usuarios u INNER JOIN municipios m ON(u.id_municipio = m.id_municipio)
-								   WHERE u.id_departamento = ?
-								   ORDER BY 1', array($id_departamento));
+	function usuarios_municipio($id_departamento, $fecha1, $fecha2){
+		$query = $this->db->query('SELECT acentos(m.nombre_municipio) nombre_municipio, acentos(F_NombreCompletoUsuario(u.id_usuario)) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
+								   FROM usuarios u INNER JOIN departamentos d ON u.id_departamento = d.id_departamento
+								   INNER JOIN municipios m ON u.id_municipio = m.id_municipio
+								   INNER JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+								   INNER JOIN examenes e ON ec.id_examen = e.id_examen
+								   WHERE ec.nota_examen_calificacion >= 7.00 AND u.id_departamento = ? AND ec.fecha_examen_calificacion BETWEEN ? AND ?
+								   ORDER BY 1', array($id_departamento, $fecha1, $fecha2));
 		return $query->result();
 	}
 	

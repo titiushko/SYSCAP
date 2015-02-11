@@ -10,7 +10,22 @@ $fecha = array(
 	'class'		=> 'form-control'
 );
 $boton_primario = 'class="btn btn-primary"';
+$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'estadisticas/consulta/2\';"';
+// Definición de formulario oculto para enviar información a imprimir
+$formulario_imprimir = array(
+	'name'		=> 'formulario_imprimir',
+	'id'		=> 'formulario_imprimir',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$campos_ocultos_formulario_imprimir = array(
+	'codigo_departamento'	=> @$campos['id_departamento'],
+	'fecha_1'				=> @$campos['fecha1'],
+	'fecha_2'				=> @$campos['fecha2']
+);
 ?>
+<?= form_open('index.php/estadisticas/imprimir/2', $formulario_imprimir, $campos_ocultos_formulario_imprimir); ?>
+<?= form_close(); ?>
 <?= form_open('index.php/estadisticas/consulta/2'); ?>
 	<div class="row">
 		<div class="col-lg-6">
@@ -42,6 +57,7 @@ $boton_primario = 'class="btn btn-primary"';
 		<div class="col-lg-12">
 			<div class="form-group">
 				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
+				<?= form_reset('boton_secundario', 'Limpiar', $boton_secundario); ?>
 			</div>
 		</div>
 	</div>

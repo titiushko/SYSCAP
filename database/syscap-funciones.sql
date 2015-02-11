@@ -114,7 +114,7 @@ BEGIN
 		FETCH c_nombre_completo_usuario
 		INTO v_nombres_usuario, v_apellido1_usuario, v_apellido2_usuario;
 		
-		IF LOCATE(' ', v_apellido1_usuario) <> 0 THEN
+		IF v_apellido1_usuario = v_apellido2_usuario THEN
 			SET v_nombre_completo_usuario = (SELECT CONCAT(IF(v_nombres_usuario IS NOT NULL, v_nombres_usuario, ''), ' ', IF(v_apellido1_usuario IS NOT NULL, v_apellido1_usuario, '')) nombre_completo_usuario);
 		ELSE
 			SET v_nombre_completo_usuario = (SELECT CONCAT(IF(v_nombres_usuario IS NOT NULL, v_nombres_usuario, ''), ' ', IF(v_apellido1_usuario IS NOT NULL, v_apellido1_usuario, ''), ' ', IF(v_apellido2_usuario IS NOT NULL, v_apellido2_usuario, '')) nombre_completo_usuario);
