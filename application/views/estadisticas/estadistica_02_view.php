@@ -11,20 +11,28 @@ $fecha = array(
 );
 $boton_primario = 'class="btn btn-primary"';
 $boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'estadisticas/consulta/2\';"';
-// Definición de formulario oculto para enviar información a imprimir
+// Definición de formularios ocultos para enviar información a imprimir y exportar
 $formulario_imprimir = array(
 	'name'		=> 'formulario_imprimir',
 	'id'		=> 'formulario_imprimir',
 	'role'		=> 'form',
 	'target'	=> '_blank'
 );
-$campos_ocultos_formulario_imprimir = array(
-	'codigo_departamento'	=> @$campos['id_departamento'],
-	'fecha_1'				=> @$campos['fecha1'],
-	'fecha_2'				=> @$campos['fecha2']
+$formulario_exportar = array(
+	'name'		=> 'formulario_exportar',
+	'id'		=> 'formulario_exportar',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$campos_ocultos_formulario = array(
+	'codigo_departamento'	=> set_value('codigo_departamento', @$campos['id_departamento']),
+	'fecha_1'				=> set_value('fecha_1', @$campos['fecha1']),
+	'fecha_2'				=> set_value('fecha_2', @$campos['fecha2'])
 );
 ?>
-<?= form_open('index.php/estadisticas/imprimir/2', $formulario_imprimir, $campos_ocultos_formulario_imprimir); ?>
+<?= form_open('index.php/estadisticas/imprimir/2', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/exportar/2', $formulario_exportar, $campos_ocultos_formulario); ?>
 <?= form_close(); ?>
 <?= form_open('index.php/estadisticas/consulta/2'); ?>
 	<div class="row">
@@ -129,8 +137,8 @@ $campos_ocultos_formulario_imprimir = array(
 							<tr>
 								<th>#</th>
 								<th>Municipio</th>
-								<th>Capacitados</th>
-								<th>Certificados</th>
+								<th>Nombre</th>
+								<th>Modalidad Capacitaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>

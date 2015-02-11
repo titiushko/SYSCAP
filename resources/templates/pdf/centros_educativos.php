@@ -38,12 +38,12 @@
 					<td style="width: 310px;" valign="top">
 						<h4 align="center">Docentes Capacitados</h4>
 						<table border="1">
-							<tdead>
+							<thead>
 								<tr>
 									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
 									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre</td>
 								</tr>
-							</tdead>
+							</thead>
 							<tbody>
 								<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>
 							</tbody>
@@ -53,12 +53,12 @@
 					<td style="width: 310px;" valign="top">
 						<h4 align="center">Docentes Certificados</h4>
 						<table border="1">
-							<tdead>
+							<thead>
 								<tr>
 									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
 									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre</td>
 								</tr>
-							</tdead>
+							</thead>
 							<tbody>
 								<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>
 							</tbody>

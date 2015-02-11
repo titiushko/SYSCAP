@@ -248,7 +248,7 @@ class Estadisticas extends CI_Controller{
 		}
 		elseif($metodo == 'imprimir'){
 			$datos['nombre_departamento'] = $codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : '';
-			$datos['periodo'] = 'Del '.($fecha1 != '' ? date_format(new DateTime($fecha1), 'd/m/Y') : '').' al '.($fecha2 != '' ? date_format(new DateTime($fecha2), 'd/m/Y') : '');
+			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
 	}
@@ -284,6 +284,83 @@ class Estadisticas extends CI_Controller{
 				show_404();
 			}
 		}
+	}
+	
+	public function exportar($opcion = 1){
+		$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
+		$pdf->setPrintHeader(FALSE);
+		$pdf->setPrintFooter(FALSE);
+		$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+		$pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+		$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+		$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+		$pdf->SetFont('helvetica', '', 13, '', true);
+		$pdf->AddPage();
+		$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, $this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'));
+		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
+		$nombre_archivo = utf8_decode(acentos('Estadística '.listado_estadisticas($opcion)).'.pdf');
+		$pdf->Output($nombre_archivo, 'I');
+	}
+	
+	private function cargar_plantilla_pdf($opcion, $codigo_departamento, $fecha1, $fecha2){
+		if(empty($opcion)){
+			show_404();
+		}
+		else{
+			if(is_numeric($opcion)){
+				switch($opcion){
+					case 1: // Usuarios por Modalidad de Capacitación
+					case 2: // Usuarios por Departamento y Rango de Fechas
+						$cantidad_usuarios_municipio = $this->estadisticas_model->cantidad_usuarios_municipio($codigo_departamento, $fecha1, $fecha2);
+						$lista_cantidad_usuarios_municipio = ''; $cantidades = 1;
+						foreach($cantidad_usuarios_municipio as $cantidad_municipio){
+							if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+								$lista_cantidad_usuarios_municipio .= '<tr><td>'.$cantidades++.'</td><td>'.utf8($cantidad_municipio->nombre_municipio).'</td><td>'.$cantidad_municipio->capacitados.'</td><td>'.$cantidad_municipio->certificados.'</td></tr>';
+							}
+							else{
+								$lista_cantidad_usuarios_municipio .= '<tr><td style="opacity: 0.0;">'.$cantidades++.'</td><td>'.bold($cantidad_municipio->nombre_municipio).'</td><td>'.bold($cantidad_municipio->capacitados).'</td><td>'.bold($cantidad_municipio->certificados).'</td></tr>';
+							}
+						}
+						if($lista_cantidad_usuarios_municipio == ''){
+							$lista_cantidad_usuarios_municipio = 'No hay resultados para ésta estadística.';
+						}
+						$usuarios_municipio = $this->estadisticas_model->usuarios_municipio($codigo_departamento, $fecha1, $fecha2);
+						$lista_usuarios_municipio = ''; $usuarios = 1;
+						foreach($usuarios_municipio as $usuario_municipio){
+							$lista_usuarios_municipio .= '<tr><td>'.$usuarios++.'</td><td>'.utf8($usuario_municipio->nombre_municipio).'</td><td>'.utf8($usuario_municipio->nombre_usuario).'</td><td>'.utf8($usuario_municipio->modalidad_usuario).'</td></tr>';
+						}
+						if($lista_usuarios_municipio == ''){
+							$lista_usuarios_municipio = 'No hay resultados para ésta estadística.';
+						}
+						$plantilla_pdf = read_file('resources/templates/pdf/estadistica_02.php');
+						$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+														   '<DEPARTAMENTO>',
+														   '<PERIODO>',
+														   '<CANTIDAD_USUARIOS_MUNICIPIO>',
+														   '<USUARIOS_MUNICIPIO>'),
+													 array(encabezado_reporte(),
+														   utf8($codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : ''),
+														   $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '',
+														   $lista_cantidad_usuarios_municipio,
+														   $lista_usuarios_municipio),
+													 $plantilla_pdf);
+						break;
+					case 3: // Total de Usuarios por Departamento y Rango de Fechas
+					case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
+					case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+					case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
+					case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
+					case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
+					case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
+					case 10: // Usuarios a Nivel Nacional
+					case 11: // Usuarios por Grado Digital
+				}
+			}
+			else{
+				show_404();
+			}
+		}
+		return $plantilla_pdf;
 	}
 	
 	public function validar_fechas($fecha1, $fecha2){

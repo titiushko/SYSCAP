@@ -138,7 +138,7 @@ class Centros_educativos extends CI_Controller{
 				$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_capacitados == ''){
-				$lista_docentes_capacitados ='No hay docentes capacitados en el centro educativo.';
+				$lista_docentes_capacitados = 'No hay docentes capacitados en el centro educativo.';
 			}
 			
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
@@ -146,7 +146,7 @@ class Centros_educativos extends CI_Controller{
 				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){
-				$lista_docentes_certificados ='No hay docentes certificados en el centro educativo.';
+				$lista_docentes_certificados = 'No hay docentes certificados en el centro educativo.';
 			}
 			
 			$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
@@ -155,7 +155,7 @@ class Centros_educativos extends CI_Controller{
 											   '<DEPARTAMENTO_CENTRO_EDUCATIVO>',
 											   '<MUNICIPIO_CENTRO_EDUCATIVO>',
 											   '<DOCENTES_CAPACITADOS_CENTRO_EDUCATIVO>',
-											   '<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>',),
+											   '<DOCENTES_CERTIFICADOS_CENTRO_EDUCATIVO>'),
 										 array(encabezado_reporte(),
 											   utf8($centro_educativo[0]->nombre_centro_educativo),
 											   $centro_educativo[0]->codigo_centro_educativo,

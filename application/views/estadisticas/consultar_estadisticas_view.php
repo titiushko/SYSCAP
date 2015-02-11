@@ -42,8 +42,8 @@
 				?>
 				<div class="row">
 					<div class="col-lg-12 text-center">
-						<span class="btn btn-success" onclick="document.formulario_imprimir.submit();"><i class="fa fa-print"></i> Imprimir</span>
-						<a href="<?= base_url().'estadisticas/exportar/'.$this->uri->segment(3); ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+						<button class="btn btn-success" onclick="document.formulario_imprimir.submit();"><i class="fa fa-print"></i> Imprimir</button>
+						<button class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</button>
 					</div>
 				</div>
 				<?php
