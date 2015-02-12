@@ -94,17 +94,19 @@ class Estadisticas_model extends CI_Model{
 	
 	// Consulta Estadística 3: Total de Usuarios por Departamento y Rango de Fechas
 	// Consulta Estadística 8: Usuarios por Departamento, Tipo de Capacitados y Fecha
-	function estaditicas_departamento_fechas($tipo_resultado = ''){
-		if($tipo_resultado == 'tabla'){
-		  $query = $this->db->query('set @row_num = 0');
-          $sql = 'select @row_num := @row_num + 1 as row_number,
-                    	   nombre_departamento,
-                    	   sum(case when a.nombre_examen like \'Evaluaci%\' then 1 else 0 end ) capacitados,
-                    	   sum(case when a.nombre_examen like \'Examen%\' then 1 else 0 end ) certificados 
-                    from v_estadisticadepartamentofecha a where a.nota_examen_calificacion >= 7.00 
-                    group by nombre_departamento order by row_number';
+	function estaditicas_departamento_fechas($fecha1, $fecha2){
+		$filtro = '';
+		if($fecha1 != '' && $fecha2 != ''){
+			$filtro = 'AND fecha_examen_calificacion BETWEEN ? AND ?';
 		}
-		$query = $this->db->query($sql);
+		$query = $this->db->query('SET @indice = 0');
+		$query = $this->db->query('SELECT @indice := @indice + 1 indice, nombre_departamento,
+								   SUM(CASE WHEN nombre_examen LIKE \'Evaluaci%\' THEN 1 ELSE 0 END) capacitados,
+								   SUM(CASE WHEN nombre_examen LIKE \'Examen%\' THEN 1 ELSE 0 END) certificados
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 '.$filtro.'
+								   GROUP BY nombre_departamento
+								   ORDER BY indice', array($fecha1, $fecha2));
 		return $query->result();
 	}
     

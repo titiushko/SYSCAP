@@ -68,6 +68,7 @@ $campos_ocultos_formulario = array(
 			</div>
 		</div>
 	</div>
+<?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<?= heading('Resultado', 4); ?>

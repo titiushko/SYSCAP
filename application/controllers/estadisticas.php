@@ -14,6 +14,9 @@ class Estadisticas extends CI_Controller{
 		if($this->validar_parametros($opcion)){
 			$datos['nombre_estadistica'] = listado_estadisticas($opcion);
 			$datos['estadistica'] = array($opcion => 'active');
+			$datos['id_modal'] = 'myModalChart';
+			$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
+			$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica'.$opcion.'-2"></div>';
 			switch($opcion){
 				case 1: // Usuarios por Modalidad de Capacitación
 					if($this->input->post()){
@@ -49,15 +52,20 @@ class Estadisticas extends CI_Controller{
 					}
 					break;
 				case 3: // Total de Usuarios por Departamento y Rango de Fechas
-					$datos['tabla'] = $this->estadisticas_model->estaditicas_departamento_fechas('tabla');
-					$datos['grafica_estaditicas_departamento_json'] = '';
-					$contador = 1;
-					foreach($datos['tabla'] as $data){
-						$datos['grafica_estaditicas_departamento_json'] = $datos['grafica_estaditicas_departamento_json'].'{y: \''.($contador++).'\', a: \''.$data->capacitados.'\', b: \''.$data->certificados.'\'},';
+					if($this->input->post()){
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'trim|required');
+						$this->form_validation->set_rules('fecha2', 'Fecha 2', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
+						if($this->form_validation->run()){
+							$datos = array_merge($this->datos_estadistica_03_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+						}
+						else{
+							$datos = array_merge($this->datos_estadistica_03_view(), $datos);
+						}
 					}
-					$datos['id_modal'] = 'myModalChart';
-					$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
-					$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica3-2"></div>';
+					else{
+						$datos = array_merge($this->datos_estadistica_03_view(), $datos);
+					}
 					break;
 				case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
 					$datos['tabla'] = $this->estadisticas_model->usuarios_departamento_municipio('tabla');
@@ -238,9 +246,6 @@ class Estadisticas extends CI_Controller{
 		}
 		if($metodo == 'consulta'){
 			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2);
-			$datos['id_modal'] = 'myModalChart';
-			$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.listado_estadisticas(1);
-			$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica1-2"></div>';
 		}
 		elseif($metodo == 'imprimir'){
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
@@ -260,12 +265,24 @@ class Estadisticas extends CI_Controller{
 		$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
 		if($metodo == 'consulta'){
 			$datos['campos'] = array('id_departamento' => $codigo_departamento, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
-			$datos['id_modal'] = 'myModalChart';
-			$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.listado_estadisticas(2);
-			$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica2-2"></div>';
 		}
 		elseif($metodo == 'imprimir'){
 			$datos['nombre_departamento'] = $codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : '';
+			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
+		}
+		return $datos;
+	}
+	
+	private function datos_estadistica_03_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
+		$datos['estaditicas_departamento_fechas'] = $this->estadisticas_model->estaditicas_departamento_fechas($fecha1, $fecha2);
+		$datos['estaditicas_departamento_fechas_json'] = '';
+		foreach($datos['estaditicas_departamento_fechas'] as $estaditica_departamento_fecha){
+			$datos['estaditicas_departamento_fechas_json'] .= '{y: \''.$estaditica_departamento_fecha->indice.'\', a: \''.$estaditica_departamento_fecha->capacitados.'\', b: \''.$estaditica_departamento_fecha->certificados.'\'},';
+		}
+		if($metodo == 'consulta'){
+			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2);
+		}
+		elseif($metodo == 'imprimir'){
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -289,6 +306,12 @@ class Estadisticas extends CI_Controller{
 					}
 					break;
 				case 3: // Total de Usuarios por Departamento y Rango de Fechas
+					$pagina = 'estadisticas/imprimir_estadistica_03_view';
+					$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+					if(empty($datos['estaditicas_departamento_fechas'])){
+						show_404();
+					}
+					break;
 				case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
 				case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
 				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
@@ -324,6 +347,8 @@ class Estadisticas extends CI_Controller{
 					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('codigo_departamento' => $this->input->post('codigo_departamento'), 'fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2')));
 					break;
 				case 3: // Total de Usuarios por Departamento y Rango de Fechas
+					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2')));
+					break;
 				case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
 				case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
 				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
@@ -403,6 +428,23 @@ class Estadisticas extends CI_Controller{
 											 $plantilla_pdf);
 				break;
 			case 3: // Total de Usuarios por Departamento y Rango de Fechas
+				$estaditicas_departamento_fechas = $this->estadisticas_model->estaditicas_departamento_fechas($parametros['fecha1'], $parametros['fecha2']);
+				$lista_estaditicas_departamento_fechas = '';
+				foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
+					$lista_estaditicas_departamento_fechas .= '<tr><td>'.$estaditica_departamento_fecha->indice.'</td><td>'.utf8($estaditica_departamento_fecha->nombre_departamento).'</td><td>'.$estaditica_departamento_fecha->capacitados.'</td><td>'.$estaditica_departamento_fecha->certificados.'</td></tr>';
+				}
+				if($lista_estaditicas_departamento_fechas == ''){
+					$lista_estaditicas_departamento_fechas = 'No hay resultados para ésta estadística.';
+				}
+				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_03.php');
+				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+												   '<PERIODO>',
+												   '<ESTADITICAS_DEPARTAMENTO_FECHAS>'),
+											 array(encabezado_reporte(),
+												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
+												   $lista_estaditicas_departamento_fechas),
+											 $plantilla_pdf);
+				break;
 			case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
 			case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
 			case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
