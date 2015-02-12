@@ -35,7 +35,10 @@
 					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Modalidad de Capacitaci&oacute;n', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
-								<th class="column-title">Periodo:</th><td class="column-value"><?= @$periodo; ?></td>
+								<td><?= nbs(); ?></td>
+								<th class="column-title">Periodo:</th>
+								<td class="column-value"><?= @$periodo; ?></td>
+								<td><?= nbs(); ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>

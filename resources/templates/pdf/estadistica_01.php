@@ -17,8 +17,10 @@
 			<hr/>
 			<table border="0">
 				<tr>
+					<td>&nbsp;</td>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Periodo:</td>
 					<td style="widtd: 250px;"><PERIODO></td>
+					<td>&nbsp;</td>
 				</tr>
 			</table>
 			<br/><br/>
