@@ -38,7 +38,6 @@
                 if($this->uri->uri_string() == 'estadisticas/consulta/10'){
 					$this->load->view('estadisticas/estadistica_10_view', $datos);
 				}
-				if($habilitar_generar_reporte){
 				?>
 				<div class="row">
 					<div class="col-lg-12 text-center">
@@ -46,9 +45,6 @@
 						<button class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</button>
 					</div>
 				</div>
-				<?php
-				}
-				?>
 			</div>
 		</div>
 	</div>

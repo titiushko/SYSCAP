@@ -6,31 +6,29 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 1: Usuarios por Modalidad de Capacitación
-	function modalidades_capacitados($tipo_resultado = ''){
-		if($tipo_resultado == 'certificados'){
-			$sql = 'select sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
-	                sum(case when a.modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion 
-					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00 
-                    and a.nombre_examen like \'Examen%\'';
+	function modalidades_capacitados($fecha1, $fecha2){
+		$filtro = '';
+		if($fecha1 != '' && $fecha2 != ''){
+			$filtro = 'AND fecha_examen_calificacion BETWEEN ? AND ?';
 		}
-		if($tipo_resultado == 'capacitados'){
-			$sql = 'select sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
-	                sum(case when a.modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion 
-					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00 
-                    and a.nombre_examen like \'Evaluaci%\'';
-		}
-		if($tipo_resultado == 'total'){
-			$sql = 'select sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
-	                sum(case when a.modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion 
-					from v_estadisticamodalidad a where a.nota_examen_calificacion >= 7.00';
-		}
-		$query = $this->db->query($sql);
+		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizados, SUM(CASE WHEN modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion
+								   FROM V_EstadisticaModalidad
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Evaluaci%\' '.$filtro.'
+								   UNION
+								   SELECT \'Certificados\' tipos_capacitados, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizados, SUM(CASE WHEN modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion
+								   FROM V_EstadisticaModalidad
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Examen%\' '.$filtro.'
+								   UNION
+								   SELECT \'TOTAL\' tipos_capacitados, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados, SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaModalidad
+								   WHERE nota_examen_calificacion >= 7.00 '.$filtro,
+								   array($fecha1, $fecha2, $fecha1, $fecha2, $fecha1, $fecha2));
 		return $query->result();
 	}
 	
 	// Consulta Estadística 2: Usuarios por Departamento y Rango de Fechas
-	function cantidad_usuarios_municipio($id_departamento, $fecha1, $fecha2){
-		if($id_departamento == '' && $fecha1 == '' && $fecha2 == ''){
+	function cantidad_usuarios_municipio($codigo_departamento, $fecha1, $fecha2){
+		if($codigo_departamento == '' && $fecha1 == '' && $fecha2 == ''){
 			$query = $this->db->query('SELECT * FROM V_UsuariosTotalDepartamento');
 		}
 		else{
@@ -43,20 +41,20 @@ class Estadisticas_model extends CI_Model{
 									   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) capacitados
 									   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?) certificados
 									   ON capacitados.nombre_municipio = certificados.nombre_municipio',
-									  array($id_departamento, $fecha1, $fecha2, $id_departamento, $fecha1, $fecha2, $id_departamento, $fecha1, $fecha2, $id_departamento, $fecha1, $fecha2));
+									  array($codigo_departamento, $fecha1, $fecha2, $codigo_departamento, $fecha1, $fecha2, $codigo_departamento, $fecha1, $fecha2, $codigo_departamento, $fecha1, $fecha2));
 		}
 		return $query->result();
 	}
 	
 	// Consulta Estadística 2: Usuarios por Departamento y Rango de Fechas
-	function usuarios_municipio($id_departamento, $fecha1, $fecha2){
+	function usuarios_municipio($codigo_departamento, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT acentos(m.nombre_municipio) nombre_municipio, acentos(F_NombreCompletoUsuario(u.id_usuario)) nombre_usuario, initcap(u.modalidad_usuario) modalidad_usuario
 								   FROM usuarios u INNER JOIN departamentos d ON u.id_departamento = d.id_departamento
 								   INNER JOIN municipios m ON u.id_municipio = m.id_municipio
 								   INNER JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
 								   INNER JOIN examenes e ON ec.id_examen = e.id_examen
 								   WHERE ec.nota_examen_calificacion >= 7.00 AND u.id_departamento = ? AND ec.fecha_examen_calificacion BETWEEN ? AND ?
-								   ORDER BY 1', array($id_departamento, $fecha1, $fecha2));
+								   ORDER BY 1', array($codigo_departamento, $fecha1, $fecha2));
 		return $query->result();
 	}
 	
@@ -154,34 +152,34 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 10: Usuarios a Nivel Nacional
-	function usuarios_nivel_nacional($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin){
+	function usuarios_nivel_nacional($id_tipo_capacitados, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2){
 		$sql ='';
 		$query = $this->db->query('set @row_num = 0');
 		$tipo_resultado= '';
 		//set @row_num = 0;
-		$sql = "select @row_num := @row_num + 1 as row_number,
+		$sql = 'select @row_num := @row_num + 1 as row_number,
 				a.nombre_centro_educativo,
-				sum(case when a.modalidad_usuario =  'tutorizado' then 1 else 0 end ) tutorizado,
-				sum(case when a.modalidad_usuario =  'autoformacion' then 1 else 0 end ) autoformacion 
+				sum(case when a.modalidad_usuario =  \'tutorizado\' then 1 else 0 end ) tutorizado,
+				sum(case when a.modalidad_usuario =  \'autoformacion\' then 1 else 0 end ) autoformacion 
 		from v_estadisticadepartamentofecha a
 		where a.nota_examen_calificacion >= 7.00 
-		and a.nombre_examen like '?%'
-		and a.id_departamento = $id_departamento
-		and a.id_municipio = $id_municipio
-		and a.fecha_examen_calificacion between '?' and '?'
+		and a.nombre_examen like \'?%\'
+		and a.id_departamento = ?
+		and a.id_municipio = ?
+		and a.fecha_examen_calificacion between ? and ?
 		group by a.nombre_centro_educativo
 		union 
 		select @row_num := @row_num + 1 as row_number,
-			   'TOTAL' as nombre_centro_educativo,
-			   sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
-			   sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
+			   \'TOTAL\' as nombre_centro_educativo,
+			   sum(case when a.modalidad_usuario = \'tutorizado\' then 1 else 0 end ) tutorizado,
+			   sum(case when a.modalidad_usuario = \'autoformacion\' then 1 else 0 end ) autoformacion 
 		from v_estadisticadepartamentofecha a 
 		where a.nota_examen_calificacion >= 7.00
-		and a.nombre_examen like '?%'
-		and a.id_departamento = $id_departamento
-		and a.id_municipio = $id_municipio
-		and a.fecha_examen_calificacion between '".$fecha_ini."' and '".$fecha_fin."'";
-		$query = $this->db->query($sql, array($id_tipo_capacitados, $fecha_ini, $fecha_fin, $id_tipo_capacitados));
+		and a.nombre_examen like \'?%\'
+		and a.id_departamento = $codigo_departamento
+		and a.id_municipio = $codigo_municipio
+		and a.fecha_examen_calificacion between ? and ?';
+		$query = $this->db->query($sql, array($id_tipo_capacitados, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $id_tipo_capacitados, $fecha1, $fecha2));
 		return $query->result();
 	}
 }

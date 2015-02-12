@@ -1,32 +1,44 @@
 <?php
-$fecha_ini = array(
-	'name'		=> 'fecha_ini',
-	'id'		=> 'fecha_ini',
+$formulario_consultar = array(
+	'name'		=> 'formulario_consultar',
+	'id'		=> 'formulario_consultar',
+	'role'		=> 'form'
+);
+$fecha = array(
+	'name'		=> '',
+	'id'		=> '',
 	'maxlength'	=> '60',
 	'size'		=> '20',
+	'value'		=> '',
 	'type'		=> 'date',
 	'required'	=> 'required',
 	'class'		=> 'form-control'
 );
-$fecha_fin = array(
-	'name'		=> 'fecha_fin',
-	'id'		=> 'fecha_fin',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+$boton_primario = 'class="btn btn-primary"';
+$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'estadisticas/consulta/1\';"';
+// Definición de formularios ocultos para enviar información a imprimir y exportar
+$formulario_imprimir = array(
+	'name'		=> 'formulario_imprimir',
+	'id'		=> 'formulario_imprimir',
+	'role'		=> 'form',
+	'target'	=> '_blank'
 );
-$attr = array('id'   => 'formulario',
-              'name' => 'formulario'
+$formulario_exportar = array(
+	'name'		=> 'formulario_exportar',
+	'id'		=> 'formulario_exportar',
+	'role'		=> 'form',
+	'target'	=> '_blank'
 );
-$boton_primario = array('id'    => 'boton_primario',
-						'class' => 'btn btn-primary',
-						'name'	=> 'boton_primario',
-						'value' => 'Consultar',
+$campos_ocultos_formulario = array(
+	'fecha_1'	=> set_value('fecha_1', @$campos['fecha1']),
+	'fecha_2'	=> set_value('fecha_2', @$campos['fecha2'])
 );
 ?>
-<?= form_open('',$attr); ?>
+<?= form_open('index.php/estadisticas/imprimir/1', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/exportar/1', $formulario_exportar, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/consulta/1', $formulario_consultar); ?>
 	<div class="row">
 		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
@@ -34,12 +46,14 @@ $boton_primario = array('id'    => 'boton_primario',
 				<?= form_label('Periodo:'); ?>
 				<div class="row">
 					<div class="col-lg-6">
-						<?= form_input($fecha_ini); ?>
-						<?= form_error('fecha_ini'); ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; $fecha['value'] = set_value('fecha1', @$campos['fecha1']); ?>
+						<?= form_input($fecha); ?>
+						<?= form_error('fecha1'); ?>
 					</div>
 					<div class="col-lg-6">
-						<?= form_input($fecha_fin); ?>
-						<?= form_error('fecha_fin'); ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; $fecha['value'] = set_value('fecha2', @$campos['fecha2']); ?>
+						<?= form_input($fecha); ?>
+						<?= form_error('fecha2'); ?>
 					</div>
 				</div>
 			</div>
@@ -49,7 +63,8 @@ $boton_primario = array('id'    => 'boton_primario',
 		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
-				<?= form_submit($boton_primario); ?>
+				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
+				<?= form_reset('boton_secundario', 'Limpiar', $boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -65,30 +80,37 @@ $boton_primario = array('id'    => 'boton_primario',
 						<thead>
 							<tr>
 								<th></th>
-								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
+								<th colspan="2">Modalidades de Capacitaci&oacute;n</th>
 							</tr>
 							<tr>
-								<th rowspan="2">Tipo de Capacitado</th>
+								<th rowspan="2">Tipos de Capacitado</th>
 								<th>Tutorizados</th>
 								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
+							<?php
+							foreach($modalidades_capacitados as $modalidad_capacitado){
+								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+							?>
 							<tr>
-								<th>Capacitados</th>
-								<td><?= $capacitados[0]->tutorizado?></td>
-								<td><?= $capacitados[0]->autoformacion ?></td>
+								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
+								<td><?= $modalidad_capacitado->tutorizados; ?></td>
+								<td><?= $modalidad_capacitado->autoformacion; ?></td>
 							</tr>
+							<?php
+								}
+								else{
+							?>
 							<tr>
-								<th>Certificados</th>
-								<td><?= $certificados[0]->tutorizado?></td>
-								<td><?= $certificados[0]->autoformacion ?></td>
+								<th><?= bold($modalidad_capacitado->tipos_capacitados); ?></th>
+								<td><?= bold($modalidad_capacitado->tutorizados); ?></td>
+								<td><?= bold($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
-							<tr>
-								<th>TOTAL</th>
-								<th><?= $total[0]->tutorizado ?></th>
-								<th><?= $total[0]->autoformacion ?></th>
-							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
@@ -105,19 +127,19 @@ $boton_primario = array('id'    => 'boton_primario',
 	$(function() {
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica1-1',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $modalidades_capacitados_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
 			hideHover: 'auto',
 			resize: true
 		});
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica1-2',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $modalidades_capacitados_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
 			hideHover: 'auto',
 			resize: true
 		});

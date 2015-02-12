@@ -1,4 +1,9 @@
 <?php
+$formulario_consultar = array(
+	'name'		=> 'formulario_consultar',
+	'id'		=> 'formulario_consultar',
+	'role'		=> 'form'
+);
 $fecha = array(
 	'name'		=> '',
 	'id'		=> '',
@@ -34,7 +39,7 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <?= form_open('index.php/estadisticas/exportar/2', $formulario_exportar, $campos_ocultos_formulario); ?>
 <?= form_close(); ?>
-<?= form_open('index.php/estadisticas/consulta/2'); ?>
+<?= form_open('index.php/estadisticas/consulta/2', $formulario_consultar); ?>
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="form-group">
