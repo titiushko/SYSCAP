@@ -94,10 +94,14 @@ class Estadisticas_model extends CI_Model{
 	
 	// Consulta Estadística 3: Total de Usuarios por Departamento y Rango de Fechas
 	// Consulta Estadística 8: Usuarios por Departamento, Tipo de Capacitados y Fecha
-	function estaditicas_departamento_fechas($fecha1, $fecha2){
+	function estaditicas_departamento_fechas($fecha1, $fecha2, $tipo_capacitado = ''){
 		$filtro = '';
 		if($fecha1 != '' && $fecha2 != ''){
 			$filtro = 'AND fecha_examen_calificacion BETWEEN ? AND ?';
+		}
+		if($tipo_capacitado != ''){
+			$tipo_capacitado .= '%';
+			$filtro .= ' AND nombre_examen LIKE ?';
 		}
 		$query = $this->db->query('SET @indice = 0');
 		$query = $this->db->query('SELECT @indice := @indice + 1 indice, nombre_departamento,
@@ -106,7 +110,7 @@ class Estadisticas_model extends CI_Model{
 								   FROM V_EstadisticaDepartamentoFecha
 								   WHERE nota_examen_calificacion >= 7.00 '.$filtro.'
 								   GROUP BY nombre_departamento
-								   ORDER BY indice', array($fecha1, $fecha2));
+								   ORDER BY indice', array($fecha1, $fecha2, $tipo_capacitado));
 		return $query->result();
 	}
     

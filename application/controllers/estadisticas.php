@@ -124,19 +124,21 @@ class Estadisticas extends CI_Controller{
 					$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica7-2"></div>';
 					break;
 				case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
-					$datos['tabla'] = $this->estadisticas_model->estaditicas_departamento_fechas('tabla');
-					$datos['grafica_estaditicas_departamento_json'] = '';
-					$datos['lista_tipo_capacitados'] =  array(
-						'Evaluacion' => 'Capacitados',
-						'Examen' => 'Certificados'
-						);
-					$contador = 1;
-					foreach($datos['tabla'] as $data){
-						$datos['grafica_estaditicas_departamento_json'] = $datos['grafica_estaditicas_departamento_json'].'{y: \''.($contador++).'\', a: \''.$data->capacitados.'\', b: \''.$data->certificados.'\'},';
+					if($this->input->post()){
+						$this->form_validation->set_rules('tipo_capacitado', 'Tipo de Capacitado', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'trim|required');
+						$this->form_validation->set_rules('fecha2', 'Fecha 2', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
+						if($this->form_validation->run()){
+							$datos = array_merge($this->datos_estadistica_03_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
+						}
+						else{
+							$datos = array_merge($this->datos_estadistica_03_view(), $datos);
+						}
 					}
-					$datos['id_modal'] = 'myModalChart';
-					$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
-					$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica8-2"></div>';
+					else{
+						$datos = array_merge($this->datos_estadistica_03_view(), $datos);
+					}
 					break;
 				case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
 					$datos['capacitados'] = $this->estadisticas_model->centro_educativo_capacitado('capacitados');
@@ -273,16 +275,17 @@ class Estadisticas extends CI_Controller{
 		return $datos;
 	}
 	
-	private function datos_estadistica_03_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
-		$datos['estaditicas_departamento_fechas'] = $this->estadisticas_model->estaditicas_departamento_fechas($fecha1, $fecha2);
+	private function datos_estadistica_03_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta', $tipo_capacitado = ''){
+		$datos['estaditicas_departamento_fechas'] = $this->estadisticas_model->estaditicas_departamento_fechas($fecha1, $fecha2, $tipo_capacitado);
 		$datos['estaditicas_departamento_fechas_json'] = '';
 		foreach($datos['estaditicas_departamento_fechas'] as $estaditica_departamento_fecha){
 			$datos['estaditicas_departamento_fechas_json'] .= '{y: \''.$estaditica_departamento_fecha->indice.'\', a: \''.$estaditica_departamento_fecha->capacitados.'\', b: \''.$estaditica_departamento_fecha->certificados.'\'},';
 		}
 		if($metodo == 'consulta'){
-			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2);
+			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
+			$datos['tipo_capacitado'] = $tipo_capacitado != '' ? $tipo_capacitado == 'Evaluaci' ? 'Capacitados' : 'Certificados' : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -317,6 +320,12 @@ class Estadisticas extends CI_Controller{
 				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 				case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
 				case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
+					$pagina = 'estadisticas/imprimir_estadistica_08_view';
+					$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
+					if(empty($datos['estaditicas_departamento_fechas'])){
+						show_404();
+					}
+					break;
 				case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
 				case 10: // Usuarios a Nivel Nacional
 				case 11: // Usuarios por Grado Digital
@@ -354,6 +363,8 @@ class Estadisticas extends CI_Controller{
 				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 				case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
 				case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
+					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2'), 'tipo_capacitado' => $this->input->post('tipo_de_capacitado')));
+					break;
 				case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
 				case 10: // Usuarios a Nivel Nacional
 				case 11: // Usuarios por Grado Digital
@@ -450,6 +461,25 @@ class Estadisticas extends CI_Controller{
 			case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 			case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
 			case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
+				$estaditicas_departamento_fechas = $this->estadisticas_model->estaditicas_departamento_fechas($parametros['fecha1'], $parametros['fecha2'], $parametros['tipo_capacitado']);
+				$lista_estaditicas_departamento_fechas = '';
+				foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
+					$lista_estaditicas_departamento_fechas .= '<tr><td>'.$estaditica_departamento_fecha->indice.'</td><td>'.utf8($estaditica_departamento_fecha->nombre_departamento).'</td><td>'.$estaditica_departamento_fecha->capacitados.'</td><td>'.$estaditica_departamento_fecha->certificados.'</td></tr>';
+				}
+				if($lista_estaditicas_departamento_fechas == ''){
+					$lista_estaditicas_departamento_fechas = 'No hay resultados para ésta estadística.';
+				}
+				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_03.php');
+				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+												   '<TIPO_CAPACITADO>',
+												   '<PERIODO>',
+												   '<ESTADITICAS_DEPARTAMENTO_FECHAS>'),
+											 array(encabezado_reporte(),
+												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : 'Certificados',
+												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
+												   $lista_estaditicas_departamento_fechas),
+											 $plantilla_pdf);
+				break;
 			case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
 			case 10: // Usuarios a Nivel Nacional
 			case 11: // Usuarios por Grado Digital
