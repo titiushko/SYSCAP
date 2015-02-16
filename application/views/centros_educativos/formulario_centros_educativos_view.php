@@ -37,12 +37,12 @@ $formulario = array(
 $campos_ocultos = array('estado' => '0');
 
 if($operacion == "Mostrar"){
-	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos\';"';
+	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
+	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\';"';
+	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
 }
 ?>
 <script src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>

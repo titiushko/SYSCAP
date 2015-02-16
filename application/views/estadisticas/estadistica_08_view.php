@@ -20,7 +20,7 @@ $lista_tipo_capacitados =  array(
 	'Examen'	=> 'Certificados'
 );
 $boton_primario = 'class="btn btn-primary"';
-$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'estadisticas/consulta/8\';"';
+$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'estadisticas/consulta/8\');"';
 // Definición de formularios ocultos para enviar información a imprimir y exportar
 $formulario_imprimir = array(
 	'name'		=> 'formulario_imprimir',

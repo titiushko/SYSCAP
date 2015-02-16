@@ -25,29 +25,29 @@
 	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
-	    <script src="<?= base_url(); ?>resources/plugins/jquery/prototype.js"></script>
-	    <script src="<?= base_url(); ?>resources/js/funciones.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/prototype.js"></script>
+	    <script type="text/javascript" src="<?= base_url(); ?>resources/js/funciones.js"></script>
 	    <?php
-	        $formulario = array('name'	=> 'login', 'id'	=> 'login', 'role'	=> 'form');
-	        $campos_ocultos = '';
+			$formulario = array('name' => 'login', 'id' => 'login', 'role' => 'form');
+			$campos_ocultos = array('sesion_usuario' => @$sesion_usuario);
 	        $boton_primario = 'class="btn btn-lg btn-success btn-block"';
-	        
 	        $correo_electronico_usuario = array(
         		'name'			=> 'correo_electronico_usuario',
         		'id'			=> 'correo_electronico_usuario',
 				'type'			=> 'email',
         		'placeholder'	=> 'Correo electrónico',
+				'value'			=>	set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario),
         		'class'			=> 'form-control',
 				'autofocus'		=> 'autofocus'
 	        );
-
 			$contrasena_usuario = array(
 				'name'			=> 'contrasena_usuario',
 				'id'			=> 'contrasena_usuario',
 				'type'			=> 'password',
 				'placeholder'	=> 'Contraseña',
+				'value'			=>	set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario),
 				'class'			=> 'form-control',
-				'onKeyPress'	=> 'capLock(event)'
+				'onKeyPress'	=> 'bloq_mayus(event)'
 			);
 	    ?>
 	</head>
@@ -60,27 +60,30 @@
 							<h3 class="panel-title">Acceder a SYSCAP</h3>
 						</div>
 						<div class="panel-body">
-							<?= form_open('inicio', $formulario, $campos_ocultos); ?>
+							<?= form_open('index.php/sesion/iniciar_sesion', $formulario, $campos_ocultos); ?>
 								<?= form_fieldset(); ?>
 									<div class="form-group">
 										<?= form_input($correo_electronico_usuario); ?>
-										<div id="wrong_email" class="oculto" title="¡Error!">
+										<?= form_error('correo_electronico_usuario'); ?>
+										<div id="correo_electronico_incorrecto" class="oculto" title="¡Error!">
 											<?= icono_notificacion('error'); ?>Correo electr&oacute;nico incorrecto.
 										</div>
 									</div>
 									<div class="form-group">
 										<?= form_input($contrasena_usuario); ?>
-										<div id="wrong_password" class="oculto" title="¡Error!">
+										<?= form_error('contrasena_usuario'); ?>
+										<div id="contrasena_incorrecto" class="oculto" title="¡Error!">
 											<?= icono_notificacion('error'); ?>Contrase&ntilde;a incorrecta.
 										</div>
-										<div id="caplock" class="oculto" title="¡Advertencia!">
+										<div id="bloq_mayus_activado" class="oculto" title="¡Advertencia!">
 											<?= icono_notificacion('alerta'); ?>BLOQ MAY&Uacute;S est&aacute; activado.
 										</div>
 									</div>
-									<div class="checkbox">
-										<label>
-											<input name="remember" type="checkbox" value="Remember Me">Recordarme
-										</label>
+									<div class="form-group">
+										<?php
+										if($this->session->flashdata('usuario_incorrecto'))
+											echo $this->session->flashdata('usuario_incorrecto');
+										?>
 									</div>
 									<?= form_submit('boton_primario', utf8('Iniciar Sesion'), $boton_primario); ?>
 								<?= form_fieldset_close(); ?>

@@ -19,7 +19,10 @@ class Municipios_model extends CI_Model{
 		$query = $this->db->select('acentos(nombre_municipio) nombre_municipio');
 		$query = $this->db->where('id_municipio', $codigo_municipio);
 		$query = $this->db->get('municipios');
-		return $query->result()[0]->nombre_municipio;
+		if($query->row())
+			return $query->result()[0]->nombre_municipio;
+		else
+			return '';
 	}
 	
 	function validar_municipio($codigo_municipio, $codigo_departamento){

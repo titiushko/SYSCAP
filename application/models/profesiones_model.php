@@ -20,7 +20,10 @@ class Profesiones_model extends CI_Model{
 			$query = $this->db->select('acentos(nombre_profesion) nombre_profesion');
 			$query = $this->db->where('id_profesion', $codigo_profesion);
 			$query = $this->db->get('profesiones');
-			return $query->result()[0]->nombre_profesion;
+			if($query->row())
+				return $query->result()[0]->nombre_profesion;
+			else
+				return '';
 		}
 	}
 }

@@ -15,7 +15,7 @@ $fecha = array(
 	'class'		=> 'form-control'
 );
 $boton_primario = 'class="btn btn-primary"';
-$boton_secundario = 'class="btn btn-danger" onclick="location.href=\''.base_url().'estadisticas/consulta/1\';"';
+$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'estadisticas/consulta/1\');"';
 // Definición de formularios ocultos para enviar información a imprimir y exportar
 $formulario_imprimir = array(
 	'name'		=> 'formulario_imprimir',

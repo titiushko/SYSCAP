@@ -7,6 +7,13 @@ if(!function_exists('utf8')){
 	}
 }
 
+/* Convierte todos los caracteres aplicables a entidades HTML. */
+if(!function_exists('formato_dui')){
+	function formato_dui($dui){
+		return preg_match('/^\d{8}-\d$/', $dui) ? $dui : substr($dui, 0, 7).'-'.substr($dui, 8, 1);
+	}
+}
+
 /* Elimina caracteres especiales. */
 if(!function_exists('acentos')){
 	function acentos($cadena){

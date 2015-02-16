@@ -20,7 +20,10 @@ class Tipos_usuarios_model extends CI_Model{
 			$query = $this->db->select('acentos(nombre_tipo_usuario) nombre_tipo_usuario');
 			$query = $this->db->where('id_tipo_usuario', $codigo_tipo_usuario);
 			$query = $this->db->get('tipos_usuarios');
-			return $query->result()[0]->nombre_tipo_usuario;
+			if($query->row())
+				return $query->result()[0]->nombre_tipo_usuario;
+			else
+				return '';
 		}
 	}
 }

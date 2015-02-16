@@ -28,9 +28,9 @@ if($operacion == "Mostrar"){
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
 	
-	$boton_primario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\';"';
-	$boton_secundario = 'class="btn btn-primary" onclick="location.href=\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\';"';
-	$boton_regresar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios\';"';
+	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\');"';
+	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\');"';
+	$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
 }
 if($operacion == "Editar"){
 	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
@@ -44,7 +44,7 @@ if($operacion == "Recuperar Contraseña"){
 	
 	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';"';
 }
-$boton_cancelar = 'class="btn btn-danger" onclick="location.href=\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id_usuario.'\';"';
+$boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id_usuario.'\');"';
 
 // Definición de los campos Datos Personales
 
@@ -73,7 +73,7 @@ $dui_usuario = array(
 	'id'		=>	'dui_usuario',
 	'maxlength'	=>	'12',
 	'size'		=>	'20',
-	'value'		=>	set_value('dui_usuario', @$usuario[0]->dui_usuario),
+	'value'		=>	set_value('dui_usuario', formato_dui(@$usuario[0]->dui_usuario)),
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );

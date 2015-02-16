@@ -15,6 +15,7 @@
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/dashgumfree/css/dashgumfree.css" rel="stylesheet" type="text/css" />
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/dashgumfree/css/dashgumfree-responsive.css" rel="stylesheet" type="text/css" />
+		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/css/estilo.css" rel="stylesheet" type="text/css" />
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/img/syscap.ico" rel="shortcut icon" type="image/ico" />
 		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 		<!--[if lt IE 9]>
@@ -26,14 +27,48 @@
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.scrollTo.min.js"></script>
+	    <script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/js/funciones.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				var nombre_corto_rol = <?= $role == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
+				if(nombre_corto_rol == 'TRUE'){
+					$('#main-content').css({
+						'margin-left': '307px'
+					});
+					$('#footer').css({
+						'margin-left': '307px'
+					});
+					$('#sidebar > ul').show();
+					$('#sidebar').css({
+						'margin-left': '0'
+					});
+					$("#container").removeClass("sidebar-closed");
+				}
+				else{
+					$('#main-content').css({
+						'margin-left': '0px'
+					});
+					$('#sidebar').css({
+						'margin-left': '-307px'
+					});
+					$('#footer').css({
+						'margin-left': '0px'
+					});
+					$('#sidebar > ul').hide();
+					$("#container").addClass("sidebar-closed");
+				}
+			});
+		</script>
 	</head>
 	<body>
 		<section id="container" >
 			<header class="header black-bg navbar-fixed-top">
 				<div class="sidebar-toggle-box">
+				<?php if($role == 'admin'){ ?>
 					<div class="btn btn-default">
 						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
 					</div>
+				<?php } ?>
 				</div>
 				<div>
 					<a class="logo" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/inicio">
@@ -44,14 +79,15 @@
 				<div class="top-menu btn-toolbar dropdown-user">
 					<div class="btn-group">
 						<a class="btn btn-primary dropdown-toggle dropdown-user-name" data-toggle="dropdown" data-hover="dropdown">
-							<i class="fa fa-user fa-fw"></i> &lt;nombre_usuario&gt; <i class="caret"></i>
+							<i class="fa fa-user fa-fw"></i><?= $username; ?><i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user-name">
-							<li><a href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
+							<li><a href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/sesion/cerrar_sesion"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
 						</ul>
 					</div>
 				</div>
 			</header>
+			<?php if($role == 'admin'){ ?>
 			<aside>
 				<div id="sidebar"  class="nav-collapse">
 					<ul class="error sidebar-menu" id="nav-accordion">
@@ -97,6 +133,7 @@
 					</ul>
 				</div>
 			</aside>
+			<?php } ?>
 			<section id="main-content">
 				<section class="error wrapper">
 					<div id="page-wrapper">
@@ -112,7 +149,9 @@
 										<h3>P&aacute;gina no Encontrada</h3>
 									</div>
 									<div class="panel-body">
-									&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina solicitada no se encuentra!
+										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= $page; ?></b> a la que intenta acceder no existe!</p>
+										<p><b>Si el problema persiste, por favor notificar al Administrador.</b></p>
+										<p><span class="enlace" onclick="redireccionar('javascript:window.history.back()');">Regresar a la p&aacute;gina anterior.</span></p>
 									</div>
 								</div>
 							</div>

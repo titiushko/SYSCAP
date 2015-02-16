@@ -31,7 +31,10 @@ class Centros_educativos_model extends CI_Model{
 	
 	function nombre_centro_educativo($codigo_centro_educativo){
 		$query = $this->db->query('SELECT acentos(F_NombreCentroEducativo(?)) nombre_centro_educativo', array($codigo_centro_educativo));
-		return utf8($query->result()[0]->nombre_centro_educativo);
+		if($query->row())
+			return utf8($query->result()[0]->nombre_centro_educativo);
+		else
+			return '';
 	}
 	
 	function modificar($datos, $codigo_centro_educativo){

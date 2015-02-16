@@ -4,7 +4,7 @@ USE syscap;
 -- copiar a syscap.departamentos los registros de moodle19.mdl_cat_deptos
 TRUNCATE syscap.departamentos;
 INSERT INTO syscap.departamentos(syscap.departamentos.id_departamento, syscap.departamentos.nombre_departamento)
-SELECT moodle19.mdl_cat_deptos.id, syscap.initcap(moodle19.mdl_cat_deptos.deptos)
+SELECT moodle19.mdl_cat_deptos.id, syscap.initcap(syscap.acentos(moodle19.mdl_cat_deptos.deptos))
 FROM moodle19.mdl_cat_deptos
 WHERE moodle19.mdl_cat_deptos.id IS NOT NULL AND moodle19.mdl_cat_deptos.deptos IS NOT NULL;
 
@@ -12,7 +12,7 @@ WHERE moodle19.mdl_cat_deptos.id IS NOT NULL AND moodle19.mdl_cat_deptos.deptos 
 -- copiar a syscap.municipios los registros de moodle19.mdl_cat_municip
 TRUNCATE syscap.municipios;
 INSERT INTO syscap.municipios(syscap.municipios.id_municipio, syscap.municipios.id_departamento, syscap.municipios.nombre_municipio)
-SELECT moodle19.mdl_cat_municip.id, moodle19.mdl_cat_municip.relacion, syscap.initcap(moodle19.mdl_cat_municip.opcion)
+SELECT moodle19.mdl_cat_municip.id, moodle19.mdl_cat_municip.relacion, syscap.initcap(syscap.acentos(moodle19.mdl_cat_municip.opcion))
 FROM moodle19.mdl_cat_municip
 WHERE moodle19.mdl_cat_municip.id IS NOT NULL AND moodle19.mdl_cat_municip.relacion IS NOT NULL AND moodle19.mdl_cat_municip.opcion IS NOT NULL;
 
@@ -20,7 +20,7 @@ WHERE moodle19.mdl_cat_municip.id IS NOT NULL AND moodle19.mdl_cat_municip.relac
 -- copiar a syscap.centros_educativos los registros de moodle19.mdl_cat_educativa
 TRUNCATE syscap.centros_educativos;
 INSERT INTO syscap.centros_educativos(syscap.centros_educativos.id_centro_educativo, syscap.centros_educativos.codigo_centro_educativo, syscap.centros_educativos.nombre_centro_educativo, syscap.centros_educativos.id_departamento, syscap.centros_educativos.id_municipio)
-SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.departamento(moodle19.mdl_cat_educativa.depto), syscap.municipio(moodle19.mdl_cat_educativa.muni)
+SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(syscap.acentos(moodle19.mdl_cat_educativa.nombre)), syscap.departamento(moodle19.mdl_cat_educativa.depto), syscap.municipio(moodle19.mdl_cat_educativa.muni)
 FROM moodle19.mdl_cat_educativa
 WHERE moodle19.mdl_cat_educativa.row_id IS NOT NULL AND moodle19.mdl_cat_educativa.codigo_entidad IS NOT NULL AND moodle19.mdl_cat_educativa.nombre IS NOT NULL AND moodle19.mdl_cat_educativa.depto IS NOT NULL AND moodle19.mdl_cat_educativa.muni IS NOT NULL LIMIT 0, 2000;
 
@@ -28,7 +28,7 @@ WHERE moodle19.mdl_cat_educativa.row_id IS NOT NULL AND moodle19.mdl_cat_educati
 -- copiar a syscap.niveles_estudios los registros de moodle19.mdl_cat_nestudio
 TRUNCATE syscap.niveles_estudios;
 INSERT INTO syscap.niveles_estudios(syscap.niveles_estudios.id_nivel_estudio, syscap.niveles_estudios.nombre_nivel_estudio)
-SELECT moodle19.mdl_cat_nestudio.cod_nestudio, syscap.initcap(moodle19.mdl_cat_nestudio.descripcion)
+SELECT moodle19.mdl_cat_nestudio.cod_nestudio, syscap.initcap(syscap.acentos(moodle19.mdl_cat_nestudio.descripcion))
 FROM moodle19.mdl_cat_nestudio
 WHERE moodle19.mdl_cat_nestudio.cod_nestudio IS NOT NULL AND moodle19.mdl_cat_nestudio.descripcion IS NOT NULL;
 
@@ -36,7 +36,7 @@ WHERE moodle19.mdl_cat_nestudio.cod_nestudio IS NOT NULL AND moodle19.mdl_cat_ne
 -- copiar a syscap.profesiones los registros de moodle19.mdl_cat_profesion
 TRUNCATE syscap.profesiones;
 INSERT INTO syscap.profesiones(syscap.profesiones.id_profesion, syscap.profesiones.nombre_profesion)
-SELECT IF(moodle19.mdl_cat_profesion.row_id < 10, CONCAT('0', moodle19.mdl_cat_profesion.row_id), moodle19.mdl_cat_profesion.row_id) row_id, syscap.initcap(moodle19.mdl_cat_profesion.descripcion)
+SELECT IF(moodle19.mdl_cat_profesion.row_id < 10, CONCAT('0', moodle19.mdl_cat_profesion.row_id), moodle19.mdl_cat_profesion.row_id) row_id, syscap.initcap(syscap.acentos(moodle19.mdl_cat_profesion.descripcion))
 FROM moodle19.mdl_cat_profesion
 WHERE moodle19.mdl_cat_profesion.row_id IS NOT NULL AND moodle19.mdl_cat_profesion.descripcion IS NOT NULL;
 
@@ -52,7 +52,7 @@ WHERE moodle19.mdl_context.id IS NOT NULL AND moodle19.mdl_context.instanceid IS
 -- copiar a syscap.cursos los registros de moodle19.mdl_course
 TRUNCATE syscap.cursos;
 INSERT INTO syscap.cursos(syscap.cursos.id_curso, syscap.cursos.nombre_completo_curso, syscap.cursos.nombre_corto_curso)
-SELECT moodle19.mdl_course.id, moodle19.mdl_course.fullname, moodle19.mdl_course.shortname
+SELECT moodle19.mdl_course.id, syscap.acentos(moodle19.mdl_course.fullname), syscap.acentos(moodle19.mdl_course.shortname)
 FROM moodle19.mdl_course
 WHERE moodle19.mdl_course.id IS NOT NULL AND moodle19.mdl_course.fullname IS NOT NULL AND moodle19.mdl_course.shortname IS NOT NULL;
 
@@ -60,7 +60,7 @@ WHERE moodle19.mdl_course.id IS NOT NULL AND moodle19.mdl_course.fullname IS NOT
 -- copiar a syscap.examenes los registros de moodle19.mdl_quiz
 TRUNCATE syscap.examenes;
 INSERT INTO syscap.examenes(syscap.examenes.id_examen, syscap.examenes.id_curso, syscap.examenes.nombre_examen)
-SELECT moodle19.mdl_quiz.id, moodle19.mdl_quiz.course, syscap.initcap(moodle19.mdl_quiz.name)
+SELECT moodle19.mdl_quiz.id, moodle19.mdl_quiz.course, syscap.initcap(syscap.acentos(moodle19.mdl_quiz.name))
 FROM moodle19.mdl_quiz
 WHERE moodle19.mdl_quiz.id IS NOT NULL AND moodle19.mdl_quiz.course IS NOT NULL AND moodle19.mdl_quiz.name IS NOT NULL;
 
@@ -76,7 +76,7 @@ WHERE moodle19.mdl_quiz_grades.id IS NOT NULL AND moodle19.mdl_quiz_grades.quiz 
 -- copiar a syscap.roles los registros de moodle19.mdl_role
 TRUNCATE syscap.roles;
 INSERT INTO syscap.roles(syscap.roles.id_rol, syscap.roles.nombre_completo_rol, syscap.roles.nombre_corto_rol, syscap.roles.descripcion_rol, syscap.roles.criterio_rol)
-SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description, moodle19.mdl_role.sortorder
+SELECT moodle19.mdl_role.id, syscap.initcap(syscap.acentos(moodle19.mdl_role.name)), syscap.acentos(moodle19.mdl_role.shortname), moodle19.mdl_role.description, moodle19.mdl_role.sortorder
 FROM moodle19.mdl_role
 WHERE moodle19.mdl_role.id IS NOT NULL AND moodle19.mdl_role.name IS NOT NULL AND moodle19.mdl_role.shortname IS NOT NULL AND moodle19.mdl_role.description IS NOT NULL AND moodle19.mdl_role.sortorder IS NOT NULL;
 
@@ -84,7 +84,7 @@ WHERE moodle19.mdl_role.id IS NOT NULL AND moodle19.mdl_role.name IS NOT NULL AN
 -- copiar a syscap.roles_asignados los registros de moodle19.mdl_role_assignments
 TRUNCATE syscap.roles_asignados;
 INSERT INTO syscap.roles_asignados(syscap.roles_asignados.id_rol_asignado, syscap.roles_asignados.id_rol, syscap.roles_asignados.id_matricula, syscap.roles_asignados.id_usuario)
-SELECT moodle19.mdl_role_assignments.id, syscap.initcap(moodle19.mdl_role_assignments.roleid), moodle19.mdl_role_assignments.contextid, moodle19.mdl_role_assignments.userid
+SELECT moodle19.mdl_role_assignments.id, syscap.initcap(syscap.acentos(moodle19.mdl_role_assignments.roleid)), moodle19.mdl_role_assignments.contextid, moodle19.mdl_role_assignments.userid
 FROM moodle19.mdl_role_assignments
 WHERE moodle19.mdl_role_assignments.id IS NOT NULL AND moodle19.mdl_role_assignments.roleid IS NOT NULL AND moodle19.mdl_role_assignments.contextid IS NOT NULL AND moodle19.mdl_role_assignments.userid IS NOT NULL;
 
@@ -92,7 +92,7 @@ WHERE moodle19.mdl_role_assignments.id IS NOT NULL AND moodle19.mdl_role_assignm
 -- copiar a syscap.usuarios los registros de moodle19.mdl_user
 TRUNCATE syscap.usuarios;
 INSERT INTO syscap.usuarios(syscap.usuarios.id_usuario, syscap.usuarios.nombre_usuario, syscap.usuarios.contrasena_usuario, syscap.usuarios.id_tipo_usuario, syscap.usuarios.nombres_usuario, syscap.usuarios.apellido1_usuario, syscap.usuarios.apellido2_usuario, syscap.usuarios.dui_usuario, syscap.usuarios.sexo_usuario, syscap.usuarios.id_profesion, syscap.usuarios.id_nivel_estudio, syscap.usuarios.correo_electronico_usuario, syscap.usuarios.telefono1_usuario, syscap.usuarios.telefono2_usuario, syscap.usuarios.id_centro_educativo, syscap.usuarios.id_departamento, syscap.usuarios.id_municipio, syscap.usuarios.pais_usuario, syscap.usuarios.direccion_usuario, syscap.usuarios.ciudad_usuario, syscap.usuarios.fecha_nacimiento_usuario, syscap.usuarios.modalidad_usuario)
-SELECT moodle19.mdl_user.id, moodle19.mdl_user.username, moodle19.mdl_user.password, moodle19.mdl_user.tipo, initcap(moodle19.mdl_user.firstname), initcap(moodle19.mdl_user.lastname), initcap(moodle19.mdl_user.apellido2), moodle19.mdl_user.dui, moodle19.mdl_user.sexo, moodle19.mdl_user.profesion, moodle19.mdl_user.nestudio, moodle19.mdl_user.email, moodle19.mdl_user.phone1, moodle19.mdl_user.phone2, moodle19.mdl_user.tinstitucion, moodle19.mdl_user.deptorec, moodle19.mdl_user.munirec, moodle19.mdl_user.country, initcap(moodle19.mdl_user.address), initcap(moodle19.mdl_user.city), moodle19.mdl_user.fnacimiento, IF(moodle19.mdl_user.auth = 'manual', 'tutorizado', IF(moodle19.mdl_user.auth = 'email', 'autoformacion', NULL)) auth
+SELECT moodle19.mdl_user.id, moodle19.mdl_user.username, moodle19.mdl_user.password, moodle19.mdl_user.tipo, syscap.initcap(syscap.acentos(moodle19.mdl_user.firstname)), syscap.initcap(syscap.acentos(moodle19.mdl_user.lastname)), syscap.initcap(syscap.acentos(moodle19.mdl_user.apellido2)), moodle19.mdl_user.dui, moodle19.mdl_user.sexo, moodle19.mdl_user.profesion, moodle19.mdl_user.nestudio, moodle19.mdl_user.email, moodle19.mdl_user.phone1, moodle19.mdl_user.phone2, moodle19.mdl_user.tinstitucion, moodle19.mdl_user.deptorec, moodle19.mdl_user.munirec, moodle19.mdl_user.country, syscap.initcap(syscap.acentos(moodle19.mdl_user.address)), syscap.initcap(syscap.acentos(moodle19.mdl_user.city)), moodle19.mdl_user.fnacimiento, IF(moodle19.mdl_user.auth = 'manual', 'tutorizado', IF(moodle19.mdl_user.auth = 'email', 'autoformacion', NULL)) auth
 FROM moodle19.mdl_user
 /*WHERE moodle19.mdl_user.id IS NOT NULL AND moodle19.mdl_user.username IS NOT NULL AND moodle19.mdl_user.password IS NOT NULL AND moodle19.mdl_user.tipo IS NOT NULL AND moodle19.mdl_user.firstname IS NOT NULL AND moodle19.mdl_user.lastname IS NOT NULL AND moodle19.mdl_user.apellido2 IS NOT NULL AND moodle19.mdl_user.dui IS NOT NULL AND moodle19.mdl_user.sexo IS NOT NULL AND moodle19.mdl_user.profesion IS NOT NULL AND moodle19.mdl_user.nestudio IS NOT NULL AND moodle19.mdl_user.email IS NOT NULL AND moodle19.mdl_user.phone1 IS NOT NULL AND moodle19.mdl_user.phone2 IS NOT NULL AND moodle19.mdl_user.tinstitucion IS NOT NULL AND moodle19.mdl_user.deptorec IS NOT NULL AND moodle19.mdl_user.munirec IS NOT NULL AND moodle19.mdl_user.country IS NOT NULL AND moodle19.mdl_user.address IS NOT NULL AND moodle19.mdl_user.city IS NOT NULL AND moodle19.mdl_user.fnacimiento IS NOT NULL*/;
 
@@ -307,3 +307,15 @@ UPDATE centros_educativos SET id_mapa = 88 WHERE id_centro_educativo = 1164;
 UPDATE centros_educativos SET id_mapa = 89 WHERE id_centro_educativo = 1170;
 UPDATE centros_educativos SET id_mapa = 90 WHERE id_centro_educativo = 1177;
 UPDATE centros_educativos SET id_mapa = 91 WHERE id_centro_educativo = 1180;
+
+/* USUARIOS DE PRUEBAS */
+INSERT INTO usuarios(id_usuario, nombre_usuario, contrasena_usuario, id_tipo_usuario, nombres_usuario, apellido1_usuario, apellido2_usuario, dui_usuario, sexo_usuario, id_profesion, id_nivel_estudio, correo_electronico_usuario, telefono1_usuario, telefono2_usuario, id_centro_educativo, id_departamento, id_municipio, pais_usuario, direccion_usuario, ciudad_usuario, fecha_nacimiento_usuario, modalidad_usuario) VALUES
+(2209, 'aescobar', '8c8b0643c01918b071983ca305265543', 4, acentos('Amanda Eliza'), acentos('Escobar'), acentos('Orellana'), '12345678910', 'F', 99, 8, 'aescobar@syscap.com', '78945612', '23654789', 985, '01', '09', 'SV', 'calle 1, pasaje 2, ciudad 3', 'Apopas', '2013-12-11', 'autoformacion'),
+(2210, 'lgiron', 'fc3e0ce13390316d3722bdefb409a635', 4, acentos('Ligia'), acentos('Girón'), NULL, '12345678910', 'F', 99, 8, 'lgiron@syscap.com', '78945612', '23654789', 1139, '01', '01', 'SV', 'calle 1, pasaje 2, ciudad 3', 'San Salvador', '2013-12-11', 'autoformacion'),
+(2211, 'tmiguel', '841ebc08e12f24020bd8fe0275eac30d', 4, acentos('Tito Javier'), acentos('Miguel'), acentos('Galdámez'), '12345678910', 'M', 99, 8, 'tmiguel@syscap.com', '78945612', '23654789', 1142, '01', '06', 'SV', 'calle 1, pasaje 2, ciudad 3', 'San Marcos', '2013-12-11', 'autoformacion'),
+(2212, 'szaldiva', '212e6f4accbcad2debfff2408069684d', 4, acentos('Susana'), acentos('Zaldívar'), NULL, '12345678910', 'F', 99, 8, 'szaldiva@syscap.com', '78945612', '23654789', 1297, '01', '13', 'SV', 'calle 1, pasaje 2, ciudad 3', 'Tonacatepeque', '2013-12-11', 'autoformacion');
+INSERT INTO roles_asignados(id_rol_asignado, id_rol, id_matricula, id_usuario) VALUES
+(5015, 1, 1, 2209),
+(5016, 5, 1, 2210),
+(5017, 8, 1, 2211),
+(5018, 1, 1, 2212);

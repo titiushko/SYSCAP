@@ -1,15 +1,24 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Estadisticas extends CI_Controller{
+class Estadisticas extends MY_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->helper('form');
-		$this->load->model(array('estadisticas_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
+		$this->eliminar_cache();
+		if(isset($this->session->userdata['conexion_usuario'])){
+			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
+				$this->load->model(array('estadisticas_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
+			}
+			else{
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+			}
+		}
+		else{
+			$this->acceso_denegado('sin_conexion');
+		}
 	}
 	
 	public function consulta($opcion = 1){
 		$datos['pagina'] = 'estadisticas/consultar_estadisticas_view';
-		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$datos['opcion_menu'] = modulo_actual('modulo_consultas_estadisticas');
 		if($this->validar_parametros($opcion)){
 			$datos['nombre_estadistica'] = listado_estadisticas($opcion);
@@ -184,7 +193,7 @@ class Estadisticas extends CI_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404();
+			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	
@@ -298,21 +307,21 @@ class Estadisticas extends CI_Controller{
 					$pagina = 'estadisticas/imprimir_estadistica_01_view';
 					$datos = $this->datos_estadistica_01_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 					if(empty($datos['modalidades_capacitados'])){
-						show_404();
+						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 					}
 					break;
 				case 2: // Usuarios por Departamento y Rango de Fechas
 					$pagina = 'estadisticas/imprimir_estadistica_02_view';
 					$datos = $this->datos_estadistica_02_view($this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 					if(empty($datos['cantidad_usuarios_municipio'])){
-						show_404();
+						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 					}
 					break;
 				case 3: // Total de Usuarios por Departamento y Rango de Fechas
 					$pagina = 'estadisticas/imprimir_estadistica_03_view';
 					$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 					if(empty($datos['estaditicas_departamento_fechas'])){
-						show_404();
+						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 					}
 					break;
 				case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
@@ -323,7 +332,7 @@ class Estadisticas extends CI_Controller{
 					$pagina = 'estadisticas/imprimir_estadistica_08_view';
 					$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
 					if(empty($datos['estaditicas_departamento_fechas'])){
-						show_404();
+						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 					}
 					break;
 				case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
@@ -333,7 +342,7 @@ class Estadisticas extends CI_Controller{
 			$this->load->view($pagina, $datos);
 		}
 		else{
-			show_404();
+			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	
@@ -374,7 +383,7 @@ class Estadisticas extends CI_Controller{
 			$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
-			show_404();
+			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	

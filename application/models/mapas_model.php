@@ -10,7 +10,7 @@ class Mapas_model extends CI_Model{
 								   mapas.longitud_mapa longitud_mapa,
 								   mapas.latitud_mapa latitud_mapa,
 								   departamentos.id_departamento id_departamento,
-								   acentos(municipios.nombre_municipio) nombre_municipio,
+								   NULL nombre_municipio,
 								   acentos(departamentos.nombre_departamento) nombre_departamento,
 								   NULL nombre_centro_educativo
 								   FROM mapas INNER JOIN departamentos ON mapas.id_mapa = departamentos.id_mapa

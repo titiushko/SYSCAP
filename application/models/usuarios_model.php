@@ -21,7 +21,10 @@ class Usuarios_model extends CI_Model{
 	
 	function nombre_completo_usuario($codigo_usuario){
 		$query = $this->db->query('SELECT acentos(F_NombreCompletoUsuario(?)) nombre_completo_usuario', array($codigo_usuario));
-		return $query->result()[0]->nombre_completo_usuario;
+		if($query->row())
+			return $query->result()[0]->nombre_completo_usuario;
+		else
+			return '';
 	}
 	
 	function modificar($datos_usuario, $codigo_usuario){

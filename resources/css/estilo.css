@@ -5,7 +5,7 @@ html, body {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*										estilo de inicio de sesion											*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.login-panel.panel.panel-primary, .login-panel.panel.panel-primary .panel-heading .panel-title /*, .checkbox label*/ {
+.login-panel.panel.panel-primary, .login-panel.panel.panel-primary .panel-heading .panel-title {
 	color: #ffffff;
 	font-weight: bold;
 }
@@ -81,4 +81,22 @@ table.cursos tr th, table.cursos tr td {
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 div.table-responsive table.table.table-striped.table-bordered.table-hover thead tr th {
 	text-align: center;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo para crear un enlace											*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.enlace, .enlace:hover, .enlace:focus {
+	text-decoration: none;
+	outline: none;
+	cursor: pointer;
+}
+.enlace {
+	color: #428bca;
+	text-decoration: none;
+	cursor: pointer;
+}
+.enlace {
+	background: transparent;
+	cursor: pointer;
 }

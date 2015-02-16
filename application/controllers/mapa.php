@@ -1,10 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Mapa extends CI_Controller{
+class Mapa extends MY_Controller{
 	function __construct(){
 		parent::__construct();
-		$this->load->library('map');
-		$this->load->model(array('mapas_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
+		$this->eliminar_cache();
+		if(isset($this->session->userdata['conexion_usuario'])){
+			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
+				$this->load->library('map');
+				$this->load->model(array('mapas_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
+			}
+			else{
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+			}
+		}
+		else{
+			$this->acceso_denegado('sin_conexion');
+		}
 	}
 	
 	public function index(){
@@ -34,7 +45,7 @@ class Mapa extends CI_Controller{
 	
 	public function departamento($codigo_departamento = NULL){
 		$coordenadas = $this->mapas_model->coordenadas_municipios($codigo_departamento);
-		if($this->validar_parametros($codigo_departamento, FALSE)){
+		if($this->validar_parametros($codigo_departamento)){
 			foreach($coordenadas as $informacion_coordenada){
 				$coordenada = array();
 				$coordenada['animation'] = 'DROP';
@@ -48,7 +59,7 @@ class Mapa extends CI_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404();
+			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	
@@ -78,7 +89,7 @@ class Mapa extends CI_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404();
+			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	
@@ -88,13 +99,12 @@ class Mapa extends CI_Controller{
 		$estadistica_centro_educativo .= bold('Usuarios Capacitados: ').$cantidad_usuarios_centro_educativo->capacitados.br();
 		$estadistica_centro_educativo .= bold('Usuarios Certificados: ').$cantidad_usuarios_centro_educativo->certificados.br();
 		$estadistica_centro_educativo .= bold('Total Usuarios: ').$cantidad_usuarios_centro_educativo->total.br(2);
-		$estadistica_centro_educativo .= anchor('centros_educativos/mostrar/'.$codigo_centro_educativo, 'Ver centro_educativo.', '');
+		$estadistica_centro_educativo .= anchor('centros_educativos/mostrar/'.$codigo_centro_educativo, 'Ver centro educativo.', '');
 		return $estadistica_centro_educativo;
 	}
 	
 	private function datos_consultar_mapa_view($centro, $zoom, $coordenadas, $breadcrumbs){
 		$datos['pagina'] = 'mapa/consultar_mapa_view';
-		$datos['usuario_actual'] = "&lt;nombre_usuario&gt;";
 		$datos['opcion_menu'] = modulo_actual('modulo_mapa_estadistico');
 		$datos['zoom'] = $zoom + 3;
 		$datos['coordenadas'] = $coordenadas;
@@ -119,7 +129,7 @@ class Mapa extends CI_Controller{
 		return $datos;
 	}
 	
-	private function validar_parametros($codigo_departamento, $codigo_municipio){
+	private function validar_parametros($codigo_departamento, $codigo_municipio = FALSE){
 		if(!$codigo_municipio){
 			$opcional = $codigo_municipio;
 			$codigo_municipio = '01';

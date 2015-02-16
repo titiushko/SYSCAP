@@ -19,7 +19,10 @@ class Departamentos_model extends CI_Model{
 		$query = $this->db->select('acentos(nombre_departamento) nombre_departamento');
 		$query = $this->db->where('id_departamento', $codigo_departamento);
 		$query = $this->db->get('departamentos');
-		return $query->result()[0]->nombre_departamento;
+		if($query->row())
+			return $query->result()[0]->nombre_departamento;
+		else
+			return '';
 	}
 }
 
