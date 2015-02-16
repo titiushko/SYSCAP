@@ -145,6 +145,7 @@ else{
 												<tr>
 													<th>#</th>
 													<th>Nombre</th>
+													<th>Certificaci&oacute;n</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -155,6 +156,7 @@ else{
 												<tr>
 													<td><?= $docentes_certificados; ?></td>
 													<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
+													<td><?= utf8($docente_certificado->certificacion_usuario); ?></td>
 												</tr>
 												<?php
 													$docentes_certificados++;
@@ -191,26 +193,36 @@ else{
 <script>
 $(document).ready(function() {
 	$('#data-tables-docentes_capacitados').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
+		"searching":	false,
+		"lengthChange":	false,
+		"pageLength":	5,
+		"ordering":		false,
 		"oLanguage": {
-			"sEmptyTable": "No hay docentes capacitados en el centro educativo."
-		  }
+			"oPaginate": {
+				"sFirst":		"<<",
+				"sLast":		">>",
+				"sNext":		">",
+				"sPrevious":	"<"
+			},
+			"sInfo":		"_START_/_END_ de _TOTAL_ registros",
+			"sEmptyTable":	"No hay docentes capacitados en el centro educativo."
+		}
 	});
 	$('#data-tables-docentes_certificados').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
+		"searching":	false,
+		"lengthChange":	false,
+		"pageLength":	5,
+		"ordering":		false,
 		"oLanguage": {
-			"sEmptyTable": "No hay docentes certificados en el centro educativo."
-		  }
+			"oPaginate": {
+				"sFirst":		"<<",
+				"sLast":		">>",
+				"sNext":		">",
+				"sPrevious":	"<"
+			},
+			"sInfo":		"_START_/_END_ de _TOTAL_ registros",
+			"sEmptyTable":	"No hay docentes certificados en el centro educativo."
+		}
 	});
 });
 </script>

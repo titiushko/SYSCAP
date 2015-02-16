@@ -173,18 +173,17 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#data-tables-estadistica2-1').dataTable({
-			"searching": false,
-			"lengthChange": false,
-			"info": false,
-			"oLanguage": {
-				"oPaginate": {
-					"sFirst": "Primero",
-					"sLast": "Último",
-					"sNext": ">",
-					"sPrevious": "<"
+			"searching":	false,
+			"lengthChange":	false,
+			"info":			false,
+			"oPaginate": {
+				"sFirst":		"<<",
+				"sLast":		">>",
+				"sNext":		">",
+				"sPrevious":	"<"
 				},
-				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
-			  }
+				"sEmptyTable": "No hay resultado para ésta consulta estadística."
+			}
 		});
 		$('#data-tables-estadistica2-2').dataTable({
 			language:{

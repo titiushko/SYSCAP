@@ -110,18 +110,18 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#data-tables-estadistica3-1').dataTable({
-			"searching": false,
-			"lengthChange": false,
-			"oLanguage": {
-				"oPaginate": {
-					"sFirst": "Primero",
-					"sLast": "Último",
-					"sNext": ">",
-					"sPrevious": "<"
+			"searching":	false,
+			"lengthChange":	false,
+			"info":			false,
+			"oPaginate": {
+				"sFirst":		"<<",
+				"sLast":		">>",
+				"sNext":		">",
+				"sPrevious":	"<"
 				},
-				"sInfo": "_START_/_END_ de _TOTAL_ registros",
-				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
-			  }
+				"sInfo":		"_START_/_END_ de _TOTAL_ registros",
+				"sEmptyTable":	"No hay resultado para ésta consulta estadística."
+			}
 		});
 	});
 </script>

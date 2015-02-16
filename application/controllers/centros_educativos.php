@@ -138,15 +138,15 @@ class Centros_educativos extends MY_Controller{
 		}
 		else{
 			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
-			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'),'tutorizado') as $docente_capacitado){
+			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado') as $docente_capacitado){
 				$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_capacitados == ''){
 				$lista_docentes_capacitados = 'No hay docentes capacitados en el centro educativo.';
 			}
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
-			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'),'tutorizado') as $docente_certificado){
-				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td></tr>';
+			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado') as $docente_certificado){
+				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.utf8($docente_certificado->certificacion_usuario).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){
 				$lista_docentes_certificados = 'No hay docentes certificados en el centro educativo.';

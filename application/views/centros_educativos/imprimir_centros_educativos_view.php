@@ -87,6 +87,7 @@
 											<tr>
 												<th>#</th>
 												<th>Nombre</th>
+												<th>Certificaci&oacute;n</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -97,6 +98,7 @@
 											<tr>
 												<td><?= $docentes_certificados; ?></td>
 												<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
+												<td><?= utf8($docente_certificado->certificacion_usuario); ?></td>
 											</tr>
 											<?php
 												$docentes_certificados++;

@@ -125,7 +125,7 @@ class Usuarios extends MY_Controller{
 			$datos['usuario'] = $this->usuarios_model->usuario($codigo_usuario);
 			if($operacion != ''){
 				$datos['operacion'] = $operacion;
-				$datos['pagina'] = $this->session->userdata('nombre_corto_rol') != 'admin' ? 'usuarios/usuario_view' : 'usuarios/formulario_usuarios_view';
+				$datos['pagina'] = $this->session->userdata('nombre_corto_rol') != 'admin' ? 'usuarios/usuarios_view' : 'usuarios/formulario_usuarios_view';
 				$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
 				$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 				$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();

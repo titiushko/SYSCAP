@@ -35,13 +35,13 @@
 			<hr/>
 			<table border="0">
 				<tr>
-					<td style="width: 310px;" valign="top">
+					<td style="width: 275px;" valign="top">
 						<h4 align="center">Docentes Capacitados</h4>
 						<table border="1">
 							<thead>
 								<tr>
-									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
-									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre</td>
+									<td style="text-align: center; font-weight: bold; width: 25px;">#</td>
+									<td style="text-align: center; font-weight: bold; width: 250px;">Nombre</td>
 								</tr>
 							</thead>
 							<tbody>
@@ -49,14 +49,15 @@
 							</tbody>
 						</table>
 					</td>
-					<td style="width: 50px;">&nbsp;</td>
-					<td style="width: 310px;" valign="top">
+					<td style="width: 20px;">&nbsp;</td>
+					<td style="width: 400px;" valign="top">
 						<h4 align="center">Docentes Certificados</h4>
 						<table border="1">
 							<thead>
 								<tr>
-									<td style="text-align: center; font-weight: bold; width: 30px;">#</td>
-									<td style="text-align: center; font-weight: bold; width: 310px;">Nombre</td>
+									<td style="text-align: center; font-weight: bold; width: 25px;">#</td>
+									<td style="text-align: center; font-weight: bold; width: 155px;">Nombre</td>
+									<td style="text-align: center; font-weight: bold; width: 220px;">Certificaci&oacute;n</td>
 								</tr>
 							</thead>
 							<tbody>
