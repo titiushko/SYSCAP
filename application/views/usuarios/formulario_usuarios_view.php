@@ -25,7 +25,18 @@ if($operacion == "Mostrar"){
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
 	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\');"';
 	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\');"';
-	$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+	if($this->session->userdata('uri_usuarios')){
+		$uri_usuarios = $this->session->userdata('uri_usuarios');
+		if(strpos($uri_usuarios, 'mostrar') != FALSE){
+			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().$uri_usuarios.'\');"';
+		}
+		else{
+			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+		}
+	}
+	else{
+		$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+	}
 }
 if($operacion == "Editar"){
 	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';

@@ -3,7 +3,18 @@ $bloqueo_informacion_general = $valor_bloqueo_informacion_general = '';
 if($operacion == "Mostrar"){
 	$bloqueo_informacion_general = $valor_bloqueo_informacion_general = 'disabled';
 	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
-	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
+	if($this->session->userdata('uri_centros_educativos')){
+		$uri_centros_educativos = $this->session->userdata('uri_centros_educativos');
+		if(strpos($uri_centros_educativos, 'municipio') != FALSE){
+			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().$uri_centros_educativos.'\');"';
+		}
+		else{
+			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
+		}
+	}
+	else{
+		$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
+	}
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
@@ -203,3 +214,4 @@ $(document).ready(function() {
 	});
 });
 </script>
+<?php $this->session->set_userdata('uri_usuarios', uri_string()); ?>

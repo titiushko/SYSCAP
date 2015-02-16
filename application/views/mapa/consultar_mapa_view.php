@@ -64,3 +64,4 @@ $(document).ready(function(){
 	});
 });
 </script>
+<?php $this->session->set_userdata('uri_centros_educativos', uri_string()); ?>
