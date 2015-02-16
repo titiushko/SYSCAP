@@ -1,6 +1,5 @@
 <?php
 // Atributos del Formulario
-
 $formulario = array(
 	1	=>	array(
 		'name'		=>	'datos_personales',
@@ -18,16 +17,12 @@ $formulario = array(
 		'role'		=>	'form'
 	)
 );
-
 $campos_ocultos = array('estado' => '0', 'grupo_campos' => '');
-
 $bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = '';
-
 if($operacion == "Mostrar"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
-	
 	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\');"';
 	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\');"';
 	$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
@@ -35,19 +30,15 @@ if($operacion == "Mostrar"){
 if($operacion == "Editar"){
 	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
-	
 	$boton_primario = 'class="btn btn-primary" onclick="document.datos_personales.estado.value=\'1\'; document.datos_personales.grupo_campos.value=\'datos_personales\';"';
 }
 if($operacion == "Recuperar Contraseña"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
-	
 	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';"';
 }
 $boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id_usuario.'\');"';
-
 // Definición de los campos Datos Personales
-
 $nombres_usuario = array(
 	'name'		=>	'nombres_usuario',
 	'id'		=>	'nombres_usuario',
@@ -57,7 +48,6 @@ $nombres_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
-
 $apellido1_usuario = array(
 	'name'		=>	'apellido1_usuario',
 	'id'		=>	'apellido1_usuario',
@@ -67,7 +57,6 @@ $apellido1_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
-
 $dui_usuario = array(
 	'name'		=>	'dui_usuario',
 	'id'		=>	'dui_usuario',
@@ -77,7 +66,6 @@ $dui_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
-
 $correo_electronico_usuario = array(
 	'name'		=>	'correo_electronico_usuario',
 	'id'		=>	'correo_electronico_usuario',
@@ -88,7 +76,6 @@ $correo_electronico_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
-
 $direccion_usuario = array(
 	'name'		=>	'direccion_usuario',
 	'id'		=>	'direccion_usuario',
@@ -97,9 +84,7 @@ $direccion_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
-
 // Definición de los campos Información de Usuario
-
 $nombre_usuario = array(
 	'name'		=>	'nombre_usuario',
 	'id'		=>	'nombre_usuario',
@@ -109,7 +94,6 @@ $nombre_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
-
 $contrasena_usuario = array(
 	'name'		=>	'contrasena_usuario',
 	'id'		=>	'contrasena_usuario',
@@ -119,9 +103,7 @@ $contrasena_usuario = array(
 	'class'		=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
-
 // Definición de los campos Información de Cursos
-
 $modalidad_usuario = array(
 	'name'		=>	'modalidad_usuario',
 	'id'		=>	'modalidad_usuario',
@@ -371,9 +353,7 @@ $(document).ready(function() {
 		"info":				false,
 		"ordering":			false,
 		"paging":			false,
-		"oLanguage": {
-			"sEmptyTable": "El usuario no tiene certificaciones."
-		  }
+		"oLanguage":		{"sEmptyTable": "El usuario no tiene certificaciones."}
 	});
 	$('#data-tables-calificaciones_usuario').dataTable({
 		"searching":		false,
@@ -382,9 +362,7 @@ $(document).ready(function() {
 		"info":				false,
 		"ordering":			false,
 		"paging":			false,
-		"oLanguage": {
-			"sEmptyTable": "El usuario no a recibido cursos."
-		  }
+		"oLanguage":		{"sEmptyTable": "El usuario no a recibido cursos."}
 	});
 });
 </script>

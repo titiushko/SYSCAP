@@ -38,10 +38,9 @@ class Usuarios_model extends CI_Model{
 	 * @return array de objetos con el listado de cursos recibidos y calificaciones obtenidas de un usuario.
 	 */
 	function calificaciones_usuario($codigo_usuario){
-		$sql = 'SELECT acentos(c_nombre_completo_curso) nombre, ROUND(ec_nota_examen_calificacion, 2) nota
-				FROM V_UsuariosCursosExamenesCalificaciones
-				WHERE ec_id_usuario = ?';
-		$query = $this->db->query($sql, array($codigo_usuario));
+		$query = $this->db->query('SELECT acentos(c_nombre_completo_curso) nombre, ROUND(ec_nota_examen_calificacion, 2) nota
+								   FROM V_UsuariosCursosExamenesCalificaciones
+								   WHERE ec_id_usuario = ?', array($codigo_usuario));
 		return $query->result();
 	}
 	
@@ -51,12 +50,13 @@ class Usuarios_model extends CI_Model{
 	 * @return array de objetos con el listado de certificaciones obtenidas de un usuario.
 	 */
 	function certificaciones_usuario($codigo_usuario){
-		$sql = 'SELECT acentos(SUBSTRING(c.nombre_completo_curso, LENGTH(\'Examen de Certificación\') + 2)) nombre
-				FROM matriculas m LEFT JOIN roles_asignados ra ON(m.id_matricula = ra.id_matricula)
-				LEFT JOIN cursos c ON(m.id_curso = c.id_curso)
-				WHERE ra.id_usuario = ?
-				AND c.nombre_completo_curso LIKE \'Examen%\'';
-		$query = $this->db->query($sql, array($codigo_usuario));
+		$query = $this->db->query('SELECT DISTINCT (CASE WHEN c_nombre_completo_curso LIKE \'Examen%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso, LENGTH(\'Examen\') + 2) + 1) ELSE (CASE WHEN c_nombre_completo_curso LIKE \'Certificaci%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso) + 1) ELSE c_nombre_completo_curso END) END) nombre
+								   FROM V_UsuariosCursosExamenesCalificaciones
+								   WHERE u_id_usuario = ?
+								   AND e_nombre_examen LIKE \'Examen%\'
+								   AND ec_nota_examen_calificacion >= 7
+								   AND u_modalidad_usuario LIKE \'tutorizado\'
+								   ORDER BY c_nombre_completo_curso', array($codigo_usuario));
 		return $query->result();
 	}
 	

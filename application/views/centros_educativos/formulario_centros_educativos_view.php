@@ -2,10 +2,21 @@
 $bloqueo_informacion_general = $valor_bloqueo_informacion_general = '';
 if($operacion == "Mostrar"){
 	$bloqueo_informacion_general = $valor_bloqueo_informacion_general = 'disabled';
+	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
+	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
 }
-
+else{
+	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
+	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
+}
+// Atributos del Formulario
+$formulario = array(
+	'name'		=> 'centros_educativos',
+	'id'		=> 'centros_educativos',
+	'role'		=> 'form'
+);
+$campos_ocultos = array('estado' => '0');
 // Definición de los campos Información General
-
 $nombre_centro_educativo = array(
 	'name'		=> 'nombre_centro_educativo',
 	'id'		=> 'nombre_centro_educativo',
@@ -15,7 +26,6 @@ $nombre_centro_educativo = array(
 	'class'		=> 'form-control text-capitalize',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
-
 $codigo_centro_educativo = array(
 	'name'		=> 'codigo_centro_educativo',
 	'id'		=> 'codigo_centro_educativo',
@@ -25,25 +35,6 @@ $codigo_centro_educativo = array(
 	'class'		=> 'form-control',
 	'disabled'	=> 'disabled'
 );
-
-// Atributos del Formulario
-
-$formulario = array(
-	'name'		=> 'centros_educativos',
-	'id'		=> 'centros_educativos',
-	'role'		=> 'form'
-);
-
-$campos_ocultos = array('estado' => '0');
-
-if($operacion == "Mostrar"){
-	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
-	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
-}
-else{
-	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
-}
 ?>
 <script src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
 <div class="row">
@@ -125,7 +116,7 @@ else{
 												$docentes_capacitados = 1;
 												foreach($lista_docentes_capacitados as $docente_capacitado){
 												?>
-												<tr>
+												<tr onclick="redireccionar('<?= base_url().'usuarios/mostrar/'.$docente_capacitado->id_usuario; ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_capacitado->nombre_completo_usuario); ?>">
 													<td><?= $docentes_capacitados; ?></td>
 													<td><?= utf8($docente_capacitado->nombre_completo_usuario); ?></td>
 												</tr>
@@ -153,7 +144,7 @@ else{
 												$docentes_certificados = 1;
 												foreach($lista_docentes_certificados as $docente_certificado){
 												?>
-												<tr>
+												<tr onclick="redireccionar('<?= base_url().'usuarios/mostrar/'.$docente_certificado->id_usuario; ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_certificado->nombre_completo_usuario); ?>">
 													<td><?= $docentes_certificados; ?></td>
 													<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
 													<td><?= utf8($docente_certificado->certificacion_usuario); ?></td>
@@ -193,36 +184,22 @@ else{
 <script>
 $(document).ready(function() {
 	$('#data-tables-docentes_capacitados').dataTable({
-		"searching":	false,
-		"lengthChange":	false,
-		"pageLength":	5,
-		"ordering":		false,
-		"oLanguage": {
-			"oPaginate": {
-				"sFirst":		"<<",
-				"sLast":		">>",
-				"sNext":		">",
-				"sPrevious":	"<"
-			},
-			"sInfo":		"_START_/_END_ de _TOTAL_ registros",
-			"sEmptyTable":	"No hay docentes capacitados en el centro educativo."
-		}
+		"searching":		false,
+		"scrollY":			"200px",
+		"scrollCollapse":	true,
+		"info":				false,
+		"ordering":			false,
+		"paging":			false,
+		"oLanguage":		{"sEmptyTable": "No hay docentes capacitados en el centro educativo."}
 	});
 	$('#data-tables-docentes_certificados').dataTable({
-		"searching":	false,
-		"lengthChange":	false,
-		"pageLength":	5,
-		"ordering":		false,
-		"oLanguage": {
-			"oPaginate": {
-				"sFirst":		"<<",
-				"sLast":		">>",
-				"sNext":		">",
-				"sPrevious":	"<"
-			},
-			"sInfo":		"_START_/_END_ de _TOTAL_ registros",
-			"sEmptyTable":	"No hay docentes certificados en el centro educativo."
-		}
+		"searching":		false,
+		"scrollY":			"200px",
+		"scrollCollapse":	true,
+		"info":				false,
+		"ordering":			false,
+		"paging":			false,
+		"oLanguage":		{"sEmptyTable": "No hay docentes certificados en el centro educativo."}
 	});
 });
 </script>

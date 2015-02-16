@@ -77,10 +77,11 @@ class Centros_educativos_model extends CI_Model{
 			}
 			if($tipo_usuario[$i] == 'docentes'){
 				$tipos_usuarios = 'AND u_id_tipo_usuario BETWEEN 5 AND 8'.' '.$tipos_usuarios;
-				$nombre_certificacion = ', (CASE WHEN c_nombre_completo_curso LIKE \'Examen%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso) + 1) ELSE c_nombre_completo_curso END) certificacion_usuario';
+				if($tipo_capacitado == 'Examen%')
+					$nombre_certificacion = ', (CASE WHEN c_nombre_completo_curso LIKE \'Examen%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso) + 1) ELSE c_nombre_completo_curso END) certificacion_usuario';
 			}
 		}
-		$sql = 'SELECT DISTINCT acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
+		$sql = 'SELECT DISTINCT u_id_usuario id_usuario, acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
 				'.$nombre_certificacion.'
 				FROM V_UsuariosCursosExamenesCalificaciones
 				WHERE u_id_centro_educativo = ?
@@ -88,7 +89,7 @@ class Centros_educativos_model extends CI_Model{
 				AND e_nombre_examen LIKE ?
 				'.$tipos_usuarios.'
 				AND u_modalidad_usuario LIKE ?
-				ORDER BY c_nombre_completo_curso';
+				ORDER BY nombre_completo_usuario';
 		$query = $this->db->query($sql, array($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_modalidad));
 		return $query->result();
 	}
