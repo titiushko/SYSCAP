@@ -13,7 +13,7 @@
 		);
 		echo meta($metainformaciones);
 		?>
-		<title><?= utf8(@$nombre_departamento).' '.utf8(@$nombre_municipio).' '.@$periodo; ?></title>
+		<title><?= @$tipo_capacitado.' '.utf8(@$nombre_departamento).' '.utf8(@$nombre_municipio).' '.@$periodo; ?></title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
@@ -32,7 +32,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento, Municipio y Rango de Fechas', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados, Departamento y Municipio', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Departamento:</th><td class="column-value"><?= utf8(@$nombre_departamento); ?></td>
@@ -40,6 +40,8 @@
 								<th class="column-title">Municipio:</th><td class="column-value"><?= utf8(@$nombre_municipio); ?></td>
 							</tr>
 							<tr>
+								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
+								<td class="column-nbs"><?= nbs(); ?></td>
 								<th class="column-title">Periodo:</th><td class="column-value" colspan="2"><?= @$periodo; ?></td>
 							</tr>
 						</table>
@@ -88,7 +90,7 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
-					<div id="morris-bar-chart-estadistica4-1"></div>
+					<div id="morris-bar-chart-estadistica7-1"></div>
 				</div>
 			</div>
 			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
@@ -133,7 +135,7 @@
 		<script type="text/javascript">
 			$(function() {
 				Morris.Bar({
-					element: 'morris-bar-chart-estadistica4-1',
+					element: 'morris-bar-chart-estadistica7-1',
 					data: [<?= $usuarios_departamento_municipio_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],

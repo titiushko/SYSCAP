@@ -60,30 +60,33 @@ class Estadisticas_model extends CI_Model{
 	
 	// Consulta Estadística 4: Usuarios por Departamento, Municipio y Rango de Fechas
 	// Consulta Estadística 7: Usuarios por Tipo de Capacitados, Departamento y Municipio
-	function usuarios_departamento_municipio($codigo_departamento, $codigo_municipio, $fecha1, $fecha2){
+	function usuarios_departamento_municipio($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = ''){
+		$filtro = $tipo_capacitado != '' ? ' AND tipo_capacitado = ?' : '';
 		$query = $this->db->query('SELECT nombre_centro_educativo,
 								   SUM(CASE WHEN nombre_examen LIKE \'Evaluaci%\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN nombre_examen LIKE \'Examen%\' THEN 1 ELSE 0 END) certificados
-								   FROM V_EstadisticaDepartamentoFecha 
+								   FROM V_EstadisticaDepartamentoFecha
 								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
-								   AND fecha_examen_calificacion BETWEEN ? AND ? 
+								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   GROUP BY nombre_centro_educativo
 								   UNION
 								   SELECT \'TOTAL\' nombre_centro_educativo,
 								   SUM(CASE WHEN nombre_examen LIKE \'Evaluaci%\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN nombre_examen LIKE \'Examen%\' THEN 1 ELSE 0 END) certificados
-								   FROM V_EstadisticaDepartamentoFecha 
+								   FROM V_EstadisticaDepartamentoFecha
 								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
-								   AND fecha_examen_calificacion BETWEEN ? AND ?',
-								   array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2));
+								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro,
+								   array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado));
 		return $query->result();
 	}
 	
-	function usuarios_centro_educativo($codigo_departamento, $codigo_municipio, $fecha1, $fecha2){
+	function usuarios_centro_educativo($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = ''){
+		$filtro = $tipo_capacitado != '' ? ' AND tipo_capacitado = ?' : '';
 		$query = $this->db->query('SELECT nombre_centro_educativo, nombre_usuario, tipo_capacitado, modalidad_usuario
 								   FROM V_EstadisticaDepartamentoFecha
 								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
-								   AND fecha_examen_calificacion BETWEEN ? AND ?', array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2));
+								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro,
+								   array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado));
 		return $query->result();
 	}
 	

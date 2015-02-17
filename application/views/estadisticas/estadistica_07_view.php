@@ -1,52 +1,87 @@
 <?php
+$formulario_consultar = array(
+	'name'		=> 'formulario_consultar',
+	'id'		=> 'formulario_consultar',
+	'role'		=> 'form'
+);
 $fecha = array(
 	'name'		=> '',
 	'id'		=> '',
 	'maxlength'	=> '60',
 	'size'		=> '20',
+	'value'		=> '',
 	'type'		=> 'date',
 	'required'	=> 'required',
 	'class'		=> 'form-control'
 );
+$lista_tipo_capacitados =  array(
+	''				=> '',
+	'capacitados'	=> 'Capacitados',
+	'certificados'	=> 'Certificados'
+);
 $boton_primario = 'class="btn btn-primary"';
+$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'estadisticas/consulta/7\');"';
+// Definición de formularios ocultos para enviar información a imprimir y exportar
+$formulario_imprimir = array(
+	'name'		=> 'formulario_imprimir',
+	'id'		=> 'formulario_imprimir',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$formulario_exportar = array(
+	'name'		=> 'formulario_exportar',
+	'id'		=> 'formulario_exportar',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$campos_ocultos_formulario = array(
+	'tipo_de_capacitado'	=> set_value('tipo_de_capacitado', @$campos['tipo_capacitado']),
+	'codigo_departamento'	=> set_value('codigo_departamento', @$campos['id_departamento']),
+	'codigo_municipio'		=> set_value('codigo_municipio', @$campos['id_municipio']),
+	'fecha_1'				=> set_value('fecha_1', @$campos['fecha1']),
+	'fecha_2'				=> set_value('fecha_2', @$campos['fecha2'])
+);
 ?>
-<?= form_open(); ?>
+<?= form_open('index.php/estadisticas/imprimir/7', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/exportar/7', $formulario_exportar, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/consulta/7', $formulario_consultar); ?>
 	<div class="row">
-        <div class="col-lg-4">
-			<div class="form-group">
-				<?= form_label('Tipo de Capacitado:'); ?>
-				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required'); ?>
-				<?= form_error('id_tipo_capacitados'); ?>
-			</div>
-		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
-				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required'); ?>
+				<?= form_dropdown('id_departamento', $lista_departamentos, set_value('id_departamento', @$campos['id_departamento']), 'class="form-control" required'); ?>
 				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Municipio:'); ?>
-				<?= form_dropdown('id_municipio', $lista_municipios, '', 'class="form-control" required'); ?>
+				<?= form_dropdown('id_municipio', $lista_municipios, set_value('id_municipio', @$campos['id_municipio']), 'class="form-control" required'); ?>
 				<?= form_error('id_municipio'); ?>
 			</div>
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-3"><?= nbs(); ?></div>
+        <div class="col-lg-6">
+			<div class="form-group">
+				<?= form_label('Tipo de Capacitado:'); ?>
+				<?= form_dropdown('tipo_capacitado', $lista_tipo_capacitados, set_value('tipo_capacitado', @$campos['tipo_capacitado']), 'class="form-control" required'); ?>
+				<?= form_error('tipo_capacitado'); ?>
+			</div>
+		</div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
 				<div class="row">
 					<div class="col-lg-6">
-						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; $fecha['value'] = set_value('fecha1', @$campos['fecha1']); ?>
 						<?= form_input($fecha); ?>
 						<?= form_error('fecha1'); ?>
 					</div>
 					<div class="col-lg-6">
-						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; $fecha['value'] = set_value('fecha2', @$campos['fecha2']); ?>
 						<?= form_input($fecha); ?>
 						<?= form_error('fecha2'); ?>
 					</div>
@@ -58,6 +93,7 @@ $boton_primario = 'class="btn btn-primary"';
 		<div class="col-lg-12">
 			<div class="form-group">
 				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
+				<?= form_reset('boton_secundario', 'Limpiar', $boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -74,23 +110,35 @@ $boton_primario = 'class="btn btn-primary"';
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Centros Educativos</th>
-								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
+								<th>Centro Educativo</th>
+								<th>Capacitados</th>
+								<th>Certificados</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$centroseducativos = 1;
-							foreach($tabla as $tbl){ ?>
+							$centros_educativos = 1;
+							foreach($usuarios_departamento_municipio as $usuario_departamento_municipio){
+								if($usuario_departamento_municipio->nombre_centro_educativo != 'TOTAL'){
+							?>
 							<tr>
-								<td><?= $centroseducativos; ?></td>
-								<td><?= utf8($tbl->nombre_centro_educativo); ?></td>
-								<td><?= $tbl->capacitados; ?></td>
-								<td><?= $tbl->certificados; ?></td>
+								<td><?= $centros_educativos++; ?></td>
+								<td><?= utf8($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
+								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
+								<td><?= $usuario_departamento_municipio->certificados; ?></td>
 							</tr>
 							<?php
-							$centroseducativos++;
+								}
+								else{
+							?>
+							<tr>
+								<td style="opacity: 0.0;"><?= $centros_educativos; ?></td>
+								<td><?= bold($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
+								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
+								<td><?= $usuario_departamento_municipio->certificados; ?></td>
+							</tr>
+							<?php
+								}
 							}
 							?>
 						</tbody>
@@ -115,6 +163,7 @@ $boton_primario = 'class="btn btn-primary"';
 						<thead>
 							<tr>
 								<th>#</th>
+								<th>Centro Educativo</th>
 								<th>Nombre</th>
 								<th>Tipo de Capacitado</th>
 								<th>Modalidad de Capacitaci&oacute;n</th>
@@ -122,17 +171,17 @@ $boton_primario = 'class="btn btn-primary"';
 						</thead>
 						<tbody>
 							<?php
-							$centroseducativos = 1;
-							foreach($listado as $lst){
+							$usuarios = 1;
+							foreach($usuarios_centro_educativo as $usuario_centro_educativo){
 							?>
 							<tr>
-								<td><?= $centroseducativos; ?></td>
-								<td><?= utf8($lst->nombre_usuario); ?></td>
-								<td><?= utf8($lst->tipo_capacitado); ?></td>
-								<td><?= utf8($lst->modalidad_usuario); ?></td>
+								<td><?= $usuarios++; ?></td>
+								<td><?= utf8($usuario_centro_educativo->nombre_centro_educativo); ?></td>
+								<td><?= utf8($usuario_centro_educativo->nombre_usuario); ?></td>
+								<td><?= utf8($usuario_centro_educativo->tipo_capacitado); ?></td>
+								<td><?= utf8($usuario_centro_educativo->modalidad_usuario); ?></td>
 							</tr>
 							<?php
-							$centroseducativos++;
 							}
 							?>
 						</tbody>
@@ -173,19 +222,19 @@ $boton_primario = 'class="btn btn-primary"';
 	$(function() {
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica7-1',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $usuarios_departamento_municipio_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
+			labels: ['Capacitados', 'Certificados'],
 			hideHover: 'auto',
 			resize: true
 		});
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica7-2',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $usuarios_departamento_municipio_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
+			labels: ['Capacitados', 'Certificados'],
 			hideHover: 'auto',
 			resize: true
 		});

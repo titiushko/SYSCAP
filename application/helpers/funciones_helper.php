@@ -84,7 +84,7 @@ if(!function_exists('listado_estadisticas')){
 									  9 => 'Usuarios por Tipo de Capacitados y Centro Educativo',
 									  10 => 'Usuarios a Nivel Nacional',
 									  11 => 'Usuarios por Grado Digital');
-		return 'Estad&iacute;stica de '.$nombres_estadisticas[$estadistica];
+		return $nombres_estadisticas[$estadistica];
 	}
 }
 
