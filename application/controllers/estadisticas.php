@@ -593,7 +593,7 @@ class Estadisticas extends MY_Controller{
 			return FALSE;
 		}
 		elseif(is_numeric($opcion)){
-			if($opcion >= 1 && $opcion <= 11){
+			if(($opcion >= 1 && $opcion <= 4) || ($opcion >= 6 && $opcion <= 11)){
 				return TRUE;
 			}
 			else{
