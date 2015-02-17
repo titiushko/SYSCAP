@@ -108,7 +108,11 @@
 				</div>
 				<!--logo start-->
 				<div>
+					<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 					<a class="logo" href="<?= base_url(); ?>inicio">
+					<?php } else{ ?>
+					<a class="logo">
+					<?php } ?>
 						<b class="visible-desktop" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">Sistema Informático para apoyar el Control y Administración de Capacitaciones</b>
 						<b class="visible-phone visible-tablet" title="Sistema Informático para apoyar el Control y Administración de Capacitaciones">SYSCAP</b>
 					</a>
