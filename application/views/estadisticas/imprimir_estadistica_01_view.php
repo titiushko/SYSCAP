@@ -86,7 +86,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-6 text-center">
 					<div id="morris-bar-chart-estadistica1-1"></div>
 				</div>
 			</div>

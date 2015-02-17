@@ -13,7 +13,7 @@
 		);
 		echo meta($metainformaciones);
 		?>
-		<title><?= utf8(@$nombre_departamento).' '.@$periodo; ?></title>
+		<title><?= utf8(@$nombre_departamento).' '.utf8(@$nombre_municipio).' '.@$periodo; ?></title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
@@ -32,12 +32,15 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento y Rango de Fechas', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad$iacute;stica de Usuarios por Departamento, Municipio y Rango de Fechas', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Departamento:</th><td class="column-value"><?= utf8(@$nombre_departamento); ?></td>
 								<td class="column-nbs"><?= nbs(); ?></td>
-								<th class="column-title">Periodo:</th><td class="column-value"><?= @$periodo; ?></td>
+								<th class="column-title">Municipio:</th><td class="column-value"><?= utf8(@$nombre_municipio); ?></td>
+							</tr>
+							<tr>
+								<th class="column-title">Periodo:</th><td class="column-value" colspan="2"><?= @$periodo; ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -50,36 +53,35 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Municipio</th>
+								<th>Centro Educativo</th>
 								<th>Capacitados</th>
 								<th>Certificados</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$cantidades = 1;
-							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
-								if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+							$centros_educativos = 1;
+							foreach($usuarios_departamento_municipio as $usuario_departamento_municipio){
+								if($usuario_departamento_municipio->nombre_centro_educativo != 'TOTAL'){
 							?>
 							<tr>
-								<td><?= $cantidades; ?></td>
-								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
-								<td><?= $cantidad_municipio->capacitados; ?></td>
-								<td><?= $cantidad_municipio->certificados; ?></td>
+								<td><?= $centros_educativos++; ?></td>
+								<td><?= utf8($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
+								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
+								<td><?= $usuario_departamento_municipio->certificados; ?></td>
 							</tr>
 							<?php
 								}
 								else{
 							?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
-								<td><?= bold($cantidad_municipio->nombre_municipio); ?></td>
-								<td><?= bold($cantidad_municipio->capacitados); ?></td>
-								<td><?= bold($cantidad_municipio->certificados); ?></td>
+								<td style="opacity: 0.0;"><?= $centros_educativos; ?></td>
+								<td><?= bold($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
+								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
+								<td><?= $usuario_departamento_municipio->certificados; ?></td>
 							</tr>
 							<?php
 								}
-							$cantidades++;
 							}
 							?>
 						</tbody>
@@ -92,29 +94,30 @@
 			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-12">
-					<?= form_fieldset(heading('Listado de Usuarios por Municipio', 4)); ?>
+					<?= form_fieldset(heading('Listado de Usuarios por Centro Educativo', 4)); ?>
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Municipio</th>
-									<th>Capacitados</th>
-									<th>Certificados</th>
+									<th>Centro Educativo</th>
+									<th>Nombre</th>
+									<th>Tipo de Capacitado</th>
+									<th>Modalidad de Capacitaci&oacute;n</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php
 								$usuarios = 1;
-								foreach($usuarios_municipio as $usuario_municipio){
+								foreach($usuarios_centro_educativo as $usuario_centro_educativo){
 								?>
 								<tr>
-									<td><?= $usuarios; ?></td>
-									<td><?= utf8($usuario_municipio->nombre_municipio); ?></td>
-									<td><?= utf8($usuario_municipio->nombre_usuario); ?></td>
-									<td><?= utf8($usuario_municipio->modalidad_usuario); ?></td>
+									<td><?= $usuarios++; ?></td>
+									<td><?= utf8($usuario_centro_educativo->nombre_centro_educativo); ?></td>
+									<td><?= utf8($usuario_centro_educativo->nombre_usuario); ?></td>
+									<td><?= utf8($usuario_centro_educativo->tipo_capacitado); ?></td>
+									<td><?= utf8($usuario_centro_educativo->modalidad_usuario); ?></td>
 								</tr>
 								<?php
-								$usuarios++;
 								}
 								?>
 							</tbody>
@@ -131,7 +134,7 @@
 			$(function() {
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica2-1',
-					data: [<?= $cantidad_usuarios_municipio_json; ?>],
+					data: [<?= $usuarios_departamento_municipio_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],
 					labels: ['Capacitados', 'Certificados'],

@@ -81,7 +81,7 @@ $campos_ocultos_formulario = array(
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Departamentos</th>
+								<th>Departamento</th>
 								<th>Capacitados</th>
 								<th>Certificados</th>
 							</tr>
@@ -108,7 +108,7 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(){
 		$('#data-tables-estadistica3-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
@@ -117,8 +117,7 @@ $campos_ocultos_formulario = array(
 				"sFirst":		"<<",
 				"sLast":		">>",
 				"sNext":		">",
-				"sPrevious":	"<"
-				},
+				"sPrevious":	"<",
 				"sInfo":		"_START_/_END_ de _TOTAL_ registros",
 				"sEmptyTable":	"No hay resultado para ésta consulta estadística."
 			}

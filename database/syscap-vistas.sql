@@ -55,7 +55,9 @@ SELECT
 	ec.fecha_examen_calificacion fecha_examen_calificacion,
 	d.id_departamento id_departamento,
 	d.nombre_departamento nombre_departamento,
+	m.id_municipio id_municipio,
 	m.nombre_municipio nombre_municipio,
+	ce.id_centro_educativo id_centro_educativo,
 	ce.nombre_centro_educativo nombre_centro_educativo
 FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
 	JOIN examenes e ON(ec.id_examen = e.id_examen)

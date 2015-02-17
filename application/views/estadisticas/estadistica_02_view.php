@@ -180,8 +180,7 @@ $campos_ocultos_formulario = array(
 				"sFirst":		"<<",
 				"sLast":		">>",
 				"sNext":		">",
-				"sPrevious":	"<"
-				},
+				"sPrevious":	"<",
 				"sEmptyTable": "No hay resultado para ésta consulta estadística."
 			}
 		});
