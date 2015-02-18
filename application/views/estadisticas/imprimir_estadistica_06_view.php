@@ -13,7 +13,7 @@
 		);
 		echo meta($metainformaciones);
 		?>
-		<title><?= @$periodo; ?></title>
+		<title><?= @$tipo_capacitado.' '.utf8(@$nombre_departamento).' '.@$periodo; ?></title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
@@ -32,13 +32,15 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Modalidad de Capacitaci&oacute;n', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados, Departamento y Fecha', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
-								<td><?= nbs(); ?></td>
-								<th class="column-title">Periodo:</th>
-								<td class="column-value"><?= @$periodo; ?></td>
-								<td><?= nbs(); ?></td>
+								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
+								<td class="column-nbs"><?= nbs(); ?></td>
+								<th class="column-title">Departamento:</th><td class="column-value"><?= utf8(@$nombre_departamento); ?></td>
+							</tr>
+							<tr>
+								<th class="column-title">Periodo:</th><td class="column-value" colspan="2"><?= @$periodo; ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -50,34 +52,33 @@
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th></th>
-								<th colspan="2">Modalidades de Capacitaci&oacute;n</th>
-							</tr>
-							<tr>
-								<th rowspan="2">Tipos de Capacitado</th>
+								<th>#</th>
+								<th>Municipio</th>
 								<th>Tutorizados</th>
 								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							$cantidades = 1;
-							foreach($modalidades_capacitados as $modalidad_capacitado){
-								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+							$estaditicas = 1;
+							foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
+								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'TOTAL'){
 							?>
 							<tr>
-								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
-								<td><?= $modalidad_capacitado->tutorizados; ?></td>
-								<td><?= $modalidad_capacitado->autoformacion; ?></td>
+								<td><?= $estaditicas++; ?></td>
+								<td><?= utf8($estaditica_departamento_tipo_fecha->nombre_municipio); ?></td>
+								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
+								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
 							</tr>
 							<?php
 								}
 								else{
 							?>
 							<tr>
-								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
-								<td><?= bold($modalidad_capacitado->tutorizados); ?></td>
-								<td><?= bold($modalidad_capacitado->autoformacion); ?></td>
+								<td style="opacity: 0.0;"><?= $estaditicas++; ?></td>
+								<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
+								<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
+								<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>
 							</tr>
 							<?php
 								}
@@ -87,7 +88,7 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
-					<div id="morris-bar-chart-estadistica1-1"></div>
+					<div id="morris-bar-chart-estadistica6-1"></div>
 				</div>
 			</div>
 		</div>
@@ -98,8 +99,8 @@
 		<script type="text/javascript">
 			$(function() {
 				Morris.Bar({
-					element: 'morris-bar-chart-estadistica1-1',
-					data: [<?= $modalidades_capacitados_json; ?>],
+					element: 'morris-bar-chart-estadistica6-1',
+					data: [<?= $estaditicas_departamento_tipo_fechas_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],
 					labels: ['Capacitados', 'Certificados'],

@@ -1,58 +1,93 @@
 <?php
-$fecha_ini = array(
-	'name'		=> 'fecha_ini',
-	'id'		=> 'fecha_ini',
+$formulario_consultar = array(
+	'name'		=> 'formulario_consultar',
+	'id'		=> 'formulario_consultar',
+	'role'		=> 'form'
+);
+$fecha = array(
+	'name'		=> '',
+	'id'		=> '',
 	'maxlength'	=> '60',
 	'size'		=> '20',
+	'value'		=> '',
 	'type'		=> 'date',
 	'required'	=> 'required',
 	'class'		=> 'form-control'
 );
-$fecha_fin = array(
-	'name'		=> 'fecha_fin',
-	'id'		=> 'fecha_fin',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+$lista_tipo_capacitados =  array(
+	''			=> '',
+	'Evaluaci'	=> 'Capacitados',
+	'Examen'	=> 'Certificados'
 );
-$attr = array("id"   => "formulario",
-              "name" => "formulario"
+$boton_primario = array(
+	'name'		=> 'boton_primario',
+	'id'		=> 'boton_primario',
+	'value'		=> 'Consultar',
+	'class'		=> 'btn btn-primary'
 );
-$boton_primario = array('id'    => 'boton_primario',
-						'class' => 'btn btn-primary',
-						'name'	=> 'boton_primario',
-						'value' => 'Consultar',
+$boton_secundario = array(
+	'name'		=> 'boton_secundario',
+	'id'		=> 'boton_secundario',
+	'value'		=> 'Limpiar',
+	'class'		=> 'btn btn-danger',
+	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/6\');'
+);
+// Definición de formularios ocultos para enviar información a imprimir y exportar
+$formulario_imprimir = array(
+	'name'		=> 'formulario_imprimir',
+	'id'		=> 'formulario_imprimir',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$formulario_exportar = array(
+	'name'		=> 'formulario_exportar',
+	'id'		=> 'formulario_exportar',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$campos_ocultos_formulario = array(
+	'tipo_de_capacitado'	=> set_value('tipo_de_capacitado', @$campos['tipo_capacitado']),
+	'codigo_departamento'	=> set_value('codigo_departamento', @$campos['id_departamento']),
+	'fecha_1'				=> set_value('fecha_1', @$campos['fecha1']),
+	'fecha_2'				=> set_value('fecha_2', @$campos['fecha2'])
 );
 ?>
-<?= form_open('',$attr); ?>
+<?= form_open('index.php/estadisticas/imprimir/6', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/exportar/6', $formulario_exportar, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/consulta/6', $formulario_consultar); ?>
 	<div class="row">
-        <div class="col-lg-3">
+        <div class="col-lg-6">
 			<div class="form-group">
-				<?= form_label('Tipo de Capacitados:'); ?>
-				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required id="id_tipo_capacitados"'); ?>
-				<?= form_error('id_tipo_capacitado'); ?>
+				<?= form_label('Tipo de Capacitado:'); ?>
+				<?= form_dropdown('tipo_capacitado', $lista_tipo_capacitados, set_value('tipo_capacitado', @$campos['tipo_capacitado']), 'class="form-control" required'); ?>
+				<?= form_error('tipo_capacitado'); ?>
 			</div>
 		</div>
-        <div class="col-lg-3">
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
-				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required id="id_departamento"'); ?>
-				<?= form_error('id_municipio'); ?>
+				<?= form_dropdown('id_departamento', $lista_departamentos, set_value('id_departamento', @$campos['id_departamento']), 'class="form-control" required'); ?>
+				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
-		<div class="col-lg-6">            
+	</div>
+	<div class="row">
+		<div class="col-lg-3"><?= nbs(); ?></div>
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
 				<div class="row">
 					<div class="col-lg-6">
-						<?= form_input($fecha_ini); ?>
-						<?= form_error('fecha_ini'); ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; $fecha['value'] = set_value('fecha1', @$campos['fecha1']); ?>
+						<?= form_input($fecha); ?>
+						<?= form_error('fecha1'); ?>
 					</div>
 					<div class="col-lg-6">
-						<?= form_input($fecha_fin); ?>
-						<?= form_error('fecha_fin'); ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; $fecha['value'] = set_value('fecha2', @$campos['fecha2']); ?>
+						<?= form_input($fecha); ?>
+						<?= form_error('fecha2'); ?>
 					</div>
 				</div>
 			</div>
@@ -62,6 +97,7 @@ $boton_primario = array('id'    => 'boton_primario',
 		<div class="col-lg-12">
 			<div class="form-group">
 				<?= form_submit($boton_primario); ?>
+				<?= form_reset($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -83,8 +119,32 @@ $boton_primario = array('id'    => 'boton_primario',
 								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
-						<tbody id="table_data">
-							
+						<tbody>
+							<?php
+							$estaditicas = 1;
+							foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
+								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'TOTAL'){
+							?>
+							<tr>
+								<td><?= $estaditicas++; ?></td>
+								<td><?= utf8($estaditica_departamento_tipo_fecha->nombre_municipio); ?></td>
+								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
+								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
+							</tr>
+							<?php
+								}
+								else{
+							?>
+							<tr>
+								<td style="opacity: 0.0;"><?= $estaditicas++; ?></td>
+								<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
+								<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
+								<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>
+							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
@@ -98,105 +158,10 @@ $boton_primario = array('id'    => 'boton_primario',
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() 
-	{
-		/*
-		$('#data-tables-estadistica6-1').dataTable({
-			"searching": false,
-			"lengthChange": false,
-			"oLanguage": {
-				"oPaginate": {
-					"sFirst": "Primero",
-					"sLast": "Último",
-					"sNext": ">",
-					"sPrevious": "<"
-				},
-				"sInfo": "_START_/_END_ de _TOTAL_ registros",
-				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
-			  }
-		});
-		var table = $('#data-tables-estadistica6-2').dataTable({
-			language:{
-				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
-			}
-		});
-		*/
-		
-        $("#formulario").on("submit", function(e)
-        {	
-		//table class="table table-striped table-bordered table-hover" id="data-tables-estadistica6-1"
-						
-			var respuesta = null;
-			var r2 = null;
-			
-			$.ajax(
-			{
-                type : "get",
-                url  : "<?= base_url('estadisticas/formulario')?>",
-                data : {
-					opcion:"6",
-					id_tipo_capacitados:$('#id_tipo_capacitados').val(),
-					id_departamento:$('#id_departamento').val(),
-					fecha_ini:$('#fecha_ini').val(),
-					fecha_fin:$('#fecha_fin').val()
-				},
-                success: function(data)
-                {
-                    //console.log($('#id_tipo_capacitados').val());
-                    console.log("JSON: " + json);
-                },
-                error: function(jqXHR, exception)
-                {
-                    //console.log("Error: " + jqXHR.responseText);
-					//console.log($('#id_tipo_capacitados').val());
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					r2 = jqXHR.responseText;
-					//console.log(respuesta);
-					$('#data-tables-estadistica6-1').dataTable
-					({
-						data: respuesta,
-						columns: 
-						[
-							{data:"row_number"},
-							{data:"nombre_municipio"},
-							{data:"capacitados"},
-							{data:"certificados"}
-						]
-					});
-                }
-			});
-			//console.log("Error: " + respuesta);
-			console.log(respuesta);
-			Morris.Bar({
-				element: 'morris-bar-chart-estadistica6-1',
-				data: respuesta,
-				xkey: 'nombre_municipio',
-				ykeys: ['capacitados', 'certificados'],
-				labels: ['Capacitados', 'Certificados'],
-				hideHover: 'auto',
-				resize: true
-			});
-			
-			Morris.Bar({
-				element: 'morris-bar-chart-estadistica6-2',
-				data: respuesta,
-				xkey: 'capacitados',
-				ykeys: ['capacitados', 'certificados'],
-				labels: ['Capacitados', 'Certificados'],
-				hideHover: 'auto',
-				resize: true
-			});		
-			
-			e.preventDefault();
-			return false;
-			
-		});	
-	
-	/*
 	$(function() {
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica6-1',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $estaditicas_departamento_tipo_fechas_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],
@@ -205,7 +170,7 @@ $boton_primario = array('id'    => 'boton_primario',
 		});
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica6-2',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $estaditicas_departamento_tipo_fechas_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
 			labels: ['Capacitados', 'Certificados'],
@@ -213,5 +178,4 @@ $boton_primario = array('id'    => 'boton_primario',
 			resize: true
 		});
 	});
-    */
 </script>

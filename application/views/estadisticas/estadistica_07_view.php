@@ -19,8 +19,19 @@ $lista_tipo_capacitados =  array(
 	'capacitados'	=> 'Capacitados',
 	'certificados'	=> 'Certificados'
 );
-$boton_primario = 'class="btn btn-primary"';
-$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'estadisticas/consulta/7\');"';
+$boton_primario = array(
+	'name'		=> 'boton_primario',
+	'id'		=> 'boton_primario',
+	'value'		=> 'Consultar',
+	'class'		=> 'btn btn-primary'
+);
+$boton_secundario = array(
+	'name'		=> 'boton_secundario',
+	'id'		=> 'boton_secundario',
+	'value'		=> 'Limpiar',
+	'class'		=> 'btn btn-danger',
+	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/7\');'
+);
 // Definición de formularios ocultos para enviar información a imprimir y exportar
 $formulario_imprimir = array(
 	'name'		=> 'formulario_imprimir',
@@ -92,8 +103,8 @@ $campos_ocultos_formulario = array(
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
-				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
-				<?= form_reset('boton_secundario', 'Limpiar', $boton_secundario); ?>
+				<?= form_submit($boton_primario); ?>
+				<?= form_reset($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -133,9 +144,9 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $centros_educativos; ?></td>
-								<td><?= bold($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
-								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
-								<td><?= $usuario_departamento_municipio->certificados; ?></td>
+								<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>
+								<td><?= bold($usuario_departamento_municipio->capacitados); ?></td>
+								<td><?= bold($usuario_departamento_municipio->certificados); ?></td>
 							</tr>
 							<?php
 								}
@@ -196,18 +207,19 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript">
 	$(document).ready(function() {
 		$('#data-tables-estadistica7-1').dataTable({
-			"searching": false,
-			"lengthChange": false,
+			"searching":	false,
+			"lengthChange":	false,
+			"info":			false,
 			"oLanguage": {
 				"oPaginate": {
-					"sFirst": "Primero",
-					"sLast": "Último",
-					"sNext": ">",
-					"sPrevious": "<"
+					"sFirst":		"<<",
+					"sLast":		">>",
+					"sNext":		">",
+					"sPrevious":	"<"
 				},
-				"sInfo": "_START_/_END_ de _TOTAL_ registros",
-				"sEmptyTable": "No hay resultado para esta Consulta Estadística."
-			  }
+				"sInfo":		"_START_/_END_ de _TOTAL_ registros",
+				"sEmptyTable":	"No hay resultado para esta Consulta Estadística."
+			}
 		});
 		$('#data-tables-estadistica7-2').dataTable({
 			language:{

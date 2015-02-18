@@ -78,9 +78,9 @@
 							?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $centros_educativos; ?></td>
-								<td><?= bold($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
-								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
-								<td><?= $usuario_departamento_municipio->certificados; ?></td>
+								<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>
+								<td><?= bold($usuario_departamento_municipio->capacitados); ?></td>
+								<td><?= bold($usuario_departamento_municipio->certificados); ?></td>
 							</tr>
 							<?php
 								}

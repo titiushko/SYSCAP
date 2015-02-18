@@ -14,8 +14,19 @@ $fecha = array(
 	'required'	=> 'required',
 	'class'		=> 'form-control'
 );
-$boton_primario = 'class="btn btn-primary"';
-$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'estadisticas/consulta/1\');"';
+$boton_primario = array(
+	'name'		=> 'boton_primario',
+	'id'		=> 'boton_primario',
+	'value'		=> 'Consultar',
+	'class'		=> 'btn btn-primary'
+);
+$boton_secundario = array(
+	'name'		=> 'boton_secundario',
+	'id'		=> 'boton_secundario',
+	'value'		=> 'Limpiar',
+	'class'		=> 'btn btn-danger',
+	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/1\');'
+);
 // Definición de formularios ocultos para enviar información a imprimir y exportar
 $formulario_imprimir = array(
 	'name'		=> 'formulario_imprimir',
@@ -63,8 +74,8 @@ $campos_ocultos_formulario = array(
 		<div class="col-lg-3"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
-				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
-				<?= form_reset('boton_secundario', 'Limpiar', $boton_secundario); ?>
+				<?= form_submit($boton_primario); ?>
+				<?= form_reset($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -104,7 +115,7 @@ $campos_ocultos_formulario = array(
 								else{
 							?>
 							<tr>
-								<th><?= bold($modalidad_capacitado->tipos_capacitados); ?></th>
+								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
 								<td><?= bold($modalidad_capacitado->tutorizados); ?></td>
 								<td><?= bold($modalidad_capacitado->autoformacion); ?></td>
 							</tr>

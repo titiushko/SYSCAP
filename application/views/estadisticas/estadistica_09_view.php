@@ -1,36 +1,71 @@
 <?php
-$fecha = array(
-	'name'		=> '',
-	'id'		=> '',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+$formulario_consultar = array(
+	'name'		=> 'formulario_consultar',
+	'id'		=> 'formulario_consultar',
+	'role'		=> 'form'
 );
-$boton_primario = 'class="btn btn-primary"';
+$lista_tipo_capacitados =  array(
+	''			=> '',
+	'Evaluaci'	=> 'Capacitados',
+	'Examen'	=> 'Certificados'
+);
+$boton_primario = array(
+	'name'		=> 'boton_primario',
+	'id'		=> 'boton_primario',
+	'value'		=> 'Consultar',
+	'class'		=> 'btn btn-primary'
+);
+$boton_secundario = array(
+	'name'		=> 'boton_secundario',
+	'id'		=> 'boton_secundario',
+	'value'		=> 'Limpiar',
+	'class'		=> 'btn btn-danger',
+	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/9\');'
+);
+// Definición de formularios ocultos para enviar información a imprimir y exportar
+$formulario_imprimir = array(
+	'name'		=> 'formulario_imprimir',
+	'id'		=> 'formulario_imprimir',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$formulario_exportar = array(
+	'name'		=> 'formulario_exportar',
+	'id'		=> 'formulario_exportar',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$campos_ocultos_formulario = array(
+	'tipo_de_capacitado'		=> set_value('tipo_de_capacitado', @$campos['tipo_capacitado']),
+	'codigo_centro_educativo'	=> set_value('codigo_centro_educativo', @$campos['id_centro_educativo'])
+);
 ?>
-<?= form_open(); ?>
+<?= form_open('index.php/estadisticas/imprimir/9', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/exportar/9', $formulario_exportar, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/consulta/9', $formulario_consultar); ?>
 	<div class="row">
-        <div class="col-lg-6">
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Tipo de Capacitado:'); ?>
-				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, 'Evaluacion', 'class="form-control" required'); ?>
-				<?= form_error('id_tipo_capacitados'); ?>
+				<?= form_dropdown('tipo_capacitado', $lista_tipo_capacitados, set_value('tipo_capacitado', @$campos['tipo_capacitado']), 'class="form-control" required'); ?>
+				<?= form_error('tipo_capacitado'); ?>
 			</div>
 		</div>
-        <div class="col-lg-6">
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Centro Educativo:'); ?>
-				<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, '', 'class="form-control" required'); ?>
+				<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, set_value('id_centro_educativo', @$campos['id_centro_educativo']), 'class="form-control" required'); ?>
 				<?= form_error('id_centro_educativo'); ?>
 			</div>
-		</div>		   
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
-				<?= form_submit('boton_primario', 'Consultar', $boton_primario); ?>
+				<?= form_submit($boton_primario); ?>
+				<?= form_reset($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -46,22 +81,22 @@ $boton_primario = 'class="btn btn-primary"';
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th></th>
+								<th>Modalidades de Capacitaci&oacute;n</th>
 								<th>Cantidades</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
 								<td>Tutorizados</td>
-								<td><?= $capacitados[0]->tutorizado?></td>				
+								<td><?= $capacitados[0]->tutorizado; ?></td>				
 							</tr>
 							<tr>
 								<td>Autoformaci&oacute;n</td>
-								<td><?= $certificados[0]->tutorizado?></td>
+								<td><?= $certificados[0]->tutorizado; ?></td>
 							</tr>
 							<tr>
 								<th>TOTAL</th>
-								<td><?= $total[0]->tutorizado?></td>						
+								<th><?= $total[0]->tutorizado; ?></th>						
 							</tr>
 						</tbody>
 					</table>

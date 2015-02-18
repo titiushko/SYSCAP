@@ -73,7 +73,7 @@
 							?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
-								<td><?= bold($cantidad_municipio->nombre_municipio); ?></td>
+								<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
 								<td><?= bold($cantidad_municipio->capacitados); ?></td>
 								<td><?= bold($cantidad_municipio->certificados); ?></td>
 							</tr>
