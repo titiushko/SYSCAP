@@ -17,7 +17,7 @@
 			<hr/>
 			<table border="0">
 				<tr>
-					<td style="text-align: left; font-weight: bold; widtd: 100px;">Tipo de Capacitado:</td><td style="widtd: 250px;"><TIPO_CAPACITADO></td>
+					<td style="text-align: left; font-weight: bold; widtd: 60px;">Tipo de Capacitado:</td><td style="widtd: 60px;"><TIPO_CAPACITADO></td>
 					<td style="text-align: left; font-weight: bold; widtd: 100px;">Periodo:</td><td style="widtd: 250px;"><PERIODO></td>
 				</tr>
 			</table>

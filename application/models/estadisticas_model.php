@@ -131,31 +131,20 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 9: Usuarios por Tipo de Capacitados y Centro Educativo
-	function centro_educativo_capacitado($tipo_resultado = ''){
-		if($tipo_resultado == 'certificados'){
-			$sql = " select sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
-						sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
-						from V_EstadisticaDepartamentoFecha a
-						where a.nota_examen_calificacion >= 7.00 
-						and a.nombre_examen like 'Examen%'
-						and a.nombre_centro_educativo='Centro Escolar  Isidro Menendez'";
-		}
-		if($tipo_resultado == 'capacitados'){
-			$sql = " select sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
-						sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
-						from V_EstadisticaDepartamentoFecha a
-						where a.nota_examen_calificacion >= 7.00 
-						and a.nombre_examen like 'Evaluaci%'
-						and a.nombre_centro_educativo='Centro Escolar  Isidro Menendez'";
-        }           
-    	if($tipo_resultado == 'total'){		
-			$sql = " select sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
-						sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
-						from V_EstadisticaDepartamentoFecha a 
-						where a.nota_examen_calificacion >= 7.00
-						and a.nombre_centro_educativo='Centro Escolar  Isidro Menendez'";           
-        }                     
-		$query = $this->db->query($sql);
+	function tipos_capacitados_centro_educativo($tipo_capacitado = '', $codigo_centro_educativo = ''){
+		$tipo_capacitado = $tipo_capacitado != '' ? $tipo_capacitado.'%' : $tipo_capacitado;
+		$query = $this->db->query('SELECT \'Tutorizado\' modalidad_capacitado, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) total
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE ? AND id_centro_educativo = ?
+								   UNION
+								   SELECT \'Autoformación\' modalidad_capacitado, SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) total
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE ? AND id_centro_educativo = ?
+								   UNION
+								   SELECT \'TOTAL\' modalidad_capacitado, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) total
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE ? AND id_centro_educativo = ?',
+								   array($tipo_capacitado, $codigo_centro_educativo, $tipo_capacitado, $codigo_centro_educativo, $tipo_capacitado, $codigo_centro_educativo));
 		return $query->result();
 	}
 	

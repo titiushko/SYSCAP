@@ -74,7 +74,7 @@ $campos_ocultos_formulario = array(
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-3"><?= nbs(); ?></div>
+		<div class="col-lg-3 visible-desktop"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -84,6 +84,7 @@ $campos_ocultos_formulario = array(
 						<?= form_input($fecha); ?>
 						<?= form_error('fecha1'); ?>
 					</div>
+					<div class="visible-phone visible-tablet"><?= nbs(); ?></div>
 					<div class="col-lg-6">
 						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; $fecha['value'] = set_value('fecha2', @$campos['fecha2']); ?>
 						<?= form_input($fecha); ?>

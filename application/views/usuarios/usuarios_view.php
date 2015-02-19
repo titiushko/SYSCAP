@@ -149,7 +149,7 @@
 							</div>
 						<?= form_fieldset_close(); ?>
 						<div class="row">
-							<div class="col-lg-12"><?= nbs(); ?></div>
+							<div class="col-lg-12 visible-desktop"><?= nbs(); ?></div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
@@ -159,7 +159,7 @@
 						</div>
 						<?php if($this->session->userdata('nombre_corto_rol') != 'student'){ ?>
 						<div class="row">
-							<div class="col-lg-12"><?= nbs(); ?></div>
+							<div class="col-lg-12 visible-desktop"><?= nbs(); ?></div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">

@@ -17,10 +17,8 @@
 			<hr/>
 			<table border="0">
 				<tr>
-					<td style="text-align: left; font-weight: bold; widtd: 100px;">Departamento:</td>
-					<td style="widtd: 250px;"><DEPARTAMENTO></td>
-					<td style="text-align: left; font-weight: bold; widtd: 100px;">Periodo:</td>
-					<td style="widtd: 250px;"><PERIODO></td>
+					<td style="text-align: left; font-weight: bold; widtd: 100px;">Departamento:</td><td style="widtd: 250px;"><DEPARTAMENTO></td>
+					<td style="text-align: left; font-weight: bold; widtd: 100px;">Periodo:</td><td style="widtd: 250px;"><PERIODO></td>
 				</tr>
 			</table>
 			<br/><br/>

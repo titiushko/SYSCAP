@@ -24,7 +24,7 @@
 						<?= $mapa['html']; ?>
 					</div>
 				</div>
-				<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+				<div class="row"><div class="col-lg-12 visible-desktop"><?= nbs(); ?></div></div>
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="table-responsive">

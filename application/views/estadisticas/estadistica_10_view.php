@@ -51,7 +51,7 @@ $boton_primario = array('id'    => 'boton_primario',
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-lg-3"><?= nbs(); ?></div>
+		<div class="col-lg-3 visible-desktop"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>

@@ -36,7 +36,7 @@
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= utf8(@$tipo_capacitado); ?></td>
-								<th class="column-title">Centro Educativo:</th><td class="column-value"><?= utf8(@$nombre_centro_educativo); ?></td>
+								<th class="column-title">Centro Educativo:</th><td class="column-value"><?= @$nombre_centro_educativo; ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -53,18 +53,26 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php
+							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
+								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+							?>
 							<tr>
-								<td>Tutorizados</td>
-								<td><?= $capacitados[0]->tutorizado; ?></td>				
+								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
+								<td><?= $tipo_capacitado_centro_educativo->total; ?></td>
 							</tr>
+							<?php
+								}
+								else{
+							?>
 							<tr>
-								<td>Autoformaci&oacute;n</td>
-								<td><?= $certificados[0]->tutorizado; ?></td>
+								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
+								<td><?= bold($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
-							<tr>
-								<th>TOTAL</th>
-								<th><?= $total[0]->tutorizado; ?></th>						
-							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
@@ -81,7 +89,7 @@
 			$(function() {
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica9-1',
-					data: [<?= $grafica_json; ?>],
+					data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],
 					labels: ['Capacitados', 'Certificados'],

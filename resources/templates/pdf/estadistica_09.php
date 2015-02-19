@@ -13,29 +13,24 @@
 		<ENCABEZADO_REPORTE>
 		<h1 align="center">Reporte de Consulta Estadítica</h1>
 		<fieldset>
-			<legend><h3 align="center">Estadística de Usuarios por Tipo de Capacitados, Departamento y Fecha</h3></legend>
+			<legend><h3 align="center">Estadística de Usuarios por Tipo de Capacitados y Centro Educativo</h3></legend>
 			<hr/>
 			<table border="0">
 				<tr>
 					<td style="text-align: left; font-weight: bold; widtd: 60px;">Tipo de Capacitado:</td><td style="widtd: 60px;"><TIPO_CAPACITADO></td>
-					<td style="text-align: left; font-weight: bold; widtd: 100px;">Departamento:</td><td style="widtd: 250px;"><DEPARTAMENTO></td>
-				</tr>
-				<tr>
-					<td style="text-align: left; font-weight: bold; widtd: 100px;">Periodo:</td><td style="widtd: 250px;"><PERIODO></td>
+					<td style="text-align: left; font-weight: bold; widtd: 60px;">Centro Educativo:</td><td style="widtd: 300px;"><CENTRO_EDUCATIVO></td>
 				</tr>
 			</table>
 			<br/><br/>
 			<table border="1">
 				<thead>
 					<tr>
-						<td style="text-align: center; font-weight: bold;">#</td>
-						<td style="text-align: center; font-weight: bold;">Centro Educativo</td>
-						<td style="text-align: center; font-weight: bold;">Capacitados</td>
-						<td style="text-align: center; font-weight: bold;">Certificados</td>
+						<td style="text-align: center; font-weight: bold;">Modalidades de Capacitaci&oacute;n</td>
+						<td style="text-align: center; font-weight: bold;">Cantidades</td>
 					</tr>
 				</thead>
 				<tbody>
-					<ESTADITICAS_DEPARTAMENTO_TIPO_FECHAS>
+					<TIPOS_CAPACITADOS_CENTRO_EDUCATIVO>
 				</tbody>
 			</table>
 		</fieldset>

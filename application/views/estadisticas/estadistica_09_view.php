@@ -86,18 +86,26 @@ $campos_ocultos_formulario = array(
 							</tr>
 						</thead>
 						<tbody>
+							<?php
+							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
+								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+							?>
 							<tr>
-								<td>Tutorizados</td>
-								<td><?= $capacitados[0]->tutorizado; ?></td>				
+								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
+								<td><?= $tipo_capacitado_centro_educativo->total; ?></td>
 							</tr>
+							<?php
+								}
+								else{
+							?>
 							<tr>
-								<td>Autoformaci&oacute;n</td>
-								<td><?= $certificados[0]->tutorizado; ?></td>
+								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
+								<td><?= bold($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
-							<tr>
-								<th>TOTAL</th>
-								<th><?= $total[0]->tutorizado; ?></th>						
-							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
@@ -114,7 +122,7 @@ $campos_ocultos_formulario = array(
 	$(function() {
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica9-1',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
 			xkey: 'y',
 			ykeys: ['a'],
 			labels: ['Cantidades'],
@@ -123,7 +131,7 @@ $campos_ocultos_formulario = array(
 		});
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica9-2',
-			data: [<?= $grafica_json; ?>],
+			data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
 			xkey: 'y',
 			ykeys: ['a'],
 			labels: ['Cantidades'],

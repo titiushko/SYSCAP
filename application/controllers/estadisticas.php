@@ -295,10 +295,14 @@ class Estadisticas extends MY_Controller{
 	}
 	
 	private function datos_estadistica_09_view($tipo_capacitado = '', $codigo_centro_educativo = '', $metodo = 'consulta'){
-		$datos['capacitados'] = $this->estadisticas_model->centro_educativo_capacitado('capacitados');
-		$datos['certificados'] = $this->estadisticas_model->centro_educativo_capacitado('certificados');
-		$datos['total'] = $this->estadisticas_model->centro_educativo_capacitado('total');
-		$datos['grafica_json']  = '{y: \'Tutorizados\', a: '.$datos['capacitados'][0]->tutorizado.'},{y: \'Autoformacion\', a: '.$datos['certificados'][0]->tutorizado.'},';
+		$datos['tipos_capacitados_centro_educativo'] = $this->estadisticas_model->tipos_capacitados_centro_educativo($tipo_capacitado, $codigo_centro_educativo);
+		$datos['centro_educativo_capacitado_json']  = '';
+		$datos['tipos_capacitados_centro_educativo_json'] = '';
+		foreach($datos['tipos_capacitados_centro_educativo'] as $tipo_capacitado_centro_educativo){
+			if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+				$datos['tipos_capacitados_centro_educativo_json'] .= '{y: \''.acentos($tipo_capacitado_centro_educativo->modalidad_capacitado).'\', a: '.$tipo_capacitado_centro_educativo->total.'},';
+			}
+		}
 		$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();				    
 		if($metodo == 'consulta'){
 			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_centro_educativo' => $codigo_centro_educativo);
@@ -415,7 +419,7 @@ class Estadisticas extends MY_Controller{
 					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2'), 'tipo_capacitado' => $this->input->post('tipo_de_capacitado')));
 					break;
 				case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
-					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('tipo_capacitado' => $this->input->post('tipo_de_capacitado'), 'codigo_departamento' => $this->input->post('codigo_departamento')));
+					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('tipo_capacitado' => $this->input->post('tipo_de_capacitado'), 'codigo_centro_educativo' => $this->input->post('codigo_centro_educativo')));
 					break;
 				case 10: // Usuarios a Nivel Nacional
 				case 11: // Usuarios por Grado Digital
@@ -566,7 +570,7 @@ class Estadisticas extends MY_Controller{
 												   '<PERIODO>',
 												   '<ESTADITICAS_DEPARTAMENTO_TIPO_FECHAS>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : 'Certificados',
+												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'Examen' ? 'Certificados' : '',
 												   utf8($parametros['codigo_departamento'] != '' ? $this->departamentos_model->nombre_departamento($parametros['codigo_departamento']) : ''),
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
 												   $lista_estaditicas_departamento_tipo_fechas),
@@ -603,7 +607,7 @@ class Estadisticas extends MY_Controller{
 												   '<USUARIOS_DEPARTAMENTO_MUNICIPIO>',
 												   '<USUARIOS_CENTRO_EDUCATIVO>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'capacitados' ? 'Capacitados' : 'Certificados',
+												   $parametros['tipo_capacitado'] == 'capacitados' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificados' ? 'Certificados' : '',
 												   utf8($parametros['codigo_departamento'] != '' ? $this->departamentos_model->nombre_departamento($parametros['codigo_departamento']) : ''),
 												   utf8($parametros['codigo_municipio'] != '' ? $this->municipios_model->nombre_municipio($parametros['codigo_municipio']) : ''),
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
@@ -620,18 +624,42 @@ class Estadisticas extends MY_Controller{
 				if($lista_estaditicas_departamento_fechas == ''){
 					$lista_estaditicas_departamento_fechas = 'No hay resultados para ésta estadística.';
 				}
-				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_03.php');
+				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_08.php');
 				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
 												   '<TIPO_CAPACITADO>',
 												   '<PERIODO>',
 												   '<ESTADITICAS_DEPARTAMENTO_FECHAS>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : 'Certificados',
+												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'Examen' ? 'Certificados' : '',
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
 												   $lista_estaditicas_departamento_fechas),
 											 $plantilla_pdf);
 				break;
 			case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
+				$tipos_capacitados_centro_educativo = $this->estadisticas_model->tipos_capacitados_centro_educativo($parametros['tipo_capacitado'], $parametros['codigo_centro_educativo']);
+				$lista_tipos_capacitados_centro_educativo = '';
+				foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
+					if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_capacitado).'</td><td>'.$tipo_capacitado_centro_educativo->total.'</td></tr>';
+					}
+					else{
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)).'</td><td>'.bold($tipo_capacitado_centro_educativo->total).'</td></tr>';
+					}
+				}
+				if($lista_tipos_capacitados_centro_educativo == ''){
+					$lista_tipos_capacitados_centro_educativo = 'No hay resultados para ésta estadística.';
+				}
+				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_09.php');
+				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+												   '<TIPO_CAPACITADO>',
+												   '<CENTRO_EDUCATIVO>',
+												   '<TIPOS_CAPACITADOS_CENTRO_EDUCATIVO>'),
+											 array(encabezado_reporte(),
+												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'Examen' ? 'Certificados' : '',
+												   $parametros['codigo_centro_educativo'] != '' ? $this->centros_educativos_model->nombre_centro_educativo($parametros['codigo_centro_educativo']) : '',
+												   $lista_tipos_capacitados_centro_educativo),
+											 $plantilla_pdf);
+				break;
 			case 10: // Usuarios a Nivel Nacional
 			case 11: // Usuarios por Grado Digital
 		}
