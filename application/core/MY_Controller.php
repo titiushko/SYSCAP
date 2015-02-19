@@ -24,6 +24,15 @@ class MY_Controller extends CI_Controller{
 		include(APPPATH.'views/sesion/acceso_denegado_view.php');
 		exit;
 	}
+	
+	function show_error_mobile($page = '', $username = '', $role = ''){
+		ob_start();
+		include(APPPATH.'errors/error_mobile.php');
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		echo $buffer;
+		exit;
+	}
 }
 
 /* End of file MY_Controller.php */

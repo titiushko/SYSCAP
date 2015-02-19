@@ -5,6 +5,7 @@ class Sesion extends MY_Controller{
 		parent::__construct();
 		$this->eliminar_cache();
 		$this->load->model('sesion_model');
+		$this->session->set_userdata('dispositivo_movil', (new Mobile_Detect)->isMobile() ? TRUE : FALSE);
 	}
 	
 	public function index(){

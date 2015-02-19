@@ -139,19 +139,22 @@
 					<div id="page-wrapper">
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="well page-header"><span style="color: #f0ad4e;"><i class="fa fa-exclamation-triangle"></i></span> Error 404</h1>
+								<h1 class="well page-header"><span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> Error</h1>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<h3>P&aacute;gina no Encontrada</h3>
+										<h3>P&aacute;gina no Disponible</h3>
 									</div>
 									<div class="panel-body">
-										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= $page; ?></b> a la que intenta acceder no existe!</p>
-										<p><b>Si el problema persiste, por favor notificar al Administrador.</b></p>
+										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= $page; ?></b> a la que intenta acceder no es accesible desde dispositivos m&oacute;viles.</p>
+										<?php if(strpos($page, 'imprimir')){ ?>
+										<p><span class="enlace" onclick="javascript:window.close();">Cerrar p&aacute;gina.</span></p>
+										<?php } else{ ?>
 										<p><span class="enlace" onclick="redireccionar('javascript:window.history.back()');">Regresar a la p&aacute;gina anterior.</span></p>
+										<?php } ?>
 									</div>
 								</div>
 							</div>

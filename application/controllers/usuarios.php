@@ -36,7 +36,7 @@ class Usuarios extends MY_Controller{
 			if($this->notificacion){
 				$datos['id_modal'] = 'myModal';
 				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.$codigo_usuario.'\');"';
-				$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Usuario';
+				$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario';
 				$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.';
 				$this->notificacion = FALSE;
 			}
@@ -276,20 +276,25 @@ class Usuarios extends MY_Controller{
 	}
 	
 	public function imprimir($codigo_usuario = NULL){
-		if($this->validar_parametros($codigo_usuario)){
-			if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
-			}
-			$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
-			if(empty($datos['usuario'])){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+		if(!$this->session->userdata('dispositivo_movil')){
+			if($this->validar_parametros($codigo_usuario)){
+				if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
+					$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				}
+				$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
+				if(empty($datos['usuario'])){
+					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				}
+				else{
+					$this->load->view('usuarios/imprimir_usuarios_view', $datos);
+				}
 			}
 			else{
-				$this->load->view('usuarios/imprimir_usuarios_view', $datos);
+				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->show_error_mobile(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	

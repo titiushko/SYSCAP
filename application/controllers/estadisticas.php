@@ -315,72 +315,77 @@ class Estadisticas extends MY_Controller{
 	}
 	
 	public function imprimir($opcion = 1){
-		if($this->validar_parametros($opcion)){
-			switch($opcion){
-				case 1: // Usuarios por Modalidad de Capacitación
-					$pagina = 'estadisticas/imprimir_estadistica_01_view';
-					$datos = $this->datos_estadistica_01_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
-					if(empty($datos['modalidades_capacitados'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 2: // Usuarios por Departamento y Rango de Fechas
-					$pagina = 'estadisticas/imprimir_estadistica_02_view';
-					$datos = $this->datos_estadistica_02_view($this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
-					if(empty($datos['cantidad_usuarios_municipio'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 3: // Total de Usuarios por Departamento y Rango de Fechas
-					$pagina = 'estadisticas/imprimir_estadistica_03_view';
-					$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
-					if(empty($datos['estaditicas_departamento_fechas'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
-					$pagina = 'estadisticas/imprimir_estadistica_04_view';
-					$datos = $this->datos_estadistica_04_view($this->input->post('codigo_departamento'), $this->input->post('codigo_municipio'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
-					if(empty($datos['usuarios_departamento_municipio'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
-				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
-					$pagina = 'estadisticas/imprimir_estadistica_06_view';
-					$datos = $this->datos_estadistica_06_view($this->input->post('tipo_de_capacitado'), $this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
-					if(empty($datos['estaditicas_departamento_tipo_fechas'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
-					$pagina = 'estadisticas/imprimir_estadistica_07_view';
-					$datos = $this->datos_estadistica_04_view($this->input->post('codigo_departamento'), $this->input->post('codigo_municipio'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
-					if(empty($datos['usuarios_departamento_municipio'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
-					$pagina = 'estadisticas/imprimir_estadistica_08_view';
-					$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
-					if(empty($datos['estaditicas_departamento_fechas'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
-					$pagina = 'estadisticas/imprimir_estadistica_09_view';
-					$datos = $this->datos_estadistica_09_view($this->input->post('tipo_de_capacitado'), $this->input->post('codigo_centro_educativo'), 'imprimir');
-					if(empty($datos)){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-					}
-					break;
-				case 10: // Usuarios a Nivel Nacional
-				case 11: // Usuarios por Grado Digital
+		if(!$this->session->userdata('dispositivo_movil')){
+			if($this->validar_parametros($opcion)){
+				switch($opcion){
+					case 1: // Usuarios por Modalidad de Capacitación
+						$pagina = 'estadisticas/imprimir_estadistica_01_view';
+						$datos = $this->datos_estadistica_01_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+						if(empty($datos['modalidades_capacitados'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 2: // Usuarios por Departamento y Rango de Fechas
+						$pagina = 'estadisticas/imprimir_estadistica_02_view';
+						$datos = $this->datos_estadistica_02_view($this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+						if(empty($datos['cantidad_usuarios_municipio'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 3: // Total de Usuarios por Departamento y Rango de Fechas
+						$pagina = 'estadisticas/imprimir_estadistica_03_view';
+						$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+						if(empty($datos['estaditicas_departamento_fechas'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
+						$pagina = 'estadisticas/imprimir_estadistica_04_view';
+						$datos = $this->datos_estadistica_04_view($this->input->post('codigo_departamento'), $this->input->post('codigo_municipio'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+						if(empty($datos['usuarios_departamento_municipio'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+					case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
+						$pagina = 'estadisticas/imprimir_estadistica_06_view';
+						$datos = $this->datos_estadistica_06_view($this->input->post('tipo_de_capacitado'), $this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+						if(empty($datos['estaditicas_departamento_tipo_fechas'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
+						$pagina = 'estadisticas/imprimir_estadistica_07_view';
+						$datos = $this->datos_estadistica_04_view($this->input->post('codigo_departamento'), $this->input->post('codigo_municipio'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
+						if(empty($datos['usuarios_departamento_municipio'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
+						$pagina = 'estadisticas/imprimir_estadistica_08_view';
+						$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
+						if(empty($datos['estaditicas_departamento_fechas'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
+						$pagina = 'estadisticas/imprimir_estadistica_09_view';
+						$datos = $this->datos_estadistica_09_view($this->input->post('tipo_de_capacitado'), $this->input->post('codigo_centro_educativo'), 'imprimir');
+						if(empty($datos)){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
+					case 10: // Usuarios a Nivel Nacional
+					case 11: // Usuarios por Grado Digital
+				}
+				$this->load->view($pagina, $datos);
 			}
-			$this->load->view($pagina, $datos);
+			else{
+				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->show_error_mobile(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 	

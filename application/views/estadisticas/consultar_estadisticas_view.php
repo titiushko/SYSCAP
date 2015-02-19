@@ -40,19 +40,11 @@
 				}
 				?>
 				<div class="row">
-					<div class="col-lg-3 visible-desktop"><?= nbs(); ?></div>
-					<div class="col-lg-3 visible-desktop">
-						<span class="visible-desktop text-right">
-							<button class="btn btn-success" onclick="document.formulario_imprimir.submit();"><i class="fa fa-print"></i> Imprimir</button>
-						</span>
-					</div>
-					<div class="col-lg-3">
-						<span class="visible-desktop text-left">
-							<button class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</button>
-						</span>
-						<span class="visible-phone visible-tablet text-center">
-							<button class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</button>
-						</span>
+					<div class="col-lg-12 text-center">
+						<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
+						<button class="btn btn-success" onclick="document.formulario_imprimir.submit();"><i class="fa fa-print"></i> Imprimir</button>
+						<?php } ?>
+						<button class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</button>
 					</div>
 				</div>
 			</div>

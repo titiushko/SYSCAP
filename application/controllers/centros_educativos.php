@@ -31,7 +31,7 @@ class Centros_educativos extends MY_Controller{
 		if($this->notificacion){
 			$datos['id_modal'] = 'myModal';
 			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url().'centros_educativos/mostrar/'.$codigo_centro_educativo.'\');"';
-			$datos['titulo_notificacion'] = 'Actualizaci&oacute;n de Centro Educativo';
+			$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Centro Educativo';
 			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.';
 			$this->notificacion = FALSE;
 		}
@@ -171,22 +171,27 @@ class Centros_educativos extends MY_Controller{
 	}
 	
 	public function imprimir($codigo_centro_educativo = NULL){
-		if(empty($codigo_centro_educativo)){
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-		}
-		else{
-			if(is_numeric($codigo_centro_educativo)){
-				$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
-				if(empty($datos['centro_educativo'])){
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-				}
-				else{
-					$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
-				}
-			}
-			else{
+		if(!$this->session->userdata('dispositivo_movil')){
+			if(empty($codigo_centro_educativo)){
 				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 			}
+			else{
+				if(is_numeric($codigo_centro_educativo)){
+					$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
+					if(empty($datos['centro_educativo'])){
+						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					}
+					else{
+						$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
+					}
+				}
+				else{
+					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				}
+			}
+		}
+		else{
+			$this->show_error_mobile(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
 		}
 	}
 }

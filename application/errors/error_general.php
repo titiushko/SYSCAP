@@ -139,7 +139,7 @@
 					<div id="page-wrapper">
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="well page-header">Error</h1>
+								<h1 class="well page-header"><span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> Error</h1>
 							</div>
 						</div>
 						<div class="row">

@@ -341,19 +341,11 @@ $modalidad_usuario = array(
 							<div class="col-lg-12 visible-desktop"><?= nbs(); ?></div>
 						</div>
 						<div class="row">
-							<div class="col-lg-3 visible-desktop"><?= nbs(); ?></div>
-							<div class="col-lg-3">
-								<span class="visible-desktop text-right">
-									<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-								</span>
-							</div>
-							<div class="col-lg-3">
-								<span class="visible-desktop text-left">
-									<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
-								</span>
-								<span class="visible-phone visible-tablet text-center">
-									<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
-								</span>
+							<div class="col-lg-12 text-center">
+								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
+								<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<?php } ?>
+								<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
 						<?php } ?>
