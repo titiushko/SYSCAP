@@ -15,9 +15,9 @@ $fecha = array(
 	'class'		=> 'form-control'
 );
 $lista_tipo_capacitados =  array(
-	''			=> '',
-	'Evaluaci'	=> 'Capacitados',
-	'Examen'	=> 'Certificados'
+	''				=> '',
+	'capacitado'	=> 'Capacitados',
+	'certificado'	=> 'Certificados'
 );
 $boton_primario = array(
 	'name'		=> 'boton_primario',

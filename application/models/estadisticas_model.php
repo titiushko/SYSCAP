@@ -111,12 +111,12 @@ class Estadisticas_model extends CI_Model{
     
 	// Consulta Estadística 6: Usuarios por Tipo de Capacitados, Departamento y Fecha
     function estaditicas_departamento_tipo_fechas($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2){
-		$tipo_capacitado = $tipo_capacitado != '' ? $tipo_capacitado.'%' : $tipo_capacitado;
+		$tipo_capacitado = $tipo_capacitado != '' ? $tipo_capacitado : '%';
 		$query = $this->db->query('SELECT DISTINCT nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen = ? AND id_departamento = ?
+								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_departamento = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY nombre_municipio
 								   UNION
@@ -124,7 +124,7 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen = ? AND id_departamento = ?
+								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_departamento = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?',
 								   array($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2, $tipo_capacitado, $codigo_departamento, $fecha1, $fecha2));
 		return $query->result();

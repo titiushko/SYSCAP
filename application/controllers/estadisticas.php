@@ -287,7 +287,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_departamento' => $codigo_departamento, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado != '' ? $tipo_capacitado == 'Evaluaci' ? 'Capacitados' : 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
 			$datos['nombre_departamento'] = $codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
@@ -575,7 +575,7 @@ class Estadisticas extends MY_Controller{
 												   '<PERIODO>',
 												   '<ESTADITICAS_DEPARTAMENTO_TIPO_FECHAS>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'Examen' ? 'Certificados' : '',
+												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
 												   utf8($parametros['codigo_departamento'] != '' ? $this->departamentos_model->nombre_departamento($parametros['codigo_departamento']) : ''),
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
 												   $lista_estaditicas_departamento_tipo_fechas),
