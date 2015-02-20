@@ -105,8 +105,8 @@ $campos_ocultos_formulario = array(
 							<tr>
 								<th>#</th>
 								<th>Departamentos</th>
-								<th>Capacitados</th>
-								<th>Certificados</th>
+								<th>Tutorizado</th>
+								<th>Autoformacion</th>
 							</tr>
 						</thead>
 						<tbody>

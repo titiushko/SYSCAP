@@ -201,11 +201,13 @@ class Estadisticas extends MY_Controller{
 	private function datos_estadistica_01_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
 		$datos['modalidades_capacitados'] = $this->estadisticas_model->modalidades_capacitados($fecha1, $fecha2);
 		$datos['modalidades_capacitados_json'] = '';
+         
 		foreach($datos['modalidades_capacitados'] as $modalidad_capacitado){
 			if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
 				$datos['modalidades_capacitados_json'] .= '{y: \''.$modalidad_capacitado->tipos_capacitados.'\', a: '.$modalidad_capacitado->tutorizados.', b: '.$modalidad_capacitado->autoformacion.'},';
 			}
 		}
+        
 		if($metodo == 'consulta'){
 			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2);
 		}
@@ -711,7 +713,111 @@ class Estadisticas extends MY_Controller{
 			return FALSE;
 		}
 	}
+    
+    public function lista_municipios_departamentos (){
+		$id_departamento = $this->input->get_post('id_departamento');
+		$datos['json_data'] = json_encode($this->municipios_model->lista_municipios_departamento($id_departamento));
+		//$this->load->view('estadisticas/json', $datos);
+		echo $datos['json_data'];
+        exit;
+	}
+    
+    public function lista_usuarios_centro_educativo (){
+        /*
+		$id_departamento = $this->input->get_post('id_departamento');
+        $codigo_departamento, 
+        $codigo_municipio, 
+        $fecha1, 
+        $fecha2, 
+        $tipo_capacitado
+        */
+		$datos['json_data'] = json_encode($this->estadisticas_model->lista_usuarios_centro_educativo($parametros['codigo_departamento'], $parametros['codigo_municipio'], $parametros['fecha1'], $parametros['fecha2'], $parametros['nombre_centro_eucuativo']));
+		//$this->load->view('estadisticas/json', $datos);
+		echo $datos['json_data'];//lista_usuarios_centro_educativo
+        exit;
+	}
+    
+    
+    
+    public function formulario(){
+		
+		$opcion = $this->input->get_post('opcion');
+        
+        $fecha_ini=$this->input->get_post('fecha_ini');
+		$fecha_fin=$this->input->get_post('fecha_fin');
+        
+		switch($opcion){
+		  case 4: // Usuarios a Nivel Nacional		
+				
+				//$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
+				$id_departamento=$this->input->get_post('id_departamento');
+				$id_municipio=$this->input->get_post('id_municipio');
+                
+				$datos['certificados'] = $this->estadisticas_model->usuarios_departamento_municipio($id_departamento,$id_municipio,$fecha_ini,$fecha_fin);
+				$datos['json_data'] = json_encode($datos['certificados']);
+                
+				echo $datos['json_data'];
+			break;			
+			case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
+            
+                $id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
+				$id_departamento=$this->input->get_post('id_departamento');
+				
+				$datos['certificados'] = $this->estadisticas_model->estaditicas_departamento_tipo_fechas($fecha_ini,$fecha_fin,$id_departamento,$id_tipo_capacitados);
+				$datos['json_data'] = json_encode($datos['certificados']);
+
+				echo $datos['json_data'];
+            break;
+            case 7: // Usuarios a Nivel Nacional		
+				
+				$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
+				$id_departamento=$this->input->get_post('id_departamento');
+				$id_municipio=$this->input->get_post('id_municipio');
+				
+				$datos['certificados'] = $this->estadisticas_model->usuarios_departamento_municipio_fecha($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin);
+				$datos['json_data'] = json_encode($datos['certificados']);
+				echo $datos['json_data'];
+			break;
+            
+			case 10: // Usuarios a Nivel Nacional		
+				
+				$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
+				$id_departamento=$this->input->get_post('id_departamento');
+				$id_municipio=$this->input->get_post('id_municipio');
+				
+				$datos['certificados'] = $this->estadisticas_model->usuarios_nivel_nacional($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin);
+				$datos['json_data'] = json_encode($datos['certificados']);
+				//$this->load->view('estadisticas/json', $datos);
+				echo $datos['json_data'];
+			break;
+			case 11: // Usuarios por centro educativo
+			
+				$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
+				$id_departamento=$this->input->get_post('id_departamento');
+				$id_municipio=$this->input->get_post('id_municipio');
+                $centro_educativo=$this->input->get_post('centro_educativo');
+				
+				$datos['certificados'] = $this->estadisticas_model->usuarios_centro_educativo($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin,$centro_educativo);
+				$datos['json_data'] = json_encode($datos['certificados']);
+				//$this->load->view('estadisticas/json', $datos);
+				echo $datos['json_data'];
+			break;
+            case 12: // Usuario municipio.
+                $id_municipio=$this->input->get_post('id_municipio');
+                
+                $datos['usuarios_municipio'] = $this->estadisticas_model->usuarios_municipio_filtro_nombre($id_municipio);
+                $datos['json_data'] = json_encode($datos['usuarios_municipio']);
+				//$this->load->view('estadisticas/json', $datos);
+				echo $datos['json_data'];
+            break;
+			default:
+			break;
+		}
+	}	
+    
 }
+
+
 
 /* End of file estadisticas.php */
 /* Location: ./application/controllers/estadisticas.php */

@@ -89,6 +89,16 @@ class Estadisticas_model extends CI_Model{
 								   array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado));
 		return $query->result();
 	}
+    
+    function lista_usuarios_centro_educativo($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = '', $nombre_centro_educativo=''){
+		$filtro = $tipo_capacitado != '' ? ' AND tipo_capacitado = ?' : '';
+		$query = $this->db->query('SELECT acentos(nombre_centro_educativo) nombre_centro_educativo, acentos(nombre_usuario) nombre_usuario, tipo_capacitado, modalidad_usuario
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
+								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.' AND acentos(nombre_centro_educativo) = ?',
+								   array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado, $nombre_centro_educativo));
+		return $query->result();
+	}
 	
 	// Consulta Estadística 3: Total de Usuarios por Departamento y Rango de Fechas
 	// Consulta Estadística 8: Usuarios por Departamento, Tipo de Capacitados y Fecha
@@ -152,6 +162,7 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 10: Usuarios a Nivel Nacional
+/*
 	function usuarios_nivel_nacional($id_tipo_capacitados, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2){
 		$sql ='';
 		$query = $this->db->query('set @row_num = 0');
@@ -180,6 +191,39 @@ class Estadisticas_model extends CI_Model{
 		and a.id_municipio = $codigo_municipio
 		and a.fecha_examen_calificacion between ? and ?';
 		$query = $this->db->query($sql, array($id_tipo_capacitados, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $id_tipo_capacitados, $fecha1, $fecha2));
+		return $query->result();
+	}
+    */
+    
+    function usuarios_nivel_nacional($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin){
+		$sql ='';
+		$query = $this->db->query('set @row_num = 0');
+
+		$sql = "select @row_num := @row_num + 1 as row_number,
+				a.nombre_centro_educativo,
+				sum(case when a.modalidad_usuario =  'tutorizado' then 1 else 0 end ) tutorizado,
+				sum(case when a.modalidad_usuario =  'autoformacion' then 1 else 0 end ) autoformacion 
+		from v_estadisticadepartamentofecha a
+		where a.nota_examen_calificacion >= 7.00 
+		and a.nombre_examen like '".$id_tipo_capacitados."%'
+		and a.id_departamento = $id_departamento
+		and a.id_municipio = $id_municipio
+		and a.fecha_examen_calificacion between '".$fecha_ini."' and '".$fecha_fin."'
+		group by a.nombre_centro_educativo";
+		/*
+		union 
+		select '' as row_number,
+			   'TOTAL' as nombre_centro_educativo,
+			   sum(case when a.modalidad_usuario = 'tutorizado' then 1 else 0 end ) tutorizado,
+			   sum(case when a.modalidad_usuario = 'autoformacion' then 1 else 0 end ) autoformacion 
+		from v_estadisticadepartamentofecha a 
+		where a.nota_examen_calificacion >= 7.00
+		and a.nombre_examen like '".$id_tipo_capacitados."%'
+		and a.id_departamento = $id_departamento
+		and a.id_municipio = $id_municipio
+		and a.fecha_examen_calificacion between '".$fecha_ini."' and '".$fecha_fin."'";
+		*/
+		$query = $this->db->query($sql);
 		return $query->result();
 	}
 }

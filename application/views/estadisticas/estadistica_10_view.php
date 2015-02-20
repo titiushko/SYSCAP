@@ -6,7 +6,7 @@ $fecha_ini = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'class'		=> 'form-control text-capitalize'
 );
 $fecha_fin = array(
 	'name'		=> 'fecha_fin',
@@ -15,43 +15,74 @@ $fecha_fin = array(
 	'size'		=> '20',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'class'		=> 'form-control text-capitalize'
 );
-$attr = array("id"   => "formulario",
+$attr = array("id" => "formulario",
               "name" => "formulario"
 );
+
 $boton_primario = array('id'    => 'boton_primario',
 						'class' => 'btn btn-primary',
 						'name'	=> 'boton_primario',
 						'value' => 'Consultar',
 );
+$boton_secundario = array(
+	'name'		=> 'boton_secundario',
+	'id'		=> 'boton_secundario',
+	'value'		=> 'Limpiar',
+	'class'		=> 'btn btn-danger',
+	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/10\');'
+);
+// Definición de formularios ocultos para enviar información a imprimir y exportar
+$formulario_imprimir = array(
+	'name'		=> 'formulario_imprimir',
+	'id'		=> 'formulario_imprimir',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$formulario_exportar = array(
+	'name'		=> 'formulario_exportar',
+	'id'		=> 'formulario_exportar',
+	'role'		=> 'form',
+	'target'	=> '_blank'
+);
+$campos_ocultos_formulario = array(
+	'tipo_de_capacitado'	=> set_value('tipo_de_capacitado', @$campos['tipo_capacitado']),
+	'codigo_departamento'	=> set_value('codigo_departamento', @$campos['id_departamento']),
+	'fecha_1'				=> set_value('fecha_1', @$campos['fecha1']),
+	'fecha_2'				=> set_value('fecha_2', @$campos['fecha2'])
+);
+
+
 ?>
+<?= form_open('index.php/estadisticas/imprimir/10', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<?= form_open('index.php/estadisticas/exportar/10', $formulario_exportar, $campos_ocultos_formulario); ?>
+<?= form_close(); ?>
+<? //form_open('index.php/estadisticas/consulta/10', $formulario_consultar); ?>
 <?= form_open('',$attr); ?>
 	<div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Tipo de Capacitado:'); ?>
 				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, '', 'class="form-control" required id="id_tipo_capacitados"'); ?>
 				<?= form_error('id_tipo_capacitados'); ?>
 			</div>
 		</div>
-		<div class="col-lg-4">
+		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
 				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required id="id_departamento"'); ?>
 				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Municipio:'); ?>
 				<?= form_dropdown('id_municipio', $lista_municipios, '', 'class="form-control" required id="id_municipio"'); ?>
 				<?= form_error('id_municipio'); ?>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-lg-3 visible-desktop"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Periodo:'); ?>
@@ -72,6 +103,7 @@ $boton_primario = array('id'    => 'boton_primario',
 		<div class="col-lg-12">
 			<div class="form-group">
 				<?= form_submit($boton_primario); ?>
+                <?= form_reset($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -83,14 +115,14 @@ $boton_primario = array('id'    => 'boton_primario',
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica10-1">
+				<div class="table-responsive" id="contenedor-tabla-princial">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Centro Educativo</th>
+								<th>Centros Educativos</th>
+								<th>Autoformacion</th>
 								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -99,12 +131,13 @@ $boton_primario = array('id'    => 'boton_primario',
 					</table>
 				</div>
 			</div>
-			<div class="col-lg-6">
-				<!--<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica10-1"></div></a>-->
+			<div class="col-lg-6" id="contenedor-grafica">
+				<div id="morris-bar-chart-estadistica2-1"></div>
 			</div>
 		</div>
 	</div>
 </div>
+<!--
 <div class="panel panel-default">
 	<div class="panel-heading">
 		<?= heading('Listado de Usuarios por Centro Educativo', 4); ?>
@@ -113,17 +146,18 @@ $boton_primario = array('id'    => 'boton_primario',
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica10-2">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-2">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Nombre</th>
+								<th>Nombres</th>
+								<th>Apellido</th>
+								<th>Apellido</th>
 								<th>Tipo de Capacitado</th>
-								<th>Modalidad de Capacitaci&oacute;n</th>
+								<th>Modalidad de Capacitacion</th>
 							</tr>
 						</thead>
 						<tbody>
-							
 						</tbody>
 					</table>
 				</div>
@@ -131,24 +165,30 @@ $boton_primario = array('id'    => 'boton_primario',
 		</div>
 	</div>
 </div>
+//-->
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-
-	$(document).ready(function() {
-		
+	$(document).ready(function() 
+	{
 		$("#id_departamento").change( function()
         {
 		  var respuesta = null;
 		  $.ajax({
-                type : "get",
-                url  : "<?= base_url('estadisticas/lista_municipios_departamentos')?>",	
-                data : {
-					id_departamento:$("#id_departamento").val()
+                type : 'get',
+				datatype: 'json',
+                url  : "<?= base_url('estadisticas/lista_municipios_departamentos')?>",
+				cache:false,
+                data : 
+				{
+					id_departamento:$("#id_departamento").val(),
+					csrf_test_name:$('input[name=csrf_test_name]').val()
 				},
                 success: function(data)
                 {
-                    console.log($('#id_tipo_capacitados').val());
+                    //console.log($('#id_tipo_capacitados').val());
                     console.log("JSON: " + json);
                 },
                 error: function(jqXHR, exception)
@@ -158,7 +198,6 @@ $boton_primario = array('id'    => 'boton_primario',
 					$.each(respuesta,function(res,item){
 						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
 					});
-
                 }
             });		
 		}).change();
@@ -167,9 +206,14 @@ $boton_primario = array('id'    => 'boton_primario',
 	$("#formulario").on("submit", function(e)
         {	
 			var respuesta = null;
+			$('#contenedor-grafica').empty();
+			$("#contenedor-grafica").append($("<div></div>").attr("id", "morris-bar-chart-estadistica2-1"));
+
+			$('#contenedor-tabla-princial').empty();
+			$("#contenedor-tabla-princial").html('<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1"><thead>'+
+												 '<tr><th>#</th><th>Centros Educativos</th><th>Autoformacion</th><th>Tutorizados</th></tr></thead></table>');
 			
-			$.ajax(
-			{
+			$.ajax({
                 type : "get",
                 url  : "<?= base_url('estadisticas/formulario')?>",
                 data : {
@@ -178,18 +222,20 @@ $boton_primario = array('id'    => 'boton_primario',
 					id_departamento:$('#id_departamento').val(),
 					id_municipio: $('#id_municipio').val(),
 					fecha_ini:$('#fecha_ini').val(),
-					fecha_fin:$('#fecha_fin').val()
+					fecha_fin:$('#fecha_fin').val(),
+					csrf_test_name:$('input[name=csrf_test_name]').val()
+				
 				},
                 success: function(data)
                 {
-                    console.log("JSON: " + json);
+                    alert("JSON: " + json);
                 },
                 error: function(jqXHR, exception)
                 {
 					respuesta = jQuery.parseJSON(jqXHR.responseText);
 					console.log(respuesta);
-					
-					$('#data-tables-estadistica10-1').dataTable({
+										
+					$('#data-tables-estadistica2-1').dataTable({
 						searching: false,
 						lengthChange: false,
 						oLanguage: {
@@ -205,46 +251,34 @@ $boton_primario = array('id'    => 'boton_primario',
 						data: respuesta,
 						columns: 
 						[
-							{ data : "row_number" },
-							{ data : "nombre_centro_educativo" },
-							{ data : "autoformacion" },
-							{ data : "tutorizado" }
+							{data: "row_number" },
+							{data: "nombre_centro_educativo" },
+							{data: "autoformacion" },
+							{data: "tutorizado" }
 						]
 					});
-					
-					//$('#data-tables-estadistica10-1').DataTable().ajax.reload();
-					
+			     
 					Morris.Bar({
-				element: 'morris-bar-chart-estadistica10-1',
-				data: respuesta,
-				xkey: 'nombre_centro_educativo',
-				ykeys: ['tutorizado', 'autoformacion'],
-				labels: ['Tutorizado', 'Autoformacion'],
-				hideHover: 'auto',
-				resize: true
-			});
-			/*
-			Morris.Bar({
-				element: 'morris-bar-chart-estadistica10-2',
-				data: respuesta,
-				xkey: 'nombre_centro_educativo',
-				ykeys: ['tutorizado', 'autoformacion'],
-				labels: ['tutorizado', 'Certificados'],
-				hideHover: 'auto',
-				resize: true
-			});
-			*/
-					
-					
+						element: 'morris-bar-chart-estadistica2-1',
+						data: respuesta,
+						xkey: 'nombre_centro_educativo',
+						ykeys: ['tutorizado', 'autoformacion'],
+						labels: ['Tutorizado', 'Autoformacion']
+					});
 
                 }
 			});
 			
-			$('#data-tables-estadistica10-1 tbody').on('click', 'tr', function () {
-				var name = $('td', this).eq(1).text();
-				alert(name);
-				var respuesta = null;
-		/*
+			e.preventDefault();
+			return false;
+
+		});
+        /*
+        $('#data-tables-estadistica2-1 tbody').on('click', 'tr', function () {
+		    var name = $('td', this).eq(1).text();
+            alert(name);
+				//var respuesta = null;
+		
 			$.ajax(
 			{
                 type : "get",
@@ -265,7 +299,7 @@ $boton_primario = array('id'    => 'boton_primario',
                 {
 					respuesta = jQuery.parseJSON(jqXHR.responseText);
 					console.log(respuesta);
-					$('#data-tables-estadistica10-1').dataTable({
+					$('#data-tables-estadistica2-1').dataTable({
 						searching: false,
 						lengthChange: false,
 						oLanguage: {
@@ -289,34 +323,8 @@ $boton_primario = array('id'    => 'boton_primario',
 						]
 					});
                 }
-				*/
-			} );
-			
-			e.preventDefault();
-			return false;
-			
-		});
-	
-	/*	
-	$(function() {
-		Morris.Bar({
-			element: 'morris-bar-chart-estadistica10-1',
-			data: [<?= $grafica_json; ?>],
-			xkey: 'y',
-			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
-			hideHover: 'auto',
-			resize: true
-		});
-		Morris.Bar({
-			element: 'morris-bar-chart-estadistica10-2',
-			data: [<?= $grafica_json; ?>],
-			xkey: 'y',
-			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
-			hideHover: 'auto',
-			resize: true
-		});
-	});
-	*/
+				
+			});
+        */
+        
 </script>

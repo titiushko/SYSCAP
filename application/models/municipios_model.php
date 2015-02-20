@@ -31,6 +31,14 @@ class Municipios_model extends CI_Model{
 		$query = $this->db->get('municipios');
 		return $query->result();
 	}
+    
+    function lista_municipios_departamento($id_departamento){
+		
+		$this->db->select('id_municipio, nombre_municipio');
+		$this->db->where('id_departamento', $id_departamento);
+		$query = $this->db->get('municipios');
+		return $query->result();
+	}
 }
 
 /* End of file municipios_model.php */
