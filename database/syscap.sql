@@ -1,115 +1,128 @@
+-- Crear un usuario con acceso desde cualquier host
+CREATE USER 'syscap'@'%' IDENTIFIED BY 'admin#159';
+
+-- Asignar los permiso al usuario para la base de datos SYSCAP
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE VIEW, EVENT, TRIGGER, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EXECUTE
+ON syscap.* TO 'syscap'@'%'
+WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
+
+-- Asignar los permiso al usuario para la base de datos MOODLE19
+GRANT SELECT ON moodle19.* TO 'syscap'@'%';
+
+-- ============================================================================================================================================================
+
 DROP DATABASE IF EXISTS syscap;
 CREATE DATABASE IF NOT EXISTS syscap DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE syscap;
 
 CREATE TABLE IF NOT EXISTS departamentos(
-	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador de un departamento. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	nombre_departamento VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un departamento. Los valores de est√© campo se obtendr√°n del campo <deptos> de Moodle usando ETL.',
+	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador de un departamento. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	nombre_departamento VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un departamento. Los valores de estÈ campo se obtendr·n del campo <deptos> de Moodle usando ETL.',
 	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un departamento en el mapa.',
 	PRIMARY KEY(id_departamento)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de nombres de los departamentos de El Salvador. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_cat_deptos> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de nombres de los departamentos de El Salvador. Los registros de est· tabla se obtendr·n de la tabla <mdl_cat_deptos> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS centros_educativos(
-	id_centro_educativo INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un centro educativo. Los valores de est√© campo se obtendr√°n del campo <row_id> de Moodle usando ETL.',
-	codigo_centro_educativo VARCHAR(5) NOT NULL COMMENT 'C√≥digo de un centro educativo. Los valores de est√© campo se obtendr√°n del campo <codigo_entidad> de Moodle usando ETL.',
-	nombre_centro_educativo VARCHAR(150) DEFAULT NULL COMMENT 'Nombre completo de un centro educativo. Los valores de est√© campo se obtendr√°n del campo <nombre> de Moodle usando ETL.',
-	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un centro educativo. Los valores de est√© campo se obtendr√°n del campo <depto> de Moodle usando ETL.',
-	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador del municipio al que pertenece un centro educativo. Los valores de est√© campo se obtendr√°n del campo <muni> de Moodle usando ETL.',
+	id_centro_educativo INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un centro educativo. Los valores de estÈ campo se obtendr·n del campo <row_id> de Moodle usando ETL.',
+	codigo_centro_educativo VARCHAR(5) NOT NULL COMMENT 'CÛdigo de un centro educativo. Los valores de estÈ campo se obtendr·n del campo <codigo_entidad> de Moodle usando ETL.',
+	nombre_centro_educativo VARCHAR(150) DEFAULT NULL COMMENT 'Nombre completo de un centro educativo. Los valores de estÈ campo se obtendr·n del campo <nombre> de Moodle usando ETL.',
+	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un centro educativo. Los valores de estÈ campo se obtendr·n del campo <depto> de Moodle usando ETL.',
+	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador del municipio al que pertenece un centro educativo. Los valores de estÈ campo se obtendr·n del campo <muni> de Moodle usando ETL.',
 	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un centro educativo en el mapa.',
 	PRIMARY KEY(id_centro_educativo)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de centros educativos. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_cat_educativa> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de centros educativos. Los registros de est· tabla se obtendr·n de la tabla <mdl_cat_educativa> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS municipios(
-	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador de un municipio. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un municipio. Los valores de est√© campo se obtendr√°n del campo <relacion> de Moodle usando ETL.',
-	nombre_municipio VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un municipio. Los valores de est√© campo se obtendr√°n del campo <opcion> de Moodle usando ETL.',
+	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador de un municipio. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un municipio. Los valores de estÈ campo se obtendr·n del campo <relacion> de Moodle usando ETL.',
+	nombre_municipio VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un municipio. Los valores de estÈ campo se obtendr·n del campo <opcion> de Moodle usando ETL.',
 	id_mapa BIGINT(10) COMMENT 'Identificador de una coordenada para ubicar a un municipio en el mapa.',
 	PRIMARY KEY(id_municipio)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de nombres de los municipios de El Salvador. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_cat_municip> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de nombres de los municipios de El Salvador. Los registros de est· tabla se obtendr·n de la tabla <mdl_cat_municip> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS niveles_estudios(
-	id_nivel_estudio INT(4) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un nivel de estudio. Los valores de est√© campo se obtendr√°n del campo <cod_nestudio> de Moodle usando ETL.',
-	nombre_nivel_estudio VARCHAR(100) NOT NULL COMMENT 'Nombre completo de un nivel de estudio. Los valores de est√© campo se obtendr√°n del campo <descripcion> de Moodle usando ETL.',
+	id_nivel_estudio INT(4) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un nivel de estudio. Los valores de estÈ campo se obtendr·n del campo <cod_nestudio> de Moodle usando ETL.',
+	nombre_nivel_estudio VARCHAR(100) NOT NULL COMMENT 'Nombre completo de un nivel de estudio. Los valores de estÈ campo se obtendr·n del campo <descripcion> de Moodle usando ETL.',
 	PRIMARY KEY(id_nivel_estudio)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de niveles de estudios. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de niveles de estudios. Los registros de est· tabla se obtendr·n de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS profesiones(
-  id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesi√≥n. Los valores de est√© campo se obtendr√°n del campo <cod_profesion> de Moodle usando ETL.',
-  nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesi√≥n. Los valores de est√© campo se obtendr√°n del campo <descripcion> de Moodle usando ETL.',
+  id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesiÛn. Los valores de estÈ campo se obtendr·n del campo <cod_profesion> de Moodle usando ETL.',
+  nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesiÛn. Los valores de estÈ campo se obtendr·n del campo <descripcion> de Moodle usando ETL.',
   PRIMARY KEY(id_profesion)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de nombres de las profesiones. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de nombres de las profesiones. Los registros de est· tabla se obtendr·n de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS matriculas(
-	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  una matricula. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece una matricula. Los valores de est√© campo se obtendr√°n del campo <instanceid> de Moodle usando ETL.',
+	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  una matricula. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece una matricula. Los valores de estÈ campo se obtendr·n del campo <instanceid> de Moodle usando ETL.',
 	PRIMARY KEY(id_matricula)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n de las matriculas de usuarios con mdl_course. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn de las matriculas de usuarios con mdl_course. Los registros de est· tabla se obtendr·n de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS cursos(
-	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un curso. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	nombre_completo_curso VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un curso. Los valores de est√© campo se obtendr√°n del campo <fullname> de Moodle usando ETL.',
-	nombre_corto_curso VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un curso. Los valores de est√© campo se obtendr√°n del campo <shortname> de Moodle usando ETL.',
+	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un curso. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	nombre_completo_curso VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un curso. Los valores de estÈ campo se obtendr·n del campo <fullname> de Moodle usando ETL.',
+	nombre_corto_curso VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un curso. Los valores de estÈ campo se obtendr·n del campo <shortname> de Moodle usando ETL.',
 	PRIMARY KEY(id_curso)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n central de los cursos. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn central de los cursos. Los registros de est· tabla se obtendr·n de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS examenes(
-	id_examen BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un examen. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece un examen. Los valores de est√© campo se obtendr√°n del campo <course> de Moodle usando ETL.',
-	nombre_examen VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un examen. Los valores de est√© campo se obtendr√°n del campo <name> de Moodle usando ETL.',
+	id_examen BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un examen. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece un examen. Los valores de estÈ campo se obtendr·n del campo <course> de Moodle usando ETL.',
+	nombre_examen VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un examen. Los valores de estÈ campo se obtendr·n del campo <name> de Moodle usando ETL.',
 	PRIMARY KEY(id_examen)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n principal de cada examen. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_quiz> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn principal de cada examen. Los registros de est· tabla se obtendr·n de la tabla <mdl_quiz> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS examenes_calificaciones(
-	id_examen_calificacion BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la calificaci√≥n un examen final. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	id_examen BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del examen al que pertenece la calificaci√≥n un examen final. Los valores de est√© campo se obtendr√°n del campo <quiz> de Moodle usando ETL.',
-	id_usuario BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del usuario al que pertenece la calificaci√≥n un examen final. Los valores de est√© campo se obtendr√°n del campo <userid> de Moodle usando ETL.',
-	nota_examen_calificacion DOUBLE NOT NULL COMMENT 'Calificaci√≥n de un examen final. Los valores de est√© campo se obtendr√°n del campo <grade> de Moodle usando ETL.',
-	fecha_examen_calificacion DATE NULL DEFAULT NULL COMMENT 'Fecha de un examen final. Los valores de est√© campo se obtendr√°n del campo <timemodified> de Moodle usando ETL.',
+	id_examen_calificacion BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la calificaciÛn un examen final. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	id_examen BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del examen al que pertenece la calificaciÛn un examen final. Los valores de estÈ campo se obtendr·n del campo <quiz> de Moodle usando ETL.',
+	id_usuario BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del usuario al que pertenece la calificaciÛn un examen final. Los valores de estÈ campo se obtendr·n del campo <userid> de Moodle usando ETL.',
+	nota_examen_calificacion DOUBLE NOT NULL COMMENT 'CalificaciÛn de un examen final. Los valores de estÈ campo se obtendr·n del campo <grade> de Moodle usando ETL.',
+	fecha_examen_calificacion DATE NULL DEFAULT NULL COMMENT 'Fecha de un examen final. Los valores de estÈ campo se obtendr·n del campo <timemodified> de Moodle usando ETL.',
 	PRIMARY KEY(id_examen_calificacion)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n de las calificaciones de cada examen final. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_quiz_grades> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn de las calificaciones de cada examen final. Los registros de est· tabla se obtendr·n de la tabla <mdl_quiz_grades> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS roles(
-	id_rol BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un rol de Moodle. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	nombre_completo_rol VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un rol de Moodle. Los valores de est√© campo se obtendr√°n del campo <name> de Moodle usando ETL.',
-	nombre_corto_rol VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un rol de Moodle. Los valores de est√© campo se obtendr√°n del campo <shortname> de Moodle usando ETL.',
-	descripcion_rol TEXT NOT NULL COMMENT 'Descripci√≥n de un rol de Moodle. Los valores de est√© campo se obtendr√°n del campo <description> de Moodle usando ETL.',
-	criterio_rol BIGINT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Criterio de un rol de Moodle. Los valores de est√© campo se obtendr√°n del campo <sortorder> de Moodle usando ETL.',
+	id_rol BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un rol de Moodle. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	nombre_completo_rol VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un rol de Moodle. Los valores de estÈ campo se obtendr·n del campo <name> de Moodle usando ETL.',
+	nombre_corto_rol VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un rol de Moodle. Los valores de estÈ campo se obtendr·n del campo <shortname> de Moodle usando ETL.',
+	descripcion_rol TEXT NOT NULL COMMENT 'DescripciÛn de un rol de Moodle. Los valores de estÈ campo se obtendr·n del campo <description> de Moodle usando ETL.',
+	criterio_rol BIGINT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Criterio de un rol de Moodle. Los valores de estÈ campo se obtendr·n del campo <sortorder> de Moodle usando ETL.',
 	PRIMARY KEY(id_rol)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de roles de Moodle. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_role> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de roles de Moodle. Los registros de est· tabla se obtendr·n de la tabla <mdl_role> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS roles_asignados(
-	id_rol_asignado BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un rol asignado. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	id_rol BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del rol de Moodle al que pertenece un rol asignado. Los valores de est√© campo se obtendr√°n del campo <roleid> de Moodle usando ETL.',
-	id_matricula BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la matricula al que pertenece un rol asignado. Los valores de est√© campo se obtendr√°n del campo <contextid> de Moodle usando ETL.',
-	id_usuario BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del usuario al que pertenece un rol asignado. Los valores de est√© campo se obtendr√°n del campo <userid> de Moodle usando ETL.',
+	id_rol_asignado BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un rol asignado. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	id_rol BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del rol de Moodle al que pertenece un rol asignado. Los valores de estÈ campo se obtendr·n del campo <roleid> de Moodle usando ETL.',
+	id_matricula BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la matricula al que pertenece un rol asignado. Los valores de estÈ campo se obtendr·n del campo <contextid> de Moodle usando ETL.',
+	id_usuario BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del usuario al que pertenece un rol asignado. Los valores de estÈ campo se obtendr·n del campo <userid> de Moodle usando ETL.',
 	PRIMARY KEY(id_rol_asignado)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n de la asignaci√≥n de roles o funciones a diferentes matriculas o contexts. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_role_assignments> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn de la asignaciÛn de roles o funciones a diferentes matriculas o contexts. Los registros de est· tabla se obtendr·n de la tabla <mdl_role_assignments> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS usuarios(
-	id_usuario BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un usuario. Los valores de est√© campo se obtendr√°n del campo <id> de Moodle usando ETL.',
-	nombre_usuario VARCHAR(100) NOT NULL COMMENT 'Nombre corto o Alias de un usuario. Los valores de est√© campo se obtendr√°n del campo <username> de Moodle usando ETL.',
-	contrasena_usuario VARCHAR(32) NOT NULL COMMENT 'Contrase√±a de un usuario. Los valores de est√© campo se obtendr√°n del campo <password> de Moodle usando ETL.',
-	id_tipo_usuario INT(4) NOT NULL COMMENT 'Identificador del tipo de usuario al que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <tipo> de Moodle usando ETL.',
-	nombres_usuario VARCHAR(100) NOT NULL COMMENT 'Nombres completos de un usuario. Los valores de est√© campo se obtendr√°n del campo <firstname> de Moodle usando ETL.',
-	apellido1_usuario VARCHAR(100) NOT NULL COMMENT 'Primer Apellido de un usuario. Los valores de est√© campo se obtendr√°n del campo <lastname> de Moodle usando ETL.',
-	apellido2_usuario VARCHAR(100) DEFAULT NULL COMMENT 'Segundo Apellido de un usuario. Los valores de est√© campo se obtendr√°n del campo <apellido2> de Moodle usando ETL.',
-	dui_usuario VARCHAR(10) DEFAULT NULL COMMENT 'N√∫mero del documento √∫nico de identidad de un usuario. Los valores de est√© campo se obtendr√°n del campo <dui> de Moodle usando ETL.',
-	sexo_usuario CHAR(2) NOT NULL COMMENT 'Genero de un usuario. Los valores de est√© campo se obtendr√°n del campo <sexo> de Moodle usando ETL.',
-	id_profesion VARCHAR(3) DEFAULT NULL COMMENT 'Identificador de la profesi√≥n de un usuario. Los valores de est√© campo se obtendr√°n del campo <profesion> de Moodle usando ETL.',
-	id_nivel_estudio INT(4) DEFAULT NULL COMMENT 'Identificador del nivel de estudio al que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <nestudio> de Moodle usando ETL.',
-	correo_electronico_usuario VARCHAR(100) NOT NULL COMMENT 'Correo electr√≥nico principal de un usuario. Los valores de est√© campo se obtendr√°n del campo <email> de Moodle usando ETL.',
-	telefono1_usuario VARCHAR(12) DEFAULT NULL COMMENT 'N√∫mero telef√≥nico principal de un usuario. Los valores de est√© campo se obtendr√°n del campo <phone1> de Moodle usando ETL.',
-	telefono2_usuario VARCHAR(12) DEFAULT NULL COMMENT 'N√∫mero telef√≥nico secundario de un usuario. Los valores de est√© campo se obtendr√°n del campo <phone2> de Moodle usando ETL.',
-	id_centro_educativo INT(10) DEFAULT NULL COMMENT 'Identificador del centro educativo al que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <tinstitucion> de Moodle usando ETL.',
-	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <deptorec> de Moodle usando ETL.',
-	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador del municipio al que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <munirec> de Moodle usando ETL.',
-	pais_usuario VARCHAR(2) DEFAULT NULL COMMENT 'C√≥digo de pa√≠s al que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <country> de Moodle usando ETL.',
-	direccion_usuario VARCHAR(200) DEFAULT NULL COMMENT 'Direcci√≥n del domicilio de un usuario. Los valores de est√© campo se obtendr√°n del campo <address> de Moodle usando ETL.',
-	ciudad_usuario VARCHAR(20) NOT NULL COMMENT 'Nombre de la ciudad a la que pertenece un usuario. Los valores de est√© campo se obtendr√°n del campo <city> de Moodle usando ETL.',
-	fecha_nacimiento_usuario DATE DEFAULT NULL COMMENT 'Fecha de nacimiento de un usuario. Los valores de est√© campo se obtendr√°n del campo <fnacimiento> de Moodle usando ETL.',
-	modalidad_usuario VARCHAR(30) DEFAULT NULL COMMENT 'Modalidad de capacitaci√≥n de un usuario. Los valores de est√© campo se obtendr√°n del campo <auth> de Moodle usando ETL.',
+	id_usuario BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un usuario. Los valores de estÈ campo se obtendr·n del campo <id> de Moodle usando ETL.',
+	nombre_usuario VARCHAR(100) NOT NULL COMMENT 'Nombre corto o Alias de un usuario. Los valores de estÈ campo se obtendr·n del campo <username> de Moodle usando ETL.',
+	contrasena_usuario VARCHAR(32) NOT NULL COMMENT 'ContraseÒa de un usuario. Los valores de estÈ campo se obtendr·n del campo <password> de Moodle usando ETL.',
+	id_tipo_usuario INT(4) NOT NULL COMMENT 'Identificador del tipo de usuario al que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <tipo> de Moodle usando ETL.',
+	nombres_usuario VARCHAR(100) NOT NULL COMMENT 'Nombres completos de un usuario. Los valores de estÈ campo se obtendr·n del campo <firstname> de Moodle usando ETL.',
+	apellido1_usuario VARCHAR(100) NOT NULL COMMENT 'Primer Apellido de un usuario. Los valores de estÈ campo se obtendr·n del campo <lastname> de Moodle usando ETL.',
+	apellido2_usuario VARCHAR(100) DEFAULT NULL COMMENT 'Segundo Apellido de un usuario. Los valores de estÈ campo se obtendr·n del campo <apellido2> de Moodle usando ETL.',
+	dui_usuario VARCHAR(10) DEFAULT NULL COMMENT 'N˙mero del documento ˙nico de identidad de un usuario. Los valores de estÈ campo se obtendr·n del campo <dui> de Moodle usando ETL.',
+	sexo_usuario CHAR(2) NOT NULL COMMENT 'Genero de un usuario. Los valores de estÈ campo se obtendr·n del campo <sexo> de Moodle usando ETL.',
+	id_profesion VARCHAR(3) DEFAULT NULL COMMENT 'Identificador de la profesiÛn de un usuario. Los valores de estÈ campo se obtendr·n del campo <profesion> de Moodle usando ETL.',
+	id_nivel_estudio INT(4) DEFAULT NULL COMMENT 'Identificador del nivel de estudio al que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <nestudio> de Moodle usando ETL.',
+	correo_electronico_usuario VARCHAR(100) NOT NULL COMMENT 'Correo electrÛnico principal de un usuario. Los valores de estÈ campo se obtendr·n del campo <email> de Moodle usando ETL.',
+	telefono1_usuario VARCHAR(12) DEFAULT NULL COMMENT 'N˙mero telefÛnico principal de un usuario. Los valores de estÈ campo se obtendr·n del campo <phone1> de Moodle usando ETL.',
+	telefono2_usuario VARCHAR(12) DEFAULT NULL COMMENT 'N˙mero telefÛnico secundario de un usuario. Los valores de estÈ campo se obtendr·n del campo <phone2> de Moodle usando ETL.',
+	id_centro_educativo INT(10) DEFAULT NULL COMMENT 'Identificador del centro educativo al que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <tinstitucion> de Moodle usando ETL.',
+	id_departamento VARCHAR(2) NOT NULL COMMENT 'Identificador del departamento al que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <deptorec> de Moodle usando ETL.',
+	id_municipio VARCHAR(3) NOT NULL COMMENT 'Identificador del municipio al que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <munirec> de Moodle usando ETL.',
+	pais_usuario VARCHAR(2) DEFAULT NULL COMMENT 'CÛdigo de paÌs al que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <country> de Moodle usando ETL.',
+	direccion_usuario VARCHAR(200) DEFAULT NULL COMMENT 'DirecciÛn del domicilio de un usuario. Los valores de estÈ campo se obtendr·n del campo <address> de Moodle usando ETL.',
+	ciudad_usuario VARCHAR(20) NOT NULL COMMENT 'Nombre de la ciudad a la que pertenece un usuario. Los valores de estÈ campo se obtendr·n del campo <city> de Moodle usando ETL.',
+	fecha_nacimiento_usuario DATE DEFAULT NULL COMMENT 'Fecha de nacimiento de un usuario. Los valores de estÈ campo se obtendr·n del campo <fnacimiento> de Moodle usando ETL.',
+	modalidad_usuario VARCHAR(30) DEFAULT NULL COMMENT 'Modalidad de capacitaciÛn de un usuario. Los valores de estÈ campo se obtendr·n del campo <auth> de Moodle usando ETL.',
 	PRIMARY KEY(id_usuario)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n de usuarios. Los registros de est√° tabla se obtendr√°n de la tabla <mdl_user> de Moodle usando ETL.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn de usuarios. Los registros de est· tabla se obtendr·n de la tabla <mdl_user> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS bitacoras(
 	id_bitacora BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -117,18 +130,18 @@ CREATE TABLE IF NOT EXISTS bitacoras(
 	fecha_bitacora DATETIME NOT NULL,
 	accion_bitacora VARCHAR(255) NOT NULL,
 	PRIMARY KEY(id_bitacora)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Informaci√≥n de las acciones realizadas por los usuarios.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'InformaciÛn de las acciones realizadas por los usuarios.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS tipos_usuarios(
 	id_tipo_usuario INT(4) UNSIGNED NOT NULL AUTO_INCREMENT,
 	nombre_tipo_usuario VARCHAR(255),
 	PRIMARY KEY(id_tipo_usuario)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat√°logo de los tipos de usuarios.' AUTO_INCREMENT=1;
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Cat·logo de los tipos de usuarios.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS mapas(
 	id_mapa BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de una coordenada en el mapa.',
-	longitud_mapa DOUBLE NOT NULL COMMENT 'Posici√≥n en el eje X de una coordenada del mapa.',
-	latitud_mapa DOUBLE NOT NULL COMMENT 'Posici√≥n en el eje Y de una coordenada del mapa.',
+	longitud_mapa DOUBLE NOT NULL COMMENT 'PosiciÛn en el eje X de una coordenada del mapa.',
+	latitud_mapa DOUBLE NOT NULL COMMENT 'PosiciÛn en el eje Y de una coordenada del mapa.',
 	PRIMARY KEY(id_mapa)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Coordenadas de puntos en el mapa.' AUTO_INCREMENT=1;
 
@@ -191,3 +204,705 @@ FOREIGN KEY(id_municipio) REFERENCES municipios(id_municipio);
 
 ALTER TABLE usuarios ADD CONSTRAINT fk_usuarios_profesiones
 FOREIGN KEY(id_profesion) REFERENCES profesiones(id_profesion);
+
+-- ============================================================================================================================================================
+
+USE syscap;
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS acentos $$
+CREATE FUNCTION acentos(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
+COMMENT 'FunciÛn que corrige los problemas de tildes.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_cadena CHAR(255);
+	
+	SET v_cadena = p_cadena;
+	SET v_cadena = REPLACE(v_cadena, '√', '¡');
+	SET v_cadena = REPLACE(v_cadena, '„°', '·');
+	SET v_cadena = REPLACE(v_cadena, '„©', 'È');
+	SET v_cadena = REPLACE(v_cadena, 'Ì®', 'È');
+	SET v_cadena = REPLACE(v_cadena, 'Ìâ', 'È');
+	SET v_cadena = REPLACE(v_cadena, 'Ì®', 'È');
+	SET v_cadena = REPLACE(v_cadena, '„¨', 'Ì');
+	SET v_cadena = REPLACE(v_cadena, '„', 'Ì');
+	SET v_cadena = REPLACE(v_cadena, '„≤', 'Û');
+	SET v_cadena = REPLACE(v_cadena, '„≥', 'Û');
+	SET v_cadena = REPLACE(v_cadena, 'Ì≥', 'Û');
+	SET v_cadena = REPLACE(v_cadena, 'Ì≤', 'Û');
+	SET v_cadena = REPLACE(v_cadena, 'Ì∫', '˙');
+	SET v_cadena = REPLACE(v_cadena, 'Ìπ', '˙');
+	SET v_cadena = REPLACE(v_cadena, '„ë', 'Ò');
+	SET v_cadena = REPLACE(v_cadena, 'Ìë', 'Ò');
+	SET v_cadena = REPLACE(v_cadena, 'Ì±', 'Ò');
+	SET v_cadena = REPLACE(v_cadena, '„±', 'Ò');
+	
+	RETURN v_cadena;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS initcap $$
+CREATE FUNCTION initcap(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
+COMMENT 'FunciÛn que devuelve la primera letra de cada palabra en may˙sculas.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	SET @v_string1 = '';
+	SET @v_string2 = '';
+	WHILE p_cadena REGEXP ' ' DO
+		SELECT SUBSTRING_INDEX(p_cadena, ' ', 1) INTO @v_string2;
+		SELECT SUBSTRING(p_cadena, LOCATE(' ', p_cadena) + 1) INTO p_cadena;
+		SELECT CONCAT(@v_string1, ' ', CONCAT(UPPER(SUBSTRING(@v_string2, 1, 1)), LOWER(SUBSTRING(@v_string2, 2)))) INTO @v_string1;
+	END WHILE;
+	RETURN TRIM(CONCAT(@v_string1, ' ', CONCAT(UPPER(SUBSTRING(p_cadena, 1, 1)), LOWER(SUBSTRING(p_cadena, 2)))));
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS departamento $$
+CREATE FUNCTION departamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
+COMMENT 'FunciÛn que devuelve el identificador de un departamento a partir del nombre.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_id_departamento CHAR(2);
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_departamento CURSOR FOR
+		SELECT syscap.departamentos.id_departamento
+		FROM syscap.departamentos
+		WHERE initcap(syscap.departamentos.nombre_departamento) = syscap.initcap(p_nombre_departamento);
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_departamento;
+	recorre_cursor: LOOP
+		FETCH c_departamento INTO v_id_departamento;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_departamento;
+	
+	RETURN v_id_departamento;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS municipio $$
+CREATE FUNCTION municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
+COMMENT 'FunciÛn que devuelve el identificador de un municipio a partir del nombre.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_id_municipio CHAR(3);
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_municipio CURSOR FOR
+		SELECT syscap.municipios.id_municipio
+		FROM syscap.municipios
+		WHERE initcap(syscap.municipios.nombre_municipio) = syscap.initcap(p_nombre_municipio);
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_municipio;
+	recorre_cursor: LOOP
+		FETCH c_municipio INTO v_id_municipio;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_municipio;
+	
+	RETURN v_id_municipio;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
+CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(300)
+NOT DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'FunciÛn que devuelve el nombre completo de un usuario.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_nombre_completo_usuario VARCHAR(300);
+	DECLARE v_nombres_usuario VARCHAR(100);
+	DECLARE v_apellido1_usuario VARCHAR(100);
+	DECLARE v_apellido2_usuario VARCHAR(100);
+	DECLARE v_termina INT DEFAULT FALSE;
+	
+	DECLARE c_nombre_completo_usuario CURSOR FOR
+		SELECT
+			IF(nombres_usuario IS NOT NULL, nombres_usuario, '') nombres_usuario,
+			IF(apellido1_usuario IS NOT NULL, apellido1_usuario, '') apellido1_usuario,
+			IF(apellido2_usuario IS NOT NULL, apellido2_usuario, '') apellido2_usuario
+		FROM usuarios
+		WHERE id_usuario = p_codigo_usuario;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_completo_usuario;
+	recorre_cursor: LOOP
+		FETCH c_nombre_completo_usuario
+		INTO v_nombres_usuario, v_apellido1_usuario, v_apellido2_usuario;
+		
+		IF v_apellido1_usuario = v_apellido2_usuario THEN
+			SET v_nombre_completo_usuario = (SELECT CONCAT(IF(v_nombres_usuario IS NOT NULL, v_nombres_usuario, ''), ' ', IF(v_apellido1_usuario IS NOT NULL, v_apellido1_usuario, '')) nombre_completo_usuario);
+		ELSE
+			SET v_nombre_completo_usuario = (SELECT CONCAT(IF(v_nombres_usuario IS NOT NULL, v_nombres_usuario, ''), ' ', IF(v_apellido1_usuario IS NOT NULL, v_apellido1_usuario, ''), ' ', IF(v_apellido2_usuario IS NOT NULL, v_apellido2_usuario, '')) nombre_completo_usuario);
+		END IF;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_completo_usuario;
+	
+	RETURN v_nombre_completo_usuario;
+END;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
+CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(300)
+DETERMINISTIC
+READS SQL DATA
+COMMENT 'FunciÛn que devuelve el nombre de un centro educativo.'
+BEGIN
+	DECLARE v_nombre_centro_educativo VARCHAR(300);
+	DECLARE v_termina INT DEFAULT FALSE;
+	
+	DECLARE c_nombre_centro_educativo CURSOR FOR
+		SELECT nombre_centro_educativo
+		FROM centros_educativos
+		WHERE id_centro_educativo = p_codigo_centro_educativo;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_centro_educativo;
+	recorre_cursor: LOOP
+		FETCH c_nombre_centro_educativo INTO v_nombre_centro_educativo;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_centro_educativo;
+	
+	RETURN v_nombre_centro_educativo;
+END;
+$$
+DELIMITER ;
+
+-- ============================================================================================================================================================
+
+USE syscap;
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_UsuariosCursosExamenesCalificaciones $$
+CREATE VIEW V_UsuariosCursosExamenesCalificaciones AS
+SELECT
+	u.id_usuario u_id_usuario,
+	u.nombre_usuario u_nombre_usuario,
+	u.id_tipo_usuario u_id_tipo_usuario,
+	tu.nombre_tipo_usuario tu_nombre_tipo_usuario,
+	u.nombres_usuario u_nombres_usuario,
+	u.apellido1_usuario u_apellido1_usuario,
+	u.apellido2_usuario u_apellido2_usuario,
+	u.id_profesion u_id_profesion,
+	p.nombre_profesion p_nombre_profesion,
+	u.id_nivel_estudio u_id_nivel_estudio,
+	ne.nombre_nivel_estudio ne_nombre_nivel_estudio,
+	u.id_centro_educativo u_id_centro_educativo,
+	ce.nombre_centro_educativo ce_nombre_centro_educativo,
+    u.id_departamento u_id_departamento,
+    d.nombre_departamento d_nombre_departamento,
+    u.id_municipio u_id_municipio,
+    m.nombre_municipio m_nombre_municipio,
+    u.modalidad_usuario u_modalidad_usuario,
+	ec.id_usuario ec_id_usuario,
+	ec.nota_examen_calificacion ec_nota_examen_calificacion,
+	ec.fecha_examen_calificacion ec_fecha_examen_calificacion,
+	e.nombre_examen e_nombre_examen,
+	c.nombre_completo_curso c_nombre_completo_curso,
+    c.nombre_corto_curso c_nombre_corto_curso
+FROM
+	usuarios u LEFT JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	LEFT JOIN examenes e ON(ec.id_examen = e.id_examen)
+	LEFT JOIN cursos c ON(e.id_curso = c.id_curso)
+	LEFT JOIN tipos_usuarios tu ON(u.id_tipo_usuario = tu.id_tipo_usuario)
+	LEFT JOIN profesiones p ON(u.id_profesion = p.id_profesion)
+	LEFT JOIN niveles_estudios ne ON(u.id_nivel_estudio = ne.id_nivel_estudio)
+	LEFT JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo)
+    LEFT JOIN departamentos d ON(u.id_departamento = d.id_departamento)
+    LEFT JOIN municipios m ON(u.id_municipio = m.id_municipio);
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_EstadisticaDepartamentoFecha $$
+CREATE VIEW V_EstadisticaDepartamentoFecha AS
+SELECT
+	F_NombreCompletoUsuario(u.id_usuario) nombre_usuario,
+	ec.nota_examen_calificacion nota_examen_calificacion,
+	u.modalidad_usuario modalidad_usuario,
+	e.nombre_examen nombre_examen,
+	IF(e.nombre_examen LIKE 'Evaluaci%', 'Capacitado', 'Certificado') tipo_capacitado,
+	ec.fecha_examen_calificacion fecha_examen_calificacion,
+	d.id_departamento id_departamento,
+	d.nombre_departamento nombre_departamento,
+	m.id_municipio id_municipio,
+	m.nombre_municipio nombre_municipio,
+	ce.id_centro_educativo id_centro_educativo,
+	ce.nombre_centro_educativo nombre_centro_educativo
+FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	JOIN examenes e ON(ec.id_examen = e.id_examen)
+	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
+	JOIN municipios m ON(u.id_municipio = m.id_municipio)
+	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo);
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_EstadisticaModalidad $$
+CREATE VIEW V_EstadisticaModalidad AS
+SELECT
+	ec.nota_examen_calificacion nota_examen_calificacion,
+	u.modalidad_usuario modalidad_usuario,
+	e.nombre_examen nombre_examen,
+	ec.fecha_examen_calificacion fecha_examen_calificacion
+FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	JOIN examenes e ON(ec.id_examen = e.id_examen);
+$$
+DELIMITER ;
+
+-- ============================================================================================================================================================
+
+USE syscap;
+
+-- 1. TRIGGERS TABLA USUARIOS
+-- 1.1. UPDATE USUARIOS: T_BitacoraUpdateUsuarios
+DELIMITER $$
+DROP TRIGGER IF EXISTS T_BitacoraUpdateUsuarios $$
+CREATE TRIGGER T_BitacoraUpdateUsuarios
+AFTER UPDATE ON usuarios
+FOR EACH ROW
+BEGIN
+	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
+	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;
+	INSERT INTO bitacoras SET
+		id_usuario		= v_id_usuario, 
+		fecha_bitacora	= NOW(), 
+		accion_bitacora	= CONCAT('UPDATE, Registro actualizado: ', OLD.nombres_usuario);
+END$$
+DELIMITER ;
+
+-- 1.2. DELETE USUARIOS: T_BitacoraDeleteUsuarios
+DELIMITER $$
+DROP TRIGGER IF EXISTS T_BitacoraDeleteUsuarios $$
+CREATE TRIGGER T_BitacoraDeleteUsuarios
+BEFORE DELETE ON usuarios
+FOR EACH ROW
+BEGIN
+	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
+	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;
+	INSERT INTO bitacoras SET
+		id_usuario		= v_id_usuario, 
+		fecha_bitacora	= NOW(), 
+		accion_bitacora	= CONCAT('DELETE, Registro eliminado: ', OLD.nombres_usuario);
+END$$
+DELIMITER ;
+
+-- 2. TRIGGERS TABLA CENTROS EDUCATIVOS
+-- 2.1. UPDATE CENTROS EDUCATIVOS: T_BitacoraUpdateCentrosEducativos
+DELIMITER $$
+DROP TRIGGER IF EXISTS T_BitacoraUpdateCentrosEducativos $$
+CREATE TRIGGER T_BitacoraUpdateCentrosEducativos
+AFTER UPDATE ON centros_educativos
+FOR EACH ROW
+BEGIN
+	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
+	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;
+	INSERT INTO bitacoras SET
+		id_usuario		= v_id_usuario, 
+		fecha_bitacora	= NOW(), 
+		accion_bitacora	= CONCAT('UPDATE, Registro actualizado: ', OLD.nombre_centro_educativo);
+END$$
+DELIMITER ;
+
+-- 2.2. DELETE CENTROS EDUCATIVOS: T_BitacoraDeleteCentrosEducativos
+DELIMITER $$
+DROP TRIGGER IF EXISTS T_BitacoraDeleteCentrosEducativos $$
+CREATE TRIGGER T_BitacoraDeleteCentrosEducativos
+BEFORE DELETE ON centros_educativos
+FOR EACH ROW
+BEGIN
+	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
+	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;	    
+	INSERT INTO bitacoras SET
+		id_usuario		= v_id_usuario, 
+		fecha_bitacora	= NOW(), 
+		accion_bitacora	= CONCAT('DELETE, Registro eliminado: ', OLD.nombre_centro_educativo);
+END$$
+DELIMITER ;
+
+-- ============================================================================================================================================================
+
+USE syscap;
+
+DELIMITER $$
+DROP PROCEDURE IF EXISTS P_Etl $$
+CREATE PROCEDURE P_Etl()
+BEGIN
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET v_termina = TRUE;
+
+/* DEPARTAMENTOS */
+-- copiar a syscap.departamentos los registros de moodle19.mdl_cat_deptos
+TRUNCATE syscap.departamentos;
+INSERT INTO syscap.departamentos(syscap.departamentos.id_departamento, syscap.departamentos.nombre_departamento)
+SELECT moodle19.mdl_cat_deptos.id, syscap.initcap(moodle19.mdl_cat_deptos.deptos)
+FROM moodle19.mdl_cat_deptos
+WHERE moodle19.mdl_cat_deptos.id IS NOT NULL AND moodle19.mdl_cat_deptos.deptos IS NOT NULL;
+
+/* MUNICIPIOS */
+-- copiar a syscap.municipios los registros de moodle19.mdl_cat_municip
+TRUNCATE syscap.municipios;
+INSERT INTO syscap.municipios(syscap.municipios.id_municipio, syscap.municipios.id_departamento, syscap.municipios.nombre_municipio)
+SELECT moodle19.mdl_cat_municip.id, moodle19.mdl_cat_municip.relacion, syscap.initcap(moodle19.mdl_cat_municip.opcion)
+FROM moodle19.mdl_cat_municip
+WHERE moodle19.mdl_cat_municip.id IS NOT NULL AND moodle19.mdl_cat_municip.relacion IS NOT NULL AND moodle19.mdl_cat_municip.opcion IS NOT NULL;
+
+/* CENTROS_EDUCATIVOS */
+-- copiar a syscap.centros_educativos los registros de moodle19.mdl_cat_educativa
+TRUNCATE syscap.centros_educativos;
+INSERT INTO syscap.centros_educativos(syscap.centros_educativos.id_centro_educativo, syscap.centros_educativos.codigo_centro_educativo, syscap.centros_educativos.nombre_centro_educativo, syscap.centros_educativos.id_departamento, syscap.centros_educativos.id_municipio)
+SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.departamento(moodle19.mdl_cat_educativa.depto), syscap.municipio(moodle19.mdl_cat_educativa.muni)
+FROM moodle19.mdl_cat_educativa
+WHERE moodle19.mdl_cat_educativa.row_id IS NOT NULL AND moodle19.mdl_cat_educativa.codigo_entidad IS NOT NULL AND moodle19.mdl_cat_educativa.nombre IS NOT NULL AND moodle19.mdl_cat_educativa.depto IS NOT NULL AND moodle19.mdl_cat_educativa.muni IS NOT NULL LIMIT 0, 2000;
+
+/* NIVELES_ESTUDIOS */
+-- copiar a syscap.niveles_estudios los registros de moodle19.mdl_cat_nestudio
+TRUNCATE syscap.niveles_estudios;
+INSERT INTO syscap.niveles_estudios(syscap.niveles_estudios.id_nivel_estudio, syscap.niveles_estudios.nombre_nivel_estudio)
+SELECT moodle19.mdl_cat_nestudio.cod_nestudio, syscap.initcap(moodle19.mdl_cat_nestudio.descripcion)
+FROM moodle19.mdl_cat_nestudio
+WHERE moodle19.mdl_cat_nestudio.cod_nestudio IS NOT NULL AND moodle19.mdl_cat_nestudio.descripcion IS NOT NULL;
+
+/* PROFESIONES */
+-- copiar a syscap.profesiones los registros de moodle19.mdl_cat_profesion
+TRUNCATE syscap.profesiones;
+INSERT INTO syscap.profesiones(syscap.profesiones.id_profesion, syscap.profesiones.nombre_profesion)
+SELECT IF(moodle19.mdl_cat_profesion.row_id < 10, CONCAT('0', moodle19.mdl_cat_profesion.row_id), moodle19.mdl_cat_profesion.row_id) row_id, syscap.initcap(moodle19.mdl_cat_profesion.descripcion)
+FROM moodle19.mdl_cat_profesion
+WHERE moodle19.mdl_cat_profesion.row_id IS NOT NULL AND moodle19.mdl_cat_profesion.descripcion IS NOT NULL;
+
+/* MATRICULAS */
+-- copiar a syscap.matriculas los registros de moodle19.mdl_context
+TRUNCATE syscap.matriculas;
+INSERT INTO syscap.matriculas(syscap.matriculas.id_matricula, syscap.matriculas.id_curso)
+SELECT moodle19.mdl_context.id, moodle19.mdl_context.instanceid
+FROM moodle19.mdl_context
+WHERE moodle19.mdl_context.id IS NOT NULL AND moodle19.mdl_context.instanceid IS NOT NULL;
+
+/* CURSOS */
+-- copiar a syscap.cursos los registros de moodle19.mdl_course
+TRUNCATE syscap.cursos;
+INSERT INTO syscap.cursos(syscap.cursos.id_curso, syscap.cursos.nombre_completo_curso, syscap.cursos.nombre_corto_curso)
+SELECT moodle19.mdl_course.id, moodle19.mdl_course.fullname, moodle19.mdl_course.shortname
+FROM moodle19.mdl_course
+WHERE moodle19.mdl_course.id IS NOT NULL AND moodle19.mdl_course.fullname IS NOT NULL AND moodle19.mdl_course.shortname IS NOT NULL;
+
+/* EXAMENES */
+-- copiar a syscap.examenes los registros de moodle19.mdl_quiz
+TRUNCATE syscap.examenes;
+INSERT INTO syscap.examenes(syscap.examenes.id_examen, syscap.examenes.id_curso, syscap.examenes.nombre_examen)
+SELECT moodle19.mdl_quiz.id, moodle19.mdl_quiz.course, syscap.initcap(moodle19.mdl_quiz.name)
+FROM moodle19.mdl_quiz
+WHERE moodle19.mdl_quiz.id IS NOT NULL AND moodle19.mdl_quiz.course IS NOT NULL AND moodle19.mdl_quiz.name IS NOT NULL;
+
+/* EXAMENES_CALIFICACIONES */
+-- copiar a syscap.examenes_calificaciones los registros de moodle19.mdl_quiz_grades
+TRUNCATE syscap.examenes_calificaciones;
+INSERT INTO syscap.examenes_calificaciones(syscap.examenes_calificaciones.id_examen_calificacion, syscap.examenes_calificaciones.id_examen, syscap.examenes_calificaciones.id_usuario, syscap.examenes_calificaciones.nota_examen_calificacion, syscap.examenes_calificaciones.fecha_examen_calificacion)
+SELECT moodle19.mdl_quiz_grades.id, moodle19.mdl_quiz_grades.quiz, moodle19.mdl_quiz_grades.userid, moodle19.mdl_quiz_grades.grade, DATE_FORMAT(FROM_UNIXTIME(moodle19.mdl_quiz_grades.timemodified), '%Y-%m-%d')
+FROM moodle19.mdl_quiz_grades
+WHERE moodle19.mdl_quiz_grades.id IS NOT NULL AND moodle19.mdl_quiz_grades.quiz IS NOT NULL AND moodle19.mdl_quiz_grades.userid IS NOT NULL AND moodle19.mdl_quiz_grades.grade IS NOT NULL;
+
+/* ROLES */
+-- copiar a syscap.roles los registros de moodle19.mdl_role
+TRUNCATE syscap.roles;
+INSERT INTO syscap.roles(syscap.roles.id_rol, syscap.roles.nombre_completo_rol, syscap.roles.nombre_corto_rol, syscap.roles.descripcion_rol, syscap.roles.criterio_rol)
+SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description, moodle19.mdl_role.sortorder
+FROM moodle19.mdl_role
+WHERE moodle19.mdl_role.id IS NOT NULL AND moodle19.mdl_role.name IS NOT NULL AND moodle19.mdl_role.shortname IS NOT NULL AND moodle19.mdl_role.description IS NOT NULL AND moodle19.mdl_role.sortorder IS NOT NULL;
+
+/* ROLES_ASIGNADOS */
+-- copiar a syscap.roles_asignados los registros de moodle19.mdl_role_assignments
+TRUNCATE syscap.roles_asignados;
+INSERT INTO syscap.roles_asignados(syscap.roles_asignados.id_rol_asignado, syscap.roles_asignados.id_rol, syscap.roles_asignados.id_matricula, syscap.roles_asignados.id_usuario)
+SELECT moodle19.mdl_role_assignments.id, syscap.initcap(moodle19.mdl_role_assignments.roleid), moodle19.mdl_role_assignments.contextid, moodle19.mdl_role_assignments.userid
+FROM moodle19.mdl_role_assignments
+WHERE moodle19.mdl_role_assignments.id IS NOT NULL AND moodle19.mdl_role_assignments.roleid IS NOT NULL AND moodle19.mdl_role_assignments.contextid IS NOT NULL AND moodle19.mdl_role_assignments.userid IS NOT NULL;
+
+/* USUARIOS */
+-- copiar a syscap.usuarios los registros de moodle19.mdl_user
+TRUNCATE syscap.usuarios;
+INSERT INTO syscap.usuarios(syscap.usuarios.id_usuario, syscap.usuarios.nombre_usuario, syscap.usuarios.contrasena_usuario, syscap.usuarios.id_tipo_usuario, syscap.usuarios.nombres_usuario, syscap.usuarios.apellido1_usuario, syscap.usuarios.apellido2_usuario, syscap.usuarios.dui_usuario, syscap.usuarios.sexo_usuario, syscap.usuarios.id_profesion, syscap.usuarios.id_nivel_estudio, syscap.usuarios.correo_electronico_usuario, syscap.usuarios.telefono1_usuario, syscap.usuarios.telefono2_usuario, syscap.usuarios.id_centro_educativo, syscap.usuarios.id_departamento, syscap.usuarios.id_municipio, syscap.usuarios.pais_usuario, syscap.usuarios.direccion_usuario, syscap.usuarios.ciudad_usuario, syscap.usuarios.fecha_nacimiento_usuario, syscap.usuarios.modalidad_usuario)
+SELECT moodle19.mdl_user.id, moodle19.mdl_user.username, moodle19.mdl_user.password, moodle19.mdl_user.tipo, syscap.initcap(moodle19.mdl_user.firstname), syscap.initcap(moodle19.mdl_user.lastname), syscap.initcap(moodle19.mdl_user.apellido2), moodle19.mdl_user.dui, moodle19.mdl_user.sexo, moodle19.mdl_user.profesion, moodle19.mdl_user.nestudio, moodle19.mdl_user.email, moodle19.mdl_user.phone1, moodle19.mdl_user.phone2, moodle19.mdl_user.tinstitucion, moodle19.mdl_user.deptorec, moodle19.mdl_user.munirec, moodle19.mdl_user.country, syscap.initcap(moodle19.mdl_user.address), syscap.initcap(moodle19.mdl_user.city), moodle19.mdl_user.fnacimiento, IF(moodle19.mdl_user.auth = 'manual', 'tutorizado', IF(moodle19.mdl_user.auth = 'email', 'autoformacion', NULL)) auth
+FROM moodle19.mdl_user
+WHERE moodle19.mdl_user.id IS NOT NULL /*AND moodle19.mdl_user.username IS NOT NULL AND moodle19.mdl_user.password IS NOT NULL AND moodle19.mdl_user.tipo IS NOT NULL AND moodle19.mdl_user.firstname IS NOT NULL AND moodle19.mdl_user.lastname IS NOT NULL AND moodle19.mdl_user.apellido2 IS NOT NULL AND moodle19.mdl_user.dui IS NOT NULL AND moodle19.mdl_user.sexo IS NOT NULL AND moodle19.mdl_user.profesion IS NOT NULL AND moodle19.mdl_user.nestudio IS NOT NULL AND moodle19.mdl_user.email IS NOT NULL AND moodle19.mdl_user.phone1 IS NOT NULL AND moodle19.mdl_user.phone2 IS NOT NULL AND moodle19.mdl_user.tinstitucion IS NOT NULL AND moodle19.mdl_user.deptorec IS NOT NULL AND moodle19.mdl_user.munirec IS NOT NULL AND moodle19.mdl_user.country IS NOT NULL AND moodle19.mdl_user.address IS NOT NULL AND moodle19.mdl_user.city IS NOT NULL AND moodle19.mdl_user.fnacimiento IS NOT NULL*/;
+
+/* TIPOS_USUARIOS */
+-- copiar a syscap.tipos_usuarios los registros de la lista desplegable del formulario inscripcion de usuarios de EducaContinua
+TRUNCATE syscap.tipos_usuarios;
+INSERT INTO syscap.tipos_usuarios(syscap.tipos_usuarios.id_tipo_usuario, syscap.tipos_usuarios.nombre_tipo_usuario) VALUES
+(1, 'Ciudadano en General'),
+(2, 'Estudiante de Basica'),
+(3, 'Estudiante de Media'),
+(4, 'Estudiante Universitario'),
+(5, 'Docente de B·sica'),
+(6, 'Docente de Media'),
+(7, 'Docente TecnÛlogo'),
+(8, 'Docente Universitario');
+
+/* MAPAS */
+-- almacenar en syscap.mapas los registros de las coordenadas en el mapa
+TRUNCATE syscap.mapas;
+INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, syscap.mapas.latitud_mapa) VALUES
+(1, 13.9344628, -89.0239548),	-- Suchitoto, Cuscatlan
+(2, 13.6914782, -89.2146939),	-- San Salvador, San Salvador
+(3, 13.6405872, -88.7839214),	-- San Vicente, San Vicente
+(4, 13.71045, -89.1435517),		-- Soyapango, San Salvador
+(5, 13.4910976, -89.3170369),	-- Puerto De La Libertad, La Libertad
+(6, 13.8150632, -89.1726215),	-- Apopa, San Salvador
+(7, 13.6771271, -89.331572),	-- Nueva San Salvador (Santa Tecla), La Libertad
+(8, 13.4785173, -88.1690892),	-- San Miguel, San Miguel
+(9, 13.9866054, -89.6780062),	-- Chalchuapa, Santa Ana
+(10, 13.9837933, -89.5628214),	-- Santa Ana, Santa Ana
+(11, 13.7391679, -89.2104026),	-- Mejicanos, San Salvador
+(12, 13.6247163, -87.8940153),	-- Santa Rosa De Lima, La Union
+(13, 13.7103248, -89.7300196),	-- Sonsonate, Sonsonate
+(14, 13.7210174, -88.938373),	-- Cojutepeque, Cuscatlan
+(15, 13.7503845, -89.057579),	-- San Martin, San Salvador
+(16, 13.3432736, -88.4427738),	-- Usulutan, Usulutan
+(17, 13.8762505, -89.3583689),	-- San Juan Opico, La Libertad
+(18, 13.9290675, -89.8436594),	-- Ahuachapan, Ahuachapan
+(19, 13.5788318, -89.2671776),	-- San Jose Villanueva, La Libertad
+(20, 13.7632123, -89.0487634),	-- San Bartolome Perulapia, Cuscatlan
+(21, 13.6603945, -89.1769482),	-- San Marcos, San Salvador
+(22, 13.7083268, -89.3482965),	-- Colon, La Libertad
+(23, 13.7534692, -89.1586547),	-- Ciudad Delgado, San Salvador
+(24, 13.830604, -89.2692803),	-- Quezaltepeque, La Libertad
+(25, 13.4296472, -88.5936102),	-- San Agustin, Usulutan
+(26, 13.9153632, -89.8470068),	-- Centro Escolar Isidro Menendez
+(27, 13.924497, -89.85044),		-- Centro Escolar Alejandro De Humboldt
+(28, 13.917568, -89.846442),	-- Centro Escolar Primero De Julio De 1823
+(29, 14.0227061, -88.9209365),	-- Chalatenango, Chalatenango
+(30, 13.5090328, -88.8731075),	-- Zacatecoluca, La Paz
+(31, 13.872746, -88.6322237),	-- Sensuntepeque, CabaÒas
+(32, 13.6908134, -88.0992366),	-- San Francisco Gotera, Morazan
+(33, 13.3376152, -87.8486967),	-- La Union, La Union
+(34, 13.8388186, -88.8543641),	-- Ilobasco, CabaÒas
+(35, 13.6440684, -88.8700175),	-- Verapaz, San Vicente
+(36, 13.7033274, -89.4616417),	-- Tepecoyo, La Libertad
+(37, 13.6700494, -88.7782622),	-- Apastepeque, San Vicente
+(38, 13.6859592, -88.7881394),	-- San Esteban Catarina, San Vicente
+(39, 13.8882866, -88.9599466),	-- Cinquera, CabaÒas
+(40, 13.6902395, -89.111048),	-- Ilopango, San Salvador
+(41, 13.540327, -88.7766337),	-- Tecoluca, San Vicente
+(42, 13.3561997, -87.9968499),	-- El Carmen, La Union
+(43, 13.7191032, -88.8560915),	-- Santo Domingo, San Vicente
+(44, 13.767689, -89.0363788),	-- San Pedro Perulapan, Cuscatlan
+(45, 13.6693079, -89.2510443),	-- Antiguo Cuscatlan, La Libertad
+(46, 13.8529346, -88.9062595),	-- Tejutepeque, CabaÒas
+(47, 13.7390616, -89.7117913),	-- Sonzacate, Sonsonate
+(48, 13.5034846, -88.9241625),	-- San Rafael Obrajuelo, La Paz
+(49, 13.9673659, -89.6343613),	-- San Sebastian Salitrillo, Santa Ana
+(50, 14.1357432, -89.0269803),	-- San Rafael, Chalatenango
+(51, 14.3272925, -89.4471216),	-- Metapan, Santa Ana
+(52, 13.6511232, -88.8118866),	-- San Cayetano Istepeque, San Vicente
+(53, 13.3799176, -88.3526877),	-- San Rafael Oriente, San Miguel
+(54, 13.3475727, -88.387413),	-- Ereguayquin, Usulutan
+(55, 13.8872399, -88.901788),	-- Jutiapa, CabaÒas
+(56, 13.975112, -89.7089481),	-- El Refugio, Ahuachapan
+(57, 13.6398752, -89.1421438),	-- Santo Tomas, San Salvador
+(58, 13.9743259, -89.7551734),	-- Atiquizaya, Ahuachapan
+(59, 13.9756324, -89.3404341),	-- San Pablo Tacachico, La Libertad
+(60, 13.4326377, -87.9615212),	-- San Alejo, La Union
+(61, 13.9572532, -89.1843324),	-- Aguilares, San Salvador
+(62, 13.9557878, -88.1571722),	-- Perquin, Morazan
+(63, 13.6134522, -88.0274425),	-- Jocoro, Morazan
+(64, 13.81907, -89.4307709),	-- Ciudad Arce, La Libertad
+(65, 13.5418708, -89.037881),	-- San Pedro Masahuat, La Paz
+(66, 13.7527084, -89.1836323),	-- Cuscatancingo, San Salvador
+(67, 13.4952292, -89.0262235),	-- Rosario De La Paz, La Paz
+(68, 13.6779925, -89.4360307),	-- Jayaque, La Libertad
+(69, 13.5700108, -89.1152572),	-- Olocuilta, La Paz
+(70, 13.3236884, -88.5616066),	-- Jiquilisco, Usulutan
+(71, 14.1297502, -89.2908239),	-- Nueva Concepcion, Chalatenango
+(72, 13.734299, -88.8851023),	-- San Rafael Cedros, Cuscatlan
+(73, 13.7109085, -89.7590841),	-- San Antonio Del Monte, Sonsonate
+(74, 13.6408958, -89.119057),	-- Santiago Texacuangos, San Salvador
+(75, 13.5327463, -88.2550471),	-- Moncagua, San Miguel
+(76, 13.7804787, -89.7387114),	-- Nahuizalco, Sonsonate
+(77, 13.6193623, -89.7934429),	-- San Julian, Sonsonate
+(79, 13.921947, -89.8449174),	-- Centro Escolar Alfredo Espino
+(80, 13.6878632, -89.1868767),	-- Escuela De Educacion Parvularia San Jacinto
+(81, 13.714436, -89.205852),	-- Instituto Nacional Albert Camus
+(82, 13.7384192, -89.2206226),	-- Centro Escolar General Francisco Morazan
+(83, 13.700678, -89.180982),	-- Centro Escolar Accion Civica Militar
+(84, 13.713366, -89.180338),	-- Instituto Nacional General Francisco Menendez
+(85, 13.687911, -89.185976),	-- Instituto Nacional De Comercio
+(86, 13.7354, -89.196336),		-- Escuela De Educacion Parvularia  Comunidad El Prado
+(87, 13.6693496, -89.2090322),	-- Centro Escolar Canton San Cristobal
+(88, 13.7354, -89.196336),		-- Escuela De Educacion Parvularia Colonia Centro America
+(89, 13.7240354, -89.1248218),	-- Centro Escolar El Progreso
+(90, 13.717931, -89.167772),	-- Centro Escolar Juana Lopez
+(91, 13.8278963,-89.2777986);	-- Centro Escolar  Juan Ramon Jimenez
+UPDATE municipios SET id_mapa = 1 WHERE id_municipio = '188';
+UPDATE municipios SET id_mapa = 2 WHERE id_municipio = '01';
+UPDATE municipios SET id_mapa = 3 WHERE id_municipio = '241';
+UPDATE municipios SET id_mapa = 4 WHERE id_municipio = '04';
+UPDATE municipios SET id_mapa = 5 WHERE id_municipio = '58';
+UPDATE municipios SET id_mapa = 6 WHERE id_municipio = '09';
+UPDATE municipios SET id_mapa = 7 WHERE id_municipio = '53';
+UPDATE municipios SET id_mapa = 8 WHERE id_municipio = '33';
+UPDATE municipios SET id_mapa = 9 WHERE id_municipio = '21';
+UPDATE municipios SET id_mapa = 10 WHERE id_municipio = '20';
+UPDATE municipios SET id_mapa = 11 WHERE id_municipio = '03';
+UPDATE municipios SET id_mapa = 12 WHERE id_municipio = '115';
+UPDATE municipios SET id_mapa = 13 WHERE id_municipio = '98';
+UPDATE municipios SET id_mapa = 14 WHERE id_municipio = '187';
+UPDATE municipios SET id_mapa = 15 WHERE id_municipio = '10';
+UPDATE municipios SET id_mapa = 16 WHERE id_municipio = '75';
+UPDATE municipios SET id_mapa = 17 WHERE id_municipio = '56';
+UPDATE municipios SET id_mapa = 18 WHERE id_municipio = '203';
+UPDATE municipios SET id_mapa = 19 WHERE id_municipio = '70';
+UPDATE municipios SET id_mapa = 20 WHERE id_municipio = '198';
+UPDATE municipios SET id_mapa = 21 WHERE id_municipio = '06';
+UPDATE municipios SET id_mapa = 22 WHERE id_municipio = '57';
+UPDATE municipios SET id_mapa = 23 WHERE id_municipio = '02';
+UPDATE municipios SET id_mapa = 24 WHERE id_municipio = '54';
+UPDATE municipios SET id_mapa = 25 WHERE id_municipio = '82';
+UPDATE municipios SET id_mapa = 29 WHERE id_municipio = '154';
+UPDATE municipios SET id_mapa = 30 WHERE id_municipio = '132';
+UPDATE municipios SET id_mapa = 31 WHERE id_municipio = '254';
+UPDATE municipios SET id_mapa = 32 WHERE id_municipio = '215';
+UPDATE municipios SET id_mapa = 33 WHERE id_municipio = '114';
+UPDATE municipios SET id_mapa = 34 WHERE id_municipio = '255';
+UPDATE municipios SET id_mapa = 35 WHERE id_municipio = '249';
+UPDATE municipios SET id_mapa = 36 WHERE id_municipio = '64';
+UPDATE municipios SET id_mapa = 37 WHERE id_municipio = '244';
+UPDATE municipios SET id_mapa = 38 WHERE id_municipio = '245';
+UPDATE municipios SET id_mapa = 39 WHERE id_municipio = '261';
+UPDATE municipios SET id_mapa = 40 WHERE id_municipio = '07';
+UPDATE municipios SET id_mapa = 41 WHERE id_municipio = '242';
+UPDATE municipios SET id_mapa = 42 WHERE id_municipio = '119';
+UPDATE municipios SET id_mapa = 43 WHERE id_municipio = '251';
+UPDATE municipios SET id_mapa = 44 WHERE id_municipio = '189';
+UPDATE municipios SET id_mapa = 45 WHERE id_municipio = '59';
+UPDATE municipios SET id_mapa = 46 WHERE id_municipio = '259';
+UPDATE municipios SET id_mapa = 47 WHERE id_municipio = '105';
+UPDATE municipios SET id_mapa = 48 WHERE id_municipio = '141';
+UPDATE municipios SET id_mapa = 49 WHERE id_municipio = '27';
+UPDATE municipios SET id_mapa = 50 WHERE id_municipio = '168';
+UPDATE municipios SET id_mapa = 51 WHERE id_municipio = '22';
+UPDATE municipios SET id_mapa = 52 WHERE id_municipio = '252';
+UPDATE municipios SET id_mapa = 53 WHERE id_municipio = '39';
+UPDATE municipios SET id_mapa = 54 WHERE id_municipio = '92';
+UPDATE municipios SET id_mapa = 55 WHERE id_municipio = '258';
+UPDATE municipios SET id_mapa = 56 WHERE id_municipio = '214';
+UPDATE municipios SET id_mapa = 57 WHERE id_municipio = '14';
+UPDATE municipios SET id_mapa = 58 WHERE id_municipio = '204';
+UPDATE municipios SET id_mapa = 59 WHERE id_municipio = '61';
+UPDATE municipios SET id_mapa = 60 WHERE id_municipio = '117';
+UPDATE municipios SET id_mapa = 61 WHERE id_municipio = '12';
+UPDATE municipios SET id_mapa = 62 WHERE id_municipio = '236';
+UPDATE municipios SET id_mapa = 63 WHERE id_municipio = '216';
+UPDATE municipios SET id_mapa = 64 WHERE id_municipio = '55';
+UPDATE municipios SET id_mapa = 65 WHERE id_municipio = '135';
+UPDATE municipios SET id_mapa = 66 WHERE id_municipio = '05';
+UPDATE municipios SET id_mapa = 67 WHERE id_municipio = '140';
+UPDATE municipios SET id_mapa = 68 WHERE id_municipio = '62';
+UPDATE municipios SET id_mapa = 69 WHERE id_municipio = '136';
+UPDATE municipios SET id_mapa = 70 WHERE id_municipio = '76';
+UPDATE municipios SET id_mapa = 71 WHERE id_municipio = '155';
+UPDATE municipios SET id_mapa = 72 WHERE id_municipio = '192';
+UPDATE municipios SET id_mapa = 73 WHERE id_municipio = '106';
+UPDATE municipios SET id_mapa = 74 WHERE id_municipio = '15';
+UPDATE municipios SET id_mapa = 75 WHERE id_municipio = '40';
+UPDATE municipios SET id_mapa = 76 WHERE id_municipio = '102';
+UPDATE municipios SET id_mapa = 77 WHERE id_municipio = '104';
+UPDATE departamentos SET id_mapa = 2 WHERE id_departamento = '01';
+UPDATE departamentos SET id_mapa = 3 WHERE id_departamento = '13';
+UPDATE departamentos SET id_mapa = 7 WHERE id_departamento = '04';
+UPDATE departamentos SET id_mapa = 8 WHERE id_departamento = '03';
+UPDATE departamentos SET id_mapa = 10 WHERE id_departamento = '02';
+UPDATE departamentos SET id_mapa = 13 WHERE id_departamento = '06';
+UPDATE departamentos SET id_mapa = 14 WHERE id_departamento = '10';
+UPDATE departamentos SET id_mapa = 16 WHERE id_departamento = '05';
+UPDATE departamentos SET id_mapa = 18 WHERE id_departamento = '11';
+UPDATE departamentos SET id_mapa = 29 WHERE id_departamento = '09';
+UPDATE departamentos SET id_mapa = 30 WHERE id_departamento = '08';
+UPDATE departamentos SET id_mapa = 31 WHERE id_departamento = '14';
+UPDATE departamentos SET id_mapa = 32 WHERE id_departamento = '12';
+UPDATE departamentos SET id_mapa = 33 WHERE id_departamento = '07';
+UPDATE centros_educativos SET id_mapa = 26 WHERE id_centro_educativo = 1;
+UPDATE centros_educativos SET id_mapa = 27 WHERE id_centro_educativo = 3;
+UPDATE centros_educativos SET id_mapa = 28 WHERE id_centro_educativo = 4;
+UPDATE centros_educativos SET id_mapa = 79 WHERE id_centro_educativo = 2;
+UPDATE centros_educativos SET id_mapa = 80 WHERE id_centro_educativo = 148;
+UPDATE centros_educativos SET id_mapa = 81 WHERE id_centro_educativo = 1128;
+UPDATE centros_educativos SET id_mapa = 82 WHERE id_centro_educativo = 1134;
+UPDATE centros_educativos SET id_mapa = 83 WHERE id_centro_educativo = 1135;
+UPDATE centros_educativos SET id_mapa = 84 WHERE id_centro_educativo = 1139;
+UPDATE centros_educativos SET id_mapa = 85 WHERE id_centro_educativo = 1141;
+UPDATE centros_educativos SET id_mapa = 86 WHERE id_centro_educativo = 1146;
+UPDATE centros_educativos SET id_mapa = 87 WHERE id_centro_educativo = 1163;
+UPDATE centros_educativos SET id_mapa = 88 WHERE id_centro_educativo = 1164;
+UPDATE centros_educativos SET id_mapa = 89 WHERE id_centro_educativo = 1170;
+UPDATE centros_educativos SET id_mapa = 90 WHERE id_centro_educativo = 1177;
+UPDATE centros_educativos SET id_mapa = 91 WHERE id_centro_educativo = 1180;
+
+END$$
+DELIMITER ;
+
+DELIMITER $$
+DROP EVENT IF EXISTS ETL_CARGA_DATOS $$
+CREATE EVENT ETL_CARGA_DATOS
+	ON SCHEDULE EVERY 1 DAY STARTS '2015-02-15 20:00:01'
+	ON COMPLETION NOT PRESERVE ENABLE
+	DO
+	CALL P_Etl();
+$$
+DELIMITER ;
+
+SET GLOBAL event_scheduler = ON;
+
+-- ============================================================================================================================================================
+
+USE syscap;
+
+CALL P_Etl();
