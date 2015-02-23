@@ -31,12 +31,12 @@
 			$formulario = array('name' => 'login', 'id' => 'login', 'role' => 'form');
 			$campos_ocultos = array('sesion_usuario' => @$sesion_usuario);
 	        $boton_primario = 'class="btn btn-lg btn-success btn-block"';
-	        $correo_electronico_usuario = array(
-        		'name'			=> 'correo_electronico_usuario',
-        		'id'			=> 'correo_electronico_usuario',
-				'type'			=> 'email',
-        		'placeholder'	=> 'Correo electrónico',
-				'value'			=>	set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario),
+	        $nombre_usuario = array(
+        		'name'			=> 'nombre_usuario',
+        		'id'			=> 'nombre_usuario',
+				'type'			=> 'text',
+        		'placeholder'	=> 'Nombre de usuario',
+				'value'			=>	set_value('nombre_usuario', @$usuario[0]->nombre_usuario),
         		'class'			=> 'form-control',
 				'autofocus'		=> 'autofocus'
 	        );
@@ -63,10 +63,10 @@
 							<?= form_open('index.php/sesion/iniciar_sesion', $formulario, $campos_ocultos); ?>
 								<?= form_fieldset(); ?>
 									<div class="form-group">
-										<?= form_input($correo_electronico_usuario); ?>
-										<?= form_error('correo_electronico_usuario'); ?>
-										<div id="correo_electronico_incorrecto" class="oculto" title="¡Error!">
-											<?= icono_notificacion('error'); ?>Correo electr&oacute;nico incorrecto.
+										<?= form_input($nombre_usuario); ?>
+										<?= form_error('nombre_usuario'); ?>
+										<div id="nombre_usuario_incorrecto" class="oculto" title="¡Error!">
+											<?= icono_notificacion('error'); ?>Nombre de usuario incorrecto.
 										</div>
 									</div>
 									<div class="form-group">

@@ -81,3 +81,72 @@ FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
 	JOIN examenes e ON(ec.id_examen = e.id_examen);
 $$
 DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_UsuariosCapacitadosDepartamento $$
+CREATE VIEW V_UsuariosCapacitadosDepartamento AS
+SELECT
+	ec.fecha_examen_calificacion fecha_examen_calificacion,
+	u.id_departamento id_departamento,
+	u.id_municipio id_municipio,
+	m.nombre_municipio nombre_municipio,
+	u.id_centro_educativo,
+	COUNT(u.id_municipio) total
+FROM usuarios u
+	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
+	JOIN municipios m ON(u.id_municipio = m.id_municipio)
+	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo)
+	JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	JOIN examenes e ON(ec.id_examen = e.id_examen)
+WHERE ec.nota_examen_calificacion >= 7.00
+	AND e.nombre_examen LIKE 'Evaluaci%'
+GROUP BY u.id_departamento, m.nombre_municipio;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_UsuariosCertificadosDepartamento $$
+CREATE VIEW V_UsuariosCertificadosDepartamento AS
+SELECT
+	ec.fecha_examen_calificacion fecha_examen_calificacion,
+	u.id_departamento id_departamento,
+	u.id_municipio id_municipio,
+	m.nombre_municipio nombre_municipio,
+	u.id_centro_educativo,
+	COUNT(u.id_municipio) total
+FROM usuarios u
+	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
+	JOIN municipios m ON(u.id_municipio = m.id_municipio)
+	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo)
+	JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
+	JOIN examenes e ON(ec.id_examen = e.id_examen)
+WHERE ec.nota_examen_calificacion >= 7.00
+	AND e.nombre_examen LIKE 'Examen%'
+GROUP BY u.id_departamento, m.nombre_municipio;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_UsuariosTotalDepartamento $$
+CREATE VIEW V_UsuariosTotalDepartamento AS
+SELECT
+	capacitados.nombre_municipio nombre_municipio,
+	capacitados.total capacitados,
+	(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+FROM V_UsuariosCapacitadosDepartamento capacitados
+	LEFT JOIN V_UsuariosCertificadosDepartamento certificados ON capacitados.nombre_municipio = certificados.nombre_municipio
+UNION
+SELECT
+	'TOTAL' nombre_municipio,
+	SUM(capacitados.total) capacitados,
+	SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados
+FROM V_UsuariosCapacitadosDepartamento capacitados
+	LEFT JOIN V_UsuariosCertificadosDepartamento certificados ON capacitados.nombre_municipio = certificados.nombre_municipio;
+$$
+DELIMITER ;

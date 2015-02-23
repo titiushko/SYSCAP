@@ -17,7 +17,21 @@
 | 'carousel' = FALSE; no muestra el carrusel.
 |
 */
-$config['carousel']	= FALSE;
+$config['carousel'] = FALSE;
+
+/*
+|--------------------------------------------------------------------------
+| Semilla de Encriptación de Moodle
+|--------------------------------------------------------------------------
+|
+| Esta propiedad de SYSCAP o variable de configuración establece la semilla
+| de encriptación de contraseñas que utiliza Moodle. 
+|
+| 'semilla_moodle': debe de ser igual a $CFG->passwordsaltmain del archivo
+| 					moodle/config.php.
+|
+*/
+$config['semilla_moodle'] = 'Mtx5;;1>0EWn:,,{go%~}=aPJ#Hky';
 
 /* End of file properties.php */
 /* Location: ./application/properties/properties.php */

@@ -68,7 +68,7 @@ class Usuarios extends MY_Controller{
 					if($this->form_validation->run()){
 						$update_usuario = $this->input->post();
 						if($this->input->post('contrasena_usuario'))
-							$update_usuario['contrasena_usuario'] = md5($this->input->post('contrasena_usuario'));
+							$update_usuario['contrasena_usuario'] = md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle'));
 						unset($update_usuario['estado'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 						$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
 						$this->notificacion = TRUE;

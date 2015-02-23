@@ -28,20 +28,18 @@ class Sesion extends MY_Controller{
 	
 	public function iniciar_sesion(){
 		if($this->input->post()){
-			$this->form_validation->set_rules('correo_electronico_usuario', 'Correo Electr&oacute;nico', 'trim|required|valid_email');
-			$this->form_validation->set_rules('contrasena_usuario', 'Contrase&ntilde;a', 'required|trim|min_length[5]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('nombre_usuario', 'Nombre de Usuario', 'required|trim|min_length[5]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('contrasena_usuario', 'Contrase&ntilde;a', 'required|trim|min_length[5]|max_length[50]|xss_clean');
 			$datos = null;
 			if($this->form_validation->run()){
 				if($this->input->post('sesion_usuario') == $this->session->userdata('sesion_usuario')){
-					$correo_electronico_usuario = $this->input->post('correo_electronico_usuario');
-					$contrasena_usuario = md5($this->input->post('contrasena_usuario'));
-					$datos['usuario'] = $this->sesion_model->conectar_usuario($correo_electronico_usuario, $contrasena_usuario);
+					$datos['usuario'] = $this->sesion_model->conectar_usuario($this->input->post('nombre_usuario'), md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle')));
 					if(!empty($datos['usuario'])){
 						$datos_sesion_usuario = array(
 							'conexion_usuario'			=> 	TRUE,
 							'id_usuario' 				=> 	$datos['usuario']->id_usuario,
 							'nombre_corto_rol'			=>	$datos['usuario']->nombre_corto_rol,
-							'nombre_completo_rol'			=>	$datos['usuario']->nombre_completo_rol,
+							'nombre_completo_rol'		=>	$datos['usuario']->nombre_completo_rol,
 							'nombre_completo_usuario'	=> 	$datos['usuario']->nombre_completo_usuario
 						);
 						$this->session->set_userdata($datos_sesion_usuario);
