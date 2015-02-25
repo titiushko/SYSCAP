@@ -16,16 +16,18 @@
 							<thead>
 								<tr>
 									<th>Usuario</th>
-									<th>Nombres</th>
-									<th>Apellidos</th>
+									<th>Nombre</th>
+									<th>DUI</th>
+									<th>Correo Electrónico</th>
 								</tr>
 							</thead>
 							<tbody>
 								<?php foreach($lista_usuarios as $usuario){ ?>
 								<tr onclick="redireccionar('<?= base_url().'usuarios/mostrar/'.$usuario->id_usuario; ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($this->usuarios_model->nombre_completo_usuario($usuario->id_usuario)); ?>">
 									<td><?= utf8($usuario->nombre_usuario); ?></td>
-									<td><?= utf8($usuario->nombres_usuario); ?></td>
-									<td><?= utf8($usuario->apellido1_usuario); ?></td>
+									<td><?= utf8($usuario->nombre_completo_usuario); ?></td>
+									<td><?= formato_dui($usuario->dui_usuario); ?></td>
+									<td><?= $usuario->correo_electronico_usuario; ?></td>
 								</tr>
 								<?php } ?>
 							</tbody>

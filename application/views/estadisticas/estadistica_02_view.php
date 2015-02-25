@@ -187,6 +187,7 @@ $campos_ocultos_formulario = array(
 		$('#data-tables-estadistica2-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
+			"ordering":		false,
 			"info":			false,
 			"oLanguage": {
 				"oPaginate": {

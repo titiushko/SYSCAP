@@ -8,6 +8,7 @@ class Municipios_model extends CI_Model{
 	function lista_municipios(){
 		$lista_municipios[''] = '';
 		$query = $this->db->select('id_municipio, acentos(nombre_municipio) nombre_municipio');
+		$query = $this->db->order_by('nombre_municipio', 'asc');
 		$query = $this->db->get('municipios');
 		foreach($query->result() as $municipio){
 			$lista_municipios[$municipio->id_municipio] = utf8($municipio->nombre_municipio);
@@ -31,11 +32,11 @@ class Municipios_model extends CI_Model{
 		$query = $this->db->get('municipios');
 		return $query->result();
 	}
-    
-    function lista_municipios_departamento($id_departamento){
-		
-		$this->db->select('id_municipio, nombre_municipio');
-		$this->db->where('id_departamento', $id_departamento);
+	
+	function lista_municipios_departamento($id_departamento){
+		$query = $this->db->select('id_municipio, nombre_municipio');
+		$query = $this->db->where('id_departamento', $id_departamento);
+		$query = $this->db->order_by('nombre_municipio', 'asc');
 		$query = $this->db->get('municipios');
 		return $query->result();
 	}

@@ -16,9 +16,11 @@ $fecha = array(
 );
 $lista_tipo_capacitados =  array(
 	''				=> '',
-	'capacitados'	=> 'Capacitados',
-	'certificados'	=> 'Certificados'
+	'capacitado'	=> 'Capacitados',
+	'certificado'	=> 'Certificados'
 );
+$departamentos = 'id = "id_departamento" required = "required" class = "form-control"';
+$municipios = 'id = "id_municipio" required = "required" class = "form-control"';
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
@@ -62,14 +64,14 @@ $campos_ocultos_formulario = array(
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Departamento:'); ?>
-				<?= form_dropdown('id_departamento', $lista_departamentos, set_value('id_departamento', @$campos['id_departamento']), 'class="form-control" required id="id_departamento"'); ?>
+				<?= form_dropdown('id_departamento', $lista_departamentos, set_value('id_departamento', @$campos['id_departamento']), $departamentos); ?>
 				<?= form_error('id_departamento'); ?>
 			</div>
 		</div>
         <div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Municipio:'); ?>
-				<?= form_dropdown('id_municipio', $lista_municipios, set_value('id_municipio', @$campos['id_municipio']), 'class="form-control" required id="id_municipio"'); ?>
+				<?= form_dropdown('id_municipio', $lista_municipios, set_value('id_municipio', @$campos['id_municipio']), $municipios); ?>
 				<?= form_error('id_municipio'); ?>
 			</div>
 		</div>
@@ -208,39 +210,35 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-	   $("#id_departamento").change( function(){
-		  
-		  var respuesta = null;
-		  $.ajax({
-                type : 'get',
-				datatype: 'json',
-                url  : "<?= base_url('estadisticas/lista_municipios_departamentos')?>",
-				cache:false,
-                data : 
-				{
-					id_departamento:$("#id_departamento").val()
+	$(document).ready(function(){
+		$("#id_departamento").change( function(){
+			var respuesta = null;
+			$.ajax({
+				type:		"get",
+				datatype:	"json",
+				url:		"<?= base_url('listas_dependientes/municipios')?>",
+				cache:		false,
+				data:		{
+					id_departamento:	$("#id_departamento").val()
 				},
-                success: function(data)
-                {
-                    //console.log($('#id_tipo_capacitados').val());
-                    console.log("JSON: " + json);
-                },
-                error: function(jqXHR, exception)
-                {
+				success:	function(data){
+					console.log("JSON: " + json);
+				},
+				error:		function(jqXHR, exception){
+					console.log(jqXHR.responseText);
 					respuesta = jQuery.parseJSON(jqXHR.responseText);
 					$('#id_municipio').empty();
-					$.each(respuesta,function(res,item){
+					$.each(respuesta, function(res, item){
 						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
 					});
-                }
-            });		
+				}
+			});
 		}).change();
-       
-       
+		
 		$('#data-tables-estadistica7-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
+			"ordering":		false,
 			"info":			false,
 			"oLanguage": {
 				"oPaginate": {
@@ -257,10 +255,10 @@ $campos_ocultos_formulario = array(
 			language:{
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 			}
-		});
+			});
 	});
-
-	$(function() {
+	
+	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica7-1',
 			data: [<?= $usuarios_departamento_municipio_json; ?>],

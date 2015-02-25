@@ -6,7 +6,7 @@ class Usuarios_model extends CI_Model{
 	}
 	
 	function usuarios(){
-		$query = $this->db->select('id_usuario, nombre_usuario, acentos(nombres_usuario) nombres_usuario, acentos(apellido1_usuario) apellido1_usuario, dui_usuario, correo_electronico_usuario');
+		$query = $this->db->select('id_usuario, nombre_usuario, acentos(F_NombreCompletoUsuario(id_usuario)) nombre_completo_usuario, dui_usuario, correo_electronico_usuario');
 		$query = $this->db->where('id_usuario in(1156, 1381, 812, 1893, 1809, 1811, 1806, 827, 1188, 661, 832, 1808, 665, 1304, 645, 816, 1141, 368, 369, 410, 841, 1417, 388, 1467, 1844, 1604, 907, 60, 1228, 1781, 397, 1672, 850, 1220, 1206, 1690, 1783, 1788, 1731, 1597, 1736, 1723, 1691, 1435, 1372, 1522, 1805, 1678, 182, 412)');
 		$query = $this->db->get('usuarios');
 		return $query->result();

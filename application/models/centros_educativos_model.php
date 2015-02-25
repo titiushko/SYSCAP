@@ -9,7 +9,8 @@ class Centros_educativos_model extends CI_Model{
 	function lista_centros_educativos(){
 		$lista_centros_educativos[''] = '';
 		$query = $this->db->select('id_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo');
-		$query = $this->db->get('centros_educativos', 100, 0);
+		$query = $this->db->order_by('nombre_centro_educativo', 'asc');
+		$query = $this->db->get('centros_educativos', 200, 0);
 		foreach($query->result() as $centro_educativo){
 			$lista_centros_educativos[$centro_educativo->id_centro_educativo] = utf8($centro_educativo->nombre_centro_educativo);
 		}
@@ -18,7 +19,7 @@ class Centros_educativos_model extends CI_Model{
 	
 	function centros_educativos(){
 		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo, id_departamento, id_municipio');
-		$query = $this->db->get('centros_educativos', 100, 0);
+		$query = $this->db->get('centros_educativos', 200, 0);
 		return $query->result();
 	}
 	

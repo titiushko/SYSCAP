@@ -25,7 +25,7 @@
 			<table border="1">
 				<thead>
 					<tr>
-						<td style="text-align: center; font-weight: bold;">Modalidades de Capacitaci&oacute;n</td>
+						<td style="text-align: center; font-weight: bold;">Modalidad de Capacitaci&oacute;n</td>
 						<td style="text-align: center; font-weight: bold;">Cantidades</td>
 					</tr>
 				</thead>

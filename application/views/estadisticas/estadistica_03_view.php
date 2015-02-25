@@ -120,11 +120,11 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function() {
 		$('#data-tables-estadistica3-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
-			"info":			false,
+			"ordering":		false,
 			"oLanguage": {
 				"oPaginate": {
 					"sFirst":		"<<",

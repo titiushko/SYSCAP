@@ -51,7 +51,7 @@
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Departamentos</th>
+								<th>Departamento</th>
 								<th>Capacitados</th>
 								<th>Certificados</th>
 							</tr>

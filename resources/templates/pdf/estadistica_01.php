@@ -27,10 +27,10 @@
 				<thead>
 					<tr>
 						<td></td>
-						<td colspan="2" style="text-align: center; font-weight: bold;">Modalidades de Capacitaci&oacute;n</td>
+						<td colspan="2" style="text-align: center; font-weight: bold;">Modalidad de Capacitaci&oacute;n</td>
 					</tr>
 					<tr>
-						<td rowspan="2" style="text-align: center; font-weight: bold;">Tipos de Capacitado</td>
+						<td rowspan="2" style="text-align: center; font-weight: bold;">Tipo de Capacitado</td>
 						<td style="text-align: center; font-weight: bold;">Tutorizados</td>
 						<td style="text-align: center; font-weight: bold;">Autoformaci&oacute;n</td>
 					</tr>

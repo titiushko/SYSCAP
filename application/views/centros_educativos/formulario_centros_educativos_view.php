@@ -46,6 +46,8 @@ $codigo_centro_educativo = array(
 	'class'		=> 'form-control',
 	'disabled'	=> 'disabled'
 );
+$departamentos = 'id = "id_departamento" required = "required" class = "form-control" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
+$municipios = 'id = "id_municipio" required = "required" class = "form-control" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
 ?>
 <script src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
 <div class="row">
@@ -84,14 +86,14 @@ $codigo_centro_educativo = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Departamento:'); ?>
-										<?= form_dropdown('id_departamento', $lista_departamentos, utf8(set_value('id_departamento', @$centro_educativo[0]->id_departamento)), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+										<?= form_dropdown('id_departamento', $lista_departamentos, utf8(set_value('id_departamento', @$centro_educativo[0]->id_departamento)), $departamentos); ?>
 										<?= form_error('id_departamento'); ?>
 									</div>
 								</div>
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Municipio:'); ?>
-										<?= form_dropdown('id_municipio', $lista_municipios, utf8(set_value('id_municipio', @$centro_educativo[0]->id_municipio)), 'class="form-control", '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"'); ?>
+										<?= form_dropdown('id_municipio', $lista_municipios, utf8(set_value('id_municipio', @$centro_educativo[0]->id_municipio)), $municipios); ?>
 										<?= form_error('id_municipio'); ?>
 									</div>
 								</div>
@@ -194,26 +196,50 @@ $codigo_centro_educativo = array(
 </div>
 <script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script>
-$(document).ready(function() {
-	$('#data-tables-docentes_capacitados').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
-		"oLanguage":		{"sEmptyTable": "No hay docentes capacitados en el centro educativo."}
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#id_departamento").change( function(){
+			var respuesta = null;
+			$.ajax({
+				type:		"get",
+				datatype:	"json",
+				url:		"<?= base_url('listas_dependientes/municipios')?>",
+				cache:		false,
+				data:		{
+					id_departamento:	$("#id_departamento").val()
+				},
+				success:	function(data){
+					console.log("JSON: " + json);
+				},
+				error:		function(jqXHR, exception){
+					console.log(jqXHR.responseText);
+					respuesta = jQuery.parseJSON(jqXHR.responseText);
+					$('#id_municipio').empty();
+					$.each(respuesta, function(res, item){
+						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
+					});
+				}
+			});
+		}).change();
+		
+		$('#data-tables-docentes_capacitados').dataTable({
+			"searching":		false,
+			"scrollY":			"200px",
+			"scrollCollapse":	true,
+			"info":				false,
+			"ordering":			false,
+			"paging":			false,
+			"oLanguage":		{"sEmptyTable": "No hay docentes capacitados en el centro educativo."}
+		});
+		$('#data-tables-docentes_certificados').dataTable({
+			"searching":		false,
+			"scrollY":			"200px",
+			"scrollCollapse":	true,
+			"info":				false,
+			"ordering":			false,
+			"paging":			false,
+			"oLanguage":		{"sEmptyTable": "No hay docentes certificados en el centro educativo."}
+		});
 	});
-	$('#data-tables-docentes_certificados').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
-		"oLanguage":		{"sEmptyTable": "No hay docentes certificados en el centro educativo."}
-	});
-});
 </script>
 <?php $this->session->set_userdata('uri_usuarios', uri_string()); ?>

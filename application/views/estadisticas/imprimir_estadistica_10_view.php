@@ -32,11 +32,12 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento, Tipo de Capacitados y Fecha', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios a Nivel Nacional', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
-								<th class="column-title">Periodo:</th><td class="column-value"><?= @$periodo; ?></td>
+								<td class="column-nbs"><?= nbs(); ?></td>
+								<th class="column-title">Periodo:</th><td class="column-value" colspan="2"><?= @$periodo; ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -50,24 +51,43 @@
 							<tr>
 								<th>#</th>
 								<th>Departamento</th>
+								<th>Municipio</th>
 								<th>Tutorizados</th>
 								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){ ?>
+							<?php
+							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
+								if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+							?>
 							<tr>
-								<td><?= $estaditica_departamento_fecha->indice; ?></td>
-								<td><?= utf8($estaditica_departamento_fecha->nombre_departamento); ?></td>
-								<td><?= $estaditica_departamento_fecha->capacitados; ?></td>
-								<td><?= $estaditica_departamento_fecha->certificados; ?></td>
+								<td><?= $usuario_nivel_nacional->indice; ?></td>
+								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
+								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
+								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
+								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
 							</tr>
-							<?php } ?>
+							<?php
+								}
+								else{
+							?>
+							<tr>
+								<td style="opacity: 0.0;"><?= $usuario_nivel_nacional->indice; ?></td>
+								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
+								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
+								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
+								<td><?= bold($usuario_nivel_nacional->autoformacion); ?></td>
+							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
-					<div id="morris-bar-chart-estadistica8-1"></div>
+					<div id="morris-bar-chart-estadistica10-1"></div>
 				</div>
 			</div>
 		</div>
@@ -78,11 +98,11 @@
 		<script type="text/javascript">
 			$(function() {
 				Morris.Bar({
-					element: 'morris-bar-chart-estadistica8-1',
-					data: [<?= $estaditicas_departamento_fechas_json; ?>],
+					element: 'morris-bar-chart-estadistica10-1',
+					data: [<?= $usuarios_nivel_nacional_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],
-					labels: ['Tutorizados', 'Autoformacion'],
+					labels: ['Capacitados', 'Certificados'],
 					hideHover: 'always',
 					resize: true
 				});

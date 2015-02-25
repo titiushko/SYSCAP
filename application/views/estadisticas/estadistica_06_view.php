@@ -165,7 +165,7 @@ $campos_ocultos_formulario = array(
 			data: [<?= $estaditicas_departamento_tipo_fechas_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformación'],
 			hideHover: 'auto',
 			resize: true
 		});
@@ -174,7 +174,7 @@ $campos_ocultos_formulario = array(
 			data: [<?= $estaditicas_departamento_tipo_fechas_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformación'],
 			hideHover: 'auto',
 			resize: true
 		});

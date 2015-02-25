@@ -98,8 +98,8 @@
 								<tr>
 									<th>#</th>
 									<th>Municipio</th>
-									<th>Capacitados</th>
-									<th>Certificados</th>
+									<th>Nombre</th>
+									<th>Modalidad Capacitaci&oacute;n</th>
 								</tr>
 							</thead>
 							<tbody>

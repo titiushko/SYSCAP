@@ -8,6 +8,7 @@ class Departamentos_model extends CI_Model{
 	function lista_departamentos(){
 		$lista_departamentos[''] = '';
 		$query = $this->db->select('id_departamento, acentos(nombre_departamento) nombre_departamento');
+		$query = $this->db->order_by('nombre_departamento', 'asc');
 		$query = $this->db->get('departamentos');
 		foreach($query->result() as $departamento){
 			$lista_departamentos[$departamento->id_departamento] = utf8($departamento->nombre_departamento);

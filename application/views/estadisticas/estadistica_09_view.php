@@ -6,8 +6,8 @@ $formulario_consultar = array(
 );
 $lista_tipo_capacitados =  array(
 	''			=> '',
-	'Evaluaci'	=> 'Capacitados',
-	'Examen'	=> 'Certificados'
+	'capacitado'	=> 'Capacitados',
+	'certificado'	=> 'Certificados'
 );
 $boton_primario = array(
 	'name'		=> 'boton_primario',
@@ -81,7 +81,7 @@ $campos_ocultos_formulario = array(
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>Modalidades de Capacitaci&oacute;n</th>
+								<th>Modalidad de Capacitaci&oacute;n</th>
 								<th>Cantidades</th>
 							</tr>
 						</thead>

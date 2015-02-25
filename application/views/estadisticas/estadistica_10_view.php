@@ -1,30 +1,29 @@
 <?php
-$fecha_ini = array(
-	'name'		=> 'fecha_ini',
-	'id'		=> 'fecha_ini',
+$formulario_consultar = array(
+	'name'		=> 'formulario_consultar',
+	'id'		=> 'formulario_consultar',
+	'role'		=> 'form'
+);
+$fecha = array(
+	'name'		=> '',
+	'id'		=> '',
 	'maxlength'	=> '60',
 	'size'		=> '20',
+	'value'		=> '',
 	'type'		=> 'date',
 	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+	'class'		=> 'form-control'
 );
-$fecha_fin = array(
-	'name'		=> 'fecha_fin',
-	'id'		=> 'fecha_fin',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control text-capitalize'
+$lista_tipo_capacitados =  array(
+	''				=> '',
+	'capacitado'	=> 'Capacitados',
+	'certificado'	=> 'Certificados'
 );
-$attr = array("id" => "formulario",
-              "name" => "formulario"
-);
-
-$boton_primario = array('id'    => 'boton_primario',
-						'class' => 'btn btn-primary',
-						'name'	=> 'boton_primario',
-						'value' => 'Consultar',
+$boton_primario = array(
+	'name'		=> 'boton_primario',
+	'id'		=> 'boton_primario',
+	'value'		=> 'Consultar',
+	'class'		=> 'btn btn-primary'
 );
 $boton_secundario = array(
 	'name'		=> 'boton_secundario',
@@ -49,38 +48,22 @@ $formulario_exportar = array(
 $campos_ocultos_formulario = array(
 	'tipo_de_capacitado'	=> set_value('tipo_de_capacitado', @$campos['tipo_capacitado']),
 	'codigo_departamento'	=> set_value('codigo_departamento', @$campos['id_departamento']),
+	'codigo_municipio'		=> set_value('codigo_municipio', @$campos['id_municipio']),
 	'fecha_1'				=> set_value('fecha_1', @$campos['fecha1']),
 	'fecha_2'				=> set_value('fecha_2', @$campos['fecha2'])
 );
-
-
 ?>
 <?= form_open('index.php/estadisticas/imprimir/10', $formulario_imprimir, $campos_ocultos_formulario); ?>
 <?= form_close(); ?>
 <?= form_open('index.php/estadisticas/exportar/10', $formulario_exportar, $campos_ocultos_formulario); ?>
 <?= form_close(); ?>
-<? //form_open('index.php/estadisticas/consulta/10', $formulario_consultar); ?>
-<?= form_open('',$attr); ?>
+<?= form_open('index.php/estadisticas/consulta/10', $formulario_consultar); ?>
 	<div class="row">
         <div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Tipo de Capacitado:'); ?>
-				<?= form_dropdown('id_tipo_capacitados', $lista_tipo_capacitados, '', 'class="form-control" required id="id_tipo_capacitados"'); ?>
-				<?= form_error('id_tipo_capacitados'); ?>
-			</div>
-		</div>
-		<div class="col-lg-6">
-			<div class="form-group">
-				<?= form_label('Departamento:'); ?>
-				<?= form_dropdown('id_departamento', $lista_departamentos, '', 'class="form-control" required id="id_departamento"'); ?>
-				<?= form_error('id_departamento'); ?>
-			</div>
-		</div>
-        <div class="col-lg-6">
-			<div class="form-group">
-				<?= form_label('Municipio:'); ?>
-				<?= form_dropdown('id_municipio', $lista_municipios, '', 'class="form-control" required id="id_municipio"'); ?>
-				<?= form_error('id_municipio'); ?>
+				<?= form_dropdown('tipo_capacitado', $lista_tipo_capacitados, set_value('tipo_capacitado', @$campos['tipo_capacitado']), 'class="form-control" required'); ?>
+				<?= form_error('tipo_capacitado'); ?>
 			</div>
 		</div>
 		<div class="col-lg-6">
@@ -88,12 +71,15 @@ $campos_ocultos_formulario = array(
 				<?= form_label('Periodo:'); ?>
 				<div class="row">
 					<div class="col-lg-6">
-						<?= form_input($fecha_ini); ?>
-						<?= form_error('fecha_ini'); ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha1'; $fecha['value'] = set_value('fecha1', @$campos['fecha1']); ?>
+						<?= form_input($fecha); ?>
+						<?= form_error('fecha1'); ?>
 					</div>
+					<div class="visible-phone visible-tablet"><?= nbs(); ?></div>
 					<div class="col-lg-6">
-						<?= form_input($fecha_fin); ?>
-						<?= form_error('fecha_fin'); ?>
+						<?php $fecha['name'] = $fecha['id'] = 'fecha2'; $fecha['value'] = set_value('fecha2', @$campos['fecha2']); ?>
+						<?= form_input($fecha); ?>
+						<?= form_error('fecha2'); ?>
 					</div>
 				</div>
 			</div>
@@ -103,7 +89,7 @@ $campos_ocultos_formulario = array(
 		<div class="col-lg-12">
 			<div class="form-group">
 				<?= form_submit($boton_primario); ?>
-                <?= form_reset($boton_secundario); ?>
+				<?= form_reset($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -116,215 +102,101 @@ $campos_ocultos_formulario = array(
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="table-responsive" id="contenedor-tabla-princial">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1">
+					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica10-1">
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Centros Educativos</th>
-								<th>Autoformacion</th>
+								<th>Departamento</th>
+								<th>Municipio</th>
 								<th>Tutorizados</th>
+								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
-							
+							<?php
+							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
+								if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+							?>
+							<tr>
+								<td><?= $usuario_nivel_nacional->indice; ?></td>
+								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
+								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
+								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
+								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
+							</tr>
+							<?php
+								}
+								else{
+							?>
+							<tr>
+								<td style="opacity: 0.0;"><?= $usuario_nivel_nacional->indice; ?></td>
+								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
+								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
+								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
+								<td><?= bold($usuario_nivel_nacional->autoformacion); ?></td>
+							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<div class="col-lg-6" id="contenedor-grafica">
-				<div id="morris-bar-chart-estadistica2-1"></div>
+				<div id="morris-bar-chart-estadistica10-1"></div>
 			</div>
 		</div>
 	</div>
 </div>
-<!--
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<?= heading('Listado de Usuarios por Centro Educativo', 4); ?>
-	</div>
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-2">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Nombres</th>
-								<th>Apellido</th>
-								<th>Apellido</th>
-								<th>Tipo de Capacitado</th>
-								<th>Modalidad de Capacitacion</th>
-							</tr>
-						</thead>
-						<tbody>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-//-->
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#data-tables-estadistica10-1').dataTable({
+			"searching":	false,
+			"lengthChange":	false,
+			"ordering":		false,
+			"info":			false,
+			"oLanguage": {
+				"oPaginate": {
+					"sFirst":		"<<",
+					"sLast":		">>",
+					"sNext":		">",
+					"sPrevious":	"<"
+				},
+				"sInfo":		"_START_/_END_ de _TOTAL_ registros",
+				"sEmptyTable":	"No hay resultado para esta Consulta Estadística."
+			}
+		});
+		$('#data-tables-estadistica10-2').dataTable({
+			language:{
+				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
+			}
+		});
+	});
+</script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() 
-	{
-		$("#id_departamento").change( function()
-        {
-		  var respuesta = null;
-		  $.ajax({
-                type : 'get',
-				datatype: 'json',
-                url  : "<?= base_url('estadisticas/lista_municipios_departamentos')?>",
-				cache:false,
-                data : 
-				{
-					id_departamento:$("#id_departamento").val(),
-					csrf_test_name:$('input[name=csrf_test_name]').val()
-				},
-                success: function(data)
-                {
-                    //console.log($('#id_tipo_capacitados').val());
-                    console.log("JSON: " + json);
-                },
-                error: function(jqXHR, exception)
-                {
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					$('#id_municipio').empty();
-					$.each(respuesta,function(res,item){
-						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
-					});
-                }
-            });		
-		}).change();
-	});
-	
-	$("#formulario").on("submit", function(e)
-        {	
-			var respuesta = null;
-			$('#contenedor-grafica').empty();
-			$("#contenedor-grafica").append($("<div></div>").attr("id", "morris-bar-chart-estadistica2-1"));
-
-			$('#contenedor-tabla-princial').empty();
-			$("#contenedor-tabla-princial").html('<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica2-1"><thead>'+
-												 '<tr><th>#</th><th>Centros Educativos</th><th>Autoformacion</th><th>Tutorizados</th></tr></thead></table>');
-			
-			$.ajax({
-                type : "get",
-                url  : "<?= base_url('estadisticas/formulario')?>",
-                data : {
-					opcion:"10",
-					id_tipo_capacitados:$('#id_tipo_capacitados').val(),
-					id_departamento:$('#id_departamento').val(),
-					id_municipio: $('#id_municipio').val(),
-					fecha_ini:$('#fecha_ini').val(),
-					fecha_fin:$('#fecha_fin').val(),
-					csrf_test_name:$('input[name=csrf_test_name]').val()
-				
-				},
-                success: function(data)
-                {
-                    alert("JSON: " + json);
-                },
-                error: function(jqXHR, exception)
-                {
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					console.log(respuesta);
-										
-					$('#data-tables-estadistica2-1').dataTable({
-						searching: false,
-						lengthChange: false,
-						oLanguage: {
-							"oPaginate": {
-								"sFirst": "Primero",
-								"sLast": "Ultimo",
-								"sNext": ">>",
-								"sPrevious": "<<"
-							},
-							"sInfo": "_START_/_END_ de _TOTAL_ registros",
-							"sEmptyTable": "No hay resultado para esta Consulta Estadística."
-						  },
-						data: respuesta,
-						columns: 
-						[
-							{data: "row_number" },
-							{data: "nombre_centro_educativo" },
-							{data: "autoformacion" },
-							{data: "tutorizado" }
-						]
-					});
-			     
-					Morris.Bar({
-						element: 'morris-bar-chart-estadistica2-1',
-						data: respuesta,
-						xkey: 'nombre_centro_educativo',
-						ykeys: ['tutorizado', 'autoformacion'],
-						labels: ['Tutorizado', 'Autoformacion']
-					});
-
-                }
-			});
-			
-			e.preventDefault();
-			return false;
-
+	$(function() {
+		Morris.Bar({
+			element: 'morris-bar-chart-estadistica10-1',
+			data: [<?= $usuarios_nivel_nacional_json; ?>],
+			xkey: 'y',
+			ykeys: ['a', 'b'],
+			labels: ['Tutorizados', 'Autoformación'],
+			hideHover: 'auto',
+			resize: true
 		});
-        /*
-        $('#data-tables-estadistica2-1 tbody').on('click', 'tr', function () {
-		    var name = $('td', this).eq(1).text();
-            alert(name);
-				//var respuesta = null;
-		
-			$.ajax(
-			{
-                type : "get",
-                url  : "<?= base_url('estadisticas/formulario')?>",
-                data : {
-					opcion:"11",
-					id_tipo_capacitados:$('#id_tipo_capacitados').val(),
-					id_departamento:$('#id_departamento').val(),
-					id_municipio: $('#id_municipio').val(),
-					fecha_ini:$('#fecha_ini').val(),
-					fecha_fin:$('#fecha_fin').val()
-				},
-                success: function(data)
-                {
-                    console.log("JSON: " + json);
-                },
-                error: function(jqXHR, exception)
-                {
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					console.log(respuesta);
-					$('#data-tables-estadistica2-1').dataTable({
-						searching: false,
-						lengthChange: false,
-						oLanguage: {
-							"oPaginate": {
-								"sFirst": ">",
-								"sLast": "<",
-								"sNext": ">>",
-								"sPrevious": "<<"
-							},
-							"sInfo": "_START_/_END_ de _TOTAL_ registros",
-							"sEmptyTable": "No hay resultado para esta Consulta Estadística."
-						  },
-						data: respuesta,
-						columns: 
-						[
-							{ data : "nombres_usuario" },
-							{ data : "apellido1_usuario" },
-							{ data : "apellido2_usuario" },
-							{ data : "tipo_capacitado" },
-							{ data : "modalidad_usuario" }												
-						]
-					});
-                }
-				
-			});
-        */
-        
+		Morris.Bar({
+			element: 'morris-bar-chart-estadistica10-2',
+			data: [<?= $usuarios_nivel_nacional_json; ?>],
+			xkey: 'y',
+			ykeys: ['a', 'b'],
+			labels: ['Tutorizados', 'Autoformación'],
+			hideHover: 'auto',
+			resize: true
+		});
+	});
 </script>

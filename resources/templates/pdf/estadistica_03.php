@@ -27,7 +27,7 @@
 				<thead>
 					<tr>
 						<td style="text-align: center; font-weight: bold;">#</td>
-						<td style="text-align: center; font-weight: bold;">Departamentos</td>
+						<td style="text-align: center; font-weight: bold;">Departamento</td>
 						<td style="text-align: center; font-weight: bold;">Capacitados</td>
 						<td style="text-align: center; font-weight: bold;">Certificados</td>
 					</tr>

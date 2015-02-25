@@ -93,10 +93,10 @@ $campos_ocultos_formulario = array(
 						<thead>
 							<tr>
 								<th></th>
-								<th colspan="2">Modalidades de Capacitaci&oacute;n</th>
+								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
 							</tr>
 							<tr>
-								<th rowspan="2">Tipos de Capacitado</th>
+								<th rowspan="2">Tipo de Capacitado</th>
 								<th>Tutorizados</th>
 								<th>Autoformaci&oacute;n</th>
 							</tr>

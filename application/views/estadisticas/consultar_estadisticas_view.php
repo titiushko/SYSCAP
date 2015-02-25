@@ -25,19 +25,19 @@
 				}
                 if($this->uri->uri_string() == 'estadisticas/consulta/6'){
 					$this->load->view('estadisticas/estadistica_06_view', $datos);
-				}/*
+				}
                 if($this->uri->uri_string() == 'estadisticas/consulta/7'){
 					$this->load->view('estadisticas/estadistica_07_view', $datos);
-				}*/
+				}
                 if($this->uri->uri_string() == 'estadisticas/consulta/8'){
 					$this->load->view('estadisticas/estadistica_08_view', $datos);
 				}
 				if($this->uri->uri_string() == 'estadisticas/consulta/9'){
 					$this->load->view('estadisticas/estadistica_09_view', $datos);
-				}/*
+				}
                 if($this->uri->uri_string() == 'estadisticas/consulta/10'){
 					$this->load->view('estadisticas/estadistica_10_view', $datos);
-				}*/
+				}
 				?>
 				<div class="row">
 					<div class="col-lg-12 text-center">

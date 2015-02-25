@@ -48,7 +48,7 @@
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>Modalidades de Capacitaci&oacute;n</th>
+								<th>Modalidad de Capacitaci&oacute;n</th>
 								<th>Cantidades</th>
 							</tr>
 						</thead>

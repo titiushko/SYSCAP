@@ -8,6 +8,7 @@ class Profesiones_model extends CI_Model{
 	function lista_profesiones(){
 		$lista_profesiones[''] = '';
 		$query = $this->db->select('id_profesion, acentos(nombre_profesion) nombre_profesion');
+		$query = $this->db->order_by('nombre_profesion', 'asc');
 		$query = $this->db->get('profesiones');
 		foreach($query->result() as $profesion){
 			$lista_profesiones[$profesion->id_profesion] = utf8($profesion->nombre_profesion);

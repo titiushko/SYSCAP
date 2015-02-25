@@ -166,27 +166,21 @@ class Estadisticas extends MY_Controller{
 					}
 					break;
 				case 10: // Usuarios a Nivel Nacional
-					$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
-					$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
-					//$datos['certificados'] = $this->estadisticas_model->usuarios_nivel_nacional('certificados');
-					//$datos['capacitados'] = $this->estadisticas_model->usuarios_nivel_nacional('capacitados');
-					//$datos['total'] = $this->estadisticas_model->usuarios_nivel_nacional('total');
-					$datos['lista_tipo_capacitados'] =  array(
-						'Evaluacion' => 'Capacitados',
-						'Examen' => 'Certificados'
-						);
-					/*
-					$datos['grafica_json'] = '';
-					$centroseducativos = 1;
-					foreach($datos['grafica'] as $data){
-						$datos['grafica_json'] = $datos['grafica_json'].'{y: \''.($centroseducativos++).'\', a: '.$data->capacitados.', b: '.$data->certificados.'},';
+					if($this->input->post()){
+						$this->form_validation->set_rules('tipo_capacitado', 'Tipo de Capacitado', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'trim|required');
+						$this->form_validation->set_rules('fecha2', 'Fecha 2', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
+						if($this->form_validation->run()){
+							$datos = array_merge($this->datos_estadistica_10_view($this->input->post('tipo_capacitado'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+						}
+						else{
+							$datos = array_merge($this->datos_estadistica_10_view(), $datos);
+						}
 					}
-					*/
-					/*
-					$datos['id_modal'] = 'myModalChart';
-					$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
-					$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica10-2"></div>';
-					*/
+					else{
+						$datos = array_merge($this->datos_estadistica_10_view(), $datos);
+					}
 					break;
 				case 11: // Usuarios por Grado Digital
 			}
@@ -201,13 +195,11 @@ class Estadisticas extends MY_Controller{
 	private function datos_estadistica_01_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
 		$datos['modalidades_capacitados'] = $this->estadisticas_model->modalidades_capacitados($fecha1, $fecha2);
 		$datos['modalidades_capacitados_json'] = '';
-         
 		foreach($datos['modalidades_capacitados'] as $modalidad_capacitado){
 			if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
 				$datos['modalidades_capacitados_json'] .= '{y: \''.$modalidad_capacitado->tipos_capacitados.'\', a: '.$modalidad_capacitado->tutorizados.', b: '.$modalidad_capacitado->autoformacion.'},';
 			}
 		}
-        
 		if($metodo == 'consulta'){
 			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2);
 		}
@@ -247,7 +239,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado != '' ? $tipo_capacitado == 'Evaluaci' ? 'Capacitados' : 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -268,7 +260,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('id_departamento' => $codigo_departamento, 'id_municipio' => $codigo_municipio, 'fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado != '' ? $tipo_capacitado == 'Evaluaci' ? 'Capacitados' : 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
 			$datos['nombre_departamento'] = $codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : '';
 			$datos['nombre_municipio'] = $codigo_municipio != '' ? $this->municipios_model->nombre_municipio($codigo_municipio) : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
@@ -310,8 +302,26 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_centro_educativo' => $codigo_centro_educativo);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado != '' ? $tipo_capacitado == 'Evaluaci' ? 'Capacitados' : 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
 			$datos['nombre_centro_educativo'] = $codigo_centro_educativo != '' ? $this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo) : '';
+		}
+		return $datos;
+	}
+	
+	private function datos_estadistica_10_view($tipo_capacitado = '', $fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
+		$datos['usuarios_nivel_nacional'] = $this->estadisticas_model->usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2);
+		$datos['usuarios_nivel_nacional_json'] = '';
+		foreach($datos['usuarios_nivel_nacional'] as $usuario_nivel_nacional){
+			if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+				$datos['usuarios_nivel_nacional_json'] .= '{y: \''.$usuario_nivel_nacional->indice.'\', a: '.$usuario_nivel_nacional->tutorizado.', b: '.$usuario_nivel_nacional->autoformacion.'},';
+			}
+		}
+		if($metodo == 'consulta'){
+			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
+		}
+		elseif($metodo == 'imprimir'){
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
 	}
@@ -378,6 +388,12 @@ class Estadisticas extends MY_Controller{
 						}
 						break;
 					case 10: // Usuarios a Nivel Nacional
+						$pagina = 'estadisticas/imprimir_estadistica_10_view';
+						$datos = $this->datos_estadistica_10_view($this->input->post('tipo_de_capacitado'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
+						if(empty($datos['usuarios_nivel_nacional'])){
+							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						}
+						break;
 					case 11: // Usuarios por Grado Digital
 				}
 				$this->load->view($pagina, $datos);
@@ -429,6 +445,8 @@ class Estadisticas extends MY_Controller{
 					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('tipo_capacitado' => $this->input->post('tipo_de_capacitado'), 'codigo_centro_educativo' => $this->input->post('codigo_centro_educativo')));
 					break;
 				case 10: // Usuarios a Nivel Nacional
+					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('tipo_capacitado' => $this->input->post('tipo_de_capacitado'), 'fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2')));
+					break;
 				case 11: // Usuarios por Grado Digital
 			}
 			$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
@@ -473,7 +491,7 @@ class Estadisticas extends MY_Controller{
 						$lista_cantidad_usuarios_municipio .= '<tr><td>'.$cantidades++.'</td><td>'.utf8($cantidad_municipio->nombre_municipio).'</td><td>'.$cantidad_municipio->capacitados.'</td><td>'.$cantidad_municipio->certificados.'</td></tr>';
 					}
 					else{
-						$lista_cantidad_usuarios_municipio .= '<tr><td style="opacity: 0.0;">'.$cantidades++.'</td><td>'.bold($cantidad_municipio->nombre_municipio).'</td><td>'.bold($cantidad_municipio->capacitados).'</td><td>'.bold($cantidad_municipio->certificados).'</td></tr>';
+						$lista_cantidad_usuarios_municipio .= '<tr><td></td><td>'.bold($cantidad_municipio->nombre_municipio).'</td><td>'.bold($cantidad_municipio->capacitados).'</td><td>'.bold($cantidad_municipio->certificados).'</td></tr>';
 					}
 				}
 				if($lista_cantidad_usuarios_municipio == ''){
@@ -526,7 +544,7 @@ class Estadisticas extends MY_Controller{
 						$lista_usuarios_departamento_municipio .= '<tr><td>'.$centros_educativos++.'</td><td>'.utf8($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.$usuario_departamento_municipio->capacitados.'</td><td>'.$usuario_departamento_municipio->certificados.'</td></tr>';
 					}
 					else{
-						$lista_usuarios_departamento_municipio .= '<tr><td style="opacity: 0.0;">'.$centros_educativos++.'</td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold($usuario_departamento_municipio->capacitados).'</td><td>'.bold($usuario_departamento_municipio->certificados).'</td></tr>';
+						$lista_usuarios_departamento_municipio .= '<tr><td></td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold($usuario_departamento_municipio->capacitados).'</td><td>'.bold($usuario_departamento_municipio->certificados).'</td></tr>';
 					}
 				}
 				if($lista_usuarios_departamento_municipio == ''){
@@ -564,7 +582,7 @@ class Estadisticas extends MY_Controller{
 						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td>'.$estaditicas++.'</td><td>'.utf8($estaditica_departamento_tipo_fecha->nombre_municipio).'</td><td>'.$estaditica_departamento_tipo_fecha->tutorizado.'</td><td>'.$estaditica_departamento_tipo_fecha->autoformacion.'</td></tr>';
 					}
 					else{
-						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td style="opacity: 0.0;">'.$estaditicas++.'</td><td>'.utf8($estaditica_departamento_tipo_fecha->nombre_municipio).'</td><td>'.$estaditica_departamento_tipo_fecha->tutorizado.'</td><td>'.$estaditica_departamento_tipo_fecha->autoformacion.'</td></tr>';
+						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)).'</td><td>'.bold($estaditica_departamento_tipo_fecha->tutorizado).'</td><td>'.bold($estaditica_departamento_tipo_fecha->autoformacion).'</td></tr>';
 					}
 				}
 				if($lista_estaditicas_departamento_tipo_fechas == ''){
@@ -591,7 +609,7 @@ class Estadisticas extends MY_Controller{
 						$lista_usuarios_departamento_municipio .= '<tr><td>'.$centros_educativos++.'</td><td>'.utf8($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.$usuario_departamento_municipio->capacitados.'</td><td>'.$usuario_departamento_municipio->certificados.'</td></tr>';
 					}
 					else{
-						$lista_usuarios_departamento_municipio .= '<tr><td style="opacity: 0.0;">'.$centros_educativos++.'</td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold($usuario_departamento_municipio->capacitados).'</td><td>'.bold($usuario_departamento_municipio->certificados).'</td></tr>';
+						$lista_usuarios_departamento_municipio .= '<tr><td></td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold($usuario_departamento_municipio->capacitados).'</td><td>'.bold($usuario_departamento_municipio->certificados).'</td></tr>';
 					}
 				}
 				if($lista_usuarios_departamento_municipio == ''){
@@ -614,7 +632,7 @@ class Estadisticas extends MY_Controller{
 												   '<USUARIOS_DEPARTAMENTO_MUNICIPIO>',
 												   '<USUARIOS_CENTRO_EDUCATIVO>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'capacitados' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificados' ? 'Certificados' : '',
+												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
 												   utf8($parametros['codigo_departamento'] != '' ? $this->departamentos_model->nombre_departamento($parametros['codigo_departamento']) : ''),
 												   utf8($parametros['codigo_municipio'] != '' ? $this->municipios_model->nombre_municipio($parametros['codigo_municipio']) : ''),
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
@@ -637,7 +655,7 @@ class Estadisticas extends MY_Controller{
 												   '<PERIODO>',
 												   '<ESTADITICAS_DEPARTAMENTO_FECHAS>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'Examen' ? 'Certificados' : '',
+												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
 												   $lista_estaditicas_departamento_fechas),
 											 $plantilla_pdf);
@@ -662,12 +680,36 @@ class Estadisticas extends MY_Controller{
 												   '<CENTRO_EDUCATIVO>',
 												   '<TIPOS_CAPACITADOS_CENTRO_EDUCATIVO>'),
 											 array(encabezado_reporte(),
-												   $parametros['tipo_capacitado'] == 'Evaluaci' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'Examen' ? 'Certificados' : '',
+												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
 												   $parametros['codigo_centro_educativo'] != '' ? $this->centros_educativos_model->nombre_centro_educativo($parametros['codigo_centro_educativo']) : '',
 												   $lista_tipos_capacitados_centro_educativo),
 											 $plantilla_pdf);
 				break;
 			case 10: // Usuarios a Nivel Nacional
+				$usuarios_nivel_nacional = $this->estadisticas_model->usuarios_nivel_nacional($parametros['tipo_capacitado'], $parametros['fecha1'], $parametros['fecha2']);
+				$lista_usuarios_nivel_nacional = '';
+				foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
+					if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+						$lista_usuarios_nivel_nacional .= '<tr><td>'.$usuario_nivel_nacional->indice.'</td><td>'.utf8($usuario_nivel_nacional->nombre_departamento).'</td><td>'.utf8($usuario_nivel_nacional->nombre_municipio).'</td><td>'.$usuario_nivel_nacional->tutorizado.'</td><td>'.$usuario_nivel_nacional->autoformacion.'</td></tr>';
+					}
+					else{
+						$lista_usuarios_nivel_nacional .= '<tr><td></td><td>'.bold(utf8($usuario_nivel_nacional->nombre_departamento)).'</td><td>'.bold(utf8($usuario_nivel_nacional->nombre_municipio)).'</td><td>'.bold($usuario_nivel_nacional->tutorizado).'</td><td>'.bold($usuario_nivel_nacional->autoformacion).'</td></tr>';
+					}
+				}
+				if($lista_usuarios_nivel_nacional == ''){
+					$lista_usuarios_nivel_nacional = 'No hay resultados para ésta estadística.';
+				}
+				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_10.php');
+				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+												   '<TIPO_CAPACITADO>',
+												   '<PERIODO>',
+												   '<USUARIOS_NIVEL_NACIONAL>'),
+											 array(encabezado_reporte(),
+												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
+												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
+												   $lista_usuarios_nivel_nacional),
+											 $plantilla_pdf);
+				break;
 			case 11: // Usuarios por Grado Digital
 		}
 		return $plantilla_pdf;
@@ -702,7 +744,7 @@ class Estadisticas extends MY_Controller{
 			return FALSE;
 		}
 		elseif(is_numeric($opcion)){
-			if(($opcion >= 1 && $opcion <= 4) || ($opcion >= 6 && $opcion <= 11)){
+			if(($opcion >= 1 && $opcion <= 4) || ($opcion >= 6 && $opcion <= 10)){
 				return TRUE;
 			}
 			else{
@@ -713,111 +755,7 @@ class Estadisticas extends MY_Controller{
 			return FALSE;
 		}
 	}
-    
-    public function lista_municipios_departamentos (){
-		$id_departamento = $this->input->get_post('id_departamento');
-		$datos['json_data'] = json_encode($this->municipios_model->lista_municipios_departamento($id_departamento));
-		//$this->load->view('estadisticas/json', $datos);
-		echo $datos['json_data'];
-        exit;
-	}
-    
-    public function lista_usuarios_centro_educativo (){
-        /*
-		$id_departamento = $this->input->get_post('id_departamento');
-        $codigo_departamento, 
-        $codigo_municipio, 
-        $fecha1, 
-        $fecha2, 
-        $tipo_capacitado
-        */
-		$datos['json_data'] = json_encode($this->estadisticas_model->lista_usuarios_centro_educativo($parametros['codigo_departamento'], $parametros['codigo_municipio'], $parametros['fecha1'], $parametros['fecha2'], $parametros['nombre_centro_eucuativo']));
-		//$this->load->view('estadisticas/json', $datos);
-		echo $datos['json_data'];//lista_usuarios_centro_educativo
-        exit;
-	}
-    
-    
-    
-    public function formulario(){
-		
-		$opcion = $this->input->get_post('opcion');
-        
-        $fecha_ini=$this->input->get_post('fecha_ini');
-		$fecha_fin=$this->input->get_post('fecha_fin');
-        
-		switch($opcion){
-		  case 4: // Usuarios a Nivel Nacional		
-				
-				//$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
-				$id_departamento=$this->input->get_post('id_departamento');
-				$id_municipio=$this->input->get_post('id_municipio');
-                
-				$datos['certificados'] = $this->estadisticas_model->usuarios_departamento_municipio($id_departamento,$id_municipio,$fecha_ini,$fecha_fin);
-				$datos['json_data'] = json_encode($datos['certificados']);
-                
-				echo $datos['json_data'];
-			break;			
-			case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
-            
-                $id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
-				$id_departamento=$this->input->get_post('id_departamento');
-				
-				$datos['certificados'] = $this->estadisticas_model->estaditicas_departamento_tipo_fechas($fecha_ini,$fecha_fin,$id_departamento,$id_tipo_capacitados);
-				$datos['json_data'] = json_encode($datos['certificados']);
-
-				echo $datos['json_data'];
-            break;
-            case 7: // Usuarios a Nivel Nacional		
-				
-				$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
-				$id_departamento=$this->input->get_post('id_departamento');
-				$id_municipio=$this->input->get_post('id_municipio');
-				
-				$datos['certificados'] = $this->estadisticas_model->usuarios_departamento_municipio_fecha($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin);
-				$datos['json_data'] = json_encode($datos['certificados']);
-				echo $datos['json_data'];
-			break;
-            
-			case 10: // Usuarios a Nivel Nacional		
-				
-				$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
-				$id_departamento=$this->input->get_post('id_departamento');
-				$id_municipio=$this->input->get_post('id_municipio');
-				
-				$datos['certificados'] = $this->estadisticas_model->usuarios_nivel_nacional($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin);
-				$datos['json_data'] = json_encode($datos['certificados']);
-				//$this->load->view('estadisticas/json', $datos);
-				echo $datos['json_data'];
-			break;
-			case 11: // Usuarios por centro educativo
-			
-				$id_tipo_capacitados=$this->input->get_post('id_tipo_capacitados');
-				$id_departamento=$this->input->get_post('id_departamento');
-				$id_municipio=$this->input->get_post('id_municipio');
-                $centro_educativo=$this->input->get_post('centro_educativo');
-				
-				$datos['certificados'] = $this->estadisticas_model->usuarios_centro_educativo($id_tipo_capacitados,$id_departamento,$id_municipio,$fecha_ini,$fecha_fin,$centro_educativo);
-				$datos['json_data'] = json_encode($datos['certificados']);
-				//$this->load->view('estadisticas/json', $datos);
-				echo $datos['json_data'];
-			break;
-            case 12: // Usuario municipio.
-                $id_municipio=$this->input->get_post('id_municipio');
-                
-                $datos['usuarios_municipio'] = $this->estadisticas_model->usuarios_municipio_filtro_nombre($id_municipio);
-                $datos['json_data'] = json_encode($datos['usuarios_municipio']);
-				//$this->load->view('estadisticas/json', $datos);
-				echo $datos['json_data'];
-            break;
-			default:
-			break;
-		}
-	}	
-    
 }
-
-
 
 /* End of file estadisticas.php */
 /* Location: ./application/controllers/estadisticas.php */

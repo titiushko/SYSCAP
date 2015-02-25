@@ -15,9 +15,9 @@ $fecha = array(
 	'class'		=> 'form-control'
 );
 $lista_tipo_capacitados =  array(
-	''			=> '',
-	'Evaluaci'	=> 'Capacitados',
-	'Examen'	=> 'Certificados'
+	''				=> '',
+	'capacitado'	=> 'Capacitados',
+	'certificado'	=> 'Certificados'
 );
 $boton_primario = array(
 	'name'		=> 'boton_primario',
@@ -104,9 +104,9 @@ $campos_ocultos_formulario = array(
 						<thead>
 							<tr>
 								<th>#</th>
-								<th>Departamentos</th>
-								<th>Tutorizado</th>
-								<th>Autoformacion</th>
+								<th>Departamento</th>
+								<th>Tutorizados</th>
+								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -135,6 +135,7 @@ $campos_ocultos_formulario = array(
 		$('#data-tables-estadistica8-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
+			"ordering":		false,
 			"oLanguage": {
 				"oPaginate": {
 					"sFirst":		"<<",
@@ -157,7 +158,7 @@ $campos_ocultos_formulario = array(
 			data: [<?= $estaditicas_departamento_fechas_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformacion'],
 			hideHover: 'auto',
 			resize: true
 		});
@@ -166,7 +167,7 @@ $campos_ocultos_formulario = array(
 			data: [<?= $estaditicas_departamento_fechas_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Capacitados', 'Certificados'],
+			labels: ['Tutorizados', 'Autoformacion'],
 			hideHover: 'auto',
 			resize: true
 		});
