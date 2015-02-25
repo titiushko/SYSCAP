@@ -162,20 +162,19 @@ class Estadisticas_model extends CI_Model{
 	
 	// Consulta Estadística 10: Usuarios a Nivel Nacional
 	function usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2){
-		$query = $this->db->query('SET @indice = 0');
-		$query = $this->db->query('SELECT @indice := @indice + 1 indice, acentos(nombre_departamento) nombre_departamento, acentos(nombre_municipio) nombre_municipio,
+		$query = $this->db->query('SELECT acentos(nombre_departamento) nombre_departamento, acentos(nombre_municipio) nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
 								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY nombre_departamento, nombre_municipio
 								   UNION
-								   SELECT @indice := @indice + @indice indice, NULL nombre_departamento, \'TOTAL\' nombre_municipio,
+								   SELECT NULL nombre_departamento, \'TOTAL\' nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?
-								   ORDER BY indice', array($tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2));
+								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
+								   array($tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2));
 		return $query->result();
 	}
 }

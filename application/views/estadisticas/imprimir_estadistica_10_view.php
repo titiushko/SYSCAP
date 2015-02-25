@@ -58,11 +58,12 @@
 						</thead>
 						<tbody>
 							<?php
+							$usuarios = 1;
 							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
 								if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
 							?>
 							<tr>
-								<td><?= $usuario_nivel_nacional->indice; ?></td>
+								<td><?= $usuarios++; ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
 								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
@@ -73,7 +74,7 @@
 								else{
 							?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $usuario_nivel_nacional->indice; ?></td>
+								<td style="opacity: 0.0;"><?= $usuarios++; ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
 								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>

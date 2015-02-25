@@ -310,10 +310,10 @@ class Estadisticas extends MY_Controller{
 	
 	private function datos_estadistica_10_view($tipo_capacitado = '', $fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
 		$datos['usuarios_nivel_nacional'] = $this->estadisticas_model->usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2);
-		$datos['usuarios_nivel_nacional_json'] = '';
+		$datos['usuarios_nivel_nacional_json'] = ''; $usuarios = 1;
 		foreach($datos['usuarios_nivel_nacional'] as $usuario_nivel_nacional){
 			if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
-				$datos['usuarios_nivel_nacional_json'] .= '{y: \''.$usuario_nivel_nacional->indice.'\', a: '.$usuario_nivel_nacional->tutorizado.', b: '.$usuario_nivel_nacional->autoformacion.'},';
+				$datos['usuarios_nivel_nacional_json'] .= '{y: \''.$usuarios++.'\', a: '.$usuario_nivel_nacional->tutorizado.', b: '.$usuario_nivel_nacional->autoformacion.'},';
 			}
 		}
 		if($metodo == 'consulta'){
@@ -687,10 +687,10 @@ class Estadisticas extends MY_Controller{
 				break;
 			case 10: // Usuarios a Nivel Nacional
 				$usuarios_nivel_nacional = $this->estadisticas_model->usuarios_nivel_nacional($parametros['tipo_capacitado'], $parametros['fecha1'], $parametros['fecha2']);
-				$lista_usuarios_nivel_nacional = '';
+				$lista_usuarios_nivel_nacional = ''; $usuarios = 1;
 				foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
 					if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
-						$lista_usuarios_nivel_nacional .= '<tr><td>'.$usuario_nivel_nacional->indice.'</td><td>'.utf8($usuario_nivel_nacional->nombre_departamento).'</td><td>'.utf8($usuario_nivel_nacional->nombre_municipio).'</td><td>'.$usuario_nivel_nacional->tutorizado.'</td><td>'.$usuario_nivel_nacional->autoformacion.'</td></tr>';
+						$lista_usuarios_nivel_nacional .= '<tr><td>'.$usuarios++.'</td><td>'.utf8($usuario_nivel_nacional->nombre_departamento).'</td><td>'.utf8($usuario_nivel_nacional->nombre_municipio).'</td><td>'.$usuario_nivel_nacional->tutorizado.'</td><td>'.$usuario_nivel_nacional->autoformacion.'</td></tr>';
 					}
 					else{
 						$lista_usuarios_nivel_nacional .= '<tr><td></td><td>'.bold(utf8($usuario_nivel_nacional->nombre_departamento)).'</td><td>'.bold(utf8($usuario_nivel_nacional->nombre_municipio)).'</td><td>'.bold($usuario_nivel_nacional->tutorizado).'</td><td>'.bold($usuario_nivel_nacional->autoformacion).'</td></tr>';
