@@ -112,10 +112,12 @@ CREATE TABLE IF NOT EXISTS usuarios(
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de usuarios. Los registros de está tabla se obtendrán de la tabla <mdl_user> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS bitacoras(
-	id_bitacora BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	id_usuario BIGINT(10) UNSIGNED NOT NULL,
-	fecha_bitacora DATETIME NOT NULL,
-	accion_bitacora VARCHAR(255) NOT NULL,
+	id_bitacora BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de bitacora.',
+	id_usuario BIGINT(10) UNSIGNED COMMENT 'Identificador del registro de la tabla usuarios sobre el cual se realiza la acción.',
+	id_centro_educativo INT(10) UNSIGNED COMMENT 'Identificador del registro de la tabla centros_educativos sobre el cual se realiza la acción.',
+	usuario_bitacora VARCHAR(100) NOT NULL COMMENT 'Nombre del usuario de base de datos que realiza la acción.',
+	fecha_bitacora DATETIME NOT NULL COMMENT 'Fecha actual del servidor cuando se realiza la acción.',
+	accion_bitacora TEXT NOT NULL COMMENT 'Comentario de la acción realizada.',
 	PRIMARY KEY(id_bitacora)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las acciones realizadas por los usuarios.' AUTO_INCREMENT=1;
 

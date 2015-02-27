@@ -10,6 +10,7 @@ BEGIN
 	SET @v_string1 = '';
 	SET @v_string2 = '';
 	WHILE p_cadena REGEXP ' ' DO
+		SELECT REPLACE(REPLACE(REPLACE(p_cadena, '    ', ' '), '   ', ' '), '  ', ' ') INTO p_cadena;
 		SELECT SUBSTRING_INDEX(p_cadena, ' ', 1) INTO @v_string2;
 		SELECT SUBSTRING(p_cadena, LOCATE(' ', p_cadena) + 1) INTO p_cadena;
 		SELECT CONCAT(@v_string1, ' ', CONCAT(UPPER(SUBSTRING(@v_string2, 1, 1)), LOWER(SUBSTRING(@v_string2, 2)))) INTO @v_string1;

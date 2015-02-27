@@ -125,10 +125,12 @@ CREATE TABLE IF NOT EXISTS usuarios(
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de usuarios. Los registros de está tabla se obtendrán de la tabla <mdl_user> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS bitacoras(
-	id_bitacora BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	id_usuario BIGINT(10) UNSIGNED NOT NULL,
-	fecha_bitacora DATETIME NOT NULL,
-	accion_bitacora VARCHAR(255) NOT NULL,
+	id_bitacora BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de bitacora.',
+	id_usuario BIGINT(10) UNSIGNED COMMENT 'Identificador del registro de la tabla usuarios sobre el cual se realiza la acción.',
+	id_centro_educativo INT(10) UNSIGNED COMMENT 'Identificador del registro de la tabla centros_educativos sobre el cual se realiza la acción.',
+	usuario_bitacora VARCHAR(100) NOT NULL COMMENT 'Nombre del usuario de base de datos que realiza la acción.',
+	fecha_bitacora DATETIME NOT NULL COMMENT 'Fecha actual del servidor cuando se realiza la acción.',
+	accion_bitacora TEXT NOT NULL COMMENT 'Comentario de la acción realizada.',
 	PRIMARY KEY(id_bitacora)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las acciones realizadas por los usuarios.' AUTO_INCREMENT=1;
 
@@ -254,6 +256,7 @@ BEGIN
 	SET @v_string1 = '';
 	SET @v_string2 = '';
 	WHILE p_cadena REGEXP ' ' DO
+		SELECT REPLACE(REPLACE(REPLACE(p_cadena, '    ', ' '), '   ', ' '), '  ', ' ') INTO p_cadena;
 		SELECT SUBSTRING_INDEX(p_cadena, ' ', 1) INTO @v_string2;
 		SELECT SUBSTRING(p_cadena, LOCATE(' ', p_cadena) + 1) INTO p_cadena;
 		SELECT CONCAT(@v_string1, ' ', CONCAT(UPPER(SUBSTRING(@v_string2, 1, 1)), LOWER(SUBSTRING(@v_string2, 2)))) INTO @v_string1;
@@ -509,28 +512,76 @@ CREATE TRIGGER T_BitacoraUpdateUsuarios
 AFTER UPDATE ON usuarios
 FOR EACH ROW
 BEGIN
-	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
-	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;
+	DECLARE v_accion_bitacora TEXT DEFAULT ' ';
+	IF IF(OLD.nombre_usuario IS NULL, 'NULL', OLD.nombre_usuario) <> IF(NEW.nombre_usuario IS NULL, 'NULL', NEW.nombre_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'nombre_usuario: ', IF(OLD.nombre_usuario IS NULL, 'NULL', OLD.nombre_usuario), ' -> ', IF(NEW.nombre_usuario IS NULL, 'NULL', NEW.nombre_usuario), ', ');
+	END IF;
+	IF IF(OLD.contrasena_usuario IS NULL, 'NULL', OLD.contrasena_usuario) <> IF(NEW.contrasena_usuario IS NULL, 'NULL', NEW.contrasena_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'contrasena_usuario: ', IF(OLD.contrasena_usuario IS NULL, 'NULL', OLD.contrasena_usuario), ' -> ', IF(NEW.contrasena_usuario IS NULL, 'NULL', NEW.contrasena_usuario), ', ');
+	END IF;
+	IF IF(OLD.id_tipo_usuario IS NULL, 'NULL', OLD.id_tipo_usuario) <> IF(NEW.id_tipo_usuario IS NULL, 'NULL', NEW.id_tipo_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_tipo_usuario: ', IF(OLD.id_tipo_usuario IS NULL, 'NULL', OLD.id_tipo_usuario), ' -> ', IF(NEW.id_tipo_usuario IS NULL, 'NULL', NEW.id_tipo_usuario), ', ');
+	END IF;
+	IF IF(OLD.nombres_usuario IS NULL, 'NULL', OLD.nombres_usuario) <> IF(NEW.nombres_usuario IS NULL, 'NULL', NEW.nombres_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'nombres_usuario: ', IF(OLD.nombres_usuario IS NULL, 'NULL', OLD.nombres_usuario), ' -> ', IF(NEW.nombres_usuario IS NULL, 'NULL', NEW.nombres_usuario), ', ');
+	END IF;
+	IF IF(OLD.apellido1_usuario IS NULL, 'NULL', OLD.apellido1_usuario) <> IF(NEW.apellido1_usuario IS NULL, 'NULL', NEW.apellido1_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'apellido1_usuario: ', IF(OLD.apellido1_usuario IS NULL, 'NULL', OLD.apellido1_usuario), ' -> ', IF(NEW.apellido1_usuario IS NULL, 'NULL', NEW.apellido1_usuario), ', ');
+	END IF;
+	IF IF(OLD.apellido2_usuario IS NULL, 'NULL', OLD.apellido2_usuario) <> IF(NEW.apellido2_usuario IS NULL, 'NULL', NEW.apellido2_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'apellido2_usuario: ', IF(OLD.apellido2_usuario IS NULL, 'NULL', OLD.apellido2_usuario), ' -> ', IF(NEW.apellido2_usuario IS NULL, 'NULL', NEW.apellido2_usuario), ', ');
+	END IF;
+	IF IF(OLD.dui_usuario IS NULL, 'NULL', OLD.dui_usuario) <> IF(NEW.dui_usuario IS NULL, 'NULL', NEW.dui_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'dui_usuario: ', IF(OLD.dui_usuario IS NULL, 'NULL', OLD.dui_usuario), ' -> ', IF(NEW.dui_usuario IS NULL, 'NULL', NEW.dui_usuario), ', ');
+	END IF;
+	IF IF(OLD.sexo_usuario IS NULL, 'NULL', OLD.sexo_usuario) <> IF(NEW.sexo_usuario IS NULL, 'NULL', NEW.sexo_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'sexo_usuario: ', IF(OLD.sexo_usuario IS NULL, 'NULL', OLD.sexo_usuario), ' -> ', IF(NEW.sexo_usuario IS NULL, 'NULL', NEW.sexo_usuario), ', ');
+	END IF;
+	IF IF(OLD.id_profesion IS NULL, 'NULL', OLD.id_profesion) <> IF(NEW.id_profesion IS NULL, 'NULL', NEW.id_profesion) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_profesion: ', IF(OLD.id_profesion IS NULL, 'NULL', OLD.id_profesion), ' -> ', IF(NEW.id_profesion IS NULL, 'NULL', NEW.id_profesion), ', ');
+	END IF;
+	IF IF(OLD.id_nivel_estudio IS NULL, 'NULL', OLD.id_nivel_estudio) <> IF(NEW.id_nivel_estudio IS NULL, 'NULL', NEW.id_nivel_estudio) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_nivel_estudio: ', IF(OLD.id_nivel_estudio IS NULL, 'NULL', OLD.id_nivel_estudio), ' -> ', IF(NEW.id_nivel_estudio IS NULL, 'NULL', NEW.id_nivel_estudio), ', ');
+	END IF;
+	IF IF(OLD.correo_electronico_usuario IS NULL, 'NULL', OLD.correo_electronico_usuario) <> IF(NEW.correo_electronico_usuario IS NULL, 'NULL', NEW.correo_electronico_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'correo_electronico_usuario: ', IF(OLD.correo_electronico_usuario IS NULL, 'NULL', OLD.correo_electronico_usuario), ' -> ', IF(NEW.correo_electronico_usuario IS NULL, 'NULL', NEW.correo_electronico_usuario), ', ');
+	END IF;
+	IF IF(OLD.telefono1_usuario IS NULL, 'NULL', OLD.telefono1_usuario) <> IF(NEW.telefono1_usuario IS NULL, 'NULL', NEW.telefono1_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'telefono1_usuario: ', IF(OLD.telefono1_usuario IS NULL, 'NULL', OLD.telefono1_usuario), ' -> ', IF(NEW.telefono1_usuario IS NULL, 'NULL', NEW.telefono1_usuario), ', ');
+	END IF;
+	IF IF(OLD.telefono2_usuario IS NULL, 'NULL', OLD.telefono2_usuario) <> IF(NEW.telefono2_usuario IS NULL, 'NULL', NEW.telefono2_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'telefono2_usuario: ', IF(OLD.telefono2_usuario IS NULL, 'NULL', OLD.telefono2_usuario), ' -> ', IF(NEW.telefono2_usuario IS NULL, 'NULL', NEW.telefono2_usuario), ', ');
+	END IF;
+	IF IF(OLD.id_centro_educativo IS NULL, 'NULL', OLD.id_centro_educativo) <> IF(NEW.id_centro_educativo IS NULL, 'NULL', NEW.id_centro_educativo) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_centro_educativo: ', IF(OLD.id_centro_educativo IS NULL, 'NULL', OLD.id_centro_educativo), ' -> ', IF(NEW.id_centro_educativo IS NULL, 'NULL', NEW.id_centro_educativo), ', ');
+	END IF;
+	IF IF(OLD.id_departamento IS NULL, 'NULL', OLD.id_departamento) <> IF(NEW.id_departamento IS NULL, 'NULL', NEW.id_departamento) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_departamento: ', IF(OLD.id_departamento IS NULL, 'NULL', OLD.id_departamento), ' -> ', IF(NEW.id_departamento IS NULL, 'NULL', NEW.id_departamento), ', ');
+	END IF;
+	IF IF(OLD.id_municipio IS NULL, 'NULL', OLD.id_municipio) <> IF(NEW.id_municipio IS NULL, 'NULL', NEW.id_municipio) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_municipio: ', IF(OLD.id_municipio IS NULL, 'NULL', OLD.id_municipio), ' -> ', IF(NEW.id_municipio IS NULL, 'NULL', NEW.id_municipio), ', ');
+	END IF;
+	IF IF(OLD.pais_usuario IS NULL, 'NULL', OLD.pais_usuario) <> IF(NEW.pais_usuario IS NULL, 'NULL', NEW.pais_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'pais_usuario: ', IF(OLD.pais_usuario IS NULL, 'NULL', OLD.pais_usuario), ' -> ', IF(NEW.pais_usuario IS NULL, 'NULL', NEW.pais_usuario), ', ');
+	END IF;
+	IF IF(OLD.direccion_usuario IS NULL, 'NULL', OLD.direccion_usuario) <> IF(NEW.direccion_usuario IS NULL, 'NULL', NEW.direccion_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'direccion_usuario: ', IF(OLD.direccion_usuario IS NULL, 'NULL', OLD.direccion_usuario), ' -> ', IF(NEW.direccion_usuario IS NULL, 'NULL', NEW.direccion_usuario), ', ');
+	END IF;
+	IF IF(OLD.ciudad_usuario IS NULL, 'NULL', OLD.ciudad_usuario) <> IF(NEW.ciudad_usuario IS NULL, 'NULL', NEW.ciudad_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'ciudad_usuario: ', IF(OLD.ciudad_usuario IS NULL, 'NULL', OLD.ciudad_usuario), ' -> ', IF(NEW.ciudad_usuario IS NULL, 'NULL', NEW.ciudad_usuario), ', ');
+	END IF;
+	IF IF(OLD.fecha_nacimiento_usuario IS NULL, 'NULL', OLD.fecha_nacimiento_usuario) <> IF(NEW.fecha_nacimiento_usuario IS NULL, 'NULL', NEW.fecha_nacimiento_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'fecha_nacimiento_usuario: ', IF(OLD.fecha_nacimiento_usuario IS NULL, 'NULL', OLD.fecha_nacimiento_usuario), ' -> ', IF(NEW.fecha_nacimiento_usuario IS NULL, 'NULL', NEW.fecha_nacimiento_usuario), ', ');
+	END IF;
+	IF IF(OLD.modalidad_usuario IS NULL, 'NULL', OLD.modalidad_usuario) <> IF(NEW.modalidad_usuario IS NULL, 'NULL', NEW.modalidad_usuario) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'modalidad_usuario: ', IF(OLD.modalidad_usuario IS NULL, 'NULL', OLD.modalidad_usuario), ' -> ', IF(NEW.modalidad_usuario IS NULL, 'NULL', NEW.modalidad_usuario));
+	END IF;
 	INSERT INTO bitacoras SET
-		id_usuario		= v_id_usuario, 
-		fecha_bitacora	= NOW(), 
-		accion_bitacora	= CONCAT('UPDATE, Registro actualizado: ', OLD.nombres_usuario);
-END$$
-DELIMITER ;
-
--- 1.2. DELETE USUARIOS: T_BitacoraDeleteUsuarios
-DELIMITER $$
-DROP TRIGGER IF EXISTS T_BitacoraDeleteUsuarios $$
-CREATE TRIGGER T_BitacoraDeleteUsuarios
-BEFORE DELETE ON usuarios
-FOR EACH ROW
-BEGIN
-	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
-	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;
-	INSERT INTO bitacoras SET
-		id_usuario		= v_id_usuario, 
-		fecha_bitacora	= NOW(), 
-		accion_bitacora	= CONCAT('DELETE, Registro eliminado: ', OLD.nombres_usuario);
+		id_usuario			= OLD.id_usuario,
+		id_centro_educativo	= NULL,
+		usuario_bitacora	= SUBSTRING_INDEX(USER(), '@', 1),
+		fecha_bitacora		= NOW(),
+		accion_bitacora		= CONCAT('UPDATE TABLE usuarios.', v_accion_bitacora);
 END$$
 DELIMITER ;
 
@@ -542,28 +593,25 @@ CREATE TRIGGER T_BitacoraUpdateCentrosEducativos
 AFTER UPDATE ON centros_educativos
 FOR EACH ROW
 BEGIN
-	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
-	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;
+	DECLARE v_accion_bitacora TEXT DEFAULT ' ';
+	IF IF(OLD.nombre_centro_educativo IS NULL, 'NULL', OLD.nombre_centro_educativo) <> IF(NEW.nombre_centro_educativo IS NULL, 'NULL', NEW.nombre_centro_educativo) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'nombre_centro_educativo: ', IF(OLD.nombre_centro_educativo IS NULL, 'NULL', OLD.nombre_centro_educativo), ' -> ', IF(NEW.nombre_centro_educativo IS NULL, 'NULL', NEW.nombre_centro_educativo), ', ');
+	END IF;
+	IF IF(OLD.id_departamento IS NULL, 'NULL', OLD.id_departamento) <> IF(NEW.id_departamento IS NULL, 'NULL', NEW.id_departamento) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_departamento: ', IF(OLD.id_departamento IS NULL, 'NULL', OLD.id_departamento), ' -> ', IF(NEW.id_departamento IS NULL, 'NULL', NEW.id_departamento), ', ');
+	END IF;
+	IF IF(OLD.id_municipio IS NULL, 'NULL', OLD.id_municipio) <> IF(NEW.id_municipio IS NULL, 'NULL', NEW.id_municipio) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_municipio: ', IF(OLD.id_municipio IS NULL, 'NULL', OLD.id_municipio), ' -> ', IF(NEW.id_municipio IS NULL, 'NULL', NEW.id_municipio), ', ');
+	END IF;
+	IF IF(OLD.id_mapa IS NULL, 'NULL', OLD.id_mapa) <> IF(NEW.id_mapa IS NULL, 'NULL', NEW.id_mapa) THEN
+		SET v_accion_bitacora = CONCAT(v_accion_bitacora, 'id_mapa: ', IF(OLD.id_mapa IS NULL, 'NULL', OLD.id_mapa), ' -> ', IF(NEW.id_mapa IS NULL, 'NULL', NEW.id_mapa));
+	END IF;
 	INSERT INTO bitacoras SET
-		id_usuario		= v_id_usuario, 
-		fecha_bitacora	= NOW(), 
-		accion_bitacora	= CONCAT('UPDATE, Registro actualizado: ', OLD.nombre_centro_educativo);
-END$$
-DELIMITER ;
-
--- 2.2. DELETE CENTROS EDUCATIVOS: T_BitacoraDeleteCentrosEducativos
-DELIMITER $$
-DROP TRIGGER IF EXISTS T_BitacoraDeleteCentrosEducativos $$
-CREATE TRIGGER T_BitacoraDeleteCentrosEducativos
-BEFORE DELETE ON centros_educativos
-FOR EACH ROW
-BEGIN
-	DECLARE v_id_usuario BIGINT(10) DEFAULT NULL;
-	SELECT id_usuario into v_id_usuario FROM usuarios WHERE SUBSTRING_INDEX(USER(), '@', 1) = nombre_usuario;	    
-	INSERT INTO bitacoras SET
-		id_usuario		= v_id_usuario, 
-		fecha_bitacora	= NOW(), 
-		accion_bitacora	= CONCAT('DELETE, Registro eliminado: ', OLD.nombre_centro_educativo);
+		id_usuario			= NULL,
+		id_centro_educativo	= OLD.id_centro_educativo,
+		usuario_bitacora	= SUBSTRING_INDEX(USER(), '@', 1),
+		fecha_bitacora		= NOW(),
+		accion_bitacora		= CONCAT('UPDATE TABLE centros_educativos.', v_accion_bitacora);
 END$$
 DELIMITER ;
 
