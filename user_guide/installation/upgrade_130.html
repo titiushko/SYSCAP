@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/installation/upgrade_130.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:03 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CodeIgniter User Guide</title>
+<title>Gu&iacute;a de Usuario del CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a de Usuario del CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Upgrading from 1.2 to 1.3
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Actualizar de 1.2 to 1.3
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -53,27 +55,15 @@ Upgrading from 1.2 to 1.3
 
 
 <!-- START CONTENT -->
-<div id="content">
-
-<h1>Upgrading from 1.2 to 1.3</h1>
-
-<p class="important"><strong>Note:</strong> The instructions on this page assume you are running version 1.2.  If you
-have not upgraded to that version please do so first.</p>
-
-
-<p>Before performing an update you should take your site offline by replacing the index.php file
-with a static one.</p>
-
-
-<h2>Step 1: Update your CodeIgniter files</h2>
-
-<p>Replace the following directories in your "system" folder with the new versions:</p>
-
-<p class="important"><strong>Note:</strong> If you have any custom developed files in these folders please make copies of them first.</p>
-
+<div id="content"><h1>Actualizando desde 1.2 a 1.3</h1>
+<p class="important"><strong>Nota:</strong> Las instrucciones en esta p&aacute;gina asumen que est&aacute; corriendo la versi&oacute;n 1.2. Si no ha actualizado todav&iacute;a a esa versi&oacute;n por favor haga esto primero.</p>
+<p>Antes de realizar una actualizaci&oacute;n deber&iacute;a tomar su sitio fuera de li&iacute;nea reemplazando el archivo index.php con uno est&aacute;tico.</p>
+<h2>Paso 1: Actualice sus archivos de CodeIgniter</h2>
+<p>Reemplace los siguientes directorios en su carpeta "system" con la nueva versi&oacute;n:</p>
+<p class="important"><strong>Nota:</strong> Si ha hecho un desarrollo en los archivos especial en estas carpeta, por favor haga copias de ellos primero.</p>
 <ul>
-<li>application/<strong>models</strong>/&nbsp;&nbsp;  (new for 1.3)</li>
-<li>codeigniter&nbsp;&nbsp;   (new for 1.3)</li>
+<li>application/<strong>models</strong>/&nbsp;&nbsp;  (nuevo para 1.3)</li>
+<li>codeigniter&nbsp;&nbsp;   (nuevo for 1.3)</li>
 <li>drivers</li>
 <li>helpers</li>
 <li>init</li>
@@ -82,46 +72,26 @@ with a static one.</p>
 <li>plugins</li>
 <li>scaffolding</li>
 </ul>
-
-
-<h2>Step 2: Update your error files</h2>
-
-<p>Version 1.3 contains two new error templates located in <dfn>application/errors</dfn>, and for naming consistency the other error templates have
-been renamed.</p>
-
-<p>If you <strong>have not</strong> customized any of the error templates simply
-replace this folder:</p>
-
+<h2>Paso 2: Actualice sus archivos de error</h2>
+<p>La versi&oacute;n 1.3 contiene dos nuevas plantillas de errores ubicadas en <dfn>application/errors</dfn>, y por consistencia las otras plantillas han sido renombradas.</p>
+<p>Si <strong>no ha</strong> retocado alguno de estos archivos, simplemente reemplace esta carpeta:</p>
 <ul>
 <li>application/errors/</li>
 </ul>
-
-<p>If you <strong>have</strong> customized your error templates, rename them as follows:</p>
-
-
+<p>Si usted <strong>ha</strong> retocado sus plantillas de error, renombrelo de la siguiente manera:</p>
 <ul>
 <li>404.php&nbsp;&nbsp; =&nbsp; error_404.php</li>
 <li>error.php&nbsp;&nbsp; =&nbsp; error_general.php</li>
-<li>error_db.php&nbsp;&nbsp; (new)</li>
-<li>error_php.php&nbsp;&nbsp; (new)</li>
+<li>error_db.php&nbsp;&nbsp; (nuevo)</li>
+<li>error_php.php&nbsp;&nbsp; (nuevo)</li>
 </ul>
-
-
-<h2>Step 3: Update your index.php file</h2>
-
-<p>Please open your main <dfn>index.php</dfn> file (located at your root).  At the very bottom of the file, change this:</p>
-
+<h2>Paso 3: Actualice su archivo index.php</h2>
+<p>Por favor abra su archivo <dfn>index.php</dfn> principal (ubicado en su ra&iacute;z). Debajo de todo el archivo cambie esto:</p>
 <code>require_once BASEPATH.'libraries/Front_controller'.EXT;</code>
-
-<p>To this:</p>
-
+<p>Por esto:</p>
 <code>require_once BASEPATH.'codeigniter/CodeIgniter'.EXT;</code>
-
-
-<h2>Step 4: Update your config.php file</h2>
-
-<p>Open your <dfn>application/config/config.php</dfn> file and add these new items:</p>
-
+<h2>Paso 4: Actualice su archivo config.php</h2>
+<p>Abra su archivo <dfn>application/config/config.php</dfn> y agregue estos nuevos items:</p>
 <pre>
 /*
 |------------------------------------------------
@@ -131,17 +101,15 @@ replace this folder:</p>
 | This option allows you to add a suffix to all URLs.
 | For example, if a URL is this:
 |
-| example.com/index.php/products/view/shoes
+| www.your-site.com/index.php/products/view/shoes
 |
 | You can optionally add a suffix, like ".html",
 | making the page appear to be of a certain type:
 |
-| example.com/index.php/products/view/shoes.html
+| www.your-site.com/index.php/products/view/shoes.html
 |
 */
 $config['url_suffix'] = "";
-
-
 /*
 |------------------------------------------------
 | Enable Query Strings
@@ -150,54 +118,48 @@ $config['url_suffix'] = "";
 | By default CodeIgniter uses search-engine and
 | human-friendly segment based URLs:
 |
-| example.com/who/what/where/
+| www.your-site.com/who/what/where/
 |
 | You can optionally enable standard query string
 | based URLs:
 |
-| example.com?who=me&what=something&where=here
+| www.your-site.com?who=me&what=something&where=here
 |
 | Options are: TRUE or FALSE (boolean)
 |
 | The two other items let you set the query string "words"
 | that will invoke your controllers and functions:
-| example.com/index.php?c=controller&m=function
+| www.your-site.com/index.php?c=controller&m=function
 |
 */
 $config['enable_query_strings'] = FALSE;
 $config['controller_trigger'] = 'c';
 $config['function_trigger'] = 'm';
 </pre>
-
-
-<h2>Step 5: Update your database.php file</h2>
-
-<p>Open your <dfn>application/config/database.php</dfn> file and add these new items:</p>
-
+<h2>Paso 5: Actualice su archivo database.php</h2>
+<p>Abra su archivo <dfn>application/config/database.php</dfn> y agregue estos nuevos items:</p>
 <pre>
 $db['default']['dbprefix'] = "";
 $db['default']['active_r'] = TRUE;
 </pre>
-
-
-<h2>Step 6: Update your user guide</h2>
-
-<p>Please also replace your local copy of the user guide with the new version.</p>
-
+<h2>Paso 6: Actualice su gu&iacute;a de usuario</h2>
+<p>Por favor tambi&eacute;n reemplace sus copias locales de la gu&iacute;a del usuario con la nueva versi&oacute;n.</p>
 </div>
 <!-- END CONTENT -->
 
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="index.html">Installation Instructions</a>
+Tema anterior:&nbsp;&nbsp;<a href="index.html">Instrucciones de Instalaci&oacute;ns</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="troubleshooting.html">Troubleshooting</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="troubleshooting.html">Soluci&oacute;n de Problemas</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/installation/upgrade_130.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:03 GMT -->
 </html>

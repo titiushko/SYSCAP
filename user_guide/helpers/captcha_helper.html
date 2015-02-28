@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/helpers/captcha_helper.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:01 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>CAPTCHA Helper : CodeIgniter User Guide</title>
+<title>Helper CAPTCHA : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
 CAPTCHA Helper
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -56,77 +58,69 @@ CAPTCHA Helper
 <div id="content">
 
 
-<h1>CAPTCHA Helper</h1>
+<h1>Helper CAPTCHA</h1>
+<p>El archivo del Helper CAPTCHA contiene funciones que lo ayudan en la creaci&oacute;n de im&aacute;genes CAPTCHA.</p>
 
-<p>The CAPTCHA Helper file contains functions that assist in creating CAPTCHA images.</p>
+<h2>Cargar este Helper</h2>
 
+<p>Este helper se carga usando el siguiente c&oacute;digo:</p>
 
-<h2>Loading this Helper</h2>
-
-<p>This helper is loaded using the following code:</p>
 <code>$this->load->helper('captcha');</code>
 
-<p>The following functions are available:</p>
+<p>Est&aacute;n disponibles las siguientes funciones:</p>
 
 <h2>create_captcha(<var>$data</var>)</h2>
+<p>Toma como entrada un array de informaci&oacute;n para generar el CAPTCHA y crea la imagen para sus especificaciones, devolviendo un array asociativo de datos acerca de la imagen.</p>
 
-<p>Takes an array of information to generate the CAPTCHA as input and creates the image to your specifications, returning an array of associative data about the image.</p>
+<pre>
+[array]
+(
+	'image' => IMAGE TAG
+	'time' => TIMESTAMP (in microtime)
+	'word' => CAPTCHA WORD
+)
+</pre>
 
-<code>[array]<br />
-(<br />
-&nbsp;&nbsp;'image' => IMAGE TAG<br />
-&nbsp;&nbsp;'time'	=> TIMESTAMP (in microtime)<br />
-&nbsp;&nbsp;'word'	=> CAPTCHA WORD<br />
-)</code>
+<p><strong>image</strong> es la etiqueta de imagen real:</p>
 
-	<p>The "image" is the actual image tag:
-<code>&lt;img src=&quot;http://example.com/captcha/12345.jpg&quot; width=&quot;140&quot; height=&quot;50&quot; /&gt;</code></p>
+<code>&lt;img src=&quot;http://example.com/captcha/12345.jpg&quot; width=&quot;140&quot; height=&quot;50&quot; /&gt;</code>
 
-	<p>The "time" is the micro timestamp used as the image name without the file
-	extension.  It will be a number like this:  1139612155.3422</p>
+<p><strong>time</strong> es la marca de tiempo usada como nombre de la imagen sin la extensi&oacute;n del archivo. Ser&aacute; un n&uacute;mero como este: 1139612155.3422</p>
 
-	<p>The "word" is the word that appears in the captcha image, which if not
-	supplied to the function, will be a random string.</p>
+<p><strong>word</strong> es la palabra que aparece en la imagen captcha, que si no se la suministra a la funci&oacute;n, ser&aacute; una cadena aleatoria.</p>
 
-	<h3>Using the CAPTCHA helper</h3>
+<h3>Usar el Helper CAPTCHA</h3>
+<p>Una vez cargado, puede generar un captcha as&iacute;:</p>
 
-	<p>Once loaded you can generate a captcha like this:</p>
+<pre>
+$vals = array(
+		'word' => 'Random word',
+		'img_path' => './captcha/',
+		'img_url' => 'http://example.com/captcha/',
+		'font_path' => './path/to/fonts/texb.ttf',
+		'img_width' => '150',
+		'img_height' => 30,
+		'expiration' => 7200
+	);
 
-<code>$vals = array(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'word'		 => 'Random word',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'img_path'	 => './captcha/',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'img_url'	 => 'http://example.com/captcha/',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'font_path'	 => './path/to/fonts/texb.ttf',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'img_width'	 => '150',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'img_height' => 30,<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'expiration' => 7200<br />
-&nbsp;&nbsp;&nbsp;&nbsp;);<br />
-<br />
-$cap = create_captcha($vals);<br />
-echo $cap['image'];</code>
+$cap = create_captcha($vals);
+echo $cap['image'];
+</pre>
 
-	<ul>
-		<li>The captcha function requires the GD image library.</li>
-		<li>Only the img_path and img_url are required.</li>
-		<li>If a "word" is not supplied, the function will generate a random
-		ASCII string.  You might put together your own word library that
-		you can draw randomly from.</li>
-		<li>If you do not specify a path to a TRUE TYPE font, the native ugly GD
-		font will be used.</li>
-		<li>The "captcha" folder must be writable (666, or 777)</li>
-		<li>The "expiration" (in seconds) signifies how long an image will
-		remain in the captcha folder before it will be deleted.  The default
-		is two hours.</li>
-	</ul>
+<ul>
+	<li>La funci&oacute;n captcha necesita la biblioteca de imagen GD.</li>
+	<li>Solamente son obligatorios img_path e img_url.</li>
+	<li>Si no se suministra "word", la funci&oacute;n generar&aacute; una cadena ASCII aleatoria. Podr&iacute;a adjuntar su propia biblioteca de palabras de la que dibujar aleatoriamente.</li>
+	<li>Si no se especifica una ruta a una fuente True Type, se usar&aacute; la espantosa fuente nativa de GD.</li>
+	<li>La carpeta "captcha" tiene que ser escribible (666 o 777)</li>
+	<li>expiration (en segundos) indica cuanto tiempo una imagen permanecer&aacute; en la carpeta captcha antes que	se la borre. El valor por defecto es dos horas.</li>
+</ul>
 
-	<h3>Adding a Database</h3>
+<h3>Agregar a una Base de Datos</h3>
 
-	<p>In order for the captcha function to prevent someone from submitting, you will need
-	to add the information returned from <kbd>create_captcha()</kbd> function to your database.
-	Then, when the data from the form is submitted by the user you will need to verify
-	that the data exists in the database and has not expired.</p>
+<p>Para que la funci&oacute;n captcha evite que alguien pueda enviar, necesitar&aacute; agregar la informaci&oacute;n devuelta por la funci&oacute;n create_captcha() a la base de datos. Luego, cuando el usuario env&iacute;a los datos del formulario, necesitar&aacute; verificar que los datos existen en la base de datos y que no expiraron.</p>
 
-	<p>Here is a table prototype:</p>
+<p>Este es el prototipo de la tabla:</p>
 
 <code>CREATE TABLE captcha (<br />
 &nbsp;captcha_id bigint(13) unsigned NOT NULL auto_increment,<br />
@@ -137,7 +131,8 @@ echo $cap['image'];</code>
 &nbsp;KEY `word` (`word`)<br />
 );</code>
 
-	<p>Here is an example of usage with a database.  On the page where the CAPTCHA will be shown you'll have something like this:</p>
+	<p>Este es un ejemplo de uso con una base de datos. En la p&aacute;gina donde se mostrar&aacute; el CAPTCHA, habr&aacute; algo como
+esto:</p>
 
 <code>$this-&gt;load-&gt;helper(&#x27;captcha&#x27;);<br />
 $vals = array(<br />
@@ -160,7 +155,7 @@ echo &#x27;Submit the word you see below:&#x27;;<br />
 echo $cap[&#x27;image&#x27;];<br />
 echo &#x27;&lt;input type=&quot;text&quot; name=&quot;captcha&quot; value=&quot;&quot; /&gt;&#x27;;</code>
 
-	<p>Then, on the page that accepts the submission you'll have something like this:</p>
+	<p>Luego, en la p&aacute;gina que acepta el env&iacute;o, que tendr&aacute; algo como esto:</p>
 
 <code>// First, delete old captchas<br />
 $expiration = time()-7200; // Two hour limit<br />
@@ -183,13 +178,15 @@ if ($row-&gt;count == 0)<br />
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="array_helper.html">Array Helper</a>
+Tema anterior:&nbsp;&nbsp;<a href="array_helper.html">Helper Array</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="cookie_helper.html">Cookie Helper</a></p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="cookie_helper.html">Helper Cookie</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/helpers/captcha_helper.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:01 GMT -->
 </html>

@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/helpers/array_helper.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:01 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Array Helper : CodeIgniter User Guide</title>
+<title>Helper Array : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Array Helper
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Helper Array
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -54,104 +56,98 @@ Array Helper
 
 <!-- START CONTENT -->
 <div id="content">
+	
+<h1>Helper Array</h1>
 
+<p>El archivo del Helper Array contiene funciones que lo ayudan a trabajar con arrays.</p>
 
-<h1>Array Helper</h1>
+<h2>Cargar este Helper</h2>
 
-<p>The Array Helper file contains functions that assist in working with arrays.</p>
-
-
-<h2>Loading this Helper</h2>
-
-<p>This helper is loaded using the following code:</p>
+<p>Este helper se carga usando el siguiente c&oacute;digo:</p>
 <code>$this->load->helper('array');</code>
 
-<p>The following functions are available:</p>
+<p>Est&aacute;n disponibles las siguientes funciones:</p>
 
 <h2>element()</h2>
 
-<p>Lets you fetch an item from an array.  The function tests whether the array index is set and whether it has a value.  If
-a value exists it is returned.  If a value does not exist it returns FALSE, or whatever you've specified as the default value via the third parameter.  Example:</p>
+<p>Le permite extraer un elemento desde un array. La funci&oacute;n prueba si el &iacute;ndice del array est&aacute; establecido y si tiene valor. Si el valor existe se devuelve. Si el valor no existe, devuelve FALSE, o lo que haya especificado como valor por defecto en el tercer par&aacute;metro. Ejemplo:</p>
 
-<code>
-$array = array('color' => 'red', 'shape' => 'round', 'size' => '');<br />
-<br />
-// returns "red"<br />
-echo element('color', $array);<br />
-<br />
-// returns NULL<br />
+<pre>
+$array = array('color' => 'red', 'shape' => 'round', 'size' => '');
+
+// Devuelve "red"
+echo element('color', $array);
+
+// Devuelve NULL
 echo element('size', $array, NULL);
-</code>
-
+</pre>
 
 <h2>random_element()</h2>
+<p>Toma como entrada un array y devuelve un elemento suyo al azar. Ejemplo de uso:</p>
 
-<p>Takes an array as input and returns a random element from it.  Usage example:</p>
+<pre>
+$quotes = array(
+		"Me parece que cuanto trabajo m&aacute;s duro, m&aacute;s suerte parezco tener. - Thomas Jefferson",
+		"No te quedes en la cama, a menos que puedas hacer dinero en ella. - George Burns",
+		"No perdimos el juego, simplemente nos quedamos sin tiempo. - Vince Lombardi",
+		"Si todo parece bajo control, usted no va lo suficientemente r&aacute;pido. - Mario Andretti",
+		"La realidad es simplemente una ilusi&oacute;n, aunque una muy persistente. - Albert Einstein",
+		"La suerte favorece a la mente preparada. - Louis Pasteur",
+		"Hay algo mal que no est&aacute; bien. - Ricardo Bravo"
+);
 
-<code>$quotes = array(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"I find that the harder I work, the more luck I seem to have. - Thomas Jefferson",<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Don't stay in bed, unless you can make money in bed. - George Burns",<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"We didn't lose the game; we just ran out of time. - Vince Lombardi",<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"If everything seems under control, you're not going fast enough. - Mario Andretti",<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Reality is merely an illusion, albeit a very persistent one. - Albert Einstein",<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Chance favors the prepared mind - Louis Pasteur"<br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;);<br />
-<br />
-echo random_element($quotes);</code>
-
+echo random_element($quotes);
+</pre>
 
 <h2>elements()</h2>
+<p>Le permite extraer una cantidad de elementos desde un array. La funci&oacute;n prueba si cada uno de los &iacute;ndices del array est&aacute; establecido. Si un &iacute;ndice no existe se establece a <samp>FALSE</samp>, o lo que sea que se haya especificado como valor por defecto a trav&eacute;s del tercer par&aacute;metro. Ejemplo:</p>
 
-<p>Lets you fetch a number of items from an array.  The function tests whether each of the array indices is set.  If an index does not exist
-it is set to FALSE, or whatever you've specified as the default value via the third parameter.  Example:</p>
-
-<code>
-$array = array(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'color' => 'red',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'shape' => 'round',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'radius' => '10',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'diameter' => '20'<br />
-);<br />
-<br />
-$my_shape = elements(array('color', 'shape', 'height'), $array);<br />
-</code>
-
-<p>The above will return the following array:</p>
-
-<code>
-array(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'color' => 'red',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'shape' => 'round',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'height' => FALSE<br />
+<pre>
+$array = array(
+		'color' => 'red',
+		'shape' => 'round',
+		'radius' => '10',
+		'diameter' => '20'
 );
-</code>
 
-<p>You can set the third parameter to any default value you like:</p>
+$my_shape = elements(array('color', 'shape', 'height'), $array);
+</pre>
 
-<code>
-$my_shape = elements(array('color', 'shape', 'height'), $array, NULL);<br />
-</code>
+<p>Lo anterior devolver&aacute; el siguiente array:</p>
 
-<p>The above will return the following array:</p>
-
-<code>
-array(<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'color' => 'red',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'shape' => 'round',<br />
-&nbsp;&nbsp;&nbsp;&nbsp;'height' => NULL<br />
+<pre>
+array(
+	'color' => 'red',
+	'shape' => 'round',
+	'height' => FALSE
 );
-</code>
+</pre>
 
-<p>This is useful when sending the <kbd>$_POST</kbd> array to one of your Models.  This prevents users from
-sending additional POST data to be entered into your tables:</p>
+<p>Puede establecer el tercer par&aacute;metro a cualquier valor por defecto que quiera:</p>
 
-<code>
-$this->load->model('post_model');<br />
-<br />
+<pre>
+$my_shape = elements(array('color', 'shape', 'height'), $array, NULL);
+</pre>
+
+<p>Lo anterior devolver&aacute; el siguiente array:</p>
+
+<pre>
+array(
+	'color' => 'red',
+	'shape' => 'round',
+	'height' => NULL
+);
+</pre>
+
+<p>Esto es &uacute;til al enviar el array $_POST a uno de sus Modelos. Esto impide que los usuarios env&iacute;en datos POST adicionales para ingresarse en las tablas:</p>
+
+<pre>
+$this->load->model('post_model');
+
 $this->post_model->update(elements(array('id', 'title', 'content'), $_POST));
-</code>
+</pre>
 
-<p>This ensures that only the id, title and content fields are sent to be updated.</p>
+<p>Esto asegura que solamente los campos id, title y content se enviar&aacute;n para actualizarse.</p>
 
 </div>
 <!-- END CONTENT -->
@@ -159,12 +155,14 @@ $this->post_model->update(elements(array('id', 'title', 'content'), $_POST));
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp; <a href="../libraries/javascript.html">Javascript Class</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="captcha_helper.html">CAPTCHA Helper</a></p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+Tema anterior:&nbsp;&nbsp; <a href="../database/index.html">Clase Database</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="captcha_helper.html">Helper CAPTCHA</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/helpers/array_helper.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:01 GMT -->
 </html>

@@ -1,0 +1,10 @@
+.settings/*.*
+system/*.*
+user_guide/*.*
+.buildpath
+.project
+copiar-syscap.bat
+index.php
+license.txt
+no-copiar
+README.md

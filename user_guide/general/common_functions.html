@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/general/common_functions.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Common Functions : CodeIgniter User Guide</title>
+<title>Funciones Comunes : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Auto-loading Resources
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Funciones Comunes
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -55,57 +57,58 @@ Auto-loading Resources
 <!-- START CONTENT -->
 <div id="content">
 
-<h1>Common Functions</h1>
+<h1>Funciones Comunes</h1>
 
-<p>CodeIgniter uses a few functions for its operation that are globally defined, and are available to you at any point. These do not require loading any libraries or helpers.</p>
+<p>CodeIgniter usa unas pocas funciones para su operaci&oacute;n que se definen globalmente y est&aacute;n disponibles en cualquier lugar. Estas funciones no requieren cargar ninguna biblioteca o helper.</p>
 
-<h2>is_php('<var>version_number</var>')</h2>
+<h2>is_php('<var>numero_de_version</var>')</h2>
 
-<p>is_php() determines of the PHP version being used is greater than the supplied <var>version_number</var>.</p>
+<p><dfn>is_php()</dfn> determina si la versi&oacute;n de PHP usada es mayor o igual que el <var>numero_de_version</var> suministrado.</p>
 
 <code>if (is_php('5.3.0'))<br />
 {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;$str = quoted_printable_encode($str);<br />
 }</code>
 
-<p>Returns boolean <kbd>TRUE</kbd> if the installed version of PHP is equal to or greater than the supplied version number.  Returns  <kbd>FALSE</kbd> if the installed version of PHP is lower than the supplied version number.</p>
+<p>Devuelve el booleano <kbd>TRUE</kbd> si la versi&oacute;n instalada de PHP es mayor o igual que el n&uacute;mero de versi&oacute;n suministrado. Devuelve <kbd>FALSE</kbd> si la versi&oacute;n instalada de PHP es menor que el n&uacute;mero de versi&oacute;n suministrado.</p>
 
+<h2>is_really_writable('<var>ruta/al/archivo</var>')</h2>
 
-<h2>is_really_writable('<var>path/to/file</var>')</h2>
+<p><dfn>is_writable()</dfn> devuelve <kbd>TRUE</kbd> en servidores Windows cuando realmente no se puede escribir en el archivo, ya que el sistema operativo le informa <kbd>FALSE</kbd> a PHP solamente si el atributo de solo lectura est&aacute; marcado. Esta funci&oacute;n determina si un archivo es escribible realmente al intentar escribir primero en &eacute;l. Por lo general s&oacute;lo se recomienda en las plataformas donde esta informaci&oacute;n puede no ser fiable.</p>
 
-<p>is_writable() returns TRUE on Windows servers when you really can't write to the file as the OS reports to PHP as FALSE only if the read-only attribute is marked. This function determines if a file is actually writable by attempting to write to it first. Generally only recommended on platforms where this information may be unreliable.</p>
-
-<code>if (is_really_writable('file.txt'))<br />
+<code>if (is_really_writable('file.txt'))
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;echo &quot;I could write to this if I wanted to&quot;;<br />
+echo "Podr&iacute;a escribir lo que quiera";<br />
 }<br />
 else<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;echo &quot;File is not writable&quot;;<br />
+echo "No se puede escribir en el archivo";<br />
 }</code>
 
-<h2>config_item('<var>item_key</var>')</h2>
-<p>The <a href="../libraries/config.html">Config library</a> is the preferred way of accessing configuration information, however config_item() can be used to retrieve single keys. See Config library documentation for more information.</p>
+<h2>config_item('<var>clave_de_item</var>')</h2>
 
-<h2>show_error('<var>message</var>'), show_404('<var>page</var>'), log_message('<var>level</var>', '<samp>message</samp>')</h2>
-<p>These are each outlined on the <a href="errors.html">Error Handling</a> page.</p>
+<p>La forma preferida para acceder a la informaci&oacute;n de configuraci&oacute;n es la <a href="../libraries/config.html">Librer&iacute;a Config</a>. Sin embargo, <dfn>config_item()</dfn> se puede usar para recuperar claves simples. Para m&aacute;s informaci&oacute;n, lea la documentaci&oacute;n de la Librer&iacute;a Config.</p>
 
-<h2>set_status_header(<var>code</var>, '<var>text</var>');</h2>
+<h2>show_error('<var>mensaje</var>'), show_404('<var>pagina</var>'), log_message('<var>nivel</var>', '<samp>mensaje</samp>')</h2>
 
-<p>Permits you to manually set a server status header.  Example:</p>
+<p>Cada uno de estos se describe en la p&aacute;gina <a href="errors.html">Manejo de Errores</a>.</p>
+
+<h2>set_status_header(<var>codigo</var>, '<var>texto</var>')</h2>
+
+<p>Le permite establecer manualmente el encabezado de estado del servidor. Ejemplo:</p>
 
 <code>set_status_header(401);<br />
-// Sets the header as:  Unauthorized</code>
+// Establece el encabezado como: No autorizado</code>
 
-<p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">See here</a> for a full list of headers.</p>
-
+<p><a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">Vea aqu&iacute;</a> la lista completa de encabezados.</p>
 
 <h2>remove_invisible_characters(<var>$str</var>)</h2>
-<p>This function prevents inserting null characters between ascii characters, like Java\0script.</p>
-
+<p>Esta funci&oacute;n evita la inserci&oacute;n de caracteres nulos entre caracteres ASCII como Java\0script.</p>
 
 <h2>html_escape(<var>$mixed</var>)</h2>
-<p>This function provides short cut for htmlspecialchars() function. It accepts string and array. To prevent Cross Site Scripting (XSS), it is very useful.</p>
+<p>Esta funci&oacute;n proporciona un acces directo a la funci&oacute;n <dfn>htmlspecialchars()</dfn>. Acepta cadenas y arrays. Es muy &uacute;til para evitar Cross Site Scripting (XSS).</p>
+
+
 
 </div>
 
@@ -115,13 +118,15 @@ else<br />
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="autoloader.html">Auto-loading Resources</a><a href="hooks.html"></a>
+Tema anterior:&nbsp;&nbsp;<a href="autoloader.html">Auto-carga de Recursos</a><a href="hooks.html"></a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="routing.html">URI Routing</a></p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="routing.html">Ruteo URI</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/general/common_functions.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

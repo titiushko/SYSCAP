@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/email.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Email Class : CodeIgniter User Guide</title>
+<title>Clase Email : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,70 +42,65 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Email Class
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Clase Email
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
 
 <br clear="all" />
+<tr>
+	<td class="td"><strong>crlf</strong></td>
+	<td class="td">\n</td>
+	<td class="td">&quot;\r\n&quot; or &quot;\n&quot; or &quot;\r&quot;</td>
+	<td class="td">Newline character. (Use &quot;\r\n&quot; to comply with RFC 822).</td>
+</tr>
 
 
 <!-- START CONTENT -->
 <div id="content">
 
-
-<h1>Email Class</h1>
-
-<p>CodeIgniter's robust Email Class supports the following features:</p>
-
+<h1>Clase Email</h1>
+<p>La robusta clase Email de CodeIgniter soporta las siguientes caracter&iacute;sticas:</p>
 
 <ul>
-<li>Multiple Protocols: Mail, Sendmail, and SMTP</li>
-<li>Multiple recipients</li>
-<li>CC and BCCs</li>
-<li>HTML or Plaintext email</li>
-<li>Attachments</li>
-<li>Word wrapping</li>
-<li>Priorities</li>
-<li>BCC Batch Mode, enabling large email lists to be broken into small BCC batches.</li>
-<li>Email Debugging tools</li>
+<li>M&uacute;ltiple Protocolos: Mail, Sendmail, y SMTP</li>
+<li>Varios Destinatarios</li>
+<li>CC y BCCs</li>
+<li>HTML o email de texto plano</li>
+<li>Adjuntos</li>
+<li>Ajuste de Linea(Word wrapping)</li>
+<li>Prioridades</li>
+<li>BCC Modo Batch, permitiendo grandes listas de correo electr&oacute;nico que se divida en peque&ntilde;os lotes BCC.</li>
+<li>Herramientas de depuraci&oacute;n de Email</li>
 </ul>
 
+<h2>Enviar Correo Electr&oacute;nico</h2>
+<p>Enviar un correo electr&oacute;nico no es simple, pero puedes configurarlo 'al vuelo' o establecer tus preferencias en un archivo de configuraci&oacute;n.</p>
 
-<h2>Sending Email</h2>
-
-<p>Sending email is not only simple, but you can configure it on the fly or set your preferences in a config file.</p>
-
-<p>Here is a basic example demonstrating how you might send email.  Note:  This example assumes you are sending the email from one of your
-<a href="../general/controllers.html">controllers</a>.</p>
+<p>Aqu&iacute; est&aacute; un ejemplo b&aacute;sico demostrando como debes enviar un email. Nota: Este ejemplo asume que estas enviando un email desde uno de tus <a href="../general/controllers.html">controladores</a>.</p>
 
 <code>$this->load->library('email');<br />
 <br />
-$this->email->from('your@example.com', 'Your Name');<br />
-$this->email->to('someone@example.com'); <br />
-$this->email->cc('another@another-example.com'); <br />
-$this->email->bcc('them@their-example.com'); <br />
+$this->email->from('tu_direccion@tu_sitio.com', 'Tu nombre');<br />	
+$this->email->to('alguien@ejemplo.com'); <br />
+$this->email->cc('otro@otro-ejemplo.com'); <br />
+$this->email->bcc('ellos@su-ejemplo.com'); <br />
 <br />
-$this->email->subject('Email Test');<br />
-$this->email->message('Testing the email class.');	<br />
+$this->email->subject('Correo de Prueba');<br />
+$this->email->message('Probando la clase email');	<br />
 <br />
 $this->email->send();<br />
 <br />
 echo $this->email->print_debugger();</code>
 
+<h2>Establecer Preferencias de Correo Electr&oacute;nico</h2>
+<p>Hay 17 diferentes preferencias disponibles para adaptar la forma en la que se env&iacute;an sus correos electr&oacute;nicos. Puedes establecer cualquiera de ellos manualmente como se describe aqu&iacute;, o autom&aacute;ticamente por las preferencias establecidas en tu archivo de configuraci&oacute;n, descrita mas abajo:</p>
 
-
-
-<h2>Setting Email Preferences</h2>
-
-<p>There are 17 different preferences available to tailor how your email messages are sent. You can either set them manually
-as described here, or automatically via preferences stored in your config file, described below:</p>
-
-<p>Preferences are set by passing an array of preference values to the email <dfn>initialize</dfn> function.  Here is an example of how you might set some preferences:</p>
+<p>Las preferencias son establecidas por el paso de valores de un arreglo de preferencias a la funcion <dfn>initialize(inicializaci&oacute;n)</dfn> de email. Aqui tenemos un ejemplo de como debes establecer algunas preferencias:</p>
 
 <code>$config['protocol'] = 'sendmail';<br />
 $config['mailpath'] = '/usr/sbin/sendmail';<br />
@@ -112,181 +109,155 @@ $config['wordwrap'] = TRUE;<br />
 <br />
 $this->email->initialize($config);</code>
 
-<p><strong>Note:</strong> Most of the preferences have default values that will be used if you do not set them.</p
+<p><strong>Nota:</strong> La mayor&iacute;a de las preferencias tienen un valor por defecto que ser&aacute; usado si no los estableces</p>
 
-><h3>Setting Email Preferences in a Config File</h3>
+<h3>Establecer preferencias de Email en un archivo de configuraci&oacute;n</h3>
+<p>Si prefieres no establecer preferencias usando el m&eacute;todo anterior, puedes ubicarlos en un archivo de configuraci&oacute;n. Simplemente debes crear un nuevo archivo llamado <var>email.php</var>,  agrega el arreglo <var>$config</var> en ese archivo. Luego gu&aacute;rdalo en  <var>config/email.php</var> y el sera usado autom&aacute;ticamente. Tu NO necesitas usar la funci&oacute;n <dfn>$this->email->initialize()</dfn> si guardas las preferencias en un archivo de configuraci&oacute;n.</p>
 
-<p>If you prefer not to set preferences using the above method, you can instead put them into a config file.
-Simply create a new file called the <var>email.php</var>,  add the <var>$config</var>
-array in that file. Then save the file at <var>config/email.php</var> and it will be used automatically. You
-will NOT need to use the <dfn>$this->email->initialize()</dfn> function if you save your preferences in a config file.</p>
-
-
-
-
-<h2>Email Preferences</h2>
-
-<p>The following is a list of all the preferences that can be set when sending email.</p>
-
-
+<h2>Preferencias de Email</h2>
+<p>Lo que sigue es una lista de todas las preferencias que pueden ser establecidas cuando se envia un e-mail.</p>
 <table cellpadding="0" cellspacing="1" border="0" style="width:100%" class="tableborder">
 <tr>
-<th>Preference</th>
-<th>Default&nbsp;Value</th>
-<th>Options</th>
-<th>Description</th>
+<th>Preferencia</th>
+<th>Valor por defecto</th>
+<th>Opciones</th>
+<th>Descripci&oacute;n</th>
 </tr><tr>
-<td class="td"><strong>useragent</strong></td><td class="td">CodeIgniter</td><td class="td">None</td><td class="td">The "user agent".</td>
+<td class="td"><strong>useragent</strong></td><td class="td">CodeIgniter</td><td class="td">None</td><td class="td">El "user agent".</td>
 </tr><tr>
-<td class="td"><strong>protocol</strong></td><td class="td">mail</td><td class="td">mail, sendmail, or smtp</td><td class="td">The mail sending protocol.</td>
+<td class="td"><strong>protocol</strong></td><td class="td">mail</td><td class="td">mail, sendmail, or smtp</td><td class="td">El protocolo en envio de email.</td>
 </tr><tr>
-<td class="td"><strong>mailpath</strong></td><td class="td">/usr/sbin/sendmail</td><td class="td">None</td><td class="td">The server path to Sendmail.</td>
+<td class="td"><strong>mailpath</strong></td><td class="td">/usr/sbin/sendmail</td><td class="td">None</td><td class="td">La ruta al Sendmail.</td>
 </tr><tr>
-<td class="td"><strong>smtp_host</strong></td><td class="td">No Default</td><td class="td">None</td><td class="td">SMTP Server Address.</td>
+<td class="td"><strong>smtp_host</strong></td><td class="td">No Default</td><td class="td">None</td><td class="td">Direcci&oacute;n del servidor SMTP.</td>
 </tr><tr>
-<td class="td"><strong>smtp_user</strong></td><td class="td">No Default</td><td class="td">None</td><td class="td">SMTP Username.</td>
+<td class="td"><strong>smtp_user</strong></td><td class="td">No Default</td><td class="td">None</td><td class="td">Usuario SMTP.</td>
 </tr><tr>
-<td class="td"><strong>smtp_pass</strong></td><td class="td">No Default</td><td class="td">None</td><td class="td">SMTP Password.</td>
+<td class="td"><strong>smtp_pass</strong></td><td class="td">No Default</td><td class="td">None</td><td class="td">Clave SMTP.</td>
 </tr><tr>
-<td class="td"><strong>smtp_port</strong></td><td class="td">25</td><td class="td">None</td><td class="td">SMTP Port.</td>
+<td class="td"><strong>smtp_port</strong></td><td class="td">25</td><td class="td">None</td><td class="td">Puerto SMTP.</td>
 </tr><tr>
-<td class="td"><strong>smtp_timeout</strong></td><td class="td">5</td><td class="td">None</td><td class="td">SMTP Timeout (in seconds).</td>
+<td class="td"><strong>smtp_timeout</strong></td><td class="td">5</td><td class="td">None</td><td class="td">SMTP Timeout (en segundos).</td>
 </tr><tr>
-<td class="td"><strong>wordwrap</strong></td><td class="td">TRUE</td><td class="td">TRUE or FALSE (boolean)</td><td class="td">Enable word-wrap.</td>
+<td class="td"><strong>wordwrap</strong></td><td class="td">TRUE</td><td class="td">TRUE or FALSE (boolean)</td><td class="td">Activar ajuste de linea.</td>
 </tr><tr>
-<td class="td"><strong>wrapchars</strong></td><td class="td">76</td><td class="td"> </td><td class="td">Character count to wrap at.</td>
+<td class="td"><strong>wrapchars</strong></td><td class="td">76</td><td class="td"> </td><td class="td">Cantidad de caracteres para ajustar.</td>
 </tr><tr>
-<td class="td"><strong>mailtype</strong></td><td class="td">text</td><td class="td">text or html</td><td class="td">Type of mail. If you send HTML email you must send it as a complete web page.  Make sure you don't have any relative links or relative image paths otherwise they will not work.</td>
+<td class="td"><strong>mailtype</strong></td><td class="td">text</td><td class="td">text or html</td><td class="td">Tipo de correo. Si envias un correo HTML debes enviarla como una pagina web completa. Asegurese de que no tiene links relativos o rutas de imagenes relativas, de otra forma no funcionaran.</td>
 </tr><tr>
-<td class="td"><strong>charset</strong></td><td class="td">utf-8</td><td class="td"></td><td class="td">Character set (utf-8, iso-8859-1, etc.).</td>
+<td class="td"><strong>charset</strong></td><td class="td">utf-8</td><td class="td"></td><td class="td">Juego de Caracteres(utf-8, iso-8859-1, etc.).</td>
 </tr><tr>
-<td class="td"><strong>validate</strong></td><td class="td">FALSE</td><td class="td">TRUE or FALSE  (boolean)</td><td class="td">Whether to validate the email address.</td>
+<td class="td"><strong>validate</strong></td><td class="td">FALSE</td><td class="td">TRUE or FALSE  (boolean)</td><td class="td">Si se validara la direccion del correo.</td>
 </tr><tr>
-<td class="td"><strong>priority</strong></td><td class="td">3</td><td class="td">1, 2, 3, 4, 5</td><td class="td">Email Priority. 1 = highest.  5 = lowest.  3 = normal.</td>
-</tr>
-<tr>
-	<td class="td"><strong>crlf</strong></td>
-	<td class="td">\n</td>
-	<td class="td">&quot;\r\n&quot; or &quot;\n&quot; or &quot;\r&quot;</td>
-	<td class="td">Newline character. (Use &quot;\r\n&quot; to comply with RFC 822).</td>
-</tr>
-<tr>
-<td class="td"><strong>newline</strong></td><td class="td">\n</td>
-<td class="td">"\r\n" or "\n" or &quot;\r&quot;</td><td class="td">Newline character. (Use "\r\n" to comply with RFC 822).</td>
+<td class="td"><strong>priority</strong></td><td class="td">3</td><td class="td">1, 2, 3, 4, 5</td><td class="td">Prioridad del email. 1 = Alta.  5 = Baja.  3 = Normal.</td>
 </tr><tr>
-<td class="td"><strong>bcc_batch_mode</strong></td><td class="td">FALSE</td><td class="td">TRUE or FALSE (boolean)</td><td class="td">Enable BCC Batch Mode.</td>
+<td class="td"><strong>crlf</strong></td><td class="td">\n</td>	<td class="td">&quot;\r\n&quot; or &quot;\n&quot; or &quot;\r&quot;</td><td class="td">Caracter de Nueva L&iacute;nea. (Use "\r\n" para cumplir con
+RFC 822)</td>
 </tr><tr>
-<td class="td"><strong>bcc_batch_size</strong></td><td class="td">200</td><td class="td">None</td><td class="td">Number of emails in each BCC batch.</td>
+<td class="td"><strong>newline</strong></td><td class="td">\n</td><td class="td">"\r\n" or "\n"</td><td class="td">Caracter de nueva linea. (Use "\r\n" para cumplir con la RFC 822).</td>
+</tr><tr>
+<td class="td"><strong>bcc_batch_mode</strong></td><td class="td">FALSE</td><td class="td">TRUE or FALSE (boolean)</td><td class="td">Activa el Modo Batch BCC.</td>
+</tr><tr>
+<td class="td"><strong>bcc_batch_size</strong></td><td class="td">200</td><td class="td">None</td><td class="td">Numero de emails en cada BCC batch.</td>
 </tr>
 </table>
 
-
-<h2>Email Function Reference</h2>
+<h2>Referencia de la funci&oacute;n email</h2>
 
 <h3>$this->email->from()</h3>
-<p>Sets the email address and name of the person sending the email:</p>
-<code>$this->email->from('<var>you@example.com</var>', '<var>Your Name</var>');</code>
+<p>Establece la direcci&oacute;n de email y el nombre de la persona que env&iacute;a el email:</p>
+
+<code>$this->email->from('<var>tu@tu-sitio.com</var>', '<var>Tu Nombre</var>');</code>
 
 <h3>$this->email->reply_to()</h3>
-<p>Sets the reply-to address.  If the information is not provided the information in the "from" function is used. Example:</p>
-<code>$this->email->reply_to('<var>you@example.com</var>', '<var>Your Name</var>');</code>
+<p>Establece la direccion de respuesta. Si la informaci&oacute;n no es proveida, se usara de la funcion "from". Ejemplo:</p>
 
+<code>$this->email->reply_to('<var>tu@tu-sitio.com</var>', '<var>Tu Nombre</var>');</code>
 
 <h3>$this->email->to()</h3>
-<p>Sets the email address(s) of the recipient(s).  Can be a single email, a comma-delimited list or an array:</p>
+<p>Establece la(s) direccion(es) de email del destinatario(s). Puede ser una direccion simple, una lista separada por comas o un arreglo:</p>
 
-<code>$this->email->to('<var>someone@example.com</var>');</code>
-<code>$this->email->to('<var>one@example.com</var>, <var>two@example.com</var>, <var>three@example.com</var>');</code>
+<code>$this->email->to('<var>alguien@ejemplo.com</var>');</code>
 
-<code>$list = array('<var>one@example.com</var>', '<var>two@example.com</var>', '<var>three@example.com</var>');<br />
+<code>$this->email->to('<var>uno@ejemplo.com</var>, <var>dos@ejemplo.com</var>, <var>tres@ejemplo.com</var>');</code>
+
+<code>$list = array('<var>uno@ejemplo.com</var>', '<var>dos@ejemplo.com</var>', '<var>tres@ejemplo.com</var>');<br />
 <br />
 $this->email->to(<var>$list</var>);</code>
 
 <h3>$this->email->cc()</h3>
-<p>Sets the CC email address(s). Just like the "to", can be a single email, a comma-delimited list or an array.</p>
+<p>Estable las direcciones CC (con copia). Igual al "to", puede ser una direcci&oacute;n simple, o una lista separada por comas, o un arreglo.</p>
 
 <h3>$this->email->bcc()</h3>
-<p>Sets the BCC email address(s). Just like the "to", can be a single email, a comma-delimited list or an array.</p>
-
+<p>Establece las direcciones BCC (con copia oculta). Es igual a la forma "to", puede ser una direccion simple, una lista delimitada por comas, o un array.</p>
 
 <h3>$this->email->subject()</h3>
-<p>Sets the email subject:</p>
-<code>$this->email->subject('<var>This is my subject</var>');</code>
+<p>Establece el asunto del email:</p>
+
+<code>$this->email->subject('<var>Este es el asunto</var>');</code>
 
 <h3>$this->email->message()</h3>
-<p>Sets the email message body:</p>
-<code>$this->email->message('<var>This is my message</var>');</code>
+<p>Establece el cuerpo del mensaje:</p>
+
+<code>$this->email->message('<var>Este es mi mensaje</var>');</code>
 
 <h3>$this->email->set_alt_message()</h3>
-<p>Sets the alternative email message body:</p>
-<code>$this->email->set_alt_message('<var>This is the alternative message</var>');</code>
+<p>Establece un cuerpo de mensaje alternativo:</p>
 
-<p>This is an optional message string which can be used if you send HTML formatted email.  It lets you specify an alternative
-message with no HTML formatting which is added to the header string for people who do not accept HTML email.
-If you do not set your own message CodeIgniter will extract the message from your HTML email and strip the tags.</p>
+<code>$this->email->set_alt_message('<var>Este es el mensaje alternativo</var>');</code>
 
-
+<p>Este es una cadena de mensaje opcional que puede ser usado si envias un email con formato HTML. El te permite especificar un mensaje alternativo sin formato HTML el cual es adherido a la cadena de la cabecera. Para la gente que no acepta email con formato HTML. Si no estableces un mensaje alternativo, CodeIgniter extraera el mensaje de tu email HTML y quitara las etiquetas.</p>
 
 <h3>$this->email->clear()</h3>
-<p>Initializes all the email variables to an empty state.  This function is intended for use if you run the email sending function
-in a loop, permitting the data to be reset between cycles.</p>
-<code>foreach ($list as $name => $address)<br />
+<p>Inicializa todas las variables de email a un estado vacio. Esta funci&oacute;n esta hecha para ser usada en caso de que se use la funcion enviar email en un ciclo repetitivo (loop), permitiendo que los datos sean restablecidos entre los ciclos.</p>
+
+<code>foreach ($lista as $nombre => $direccion)<br />
 {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;$this->email->clear();<br /><br />
-
-&nbsp;&nbsp;&nbsp;&nbsp;$this->email->to($address);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;$this->email->from('your@example.com');<br />
-&nbsp;&nbsp;&nbsp;&nbsp;$this->email->subject('Here is your info '.$name);<br />
-&nbsp;&nbsp;&nbsp;&nbsp;$this->email->message('Hi '.$name.' Here is the info you requested.');<br />
+	
+&nbsp;&nbsp;&nbsp;&nbsp;$this->email->to($direccion);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$this->email->from('tu@tu-sitio.com');<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$this->email->subject('Aqui tu informacion '.$nombre);<br />
+&nbsp;&nbsp;&nbsp;&nbsp;$this->email->message('Hola '.$nombre.' Aqui esta la informacion que solicitaste.');<br />
 &nbsp;&nbsp;&nbsp;&nbsp;$this->email->send();<br />
 }</code>
 
-<p>If you set the parameter to TRUE any attachments will be cleared as well:</p>
+<p>Si estableces el parametro a TRUE cualquier adjunto sera limpiado tambi&eacute;n:</p>
 
 <code>$this->email->clear(TRUE);</code>
 
-
 <h3>$this->email->send()</h3>
-<p>The Email sending function. Returns boolean TRUE or FALSE based on success or failure, enabling it to be used
-conditionally:</p>
+<p>La funci&oacute;n de env&iacute;o de emails. Retorna el booleano TRUE o FALSE basado en el exito o el fracaso, permitiendo su uso condicionalmente:</p>
 
 <code>if ( ! $this->email->send())<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;// Generate error<br />
+&nbsp;&nbsp;&nbsp;&nbsp;// Generar error<br />
 }</code>
 
-
 <h3>$this->email->attach()</h3>
-<p>Enables you to send an attachment. Put the file path/name in the first parameter. Note: Use a file path, not a URL.
-For multiple attachments use the function multiple times. For example:</p>
+<p>Te permite enviar un adjunto. Coloque el path/nombre en el primer parametro. Nota: Use un path al archivo, no una URL. Para multiples adjuntos use la funci&oacute;n varias veces. Por ejemplo:</p>
 
-<code>$this->email->attach('/path/to/photo1.jpg');<br />
-$this->email->attach('/path/to/photo2.jpg');<br />
-$this->email->attach('/path/to/photo3.jpg');<br />
+<code>$this->email->attach('/path/a/photo1.jpg');<br />
+$this->email->attach('/path/a/photo2.jpg');<br />
+$this->email->attach('/path/a/photo3.jpg');<br />
 <br />
 $this->email->send();</code>
 
-
 <h3>$this->email->print_debugger()</h3>
-<p>Returns a string containing any server messages, the email headers, and the email messsage.  Useful for debugging.</p>
+<p>Retorna una cadena conteniendo  cualquier mensaje del servidor, la cabecera del email, y el mensaje. Muy util para debugging.</p>
 
+<h2>Sobre-escribir el ajuste de palabras</h2>
+<p>Si tienes el ajuste de palabras (word wrapping) activado (recomendado para cumplir con la RFC 822) y tienes un enlace muy largo en tu email, este puede ser ajustado tambien, causando que se vuelva in-clickeable por la persona que lo reciba. CodeIgniter te permite manualmente sobre-escribir el (word wrapping) ajuste de palabra en una parte de tu mensaje como este:</p>
 
-<h2>Overriding Word Wrapping</h2>
-
-<p>If you have word wrapping enabled (recommended to comply with RFC 822) and you have a very long link in your email it can
-get wrapped too, causing it to become un-clickable by the person receiving it.  CodeIgniter lets you manually override
-word wrapping within part of your message like this:</p>
-
-<code>The text of your email that<br />
-gets wrapped normally.<br />
+<code>El texto de tu email que<br />
+sera ajustado normalmente.<br />
 <br />
-<var>{unwrap}</var>http://example.com/a_long_link_that_should_not_be_wrapped.html<var>{/unwrap}</var><br />
+<var>{unwrap}</var>http://www.ejemplo.com/un_largo_enlace_que_deberia_no_ser_ajustado.html<var>{/unwrap}</var><br />
 <br />
-More text that will be<br />
-wrapped normally.</code>
+Mas texto que luego deberia<br />
+ser ajustado normalmente.</code>
 
-<p>Place the item you do not want word-wrapped between: <var>{unwrap}</var> <var>{/unwrap}</var></p>
-
+<p>Ubique el item que quieres que no sea ajustado entre :<var>{unwrap}</var> <var>{/unwrap}</var></p>
 
 </div>
 <!-- END CONTENT -->
@@ -294,14 +265,16 @@ wrapped normally.</code>
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="../database/index.html">Database Class</a>
+Tema anterior:&nbsp;&nbsp;<a href="../database/index.html">Clase Database</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="encryption.html">Encryption Class</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="encryption.html">Clase Encrypt</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/email.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

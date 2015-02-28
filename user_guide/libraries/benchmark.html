@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/benchmark.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Benchmarking Class : CodeIgniter User Guide</title>
+<title>Clase Benchmarking : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-Benchmarking Class
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Clase Benchmarking
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -55,144 +57,127 @@ Benchmarking Class
 <!-- START CONTENT -->
 <div id="content">
 
+<h1>Clase Benchmark</h1>
 
-<h1>Benchmarking Class</h1>
+<p>CodeIgniter tiene una clase para evaluar el desempe&ntilde;o que est&aacute; siempre activa, permitiendo que se calcule la diferencia de tiempo entre dos puntos que sean marcados.</p>
 
-<p>CodeIgniter has a Benchmarking class that is always active, enabling the time difference between any
-two marked points to be calculated.</p>
+<p class="important"><strong>Nota:</strong>Esta clase es inicializada autom&aacute;ticamente por el sistema, por esto, no hay necesidad de hacerlo manualmente.</p>
 
-<p class="important"><strong>Note:</strong> This class is initialized automatically by the system so there is no need to do it manually.</p>
+<p>Adem&aacute;s, la evaluaci&oacute;n de desempe&ntilde;o siempre arranca en el momento que se invoca al framework, y la termina la
+clase Output, justo antes de enviar la vista final al navegador, permitiendo mostrar una medici&oacute;n de tiempo muy
+exacta de la ejecuci&oacute;n del sistema al completo.</p>
 
-
-<p>In addition, the benchmark is always started the moment the framework is
-invoked, and ended by the output class right before sending the final view to the browser, enabling a very accurate
-timing of the entire system execution to be shown.</p>
-
-
-<h3>Table of Contents</h3>
+<h3>Tabla de Contenidos</h3>
 
 <ul>
-<li><a href="#using">Using the Benchmark Class</a></li>
-<li><a href="#profiler">Profiling Your Benchmark Points</a></li>
-<li><a href="#execution">Displaying Total Execution Time</a></li>
-<li><a href="#memory">Displaying Memory Consumption</a></li>
+<li><a href="#using">Usando la clase Puntos de Referencia</a></li>
+<li><a href="#profiler">Perfilando tus puntos de referencia</a></li>
+<li><a href="#execution">Desplegando el tiempo total de ejecucion</a></li>
+<li><a href="#memory">Desplegando el uso de memoria</a></li>
 </ul>
 
-
-
 <a name="using"></a>
-<h2>Using the Benchmark Class</h2>
+<h2>Usando la clase Puntos de referencia</h2>
 
-<p>The Benchmark class can be used within your <a href="../general/controllers.html">controllers</a>,  <a href="../general/views.html">views</a>, or your  <a href="../general/models.html">models</a>.  The process for usage is this:</p>
+<p>La clase Puntos de referencia puede ser usado con tus <a href="../general/controllers.html">controladores</a>,  <a href="../general/views.html">vistas</a>, o tus  <a href="../general/models.html">Modelos</a>. El proceso para usarlo es este:</p>
 
 <ol>
-<li>Mark a start point</li>
-<li>Mark an end point</li>
-<li>Run the "elapsed time" function to view the results</li>
+<li>Marcando un punto inicial</li>
+<li>Marcando un punto final</li>
+<li>Ejecuta la funcion "elapsed time"(tiempo transcurrido) para ver los resultados</li>
 </ol>
 
-<p>Here's an example using real code:</p>
+<p>Aqui un ejemplo utilizando codigo real:</p>
 
-<code>$this->benchmark->mark('code_start');<br />
+<code>$this->benchmark->mark('codigo_inicio');<br />
 <br />
-// Some code happens here<br />
+// Alg&uacute;n codigo por aqu&iacute;<br />
 <br />
-$this->benchmark->mark('code_end');<br />
+$this->benchmark->mark('codigo_fin');<br />
 <br />
-echo $this->benchmark->elapsed_time('code_start', 'code_end');</code>
+echo $this->benchmark->elapsed_time('codigo_inicio', 'codigo_fin');</code>
 
-<p class="important"><strong>Note:</strong> The words "code_start" and "code_end" are arbitrary.  They are simply words used to set two markers.  You can
-use any words you want, and you can set multiple sets of markers. Consider this example:</p>
+<p class="important"><strong>Nota:</strong>Las palabras "codigo_inicio" y "codigo_fin" son arbitrarios. Son solamente palabras que se usan para setear dos marcas. Puedes usar cual cualquier palabra que quieras, y puedes poner multiples juegos de marcas. Considere este ejemplo:</p>
 
-<code>$this->benchmark->mark('dog');<br />
+<code>$this->benchmark->mark('perro');<br />
 <br />
-// Some code happens here<br />
+// Algun codigo aqui<br />
 <br />
-$this->benchmark->mark('cat');<br />
+$this->benchmark->mark('gato');<br />
 <br />
-// More code happens here<br />
+// M&aacute;s codigo aqui<br />
 <br />
-$this->benchmark->mark('bird');<br />
+$this->benchmark->mark('pajaro');<br />
 <br />
-echo $this->benchmark->elapsed_time('dog', 'cat');<br />
-echo $this->benchmark->elapsed_time('cat', 'bird');<br />
-echo $this->benchmark->elapsed_time('dog', 'bird');</code>
-
+echo $this->benchmark->elapsed_time('perro', 'gato');<br />
+echo $this->benchmark->elapsed_time('gato', 'pajaro');<br />
+echo $this->benchmark->elapsed_time('perro', 'pajaro');</code>
 
 <a name="profiler"></a>
-<h2>Profiling Your Benchmark Points</h2>
+<h2>Perfilando tus Puntos de Referencia</h2>
 
-<p>If you want your benchmark data to be available to the
-<a href="../general/profiling.html">Profiler</a> all of your marked points must be set up in pairs, and
-each mark point name must end with <kbd>_start</kbd> and <kbd>_end</kbd>.
-Each pair of points must otherwise be named identically. Example:</p>
+<p>Si quieres hacer disponible los datos de tus puntos de referencia disponible para tu <a href="../general/profiling.html">Profiler</a> todos los puntos que marques deben ser seteado en pares, y cada punto de marca debe finalizar con <kbd>_start</kbd> y <kbd>_end</kbd>. Cada par de puntos deben ser llamados de igual forma. Por ejemplo:</p>
 
 <code>
-$this->benchmark->mark('my_mark<kbd>_start</kbd>');<br />
+$this->benchmark->mark('mi_marca<kbd>_start</kbd>');<br />
 <br />
 // Some code happens here...<br />
 <br />
-$this->benchmark->mark('my_mark<kbd>_end</kbd>');
+$this->benchmark->mark('mi_marca<kbd>_end</kbd>');
 <br /><br />
-
-$this->benchmark->mark('another_mark<kbd>_start</kbd>');<br />
+$this->benchmark->mark('otra_marca<kbd>_start</kbd>');<br />
 <br />
-// Some more code happens here...<br />
+// Agun codigo por aqui...<br />
 <br />
-$this->benchmark->mark('another_mark<kbd>_end</kbd>');
+$this->benchmark->mark('otra_marca<kbd>_end</kbd>');
 </code>
 
-<p>Please read the <a href="../general/profiling.html">Profiler page</a> for more information.</p>
-
+<p>Por favor lea la <a href="../general/profiling.html">Perfilando tu Aplicaci&oacute;n</a> para mas informacion.</p>
 
 <a name="execution"></a>
-<h2>Displaying Total Execution Time</h2>
+<h2>Desplegando el tiempo total de ejecucion</h2>
 
-<p>If you would like to display the total elapsed time from the moment CodeIgniter starts to the moment the final output
-is sent to the browser, simply place this in one of your view templates:</p>
+<p>Si quieres desplegar el tiempo total transcurrido desde el momento en el que CodeIgniter comienza hasta el momento en el que la salida es enviada al navegador, simplemente ubica esto en una de las vistas de tu plantilla:</p>
 
-<code>&lt;?php echo $this->benchmark->elapsed_time();?&gt;</code>
+<code>&lt;?=$this->benchmark->elapsed_time();?&gt;</code>
 
-<p>You'll notice that it's the same function used in the examples above to calculate the time between two point, except you are
-<strong>not</strong> using any parameters.  When the parameters are absent, CodeIgniter does not stop the benchmark until right before the final
-output is sent to the browser.  It doesn't matter where you use the function call, the timer will continue to run until the very end.</p>
+<p>Ud. se dara cuenta de que es la misma funcion usada en los ejemplos anteriores, para calcular el tiempo entre dos puntos, excepto que <strong> no </strong> estas usando ningun parametro. Cuando el parametro esta ausente, CodeIgniter no detiene el punto de referencia ahsta justo antes de que la salida final sea enviada al navegador. No importa donde se use la llamada a la funcion, el temporizador continuara corriedon hasta el final.</p>
 
-<p>An alternate way to show your elapsed time in your view files is to use this pseudo-variable, if you prefer not to use the pure PHP:</p>
+<p>Una forma alternativa de mostrar el tiempo transcurrido en tus archivos de vista es usar esta pseudo-variable, si prefieres no usar el PHP puro:</p>
+
 <code>{elapsed_time}</code>
 
-<p class="important"><strong>Note:</strong> If you want to benchmark anything within your controller
-functions you must set your own start/end points.</p>
+<p class="important"><strong>Nota:</strong>Si quieres algo de referencia en tus funciones de controlador deberas setear tus propios puntos de inicio/fin.</p>
 
 <a name="memory"></a>
-<h2>Displaying Memory Consumption</h2>
+<h2>Desplegando el consumo de memoria</h2>
 
-<p>If your PHP installation is configured with --enable-memory-limit, you can display the amount of memory consumed by the entire
-system using the following code in one of your view file:</p>
+<p>Si tu  instalacion PHP esta configurada con el --enable-memory-limit, puedes desplegar la cantidad de memoria utilizada por sistema entero usando el siguiente codigo en tu archivo vista:</p>
 
-<code>&lt;?php echo $this->benchmark->memory_usage();?&gt;</code>
-<p>Note: This function can only be used in your view files. The consumption will reflect the total memory used by the entire app.</p>
+<code>&lt;?=$this->benchmark->memory_usage();?&gt;</code>
 
-<p>An alternate way to show your memory usage in your view files is to use this pseudo-variable, if you prefer not to use the pure PHP:</p>
+<p>Nota:Esta funcion puede ser solamente usad en los archivos vista. El consumo de memoria reflejara el uso total de memoria por la aplicacion completa.</p>
+
+<p>Una forma alternativa de mostrar el uso de memoria en tus archivos de vista, es usar esta pseudo-variable, si prefieres no usar el PHP puro:</p>
+
 <code>{memory_usage}</code>
-
-
-
 
 </div>
 <!-- END CONTENT -->
 
 
-
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="../doc_style/index.html">Writing Documentaion</a>
+Tema anterior:&nbsp;&nbsp;<a href="../doc_style/index.html">Escribir Documentaci&oacute;n</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="calendar.html">Calendar Class</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="calendar.html">Clase Calendar</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/benchmark.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:00 GMT -->
 </html>

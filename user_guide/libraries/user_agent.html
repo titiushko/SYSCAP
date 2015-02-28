@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/user_agent.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:01 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>User Agent Class : CodeIgniter User Guide</title>
+<title>Clase User_agent : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,11 +42,11 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-User Agent Class
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+Clase User_agent
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -55,29 +57,21 @@ User Agent Class
 <!-- START CONTENT -->
 <div id="content">
 
+<h1>Clase User_agent</h1>
+<p>La Clase de Agente del Usuario le provee funciones para ayudar a identificar informaci&oacute;n acerca del explorador, dispositivo m&oacute;vil o robot visitando su sitio. Adem&aacute;s puede obtener informaci&oacute;n de referencia as&iacute; como el lenguaje e informaci&oacute;n sobre los juegos de caracteres soportados.</p>
 
-<h1>User Agent Class</h1>
-
-<p>The User Agent Class provides functions that help identify information about the browser, mobile device, or robot visiting your site.
-In addition you can get referrer information as well as language and supported character-set information.</p>
-
-<h2>Initializing the Class</h2>
-
-<p>Like most other classes in CodeIgniter, the User Agent class is initialized in your controller using the <dfn>$this->load->library</dfn> function:</p>
+<h2>Inicializando la Clase</h2>
+<p>Como la mayor&iacute;a de las otras clases en CodeIgniter, la clase de Agente del Usuario es inicializada en su controlador usando la funci&oacute;n <dfn>$this->load->library</dfn>:</p>
 
 <code>$this->load->library('user_agent');</code>
-<p>Once loaded, the object will be available using: <dfn>$this->agent</dfn></p>
 
-<h2>User Agent Definitions</h2>
+<p>Una vez carada, el objeto estar&aacute; disponible usando: <dfn>$this->agent</dfn></p>
 
-<p>The user agent name definitions are located in a config file located at: <dfn>application/config/user_agents.php</dfn>.  You may add items to the
-various user agent arrays if needed.</p>
+<h2>Definiciones de Agente del Usuario</h2>
+<p>La definici&oacute;n de nombres del agente del usuario est&aacute; ubicada en un archivo de configuraci&oacute;n que se encuentra en: <dfn>application/config/user_agents.php</dfn>.  Puede agregar items al variado arreglo de agentes de usuario si lo necesita.</p>
 
-<h2>Example</h2>
-
-<p>When the User Agent class is initialized it will attempt to determine whether the user agent browsing your site is
-a web browser, a mobile device, or a robot.  It will also gather the platform information if it is available.</p>
-
+<h2>Ejemplo</h2>
+<p>Cuando la clase de Agente del Usuario es inicializada, intentar&aacute; determinar si el agente del usuario navegando su sitio es un navegador web, un dispositivo m&oacute;vil, o un robot. Tambi&eacute;n juntar&aacute; informaci&oacute;n sobre la plataforma, si esta est&aacute; disponible.</p>
 
 <code>
 $this->load->library('user_agent');<br />
@@ -101,30 +95,29 @@ else<br />
 <br />
 echo $agent;<br />
 <br />
-echo $this->agent->platform(); // Platform info (Windows, Linux, Mac, etc.)
+echo $this->agent->platform(); // Informaci&oacute;n de plataforma  (Windows, Linux, Mac, etc.)
 </code>
 
+<br/>
 
 <h1>Function Reference</h1>
 
-
 <h2>$this->agent->is_browser()</h2>
-<p>Returns TRUE/FALSE (boolean) if the user agent is a known web browser.</p>
+<p>Devuelve TRUE/FALSE (boolean) si el agente del usuario es un navegador web conocido.</p>
 
 <code> if ($this->agent->is_browser('Safari'))<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;echo 'You are using Safari.';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo 'Est&aacute; us&aacute;ndo Safari.';<br />
 }<br />
 else if ($this->agent->is_browser())<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;echo 'You are using a browser.';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo ''Est&aacute; usando un navegador.';<br />
 }</code>
 
-<p class="important"><strong>Note:</strong>&nbsp; The string "Safari" in this example is an array key in the list of browser definitions.
-You can find this list in <dfn>application/config/user_agents.php</dfn> if you want to add new browsers or change the stings.</p>
+<p class="important"><strong>Nota:</strong> La cadena "Safari" en este ejemplo es una clave de array en la lista de definiciones de navegadores. Puede encontrar esta lista en <dfn>application/config/user_agents.php</dfn> si quiere agregar nuevos navegadores o cambiar las cadenas.</p>
 
 <h2>$this->agent->is_mobile()</h2>
-<p>Returns TRUE/FALSE (boolean) if the user agent is a known mobile device.</p>
+<p>Devuelve TRUE/FALSE (booleano) si el agente del usuario es un dispositivo m&oacute;vil conocido.</p>
 
 <code> if ($this->agent->is_mobile('iphone'))<br />
 {<br />
@@ -140,72 +133,62 @@ else<br />
 }</code>
 
 <h2>$this->agent->is_robot()</h2>
-<p>Returns TRUE/FALSE (boolean) if the user agent is a known robot.</p>
+<p>Devuelve TRUE/FALSE (boolean) si el agente del usuario es un robot conocido.</p>
 
-<p class="important"><strong>Note:</strong>&nbsp; The user agent library only contains the most common robot
-definitions.  It is not a complete list of bots. There are hundreds of them so searching for each one would not be
-very efficient. If you find that some bots that commonly visit your site are missing from the list you can add them to your
-<dfn>application/config/user_agents.php</dfn> file.</p>
+<p class="important"><strong>Nota:</strong>&nbsp; La librer&iacute;a del agente del usuario s&oacute;lo contiene las definiciones de robots m&aacute;s comunes. No es una lista de bots completa. Hay cientos de ellos por lo que buscar por cada uno no ser&iacute;a muy eficiente. Si encuentra que alg&uacute;n bot que com&uacute;nmente visita su sitio falta en la lista, puede agregarlo a su archivo <dfn>application/config/user_agents.php</dfn>.</p>
 
 <h2>$this->agent->is_referral()</h2>
-<p>Returns TRUE/FALSE (boolean) if the user agent was referred from another site.</p>
-
+<p>Devuelve TRUE/FALSE (boolean) si el agente del usuario fue referido desde otro sitio.</p>
 
 <h2>$this->agent->browser()</h2>
-<p>Returns a string containing the name of the web browser viewing your site.</p>
+<p>Devuelve una cadena que contiene el nombre del navegador web viendo su sitio.</p>
 
 <h2>$this->agent->version()</h2>
-<p>Returns a string containing the version number of the web browser viewing your site.</p>
+<p>Devuelve una cadena que contiene el n&uacute;mero de versi&oacute;n del navegador web viendo su sitio.</p>
 
 <h2>$this->agent->mobile()</h2>
-<p>Returns a string containing the name of the mobile device viewing your site.</p>
+<p>Devuelve una cadena que contiene el nombre del dispositivo m&oacute;vil viendo su sitio.</p>
 
 <h2>$this->agent->robot()</h2>
-<p>Returns a string containing the name of the robot viewing your site.</p>
+<p>Devuelve una cadena que contiene el nombre del robot viendo su sitio.</p>
 
 <h2>$this->agent->platform()</h2>
-<p>Returns a string containing the platform viewing your site (Linux, Windows, OS X, etc.).</p>
+<p>Devuelve una cadena que contiene la plataforma viendo su sitio (Linux, Windows, OS X, etc.).</p>
 
 <h2>$this->agent->referrer()</h2>
-<p>The referrer, if the user agent was referred from another site. Typically you'll test for this as follows:</p>
+<p>El referente, si el agente del usuario fue referido de otro sitio. T&iacute;picamente probar&aacute; de esta esta forma:</p>
 
 <code> if ($this->agent->is_referral())<br />
 {<br />
 &nbsp;&nbsp;&nbsp;&nbsp;echo $this->agent->referrer();<br />
-}</code>
-
+}
+</code>
 
 <h2>$this->agent->agent_string()</h2>
-<p>Returns a string containing the full user agent string.  Typically it will be something like this:</p>
+<p>Devuelve una cadena que contiene la cadena completa del agente del usuario. T&iacute;picamente ser&aacute; algo as&iacute;:</p>
 
 <code>Mozilla/5.0 (Macintosh; U; Intel Mac OS X; en-US; rv:1.8.0.4) Gecko/20060613 Camino/1.0.2</code>
 
-
 <h2>$this->agent->accept_lang()</h2>
-<p>Lets you determine if the user agent accepts a particular language. Example:</p>
+<p>Le permite determinar si el agente del usuario acepta un lenguaje en particular. Ejemplo:</p>
 
 <code>if ($this->agent->accept_lang('en'))<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;echo 'You accept English!';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo 'Acepta Ingl&eacute;s!';<br />
 }</code>
 
-<p class="important"><strong>Note:</strong> This function is not typically very reliable
-since some browsers do not provide language info, and even among those that do, it is not always accurate. </p>
-
-
+<p class="important"><strong>Nota:</strong> Esta funci&oacute;n no es muy confiable ya que algunos exploradores no proveen informaci&oacute;n de lenguaje, e incluso entre los que lo hacen, no siempre es la forma m&aacute;s precisa.</p>
 
 <h2>$this->agent->accept_charset()</h2>
-<p>Lets you determine if the user agent accepts a particular character set. Example:</p>
+
+<p>Le permite determinar si el agente del usuario acepta un juego de caracteres en particular. Ejemplo:</p>
 
 <code>if ($this->agent->accept_charset('utf-8'))<br />
 {<br />
-&nbsp;&nbsp;&nbsp;&nbsp;echo 'You browser supports UTF-8!';<br />
+&nbsp;&nbsp;&nbsp;&nbsp;echo 'Su explorador soporta UTF-8!';<br />
 }</code>
 
-<p class="important"><strong>Note:</strong> This function is not typically very reliable
-since some browsers do not provide character-set info, and even among those that do, it is not always accurate. </p>
-
-
+<p class="important"><strong>Nota:</strong> Esta funci&oacute;n no es muy confiable ya que algunos exploradores no proveen informaci&oacute;n de lenguaje, e incluso entre los que lo hacen, no siempre es la forma m&aacute;s precisa. </p>
 
 </div>
 <!-- END CONTENT -->
@@ -213,14 +196,16 @@ since some browsers do not provide character-set info, and even among those that
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="uri.html">URI Class</a>
+Tema anterior:&nbsp;&nbsp;<a href="uri.html">URI Class</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="xmlrpc.html">XML-RPC Class</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="xmlrpc.html">XML-RPC Class</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/libraries/user_agent.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:01 GMT -->
 </html>

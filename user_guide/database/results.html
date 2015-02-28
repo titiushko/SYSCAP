@@ -1,9 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/database/results.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:03 GMT -->
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Generating Query Results : CodeIgniter User Guide</title>
+<title>Generar Resultados de Consultas : Gu&iacute;a del Usuario de CodeIgniter</title>
 
 <style type='text/css' media='all'>@import url('../userguide.css');</style>
 <link rel='stylesheet' type='text/css' media='all' href='../userguide.css' />
@@ -17,19 +19,19 @@
 <meta http-equiv= 'pragma' content='no-cache' />
 <meta name='robots' content='all' />
 <meta name='author' content='ExpressionEngine Dev Team' />
-<meta name='description' content='CodeIgniter User Guide' />
+<meta name='description' content='Gu&iacute;a del Usuario de CodeIgniter' />
 
 </head>
 <body>
 
 <!-- START NAVIGATION -->
 <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('../');</script></div></div>
-<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" /></a></div>
+<div id="nav2"><a name="top"></a><a href="javascript:void(0);" onclick="myHeight.toggle();"><img src="../images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Mostrar Tabla de Contenido" alt="Mostrar Tabla de Contenido" /></a></div>
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 2.2.0</h1></td>
-<td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
+<td><h1>Gu&iacute;a del Usuario de CodeIgniter Versi&oacute;n 2.1.4</h1></td>
+<td id="breadcrumb_right"><a href="../toc.html">Tabla de Contenido</a></td>
 </tr>
 </table>
 </div>
@@ -40,12 +42,12 @@
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
 <td id="breadcrumb">
-<a href="http://codeigniter.com/">CodeIgniter Home</a> &nbsp;&#8250;&nbsp;
-<a href="../index.html">User Guide Home</a> &nbsp;&#8250;&nbsp;
-<a href="index.html">Database Library</a> &nbsp;&#8250;&nbsp;
-Query Results
+<a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&#8250;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a> &nbsp;&#8250;&nbsp;
+<a href="index.html">Clase Database</a> &nbsp;&#8250;&nbsp;
+Resultados de Consultas
 </td>
-<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="ellislab.com/codeigniter/user-guide/" />Search User Guide&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
+<td id="searchbox"><form method="get" action="http://www.google.com/search"><input type="hidden" name="as_sitesearch" id="as_sitesearch" value="escodeigniter.com/guia_usuario/" />Buscar en la Gu&iacute;a del Usuario&nbsp; <input type="text" class="input" style="width:200px;" name="q" id="q" size="31" maxlength="255" value="" />&nbsp;<input type="submit" class="submit" name="sa" value="Go" /></form></td>
 </tr>
 </table>
 <!-- END BREADCRUMB -->
@@ -57,21 +59,16 @@ Query Results
 <!-- START CONTENT -->
 <div id="content">
 
+<h1>Generar Resultados de Consultas</h1>
 
+<p>Hay varias formas de generar los resultados de una consulta:</p>
 
-<h1>Generating Query Results</h1>
+<h2>result()</h2>
 
-
-<p>There are several ways to generate query results:</p>
-
-	<h2>result()</h2>
-
-	<p>This function returns the query result as an array of <strong>objects</strong>, or <strong>an empty array</strong> on failure.
-
-	Typically you'll use this in a foreach loop, like this:</p>
+<p>Esta funci&oacute;n retorna el resultado de la consulta como un arreglo de <strong>objetos</strong>, o  <strong>un arreglo vac&iacute;o</strong> en el caso de fracaso. Normalmente puede utilizar esto en un bucle foreach, de esta manera:</p>
 
 	<code>
-	$query = $this->db->query("YOUR QUERY");<br />
+	$query = $this->db->query("SU CONSULTA");<br />
 	<br />
 	foreach ($query->result() as $row)<br />
 	{<br />
@@ -80,12 +77,12 @@ Query Results
 	&nbsp;&nbsp;&nbsp;echo $row->body;<br />
 	}</code>
 
-	<p>The above <dfn>function</dfn> is an alias of <dfn>result_object()</dfn>.</p>
+<p>La anterior <dfn>funci&oacute;n</dfn> es un alias de <dfn>result_object()</dfn>.</p>
 
-	<p>If you run queries that might <strong>not</strong> produce a result, you are encouraged to test the result first:</p>
+<p>Si ejecuta consultas que podr&iacute;an no producir un resultado, lo animamos a probar el resultado de esto primero:</p>
 
 	<code>
-	$query = $this->db->query("YOUR QUERY");<br />
+	$query = $this->db->query("SU CONSULTA");<br />
 	<br />
 	if ($query->num_rows() > 0)<br />
 	{<br />
@@ -98,23 +95,24 @@ Query Results
 	}
 	</code>
 
-	<p>You can also pass a string to result() which represents a class to instantiate for each result object (note: this class must be loaded)</p>
+<p>Tambi&eacute;n puede pasar una cadena a <dfn>result()</dfn>, la que representa una clase a instanciar por cada objeto de resultado (<strong>nota:</strong> se tiene que cargar esta clase).</p>
 
 	<code>
 	$query = $this->db->query("SELECT * FROM users;");<br />
 	<br />
-	foreach ($query->result('User') as $row)<br />
+	foreach ($query->result('User') as $user)<br />
 	{<br />
 	&nbsp;&nbsp;&nbsp;echo $row->name; // call attributes<br />
 	&nbsp;&nbsp;&nbsp;echo $row->reverse_name(); // or methods defined on the 'User' class<br />
 	}
 	</code>
 
-	<h2>result_array()</h2>
+<h2>result_array()</h2>
 
-	<p>This function returns the query result as a pure array, or an empty array when no result is produced.  Typically you'll use this in a foreach loop, like this:</p>
+<p>Esta funci&oacute;n retorna el resultado de la consulta como un arreglo puro, o un arreglo vac&iacute;o cuando no se producen resultados.  Normalmente puede utilizar esto en un bucle foreach, de esta manera:</p>
+
 	<code>
-	$query = $this->db->query("YOUR QUERY");<br />
+	$query = $this->db->query("SU CONSULTA");<br />
 	<br />
 	foreach ($query->result_array() as $row)<br />
 	{<br />
@@ -123,13 +121,12 @@ Query Results
 	&nbsp;&nbsp;&nbsp;echo $row['body'];<br />
 	}</code>
 
+<h2>row()</h2>
 
-	<h2>row()</h2>
+<p>Esta funci&oacute;n retorna una &uacute;nica fila como resultado. Si su consulta tiene mas de una fila, &eacute;sta solo retorna la primera fila. El resultado es retornado como un <strong>objeto</strong>. Aqu&iacute; hay un ejemplo de su uso:</p>
 
-	<p>This function returns a single result row.  If your query has more than one row, it returns only the first row.
-	The result is returned as an <strong>object</strong>.  Here's a usage example:</p>
 	<code>
-	$query = $this->db->query("YOUR QUERY");<br />
+	$query = $this->db->query("SU CONSULTA");<br />
 	<br />
 	if ($query->num_rows() > 0)<br />
 	{<br />
@@ -141,11 +138,11 @@ Query Results
 	}
 	</code>
 
-	<p>If you want a specific row returned you can submit the row number as a digit in the first parameter:</p>
+<p>Si desea retornar una fila espec&iacute;fica puede presentar el n&uacute;mero de la fila como un d&iacute;gito en el primer par&aacute;metro:</p>
 
-	<code>$row = $query->row(<dfn>5</dfn>);</code>
+<code>$row = $query->row(<dfn>5</dfn>);</code>
 
-	<p>You can also add a second String parameter, which is the name of a class to instantiate the row with:</p>
+<p>Tambi&eacute;n puede agregar un segundo par&aacute;metro de cadena, que es el nombre de la clase con la que instanciar la fila:</p>
 
 	<code>
 	$query = $this->db->query("SELECT * FROM users LIMIT 1;");<br />
@@ -155,12 +152,11 @@ Query Results
 	echo $row->reverse_name(); // or methods defined on the 'User' class<br />
 	</code>
 
-	<h2>row_array()</h2>
-
-	<p>Identical to the above <var>row()</var> function, except it returns an array.  Example:</p>
+<h2>row_array()</h2>
+<p>Id&eacute;ntica a la funci&oacute;n <var>row()</var> anterior, excepto que retorna un arreglo. Por ejemplo:</p>
 
 	<code>
-	$query = $this->db->query("YOUR QUERY");<br />
+	$query = $this->db->query("SU CONSULTA");<br />
 	<br />
 	if ($query->num_rows() > 0)<br />
 	{<br />
@@ -173,12 +169,11 @@ Query Results
 	</code>
 
 
-	<p>If you want a specific row returned you can submit the row number as a digit in the first parameter:</p>
+<p>Si desea retornar una fila espec&iacute;fica puede presentar el n&uacute;mero de la fila como un d&iacute;gito en el primer par&aacute;metro:</p>
 
 	<code>$row = $query->row_array(<dfn>5</dfn>);</code>
 
-
-	<p>In addition, you can walk forward/backwards/first/last through your results using these variations:</p>
+<p>Adem&aacute;s, se puede caminar hacia adelante / atr&aacute;s / primera / &uacute;ltima fila a trav&eacute;s de sus resultados utilizando estas variaciones:</p>
 
 <p>
 	<strong>$row = $query->first_row()</strong><br />
@@ -187,53 +182,45 @@ Query Results
 	<strong>$row = $query->previous_row()</strong>
 </p>
 
-<p>By default they return an object unless you put the word "array" in the parameter:</p>
+<p>Por defecto, retorna un objeto a menos que ponga la palabra "array" en el par&aacute;metro:</p>
 
 <p>
 	<strong>$row = $query->first_row('array')</strong><br />
 	<strong>$row = $query->last_row('array')</strong><br />
 	<strong>$row = $query->next_row('array')</strong><br />
 	<strong>$row = $query->previous_row('array')</strong>
-</p>
 
-
-
-<h1>Result Helper Functions</h1>
-
+	</p>
+<h1>Funciones Helper de Resultados</h1>
 
 <h2>$query->num_rows()</h2>
-<p>The number of rows returned by the query. Note: In this example, <dfn>$query</dfn> is the variable that the query result object is assigned to:</p>
+<p>El n&uacute;mero de filas retornado por la consulta. Nota: En este ejemplo, <dfn>$query</dfn> es la variable que el objeto resultante de la consulta es asignado a:</p>
 
 <code>$query = $this->db->query('SELECT * FROM my_table');<br /><br />
 echo $query->num_rows();
 </code>
 
 <h2>$query->num_fields()</h2>
-<p>The number of FIELDS (columns) returned by the query.  Make sure to call the function using your query result object:</p>
+<p>El n&uacute;mero de CAMPOS (columnas) retornado por la consulta. Aseg&uacute;rese de llamar a la funci&oacute;n utilizando su objeto resultante de la consulta:</p>
 
 <code>$query = $this->db->query('SELECT * FROM my_table');<br /><br />
 echo $query->num_fields();
 </code>
 
-
-
 <h2>$query->free_result()</h2>
-<p>It frees the memory associated with the result and deletes the result resource ID.  Normally PHP frees its memory automatically at the end of script
-execution.  However, if you are running a lot of queries in a particular script you might want to free the result after each query result has been
-generated in order to cut down on memory consumptions.  Example:
-</p>
+<p>Se libera la memoria asociada con el resultado y elimina los recursos ID resultantes.  Normalmente PHP libera la memoria autom&aacute;ticamente al finalizar la ejecuci&oacute;n de scripts. Sin embargo, si est&aacute; ejecutando una gran cantidad de consultas en un script en particular, puede que desee liberar el resultado despu&eacute;s de cada resultado de consulta que se ha generado, con el fin de reducir los consumos de memoria. Por ejemplo:</p>
 
 <code>$query = $this->db->query('SELECT title FROM my_table');<br /><br />
 foreach ($query->result() as $row)<br />
 {<br />
 &nbsp;&nbsp;&nbsp;echo $row->title;<br />
 }<br />
-$query->free_result();  // The $query result object will no longer be available<br />
+$query->free_result();  // El objeto resultante $query dejar&aacute; de estar disponible<br />
 <br />
 $query2 = $this->db->query('SELECT name FROM some_table');<br /><br />
 $row = $query2->row();<br />
 echo $row->name;<br />
-$query2->free_result();  // The $query2 result object will no longer be available
+$query2->free_result();  // El objeto resultante $query2 dejar&aacute; de estar disponible
 </code>
 
 
@@ -246,14 +233,16 @@ $query2->free_result();  // The $query2 result object will no longer be availabl
 
 <div id="footer">
 <p>
-Previous Topic:&nbsp;&nbsp;<a href="queries.html">Queries</a>
+Tema anterior:&nbsp;&nbsp;<a href="queries.html">Consultas</a>
 &nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="#top">Top of Page</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-<a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
-Next Topic:&nbsp;&nbsp;<a href="helpers.html">Query Helper Functions</a>
+<a href="#top">Subir</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+<a href="../index-2.html">Gu&iacute;a del Usuario</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
+Pr&oacute;ximo tema:&nbsp;&nbsp;<a href="helpers.html">Funciones Helper de Consultas</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2014 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
+<p><a href="http://codeigniter.com/">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006 - 2012 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">EllisLab, Inc.</a></p>
 </div>
 
 </body>
+
+<!-- Mirrored from escodeigniter.com/guia_usuario/database/results.html by HTTrack Website Copier/3.x [XR&CO'2010], Fri, 29 Aug 2014 06:55:03 GMT -->
 </html>
