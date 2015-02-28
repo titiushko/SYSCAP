@@ -1,5 +1,5 @@
 -- Crear un usuario con acceso desde cualquier host
-CREATE USER 'syscap'@'%' IDENTIFIED BY 'admin#159';
+CREATE USER 'syscap'@'%' IDENTIFIED BY 'moodle$198';
 
 -- Asignar los permiso al usuario para la base de datos SYSCAP
 GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE VIEW, EVENT, TRIGGER, SHOW VIEW, CREATE ROUTINE, ALTER ROUTINE, EXECUTE
