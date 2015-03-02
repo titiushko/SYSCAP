@@ -144,8 +144,10 @@ $campos_ocultos_formulario = array(
 					</table>
 				</div>
 			</div>
-			<div class="col-lg-6" id="contenedor-grafica">
-				<div id="morris-bar-chart-estadistica10-1"></div>
+			<div class="col-lg-6">
+				<?php if(count($usuarios_nivel_nacional) > 1){ ?>
+				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica10-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -177,6 +179,7 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php if(count($usuarios_nivel_nacional) > 1){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
@@ -201,3 +204,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

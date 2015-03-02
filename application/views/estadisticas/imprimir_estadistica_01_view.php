@@ -87,10 +87,13 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if(count($modalidades_capacitados) > 0){ ?>
 					<div id="morris-bar-chart-estadistica1-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
+		<?php if(count($modalidades_capacitados) > 0){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
@@ -108,5 +111,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

@@ -10,7 +10,6 @@ html, body {
 	font-weight: bold;
 }
 
-/*input[type="email"], input[type="password"] {*/
 #login .form-group .form-control {
 	font-weight: normal;
 }
@@ -99,4 +98,45 @@ div.table-responsive table.table.table-striped.table-bordered.table-hover thead 
 .enlace {
 	background: transparent;
 	cursor: pointer;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo para inputs autocompletar									*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.contenedor-centro-educativo-1,
+.contenedor-centro-educativo-2 {
+	position: absolute;
+	z-index: 100;
+	display: block;
+	width: 96.66666666%;
+	line-height: 1.42857143;
+	border-right: 1px solid #66afe9;
+	border-bottom: 1px solid #66afe9;
+	border-left: 1px solid #66afe9;
+	background-color: #ffffff;
+}
+
+.contenedor-centro-educativo-1,
+.contenedor-centro-educativo-2 {
+	overflow-y: scroll;
+}
+
+.contenedor-centro-educativo-1 {
+	height: 53px;
+}
+
+.contenedor-centro-educativo-2 {
+	height: 86px;
+}
+
+.contenedor-centro-educativo-1 p,
+.contenedor-centro-educativo-2 p {
+	padding: 0px 11px;
+	margin: 0px 0px -1px 0px;
+}
+
+.contenedor-centro-educativo-1 p:hover,
+.contenedor-centro-educativo-2 p:hover {
+	color: #ffffff;
+	background-color: #1e90ff;
 }

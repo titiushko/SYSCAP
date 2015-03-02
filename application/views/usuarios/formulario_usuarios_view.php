@@ -23,19 +23,19 @@ if($operacion == "Mostrar"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
-	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\');"';
-	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\');"';
+	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('usuarios/modificar/'.@$usuario[0]->id_usuario).'\');"';
+	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario).'\');"';
 	if($this->session->userdata('uri_usuarios')){
 		$uri_usuarios = $this->session->userdata('uri_usuarios');
 		if(strpos($uri_usuarios, 'mostrar') != FALSE){
-			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().$uri_usuarios.'\');"';
+			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url($uri_usuarios).'\');"';
 		}
 		else{
-			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios').'\');"';
 		}
 	}
 	else{
-		$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+		$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios').'\');"';
 	}
 }
 if($operacion == "Editar"){
@@ -48,7 +48,7 @@ if($operacion == "Recuperar Contraseña"){
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';"';
 }
-$boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id_usuario.'\');"';
+$boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.@$usuario[0]->id_usuario).'\');"';
 // Definición de los campos Datos Personales
 $nombres_usuario = array(
 	'name'		=>	'nombres_usuario',
@@ -343,9 +343,9 @@ $modalidad_usuario = array(
 						<div class="row">
 							<div class="col-lg-12 text-center">
 								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
-								<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url('usuarios/imprimir/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<?php } ?>
-								<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<a href="<?= base_url('usuarios/exportar/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
 						<?php } ?>

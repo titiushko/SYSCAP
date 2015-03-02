@@ -160,7 +160,9 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(count($usuarios_departamento_municipio) > 1){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica7-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -207,34 +209,8 @@ $campos_ocultos_formulario = array(
 </div>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		$("#id_departamento").change( function(){
-			var respuesta = null;
-			$.ajax({
-				type:		"get",
-				datatype:	"json",
-				url:		"<?= base_url('listas_dependientes/municipios')?>",
-				cache:		false,
-				data:		{
-					id_departamento:	$("#id_departamento").val()
-				},
-				success:	function(data){
-					console.log("JSON: " + json);
-				},
-				error:		function(jqXHR, exception){
-					console.log(jqXHR.responseText);
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					$('#id_municipio').empty();
-					$.each(respuesta, function(res, item){
-						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
-					});
-				}
-			});
-		}).change();
-		
+	$(document).ready(function() {
 		$('#data-tables-estadistica7-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
@@ -255,9 +231,33 @@ $campos_ocultos_formulario = array(
 			language:{
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 			}
+		});
+		$("#id_departamento").change(function() {
+			$.ajax({
+				type:		"get",
+				datatype:	"json",
+				url:		"<?= base_url('ajax/lista_municipios')?>",
+				cache:		false,
+				data:		{id_departamento: $("#id_departamento").val()},
+				error:		function(resultado, exception) {
+								$('#id_municipio').empty();
+								$.each(jQuery.parseJSON(resultado.responseText), function(respuesta, lista_municipios) {
+									if(lista_municipios.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){
+										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio, "selected":	"selected"}).text(lista_municipios.nombre_municipio));
+									}
+									else{
+										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio}).text(lista_municipios.nombre_municipio));
+									}
+								});
+				}
 			});
+		}).change();
 	});
-	
+</script>
+<?php if(count($usuarios_departamento_municipio) > 1){ ?>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
+<script type="text/javascript">
 	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica7-1',
@@ -279,3 +279,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

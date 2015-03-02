@@ -5,10 +5,15 @@ class Usuarios_model extends CI_Model{
 		parent::__construct();
 	}
 	
-	function usuarios(){
+	function lista_usuarios($codigo_centro_educativo = ''){
 		$query = $this->db->select('id_usuario, nombre_usuario, acentos(F_NombreCompletoUsuario(id_usuario)) nombre_completo_usuario, dui_usuario, correo_electronico_usuario');
-		$query = $this->db->where('id_usuario in(1156, 1381, 812, 1893, 1809, 1811, 1806, 827, 1188, 661, 832, 1808, 665, 1304, 645, 816, 1141, 368, 369, 410, 841, 1417, 388, 1467, 1844, 1604, 907, 60, 1228, 1781, 397, 1672, 850, 1220, 1206, 1690, 1783, 1788, 1731, 1597, 1736, 1723, 1691, 1435, 1372, 1522, 1805, 1678, 182, 412)');
-		$query = $this->db->get('usuarios');
+		if($codigo_centro_educativo != ''){
+			$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
+			$query = $this->db->get('usuarios');
+		}
+		else{
+			$query = $this->db->get('usuarios', 200);
+		}
 		return $query->result();
 	}
 	

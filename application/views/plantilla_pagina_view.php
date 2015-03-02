@@ -17,7 +17,6 @@
 		?>
 		<title>SYSCAP</title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
-		<?= link_tag('resources/plugins/metis-menu/css/metis-menu.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
 		<?= link_tag('resources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
@@ -263,7 +262,7 @@
 			<footer id="footer" class="site-footer">
 				<div class="text-center">
 					SYSCAP - 2015
-					<a href="<?= base_url().uri_string().'#'; ?>" class="go-top">
+					<a href="<?= current_url().'#'; ?>" class="go-top">
 						<i class="fa fa-angle-up"></i>
 					</a>
 				</div>

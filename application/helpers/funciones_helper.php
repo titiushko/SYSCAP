@@ -101,7 +101,7 @@ if(!function_exists('encabezado_reporte')){
 	function encabezado_reporte(){
 		$html = '<table align="center" border="0" width="100%">
 				<tr>
-					<td align="center"><img src="'.base_url().'/resources/img/escudo-nacional-de-el-salvador.jpg" height="100px"/></td>
+					<td align="center">'.img(array('src' => 'resources/img/escudo-nacional-de-el-salvador.jpg', 'height' => '100px')).'</td>
 					<td align="center">
 						<b>
 						MINISTERIO DE EDUCACIÓN<br/>
@@ -111,7 +111,7 @@ if(!function_exists('encabezado_reporte')){
 						ÁREA DE FORMACIÓN VIRTUAL
 						</b>
 					</td>
-					<td align="center"><img src="'.base_url().'/resources/img/logo-mined.jpg" height="100px"/></td>
+					<td align="center">'.img(array('src' => 'resources/img/logo-mined.jpg', 'height' => '100px')).'</td>
 				</tr>
 			</table>';
 		return $html;

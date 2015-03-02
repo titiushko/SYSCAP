@@ -19,7 +19,8 @@ class Usuarios extends MY_Controller{
 		if($this->session->userdata['nombre_corto_rol'] == 'admin' || $this->session->userdata['nombre_corto_rol'] == 'moderador'){
 			$datos['pagina'] = 'usuarios/consultar_usuarios_view';
 			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-			$datos['lista_usuarios'] = $this->usuarios_model->usuarios();
+			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios();
+			$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
@@ -35,7 +36,7 @@ class Usuarios extends MY_Controller{
 			$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
 			if($this->notificacion){
 				$datos['id_modal'] = 'myModal';
-				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.$codigo_usuario.'\');"';
+				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');"';
 				$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario';
 				$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.';
 				$this->notificacion = FALSE;

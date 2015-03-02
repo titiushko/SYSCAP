@@ -2,23 +2,23 @@
 $bloqueo_informacion_general = $valor_bloqueo_informacion_general = '';
 if($operacion == "Mostrar"){
 	$bloqueo_informacion_general = $valor_bloqueo_informacion_general = 'disabled';
-	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
+	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo).'\');"';
 	if($this->session->userdata('uri_centros_educativos')){
 		$uri_centros_educativos = $this->session->userdata('uri_centros_educativos');
 		if(strpos($uri_centros_educativos, 'municipio') != FALSE){
-			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().$uri_centros_educativos.'\');"';
+			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url($uri_centros_educativos).'\');"';
 		}
 		else{
-			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
+			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('centros_educativos').'\');"';
 		}
 	}
 	else{
-		$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos\');"';
+		$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('centros_educativos').'\');"';
 	}
 }
 else{
 	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo.'\');"';
+	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo).'\');"';
 }
 // Atributos del Formulario
 $formulario = array(
@@ -129,7 +129,7 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 												$docentes_capacitados = 1;
 												foreach($lista_docentes_capacitados as $docente_capacitado){
 												?>
-												<tr onclick="redireccionar('<?= base_url().'usuarios/mostrar/'.$docente_capacitado->id_usuario; ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_capacitado->nombre_completo_usuario); ?>">
+												<tr onclick="redireccionar('<?= base_url('usuarios/mostrar/'.$docente_capacitado->id_usuario); ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_capacitado->nombre_completo_usuario); ?>">
 													<td><?= $docentes_capacitados; ?></td>
 													<td><?= utf8($docente_capacitado->nombre_completo_usuario); ?></td>
 												</tr>
@@ -157,7 +157,7 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 												$docentes_certificados = 1;
 												foreach($lista_docentes_certificados as $docente_certificado){
 												?>
-												<tr onclick="redireccionar('<?= base_url().'usuarios/mostrar/'.$docente_certificado->id_usuario; ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_certificado->nombre_completo_usuario); ?>">
+												<tr onclick="redireccionar('<?= base_url('usuarios/mostrar/'.$docente_certificado->id_usuario); ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_certificado->nombre_completo_usuario); ?>">
 													<td><?= $docentes_certificados; ?></td>
 													<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
 													<td><?= utf8($docente_certificado->certificacion_usuario); ?></td>
@@ -182,9 +182,9 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 						<div class="row">
 							<div class="col-lg-12 text-center">
 								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
-								<a href="<?= base_url().'centros_educativos/imprimir/'.@$centro_educativo[0]->id_centro_educativo;?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url('centros_educativos/imprimir/'.@$centro_educativo[0]->id_centro_educativo); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<?php } ?>
-								<a href="<?= base_url().'centros_educativos/exportar/'.@$centro_educativo[0]->id_centro_educativo;?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<a href="<?= base_url('centros_educativos/exportar/'.@$centro_educativo[0]->id_centro_educativo); ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
 						<?php } ?>
@@ -198,30 +198,6 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 <script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#id_departamento").change( function(){
-			var respuesta = null;
-			$.ajax({
-				type:		"get",
-				datatype:	"json",
-				url:		"<?= base_url('listas_dependientes/municipios')?>",
-				cache:		false,
-				data:		{
-					id_departamento:	$("#id_departamento").val()
-				},
-				success:	function(data){
-					console.log("JSON: " + json);
-				},
-				error:		function(jqXHR, exception){
-					console.log(jqXHR.responseText);
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					$('#id_municipio').empty();
-					$.each(respuesta, function(res, item){
-						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
-					});
-				}
-			});
-		}).change();
-		
 		$('#data-tables-docentes_capacitados').dataTable({
 			"searching":		false,
 			"scrollY":			"200px",
@@ -240,6 +216,26 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 			"paging":			false,
 			"oLanguage":		{"sEmptyTable": "No hay docentes certificados en el centro educativo."}
 		});
+		$("#id_departamento").change(function() {
+			$.ajax({
+				type:		"get",
+				datatype:	"json",
+				url:		"<?= base_url('ajax/lista_municipios')?>",
+				cache:		false,
+				data:		{id_departamento: $("#id_departamento").val()},
+				error:		function(resultado, exception) {
+								$('#id_municipio').empty();
+								$.each(jQuery.parseJSON(resultado.responseText), function(respuesta, lista_municipios) {
+									if(lista_municipios.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){
+										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio, "selected":	"selected"}).text(lista_municipios.nombre_municipio));
+									}
+									else{
+										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio}).text(lista_municipios.nombre_municipio));
+									}
+								});
+				}
+			});
+		}).change();
 	});
 </script>
 <?php $this->session->set_userdata('uri_usuarios', uri_string()); ?>

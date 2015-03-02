@@ -112,7 +112,9 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(count($estaditicas_departamento_fechas) > 0){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica3-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -138,6 +140,7 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php if(count($estaditicas_departamento_fechas) > 0){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
@@ -162,3 +165,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

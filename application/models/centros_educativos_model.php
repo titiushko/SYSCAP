@@ -3,7 +3,6 @@
 class Centros_educativos_model extends CI_Model{
 	function __construct(){
 		parent::__construct();
-		//$this->load->database();
 	}
 	
 	function lista_centros_educativos(){
@@ -99,6 +98,20 @@ class Centros_educativos_model extends CI_Model{
 		$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
 		$query = $this->db->get('centros_educativos');
 		return $query->result();
+	}
+	
+	public function buscar_centro_educativo($nombre_centro_educativo){
+		$centros_educativos = $this->db->select('nombre_centro_educativo')->like('LOWER(nombre_centro_educativo)', strtolower($nombre_centro_educativo))->get('centros_educativos');
+		if($centros_educativos->num_rows() > 0) {
+			return $centros_educativos->result();
+		}
+		else{
+			return FALSE;
+		}
+	}
+	
+	function registrar_bitacora($accion_bitacora = ''){
+		return $this->db->insert('bitacoras', array('usuario_bitacora' => 'tito', 'fecha_bitacora' => 'now()', 'accion_bitacora' => $accion_bitacora));
 	}
 }
 
