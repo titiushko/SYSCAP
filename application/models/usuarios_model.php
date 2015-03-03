@@ -5,9 +5,9 @@ class Usuarios_model extends CI_Model{
 		parent::__construct();
 	}
 	
-	function lista_usuarios($codigo_centro_educativo = ''){
+	function lista_usuarios($codigo_centro_educativo = NULL){
 		$query = $this->db->select('id_usuario, nombre_usuario, acentos(F_NombreCompletoUsuario(id_usuario)) nombre_completo_usuario, dui_usuario, correo_electronico_usuario');
-		if($codigo_centro_educativo != ''){
+		if($codigo_centro_educativo != NULL){
 			$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
 			$query = $this->db->get('usuarios');
 		}

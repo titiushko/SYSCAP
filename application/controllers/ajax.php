@@ -46,7 +46,7 @@ class Ajax extends MY_Controller{
 			if($centros_educativos !== FALSE){
 				echo '<div class="'.(count($centros_educativos) < 5 ? 'contenedor-centro-educativo-1' : 'contenedor-centro-educativo-2').'">';
 				foreach($centros_educativos as $centro_educativo) {
-					echo p($centro_educativo->nombre_centro_educativo);
+					echo p($centro_educativo->nombre_centro_educativo, 'onclick="redireccionar(\''.base_url('usuarios/'.$centro_educativo->id_centro_educativo).'\');"');
 				}
 				echo '</div>';
 			}

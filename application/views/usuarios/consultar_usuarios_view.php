@@ -4,7 +4,7 @@ $centro_educativo = array (
 	'id'			=> 'centro-educativo',
 	'maxlength'		=> '60',
 	'size'			=> '20',
-	'value'			=> '',
+	'value'			=> utf8(set_value('centro_educativo', @$nombre_centro_educativo)),
 	'onpaste'		=> 'return false',
 	'type'			=> 'text',
 	'required'		=> 'required',
@@ -30,7 +30,6 @@ $centro_educativo = array (
 							<div class="form-group">
 								<?= form_label('Centro Educativo:'); ?>
 								<?= form_input($centro_educativo); ?>
-								<?= form_error('centro_educativo'); ?>
 								<div id="resultado-centro-educativo"></div>
 							</div>
 						</div>
@@ -71,37 +70,24 @@ $(document).ready(function(){
 			url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 		}
 	});
-	/*
-	$("#centro-educativo").keyup(function() {
-		var respuesta = null;
-		$.ajax({
-			type:		"get",
-			datatype:	"json",
-			url:		"<?= base_url('ajax/lista_centros_educativos')?>",
-			cache:		false,
-			data:		{nombre_centro_educativo: $("#centro-educativo").val()},
-			error:		function(data) {
-							if(data != '') {
-								$('#resultado-centro-educativo').show();
-								$("#resultado-centro-educativo").html(data.responseText);
-							}
-			}
-		});
-	});
-	*/
 	$("#centro-educativo").keyup(function() {
 		var v_centro_educativo = $(this).val();
-		$.post('<?= base_url('index.php/ajax/lista_centros_educativos')?>', {nombre_centro_educativo: v_centro_educativo}, function(data) {
+		var codigo_caracter = $("#centro-educativo").keypress(function(evento) {
+			codigo_caracter = String.fromCharCode(evento.which);
+		});
+		if(v_centro_educativo == 0 && codigo_caracter == 8){
+			alert('Backspace');
+			<?php $metodo = 'lista_centros_educativos'; ?>
+		}
+		else{
+			<?php $metodo = 'listado_centros_educativos'; ?>
+		}
+		$.post('<?= base_url('index.php/ajax/'.$metodo); ?>', {nombre_centro_educativo: v_centro_educativo}, function(data) {
 			if(data != '') {
 				$('#resultado-centro-educativo').show();
 				$("#resultado-centro-educativo").html(data);
 			}
 		});
-	});
-	$("#resultado-centro-educativo").find('p').on('click', function(e) {
-		e.preventDefault();
-		$('#centro-educativo').val($(this).text());
-		$('#resultado-centro-educativo').hide();
 	});
 });
 </script>
