@@ -1,96 +1,96 @@
 <!doctype html>
 <?php
 if(@$_GET["action"]=="getTime"){
-  $time = Time();
-  $date = date("H:i:s",$time);
-  echo $date; // time output for ajax request
-  die();
+	$time = Time();
+	$date = date("H:i:s",$time);
+	echo $date; // time output for ajax request
+	die();
 }
 ?>
 <html>
-<head>
-<meta charset="utf-8">
-<title>SYSCAP</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<meta name="description" content="Pagina de inicio del servidor SYSCAP">
-<meta name="author" content="Titiushko">
-<link href="sources/css/bootstrap.css" rel="stylesheet">
-<link href="sources/css/main.css" rel="stylesheet">
-<link rel="shortcut icon" href="sources/img/icono.ico" type="image/ico">
-<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-<!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-<script type="text/javascript">
-	window.onload = startInterval;
-	function startInterval(){
-		setInterval("startTime();",1000);
-	}
-	function startTime(){
-		AX = new ajaxObject("?action=getTime", showTime)
-		AX.update(); // start ajax request
-	}
-	// callback
-	function showTime(data){
-		//document.getElementById('digiclock').innerHTML = data;
-		document.querySelector('digitalclock').innerHTML = data;
-	}
-</script>
-<script type="text/javascript">
-// ajax object - constructor
-function ajaxObject(url, callbackFunction){
-	var that=this;
-	this.updating = false;
-	this.abort = function(){
-		if(that.updating){
-			that.updating=false;
-			that.AJAX.abort();
-			that.AJAX=null;
-		}
-	};
-	this.update = function(passData,postMethod){
-		if(that.updating){
-			return false;
-		}
-		that.AJAX = null;
-		if(window.XMLHttpRequest){
-			that.AJAX=new XMLHttpRequest();
-		}
-		else{
-			that.AJAX=new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		if(that.AJAX==null){
-			return false;
-		}
-		else{
-			that.AJAX.onreadystatechange = function(){
-				if(that.AJAX.readyState==4){
-					that.updating=false;
-					that.callback(that.AJAX.responseText, that.AJAX.status, that.AJAX.responseXML, that.AJAX.getAllResponseHeaders());
-					that.AJAX=null;
-				}
-			};
-			that.updating = new Date();
-			if(/post/i.test(postMethod)){
-				var uri=urlCall+(/\?/i.test(urlCall)?'&':'?')+'timestamp='+that.updating.getTime();
-				that.AJAX.open("POST", uri, true);
-				that.AJAX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				that.AJAX.setRequestHeader("Content-Length", passData.length);
-				that.AJAX.send(passData);
+	<head>
+		<meta charset="utf-8">
+		<title>SYSCAP</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="description" content="Pagina de inicio del servidor SYSCAP">
+		<meta name="author" content="Titiushko">
+		<link href="sources/css/bootstrap.css" rel="stylesheet">
+		<link href="sources/css/main.css" rel="stylesheet">
+		<link rel="shortcut icon" href="sources/img/icono.ico" type="image/ico">
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<script type="text/javascript">
+			window.onload = startInterval;
+			function startInterval(){
+				setInterval("startTime();",1000);
 			}
-			else{
-				var uri=urlCall+(/\?/i.test(urlCall)?'&':'?')+passData+'&timestamp='+(that.updating.getTime());
-				that.AJAX.open("GET", uri, true);
-				that.AJAX.send(null);
+			function startTime(){
+				AX = new ajaxObject("?action=getTime", showTime)
+				AX.update(); // start ajax request
 			}
-			return true;
-		}
-	};
-	var urlCall = url;
-	this.callback = callbackFunction || function (){};
-}
-</script>
-</head>
+			// callback
+			function showTime(data){
+				//document.getElementById('digiclock').innerHTML = data;
+				document.querySelector('digitalclock').innerHTML = data;
+			}
+		</script>
+		<script type="text/javascript">
+			// ajax object - constructor
+			function ajaxObject(url, callbackFunction){
+				var that=this;
+				this.updating = false;
+				this.abort = function(){
+					if(that.updating){
+						that.updating=false;
+						that.AJAX.abort();
+						that.AJAX=null;
+					}
+				};
+				this.update = function(passData,postMethod){
+					if(that.updating){
+						return false;
+					}
+					that.AJAX = null;
+					if(window.XMLHttpRequest){
+						that.AJAX=new XMLHttpRequest();
+					}
+					else{
+						that.AJAX=new ActiveXObject("Microsoft.XMLHTTP");
+					}
+					if(that.AJAX==null){
+						return false;
+					}
+					else{
+						that.AJAX.onreadystatechange = function(){
+							if(that.AJAX.readyState==4){
+								that.updating=false;
+								that.callback(that.AJAX.responseText, that.AJAX.status, that.AJAX.responseXML, that.AJAX.getAllResponseHeaders());
+								that.AJAX=null;
+							}
+						};
+						that.updating = new Date();
+						if(/post/i.test(postMethod)){
+							var uri=urlCall+(/\?/i.test(urlCall)?'&':'?')+'timestamp='+that.updating.getTime();
+							that.AJAX.open("POST", uri, true);
+							that.AJAX.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+							that.AJAX.setRequestHeader("Content-Length", passData.length);
+							that.AJAX.send(passData);
+						}
+						else{
+							var uri=urlCall+(/\?/i.test(urlCall)?'&':'?')+passData+'&timestamp='+(that.updating.getTime());
+							that.AJAX.open("GET", uri, true);
+							that.AJAX.send(null);
+						}
+						return true;
+					}
+				};
+				var urlCall = url;
+				this.callback = callbackFunction || function (){};
+			}
+		</script>
+	</head>
 	<body>
 		<div class="container">
 			<div class="row">
