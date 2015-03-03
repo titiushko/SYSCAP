@@ -100,7 +100,7 @@ class Centros_educativos_model extends CI_Model{
 	}
 	
 	public function buscar_centro_educativo($nombre_centro_educativo){
-		$query = $this->db->select('id_centro_educativo, nombre_centro_educativo')->like('LOWER(nombre_centro_educativo)', strtolower($nombre_centro_educativo))->get('centros_educativos');
+		$query = $this->db->select('id_centro_educativo, nombre_centro_educativo')->like('LOWER(nombre_centro_educativo)', strtolower($nombre_centro_educativo))->get('centros_educativos', 50);
 		if($query->num_rows() > 0) {
 			return $query->result();
 		}

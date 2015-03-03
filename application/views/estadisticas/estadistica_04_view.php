@@ -230,7 +230,7 @@ $campos_ocultos_formulario = array(
 									if(lista_municipios.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){
 										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio, "selected":	"selected"}).text(lista_municipios.nombre_municipio));
 									}
-									else{
+									else {
 										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio}).text(lista_municipios.nombre_municipio));
 									}
 								});

@@ -8,7 +8,7 @@ $centro_educativo = array (
 	'onpaste'		=> 'return false',
 	'type'			=> 'text',
 	'required'		=> 'required',
-	'placeholder'	=> 'buscar centro educativo',
+	'placeholder'	=> 'Buscar Centro Educativo',
 	'class'			=> 'form-control'
 );
 ?>
@@ -27,7 +27,7 @@ $centro_educativo = array (
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="form-group">
+							<div class="form-group" id="grupo-centro-educativo" tabindex="-1">
 								<?= form_label('Centro Educativo:'); ?>
 								<?= form_input($centro_educativo); ?>
 								<div id="resultado-centro-educativo"></div>
@@ -70,24 +70,45 @@ $(document).ready(function(){
 			url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 		}
 	});
-	$("#centro-educativo").keyup(function() {
-		var v_centro_educativo = $(this).val();
-		var codigo_caracter = $("#centro-educativo").keypress(function(evento) {
-			codigo_caracter = String.fromCharCode(evento.which);
-		});
-		if(v_centro_educativo == 0 && codigo_caracter == 8){
-			alert('Backspace');
-			<?php $metodo = 'lista_centros_educativos'; ?>
+	$("#centro-educativo").bind('keyup focusin', function(evento) {
+		if(evento.which != 27) {
+			var v_centro_educativo = $(this).val();
+			$.post('<?= base_url('index.php/ajax/lista_centros_educativos'); ?>', {nombre_centro_educativo: v_centro_educativo.length > 0 ? v_centro_educativo : '%'}, function(resultado) {
+				if(resultado != '') {
+					$('#resultado-centro-educativo').show();
+					var centros_educativos = jQuery.parseJSON(resultado);
+					var clase = centros_educativos.length < 5 ? "contenedor-centro-educativo-1" : "contenedor-centro-educativo-2";
+					$('#resultado-centro-educativo').empty();
+					$("#resultado-centro-educativo").append($("<div></div>").attr({"class": clase}));
+					$.each(centros_educativos, function(respuesta, centro_educativo) {
+						$("." + clase).append($("<p></p>").attr({"onclick": "redireccionar('<?= base_url('usuarios'); ?>/" + centro_educativo.id_centro_educativo + "');"}).text(centro_educativo.nombre_centro_educativo));
+					});
+				}
+				else {
+					$('#resultado-centro-educativo').hide();
+				}
+			});
 		}
-		else{
-			<?php $metodo = 'listado_centros_educativos'; ?>
+		else {
+			$(this).val('');
+			$('#resultado-centro-educativo').hide();
 		}
-		$.post('<?= base_url('index.php/ajax/'.$metodo); ?>', {nombre_centro_educativo: v_centro_educativo}, function(data) {
-			if(data != '') {
-				$('#resultado-centro-educativo').show();
-				$("#resultado-centro-educativo").html(data);
-			}
-		});
+		
+	});
+	/*
+	$("#resultado-centro-educativo").find("div").find("p").on('click', function(e) {
+		e.preventDefault();
+		$('#centro-educativo').val($(this).text());
+		$('#resultado-centro-educativo').hide();
+	});
+	*/
+	$("#grupo-centro-educativo").attr('tabindex', -1).focusout(function(event) {
+		/*$("p").bind('click', function(event) {
+			redireccionar('<?= base_url('usuarios/1'); ?>');
+			event.preventDefault();
+		});*/
+		//alert(event.target);
+		$('#resultado-centro-educativo').hide();
 	});
 });
 </script>

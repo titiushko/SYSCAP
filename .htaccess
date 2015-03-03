@@ -3,8 +3,8 @@
 	RewriteEngine On
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteCond %{REQUEST_FILENAME} !-d
-	RewriteRule ^(.*)$ /syscap/index.php/$1 [L] 
+	RewriteRule ^(.*)$ /github/index.php/$1 [L] 
 </IfModule>
 <IfModule !mod_rewrite.c>
-	ErrorDocument 404 /syscap/index.php 
+	ErrorDocument 404 /github/index.php 
 </IfModule>
