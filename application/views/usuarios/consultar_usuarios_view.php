@@ -27,7 +27,7 @@ $centro_educativo = array (
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-lg-12">
-							<div class="form-group" id="grupo-centro-educativo" tabindex="-1">
+							<div class="form-group">
 								<?= form_label('Centro Educativo:'); ?>
 								<?= form_input($centro_educativo); ?>
 								<div id="resultado-centro-educativo"></div>
@@ -93,22 +93,6 @@ $(document).ready(function(){
 			$(this).val('');
 			$('#resultado-centro-educativo').hide();
 		}
-		
-	});
-	/*
-	$("#resultado-centro-educativo").find("div").find("p").on('click', function(e) {
-		e.preventDefault();
-		$('#centro-educativo').val($(this).text());
-		$('#resultado-centro-educativo').hide();
-	});
-	*/
-	$("#grupo-centro-educativo").attr('tabindex', -1).focusout(function(event) {
-		/*$("p").bind('click', function(event) {
-			redireccionar('<?= base_url('usuarios/1'); ?>');
-			event.preventDefault();
-		});*/
-		//alert(event.target);
-		$('#resultado-centro-educativo').hide();
 	});
 });
 </script>

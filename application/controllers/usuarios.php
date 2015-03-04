@@ -22,7 +22,7 @@ class Usuarios extends MY_Controller{
 			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios($codigo_centro_educativo);
 			if($codigo_centro_educativo != NULL){
 				if($this->validar_parametros($codigo_centro_educativo)){
-					$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo);
+					$datos['nombre_centro_educativo'] = utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo));
 				}
 				else{
 					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
@@ -35,28 +35,14 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	public function _remap($method, $params = array()){
-		if(!method_exists($this, $method)){
-			$this->index($method, $params);
+	public function _remap($metodo, $parametros = array()){
+		if(!method_exists($this, $metodo)){
+			$this->index($metodo, $parametros);
 		}
 		else{
-			return call_user_func_array(array($this, $method), $params);
+			return call_user_func_array(array($this, $metodo), $parametros);
 		}
 	}
-	
-	/*public function centro_educativo($codigo_centro_educativo = NULL){
-		if($this->session->userdata['nombre_corto_rol'] == 'admin' || $this->session->userdata['nombre_corto_rol'] == 'moderador'){
-			if(uri_string() != 'usuarios/centro_educativo'){
-				
-			}
-			else{
-				redirect('usuarios');
-			}
-		}
-		else{
-			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
-		}
-	}*/
 	
 	public function mostrar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
@@ -163,9 +149,9 @@ class Usuarios extends MY_Controller{
 				$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 			}
 			else{
-				$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo);
-				$datos['nombre_profesion'] = $this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion);
-				$datos['nombre_tipo_usuario'] = $this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario);
+				$datos['nombre_centro_educativo'] = utf8($this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo));
+				$datos['nombre_profesion'] = utf8($this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion));
+				$datos['nombre_tipo_usuario'] = utf8($this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario));
 			}
 			$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
 			$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
