@@ -197,7 +197,7 @@ class Estadisticas extends MY_Controller{
 		$datos['modalidades_capacitados_json'] = '';
 		foreach($datos['modalidades_capacitados'] as $modalidad_capacitado){
 			if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
-				$datos['modalidades_capacitados_json'] .= '{y: \''.$modalidad_capacitado->tipos_capacitados.'\', a: '.$modalidad_capacitado->tutorizados.', b: '.$modalidad_capacitado->autoformacion.'},';
+				$datos['modalidades_capacitados_json'] .= '{y: \''.$modalidad_capacitado->tipos_capacitados.'\', a: '.$this->limpiar_nulo($modalidad_capacitado->tutorizados).', b: '.$this->limpiar_nulo($modalidad_capacitado->autoformacion).'},';
 			}
 		}
 		if($metodo == 'consulta'){
@@ -294,16 +294,16 @@ class Estadisticas extends MY_Controller{
 		$datos['tipos_capacitados_centro_educativo_json'] = '';
 		foreach($datos['tipos_capacitados_centro_educativo'] as $tipo_capacitado_centro_educativo){
 			if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
-				$datos['tipos_capacitados_centro_educativo_json'] .= '{y: \''.acentos($tipo_capacitado_centro_educativo->modalidad_capacitado).'\', a: '.$tipo_capacitado_centro_educativo->total.'},';
+				$datos['tipos_capacitados_centro_educativo_json'] .= '{y: \''.acentos($tipo_capacitado_centro_educativo->modalidad_capacitado).'\', a: '.$this->limpiar_nulo($tipo_capacitado_centro_educativo->total).'},';
 			}
 		}
-		$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();				    
+		$nombre_centro_educativo = $codigo_centro_educativo != '' ? $this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo) : '';
 		if($metodo == 'consulta'){
-			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_centro_educativo' => $codigo_centro_educativo);
+			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_centro_educativo' => $codigo_centro_educativo, 'nombre_centro_educativo' => $nombre_centro_educativo);
 		}
 		elseif($metodo == 'imprimir'){
 			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
-			$datos['nombre_centro_educativo'] = $codigo_centro_educativo != '' ? $this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo) : '';
+			$datos['nombre_centro_educativo'] = $nombre_centro_educativo;
 		}
 		return $datos;
 	}
@@ -754,6 +754,10 @@ class Estadisticas extends MY_Controller{
 		else{
 			return FALSE;
 		}
+	}
+	
+	private function limpiar_nulo($valor){
+		return $valor != NULL ? $valor : 0;
 	}
 }
 

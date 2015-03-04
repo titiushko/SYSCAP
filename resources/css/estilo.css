@@ -103,8 +103,8 @@ div.table-responsive table.table.table-striped.table-bordered.table-hover thead 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /*										estilo para inputs autocompletar									*/
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-.contenedor-centro-educativo-1,
-.contenedor-centro-educativo-2 {
+.contenedor-centro_educativo-1,
+.contenedor-centro_educativo-2 {
 	position: absolute;
 	z-index: 100;
 	display: block;
@@ -116,27 +116,27 @@ div.table-responsive table.table.table-striped.table-bordered.table-hover thead 
 	background-color: #ffffff;
 }
 
-.contenedor-centro-educativo-1,
-.contenedor-centro-educativo-2 {
+.contenedor-centro_educativo-1,
+.contenedor-centro_educativo-2 {
 	overflow-y: scroll;
 }
 
-.contenedor-centro-educativo-1 {
+.contenedor-centro_educativo-1 {
 	height: 53px;
 }
 
-.contenedor-centro-educativo-2 {
+.contenedor-centro_educativo-2 {
 	height: 86px;
 }
 
-.contenedor-centro-educativo-1 p,
-.contenedor-centro-educativo-2 p {
+.contenedor-centro_educativo-1 p,
+.contenedor-centro_educativo-2 p {
 	padding: 0px 11px;
 	margin: 0px 0px -1px 0px;
 }
 
-.contenedor-centro-educativo-1 p:hover,
-.contenedor-centro-educativo-2 p:hover {
+.contenedor-centro_educativo-1 p:hover,
+.contenedor-centro_educativo-2 p:hover {
 	color: #ffffff;
 	background-color: #1e90ff;
 }

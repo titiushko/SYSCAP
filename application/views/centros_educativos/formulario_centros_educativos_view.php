@@ -29,12 +29,14 @@ $formulario = array(
 $campos_ocultos = array('estado' => '0');
 // Definición de los campos Información General
 $nombre_centro_educativo = array(
-	'name'		=> 'nombre_centro_educativo',
-	'id'		=> 'nombre_centro_educativo',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> utf8(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo)),
-	'class'		=> 'form-control text-capitalize',
+	'name'			=> 'nombre_centro_educativo',
+	'id'			=> 'nombre_centro_educativo',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> utf8(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo)),
+	'type'			=> 'text',
+	'autocomplete'	=> 'off',
+	'class'			=> 'form-control text-capitalize',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
 $codigo_centro_educativo = array(
@@ -43,13 +45,14 @@ $codigo_centro_educativo = array(
 	'maxlength'	=> '60',
 	'size'		=> '20',
 	'value'		=> set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo),
+	'type'		=> 'text',
 	'class'		=> 'form-control',
 	'disabled'	=> 'disabled'
 );
 $departamentos = 'id = "id_departamento" required = "required" class = "form-control" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
 $municipios = 'id = "id_municipio" required = "required" class = "form-control" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
 ?>
-<script src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
 <div class="row">
 	<div class="col-lg-12">
 		<h1 class="well page-header">Modulo de Centros Educativos</h1>
@@ -194,10 +197,10 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(){
 		$('#data-tables-docentes_capacitados').dataTable({
 			"searching":		false,
 			"scrollY":			"200px",
@@ -216,24 +219,17 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 			"paging":			false,
 			"oLanguage":		{"sEmptyTable": "No hay docentes certificados en el centro educativo."}
 		});
-		$("#id_departamento").change(function() {
-			$.ajax({
-				type:		"get",
-				datatype:	"json",
-				url:		"<?= base_url('ajax/lista_municipios')?>",
-				cache:		false,
-				data:		{id_departamento: $("#id_departamento").val()},
-				error:		function(resultado, exception) {
-								$('#id_municipio').empty();
-								$.each(jQuery.parseJSON(resultado.responseText), function(respuesta, lista_municipios) {
-									if(lista_municipios.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){
-										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio, "selected":	"selected"}).text(lista_municipios.nombre_municipio));
-									}
-									else {
-										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio}).text(lista_municipios.nombre_municipio));
-									}
-								});
-				}
+		$("#id_departamento").change(function(){
+			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+				$('#id_municipio').empty();
+				$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){
+					if(municipio.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){
+						$("#id_municipio").append($("<option></option>").attr({"value":	municipio.id_municipio, "selected":	"selected"}).text(municipio.nombre_municipio));
+					}
+					else{
+						$("#id_municipio").append($("<option></option>").attr({"value":	municipio.id_municipio}).text(municipio.nombre_municipio));
+					}
+				});
 			});
 		}).change();
 	});

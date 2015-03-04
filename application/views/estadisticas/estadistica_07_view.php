@@ -5,14 +5,15 @@ $formulario_consultar = array(
 	'role'		=> 'form'
 );
 $fecha = array(
-	'name'		=> '',
-	'id'		=> '',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> '',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'name'			=> '',
+	'id'			=> '',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> '',
+	'type'			=> 'date',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'class'			=> 'form-control'
 );
 $lista_tipo_capacitados =  array(
 	''				=> '',
@@ -210,14 +211,14 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(){
 		$('#data-tables-estadistica7-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
 			"ordering":		false,
 			"info":			false,
-			"oLanguage": {
-				"oPaginate": {
+			"oLanguage":{
+				"oPaginate":{
 					"sFirst":		"<<",
 					"sLast":		">>",
 					"sNext":		">",
@@ -232,26 +233,19 @@ $campos_ocultos_formulario = array(
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 			}
 		});
-		$("#id_departamento").change(function() {
-			$.ajax({
-				type:		"get",
-				datatype:	"json",
-				url:		"<?= base_url('ajax/lista_municipios')?>",
-				cache:		false,
-				data:		{id_departamento: $("#id_departamento").val()},
-				error:		function(resultado, exception) {
-								$('#id_municipio').empty();
-								$.each(jQuery.parseJSON(resultado.responseText), function(respuesta, lista_municipios) {
-									if(lista_municipios.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){
-										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio, "selected":	"selected"}).text(lista_municipios.nombre_municipio));
-									}
-									else {
-										$("#id_municipio").append($("<option></option>").attr({"value":	lista_municipios.id_municipio}).text(lista_municipios.nombre_municipio));
-									}
-								});
-				}
+		$("#id_departamento").change(function(){
+			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+				$('#id_municipio').empty();
+				$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){
+					if(municipio.id_municipio == '<?= @$campos['id_municipio']; ?>'){
+						$("#id_municipio").append($("<option></option>").attr({"value":	municipio.id_municipio, "selected":	"selected"}).text(municipio.nombre_municipio));
+					}
+					else{
+						$("#id_municipio").append($("<option></option>").attr({"value":	municipio.id_municipio}).text(municipio.nombre_municipio));
+					}
+				});
 			});
-		}).change();
+		});
 	});
 </script>
 <?php if(count($usuarios_departamento_municipio) > 1){ ?>
