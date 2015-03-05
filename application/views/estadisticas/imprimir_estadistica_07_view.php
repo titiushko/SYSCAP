@@ -90,7 +90,9 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if(count($usuarios_departamento_municipio) > 1){ ?>
 					<div id="morris-bar-chart-estadistica7-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
@@ -128,12 +130,13 @@
 				</div>
 			</div>
 		</div>
+		<?php if(count($usuarios_departamento_municipio) > 1){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica7-1',
 					data: [<?= $usuarios_departamento_municipio_json; ?>],
@@ -145,5 +148,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

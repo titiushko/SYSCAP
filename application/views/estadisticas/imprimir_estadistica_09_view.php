@@ -77,16 +77,19 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if($tipo_capacitado_centro_educativo->total > 0){ ?>
 					<div id="morris-bar-chart-estadistica9-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
+		<?php if($tipo_capacitado_centro_educativo->total > 0){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica9-1',
 					data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
@@ -98,5 +101,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

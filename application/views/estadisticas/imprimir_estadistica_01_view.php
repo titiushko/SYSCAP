@@ -87,16 +87,19 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if($modalidades_capacitados[0]->tutorizados > 0 && $modalidades_capacitados[0]->autoformacion > 0){ ?>
 					<div id="morris-bar-chart-estadistica1-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
+		<?php if($modalidades_capacitados[0]->tutorizados > 0 && $modalidades_capacitados[0]->autoformacion > 0){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica1-1',
 					data: [<?= $modalidades_capacitados_json; ?>],
@@ -108,5 +111,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

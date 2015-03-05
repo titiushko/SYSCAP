@@ -5,14 +5,15 @@ $formulario_consultar = array(
 	'role'		=> 'form'
 );
 $fecha = array(
-	'name'		=> '',
-	'id'		=> '',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> '',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'name'			=> '',
+	'id'			=> '',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> '',
+	'type'			=> 'date',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'class'			=> 'form-control'
 );
 $lista_tipo_capacitados =  array(
 	''				=> '',
@@ -123,7 +124,9 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(count($estaditicas_departamento_fechas) > 0){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica8-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -131,13 +134,13 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(){
 		$('#data-tables-estadistica8-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
 			"ordering":		false,
-			"oLanguage": {
-				"oPaginate": {
+			"oLanguage":{
+				"oPaginate":{
 					"sFirst":		"<<",
 					"sLast":		">>",
 					"sNext":		">",
@@ -149,10 +152,11 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php if(count($estaditicas_departamento_fechas) > 0){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica8-1',
 			data: [<?= $estaditicas_departamento_fechas_json; ?>],
@@ -173,3 +177,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

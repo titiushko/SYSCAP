@@ -22,8 +22,8 @@
 	    <?= link_tag('resources/img/syscap.ico', 'shortcut icon', 'image/ico'); ?>
 	    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	    <!--[if lt IE 9]>
-	        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	        <script type="text/javascript" src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	        <script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
 	    <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/prototype.js"></script>
 	    <script type="text/javascript" src="<?= base_url(); ?>resources/js/funciones.js"></script>
@@ -35,6 +35,7 @@
         		'name'			=> 'nombre_usuario',
         		'id'			=> 'nombre_usuario',
 				'type'			=> 'text',
+				'autocomplete'	=> 'off',
         		'placeholder'	=> 'Nombre de usuario',
 				'value'			=>	set_value('nombre_usuario', @$usuario[0]->nombre_usuario),
         		'class'			=> 'form-control',
@@ -44,6 +45,7 @@
 				'name'			=> 'contrasena_usuario',
 				'id'			=> 'contrasena_usuario',
 				'type'			=> 'password',
+				'autocomplete'	=> 'off',
 				'placeholder'	=> 'Contraseña',
 				'value'			=>	set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario),
 				'class'			=> 'form-control',

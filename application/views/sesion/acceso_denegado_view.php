@@ -186,7 +186,7 @@
 			<footer id="footer" class="site-footer">
 				<div class="text-center">
 					SYSCAP - 2015
-					<a href="<?= base_url().uri_string().'#'; ?>" class="go-top">
+					<a href="<?= current_url().'#'; ?>" class="go-top">
 						<i class="fa fa-angle-up"></i>
 					</a>
 				</div>

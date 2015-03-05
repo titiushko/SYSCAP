@@ -15,15 +15,32 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	public function index(){
+	public function index($codigo_centro_educativo = NULL){
 		if($this->session->userdata['nombre_corto_rol'] == 'admin' || $this->session->userdata['nombre_corto_rol'] == 'moderador'){
 			$datos['pagina'] = 'usuarios/consultar_usuarios_view';
 			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-			$datos['lista_usuarios'] = $this->usuarios_model->usuarios();
+			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios($codigo_centro_educativo);
+			if($codigo_centro_educativo != NULL){
+				if($this->validar_parametros($codigo_centro_educativo)){
+					$datos['nombre_centro_educativo'] = utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo));
+				}
+				else{
+					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				}
+			}
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
 			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+		}
+	}
+	
+	public function _remap($metodo, $parametros = array()){
+		if(!method_exists($this, $metodo)){
+			$this->index($metodo, $parametros);
+		}
+		else{
+			return call_user_func_array(array($this, $metodo), $parametros);
 		}
 	}
 	
@@ -35,7 +52,7 @@ class Usuarios extends MY_Controller{
 			$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
 			if($this->notificacion){
 				$datos['id_modal'] = 'myModal';
-				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.$codigo_usuario.'\');"';
+				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');"';
 				$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario';
 				$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.';
 				$this->notificacion = FALSE;
@@ -132,9 +149,9 @@ class Usuarios extends MY_Controller{
 				$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 			}
 			else{
-				$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo);
-				$datos['nombre_profesion'] = $this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion);
-				$datos['nombre_tipo_usuario'] = $this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario);
+				$datos['nombre_centro_educativo'] = utf8($this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo));
+				$datos['nombre_profesion'] = utf8($this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion));
+				$datos['nombre_tipo_usuario'] = utf8($this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario));
 			}
 			$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
 			$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
@@ -298,11 +315,11 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	private function validar_parametros($codigo_usuario){
-		if(empty($codigo_usuario)){
+	private function validar_parametros($codigo){
+		if(empty($codigo)){
 			return FALSE;
 		}
-		elseif(is_numeric($codigo_usuario)){
+		elseif(is_numeric($codigo)){
 			return TRUE;
 		}
 		else{

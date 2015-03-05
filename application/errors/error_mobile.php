@@ -164,7 +164,7 @@
 			</section>
 			<footer id="footer" class="site-footer">
 				<div class="text-center">
-					SYSCAP - 2014
+					SYSCAP - 2015
 					<a href="#" class="go-top">
 						<i class="fa fa-angle-up"></i>
 					</a>

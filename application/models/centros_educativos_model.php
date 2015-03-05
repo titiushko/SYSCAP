@@ -3,7 +3,6 @@
 class Centros_educativos_model extends CI_Model{
 	function __construct(){
 		parent::__construct();
-		//$this->load->database();
 	}
 	
 	function lista_centros_educativos(){
@@ -82,16 +81,15 @@ class Centros_educativos_model extends CI_Model{
 					$nombre_certificacion = ', (CASE WHEN c_nombre_completo_curso LIKE \'Examen%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso) + 1) ELSE c_nombre_completo_curso END) certificacion_usuario';
 			}
 		}
-		$sql = 'SELECT DISTINCT u_id_usuario id_usuario, acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
-				'.$nombre_certificacion.'
-				FROM V_UsuariosCursosExamenesCalificaciones
-				WHERE u_id_centro_educativo = ?
-				AND ec_nota_examen_calificacion >= ?
-				AND e_nombre_examen LIKE ?
-				'.$tipos_usuarios.'
-				AND u_modalidad_usuario LIKE ?
-				ORDER BY nombre_completo_usuario';
-		$query = $this->db->query($sql, array($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_modalidad));
+		$query = $this->db->query('SELECT DISTINCT u_id_usuario id_usuario, acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
+								  '.$nombre_certificacion.'
+								  FROM V_UsuariosCursosExamenesCalificaciones
+								  WHERE u_id_centro_educativo = ?
+								  AND ec_nota_examen_calificacion >= ?
+								  AND e_nombre_examen LIKE ?
+								  '.$tipos_usuarios.'
+								  AND u_modalidad_usuario LIKE ?
+								  ORDER BY nombre_completo_usuario', array($codigo_centro_educativo, $nota_minima, $tipo_capacitado, $tipo_modalidad));
 		return $query->result();
 	}
 	
@@ -99,6 +97,16 @@ class Centros_educativos_model extends CI_Model{
 		$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
 		$query = $this->db->get('centros_educativos');
 		return $query->result();
+	}
+	
+	public function buscar_centro_educativo($nombre_centro_educativo){
+		$query = $this->db->select('id_centro_educativo, nombre_centro_educativo')->like('LOWER(nombre_centro_educativo)', strtolower($nombre_centro_educativo))->get('centros_educativos', 50);
+		if($query->num_rows() > 0) {
+			return $query->result();
+		}
+		else{
+			return FALSE;
+		}
 	}
 }
 

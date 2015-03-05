@@ -153,8 +153,8 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
-								<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<a href="<?= base_url('usuarios/imprimir/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url('usuarios/exportar/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
 						<?php if($this->session->userdata('nombre_corto_rol') != 'student'){ ?>
@@ -163,7 +163,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a href="<?= base_url().'usuarios'; ?>" class="btn btn-danger">Regresar</a>
+								<a href="<?= base_url('usuarios'); ?>" class="btn btn-danger">Regresar</a>
 							</div>
 						</div>
 						<?php } ?>
@@ -173,8 +173,8 @@
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script>
 $(document).ready(function() {
 	$('#data-tables-certificaciones_usuario').dataTable({

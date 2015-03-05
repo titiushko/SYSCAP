@@ -5,14 +5,15 @@ $formulario_consultar = array(
 	'role'		=> 'form'
 );
 $fecha = array(
-	'name'		=> '',
-	'id'		=> '',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> '',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'name'			=> '',
+	'id'			=> '',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> '',
+	'type'			=> 'date',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'class'			=> 'form-control'
 );
 $departamentos = 'id = "id_departamento" required = "required" class = "form-control"';
 $municipios = 'id = "id_municipio" required = "required" class = "form-control"';
@@ -145,7 +146,9 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(count($usuarios_departamento_municipio) > 1){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica4-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -192,41 +195,15 @@ $campos_ocultos_formulario = array(
 </div>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$("#id_departamento").change( function(){
-			var respuesta = null;
-			$.ajax({
-				type:		"get",
-				datatype:	"json",
-				url:		"<?= base_url('listas_dependientes/municipios')?>",
-				cache:		false,
-				data:		{
-					id_departamento:	$("#id_departamento").val()
-				},
-				success:	function(data){
-					console.log("JSON: " + json);
-				},
-				error:		function(jqXHR, exception){
-					console.log(jqXHR.responseText);
-					respuesta = jQuery.parseJSON(jqXHR.responseText);
-					$('#id_municipio').empty();
-					$.each(respuesta, function(res, item){
-						$("#id_municipio").append($("<option></option>").attr("value", item.id_municipio).text(item.nombre_municipio));
-					});
-				}
-			});
-		}).change();
-		
 		$('#data-tables-estadistica4-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
 			"ordering":		false,
 			"info":			false,
-			"oLanguage": {
-				"oPaginate": {
+			"oLanguage":{
+				"oPaginate":{
 					"sFirst":		"<<",
 					"sLast":		">>",
 					"sNext":		">",
@@ -240,9 +217,26 @@ $campos_ocultos_formulario = array(
 			language:{
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
 			}
+		});
+		$("#id_departamento").change(function(){
+			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+				$('#id_municipio').empty();
+				$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){
+					if(municipio.id_municipio == '<?= @$campos['id_municipio']; ?>'){
+						$("#id_municipio").append($("<option></option>").attr({"value":	municipio.id_municipio, "selected":	"selected"}).text(municipio.nombre_municipio));
+					}
+					else{
+						$("#id_municipio").append($("<option></option>").attr({"value":	municipio.id_municipio}).text(municipio.nombre_municipio));
+					}
+				});
 			});
+		});
 	});
-	
+</script>
+<?php if(count($usuarios_departamento_municipio) > 1){ ?>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
+<script type="text/javascript">
 	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica4-1',
@@ -264,3 +258,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>
