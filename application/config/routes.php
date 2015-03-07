@@ -40,7 +40,6 @@
 
 $route['default_controller'] = "sesion";
 $route['404_override'] = '';
-$route['usuarios/(:any)'] = 'usuarios/index/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

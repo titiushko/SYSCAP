@@ -2,10 +2,6 @@
 $centro_educativo = array (
 	'name'			=> 'centro_educativo',
 	'id'			=> 'centro_educativo',
-	'maxlength'		=> '60',
-	'size'			=> '20',
-	'value'			=> utf8(set_value('centro_educativo', @$nombre_centro_educativo)),
-	'onpaste'		=> 'return false',
 	'type'			=> 'text',
 	'autocomplete'	=> 'off',
 	'placeholder'	=> 'Buscar Centro Educativo',
@@ -38,6 +34,7 @@ $centro_educativo = array (
 						<table class="table table-striped table-bordered table-hover" id="data-tables-usuarios">
 							<thead>
 								<tr>
+									<th>Centro Educativo</th>
 									<th>Usuario</th>
 									<th>Nombre</th>
 									<th>DUI</th>
@@ -47,6 +44,7 @@ $centro_educativo = array (
 							<tbody>
 								<?php foreach($lista_usuarios as $usuario){ ?>
 								<tr onclick="redireccionar('<?= base_url('usuarios/mostrar/'.$usuario->id_usuario); ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($this->usuarios_model->nombre_completo_usuario($usuario->id_usuario)); ?>">
+									<td><?= utf8($usuario->nombre_centro_educativo); ?></td>
 									<td><?= utf8($usuario->nombre_usuario); ?></td>
 									<td><?= utf8($usuario->nombre_completo_usuario); ?></td>
 									<td><?= formato_dui($usuario->dui_usuario); ?></td>
@@ -63,37 +61,51 @@ $centro_educativo = array (
 </div>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.colvis.js"></script>
+<script type="text/javascript">
 	$(document).ready(function(){
 		$('#data-tables-usuarios').dataTable({
 			language:{
 				url: '<?= base_url(); ?>resources/plugins/data-tables/js/spanish_language.json'
-			}
+			},
+			columnDefs: [{visible: false, targets: 0}]
 		});
-		$("#centro_educativo").bind('keyup focusin', function(evento){
+		$("#centro_educativo").bind('keyup click focusin', function(evento){
 			if(evento.which != 27){
 				var v_centro_educativo = $(this).val();
 				$.post('<?= base_url('index.php/ajax/lista_centros_educativos'); ?>', {nombre_centro_educativo: v_centro_educativo.length > 0 ? v_centro_educativo : '%'}, function(resultado){
 					if(resultado != ''){
-						$('#resultado-centro_educativo').show();
 						var centros_educativos = jQuery.parseJSON(resultado);
 						var clase = centros_educativos.length < 5 ? "contenedor-centro_educativo-1" : "contenedor-centro_educativo-2";
+						$('#resultado-centro_educativo').show();
 						$('#resultado-centro_educativo').empty();
 						$("#resultado-centro_educativo").append($("<div></div>").attr({"class": clase}));
 						$.each(centros_educativos, function(respuesta, centro_educativo){
-							$("." + clase).append($("<p></p>").attr({"onclick": "redireccionar('<?= base_url('usuarios'); ?>/" + centro_educativo.id_centro_educativo + "');"}).text(centro_educativo.nombre_centro_educativo));
+							$("." + clase).append($("<p></p>").attr({"onclick": "seleccionar_centro_educativo('" + centro_educativo.nombre_centro_educativo + "');"}).text(centro_educativo.nombre_centro_educativo));
 						});
 					}
 					else{
 						$('#resultado-centro_educativo').hide();
 					}
 				});
+				$('#data-tables-usuarios').DataTable().column(0).search(
+					$(this).val()
+				).draw();
 			}
 			else{
 				$(this).val('');
 				$('#resultado-centro_educativo').hide();
 			}
 		});
+		$("#centro_educativo").bind('focusout', function(){
+			$('#data-tables-usuarios').DataTable().column(0).search(
+				$(this).val()
+			).draw();
+		});
 	});
+	function seleccionar_centro_educativo(nombre){
+		$('#centro_educativo').val(nombre);
+		$('#resultado-centro_educativo').hide();
+	}
 </script>
 <?php $this->session->set_userdata('uri_usuarios', uri_string()); ?>
