@@ -465,10 +465,10 @@ class Estadisticas extends MY_Controller{
 				$lista_modalidades_capacitados = '';
 				foreach($modalidades_capacitados as $modalidad_capacitado){
 					if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
-						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.$modalidad_capacitado->tutorizados.'</td><td>'.$modalidad_capacitado->autoformacion.'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.$this->limpiar_nulo($modalidad_capacitado->tutorizados).'</td><td>'.$this->limpiar_nulo($modalidad_capacitado->autoformacion).'</td></tr>';
 					}
 					else{
-						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold($modalidad_capacitado->tutorizados).'</td><td>'.bold($modalidad_capacitado->autoformacion).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold($this->limpiar_nulo($modalidad_capacitado->tutorizados)).'</td><td>'.bold($this->limpiar_nulo($modalidad_capacitado->autoformacion)).'</td></tr>';
 					}
 				}
 				if($lista_modalidades_capacitados == ''){
@@ -665,10 +665,10 @@ class Estadisticas extends MY_Controller{
 				$lista_tipos_capacitados_centro_educativo = '';
 				foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
 					if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
-						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_capacitado).'</td><td>'.$tipo_capacitado_centro_educativo->total.'</td></tr>';
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_capacitado).'</td><td>'.$this->limpiar_nulo($tipo_capacitado_centro_educativo->total).'</td></tr>';
 					}
 					else{
-						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)).'</td><td>'.bold($tipo_capacitado_centro_educativo->total).'</td></tr>';
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)).'</td><td>'.bold($this->limpiar_nulo($tipo_capacitado_centro_educativo->total)).'</td></tr>';
 					}
 				}
 				if($lista_tipos_capacitados_centro_educativo == ''){

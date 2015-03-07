@@ -15,32 +15,15 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	public function index($codigo_centro_educativo = NULL){
+	public function index(){
 		if($this->session->userdata['nombre_corto_rol'] == 'admin' || $this->session->userdata['nombre_corto_rol'] == 'moderador'){
 			$datos['pagina'] = 'usuarios/consultar_usuarios_view';
 			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios($codigo_centro_educativo);
-			if($codigo_centro_educativo != NULL){
-				if($this->validar_parametros($codigo_centro_educativo)){
-					$datos['nombre_centro_educativo'] = utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo));
-				}
-				else{
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
-				}
-			}
+			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios();
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
 			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
-		}
-	}
-	
-	public function _remap($metodo, $parametros = array()){
-		if(!method_exists($this, $metodo)){
-			$this->index($metodo, $parametros);
-		}
-		else{
-			return call_user_func_array(array($this, $metodo), $parametros);
 		}
 	}
 	
@@ -315,11 +298,11 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	private function validar_parametros($codigo){
-		if(empty($codigo)){
+	private function validar_parametros($codigo_usuario){
+		if(empty($codigo_usuario)){
 			return FALSE;
 		}
-		elseif(is_numeric($codigo)){
+		elseif(is_numeric($codigo_usuario)){
 			return TRUE;
 		}
 		else{
