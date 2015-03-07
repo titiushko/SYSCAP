@@ -88,24 +88,24 @@ $centro_educativo = array (
 						$('#resultado-centro_educativo').hide();
 					}
 				});
-				$('#data-tables-usuarios').DataTable().column(0).search(
-					$(this).val()
-				).draw();
 			}
 			else{
 				$(this).val('');
 				$('#resultado-centro_educativo').hide();
 			}
+			buscar_centro_educativo($(this).val());
 		});
 		$("#centro_educativo").bind('focusout', function(){
-			$('#data-tables-usuarios').DataTable().column(0).search(
-				$(this).val()
-			).draw();
+			buscar_centro_educativo($(this).val());
 		});
 	});
 	function seleccionar_centro_educativo(nombre){
 		$('#centro_educativo').val(nombre);
+		buscar_centro_educativo(nombre);
 		$('#resultado-centro_educativo').hide();
+	}
+	function buscar_centro_educativo(nombre){
+		$('#data-tables-usuarios').DataTable().column(0).search(nombre).draw();
 	}
 </script>
 <?php $this->session->set_userdata('uri_usuarios', uri_string()); ?>
