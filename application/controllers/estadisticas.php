@@ -9,7 +9,7 @@ class Estadisticas extends MY_Controller{
 				$this->load->model(array('estadisticas_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
@@ -95,6 +95,21 @@ class Estadisticas extends MY_Controller{
 					}
 					break;
 				case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+					if($this->input->post()){
+						$this->form_validation->set_rules('tipo_capacitado', 'Tipo de Capacitado', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'trim|required');
+						$this->form_validation->set_rules('fecha2', 'Fecha 2', 'trim|required');
+						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
+						if($this->form_validation->run()){
+							$datos = array_merge($this->datos_estadistica_01_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
+						}
+						else{
+							$datos = array_merge($this->datos_estadistica_01_view(), $datos);
+						}
+					}
+					else{
+						$datos = array_merge($this->datos_estadistica_01_view(), $datos);
+					}
 					break;
 				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 					if($this->input->post()){
@@ -188,22 +203,23 @@ class Estadisticas extends MY_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
-	private function datos_estadistica_01_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
-		$datos['modalidades_capacitados'] = $this->estadisticas_model->modalidades_capacitados($fecha1, $fecha2);
+	private function datos_estadistica_01_view($fecha1 = '', $fecha2 = '', $metodo = 'consulta', $tipo_capacitado = ''){
+		$datos['modalidades_capacitados'] = $this->estadisticas_model->modalidades_capacitados($fecha1, $fecha2, $tipo_capacitado);
 		$datos['modalidades_capacitados_json'] = '';
 		foreach($datos['modalidades_capacitados'] as $modalidad_capacitado){
 			if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
-				$datos['modalidades_capacitados_json'] .= '{y: \''.$modalidad_capacitado->tipos_capacitados.'\', a: '.$this->limpiar_nulo($modalidad_capacitado->tutorizados).', b: '.$this->limpiar_nulo($modalidad_capacitado->autoformacion).'},';
+				$datos['modalidades_capacitados_json'] .= '{y: \''.$modalidad_capacitado->tipos_capacitados.'\', a: '.limpiar_nulo($modalidad_capacitado->tutorizados).', b: '.limpiar_nulo($modalidad_capacitado->autoformacion).'},';
 			}
 		}
 		if($metodo == 'consulta'){
-			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2);
+			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -294,7 +310,7 @@ class Estadisticas extends MY_Controller{
 		$datos['tipos_capacitados_centro_educativo_json'] = '';
 		foreach($datos['tipos_capacitados_centro_educativo'] as $tipo_capacitado_centro_educativo){
 			if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
-				$datos['tipos_capacitados_centro_educativo_json'] .= '{y: \''.acentos($tipo_capacitado_centro_educativo->modalidad_capacitado).'\', a: '.$this->limpiar_nulo($tipo_capacitado_centro_educativo->total).'},';
+				$datos['tipos_capacitados_centro_educativo_json'] .= '{y: \''.acentos($tipo_capacitado_centro_educativo->modalidad_capacitado).'\', a: '.limpiar_nulo($tipo_capacitado_centro_educativo->total).'},';
 			}
 		}
 		$nombre_centro_educativo = $codigo_centro_educativo != '' ? $this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo) : '';
@@ -334,64 +350,70 @@ class Estadisticas extends MY_Controller{
 						$pagina = 'estadisticas/imprimir_estadistica_01_view';
 						$datos = $this->datos_estadistica_01_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 						if(empty($datos['modalidades_capacitados'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 2: // Usuarios por Departamento y Rango de Fechas
 						$pagina = 'estadisticas/imprimir_estadistica_02_view';
 						$datos = $this->datos_estadistica_02_view($this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 						if(empty($datos['cantidad_usuarios_municipio'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 3: // Total de Usuarios por Departamento y Rango de Fechas
 						$pagina = 'estadisticas/imprimir_estadistica_03_view';
 						$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 						if(empty($datos['estaditicas_departamento_fechas'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 4: // Usuarios por Departamento, Municipio y Rango de Fechas
 						$pagina = 'estadisticas/imprimir_estadistica_04_view';
 						$datos = $this->datos_estadistica_04_view($this->input->post('codigo_departamento'), $this->input->post('codigo_municipio'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 						if(empty($datos['usuarios_departamento_municipio'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+						$pagina = 'estadisticas/imprimir_estadistica_05_view';
+						$datos = $this->datos_estadistica_01_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
+						if(empty($datos['modalidades_capacitados'])){
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+						}
+						break;
 					case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 						$pagina = 'estadisticas/imprimir_estadistica_06_view';
 						$datos = $this->datos_estadistica_06_view($this->input->post('tipo_de_capacitado'), $this->input->post('codigo_departamento'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 						if(empty($datos['estaditicas_departamento_tipo_fechas'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 7: // Usuarios por Tipo de Capacitados, Departamento y Municipio
 						$pagina = 'estadisticas/imprimir_estadistica_07_view';
 						$datos = $this->datos_estadistica_04_view($this->input->post('codigo_departamento'), $this->input->post('codigo_municipio'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
 						if(empty($datos['usuarios_departamento_municipio'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 8: // Usuarios por Departamento, Tipo de Capacitados y Fecha
 						$pagina = 'estadisticas/imprimir_estadistica_08_view';
 						$datos = $this->datos_estadistica_03_view($this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir', $this->input->post('tipo_de_capacitado'));
 						if(empty($datos['estaditicas_departamento_fechas'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 9: // Usuarios por Tipo de Capacitados y Centro Educativo
 						$pagina = 'estadisticas/imprimir_estadistica_09_view';
 						$datos = $this->datos_estadistica_09_view($this->input->post('tipo_de_capacitado'), $this->input->post('codigo_centro_educativo'), 'imprimir');
 						if(empty($datos)){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 10: // Usuarios a Nivel Nacional
 						$pagina = 'estadisticas/imprimir_estadistica_10_view';
 						$datos = $this->datos_estadistica_10_view($this->input->post('tipo_de_capacitado'), $this->input->post('fecha_1'), $this->input->post('fecha_2'), 'imprimir');
 						if(empty($datos['usuarios_nivel_nacional'])){
-							show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+							show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 						}
 						break;
 					case 11: // Usuarios por Grado Digital
@@ -399,7 +421,7 @@ class Estadisticas extends MY_Controller{
 				$this->load->view($pagina, $datos);
 			}
 			else{
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 		}
 		else{
@@ -432,6 +454,8 @@ class Estadisticas extends MY_Controller{
 					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('codigo_departamento' => $this->input->post('codigo_departamento'), 'codigo_municipio' => $this->input->post('codigo_municipio'), 'fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2')));
 					break;
 				case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2'), 'tipo_capacitado' => $this->input->post('tipo_de_capacitado')));
+					break;
 				case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 					$plantilla_pdf = $this->cargar_plantilla_pdf($opcion, array('tipo_capacitado' => $this->input->post('tipo_de_capacitado'), 'codigo_departamento' => $this->input->post('codigo_departamento'), 'fecha1' => $this->input->post('fecha_1'), 'fecha2' => $this->input->post('fecha_2')));
 					break;
@@ -454,7 +478,7 @@ class Estadisticas extends MY_Controller{
 			$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -465,10 +489,10 @@ class Estadisticas extends MY_Controller{
 				$lista_modalidades_capacitados = '';
 				foreach($modalidades_capacitados as $modalidad_capacitado){
 					if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
-						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.$this->limpiar_nulo($modalidad_capacitado->tutorizados).'</td><td>'.$this->limpiar_nulo($modalidad_capacitado->autoformacion).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.limpiar_nulo($modalidad_capacitado->tutorizados).'</td><td>'.limpiar_nulo($modalidad_capacitado->autoformacion).'</td></tr>';
 					}
 					else{
-						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold($this->limpiar_nulo($modalidad_capacitado->tutorizados)).'</td><td>'.bold($this->limpiar_nulo($modalidad_capacitado->autoformacion)).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold(limpiar_nulo($modalidad_capacitado->tutorizados)).'</td><td>'.bold(limpiar_nulo($modalidad_capacitado->autoformacion)).'</td></tr>';
 					}
 				}
 				if($lista_modalidades_capacitados == ''){
@@ -574,6 +598,30 @@ class Estadisticas extends MY_Controller{
 											 $plantilla_pdf);
 				break;
 			case 5: // Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+				$modalidades_capacitados = $this->estadisticas_model->modalidades_capacitados($parametros['fecha1'], $parametros['fecha2'], $parametros['tipo_capacitado']);
+				$lista_modalidades_capacitados = '';
+				foreach($modalidades_capacitados as $modalidad_capacitado){
+					if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.limpiar_nulo($modalidad_capacitado->tutorizados).'</td><td>'.limpiar_nulo($modalidad_capacitado->autoformacion).'</td></tr>';
+					}
+					else{
+						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold(limpiar_nulo($modalidad_capacitado->tutorizados)).'</td><td>'.bold(limpiar_nulo($modalidad_capacitado->autoformacion)).'</td></tr>';
+					}
+				}
+				if($lista_modalidades_capacitados == ''){
+					$lista_modalidades_capacitados = 'No hay resultados para ésta estadística.';
+				}
+				$plantilla_pdf = read_file('resources/templates/pdf/estadistica_05.php');
+				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
+												   '<TIPO_CAPACITADO>',
+												   '<PERIODO>',
+												   '<MODALIDADES_CAPACITADOS>'),
+											 array(encabezado_reporte(),
+												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
+												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
+												   $lista_modalidades_capacitados),
+											 $plantilla_pdf);
+				break;
 			case 6: // Usuarios por Tipo de Capacitados, Departamento y Fecha
 				$estaditicas_departamento_tipo_fechas = $this->estadisticas_model->estaditicas_departamento_tipo_fechas($parametros['tipo_capacitado'], $parametros['codigo_departamento'], $parametros['fecha1'], $parametros['fecha2']);
 				$estaditicas = 1; $lista_estaditicas_departamento_tipo_fechas = '';
@@ -665,10 +713,10 @@ class Estadisticas extends MY_Controller{
 				$lista_tipos_capacitados_centro_educativo = '';
 				foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
 					if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
-						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_capacitado).'</td><td>'.$this->limpiar_nulo($tipo_capacitado_centro_educativo->total).'</td></tr>';
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_capacitado).'</td><td>'.limpiar_nulo($tipo_capacitado_centro_educativo->total).'</td></tr>';
 					}
 					else{
-						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)).'</td><td>'.bold($this->limpiar_nulo($tipo_capacitado_centro_educativo->total)).'</td></tr>';
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)).'</td><td>'.bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)).'</td></tr>';
 					}
 				}
 				if($lista_tipos_capacitados_centro_educativo == ''){
@@ -744,7 +792,7 @@ class Estadisticas extends MY_Controller{
 			return FALSE;
 		}
 		elseif(is_numeric($opcion)){
-			if(($opcion >= 1 && $opcion <= 4) || ($opcion >= 6 && $opcion <= 10)){
+			if(($opcion >= 1 && $opcion <= 10)){
 				return TRUE;
 			}
 			else{
@@ -754,10 +802,6 @@ class Estadisticas extends MY_Controller{
 		else{
 			return FALSE;
 		}
-	}
-	
-	private function limpiar_nulo($valor){
-		return $valor != NULL ? $valor : 0;
 	}
 }
 

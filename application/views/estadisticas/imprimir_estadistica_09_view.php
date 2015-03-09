@@ -59,7 +59,7 @@
 							?>
 							<tr>
 								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
-								<td><?= $tipo_capacitado_centro_educativo->total; ?></td>
+								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
 							<?php
 								}
@@ -67,7 +67,7 @@
 							?>
 							<tr>
 								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
-								<td><?= bold($tipo_capacitado_centro_educativo->total); ?></td>
+								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>
 							</tr>
 							<?php
 								}
@@ -77,13 +77,13 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
-					<?php if($tipo_capacitado_centro_educativo->total > 0){ ?>
+					<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 					<div id="morris-bar-chart-estadistica9-1"></div>
 					<?php } ?>
 				</div>
 			</div>
 		</div>
-		<?php if($tipo_capacitado_centro_educativo->total > 0){ ?>
+		<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>

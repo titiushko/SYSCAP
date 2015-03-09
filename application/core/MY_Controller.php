@@ -12,7 +12,7 @@ class MY_Controller extends CI_Controller{
 		$this->output->set_header('Pragma: no-cache');
 	}
 	
-	public function acceso_denegado($tipo_acceso = '', $usuario_actual = ''){
+	public function acceso_denegado($tipo_acceso = '', $usuario_actual = '', $nombre_completo_rol = ''){
 		$mensaje = array(
 			'sin_conexion'	=> array('encabezado'	=> 'Usuario no Autentificado',
 									 'cuerpo'		=> 'Debe de inicar sesi&oacute;n para poder acceder a SYSCAP.',

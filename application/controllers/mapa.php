@@ -10,7 +10,7 @@ class Mapa extends MY_Controller{
 				$this->load->model(array('mapas_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
@@ -59,7 +59,7 @@ class Mapa extends MY_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -89,7 +89,7 @@ class Mapa extends MY_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	

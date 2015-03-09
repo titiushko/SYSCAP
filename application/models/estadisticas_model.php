@@ -6,25 +6,32 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 1: Usuarios por Modalidad de Capacitación
-	function modalidades_capacitados($fecha1, $fecha2){
+	function modalidades_capacitados($fecha1, $fecha2, $tipo_capacitado = ''){
+		if($tipo_capacitado != ''){
+			$filtro = ' AND tipo_capacitado = ?';
+			$parametros = array($fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado);
+		}
+		else{
+			$filtro = '';
+			$parametros = array($fecha1, $fecha2, $fecha1, $fecha2, $fecha1, $fecha2);
+		}
 		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticaModalidad
-								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Evaluaci%\' AND fecha_examen_calificacion BETWEEN ? AND ?
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Evaluaci%\' AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   UNION
 								   SELECT \'Certificados\' tipos_capacitados,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticaModalidad
-								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Examen%\' AND fecha_examen_calificacion BETWEEN ? AND ?
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Examen%\' AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   UNION
 								   SELECT \'TOTAL\' tipos_capacitados,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticaModalidad
-								   WHERE nota_examen_calificacion >= 7.00 AND fecha_examen_calificacion BETWEEN ? AND ?',
-								   array($fecha1, $fecha2, $fecha1, $fecha2, $fecha1, $fecha2));
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
 		return $query->result();
 	}
 	

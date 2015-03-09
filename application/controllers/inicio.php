@@ -6,7 +6,7 @@ class Inicio extends MY_Controller{
 		$this->eliminar_cache();
 		if(isset($this->session->userdata['conexion_usuario'])){
 			if($this->session->userdata['nombre_corto_rol'] != 'admin'){
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{

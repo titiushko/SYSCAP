@@ -90,9 +90,11 @@
 					<div class="btn-group">
 					<?php if($tipo_acceso == 'sin_permiso'){ ?>
 						<a class="btn btn-primary dropdown-toggle dropdown-user-name" data-toggle="dropdown" data-hover="dropdown">
-							<i class="fa fa-user fa-fw"></i> <?= @$usuario_actual; ?> <i class="caret"></i>
+							<i class="fa fa-user fa-fw"></i> <?= $usuario_actual; ?> <i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user-name">
+							<li><a><?= $nombre_completo_rol; ?></a></li>
+							<li class="divider"></li>
 							<li><a href="<?= base_url(); ?>sesion/cerrar_sesion"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
 						</ul>
 					<?php } else{ ?>
@@ -154,19 +156,19 @@
 					<div id="page-wrapper">
 						<div class="row">
 							<div class="col-lg-12">
-								<h1 class="well page-header"><?= @$mensaje[$tipo_acceso]['icono']; ?>Acceso Denegado</h1>
+								<h1 class="well page-header"><?= $mensaje[$tipo_acceso]['icono']; ?>Acceso Denegado</h1>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="panel panel-primary">
 									<div class="panel-heading">
-										<?= heading(@$mensaje[$tipo_acceso]['encabezado'], 2); ?>
+										<?= heading($mensaje[$tipo_acceso]['encabezado'], 2); ?>
 									</div>
 									<div class="panel-body">
 										<div class="row">
 											<div class="col-lg-12">
-												<p><?= @$mensaje[$tipo_acceso]['cuerpo']; ?></p>
+												<p><?= $mensaje[$tipo_acceso]['cuerpo']; ?></p>
 												<?php if($tipo_acceso == 'sin_permiso'){ ?>
 												<p><span class="enlace" onclick="redireccionar('javascript:window.history.back()');">Regresar a la p&aacute;gina anterior.</span></p>
 												<?php } else{ ?>

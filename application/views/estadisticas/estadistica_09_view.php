@@ -114,7 +114,7 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
-								<td><?= $tipo_capacitado_centro_educativo->total; ?></td>
+								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
 							<?php
 								}
@@ -122,7 +122,7 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
-								<td><?= bold($tipo_capacitado_centro_educativo->total); ?></td>
+								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>
 							</tr>
 							<?php
 								}
@@ -133,7 +133,7 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<?php if($tipo_capacitado_centro_educativo->total > 0){ ?>
+				<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica9-1"></div></a>
 				<?php } ?>
 			</div>
@@ -174,7 +174,7 @@ $campos_ocultos_formulario = array(
 		$('#resultado-centro_educativo').hide();
 	}
 </script>
-<?php if($tipo_capacitado_centro_educativo->total > 0){ ?>
+<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">

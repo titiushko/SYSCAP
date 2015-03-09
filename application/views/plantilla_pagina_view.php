@@ -36,8 +36,36 @@
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	    <script type="text/javascript" src="<?= base_url(); ?>resources/js/funciones.js"></script>
 		<script type="text/javascript">
+			var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+			var administrador = <?= $this->session->userdata('nombre_corto_rol') == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
+			var boton_menu = <?= $this->session->userdata('boton_menu') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+			$(document).ready(function(){
+				$(".fa.fa-bars.tooltips").click(function(){
+					if ($('#sidebar > ul').is(":visible") === true){
+						$.post('<?= base_url('index.php/ajax/boton_menu'); ?>', {boton_menu: "FALSE"}, function(resultado){
+							boton_menu = resultado;
+						});
+					}
+					else{
+						$.post('<?= base_url('index.php/ajax/boton_menu'); ?>', {boton_menu: "TRUE"}, function(resultado){
+							boton_menu = resultado;
+						});
+					}
+				});
+			});
 			$(function(){
-				var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+
+				if(administrador == 'TRUE'){
+					if(boton_menu == 'TRUE'){
+						mostrar_ocultar_menu(true);
+					}
+					else{
+						mostrar_ocultar_menu(false);
+					}
+				}
+				else{
+					mostrar_ocultar_menu(false);
+				}
 				if(carousel == 'TRUE'){
 					$('.wrapper').css({
 						"margin-top": "0px"
@@ -54,21 +82,28 @@
 						"margin-top": "75px"
 					});
 				}
-				var nombre_corto_rol = <?= $this->session->userdata('nombre_corto_rol') == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
-				if(nombre_corto_rol == 'TRUE'){
+
+
+			});
+			function mostrar_ocultar_menu(opcion){
+				if(opcion){
+					$('#sidebar > ul').show();
+					$("#container").removeClass("sidebar-closed");
 					$('#main-content').css({
 						'margin-left': '307px'
 					});
 					$('#footer').css({
 						'margin-left': '307px'
 					});
-					$('#sidebar > ul').show();
+
 					$('#sidebar').css({
 						'margin-left': '0'
 					});
-					$("#container").removeClass("sidebar-closed");
+
 				}
 				else{
+					$('#sidebar > ul').hide();
+					$("#container").addClass("sidebar-closed");
 					$('#main-content').css({
 						'margin-left': '0px'
 					});
@@ -78,17 +113,18 @@
 					$('#footer').css({
 						'margin-left': '0px'
 					});
-					$('#sidebar > ul').hide();
-					$("#container").addClass("sidebar-closed");
+
+
 				}
-				/*
-				window.location.hash = "no-back-button";
-				window.location.hash = "again-no-back-button";
-				window.onhashchange = function(){
-					window.location.hash = "no-back-button";
-				}
-				*/
-			});
+
+
+
+
+
+
+
+
+			}
 		</script>
 	</head>
 	<body <?= @$eventos_body; ?>>
@@ -100,8 +136,8 @@
 			<header class="header black-bg navbar-fixed-top">
 				<div class="sidebar-toggle-box">
 				<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
-					<div class="btn btn-default">
-						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+					<div id="toggle-syscap" class="btn btn-default">
+						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Mostrar/Ocultar Menú"></div>
 					</div>
 				<?php } ?>
 				</div>
@@ -164,7 +200,7 @@
 								<li class="<?= @$estadistica[2]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/2">Departamento y Rango de Fechas</a></li>
 								<li class="<?= @$estadistica[3]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/3">Total por Departamento y Rango de Fechas</a></li>
 								<li class="<?= @$estadistica[4]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/4">Departamento, Municipio y Rango de Fechas</a></li>
-								<!--<li class="<?= @$estadistica[5]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/5">Tipo de Capacitados y Fecha a Nivel Nacional</a></li>-->
+								<li class="<?= @$estadistica[5]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/5">Tipo de Capacitados y Fecha a Nivel Nacional</a></li>
 								<li class="<?= @$estadistica[6]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/6">Tipo de Capacitados, Departamento y Fecha</a></li>
 								<li class="<?= @$estadistica[7]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/7">Tipo de Capacitados, Departamento y Municipio</a></li>
 								<li class="<?= @$estadistica[8]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/8">Departamento, Tipo de Capacitados y Fecha</a></li>

@@ -11,7 +11,7 @@ class Centros_educativos extends MY_Controller{
 				$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model'));
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
@@ -36,7 +36,7 @@ class Centros_educativos extends MY_Controller{
 			$this->notificacion = FALSE;
 		}
 		if(empty($datos['centro_educativo'])){
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $datos);
@@ -60,7 +60,7 @@ class Centros_educativos extends MY_Controller{
 		}
 		else{
 			if(empty($datos['centro_educativo'])){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
@@ -134,7 +134,7 @@ class Centros_educativos extends MY_Controller{
 		$centro_educativo = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
 		if(empty($centro_educativo)){
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 		else{
 			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
@@ -173,20 +173,20 @@ class Centros_educativos extends MY_Controller{
 	public function imprimir($codigo_centro_educativo = NULL){
 		if(!$this->session->userdata('dispositivo_movil')){
 			if(empty($codigo_centro_educativo)){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				if(is_numeric($codigo_centro_educativo)){
 					$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
 					if(empty($datos['centro_educativo'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 					}
 					else{
 						$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
 					}
 				}
 				else{
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 			}
 		}
