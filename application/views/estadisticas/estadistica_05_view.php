@@ -31,9 +31,9 @@ $boton_secundario = array(
 	'id'		=> 'boton_secundario',
 	'value'		=> 'Limpiar',
 	'class'		=> 'btn btn-danger',
-	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/8\');'
+	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/5\');'
 );
-// Definición de formularios ocultos para enviar información a imprimir y exportar
+// DefiniciÃ³n de formularios ocultos para enviar informaciÃ³n a imprimir y exportar
 $formulario_imprimir = array(
 	'name'		=> 'formulario_imprimir',
 	'id'		=> 'formulario_imprimir',
@@ -52,11 +52,11 @@ $campos_ocultos_formulario = array(
 	'fecha_2'	=> set_value('fecha_2', @$campos['fecha2'])
 );
 ?>
-<?= form_open('index.php/estadisticas/imprimir/8', $formulario_imprimir, $campos_ocultos_formulario); ?>
+<?= form_open('index.php/estadisticas/imprimir/5', $formulario_imprimir, $campos_ocultos_formulario); ?>
 <?= form_close(); ?>
-<?= form_open('index.php/estadisticas/exportar/8', $formulario_exportar, $campos_ocultos_formulario); ?>
+<?= form_open('index.php/estadisticas/exportar/5', $formulario_exportar, $campos_ocultos_formulario); ?>
 <?= form_close(); ?>
-<?= form_open('index.php/estadisticas/consulta/8', $formulario_consultar); ?>
+<?= form_open('index.php/estadisticas/consulta/5', $formulario_consultar); ?>
 	<div class="row">
 		<div class="col-lg-6">
 			<div class="form-group">
@@ -100,78 +100,74 @@ $campos_ocultos_formulario = array(
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="table-responsive">
-					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica8-1">
+				<div class="table-responsive">        
+					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>#</th>
-								<th>Departamento</th>
+								<th></th>
+								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
+							</tr>
+							<tr>
+								<th rowspan="2">Tipo de Capacitado</th>
 								<th>Tutorizados</th>
 								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){ ?>
+							<?php
+							foreach($modalidades_capacitados as $modalidad_capacitado){
+								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+							?>
 							<tr>
-								<td><?= $estaditica_departamento_fecha->indice; ?></td>
-								<td><?= utf8($estaditica_departamento_fecha->nombre_departamento); ?></td>
-								<td><?= $estaditica_departamento_fecha->capacitados; ?></td>
-								<td><?= $estaditica_departamento_fecha->certificados; ?></td>
+								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
+								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
-							<?php } ?>
+							<?php
+								}
+								else{
+							?>
+							<tr>
+								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
+							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<?php if(count($estaditicas_departamento_fechas) > 0){ ?>
-				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica8-1"></div></a>
+				<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
+				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica5-1"></div></a>
 				<?php } ?>
 			</div>
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('#data-tables-estadistica8-1').dataTable({
-			"searching":	false,
-			"lengthChange":	false,
-			"ordering":		false,
-			"oLanguage":{
-				"oPaginate":{
-					"sFirst":		"<<",
-					"sLast":		">>",
-					"sNext":		">",
-					"sPrevious":	"<"
-				},
-				"sInfo":		"_START_/_END_ de _TOTAL_ registros",
-				"sEmptyTable":	"No hay resultado para esta Consulta Estadística."
-			}
-		});
-	});
-</script>
-<?php if(count($estaditicas_departamento_fechas) > 0){ ?>
+<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica8-1',
-			data: [<?= $estaditicas_departamento_fechas_json; ?>],
+			element: 'morris-bar-chart-estadistica5-1',
+			data: [<?= $modalidades_capacitados_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Tutorizados', 'Autoformacion'],
+			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
 			hideHover: 'auto',
 			resize: true
 		});
 		Morris.Bar({
-			element: 'morris-bar-chart-estadistica8-2',
-			data: [<?= $estaditicas_departamento_fechas_json; ?>],
+			element: 'morris-bar-chart-estadistica5-2',
+			data: [<?= $modalidades_capacitados_json; ?>],
 			xkey: 'y',
 			ykeys: ['a', 'b'],
-			labels: ['Tutorizados', 'Autoformacion'],
+			labels: ['Tutorizados', 'Autoformaci&oacute;n'],
 			hideHover: 'auto',
 			resize: true
 		});

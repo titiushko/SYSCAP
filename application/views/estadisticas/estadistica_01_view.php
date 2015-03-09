@@ -109,8 +109,8 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
-								<td><?= $modalidad_capacitado->tutorizados; ?></td>
-								<td><?= $modalidad_capacitado->autoformacion; ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
 							<?php
 								}
@@ -118,8 +118,8 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
-								<td><?= bold($modalidad_capacitado->tutorizados); ?></td>
-								<td><?= bold($modalidad_capacitado->autoformacion); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
 							</tr>
 							<?php
 								}
@@ -130,14 +130,14 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
-				<?php if($modalidades_capacitados[0]->tutorizados != NULL && $modalidades_capacitados[0]->autoformacion != NULL){ ?>
+				<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica1-1"></div></a>
 				<?php } ?>
 			</div>
 		</div>
 	</div>
 </div>
-<?php if($modalidades_capacitados[0]->tutorizados != NULL && $modalidades_capacitados[0]->autoformacion != NULL){ ?>
+<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">

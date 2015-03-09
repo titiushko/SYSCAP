@@ -13,7 +13,7 @@
 		);
 		echo meta($metainformaciones);
 		?>
-		<title><?= utf8(@$tipo_capacitado).' '.utf8(@$nombre_centro_educativo); ?></title>
+		<title><?= @$tipo_capacitado.' '.@$periodo; ?></title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
@@ -32,11 +32,11 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados y Centro Educativo', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
-								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= utf8(@$tipo_capacitado); ?></td>
-								<th class="column-title">Centro Educativo:</th><td class="column-value"><?= @$nombre_centro_educativo; ?></td>
+								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
+								<th class="column-title">Periodo:</th><td class="column-value"><?= @$periodo; ?></td>
 							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
@@ -48,26 +48,34 @@
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>Modalidad de Capacitaci&oacute;n</th>
-								<th>Cantidades</th>
+								<th></th>
+								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
+							</tr>
+							<tr>
+								<th rowspan="2">Tipo de Capacitado</th>
+								<th>Tutorizados</th>
+								<th>Autoformaci&oacute;n</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php
-							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
-								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+							$cantidades = 1;
+							foreach($modalidades_capacitados as $modalidad_capacitado){
+								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
 							?>
 							<tr>
-								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
-								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
+								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
+								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
 							<?php
 								}
 								else{
 							?>
 							<tr>
-								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
-								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>
+								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
 							</tr>
 							<?php
 								}
@@ -77,13 +85,13 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
-					<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
-					<div id="morris-bar-chart-estadistica9-1"></div>
+					<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
+					<div id="morris-bar-chart-estadistica5-1"></div>
 					<?php } ?>
 				</div>
 			</div>
 		</div>
-		<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
+		<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
@@ -91,8 +99,8 @@
 		<script type="text/javascript">
 			$(function(){
 				Morris.Bar({
-					element: 'morris-bar-chart-estadistica9-1',
-					data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
+					element: 'morris-bar-chart-estadistica5-1',
+					data: [<?= $modalidades_capacitados_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],
 					labels: ['Capacitados', 'Certificados'],

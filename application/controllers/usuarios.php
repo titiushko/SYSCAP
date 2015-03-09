@@ -23,14 +23,14 @@ class Usuarios extends MY_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 		}
 	}
 	
 	public function mostrar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 			$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
 			if($this->notificacion){
@@ -41,14 +41,14 @@ class Usuarios extends MY_Controller{
 				$this->notificacion = FALSE;
 			}
 			if(empty($datos['usuario'])){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -80,7 +80,7 @@ class Usuarios extends MY_Controller{
 				}
 				else{
 					if(empty($datos['usuario'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 					}
 					else{
 						$this->load->view('plantilla_pagina_view', $datos);
@@ -88,11 +88,11 @@ class Usuarios extends MY_Controller{
 				}
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -101,18 +101,18 @@ class Usuarios extends MY_Controller{
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
 				$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
 				if(empty($datos['usuario'])){
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 				else{
 					$this->load->view('plantilla_pagina_view', $datos);
 				}
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -207,7 +207,7 @@ class Usuarios extends MY_Controller{
 	public function exportar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 			$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
 			$pdf->setPrintHeader(FALSE);
@@ -224,7 +224,7 @@ class Usuarios extends MY_Controller{
 			$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -279,18 +279,18 @@ class Usuarios extends MY_Controller{
 		if(!$this->session->userdata('dispositivo_movil')){
 			if($this->validar_parametros($codigo_usuario)){
 				if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-					$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+					$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 				}
 				$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
 				if(empty($datos['usuario'])){
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 				else{
 					$this->load->view('usuarios/imprimir_usuarios_view', $datos);
 				}
 			}
 			else{
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 		}
 		else{

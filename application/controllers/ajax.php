@@ -28,6 +28,19 @@ class Ajax extends MY_Controller{
 		}
 		exit;
 	}
+	
+	public function boton_menu(){
+		if($this->input->is_ajax_request() && $this->input->get_post('boton_menu')){
+			if($this->security->xss_clean($this->input->get_post('boton_menu')) == 'TRUE'){
+				$this->session->set_userdata('boton_menu', TRUE);
+			}
+			else{
+				$this->session->set_userdata('boton_menu', FALSE);
+			}
+			echo json_encode($this->session->userdata('boton_menu'));
+		}
+		exit;
+	}
 }
 
 /* End of file ajax.php */

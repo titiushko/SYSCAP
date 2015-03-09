@@ -14,12 +14,15 @@ class Sesion extends MY_Controller{
 				$datos['sesion_usuario'] = $this->token();
 				break;
 			case 'admin':
+				$this->session->set_userdata('boton_menu', TRUE);
 				redirect('inicio');
 				break;
 			case 'moderador':
+				$this->session->set_userdata('boton_menu', FALSE);
 				redirect('usuarios');
 				break;
 			case 'student':
+				$this->session->set_userdata('boton_menu', FALSE);
 				redirect('usuarios/mostrar/'.$this->session->userdata('id_usuario'));
 				break;
 		}

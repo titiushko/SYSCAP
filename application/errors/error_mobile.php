@@ -30,8 +30,8 @@
 	    <script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/js/funciones.js"></script>
 		<script type="text/javascript">
 			$(function(){
-				var nombre_corto_rol = <?= $role == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
-				if(nombre_corto_rol == 'TRUE'){
+				var administrador = <?= $role == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
+				if(administrador == 'TRUE'){
 					$('#main-content').css({
 						'margin-left': '307px'
 					});
@@ -82,6 +82,8 @@
 							<i class="fa fa-user fa-fw"></i><?= $username; ?><i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user-name">
+							<li><a><?= $complete_role; ?></a></li>
+							<li class="divider"></li>
 							<li><a href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/sesion/cerrar_sesion"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
 						</ul>
 					</div>

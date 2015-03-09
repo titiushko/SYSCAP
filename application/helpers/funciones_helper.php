@@ -118,5 +118,45 @@ if(!function_exists('encabezado_reporte')){
 	}
 }
 
+if(!function_exists('limpiar_nulo')){
+	function limpiar_nulo($valor){
+		return is_null($valor) ? 0 : $valor;
+	}
+}
+
+/* Verifica si una consulta estadistica tiene valores nulos */
+if(!function_exists('estadistica_vacia')){
+	function estadistica_vacia($estadistica){
+		$nulos = 0; $valores = 0;
+		foreach(objeto_a_vector($estadistica) as $indice => $valor){
+			if(is_array($valor)){
+				foreach($valor as $i => $j){
+					$nulos = !is_string($j) && is_null($j) ? $nulos + 1 : $nulos;
+					$valores = !is_string($j) || is_numeric($j) ? $valores + 1 : $valores;
+				}
+			}
+			else{
+				$nulos = !is_string($valor) && is_null($valor) ? $nulos + 1 : $nulos;
+				$valores = !is_string($valor) || is_numeric($valor) ? $valores + 1 : $valores;
+			}
+		}
+		return $nulos == $valores ? TRUE : FALSE;
+	}
+}
+
+if(!function_exists('objeto_a_vector')){
+	function objeto_a_vector($datos){
+		if(is_object($datos)){
+			$datos = get_object_vars($datos);
+		}
+		if(is_array($datos)){
+			return array_map(__FUNCTION__, $datos);
+		}
+		else{
+			return $datos;
+		}
+	}
+}
+
 /* End of file funciones_helper.php */
 /* Location: ./application/helpers/funciones_helper.php */

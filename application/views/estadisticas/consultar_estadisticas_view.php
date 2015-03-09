@@ -23,6 +23,9 @@
 				if($this->uri->uri_string() == 'estadisticas/consulta/4'){
 					$this->load->view('estadisticas/estadistica_04_view', $datos);
 				}
+				if($this->uri->uri_string() == 'estadisticas/consulta/5'){
+					$this->load->view('estadisticas/estadistica_05_view', $datos);
+				}
                 if($this->uri->uri_string() == 'estadisticas/consulta/6'){
 					$this->load->view('estadisticas/estadistica_06_view', $datos);
 				}
