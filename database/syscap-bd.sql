@@ -137,6 +137,9 @@ CREATE TABLE IF NOT EXISTS mapas(
 ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_usuarios
 FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario);
 
+ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_centros_educativos
+FOREIGN KEY(id_centro_educativo) REFERENCES centros_educativos(id_centro_educativo);
+
 ALTER TABLE centros_educativos ADD CONSTRAINT fk_centros_educativos_departamentos
 FOREIGN KEY(id_departamento) REFERENCES departamentos(id_departamento);
 

@@ -29,10 +29,11 @@ class Mapas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_departamento($codigo_departamento){
-		$query = $this->db->query('SELECT SUM(capacitados.total) capacitados, SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados, (SUM(capacitados.total) + SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END)) total
-								   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_departamento = ?) capacitados
-								   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_departamento = ?) certificados
-								   ON capacitados.nombre_municipio = certificados.nombre_municipio', array($codigo_departamento, $codigo_departamento));
+		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
+								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
+								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ?', array($codigo_departamento));
 		return $query->result()[0];
 	}
 	
@@ -67,10 +68,11 @@ class Mapas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_municipio($codigo_municipio){
-		$query = $this->db->query('SELECT SUM(capacitados.total) capacitados, SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados, (SUM(capacitados.total) + SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END)) total
-								   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_municipio = ?) capacitados
-								   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_municipio = ?) certificados
-								   ON capacitados.nombre_municipio = certificados.nombre_municipio', array($codigo_municipio, $codigo_municipio));
+		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
+								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
+								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_municipio = ?', array($codigo_municipio));
 		return $query->result()[0];
 	}
 	
@@ -96,10 +98,11 @@ class Mapas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_centro_educativo($codigo_centro_educativo, $codigo_departamento){
-		$query = $this->db->query('SELECT SUM(capacitados.total) capacitados, SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END) certificados, (SUM(capacitados.total) + SUM(CASE WHEN certificados.total IS NULL THEN 0 ELSE certificados.total END)) total
-								   FROM (SELECT nombre_municipio, total FROM V_UsuariosCapacitadosDepartamento WHERE id_centro_educativo = ? AND id_departamento = ?) capacitados
-								   LEFT JOIN (SELECT nombre_municipio, total FROM V_UsuariosCertificadosDepartamento WHERE id_centro_educativo = ? AND id_departamento = ?) certificados
-								   ON capacitados.nombre_municipio = certificados.nombre_municipio', array($codigo_centro_educativo, $codigo_departamento, $codigo_centro_educativo, $codigo_departamento));
+		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
+								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
+								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo = ? AND id_departamento = ?', array($codigo_centro_educativo, $codigo_departamento));
 		return $query->result()[0];
 	}
 }

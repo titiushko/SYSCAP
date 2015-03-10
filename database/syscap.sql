@@ -150,6 +150,9 @@ CREATE TABLE IF NOT EXISTS mapas(
 ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_usuarios
 FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario);
 
+ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_centros_educativos
+FOREIGN KEY(id_centro_educativo) REFERENCES centros_educativos(id_centro_educativo);
+
 ALTER TABLE centros_educativos ADD CONSTRAINT fk_centros_educativos_departamentos
 FOREIGN KEY(id_departamento) REFERENCES departamentos(id_departamento);
 
@@ -482,21 +485,6 @@ FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
 	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
 	JOIN municipios m ON(u.id_municipio = m.id_municipio)
 	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo);
-$$
-DELIMITER ;
-
--- ------------------------------------------------------------------------------------------
-
-DELIMITER $$
-DROP VIEW IF EXISTS V_EstadisticaModalidad $$
-CREATE VIEW V_EstadisticaModalidad AS
-SELECT
-	ec.nota_examen_calificacion nota_examen_calificacion,
-	u.modalidad_usuario modalidad_usuario,
-	e.nombre_examen nombre_examen,
-	ec.fecha_examen_calificacion fecha_examen_calificacion
-FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
-	JOIN examenes e ON(ec.id_examen = e.id_examen);
 $$
 DELIMITER ;
 
