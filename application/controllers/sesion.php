@@ -14,15 +14,12 @@ class Sesion extends MY_Controller{
 				$datos['sesion_usuario'] = $this->token();
 				break;
 			case 'admin':
-				$this->session->set_userdata('boton_menu', TRUE);
 				redirect('inicio');
 				break;
 			case 'moderador':
-				$this->session->set_userdata('boton_menu', FALSE);
 				redirect('usuarios');
 				break;
 			case 'student':
-				$this->session->set_userdata('boton_menu', FALSE);
 				redirect('usuarios/mostrar/'.$this->session->userdata('id_usuario'));
 				break;
 		}
@@ -43,7 +40,8 @@ class Sesion extends MY_Controller{
 							'id_usuario' 				=> 	$datos['usuario']->id_usuario,
 							'nombre_corto_rol'			=>	$datos['usuario']->nombre_corto_rol,
 							'nombre_completo_rol'		=>	$datos['usuario']->nombre_completo_rol,
-							'nombre_completo_usuario'	=> 	$datos['usuario']->nombre_completo_usuario
+							'nombre_completo_usuario'	=> 	$datos['usuario']->nombre_completo_usuario,
+							'boton_menu'				=>	TRUE
 						);
 						$this->session->set_userdata($datos_sesion_usuario);
 						$this->index();

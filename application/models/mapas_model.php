@@ -33,7 +33,7 @@ class Mapas_model extends CI_Model{
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ?', array($codigo_departamento));
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)', array($codigo_departamento));
 		return $query->result()[0];
 	}
 	
@@ -72,7 +72,7 @@ class Mapas_model extends CI_Model{
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND id_municipio = ?', array($codigo_municipio));
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)', array($codigo_municipio));
 		return $query->result()[0];
 	}
 	
@@ -97,12 +97,12 @@ class Mapas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	function cantidad_usuarios_centro_educativo($codigo_centro_educativo, $codigo_departamento){
+	function cantidad_usuarios_centro_educativo($codigo_centro_educativo){
 		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo = ? AND id_departamento = ?', array($codigo_centro_educativo, $codigo_departamento));
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo = ?', array($codigo_centro_educativo));
 		return $query->result()[0];
 	}
 }

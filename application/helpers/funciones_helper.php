@@ -158,5 +158,32 @@ if(!function_exists('objeto_a_vector')){
 	}
 }
 
+if(!function_exists('uri_ayuda')){
+	function uri_ayuda($uri){
+		$uri_ayuda = '';
+		$limite_inicial = stripos($uri, '/');
+		$limite_final = strripos($uri, '/');
+		$diferencia = $limite_final - $limite_inicial - 1;
+		if($diferencia > 0){
+			switch(substr($uri, 0, $limite_inicial)){
+				case 'usuarios':
+				case 'centros_educativos':
+					$uri_ayuda = str_replace('/', '-', substr($uri, 0, $limite_final));
+					break;
+				case 'estadisticas':
+					$uri_ayuda = str_replace('/', '-', $uri);
+					break;
+				case 'mapa':
+					$uri_ayuda = substr($uri, 0, $limite_inicial).'-'.(strpos($uri, 'departamento') ? 'departamento' : (strpos($uri, 'municipio') ? 'municipio' : ''));
+					break;
+			}
+		}
+		else{
+			$uri_ayuda = $uri;
+		}
+		return '#'.$uri_ayuda;
+	}
+}
+
 /* End of file funciones_helper.php */
 /* Location: ./application/helpers/funciones_helper.php */

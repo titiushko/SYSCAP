@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header">Modulo de Centros Educativos</h1>
+		<h1 class="well page-header"><i class="fa fa-university fa-fw"></i> Modulo de Centros Educativos</h1>
 	</div>
 </div>
 <div class="row">

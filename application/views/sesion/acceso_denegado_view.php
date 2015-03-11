@@ -17,7 +17,6 @@
 		?>
 		<title>SYSCAP</title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
-		<?= link_tag('resources/plugins/metis-menu/css/metis-menu.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
 		<?= link_tag('resources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
@@ -32,7 +31,6 @@
 		<![endif]-->
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/metis-menu/js/metis-menu.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	    <script type="text/javascript" src="<?= base_url(); ?>resources/js/funciones.js"></script>
@@ -106,11 +104,6 @@
 				</div>
 			</header>
 			<!--header end-->
-			<!-- **********************************************************************************************************************************************************
-			MAIN SIDEBAR MENU
-			*********************************************************************************************************************************************************** -->
-			<!--sidebar start-->
-			<!--sidebar end-->
 			<!-- **********************************************************************************************************************************************************
 			MAIN CONTENT
 			*********************************************************************************************************************************************************** -->

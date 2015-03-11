@@ -31,13 +31,11 @@
 		<![endif]-->
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/metis-menu/js/metis-menu.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	    <script type="text/javascript" src="<?= base_url(); ?>resources/js/funciones.js"></script>
 		<script type="text/javascript">
 			var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
-			var administrador = <?= $this->session->userdata('nombre_corto_rol') == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
 			var boton_menu = <?= $this->session->userdata('boton_menu') ? '\'TRUE\'' : '\'FALSE\''; ?>;
 			$(document).ready(function(){
 				$(".fa.fa-bars.tooltips").click(function(){
@@ -54,14 +52,8 @@
 				});
 			});
 			$(function(){
-
-				if(administrador == 'TRUE'){
-					if(boton_menu == 'TRUE'){
-						mostrar_ocultar_menu(true);
-					}
-					else{
-						mostrar_ocultar_menu(false);
-					}
+				if(boton_menu == 'TRUE'){
+					mostrar_ocultar_menu(true);
 				}
 				else{
 					mostrar_ocultar_menu(false);
@@ -82,8 +74,6 @@
 						"margin-top": "75px"
 					});
 				}
-
-
 			});
 			function mostrar_ocultar_menu(opcion){
 				if(opcion){
@@ -95,11 +85,9 @@
 					$('#footer').css({
 						'margin-left': '307px'
 					});
-
 					$('#sidebar').css({
 						'margin-left': '0'
 					});
-
 				}
 				else{
 					$('#sidebar > ul').hide();
@@ -113,17 +101,7 @@
 					$('#footer').css({
 						'margin-left': '0px'
 					});
-
-
 				}
-
-
-
-
-
-
-
-
 			}
 		</script>
 	</head>
@@ -135,11 +113,9 @@
 			<!--header start-->
 			<header class="header black-bg navbar-fixed-top">
 				<div class="sidebar-toggle-box">
-				<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 					<div id="toggle-syscap" class="btn btn-default">
 						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Mostrar/Ocultar Menú"></div>
 					</div>
-				<?php } ?>
 				</div>
 				<!--logo start-->
 				<div>
@@ -171,21 +147,26 @@
 			MAIN SIDEBAR MENU
 			*********************************************************************************************************************************************************** -->
 			<!--sidebar start-->
-			<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 			<aside>
 				<div id="sidebar"  class="nav-collapse">
 					<!-- sidebar menu start-->
 					<ul class="sidebar-menu" id="nav-accordion">
+					<?php if(uri_string(1) != 'ayuda'){ ?>
+						<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['inicio']; ?>" href="<?= base_url(); ?>inicio">
 								<i class="fa fa-home fa-fw"></i> Inicio
 							</a>
 						</li>
+						<?php } ?>
+						<?php if($this->session->userdata('nombre_corto_rol') != 'student'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_usuarios']; ?>" href="<?= base_url(); ?>usuarios">
 								<i class="fa fa-users fa-fw"></i> Modulo Usuarios
 							</a>
 						</li>
+						<?php } ?>
+						<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_centros_educativos']; ?>" href="<?= base_url(); ?>centros_educativos">
 								<i class="fa fa-university fa-fw"></i> Modulo Centros Educativos
@@ -214,12 +195,21 @@
 								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
 							</a>
 						</li>
-						<li><?= anchor_popup('ayuda/modulo/opcion', '<i class="fa fa-life-ring fa-fw"></i> Ayuda', array('width'=>'600', 'height'=>'800', 'left'=>'50', 'top'=>'50', 'toolbar'=>'yes')); ?></li>
+						<?php } ?>
+						<li class="sub-menu">
+							<?= anchor_popup('ayuda'.uri_ayuda(uri_string()), '<i class="fa fa-life-ring fa-fw"></i> Ayuda', array('width'=>'600', 'height'=>'800', 'left'=>'50', 'top'=>'50', 'toolbar'=>'yes')); ?>
+						</li>
+					<?php } else{ ?>
+						<li class="sub-menu">
+							<a class="enlace" onclick="javascript:window.close();">
+								<i class="fa fa-times"></i> Cerrar Ayuda
+							</a>
+						</li>
+					<?php } ?>
 					</ul>
 					<!-- sidebar menu end-->
 				</div>
 			</aside>
-			<?php } ?>
 			<!--sidebar end-->
 			<!-- **********************************************************************************************************************************************************
 			MAIN CONTENT
