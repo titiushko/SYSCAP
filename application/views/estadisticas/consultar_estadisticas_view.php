@@ -44,10 +44,17 @@
 				?>
 				<div class="row">
 					<div class="col-lg-12 text-center">
+					<?php if(@$resultado_estadistico){ ?>
 						<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
 						<button class="btn btn-success" onclick="document.formulario_imprimir.submit();"><i class="fa fa-print"></i> Imprimir</button>
 						<?php } ?>
 						<button class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</button>
+					<?php } else{ ?>
+						<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
+						<a class="btn btn-success" data-toggle="modal" href="#myModalErrorReport"><i class="fa fa-print"></i> Imprimir</a>
+						<?php } ?>
+						<a class="btn btn-success" data-toggle="modal" href="#myModalErrorReport"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+					<?php } ?>
 					</div>
 				</div>
 			</div>

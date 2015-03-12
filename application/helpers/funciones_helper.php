@@ -1,20 +1,20 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-/* Convierte todos los caracteres aplicables a entidades HTML. */
+/* Convierte todos los caracteres aplicables a entidades HTML */
 if(!function_exists('utf8')){
 	function utf8($cadena){
 		return htmlentities($cadena, ENT_COMPAT, 'UTF-8');
 	}
 }
 
-/* Convierte todos los caracteres aplicables a entidades HTML. */
+/* Convierte un String a formato de DUI */
 if(!function_exists('formato_dui')){
 	function formato_dui($dui){
 		return preg_match('/^\d{8}-\d$/', $dui) ? $dui : substr($dui, 0, 7).'-'.substr($dui, 8, 1);
 	}
 }
 
-/* Elimina caracteres especiales. */
+/* Elimina caracteres especiales */
 if(!function_exists('acentos')){
 	function acentos($cadena){
 		$cadena = trim($cadena);
@@ -59,6 +59,7 @@ if(!function_exists('acentos')){
 	}
 }
 
+/* Activa la opción seleccionada del menú */
 if(!function_exists('modulo_actual')){
 	function modulo_actual($modulo){
 		$listado_modulos = array('inicio'							=>	'',
@@ -70,7 +71,8 @@ if(!function_exists('modulo_actual')){
 		return $listado_modulos;
 	}
 }
-	
+
+/* Devuelve el titulo de la consulta estadística */
 if(!function_exists('listado_estadisticas')){
 	function listado_estadisticas($estadistica){
 		$nombres_estadisticas = array(1 => 'Usuarios por Modalidad de Capacitaci&oacute;n',
@@ -88,6 +90,7 @@ if(!function_exists('listado_estadisticas')){
 	}
 }
 
+/* Devuelve un ícono de notificación de: información, alerta o error */
 if(!function_exists('icono_notificacion')){
 	function icono_notificacion($notificacion){
 		$iconos = array('informacion' => '<span style="color: #428bca;"><i class="fa fa-info-circle"></i></span> ',
@@ -97,6 +100,7 @@ if(!function_exists('icono_notificacion')){
 	}
 }
 
+/* Devuelve el encabezado de los reportes */
 if(!function_exists('encabezado_reporte')){
 	function encabezado_reporte(){
 		$html = '<table align="center" border="0" width="100%">
@@ -118,6 +122,7 @@ if(!function_exists('encabezado_reporte')){
 	}
 }
 
+/* Devuelve 0 si un valor es NULL */
 if(!function_exists('limpiar_nulo')){
 	function limpiar_nulo($valor){
 		return is_null($valor) ? 0 : $valor;
@@ -144,6 +149,7 @@ if(!function_exists('estadistica_vacia')){
 	}
 }
 
+/* Convierte un Object a Array */
 if(!function_exists('objeto_a_vector')){
 	function objeto_a_vector($datos){
 		if(is_object($datos)){
@@ -158,6 +164,7 @@ if(!function_exists('objeto_a_vector')){
 	}
 }
 
+/* Genera el ancla de la ayuda dependiento en que lugar de SYSCAP se encuentre el usuario */
 if(!function_exists('uri_ayuda')){
 	function uri_ayuda($uri){
 		$uri_ayuda = '';
@@ -182,6 +189,30 @@ if(!function_exists('uri_ayuda')){
 			$uri_ayuda = $uri;
 		}
 		return '#'.$uri_ayuda;
+	}
+}
+
+/* Devuelve el HTML de los mensajes de notificación */
+if(!function_exists('mensaje_notificacion')){
+	function mensaje_notificacion($identificador, $titulo, $mensaje){
+		return '<div class="row">
+					<div class="col-lg-12">
+						<div class="modal fade" id="'.$identificador.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+										<h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>
+									</div>
+									<div class="modal-body">'.$mensaje.'</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>';
 	}
 }
 

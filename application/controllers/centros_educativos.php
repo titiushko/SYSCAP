@@ -29,10 +29,12 @@ class Centros_educativos extends MY_Controller{
 	public function mostrar($codigo_centro_educativo = NULL){
 		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
 		if($this->notificacion){
-			$datos['id_modal'] = 'myModal';
 			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.$codigo_centro_educativo).'\');"';
-			$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Centro Educativo';
-			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.';
+			$datos['notificaciones'] = mensaje_notificacion(
+				'myModal',
+				icono_notificacion('informacion').'Actualizaci&oacute;n de Centro Educativo',
+				'Se guardaron los cambios de '.utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.'
+			);
 			$this->notificacion = FALSE;
 		}
 		if(empty($datos['centro_educativo'])){

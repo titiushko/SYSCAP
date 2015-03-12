@@ -119,7 +119,7 @@
 				</div>
 				<!--logo start-->
 				<div>
-					<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
+					<?php if($this->session->userdata('nombre_corto_rol') == 'admin' && uri_string(1) != 'ayuda'){ ?>
 					<a class="logo" href="<?= base_url(); ?>inicio">
 					<?php } else{ ?>
 					<a class="logo">
@@ -255,26 +255,19 @@
 				<section class="wrapper">
 					<div id="page-wrapper">
 						<!-- Modal -->
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="modal fade" id="<?= @$id_modal; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-												<h4 class="modal-title" id="myModalLabel"><?= @$titulo_notificacion; ?></h4>
-											</div>
-											<div class="modal-body">
-												<?= @$mensaje_notificacion; ?>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php
+						if(!empty($notificaciones)){
+							if(is_array($notificaciones)){
+								foreach(@$notificaciones as $indice => $notificacion){
+									echo $notificacion;
+								}
+							}
+							else{
+								echo @$notificaciones;
+							}
+						}
+						?>
+						<!-- Modal End -->
 						<?php
 						if(isset($pagina)){
 							$this->load->view(@$pagina);

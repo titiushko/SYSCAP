@@ -32,12 +32,14 @@ class Usuarios extends MY_Controller{
 			if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
 				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
-			$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
+			$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Mostrar');
 			if($this->notificacion){
-				$datos['id_modal'] = 'myModal';
 				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');"';
-				$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario';
-				$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.';
+				$datos['notificaciones'] = mensaje_notificacion(
+					'myModal',
+					icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario',
+					'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.'
+				);
 				$this->notificacion = FALSE;
 			}
 			if(empty($datos['usuario'])){
@@ -55,15 +57,15 @@ class Usuarios extends MY_Controller{
 	public function modificar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
-				$datos = $this->datos_formulario_usuarios_view("Editar", $codigo_usuario);
+				$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Editar');
 				if($this->input->post('estado') == '1'){
 					if($this->input->post('grupo_campos') == 'datos_personales'){
 						$this->validaciones('datos_personales');
-						$datos = $this->datos_formulario_usuarios_view("Editar", $codigo_usuario);
+						$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Editar');
 					}
 					if($this->input->post('grupo_campos') == 'informacion_usuario'){
 						$this->validaciones('informacion_usuario');
-						$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
+						$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Recuperar Contraseña');
 					}
 					if($this->form_validation->run()){
 						$update_usuario = $this->input->post();
@@ -99,7 +101,7 @@ class Usuarios extends MY_Controller{
 	public function recuperar_contrasena($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
-				$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
+				$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Recuperar Contraseña');
 				if(empty($datos['usuario'])){
 					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
@@ -116,7 +118,7 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	private function datos_formulario_usuarios_view($operacion, $codigo_usuario){
+	private function datos_formulario_usuarios_view($codigo_usuario, $operacion = ''){
 		$validar_usuario = $this->usuarios_model->validar_usuario($codigo_usuario);
 		if(empty($validar_usuario)){
 			return NULL;
@@ -281,7 +283,7 @@ class Usuarios extends MY_Controller{
 				if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
 					$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 				}
-				$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
+				$datos = $this->datos_formulario_usuarios_view($codigo_usuario);
 				if(empty($datos['usuario'])){
 					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}

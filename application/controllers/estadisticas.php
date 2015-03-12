@@ -17,15 +17,21 @@ class Estadisticas extends MY_Controller{
 		}
 	}
 	
-	public function consulta($opcion = 1){
+	public function consulta($opcion = NULL){
 		$datos['pagina'] = 'estadisticas/consultar_estadisticas_view';
 		$datos['opcion_menu'] = modulo_actual('modulo_consultas_estadisticas');
 		if($this->validar_parametros($opcion)){
 			$datos['nombre_estadistica'] = listado_estadisticas($opcion);
 			$datos['estadistica'] = array($opcion => 'active');
-			$datos['id_modal'] = 'myModalChart';
-			$datos['titulo_notificacion'] = 'Estad&iacute;stica de '.$datos['nombre_estadistica'];
-			$datos['mensaje_notificacion'] = '<div id="morris-bar-chart-estadistica'.$opcion.'-2"></div>';
+			$datos['notificaciones'] = array(
+				mensaje_notificacion('myModalChart', 'Estad&iacute;stica de '.$datos['nombre_estadistica'], '<div id="morris-bar-chart-estadistica'.$opcion.'-2"></div>'),
+				mensaje_notificacion(
+					'myModalErrorReport',
+					icono_notificacion('error').'Error Reporte Estad&iacute;stica de '.$datos['nombre_estadistica'],
+					p('No se puede generar el reporte estad&iacute;stico sin resultados.').br().p('Por favor realice una consulta estad&iacute;stica.')
+				)
+			);
+			$datos['resultado_estadistico'] = FALSE;
 			switch($opcion){
 				case 1: // Usuarios por Modalidad de Capacitación
 					if($this->input->post()){
@@ -34,6 +40,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_01_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_01_view(), $datos);
@@ -51,6 +58,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_02_view($this->input->post('id_departamento'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_02_view(), $datos);
@@ -67,6 +75,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_03_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_03_view(), $datos);
@@ -85,6 +94,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_04_view($this->input->post('id_departamento'), $this->input->post('id_municipio'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_04_view(), $datos);
@@ -102,6 +112,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_01_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_01_view(), $datos);
@@ -120,6 +131,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_06_view($this->input->post('tipo_capacitado'), $this->input->post('id_departamento'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_06_view(), $datos);
@@ -139,6 +151,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_04_view($this->input->post('id_departamento'), $this->input->post('id_municipio'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_04_view(), $datos);
@@ -156,6 +169,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_03_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_03_view(), $datos);
@@ -171,6 +185,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('id_centro_educativo', 'Centro Educativo', 'trim|required');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_09_view($this->input->post('tipo_capacitado'), $this->input->post('id_centro_educativo'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_09_view(), $datos);
@@ -188,6 +203,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_10_view($this->input->post('tipo_capacitado'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
+							$datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_10_view(), $datos);
@@ -342,7 +358,7 @@ class Estadisticas extends MY_Controller{
 		return $datos;
 	}
 	
-	public function imprimir($opcion = 1){
+	public function imprimir($opcion = NULL){
 		if(!$this->session->userdata('dispositivo_movil')){
 			if($this->validar_parametros($opcion)){
 				switch($opcion){
@@ -429,7 +445,7 @@ class Estadisticas extends MY_Controller{
 		}
 	}
 	
-	public function exportar($opcion = 1){
+	public function exportar($opcion = NULL){
 		if($this->validar_parametros($opcion)){
 			$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
 			$pdf->setPrintHeader(FALSE);
