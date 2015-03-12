@@ -29,12 +29,25 @@ class Mapas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_departamento($codigo_departamento){
-		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
-								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
-								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
+		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)', array($codigo_departamento));
-		return $query->result()[0];
+								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)
+								   UNION
+								   SELECT \'Certificados\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)
+								   UNION
+								   SELECT \'Total\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)',
+								   array($codigo_departamento, $codigo_departamento, $codigo_departamento));
+		return $query->result();
 	}
 	
 	public function coordenadas_municipios($codigo_departamento){
@@ -68,12 +81,25 @@ class Mapas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_municipio($codigo_municipio){
-		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
-								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
-								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
+		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)', array($codigo_municipio));
-		return $query->result()[0];
+								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)
+								   UNION
+								   SELECT \'Certificados\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)
+								   UNION
+								   SELECT \'Total\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)',
+								   array($codigo_municipio, $codigo_municipio, $codigo_municipio));
+		return $query->result();
 	}
 	
 	public function coordenadas_centros_educativos($codigo_municipio){
@@ -98,12 +124,25 @@ class Mapas_model extends CI_Model{
 	}
 	
 	function cantidad_usuarios_centro_educativo($codigo_centro_educativo){
-		$query = $this->db->query('SELECT SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
-								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados,
-								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) total
+		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticaDepartamentoFecha
-								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo = ?', array($codigo_centro_educativo));
-		return $query->result()[0];
+								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_centro_educativo = ?
+								   UNION
+								   SELECT \'Certificados\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_centro_educativo = ?
+								   UNION
+								   SELECT \'Total\' tipos_capacitados,
+								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
+								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
+								   FROM V_EstadisticaDepartamentoFecha
+								   WHERE nota_examen_calificacion >= 7.00 AND id_centro_educativo = ?',
+								   array($codigo_centro_educativo, $codigo_centro_educativo, $codigo_centro_educativo));
+		return $query->result();
 	}
 }
 
