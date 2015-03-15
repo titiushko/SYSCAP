@@ -29,7 +29,25 @@
 			<div class="panel-heading">Modulo de Consultas Estadísticas</div>
 			<div class="panel-body">
 				<p>Consultas estadísticas de usuarios por diferentes tipos de búsqueda.</p>
-				Entrar al <?= anchor(base_url('estadisticas/consulta/1'), '<i class="fa fa-bar-chart-o fa-fw"></i> Modulo de Consultas Estadísticas', 'class="btn btn-primary btn-sm"'); ?>
+				Entrar al 
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					<i class="fa fa-bar-chart-o fa-fw"></i> Modulo de Consultas Estadísticas <i class="caret"></i>
+					</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><?= anchor(base_url('estadisticas/consulta/1'), 'Usuarios por Modalidad de Capacitación'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/2'), 'Usuarios por Departamento y Rango de Fechas'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/3'), 'Total de Usuarios por Departamento y Rango de Fechas'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/4'), 'Usuarios por Departamento, Municipio y Rango de Fechas'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/5'), 'Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/6'), 'Usuarios por Tipo de Capacitados, Departamento y Fecha'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/7'), 'Usuarios por Tipo de Capacitados, Departamento y Municipio'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/8'), 'Usuarios por Departamento, Tipo de Capacitados y Fecha'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/9'), 'Usuarios por Tipo de Capacitados y Centro Educativo'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/10'), 'Usuarios a Nivel Nacional'); ?></li>
+						<li><?= anchor(base_url('estadisticas/consulta/11'), 'Usuarios por Grado Digital'); ?></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
