@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -55,16 +54,13 @@
 						<tbody>
 							<?php
 							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
-								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'Total'){
 							?>
 							<tr>
 								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
 								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
 								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>

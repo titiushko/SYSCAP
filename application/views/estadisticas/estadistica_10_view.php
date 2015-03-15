@@ -48,8 +48,6 @@ $formulario_exportar = array(
 );
 $campos_ocultos_formulario = array(
 	'tipo_de_capacitado'	=> set_value('tipo_de_capacitado', @$campos['tipo_capacitado']),
-	'codigo_departamento'	=> set_value('codigo_departamento', @$campos['id_departamento']),
-	'codigo_municipio'		=> set_value('codigo_municipio', @$campos['id_municipio']),
 	'fecha_1'				=> set_value('fecha_1', @$campos['fecha1']),
 	'fecha_2'				=> set_value('fecha_2', @$campos['fecha2'])
 );
@@ -117,7 +115,7 @@ $campos_ocultos_formulario = array(
 							<?php
 							$usuarios = 1;
 							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
-								if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+								if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 							?>
 							<tr>
 								<td><?= $usuarios++; ?></td>
@@ -126,10 +124,7 @@ $campos_ocultos_formulario = array(
 								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
 								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $usuarios++; ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>

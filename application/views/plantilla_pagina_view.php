@@ -148,7 +148,7 @@
 			*********************************************************************************************************************************************************** -->
 			<!--sidebar start-->
 			<aside>
-				<div id="sidebar"  class="nav-collapse">
+				<div id="sidebar" class="nav-collapse">
 					<!-- sidebar menu start-->
 					<ul class="sidebar-menu" id="nav-accordion">
 					<?php if(uri_string(1) != 'ayuda'){ ?>
@@ -187,7 +187,7 @@
 								<li class="<?= @$estadistica[8]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/8">Departamento, Tipo de Capacitados y Fecha</a></li>
 								<li class="<?= @$estadistica[9]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/9">Tipo de Capacitados y Centro Educativo</a></li>
 								<li class="<?= @$estadistica[10]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/10">Nivel Nacional</a></li>
-								<!--<li class="<?= @$estadistica[11]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/11">Grado Digital</a></li>-->
+								<li class="<?= @$estadistica[11]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/11">Grado Digital</a></li>
 							</ul>
 						</li>
 						<li class="sub-menu">

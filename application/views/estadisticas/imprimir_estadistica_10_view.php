@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -60,7 +59,7 @@
 							<?php
 							$usuarios = 1;
 							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
-								if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+								if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 							?>
 							<tr>
 								<td><?= $usuarios++; ?></td>
@@ -69,10 +68,7 @@
 								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
 								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $usuarios++; ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>

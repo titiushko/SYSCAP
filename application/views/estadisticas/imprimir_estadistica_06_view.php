@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -62,7 +61,7 @@
 							<?php
 							$estaditicas = 1;
 							foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
-								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'TOTAL'){
+								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'Total'){
 							?>
 							<tr>
 								<td><?= $estaditicas++; ?></td>
@@ -70,10 +69,7 @@
 								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
 								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $estaditicas++; ?></td>
 								<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>

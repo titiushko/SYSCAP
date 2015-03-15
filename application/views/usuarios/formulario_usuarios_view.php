@@ -94,6 +94,28 @@ $correo_electronico_usuario = array(
 	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
+$nombre_centro_educativo = array (
+	'name'			=> 'nombre_centro_educativo',
+	'id'			=> 'nombre_centro_educativo',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> utf8(set_value('nombre_centro_educativo', $this->centros_educativos_model->nombre_centro_educativo(@$usuario[0]->id_centro_educativo))),
+	'onpaste'		=> 'return false',
+	'type'			=> 'text',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'placeholder'	=> 'Buscar Centro Educativo',
+	'class'			=> 'form-control',
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
+);
+$codigo_centro_educativo = array (
+	'name'			=> 'id_centro_educativo',
+	'id'			=> 'id_centro_educativo',
+	'value'			=> set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo),
+	'type'			=> 'hidden',
+	'required'		=> 'required',
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
+);
 $direccion_usuario = array(
 	'name'		=>	'direccion_usuario',
 	'id'		=>	'direccion_usuario',
@@ -196,7 +218,9 @@ $modalidad_usuario = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Centro Educativo:'); ?>
-										<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_input($nombre_centro_educativo); ?>
+										<?= form_input($codigo_centro_educativo); ?>
+										<div id="resultado-centro_educativo"></div>
 										<?= form_error('id_centro_educativo'); ?>
 									</div>
 								</div>
@@ -369,24 +393,54 @@ $modalidad_usuario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$('#data-tables-certificaciones_usuario').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
-		"oLanguage":		{"sEmptyTable": "El usuario no tiene certificaciones."}
+	$(document).ready(function() {
+		$('#data-tables-certificaciones_usuario').dataTable({
+			"searching":		false,
+			"scrollY":			"200px",
+			"scrollCollapse":	true,
+			"info":				false,
+			"ordering":			false,
+			"paging":			false,
+			"oLanguage":		{"sEmptyTable": "El usuario no tiene certificaciones."}
+		});
+		$('#data-tables-calificaciones_usuario').dataTable({
+			"searching":		false,
+			"scrollY":			"200px",
+			"scrollCollapse":	true,
+			"info":				false,
+			"ordering":			false,
+			"paging":			false,
+			"oLanguage":		{"sEmptyTable": "El usuario no a recibido cursos."}
+		});
+		$("#nombre_centro_educativo").bind('keyup focusin', function(evento){
+			if(evento.which != 27){
+				var v_nombre_centro_educativo = $(this).val();
+				$.post('<?= base_url('index.php/ajax/lista_centros_educativos'); ?>', {nombre_centro_educativo: v_nombre_centro_educativo.length > 0 ? v_nombre_centro_educativo : '%'}, function(resultado){
+					if(resultado != ''){
+						$('#resultado-centro_educativo').show();
+						var centros_educativos = jQuery.parseJSON(resultado);
+						var clase = centros_educativos.length < 5 ? "contenedor-centro_educativo-1" : "contenedor-centro_educativo-2";
+						$('#resultado-centro_educativo').empty();
+						$("#resultado-centro_educativo").append($("<div></div>").attr({"class": clase}));
+						$.each(centros_educativos, function(respuesta, centro_educativo){
+							$("." + clase).append($("<p></p>").attr({"onclick": "seleccionar_centro_educativo('" + centro_educativo.id_centro_educativo + "', '" + centro_educativo.nombre_centro_educativo + "');"}).text(centro_educativo.nombre_centro_educativo));
+						});
+					}
+					else{
+						$('#resultado-centro_educativo').hide();
+					}
+				});
+			}
+			else{
+				$(this).val('');
+				$('#id_centro_educativo').val('');
+				$('#resultado-centro_educativo').hide();
+			}
+		});
 	});
-	$('#data-tables-calificaciones_usuario').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
-		"oLanguage":		{"sEmptyTable": "El usuario no a recibido cursos."}
-	});
-});
+	function seleccionar_centro_educativo(codigo, nombre){
+		$('#id_centro_educativo').val(codigo);
+		$('#nombre_centro_educativo').val(nombre);
+		$('#resultado-centro_educativo').hide();
+	}
 </script>

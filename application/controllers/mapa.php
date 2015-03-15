@@ -57,7 +57,7 @@ class Mapa extends MY_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -85,7 +85,7 @@ class Mapa extends MY_Controller{
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -126,7 +126,7 @@ class Mapa extends MY_Controller{
 	private function tabla($cantidad_usuarios){
 		$html = '<table border="1"><thead><tr><th></th><th colspan="2">Modalidad de Capacitaci&oacute;n</th></tr><tr><th rowspan="2">Tipo de Capacitado</th><th>Tutorizados</th><th>Autoformaci&oacute;n</th></tr></thead><tbody>';
 		foreach($cantidad_usuarios as $cantidad){
-			if($cantidad->tipos_capacitados != 'TOTAL'){
+			if($cantidad->tipos_capacitados != 'Total'){
 				$html .= '<tr><th>'.utf8($cantidad->tipos_capacitados).'</th><td>'.limpiar_nulo($cantidad->tutorizados).'</td><td>'.limpiar_nulo($cantidad->autoformacion).'</td></tr>';
 			}
 			else{

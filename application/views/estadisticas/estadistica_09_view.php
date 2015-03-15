@@ -110,16 +110,13 @@ $campos_ocultos_formulario = array(
 						<tbody>
 							<?php
 							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
-								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'Total'){
 							?>
 							<tr>
 								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
 								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
 								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>

@@ -34,26 +34,34 @@ CREATE TABLE IF NOT EXISTS niveles_estudios(
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de niveles de estudios. Los registros de está tabla se obtendrán de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS profesiones(
-  id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesión. Los valores de esté campo se obtendrán del campo <cod_profesion> de Moodle usando ETL.',
-  nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesión. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
-  PRIMARY KEY(id_profesion)
+ id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesión. Los valores de esté campo se obtendrán del campo <cod_profesion> de Moodle usando ETL.',
+ nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesión. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
+ PRIMARY KEY(id_profesion)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
 
-CREATE TABLE IF NOT EXISTS matriculas(
-	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  una matricula. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
-	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece una matricula. Los valores de esté campo se obtendrán del campo <instanceid> de Moodle usando ETL.',
-	PRIMARY KEY(id_matricula)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las matriculas de usuarios con mdl_course. Los registros de está tabla se obtendrán de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
+CREATE TABLE IF NOT EXISTS cursos_categorias(
+ id_curso_categoria BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la categoría de cursos. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+ nombre_curso_categoria VARCHAR(255) NOT NULL COMMENT 'Nombre completo de la categoría de cursos. Los valores de esté campo se obtendrán del campo <name> de Moodle usando ETL.',
+ padre_curso_categoria BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la categoría padre a la que pertenece una categoría. Los valores de esté campo se obtendrán del campo <parent> de Moodle usando ETL.',
+ PRIMARY KEY (id_curso_categoria)
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información las categorías de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course_categories> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS cursos(
-	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un curso. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un curso. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+	id_curso_categoria BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la categoría a la que pertenece un curso. Los valores de esté campo se obtendrán del campo <category> de Moodle usando ETL.',
 	nombre_completo_curso VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un curso. Los valores de esté campo se obtendrán del campo <fullname> de Moodle usando ETL.',
 	nombre_corto_curso VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un curso. Los valores de esté campo se obtendrán del campo <shortname> de Moodle usando ETL.',
 	PRIMARY KEY(id_curso)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información central de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
+CREATE TABLE IF NOT EXISTS matriculas(
+	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de una matricula. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece una matricula. Los valores de esté campo se obtendrán del campo <instanceid> de Moodle usando ETL.',
+	PRIMARY KEY(id_matricula)
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las matriculas de usuarios con mdl_course. Los registros de está tabla se obtendrán de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
+
 CREATE TABLE IF NOT EXISTS examenes(
-	id_examen BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un examen. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+	id_examen BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de un examen. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece un examen. Los valores de esté campo se obtendrán del campo <course> de Moodle usando ETL.',
 	nombre_examen VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un examen. Los valores de esté campo se obtendrán del campo <name> de Moodle usando ETL.',
 	PRIMARY KEY(id_examen)
@@ -152,8 +160,14 @@ FOREIGN KEY(id_municipio) REFERENCES municipios(id_municipio);
 ALTER TABLE departamentos ADD CONSTRAINT fk_departamentos_mapas
 FOREIGN KEY(id_mapa) REFERENCES mapas(id_mapa);
 
+ALTER TABLE cursos_categorias ADD CONSTRAINT fk_cursos_categorias_cursos_categorias
+FOREIGN KEY(padre_curso_categoria) REFERENCES cursos_categorias(id_curso_categoria);
+
+ALTER TABLE cursos ADD CONSTRAINT fk_cursos_cursos_categorias
+FOREIGN KEY(id_curso_categoria) REFERENCES cursos_categorias(id_curso_categoria);
+
 ALTER TABLE matriculas ADD CONSTRAINT fk_matriculas_cursos
-FOREIGN KEY(id_curso) REFERENCES cursos(id_curso) ON DELETE RESTRICT ON UPDATE RESTRICT;
+FOREIGN KEY(id_curso) REFERENCES cursos(id_curso);
 
 ALTER TABLE examenes ADD CONSTRAINT fk_examenes_cursos
 FOREIGN KEY(id_curso) REFERENCES cursos(id_curso);

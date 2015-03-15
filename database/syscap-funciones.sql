@@ -87,14 +87,14 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
-CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(300)
+CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(305)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'Función que devuelve el nombre completo de un usuario.'
+COMMENT 'Función que devuelve el nombre completo (todos los nombres y todos los apellidos) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
-	DECLARE v_nombre_completo_usuario VARCHAR(300);
+	DECLARE v_nombre_completo_usuario VARCHAR(305);
 	DECLARE v_nombres_usuario VARCHAR(100);
 	DECLARE v_apellido1_usuario VARCHAR(100);
 	DECLARE v_apellido2_usuario VARCHAR(100);
@@ -137,12 +137,12 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
-CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(300)
+CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(150)
 DETERMINISTIC
 READS SQL DATA
 COMMENT 'Función que devuelve el nombre de un centro educativo.'
 BEGIN
-	DECLARE v_nombre_centro_educativo VARCHAR(300);
+	DECLARE v_nombre_centro_educativo VARCHAR(150);
 	DECLARE v_termina INT DEFAULT FALSE;
 	
 	DECLARE c_nombre_centro_educativo CURSOR FOR
@@ -171,34 +171,43 @@ DELIMITER ;
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP FUNCTION IF EXISTS acentos $$
-CREATE FUNCTION acentos(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
-COMMENT 'Función que corrige los problemas de tildes.'
+DROP FUNCTION IF EXISTS F_NombreCompactoUsuario $$
+CREATE FUNCTION F_NombreCompactoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(205)
+NOT DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'Función que devuelve el nombre compacto (un nombre y un apellido) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
-	DECLARE v_cadena CHAR(255);
+	DECLARE v_nombre_compacto_usuario VARCHAR(205);
+	DECLARE v_nombres_usuario VARCHAR(100);
+	DECLARE v_apellido1_usuario VARCHAR(100);
+	DECLARE v_termina INT DEFAULT FALSE;
 	
-	SET v_cadena = p_cadena;
-	SET v_cadena = REPLACE(v_cadena, 'Ã', 'Á');
-	SET v_cadena = REPLACE(v_cadena, 'ã¡', 'á');
-	SET v_cadena = REPLACE(v_cadena, 'ã©', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'í¨', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'í‰', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'í¨', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'ã¬', 'í');
-	SET v_cadena = REPLACE(v_cadena, 'ã', 'í');
-	SET v_cadena = REPLACE(v_cadena, 'ã²', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'ã³', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'í³', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'í²', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'íº', 'ú');
-	SET v_cadena = REPLACE(v_cadena, 'í¹', 'ú');
-	SET v_cadena = REPLACE(v_cadena, 'ã‘', 'ñ');
-	SET v_cadena = REPLACE(v_cadena, 'í‘', 'ñ');
-	SET v_cadena = REPLACE(v_cadena, 'í±', 'ñ');
-	SET v_cadena = REPLACE(v_cadena, 'ã±', 'ñ');
+	DECLARE c_nombre_compacto_usuario CURSOR FOR
+		SELECT
+			IF(LOCATE(' ', nombres_usuario) > 0, SUBSTRING(nombres_usuario, LOCATE(' ', nombres_usuario) + 1), nombres_usuario) nombres_usuario,
+			IF(LOCATE(' ', apellido1_usuario) > 0, SUBSTRING(apellido1_usuario, LOCATE(' ', apellido1_usuario) + 1), apellido1_usuario) apellido1_usuario
+		FROM usuarios
+		WHERE id_usuario = p_codigo_usuario;
 	
-	RETURN v_cadena;
-END$$
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_compacto_usuario;
+	recorre_cursor: LOOP
+		FETCH c_nombre_compacto_usuario
+		INTO v_nombres_usuario, v_apellido1_usuario;
+		
+		SET v_nombre_compacto_usuario = (SELECT CONCAT(v_nombres_usuario, ' ', v_apellido1_usuario));
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_compacto_usuario;
+	
+	RETURN v_nombre_compacto_usuario;
+END;
+$$
 DELIMITER ;

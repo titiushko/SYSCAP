@@ -125,7 +125,7 @@ $campos_ocultos_formulario = array(
 							<?php
 							$estaditicas = 1;
 							foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
-								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'TOTAL'){
+								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'Total'){
 							?>
 							<tr>
 								<td><?= $estaditicas++; ?></td>
@@ -133,10 +133,7 @@ $campos_ocultos_formulario = array(
 								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
 								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $estaditicas++; ?></td>
 								<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>

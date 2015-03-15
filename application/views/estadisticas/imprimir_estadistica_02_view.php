@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -59,7 +58,7 @@
 							<?php
 							$cantidades = 1;
 							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
-								if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+								if($cantidad_municipio->nombre_municipio != 'Total'){
 							?>
 							<tr>
 								<td><?= $cantidades; ?></td>
@@ -67,10 +66,7 @@
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
 								<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>

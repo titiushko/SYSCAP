@@ -25,7 +25,7 @@ $lang['db_table_name_required'] = 'Un nombre de tabla es necesaria para la opera
 $lang['db_column_name_required'] = 'Un nombre de columna es necesaria para la operación.';
 $lang['db_column_definition_required'] = 'Una definición de columna es necesaria para la operación.';
 $lang['db_unable_to_set_charset'] = 'No se puede establecer el juego de caracteres de la conexión cliente: %s';
-$lang['db_error_heading'] = 'Se produjo un error en la base de datos';
+$lang['db_error_heading'] = 'Se Produjo un Error en la Base de Datos';
 
 /* End of file db_lang.php */
 /* Location: ./system/language/spanish/db_lang.php */

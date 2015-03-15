@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header">Inicio</h1>
+		<h1 class="well page-header"><i class="fa fa-home fa-fw"></i> Inicio</h1>
 	</div>
 </div>
 <div class="row">

@@ -11,7 +11,7 @@ class Mapas_model extends CI_Model{
 								   mapas.latitud_mapa latitud_mapa,
 								   departamentos.id_departamento id_departamento,
 								   NULL nombre_municipio,
-								   acentos(departamentos.nombre_departamento) nombre_departamento,
+								   departamentos.nombre_departamento nombre_departamento,
 								   NULL nombre_centro_educativo
 								   FROM mapas INNER JOIN departamentos ON mapas.id_mapa = departamentos.id_mapa
 								   INNER JOIN municipios ON mapas.id_mapa = municipios.id_mapa');
@@ -55,8 +55,8 @@ class Mapas_model extends CI_Model{
 								   mapas.longitud_mapa longitud_mapa,
 								   mapas.latitud_mapa latitud_mapa,
 								   municipios.id_municipio id_municipio,
-								   acentos(municipios.nombre_municipio) nombre_municipio,
-								   acentos(departamentos.nombre_departamento) nombre_departamento,
+								   municipios.nombre_municipio nombre_municipio,
+								   departamentos.nombre_departamento nombre_departamento,
 								   NULL nombre_centro_educativo
 								   FROM mapas INNER JOIN municipios ON mapas.id_mapa = municipios.id_mapa
 								   INNER JOIN departamentos ON departamentos.id_departamento = municipios.id_departamento
@@ -107,10 +107,10 @@ class Mapas_model extends CI_Model{
 								   mapas.longitud_mapa longitud_mapa,
 								   mapas.latitud_mapa latitud_mapa,
 								   centros_educativos.id_centro_educativo id_centro_educativo,
-								   acentos(centros_educativos.nombre_centro_educativo) nombre_centro_educativo,
-								   acentos(municipios.nombre_municipio) nombre_municipio,
+								   centros_educativos.nombre_centro_educativo nombre_centro_educativo,
+								   municipios.nombre_municipio nombre_municipio,
 								   departamentos.id_departamento id_departamento,
-								   acentos(departamentos.nombre_departamento) nombre_departamento
+								   departamentos.nombre_departamento nombre_departamento
 								   FROM mapas INNER JOIN centros_educativos ON mapas.id_mapa = centros_educativos.id_mapa
 								   INNER JOIN municipios ON centros_educativos.id_municipio = municipios.id_municipio
 								   INNER JOIN departamentos ON centros_educativos.id_departamento = departamentos.id_departamento

@@ -43,14 +43,14 @@ class Usuarios extends MY_Controller{
 				$this->notificacion = FALSE;
 			}
 			if(empty($datos['usuario'])){
-				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+				$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
 			}
 		}
 		else{
-			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -71,7 +71,7 @@ class Usuarios extends MY_Controller{
 						$update_usuario = $this->input->post();
 						if($this->input->post('contrasena_usuario'))
 							$update_usuario['contrasena_usuario'] = md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle'));
-						unset($update_usuario['estado'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
+						unset($update_usuario['estado'], $update_usuario['nombre_centro_educativo'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 						$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
 						$this->notificacion = TRUE;
 						$this->mostrar($codigo_usuario);
@@ -82,7 +82,7 @@ class Usuarios extends MY_Controller{
 				}
 				else{
 					if(empty($datos['usuario'])){
-						show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+						$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 					}
 					else{
 						$this->load->view('plantilla_pagina_view', $datos);
@@ -94,7 +94,7 @@ class Usuarios extends MY_Controller{
 			}
 		}
 		else{
-			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -103,7 +103,7 @@ class Usuarios extends MY_Controller{
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
 				$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Recuperar Contraseña');
 				if(empty($datos['usuario'])){
-					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+					$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 				else{
 					$this->load->view('plantilla_pagina_view', $datos);
@@ -114,7 +114,7 @@ class Usuarios extends MY_Controller{
 			}
 		}
 		else{
-			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -129,7 +129,6 @@ class Usuarios extends MY_Controller{
 				$datos['operacion'] = $operacion;
 				$datos['pagina'] = $this->session->userdata('nombre_corto_rol') != 'admin' ? 'usuarios/usuarios_view' : 'usuarios/formulario_usuarios_view';
 				$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-				$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 				$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 				$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 			}
@@ -226,7 +225,7 @@ class Usuarios extends MY_Controller{
 			$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
-			show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -285,14 +284,14 @@ class Usuarios extends MY_Controller{
 				}
 				$datos = $this->datos_formulario_usuarios_view($codigo_usuario);
 				if(empty($datos['usuario'])){
-					show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+					$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 				else{
 					$this->load->view('usuarios/imprimir_usuarios_view', $datos);
 				}
 			}
 			else{
-				show_404(current_url(), TRUE, utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
+				$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 		}
 		else{

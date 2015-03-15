@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -64,7 +63,7 @@
 							<?php
 							$centros_educativos = 1;
 							foreach($usuarios_departamento_municipio as $usuario_departamento_municipio){
-								if($usuario_departamento_municipio->nombre_centro_educativo != 'TOTAL'){
+								if($usuario_departamento_municipio->nombre_centro_educativo != 'Total'){
 							?>
 							<tr>
 								<td><?= $centros_educativos++; ?></td>
@@ -72,10 +71,7 @@
 								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
 								<td><?= $usuario_departamento_municipio->certificados; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<td style="opacity: 0.0;"><?= $centros_educativos; ?></td>
 								<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>

@@ -41,6 +41,9 @@
 				if(uri_string() == 'estadisticas/consulta/10'){
 					$this->load->view('estadisticas/estadistica_10_view', $datos);
 				}
+				if(uri_string() == 'estadisticas/consulta/11'){
+					$this->load->view('estadisticas/estadistica_11_view', $datos);
+				}
 				?>
 				<div class="row">
 					<div class="col-lg-12 text-center">

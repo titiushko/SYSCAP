@@ -247,6 +247,16 @@
 						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.div('Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
+						
+						echo heading(anchor(current_url().'#estadisticas-consulta-11', 'Estadística de Usuarios por Grado Digital', 'name="estadisticas-consulta-11"'), 3).br();
+						echo ol(array(
+						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Grado Digital').' del sub menú del módulo de consultas estadísticas.',
+						'Seleccionar una categoría de grado digital de la lista desplegable Grado Digital, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.div('Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'SYSCAP mostrará el resultado de la consulta estadística.',
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.div('Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						)).br();
+						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
+						
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Generar Reporte Estadístico', 'name="estadisticas-generar_reporte"'), 3).br();
 						echo heading('Imprimir Consulta Estadística.', 4);
 						echo ol(array(

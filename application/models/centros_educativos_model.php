@@ -7,7 +7,7 @@ class Centros_educativos_model extends CI_Model{
 	
 	function lista_centros_educativos(){
 		$lista_centros_educativos[''] = '';
-		$query = $this->db->select('id_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo');
+		$query = $this->db->select('id_centro_educativo, nombre_centro_educativo nombre_centro_educativo');
 		$query = $this->db->order_by('nombre_centro_educativo', 'asc');
 		$query = $this->db->get('centros_educativos');
 		foreach($query->result() as $centro_educativo){
@@ -17,20 +17,20 @@ class Centros_educativos_model extends CI_Model{
 	}
 	
 	function centros_educativos(){
-		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo, id_departamento, id_municipio');
+		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, nombre_centro_educativo nombre_centro_educativo, id_departamento, id_municipio');
 		$query = $this->db->get('centros_educativos');
 		return $query->result();
 	}
 	
 	function centro_educativo($codigo_centro_educativo){
-		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, acentos(nombre_centro_educativo) nombre_centro_educativo, id_departamento, id_municipio');
+		$query = $this->db->select('id_centro_educativo, codigo_centro_educativo, nombre_centro_educativo nombre_centro_educativo, id_departamento, id_municipio');
 		$query = $this->db->where('id_centro_educativo', $codigo_centro_educativo);
 		$query = $this->db->get('centros_educativos');
 		return $query->result();
 	}
 	
 	function nombre_centro_educativo($codigo_centro_educativo){
-		$query = $this->db->query('SELECT acentos(F_NombreCentroEducativo(?)) nombre_centro_educativo', array($codigo_centro_educativo));
+		$query = $this->db->query('SELECT F_NombreCentroEducativo(?) nombre_centro_educativo', array($codigo_centro_educativo));
 		if($query->row())
 			return utf8($query->result()[0]->nombre_centro_educativo);
 		else
@@ -81,7 +81,7 @@ class Centros_educativos_model extends CI_Model{
 					$nombre_certificacion = ', (CASE WHEN c_nombre_completo_curso LIKE \'Examen%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso) + 1) ELSE c_nombre_completo_curso END) certificacion_usuario';
 			}
 		}
-		$query = $this->db->query('SELECT DISTINCT u_id_usuario id_usuario, acentos(F_NombreCompletoUsuario(u_id_usuario)) nombre_completo_usuario
+		$query = $this->db->query('SELECT DISTINCT u_id_usuario id_usuario, F_NombreCompletoUsuario(u_id_usuario) nombre_completo_usuario
 								  '.$nombre_certificacion.'
 								  FROM V_UsuariosCursosExamenesCalificaciones
 								  WHERE u_id_centro_educativo = ?

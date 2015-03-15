@@ -105,17 +105,14 @@ $campos_ocultos_formulario = array(
 						<tbody>
 							<?php
 							foreach($modalidades_capacitados as $modalidad_capacitado){
-								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+								if($modalidad_capacitado->tipos_capacitados != 'Total'){
 							?>
 							<tr>
 								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
 								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
 								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
 								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
