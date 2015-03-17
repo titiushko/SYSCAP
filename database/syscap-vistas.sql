@@ -29,23 +29,23 @@ SELECT
 	c.nombre_completo_curso c_nombre_completo_curso,
     c.nombre_corto_curso c_nombre_corto_curso
 FROM
-	usuarios u LEFT JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
-	LEFT JOIN examenes e ON(ec.id_examen = e.id_examen)
-	LEFT JOIN cursos c ON(e.id_curso = c.id_curso)
-	LEFT JOIN tipos_usuarios tu ON(u.id_tipo_usuario = tu.id_tipo_usuario)
-	LEFT JOIN profesiones p ON(u.id_profesion = p.id_profesion)
-	LEFT JOIN niveles_estudios ne ON(u.id_nivel_estudio = ne.id_nivel_estudio)
-	LEFT JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo)
-    LEFT JOIN departamentos d ON(u.id_departamento = d.id_departamento)
-    LEFT JOIN municipios m ON(u.id_municipio = m.id_municipio);
+	usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
+	LEFT JOIN cursos c ON e.id_curso = c.id_curso
+	LEFT JOIN tipos_usuarios tu ON u.id_tipo_usuario = tu.id_tipo_usuario
+	LEFT JOIN profesiones p ON u.id_profesion = p.id_profesion
+	LEFT JOIN niveles_estudios ne ON u.id_nivel_estudio = ne.id_nivel_estudio
+	LEFT JOIN centros_educativos ce ON u.id_centro_educativo = ce.id_centro_educativo
+    LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
+    LEFT JOIN municipios m ON u.id_municipio = m.id_municipio;
 $$
 DELIMITER ;
 
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP VIEW IF EXISTS V_EstadisticaDepartamentoFecha $$
-CREATE VIEW V_EstadisticaDepartamentoFecha AS
+DROP VIEW IF EXISTS V_Estadisticas $$
+CREATE VIEW V_Estadisticas AS
 SELECT
 	F_NombreCompletoUsuario(u.id_usuario) nombre_usuario,
 	ec.nota_examen_calificacion nota_examen_calificacion,
@@ -59,10 +59,32 @@ SELECT
 	m.nombre_municipio nombre_municipio,
 	ce.id_centro_educativo id_centro_educativo,
 	ce.nombre_centro_educativo nombre_centro_educativo
-FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
-	JOIN examenes e ON(ec.id_examen = e.id_examen)
-	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
-	JOIN municipios m ON(u.id_municipio = m.id_municipio)
-	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo);
+FROM usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
+	LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
+	LEFT JOIN municipios m ON u.id_municipio = m.id_municipio
+	LEFT JOIN centros_educativos ce ON u.id_centro_educativo = ce.id_centro_educativo;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP VIEW IF EXISTS V_EstadisticasGradoDigital $$
+CREATE VIEW V_EstadisticasGradoDigital AS
+SELECT
+	IF(c.nombre_completo_curso LIKE 'Curso%', 'Capacitados', IF(c.nombre_completo_curso LIKE '%Certificaci%', 'Certificados', c.nombre_completo_curso)) tipo_capacitado,
+	u.modalidad_usuario,
+	IF(cc.padre_curso_categoria = 26, 1, IF(cc.padre_curso_categoria = 23, 2, IF(cc.padre_curso_categoria = 24, 3, IF(cc.padre_curso_categoria = 25, 4, cc.padre_curso_categoria)))) grado_digital,
+	ec.fecha_examen_calificacion,
+	cc.nombre_curso_categoria,
+	c.nombre_completo_curso
+FROM usuarios u
+	LEFT JOIN roles_asignados ra ON u.id_usuario = ra.id_usuario
+	LEFT JOIN matriculas m ON ra.id_matricula = m.id_matricula
+	LEFT JOIN cursos c ON m.id_curso = c.id_curso
+	LEFT JOIN cursos_categorias cc ON c.id_curso_categoria = cc.id_curso_categoria
+	LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+WHERE ec.nota_examen_calificacion > 7.00;
 $$
 DELIMITER ;

@@ -123,19 +123,19 @@ $campos_ocultos_formulario = array(
 						</thead>
 						<tbody>
 							<?php
-							$estaditicas = 1;
+							$indice = 1;
 							foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
 								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $estaditicas++; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($estaditica_departamento_tipo_fecha->nombre_municipio); ?></td>
 								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
 								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $estaditicas++; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
 								<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
 								<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>

@@ -15,7 +15,7 @@ $fecha = array(
 	'required'		=> 'required',
 	'class'			=> 'form-control'
 );
-$lista_grados_digitales =  array(0 => '', 26 => 1, 23 => 2, 24 => 3, 25 => 4);
+$lista_grados_digitales =  array('', 1, 2, 3, 4);
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
@@ -112,16 +112,16 @@ $campos_ocultos_formulario = array(
 						<tbody>
 							<?php
 							foreach($usuarios_grado_digital as $usuario_grado_digital){
-								if($usuario_grado_digital->tipos_capacitados != 'Total'){
+								if($usuario_grado_digital->tipo_capacitado != 'Total'){
 							?>
 							<tr>
-								<th><?= utf8($usuario_grado_digital->tipos_capacitados); ?></th>
+								<th><?= utf8($usuario_grado_digital->tipo_capacitado); ?></th>
 								<td><?= limpiar_nulo($usuario_grado_digital->tutorizados); ?></td>
 								<td><?= limpiar_nulo($usuario_grado_digital->autoformacion); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<th><?= bold(utf8($usuario_grado_digital->tipos_capacitados)); ?></th>
+								<th><?= bold(utf8($usuario_grado_digital->tipo_capacitado)); ?></th>
 								<td><?= bold(limpiar_nulo($usuario_grado_digital->tutorizados)); ?></td>
 								<td><?= bold(limpiar_nulo($usuario_grado_digital->autoformacion)); ?></td>
 							</tr>
@@ -162,12 +162,12 @@ $campos_ocultos_formulario = array(
 						<tbody>
 							<?php
 							if(count($certificaciones_grado_digital) > 1){
-								$usuarios = 1;
+								$indice = 1;
 								foreach($certificaciones_grado_digital as $certificacion_grado_digital){
 									if($certificacion_grado_digital->nombre_curso_categoria != 'Total'){
 							?>
 							<tr>
-								<td><?= $usuarios; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($certificacion_grado_digital->nombre_curso_categoria); ?></td>
 								<td><?= utf8($certificacion_grado_digital->nombre_completo_curso); ?></td>
 								<td><?= limpiar_nulo($certificacion_grado_digital->tutorizados); ?></td>
@@ -175,15 +175,14 @@ $campos_ocultos_formulario = array(
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $usuarios; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
-								<td><?= bold(utf8($certificacion_grado_digital->nombre_completo_curso)); ?></td>
+								<td></td>
 								<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
 								<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
 							</tr>
 							<?php
 									}
-									$usuarios++;
 								}
 							}
 							?>

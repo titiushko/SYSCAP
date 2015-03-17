@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios a Nivel Nacional', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de indice a Nivel Nacional', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
@@ -57,12 +57,12 @@
 						</thead>
 						<tbody>
 							<?php
-							$usuarios = 1;
+							$indice = 1;
 							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
 								if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $usuarios++; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
 								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
@@ -70,7 +70,7 @@
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $usuarios++; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
 								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>

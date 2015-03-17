@@ -56,16 +56,31 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){ ?>
+							<?php
+							$indice = 1;
+							foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
+								if($estaditica_departamento_fecha->nombre_departamento != 'Total'){
+							?>
 							<tr>
-								<td><?= $estaditica_departamento_fecha->indice; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($estaditica_departamento_fecha->nombre_departamento); ?></td>
 								<td><?= $estaditica_departamento_fecha->capacitados; ?></td>
 								<td><?= $estaditica_departamento_fecha->certificados; ?></td>
 							</tr>
-							<?php } ?>
+							<?php } else{ ?>
+							<tr>
+								<td style="opacity: 0.0;"><?= $indice; ?></td>
+								<td><?= bold(utf8($estaditica_departamento_fecha->nombre_departamento)); ?></td>
+								<td><?= bold($estaditica_departamento_fecha->capacitados); ?></td>
+								<td><?= bold($estaditica_departamento_fecha->certificados); ?></td>
+							</tr>
+							<?php
+								}
+							}
+							?>
 						</tbody>
 					</table>
+					<?= $sin_departamento; ?>
 				</div>
 				<div class="col-lg-6 text-center">
 					<?php if(count($estaditicas_departamento_fechas) > 0){ ?>

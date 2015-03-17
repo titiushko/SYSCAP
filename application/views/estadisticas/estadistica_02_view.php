@@ -107,26 +107,25 @@ $campos_ocultos_formulario = array(
 						</thead>
 						<tbody>
 							<?php
-							$cantidades = 1;
+							$indice = 1;
 							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
 								if($cantidad_municipio->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $cantidades; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
 								<td><?= bold($cantidad_municipio->capacitados); ?></td>
 								<td><?= bold($cantidad_municipio->certificados); ?></td>
 							</tr>
 							<?php
 								}
-							$cantidades++;
 							}
 							?>
 						</tbody>

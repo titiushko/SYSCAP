@@ -153,7 +153,9 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
+								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
 								<a href="<?= base_url('usuarios/imprimir/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<?php } ?>
 								<a href="<?= base_url('usuarios/exportar/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>

@@ -117,19 +117,19 @@ $campos_ocultos_formulario = array(
 						</thead>
 						<tbody>
 							<?php
-							$centros_educativos = 1;
+							$indice = 1;
 							foreach($usuarios_departamento_municipio as $usuario_departamento_municipio){
 								if($usuario_departamento_municipio->nombre_centro_educativo != 'Total'){
 							?>
 							<tr>
-								<td><?= $centros_educativos++; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
 								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
 								<td><?= $usuario_departamento_municipio->certificados; ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $centros_educativos; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>
 								<td><?= bold($usuario_departamento_municipio->capacitados); ?></td>
 								<td><?= bold($usuario_departamento_municipio->certificados); ?></td>

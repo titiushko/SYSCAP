@@ -113,12 +113,12 @@ $campos_ocultos_formulario = array(
 						</thead>
 						<tbody>
 							<?php
-							$usuarios = 1;
+							$indice = 1;
 							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
 								if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $usuarios++; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
 								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
@@ -126,7 +126,7 @@ $campos_ocultos_formulario = array(
 							</tr>
 							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $usuarios++; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
 								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>

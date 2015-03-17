@@ -12,8 +12,8 @@ class Sesion_model extends CI_Model{
 		else{
 			$query = $this->db->select('u.id_usuario, F_NombreCompletoUsuario(u.id_usuario) nombre_completo_usuario, r.nombre_completo_rol, r.nombre_corto_rol');
 		}
-		$query = $this->db->join('roles_asignados ra', 'u.id_usuario = ra.id_usuario', 'inner');
-		$query = $this->db->join('roles r', 'ra.id_rol = r.id_rol', 'inner');
+		$query = $this->db->join('roles_asignados ra', 'u.id_usuario = ra.id_usuario', 'left');
+		$query = $this->db->join('roles r', 'ra.id_rol = r.id_rol', 'left');
 		$query = $this->db->where('u.nombre_usuario', $nombre_usuario);
 		$query = $this->db->where('u.contrasena_usuario', $contrasena_usuario);
 		$query = $this->db->get('usuarios u');
