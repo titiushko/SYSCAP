@@ -42,7 +42,7 @@
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
 					<table class="table table-striped table-bordered table-hover">
@@ -82,6 +82,7 @@
 							?>
 						</tbody>
 					</table>
+					<?= (!empty($sin_departamento) && !empty($sin_municipio)) ? $sin_departamento.br().$sin_municipio : (!empty($sin_departamento) ? $sin_departamento : (!empty($sin_municipio) ? $sin_municipio : '')); ?>
 				</div>
 				<div class="col-lg-6 text-center">
 					<?php if(count($usuarios_nivel_nacional) > 1){ ?>

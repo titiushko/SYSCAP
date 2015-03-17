@@ -173,7 +173,7 @@ class Estadisticas_model extends CI_Model{
 	
 	// Consulta Estadística 10: Usuarios a Nivel Nacional
 	function usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2){
-		$query = $this->db->query('SELECT nombre_departamento, nombre_municipio,
+		$query = $this->db->query('SELECT (CASE WHEN nombre_departamento IS NULL THEN \'Sin Departamento *\' ELSE nombre_departamento END) nombre_departamento, (CASE WHEN nombre_municipio IS NULL THEN \'Sin Municipio **\' ELSE nombre_municipio END) nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
@@ -190,13 +190,13 @@ class Estadisticas_model extends CI_Model{
 	}
 	// Consulta Estadística 11: Usuarios por Grado Digital
 	function usuarios_grado_digital($grado_digital, $fecha1, $fecha2){
-		$query = $this->db->query('SELECT tipo_capacitado,
+		$query = $this->db->query('SELECT IF(tipo_capacitado IS NULL, \'Capacitados\', tipo_capacitado) tipo_capacitado,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticasGradoDigital
 								   WHERE tipo_capacitado = \'Capacitados\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   UNION
-								   SELECT tipo_capacitado,
+								   SELECT IF(tipo_capacitado IS NULL, \'Certificados\', tipo_capacitado) tipo_capacitado,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_EstadisticasGradoDigital

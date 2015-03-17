@@ -41,7 +41,7 @@
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
 					<table class="table table-striped table-bordered table-hover">

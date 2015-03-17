@@ -15,7 +15,7 @@ $fecha = array(
 	'required'		=> 'required',
 	'class'			=> 'form-control'
 );
-$lista_grados_digitales =  array('', 1, 2, 3, 4);
+$lista_grados_digitales =  array('' => '', 1 => 1, 2 => 2, 3 => 3, 4 => 4);
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',

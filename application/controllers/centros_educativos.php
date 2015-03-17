@@ -27,7 +27,7 @@ class Centros_educativos extends MY_Controller{
 	}
 	
 	public function mostrar($codigo_centro_educativo = NULL){
-		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
+		$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo, 'Mostrar');
 		if($this->notificacion){
 			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.$codigo_centro_educativo).'\');"';
 			$datos['notificaciones'] = mensaje_notificacion(
@@ -46,7 +46,7 @@ class Centros_educativos extends MY_Controller{
 	}
 	
 	public function modificar($codigo_centro_educativo = NULL){
-		$datos = $this->datos_formulario_centros_educativos_view("Editar", $codigo_centro_educativo);
+		$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo, 'Editar');
 		if($this->input->post('estado') == '1'){
 			$this->validaciones();
 			if($this->form_validation->run()){
@@ -70,7 +70,7 @@ class Centros_educativos extends MY_Controller{
 		}
 	}
 	
-	private function datos_formulario_centros_educativos_view($operacion, $codigo_centro_educativo){
+	private function datos_formulario_centros_educativos_view($codigo_centro_educativo, $operacion = ''){
 		$validar_centro_educativo = $this->centros_educativos_model->validar_centro_educativo($codigo_centro_educativo);
 		if(empty($validar_centro_educativo)){
 			return NULL;
@@ -179,7 +179,7 @@ class Centros_educativos extends MY_Controller{
 			}
 			else{
 				if(is_numeric($codigo_centro_educativo)){
-					$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
+					$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo);
 					if(empty($datos['centro_educativo'])){
 						$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 					}

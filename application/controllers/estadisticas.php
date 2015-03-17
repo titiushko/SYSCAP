@@ -40,7 +40,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_01_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['modalidades_capacitados']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_01_view(), $datos);
@@ -58,7 +58,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_02_view($this->input->post('id_departamento'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['cantidad_usuarios_municipio']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_02_view(), $datos);
@@ -75,7 +75,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_03_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['estaditicas_departamento_fechas']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_03_view(), $datos);
@@ -94,7 +94,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_04_view($this->input->post('id_departamento'), $this->input->post('id_municipio'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['usuarios_departamento_municipio']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_04_view(), $datos);
@@ -112,7 +112,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_01_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['modalidades_capacitados']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_01_view(), $datos);
@@ -131,7 +131,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_06_view($this->input->post('tipo_capacitado'), $this->input->post('id_departamento'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['estaditicas_departamento_tipo_fechas']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_06_view(), $datos);
@@ -151,7 +151,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_04_view($this->input->post('id_departamento'), $this->input->post('id_municipio'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['usuarios_departamento_municipio']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_04_view(), $datos);
@@ -169,7 +169,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_03_view($this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta', $this->input->post('tipo_capacitado')), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['estaditicas_departamento_fechas']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_03_view(), $datos);
@@ -185,7 +185,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('id_centro_educativo', 'Centro Educativo', 'trim|required');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_09_view($this->input->post('tipo_capacitado'), $this->input->post('id_centro_educativo'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['tipos_capacitados_centro_educativo']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_09_view(), $datos);
@@ -203,7 +203,7 @@ class Estadisticas extends MY_Controller{
 						$this->form_validation->set_rules('fecha1', 'Fecha 1', 'callback_validar_fechas['.$this->input->post('fecha2').']');
 						if($this->form_validation->run()){
 							$datos = array_merge($this->datos_estadistica_10_view($this->input->post('tipo_capacitado'), $this->input->post('fecha1'), $this->input->post('fecha2'), 'consulta'), $datos);
-							$datos['resultado_estadistico'] = TRUE;
+							if(count($datos['usuarios_nivel_nacional']) > 1) $datos['resultado_estadistico'] = TRUE;
 						}
 						else{
 							$datos = array_merge($this->datos_estadistica_10_view(), $datos);
@@ -367,9 +367,19 @@ class Estadisticas extends MY_Controller{
 	private function datos_estadistica_10_view($tipo_capacitado = '', $fecha1 = '', $fecha2 = '', $metodo = 'consulta'){
 		$datos['usuarios_nivel_nacional'] = $this->estadisticas_model->usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2);
 		$indice = 1; $datos['usuarios_nivel_nacional_json'] = '';
+		$bandera1 = TRUE; $datos['sin_departamento'] = '';
+		$bandera2 = TRUE; $datos['sin_municipio'] = '';
 		foreach($datos['usuarios_nivel_nacional'] as $usuario_nivel_nacional){
 			if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 				$datos['usuarios_nivel_nacional_json'] .= '{y: \''.$indice++.'\', a: '.$usuario_nivel_nacional->tutorizado.', b: '.$usuario_nivel_nacional->autoformacion.'},';
+			}
+			if($usuario_nivel_nacional->nombre_departamento == 'Sin Departamento *' && $bandera1){
+				$datos['sin_departamento'] = bold('*').' Usuarios no registrados a un Departamento.';
+				$bandera1 = FALSE;
+			}
+			if($usuario_nivel_nacional->nombre_municipio == 'Sin Municipio **' && $bandera2){
+				$datos['sin_municipio'] = bold('**').' Usuarios no registrados a un Municipio.';
+				$bandera2 = FALSE;
 			}
 		}
 		if($metodo == 'consulta'){
@@ -824,12 +834,22 @@ class Estadisticas extends MY_Controller{
 			case 10: // Usuarios a Nivel Nacional
 				$usuarios_nivel_nacional = $this->estadisticas_model->usuarios_nivel_nacional($parametros['tipo_capacitado'], $parametros['fecha1'], $parametros['fecha2']);
 				$indice = 1; $lista_usuarios_nivel_nacional = '';
+				$bandera1 = TRUE; $datos['sin_departamento'] = '';
+				$bandera2 = TRUE; $datos['sin_municipio'] = '';
 				foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
 					if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 						$lista_usuarios_nivel_nacional .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_nivel_nacional->nombre_departamento).'</td><td>'.utf8($usuario_nivel_nacional->nombre_municipio).'</td><td>'.$usuario_nivel_nacional->tutorizado.'</td><td>'.$usuario_nivel_nacional->autoformacion.'</td></tr>';
 					}
 					else{
 						$lista_usuarios_nivel_nacional .= '<tr><td></td><td>'.bold(utf8($usuario_nivel_nacional->nombre_departamento)).'</td><td>'.bold(utf8($usuario_nivel_nacional->nombre_municipio)).'</td><td>'.bold($usuario_nivel_nacional->tutorizado).'</td><td>'.bold($usuario_nivel_nacional->autoformacion).'</td></tr>';
+					}
+					if($usuario_nivel_nacional->nombre_departamento == 'Sin Departamento *' && $bandera1){
+						$sin_departamento = bold('*').' Usuarios no registrados a un Departamento.';
+						$bandera1 = FALSE;
+					}
+					if($usuario_nivel_nacional->nombre_municipio == 'Sin Municipio **' && $bandera2){
+						$sin_municipio = bold('**').' Usuarios no registrados a un Municipio.';
+						$bandera2 = FALSE;
 					}
 				}
 				if($lista_usuarios_nivel_nacional == ''){
@@ -839,11 +859,13 @@ class Estadisticas extends MY_Controller{
 				$plantilla_pdf = str_replace(array('<ENCABEZADO_REPORTE>',
 												   '<TIPO_CAPACITADO>',
 												   '<PERIODO>',
-												   '<USUARIOS_NIVEL_NACIONAL>'),
+												   '<USUARIOS_NIVEL_NACIONAL>',
+												   '<SIN_DEPARTAMENTO_MUNICIPIO>'),
 											 array(encabezado_reporte(),
 												   $parametros['tipo_capacitado'] == 'capacitado' ? 'Capacitados' : $parametros['tipo_capacitado'] == 'certificado' ? 'Certificados' : '',
 												   $parametros['fecha1'] != '' && $parametros['fecha2'] != '' ? 'Del '.date_format(new DateTime($parametros['fecha1']), 'd/m/Y').' al '.date_format(new DateTime($parametros['fecha2']), 'd/m/Y') : '',
-												   $lista_usuarios_nivel_nacional),
+												   $lista_usuarios_nivel_nacional,
+												   (!empty($sin_departamento) && !empty($sin_municipio)) ? $sin_departamento.br().$sin_municipio : (!empty($sin_departamento) ? $sin_departamento : (!empty($sin_municipio) ? $sin_municipio : ''))),
 											 $plantilla_pdf);
 				break;
 			case 11: // Usuarios por Grado Digital

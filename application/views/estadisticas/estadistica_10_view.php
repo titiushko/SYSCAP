@@ -138,6 +138,7 @@ $campos_ocultos_formulario = array(
 							?>
 						</tbody>
 					</table>
+					<?= (!empty($sin_departamento) && !empty($sin_municipio)) ? $sin_departamento.br().$sin_municipio : (!empty($sin_departamento) ? $sin_departamento : (!empty($sin_municipio) ? $sin_municipio : '')); ?>
 				</div>
 			</div>
 			<div class="col-lg-6">

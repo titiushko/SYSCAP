@@ -36,6 +36,7 @@
 					<USUARIOS_NIVEL_NACIONAL>
 				</tbody>
 			</table>
+			<SIN_DEPARTAMENTO_MUNICIPIO>
 		</fieldset>
 	</body>
 </html>
