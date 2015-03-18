@@ -502,7 +502,9 @@ SELECT
 	m.id_municipio id_municipio,
 	m.nombre_municipio nombre_municipio,
 	ce.id_centro_educativo id_centro_educativo,
-	ce.nombre_centro_educativo nombre_centro_educativo
+	ce.nombre_centro_educativo nombre_centro_educativo,
+	u.id_tipo_usuario,
+	u.id_usuario
 FROM usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
 	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
 	LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
