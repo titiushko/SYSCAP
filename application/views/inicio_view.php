@@ -8,7 +8,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Modulo de Usuarios</div>
 			<div class="panel-body">
-				<p>Listado de los usuarios del aula virtual <?= anchor('http://noformal.gradodigital.edu.sv/educanoformal/index.php', 'EducaContinua', 'target="_blank" class="btn btn-default btn-sm"'); ?>. Permite realizar búsquedas de un usuario para verificar su información este correcta y actualizada.</p>
+				<p>Listado de los usuarios del aula virtual <?= anchor('http://noformal.gradodigital.edu.sv/educanoformal/index.php', 'EducaContinua', 'target="_blank" class="btn btn-default btn-sm"'); ?>. Permite realizar búsquedas de usuarios para verificar que su información este correcta y actualizada, realizando búsquedas por: Nombre de Usuario, Nombre Completo, Número de DUI, Correo Electrónico y Centro Educativo.</p>
 				Entrar al <?= anchor(base_url('usuarios'), '<i class="fa fa-users fa-fw"></i> Modulo de Usuarios', 'class="btn btn-primary btn-sm"'); ?>
 			</div>
 		</div>
@@ -17,7 +17,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Modulo de Centros Educativos</div>
 			<div class="panel-body">
-				<p>Permite consultar Centros Educativos de capacitación de docentes. Cuenta con opciones para realizar la búsqueda de usuarios por Centro Educativo.</p>
+				<p>Permite consultar Centros Educativos de capacitación de docentes, realizando búsquedas por: Código, Nombre, Departamento y Municipio.</p>
 				Entrar al <?= anchor(base_url('centros_educativos'), '<i class="fa fa-university fa-fw"></i> Modulo de Centros Educativos', 'class="btn btn-primary btn-sm"'); ?>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading">Modulo de Mapa Estadístico</div>
 			<div class="panel-body">
-				<p>Muestra en un mapa de El Salvador con el total de docentes por tipo de capacitados en cada departamento. Permite seleccionar un Departamento para mostrar el total de docentes capacitados por municipios.</p>
+				<p>Muestra en el mapa de El Salvador el total de docentes de la modalidad de capacitación tutorizados y tipo de capacitado por departamento, municipio y centro educativo.</p>
 				Entrar al <?= anchor(base_url('mapa'), '<i class="fa fa-map-marker fa-fw"></i> Modulo de Mapa Estadístico', 'class="btn btn-primary btn-sm"'); ?>
 			</div>
 		</div>

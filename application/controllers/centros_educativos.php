@@ -88,8 +88,8 @@ class Centros_educativos extends MY_Controller{
 				$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
 				$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
 			}
-			$datos['lista_docentes_certificados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
-			$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
+			$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->docentes_capacitados($codigo_centro_educativo);
+			$datos['lista_docentes_certificados'] = $this->centros_educativos_model->docentes_certificados($codigo_centro_educativo);
 			return $datos;
 		}
 	}
@@ -140,14 +140,14 @@ class Centros_educativos extends MY_Controller{
 		}
 		else{
 			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
-			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado') as $docente_capacitado){
+			foreach($this->centros_educativos_model->docentes_capacitados($codigo_centro_educativo) as $docente_capacitado){
 				$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_capacitados == ''){
 				$lista_docentes_capacitados = 'No hay docentes capacitados en el centro educativo.';
 			}
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
-			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado') as $docente_certificado){
+			foreach($this->centros_educativos_model->docentes_certificados($codigo_centro_educativo) as $docente_certificado){
 				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.utf8($docente_certificado->certificacion_usuario).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){

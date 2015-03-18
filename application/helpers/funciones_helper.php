@@ -3,7 +3,7 @@
 /* Convierte todos los caracteres aplicables a entidades HTML */
 if(!function_exists('utf8')){
 	function utf8($cadena){
-		return htmlentities($cadena, ENT_COMPAT, 'UTF-8');
+		return htmlentities(acentos($cadena), ENT_COMPAT, 'UTF-8');
 	}
 }
 

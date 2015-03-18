@@ -98,7 +98,7 @@
 					<div class="col-lg-12">
 						<?php
 						echo heading(anchor(current_url().'#centros_educativos', 'Lista de Centros Educativos', 'name="centros_educativos"'), 3).br();
-						echo p('Permite consultar Centros Educativos de capacitación de docentes realizando búsquedas por: Código, Nombre, Departamento y Municipio.').br();
+						echo p('Permite consultar Centros Educativos de capacitación de docentes, realizando búsquedas por: Código, Nombre, Departamento y Municipio.').br();
 						echo heading('Búsqueda de Centro Educativo por Código.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
@@ -286,21 +286,21 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<?php
-						echo p('Muestra en el mapa de El Salvador el total de docentes por tipo de capacitado por departamento, municipio y centro educativo.').br();
+						echo p('Muestra en el mapa de El Salvador el total de docentes de la modalidad de capacitación tutorizados y tipo de capacitado por departamento, municipio y centro educativo.').br();
 						echo heading(anchor(current_url().'#mapa', 'Lista de Departamentos', 'name="mapa"'), 3).br();
 						echo heading('Consultar Cantidad de Docentes Capacitados y Docentes Certificados por Departamento.', 4);
 						echo p('Método 1.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico, ubicarse en el listado de '.bold('Departamentos').' ubicado en la parte inferior del mapa de El Salvador.',
 						'Hacer clic sobre el registro del departamento que se desea consultar.',
-						'SYSCAP mostrará el departamento seleccionado en el mapa de El Salvador y en una viñeta mostrará la cantidad de docentes por tipo de capacitado y por modalida de capacitación del departamento.',
+						'SYSCAP mostrará el departamento seleccionado en el mapa de El Salvador y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del departamento.',
 						'Dar clic al enlace '.bold('Ver departamento').' para ver los municipios del departamento.'
 						)).br();
 						echo p('Método 2.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico, ubicarse en el mapa de El Salvador.',
 						'Navegar sobre el mapa de El Salvador y dar clic al '.bold('Marcador <font color="red" size="4"><i class="fa fa-map-marker fa-fw"></i></font>').' sobre el departamento que se desea consultar.',
-						'SYSCAP mostrará el departamento seleccionado en el mapa de El Salvador y en una viñeta mostrará la cantidad de docentes por tipo de capacitado y por modalida de capacitación del departamento.',
+						'SYSCAP mostrará el departamento seleccionado en el mapa de El Salvador y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del departamento.',
 						'Dar clic al enlace '.bold('Ver departamento').' para ver los municipios del departamento.'
 						)).br();
 						echo heading(anchor(current_url().'#mapa-departamento', 'Lista de Municipios', 'name="mapa-departamento"'), 3).br();
@@ -309,15 +309,17 @@
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico y el mapa de un departamento, ubicarse en el listado de '.bold('Municipios').' ubicado en la parte inferior del mapa del Departamento.',
 						'Hacer clic sobre el registro del municipio que se desea consultar.',
-						'SYSCAP mostrará el municipio seleccionado en el mapa del departamento y en una viñeta mostrará la cantidad de docentes por tipo de capacitado y por modalida de capacitación del municipio.',
-						'Dar clic al enlace '.bold('Ver municipio').' para ver los centros educativos del municipio.'
+						'SYSCAP mostrará el municipio seleccionado en el mapa del departamento y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del municipio.',
+						'Dar clic al enlace '.bold('Ver municipio').' para ver los centros educativos del municipio.',
+						'Para regresar al mapa de El Salvador y realizar otra búsqueda con un departamento diferente, ubicarse sobre la parte superior izquierda del mapa y hacer clic al enlace '.bold('El Salvador').'.'
 						)).br();
 						echo p('Método 2.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico y el mapa de un departamento, ubicarse en el mapa del departamento.',
 						'Navegar sobre el mapa del departamento y dar clic al '.bold('Marcador <font color="red" size="4"><i class="fa fa-map-marker fa-fw"></i></font>').' sobre el municipio que se desea consultar.',
-						'SYSCAP mostrará el municipio seleccionado en el mapa del departamento y en una viñeta mostrará la cantidad de docentes por tipo de capacitado y por modalida de capacitación del municipio.',
-						'Dar clic al enlace '.bold('Ver municipio').' para ver los centros educativos del municipio.'
+						'SYSCAP mostrará el municipio seleccionado en el mapa del departamento y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del municipio.',
+						'Dar clic al enlace '.bold('Ver municipio').' para ver los centros educativos del municipio.',
+						'Para regresar al mapa de El Salvador y realizar otra búsqueda con un departamento diferente, ubicarse sobre la parte superior izquierda del mapa y hacer clic al enlace '.bold('El Salvador').'.'
 						)).br();
 						echo heading(anchor(current_url().'#mapa-municipio', 'Lista de Centros Educativos', 'name="mapa-municipio"'), 3).br();
 						echo heading('Consultar Cantidad de Docentes Capacitados y Docentes Certificados por Centro Educativo.', 4);
@@ -325,15 +327,17 @@
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico y el mapa de un municipio, ubicarse en el listado de '.bold('Centros Educativos').' ubicado en la parte inferior del mapa del Municipio.',
 						'Hacer clic sobre el registro del centro educativo que se desea consultar.',
-						'SYSCAP mostrará el centro educativo seleccionado en el mapa del municipio y en una viñeta mostrará la cantidad de docentes por tipo de capacitado y por modalida de capacitación del centro educativo.',
-						'Dar clic al enlace '.bold('Ver centro educativo').' para ir a la ficha del centro educativo y ver los docentes capacitados y docentes certificados.'
+						'SYSCAP mostrará el centro educativo seleccionado en el mapa del municipio y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del centro educativo.',
+						'Dar clic al enlace '.bold('Ver centro educativo').' para ir a la ficha del centro educativo y ver los docentes capacitados y docentes certificados.',
+						'Para regresar al mapa del departamento y realizar otra búsqueda con un municipio diferente, ubicarse sobre la parte superior izquierda del mapa y hacer clic al enlace con el '.bold('Nombre del Departamento').', o si desea realizar otra búsqueda con un departamento diferente, hacer clic al enlace '.bold('El Salvador').'.'
 						)).br();
 						echo p('Método 2.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico y el mapa de un municipio, ubicarse en el mapa del municipio.',
 						'Navegar sobre el mapa del municipio y dar clic al '.bold('Marcador <font color="red" size="4"><i class="fa fa-map-marker fa-fw"></i></font>').' sobre el centro educativo que se desea consultar.',
-						'SYSCAP mostrará el centro educativo seleccionado en el mapa del municipio y en una viñeta mostrará la cantidad de docentes por tipo de capacitado y por modalida de capacitación del centro educativo.',
-						'Dar clic al enlace '.bold('Ver centro educativo').' para ir a la ficha del centro educativo y ver los docentes capacitados y docentes certificados.'
+						'SYSCAP mostrará el centro educativo seleccionado en el mapa del municipio y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del centro educativo.',
+						'Dar clic al enlace '.bold('Ver centro educativo').' para ir a la ficha del centro educativo y ver los docentes capacitados y docentes certificados.',
+						'Para regresar al mapa del departamento y realizar otra búsqueda con un municipio diferente, ubicarse sobre la parte superior izquierda del mapa y hacer clic al enlace con el '.bold('Nombre del Departamento').', o si desea realizar otra búsqueda con un departamento diferente, hacer clic al enlace '.bold('El Salvador').'.'
 						)).br();
 						?>
 					</div>
