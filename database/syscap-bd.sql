@@ -34,16 +34,16 @@ CREATE TABLE IF NOT EXISTS niveles_estudios(
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de niveles de estudios. Los registros de está tabla se obtendrán de la tabla <mdl_cat_nestudio> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS profesiones(
- id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesión. Los valores de esté campo se obtendrán del campo <cod_profesion> de Moodle usando ETL.',
- nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesión. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
- PRIMARY KEY(id_profesion)
+	id_profesion VARCHAR(3) NOT NULL COMMENT 'Identificador de una profesión. Los valores de esté campo se obtendrán del campo <cod_profesion> de Moodle usando ETL.',
+	nombre_profesion VARCHAR(100) NOT NULL COMMENT 'Nombre completo de una profesión. Los valores de esté campo se obtendrán del campo <descripcion> de Moodle usando ETL.',
+	PRIMARY KEY(id_profesion)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
 
 CREATE TABLE IF NOT EXISTS cursos_categorias(
- id_curso_categoria BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la categoría de cursos. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
- nombre_curso_categoria VARCHAR(255) NOT NULL COMMENT 'Nombre completo de la categoría de cursos. Los valores de esté campo se obtendrán del campo <name> de Moodle usando ETL.',
- padre_curso_categoria BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la categoría padre a la que pertenece una categoría. Los valores de esté campo se obtendrán del campo <parent> de Moodle usando ETL.',
- PRIMARY KEY (id_curso_categoria)
+	id_curso_categoria BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la categoría de cursos. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+	nombre_curso_categoria VARCHAR(255) NOT NULL COMMENT 'Nombre completo de la categoría de cursos. Los valores de esté campo se obtendrán del campo <name> de Moodle usando ETL.',
+	padre_curso_categoria BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la categoría padre a la que pertenece una categoría. Los valores de esté campo se obtendrán del campo <parent> de Moodle usando ETL.',
+	PRIMARY KEY (id_curso_categoria)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información las categorías de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course_categories> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS cursos(
