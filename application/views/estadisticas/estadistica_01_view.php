@@ -5,14 +5,15 @@ $formulario_consultar = array(
 	'role'		=> 'form'
 );
 $fecha = array(
-	'name'		=> '',
-	'id'		=> '',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> '',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'name'			=> '',
+	'id'			=> '',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> '',
+	'type'			=> 'date',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'class'			=> 'form-control'
 );
 $boton_primario = array(
 	'name'		=> 'boton_primario',
@@ -104,21 +105,18 @@ $campos_ocultos_formulario = array(
 						<tbody>
 							<?php
 							foreach($modalidades_capacitados as $modalidad_capacitado){
-								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+								if($modalidad_capacitado->tipos_capacitados != 'Total'){
 							?>
 							<tr>
 								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
-								<td><?= $modalidad_capacitado->tutorizados; ?></td>
-								<td><?= $modalidad_capacitado->autoformacion; ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
-								<td><?= bold($modalidad_capacitado->tutorizados); ?></td>
-								<td><?= bold($modalidad_capacitado->autoformacion); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
 							</tr>
 							<?php
 								}
@@ -129,15 +127,18 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica1-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
 </div>
+<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica1-1',
 			data: [<?= $modalidades_capacitados_json; ?>],
@@ -158,3 +159,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

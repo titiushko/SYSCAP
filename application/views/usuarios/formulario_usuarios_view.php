@@ -23,19 +23,19 @@ if($operacion == "Mostrar"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
-	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/modificar/'.@$usuario[0]->id_usuario.'\');"';
-	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url().'usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario.'\');"';
+	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('usuarios/modificar/'.@$usuario[0]->id_usuario).'\');"';
+	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario).'\');"';
 	if($this->session->userdata('uri_usuarios')){
 		$uri_usuarios = $this->session->userdata('uri_usuarios');
 		if(strpos($uri_usuarios, 'mostrar') != FALSE){
-			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().$uri_usuarios.'\');"';
+			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url($uri_usuarios).'\');"';
 		}
 		else{
-			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios').'\');"';
 		}
 	}
 	else{
-		$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios\');"';
+		$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios').'\');"';
 	}
 }
 if($operacion == "Editar"){
@@ -48,43 +48,72 @@ if($operacion == "Recuperar Contraseña"){
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';"';
 }
-$boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.@$usuario[0]->id_usuario.'\');"';
+$boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.@$usuario[0]->id_usuario).'\');"';
 // Definición de los campos Datos Personales
 $nombres_usuario = array(
-	'name'		=>	'nombres_usuario',
-	'id'		=>	'nombres_usuario',
-	'maxlength'	=>	'60',
-	'size'		=>	'20',
-	'value'		=>	utf8(set_value('nombres_usuario', @$usuario[0]->nombres_usuario)),
-	'class'		=>	'form-control',
+	'name'			=>	'nombres_usuario',
+	'id'			=>	'nombres_usuario',
+	'maxlength'		=>	'60',
+	'size'			=>	'20',
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'value'			=>	utf8(set_value('nombres_usuario', @$usuario[0]->nombres_usuario)),
+	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 $apellido1_usuario = array(
-	'name'		=>	'apellido1_usuario',
-	'id'		=>	'apellido1_usuario',
-	'maxlength'	=>	'60',
-	'size'		=>	'20',
-	'value'		=>	utf8(set_value('apellido1_usuario', @$usuario[0]->apellido1_usuario)),
-	'class'		=>	'form-control',
+	'name'			=>	'apellido1_usuario',
+	'id'			=>	'apellido1_usuario',
+	'maxlength'		=>	'60',
+	'size'			=>	'20',
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'value'			=>	utf8(set_value('apellido1_usuario', @$usuario[0]->apellido1_usuario)),
+	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 $dui_usuario = array(
-	'name'		=>	'dui_usuario',
-	'id'		=>	'dui_usuario',
-	'maxlength'	=>	'12',
-	'size'		=>	'20',
-	'value'		=>	set_value('dui_usuario', formato_dui(@$usuario[0]->dui_usuario)),
-	'class'		=>	'form-control',
+	'name'			=>	'dui_usuario',
+	'id'			=>	'dui_usuario',
+	'maxlength'		=>	'12',
+	'size'			=>	'20',
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'value'			=>	set_value('dui_usuario', formato_dui(@$usuario[0]->dui_usuario)),
+	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 $correo_electronico_usuario = array(
-	'name'		=>	'correo_electronico_usuario',
-	'id'		=>	'correo_electronico_usuario',
-	'maxlength'	=>	'40',
-	'size'		=>	'30',
-	'type'		=>	'email',
-	'value'		=>	set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario),
-	'class'		=>	'form-control',
+	'name'			=>	'correo_electronico_usuario',
+	'id'			=>	'correo_electronico_usuario',
+	'maxlength'		=>	'40',
+	'size'			=>	'30',
+	'type'			=>	'email',
+	'autocomplete'	=>	'off',
+	'value'			=>	set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario),
+	'class'			=>	'form-control',
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
+);
+$nombre_centro_educativo = array (
+	'name'			=> 'nombre_centro_educativo',
+	'id'			=> 'nombre_centro_educativo',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> utf8(set_value('nombre_centro_educativo', $this->centros_educativos_model->nombre_centro_educativo(@$usuario[0]->id_centro_educativo))),
+	'onpaste'		=> 'return false',
+	'type'			=> 'text',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'placeholder'	=> 'Buscar Centro Educativo',
+	'class'			=> 'form-control',
+	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
+);
+$codigo_centro_educativo = array (
+	'name'			=> 'id_centro_educativo',
+	'id'			=> 'id_centro_educativo',
+	'value'			=> set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo),
+	'type'			=> 'hidden',
+	'required'		=> 'required',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 $direccion_usuario = array(
@@ -97,21 +126,25 @@ $direccion_usuario = array(
 );
 // Definición de los campos Información de Usuario
 $nombre_usuario = array(
-	'name'		=>	'nombre_usuario',
-	'id'		=>	'nombre_usuario',
-	'maxlength'	=>	'30',
-	'size'		=>	'20',
-	'value'		=>	set_value('nombre_usuario', @$usuario[0]->nombre_usuario),
-	'class'		=>	'form-control',
+	'name'			=>	'nombre_usuario',
+	'id'			=>	'nombre_usuario',
+	'maxlength'		=>	'30',
+	'size'			=>	'20',
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'value'			=>	set_value('nombre_usuario', @$usuario[0]->nombre_usuario),
+	'class'			=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
 $contrasena_usuario = array(
-	'name'		=>	'contrasena_usuario',
-	'id'		=>	'contrasena_usuario',
-	'maxlength'	=>	'20',
-	'size'		=>	'20',
-	'value'		=>	set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario),
-	'class'		=>	'form-control',
+	'name'			=>	'contrasena_usuario',
+	'id'			=>	'contrasena_usuario',
+	'maxlength'		=>	'20',
+	'size'			=>	'20',
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'value'			=>	set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario),
+	'class'			=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
 // Definición de los campos Información de Cursos
@@ -125,10 +158,10 @@ $modalidad_usuario = array(
 	'disabled'	=>	'disabled'
 );
 ?>
-<script src="<?= base_url(); ?>resources/js/validaciones-usuarios.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/js/validaciones-usuarios.js"></script>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header">Modulo de Usuarios</h1>
+		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Modulo de Usuarios</h1>
 	</div>
 </div>
 <div class="row">
@@ -185,7 +218,9 @@ $modalidad_usuario = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Centro Educativo:'); ?>
-										<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_input($nombre_centro_educativo); ?>
+										<?= form_input($codigo_centro_educativo); ?>
+										<div id="resultado-centro_educativo"></div>
 										<?= form_error('id_centro_educativo'); ?>
 									</div>
 								</div>
@@ -343,9 +378,9 @@ $modalidad_usuario = array(
 						<div class="row">
 							<div class="col-lg-12 text-center">
 								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
-								<a href="<?= base_url().'usuarios/imprimir/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
+								<a href="<?= base_url('usuarios/imprimir/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-print"></i> Imprimir</a>
 								<?php } ?>
-								<a href="<?= base_url().'usuarios/exportar/'.@$usuario[0]->id_usuario; ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<a href="<?= base_url('usuarios/exportar/'.@$usuario[0]->id_usuario); ?>" target="_blank" class="btn btn-success"><i class="fa fa-file-pdf-o"></i> Exportar</a>
 							</div>
 						</div>
 						<?php } ?>
@@ -355,27 +390,57 @@ $modalidad_usuario = array(
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script>
-$(document).ready(function() {
-	$('#data-tables-certificaciones_usuario').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
-		"oLanguage":		{"sEmptyTable": "El usuario no tiene certificaciones."}
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#data-tables-certificaciones_usuario').dataTable({
+			"searching":		false,
+			"scrollY":			"200px",
+			"scrollCollapse":	true,
+			"info":				false,
+			"ordering":			false,
+			"paging":			false,
+			"oLanguage":		{"sEmptyTable": "El usuario no tiene certificaciones."}
+		});
+		$('#data-tables-calificaciones_usuario').dataTable({
+			"searching":		false,
+			"scrollY":			"200px",
+			"scrollCollapse":	true,
+			"info":				false,
+			"ordering":			false,
+			"paging":			false,
+			"oLanguage":		{"sEmptyTable": "El usuario no a recibido cursos."}
+		});
+		$("#nombre_centro_educativo").bind('keyup focusin', function(evento){
+			if(evento.which != 27){
+				var v_nombre_centro_educativo = $(this).val();
+				$.post('<?= base_url('index.php/ajax/lista_centros_educativos'); ?>', {nombre_centro_educativo: v_nombre_centro_educativo.length > 0 ? v_nombre_centro_educativo : '%'}, function(resultado){
+					if(resultado != ''){
+						$('#resultado-centro_educativo').show();
+						var centros_educativos = jQuery.parseJSON(resultado);
+						var clase = centros_educativos.length < 5 ? "contenedor-centro_educativo-1" : "contenedor-centro_educativo-2";
+						$('#resultado-centro_educativo').empty();
+						$("#resultado-centro_educativo").append($("<div></div>").attr({"class": clase}));
+						$.each(centros_educativos, function(respuesta, centro_educativo){
+							$("." + clase).append($("<p></p>").attr({"onclick": "seleccionar_centro_educativo('" + centro_educativo.id_centro_educativo + "', '" + centro_educativo.nombre_centro_educativo + "');"}).text(centro_educativo.nombre_centro_educativo));
+						});
+					}
+					else{
+						$('#resultado-centro_educativo').hide();
+					}
+				});
+			}
+			else{
+				$(this).val('');
+				$('#id_centro_educativo').val('');
+				$('#resultado-centro_educativo').hide();
+			}
+		});
 	});
-	$('#data-tables-calificaciones_usuario').dataTable({
-		"searching":		false,
-		"scrollY":			"200px",
-		"scrollCollapse":	true,
-		"info":				false,
-		"ordering":			false,
-		"paging":			false,
-		"oLanguage":		{"sEmptyTable": "El usuario no a recibido cursos."}
-	});
-});
+	function seleccionar_centro_educativo(codigo, nombre){
+		$('#id_centro_educativo').val(codigo);
+		$('#nombre_centro_educativo').val(nombre);
+		$('#resultado-centro_educativo').hide();
+	}
 </script>

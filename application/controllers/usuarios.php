@@ -19,57 +19,59 @@ class Usuarios extends MY_Controller{
 		if($this->session->userdata['nombre_corto_rol'] == 'admin' || $this->session->userdata['nombre_corto_rol'] == 'moderador'){
 			$datos['pagina'] = 'usuarios/consultar_usuarios_view';
 			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-			$datos['lista_usuarios'] = $this->usuarios_model->usuarios();
+			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios();
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
-			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 		}
 	}
 	
 	public function mostrar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
-			$datos = $this->datos_formulario_usuarios_view("Mostrar", $codigo_usuario);
+			$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Mostrar');
 			if($this->notificacion){
-				$datos['id_modal'] = 'myModal';
-				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url().'usuarios/mostrar/'.$codigo_usuario.'\');"';
-				$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario';
-				$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.';
+				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');"';
+				$datos['notificaciones'] = mensaje_notificacion(
+					'myModal',
+					icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario',
+					'Se guardaron los cambios de '.utf8($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.'
+				);
 				$this->notificacion = FALSE;
 			}
 			if(empty($datos['usuario'])){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
 	public function modificar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
-				$datos = $this->datos_formulario_usuarios_view("Editar", $codigo_usuario);
+				$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Editar');
 				if($this->input->post('estado') == '1'){
 					if($this->input->post('grupo_campos') == 'datos_personales'){
 						$this->validaciones('datos_personales');
-						$datos = $this->datos_formulario_usuarios_view("Editar", $codigo_usuario);
+						$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Editar');
 					}
 					if($this->input->post('grupo_campos') == 'informacion_usuario'){
 						$this->validaciones('informacion_usuario');
-						$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
+						$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Recuperar Contraseña');
 					}
 					if($this->form_validation->run()){
 						$update_usuario = $this->input->post();
 						if($this->input->post('contrasena_usuario'))
 							$update_usuario['contrasena_usuario'] = md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle'));
-						unset($update_usuario['estado'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
+						unset($update_usuario['estado'], $update_usuario['nombre_centro_educativo'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 						$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
 						$this->notificacion = TRUE;
 						$this->mostrar($codigo_usuario);
@@ -80,7 +82,7 @@ class Usuarios extends MY_Controller{
 				}
 				else{
 					if(empty($datos['usuario'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 					}
 					else{
 						$this->load->view('plantilla_pagina_view', $datos);
@@ -88,35 +90,35 @@ class Usuarios extends MY_Controller{
 				}
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
 	public function recuperar_contrasena($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
-				$datos = $this->datos_formulario_usuarios_view("Recuperar Contraseña", $codigo_usuario);
+				$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Recuperar Contraseña');
 				if(empty($datos['usuario'])){
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 				else{
 					$this->load->view('plantilla_pagina_view', $datos);
 				}
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
-	private function datos_formulario_usuarios_view($operacion, $codigo_usuario){
+	private function datos_formulario_usuarios_view($codigo_usuario, $operacion = ''){
 		$validar_usuario = $this->usuarios_model->validar_usuario($codigo_usuario);
 		if(empty($validar_usuario)){
 			return NULL;
@@ -127,14 +129,13 @@ class Usuarios extends MY_Controller{
 				$datos['operacion'] = $operacion;
 				$datos['pagina'] = $this->session->userdata('nombre_corto_rol') != 'admin' ? 'usuarios/usuarios_view' : 'usuarios/formulario_usuarios_view';
 				$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-				$datos['lista_centros_educativos'] = $this->centros_educativos_model->lista_centros_educativos();
 				$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
 				$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
 			}
 			else{
-				$datos['nombre_centro_educativo'] = $this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo);
-				$datos['nombre_profesion'] = $this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion);
-				$datos['nombre_tipo_usuario'] = $this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario);
+				$datos['nombre_centro_educativo'] = utf8($this->centros_educativos_model->nombre_centro_educativo($datos['usuario'][0]->id_centro_educativo));
+				$datos['nombre_profesion'] = utf8($this->profesiones_model->nombre_profesion($datos['usuario'][0]->id_profesion));
+				$datos['nombre_tipo_usuario'] = utf8($this->tipos_usuarios_model->nombre_tipo_usuario($datos['usuario'][0]->id_tipo_usuario));
 			}
 			$datos['lista_calificaciones_usuario'] = $this->usuarios_model->calificaciones_usuario($codigo_usuario);
 			$datos['lista_certificaciones_usuario'] = $this->usuarios_model->certificaciones_usuario($codigo_usuario);
@@ -207,7 +208,7 @@ class Usuarios extends MY_Controller{
 	public function exportar($codigo_usuario = NULL){
 		if($this->validar_parametros($codigo_usuario)){
 			if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 			$pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, TRUE, 'UTF-8', FALSE);
 			$pdf->setPrintHeader(FALSE);
@@ -224,7 +225,7 @@ class Usuarios extends MY_Controller{
 			$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 	}
 	
@@ -279,18 +280,18 @@ class Usuarios extends MY_Controller{
 		if(!$this->session->userdata('dispositivo_movil')){
 			if($this->validar_parametros($codigo_usuario)){
 				if($this->session->userdata['nombre_corto_rol'] == 'student' && $this->session->userdata['id_usuario'] != $codigo_usuario){
-					$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+					$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 				}
-				$datos = $this->datos_formulario_usuarios_view('', $codigo_usuario);
+				$datos = $this->datos_formulario_usuarios_view($codigo_usuario);
 				if(empty($datos['usuario'])){
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 				else{
 					$this->load->view('usuarios/imprimir_usuarios_view', $datos);
 				}
 			}
 			else{
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 		}
 		else{

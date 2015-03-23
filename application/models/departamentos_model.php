@@ -7,7 +7,7 @@ class Departamentos_model extends CI_Model{
 	
 	function lista_departamentos(){
 		$lista_departamentos[''] = '';
-		$query = $this->db->select('id_departamento, acentos(nombre_departamento) nombre_departamento');
+		$query = $this->db->select('id_departamento, nombre_departamento nombre_departamento');
 		$query = $this->db->order_by('nombre_departamento', 'asc');
 		$query = $this->db->get('departamentos');
 		foreach($query->result() as $departamento){
@@ -17,7 +17,7 @@ class Departamentos_model extends CI_Model{
 	}
 	
 	function nombre_departamento($codigo_departamento){
-		$query = $this->db->select('acentos(nombre_departamento) nombre_departamento');
+		$query = $this->db->select('nombre_departamento nombre_departamento');
 		$query = $this->db->where('id_departamento', $codigo_departamento);
 		$query = $this->db->get('departamentos');
 		if($query->row())

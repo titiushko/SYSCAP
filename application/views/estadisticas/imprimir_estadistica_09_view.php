@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -42,7 +41,7 @@
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
 					<table class="table table-striped table-bordered table-hover">
@@ -55,19 +54,16 @@
 						<tbody>
 							<?php
 							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
-								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+								if($tipo_capacitado_centro_educativo->modalidad_usuario != 'Total'){
 							?>
 							<tr>
-								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
-								<td><?= $tipo_capacitado_centro_educativo->total; ?></td>
+								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_usuario); ?></td>
+								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
-								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
-								<td><?= bold($tipo_capacitado_centro_educativo->total); ?></td>
+								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_usuario)); ?></td>
+								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>
 							</tr>
 							<?php
 								}
@@ -77,16 +73,19 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 					<div id="morris-bar-chart-estadistica9-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
+		<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica9-1',
 					data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
@@ -98,5 +97,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

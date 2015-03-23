@@ -5,9 +5,29 @@ $formulario_consultar = array(
 	'role'		=> 'form'
 );
 $lista_tipo_capacitados =  array(
-	''			=> '',
+	''				=> '',
 	'capacitado'	=> 'Capacitados',
 	'certificado'	=> 'Certificados'
+);
+$nombre_centro_educativo = array (
+	'name'			=> 'nombre_centro_educativo',
+	'id'			=> 'nombre_centro_educativo',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> utf8(set_value('nombre_centro_educativo', @$campos['nombre_centro_educativo'])),
+	'onpaste'		=> 'return false',
+	'type'			=> 'text',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'placeholder'	=> 'Buscar Centro Educativo',
+	'class'			=> 'form-control'
+);
+$codigo_centro_educativo = array (
+	'name'			=> 'id_centro_educativo',
+	'id'			=> 'id_centro_educativo',
+	'value'			=> set_value('id_centro_educativo', @$campos['id_centro_educativo']),
+	'type'			=> 'hidden',
+	'required'		=> 'required'
 );
 $boton_primario = array(
 	'name'		=> 'boton_primario',
@@ -56,7 +76,9 @@ $campos_ocultos_formulario = array(
 		<div class="col-lg-6">
 			<div class="form-group">
 				<?= form_label('Centro Educativo:'); ?>
-				<?= form_dropdown('id_centro_educativo', $lista_centros_educativos, set_value('id_centro_educativo', @$campos['id_centro_educativo']), 'class="form-control" required'); ?>
+				<?= form_input($nombre_centro_educativo); ?>
+				<?= form_input($codigo_centro_educativo); ?>
+				<div id="resultado-centro_educativo"></div>
 				<?= form_error('id_centro_educativo'); ?>
 			</div>
 		</div>
@@ -88,19 +110,16 @@ $campos_ocultos_formulario = array(
 						<tbody>
 							<?php
 							foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
-								if($tipo_capacitado_centro_educativo->modalidad_capacitado != 'TOTAL'){
+								if($tipo_capacitado_centro_educativo->modalidad_usuario != 'Total'){
 							?>
 							<tr>
-								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_capacitado); ?></td>
-								<td><?= $tipo_capacitado_centro_educativo->total; ?></td>
+								<td><?= utf8($tipo_capacitado_centro_educativo->modalidad_usuario); ?></td>
+								<td><?= limpiar_nulo($tipo_capacitado_centro_educativo->total); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
-								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_capacitado)); ?></td>
-								<td><?= bold($tipo_capacitado_centro_educativo->total); ?></td>
+								<td><?= bold(utf8($tipo_capacitado_centro_educativo->modalidad_usuario)); ?></td>
+								<td><?= bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)); ?></td>
 							</tr>
 							<?php
 								}
@@ -111,15 +130,52 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica9-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#nombre_centro_educativo").bind('keyup focusin', function(evento){
+			if(evento.which != 27){
+				var v_nombre_centro_educativo = $(this).val();
+				$.post('<?= base_url('index.php/ajax/lista_centros_educativos'); ?>', {nombre_centro_educativo: v_nombre_centro_educativo.length > 0 ? v_nombre_centro_educativo : '%'}, function(resultado){
+					if(resultado != ''){
+						$('#resultado-centro_educativo').show();
+						var centros_educativos = jQuery.parseJSON(resultado);
+						var clase = centros_educativos.length < 5 ? "contenedor-centro_educativo-1" : "contenedor-centro_educativo-2";
+						$('#resultado-centro_educativo').empty();
+						$("#resultado-centro_educativo").append($("<div></div>").attr({"class": clase}));
+						$.each(centros_educativos, function(respuesta, centro_educativo){
+							$("." + clase).append($("<p></p>").attr({"onclick": "seleccionar_centro_educativo('" + centro_educativo.id_centro_educativo + "', '" + centro_educativo.nombre_centro_educativo + "');"}).text(centro_educativo.nombre_centro_educativo));
+						});
+					}
+					else{
+						$('#resultado-centro_educativo').hide();
+					}
+				});
+			}
+			else{
+				$(this).val('');
+				$('#id_centro_educativo').val('');
+				$('#resultado-centro_educativo').hide();
+			}
+		});
+	});
+	function seleccionar_centro_educativo(codigo, nombre){
+		$('#id_centro_educativo').val(codigo);
+		$('#nombre_centro_educativo').val(nombre);
+		$('#resultado-centro_educativo').hide();
+	}
+</script>
+<?php if(!estadistica_vacia($tipo_capacitado_centro_educativo)){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica9-1',
 			data: [<?= $tipos_capacitados_centro_educativo_json; ?>],
@@ -140,3 +196,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

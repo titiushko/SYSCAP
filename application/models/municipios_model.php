@@ -7,7 +7,7 @@ class Municipios_model extends CI_Model{
 	
 	function lista_municipios(){
 		$lista_municipios[''] = '';
-		$query = $this->db->select('id_municipio, acentos(nombre_municipio) nombre_municipio');
+		$query = $this->db->select('id_municipio, nombre_municipio nombre_municipio');
 		$query = $this->db->order_by('nombre_municipio', 'asc');
 		$query = $this->db->get('municipios');
 		foreach($query->result() as $municipio){
@@ -17,7 +17,7 @@ class Municipios_model extends CI_Model{
 	}
 	
 	function nombre_municipio($codigo_municipio){
-		$query = $this->db->select('acentos(nombre_municipio) nombre_municipio');
+		$query = $this->db->select('nombre_municipio nombre_municipio');
 		$query = $this->db->where('id_municipio', $codigo_municipio);
 		$query = $this->db->get('municipios');
 		if($query->row())

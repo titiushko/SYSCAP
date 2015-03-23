@@ -52,18 +52,26 @@ CREATE TABLE IF NOT EXISTS profesiones(
   PRIMARY KEY(id_profesion)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catálogo de nombres de las profesiones. Los registros de está tabla se obtendrán de la tabla <mdl_cat_profesion> de Moodle usando ETL.';
 
+CREATE TABLE IF NOT EXISTS cursos_categorias(
+ id_curso_categoria BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de la categoría de cursos. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+ nombre_curso_categoria VARCHAR(255) NOT NULL COMMENT 'Nombre completo de la categoría de cursos. Los valores de esté campo se obtendrán del campo <name> de Moodle usando ETL.',
+ padre_curso_categoria BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la categoría padre a la que pertenece una categoría. Los valores de esté campo se obtendrán del campo <parent> de Moodle usando ETL.',
+ PRIMARY KEY (id_curso_categoria)
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información las categorías de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course_categories> de Moodle usando ETL.' AUTO_INCREMENT=1;
+
+CREATE TABLE IF NOT EXISTS cursos(
+	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un curso. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
+	id_curso_categoria BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador de la categoría a la que pertenece un curso. Los valores de esté campo se obtendrán del campo <category> de Moodle usando ETL.',
+	nombre_completo_curso VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un curso. Los valores de esté campo se obtendrán del campo <fullname> de Moodle usando ETL.',
+	nombre_corto_curso VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un curso. Los valores de esté campo se obtendrán del campo <shortname> de Moodle usando ETL.',
+	PRIMARY KEY(id_curso)
+) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información central de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
+
 CREATE TABLE IF NOT EXISTS matriculas(
 	id_matricula BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  una matricula. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
 	id_curso BIGINT(10) UNSIGNED NOT NULL COMMENT 'Identificador del curso al que pertenece una matricula. Los valores de esté campo se obtendrán del campo <instanceid> de Moodle usando ETL.',
 	PRIMARY KEY(id_matricula)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información de las matriculas de usuarios con mdl_course. Los registros de está tabla se obtendrán de la tabla <mdl_context> de Moodle usando ETL.' AUTO_INCREMENT=1;
-
-CREATE TABLE IF NOT EXISTS cursos(
-	id_curso BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un curso. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
-	nombre_completo_curso VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un curso. Los valores de esté campo se obtendrán del campo <fullname> de Moodle usando ETL.',
-	nombre_corto_curso VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un curso. Los valores de esté campo se obtendrán del campo <shortname> de Moodle usando ETL.',
-	PRIMARY KEY(id_curso)
-) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Información central de los cursos. Los registros de está tabla se obtendrán de la tabla <mdl_course> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
 CREATE TABLE IF NOT EXISTS examenes(
 	id_examen BIGINT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Identificador de  un examen. Los valores de esté campo se obtendrán del campo <id> de Moodle usando ETL.',
@@ -150,6 +158,9 @@ CREATE TABLE IF NOT EXISTS mapas(
 ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_usuarios
 FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario);
 
+ALTER TABLE bitacoras ADD CONSTRAINT fk_bitacoras_centros_educativos
+FOREIGN KEY(id_centro_educativo) REFERENCES centros_educativos(id_centro_educativo);
+
 ALTER TABLE centros_educativos ADD CONSTRAINT fk_centros_educativos_departamentos
 FOREIGN KEY(id_departamento) REFERENCES departamentos(id_departamento);
 
@@ -162,8 +173,14 @@ FOREIGN KEY(id_municipio) REFERENCES municipios(id_municipio);
 ALTER TABLE departamentos ADD CONSTRAINT fk_departamentos_mapas
 FOREIGN KEY(id_mapa) REFERENCES mapas(id_mapa);
 
+ALTER TABLE cursos_categorias ADD CONSTRAINT fk_cursos_categorias_cursos_categorias
+FOREIGN KEY(padre_curso_categoria) REFERENCES cursos_categorias(id_curso_categoria);
+
+ALTER TABLE cursos ADD CONSTRAINT fk_cursos_cursos_categorias
+FOREIGN KEY(id_curso_categoria) REFERENCES cursos_categorias(id_curso_categoria);
+
 ALTER TABLE matriculas ADD CONSTRAINT fk_matriculas_cursos
-FOREIGN KEY(id_curso) REFERENCES cursos(id_curso) ON DELETE RESTRICT ON UPDATE RESTRICT;
+FOREIGN KEY(id_curso) REFERENCES cursos(id_curso);
 
 ALTER TABLE examenes ADD CONSTRAINT fk_examenes_cursos
 FOREIGN KEY(id_curso) REFERENCES cursos(id_curso);
@@ -210,41 +227,6 @@ FOREIGN KEY(id_profesion) REFERENCES profesiones(id_profesion);
 -- ============================================================================================================================================================
 
 USE syscap;
-
-DELIMITER $$
-DROP FUNCTION IF EXISTS acentos $$
-CREATE FUNCTION acentos(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
-COMMENT 'Función que corrige los problemas de tildes.'
-DETERMINISTIC
-READS SQL DATA
-BEGIN
-	DECLARE v_cadena CHAR(255);
-	
-	SET v_cadena = p_cadena;
-	SET v_cadena = REPLACE(v_cadena, 'Ã', 'Á');
-	SET v_cadena = REPLACE(v_cadena, 'ã¡', 'á');
-	SET v_cadena = REPLACE(v_cadena, 'ã©', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'í¨', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'í‰', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'í¨', 'é');
-	SET v_cadena = REPLACE(v_cadena, 'ã¬', 'í');
-	SET v_cadena = REPLACE(v_cadena, 'ã', 'í');
-	SET v_cadena = REPLACE(v_cadena, 'ã²', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'ã³', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'í³', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'í²', 'ó');
-	SET v_cadena = REPLACE(v_cadena, 'íº', 'ú');
-	SET v_cadena = REPLACE(v_cadena, 'í¹', 'ú');
-	SET v_cadena = REPLACE(v_cadena, 'ã‘', 'ñ');
-	SET v_cadena = REPLACE(v_cadena, 'í‘', 'ñ');
-	SET v_cadena = REPLACE(v_cadena, 'í±', 'ñ');
-	SET v_cadena = REPLACE(v_cadena, 'ã±', 'ñ');
-	
-	RETURN v_cadena;
-END$$
-DELIMITER ;
-
--- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS initcap $$
@@ -333,14 +315,14 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
-CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(300)
+CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(305)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'Función que devuelve el nombre completo de un usuario.'
+COMMENT 'Función que devuelve el nombre completo (todos los nombres y todos los apellidos) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
-	DECLARE v_nombre_completo_usuario VARCHAR(300);
+	DECLARE v_nombre_completo_usuario VARCHAR(305);
 	DECLARE v_nombres_usuario VARCHAR(100);
 	DECLARE v_apellido1_usuario VARCHAR(100);
 	DECLARE v_apellido2_usuario VARCHAR(100);
@@ -383,12 +365,12 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
-CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(300)
+CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(150)
 DETERMINISTIC
 READS SQL DATA
 COMMENT 'Función que devuelve el nombre de un centro educativo.'
 BEGIN
-	DECLARE v_nombre_centro_educativo VARCHAR(300);
+	DECLARE v_nombre_centro_educativo VARCHAR(150);
 	DECLARE v_termina INT DEFAULT FALSE;
 	
 	DECLARE c_nombre_centro_educativo CURSOR FOR
@@ -410,6 +392,50 @@ BEGIN
 	CLOSE c_nombre_centro_educativo;
 	
 	RETURN v_nombre_centro_educativo;
+END;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreCompactoUsuario $$
+CREATE FUNCTION F_NombreCompactoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(205)
+NOT DETERMINISTIC
+SQL SECURITY DEFINER
+COMMENT 'Función que devuelve el nombre compacto (un nombre y un apellido) de un usuario.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_nombre_compacto_usuario VARCHAR(205);
+	DECLARE v_nombres_usuario VARCHAR(100);
+	DECLARE v_apellido1_usuario VARCHAR(100);
+	DECLARE v_termina INT DEFAULT FALSE;
+	
+	DECLARE c_nombre_compacto_usuario CURSOR FOR
+		SELECT
+			IF(LOCATE(' ', nombres_usuario) > 0, SUBSTRING(nombres_usuario, LOCATE(' ', nombres_usuario) + 1), nombres_usuario) nombres_usuario,
+			IF(LOCATE(' ', apellido1_usuario) > 0, SUBSTRING(apellido1_usuario, LOCATE(' ', apellido1_usuario) + 1), apellido1_usuario) apellido1_usuario
+		FROM usuarios
+		WHERE id_usuario = p_codigo_usuario;
+	
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_compacto_usuario;
+	recorre_cursor: LOOP
+		FETCH c_nombre_compacto_usuario
+		INTO v_nombres_usuario, v_apellido1_usuario;
+		
+		SET v_nombre_compacto_usuario = (SELECT CONCAT(v_nombres_usuario, ' ', v_apellido1_usuario));
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_compacto_usuario;
+	
+	RETURN v_nombre_compacto_usuario;
 END;
 $$
 DELIMITER ;
@@ -447,23 +473,23 @@ SELECT
 	c.nombre_completo_curso c_nombre_completo_curso,
     c.nombre_corto_curso c_nombre_corto_curso
 FROM
-	usuarios u LEFT JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
-	LEFT JOIN examenes e ON(ec.id_examen = e.id_examen)
-	LEFT JOIN cursos c ON(e.id_curso = c.id_curso)
-	LEFT JOIN tipos_usuarios tu ON(u.id_tipo_usuario = tu.id_tipo_usuario)
-	LEFT JOIN profesiones p ON(u.id_profesion = p.id_profesion)
-	LEFT JOIN niveles_estudios ne ON(u.id_nivel_estudio = ne.id_nivel_estudio)
-	LEFT JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo)
-    LEFT JOIN departamentos d ON(u.id_departamento = d.id_departamento)
-    LEFT JOIN municipios m ON(u.id_municipio = m.id_municipio);
+	usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
+	LEFT JOIN cursos c ON e.id_curso = c.id_curso
+	LEFT JOIN tipos_usuarios tu ON u.id_tipo_usuario = tu.id_tipo_usuario
+	LEFT JOIN profesiones p ON u.id_profesion = p.id_profesion
+	LEFT JOIN niveles_estudios ne ON u.id_nivel_estudio = ne.id_nivel_estudio
+	LEFT JOIN centros_educativos ce ON u.id_centro_educativo = ce.id_centro_educativo
+    LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
+    LEFT JOIN municipios m ON u.id_municipio = m.id_municipio;
 $$
 DELIMITER ;
 
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP VIEW IF EXISTS V_EstadisticaDepartamentoFecha $$
-CREATE VIEW V_EstadisticaDepartamentoFecha AS
+DROP VIEW IF EXISTS V_Estadisticas $$
+CREATE VIEW V_Estadisticas AS
 SELECT
 	F_NombreCompletoUsuario(u.id_usuario) nombre_usuario,
 	ec.nota_examen_calificacion nota_examen_calificacion,
@@ -476,27 +502,36 @@ SELECT
 	m.id_municipio id_municipio,
 	m.nombre_municipio nombre_municipio,
 	ce.id_centro_educativo id_centro_educativo,
-	ce.nombre_centro_educativo nombre_centro_educativo
-FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
-	JOIN examenes e ON(ec.id_examen = e.id_examen)
-	JOIN departamentos d ON(u.id_departamento = d.id_departamento)
-	JOIN municipios m ON(u.id_municipio = m.id_municipio)
-	JOIN centros_educativos ce ON(u.id_centro_educativo = ce.id_centro_educativo);
+	ce.nombre_centro_educativo nombre_centro_educativo,
+	u.id_tipo_usuario,
+	u.id_usuario
+FROM usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
+	LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
+	LEFT JOIN municipios m ON u.id_municipio = m.id_municipio
+	LEFT JOIN centros_educativos ce ON u.id_centro_educativo = ce.id_centro_educativo;
 $$
 DELIMITER ;
 
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP VIEW IF EXISTS V_EstadisticaModalidad $$
-CREATE VIEW V_EstadisticaModalidad AS
+DROP VIEW IF EXISTS V_EstadisticasGradoDigital $$
+CREATE VIEW V_EstadisticasGradoDigital AS
 SELECT
-	ec.nota_examen_calificacion nota_examen_calificacion,
-	u.modalidad_usuario modalidad_usuario,
-	e.nombre_examen nombre_examen,
-	ec.fecha_examen_calificacion fecha_examen_calificacion
-FROM usuarios u JOIN examenes_calificaciones ec ON(u.id_usuario = ec.id_usuario)
-	JOIN examenes e ON(ec.id_examen = e.id_examen);
+	IF(c.nombre_completo_curso LIKE 'Curso%', 'Capacitados', IF(c.nombre_completo_curso LIKE '%Certificaci%', 'Certificados', c.nombre_completo_curso)) tipo_capacitado,
+	u.modalidad_usuario,
+	IF(cc.padre_curso_categoria = 26, 1, IF(cc.padre_curso_categoria = 23, 2, IF(cc.padre_curso_categoria = 24, 3, IF(cc.padre_curso_categoria = 25, 4, cc.padre_curso_categoria)))) grado_digital,
+	ec.fecha_examen_calificacion,
+	cc.nombre_curso_categoria,
+	c.nombre_completo_curso
+FROM usuarios u
+	LEFT JOIN roles_asignados ra ON u.id_usuario = ra.id_usuario
+	LEFT JOIN matriculas m ON ra.id_matricula = m.id_matricula
+	LEFT JOIN cursos c ON m.id_curso = c.id_curso
+	LEFT JOIN cursos_categorias cc ON c.id_curso_categoria = cc.id_curso_categoria
+	LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
+WHERE ec.nota_examen_calificacion > 7.00;
 $$
 DELIMITER ;
 
@@ -666,6 +701,21 @@ SELECT IF(moodle19.mdl_cat_profesion.row_id < 10, CONCAT('0', moodle19.mdl_cat_p
 FROM moodle19.mdl_cat_profesion
 WHERE moodle19.mdl_cat_profesion.row_id IS NOT NULL AND moodle19.mdl_cat_profesion.descripcion IS NOT NULL;
 
+/* CURSOS_CATEGORIAS */
+-- copiar a syscap.cursos_categorias los registros de moodle19.mdl_course_categories
+TRUNCATE syscap.cursos_categorias;
+INSERT INTO syscap.cursos_categorias(syscap.cursos_categorias.id_curso_categoria, syscap.cursos_categorias.nombre_curso_categoria, syscap.cursos_categorias.padre_curso_categoria)
+SELECT moodle19.mdl_course_categories.id, moodle19.mdl_course_categories.name, moodle19.mdl_course_categories.parent
+FROM moodle19.mdl_course_categories;
+
+/* CURSOS */
+-- copiar a syscap.cursos los registros de moodle19.mdl_course
+TRUNCATE syscap.cursos;
+INSERT INTO syscap.cursos(syscap.cursos.id_curso, syscap.cursos.id_curso_categoria, syscap.cursos.nombre_completo_curso, syscap.cursos.nombre_corto_curso)
+SELECT moodle19.mdl_course.id, moodle19.mdl_course.category, moodle19.mdl_course.fullname, moodle19.mdl_course.shortname
+FROM moodle19.mdl_course
+WHERE moodle19.mdl_course.id IS NOT NULL AND moodle19.mdl_course.fullname IS NOT NULL AND moodle19.mdl_course.shortname IS NOT NULL;
+
 /* MATRICULAS */
 -- copiar a syscap.matriculas los registros de moodle19.mdl_context
 TRUNCATE syscap.matriculas;
@@ -673,14 +723,6 @@ INSERT INTO syscap.matriculas(syscap.matriculas.id_matricula, syscap.matriculas.
 SELECT moodle19.mdl_context.id, moodle19.mdl_context.instanceid
 FROM moodle19.mdl_context
 WHERE moodle19.mdl_context.id IS NOT NULL AND moodle19.mdl_context.instanceid IS NOT NULL;
-
-/* CURSOS */
--- copiar a syscap.cursos los registros de moodle19.mdl_course
-TRUNCATE syscap.cursos;
-INSERT INTO syscap.cursos(syscap.cursos.id_curso, syscap.cursos.nombre_completo_curso, syscap.cursos.nombre_corto_curso)
-SELECT moodle19.mdl_course.id, moodle19.mdl_course.fullname, moodle19.mdl_course.shortname
-FROM moodle19.mdl_course
-WHERE moodle19.mdl_course.id IS NOT NULL AND moodle19.mdl_course.fullname IS NOT NULL AND moodle19.mdl_course.shortname IS NOT NULL;
 
 /* EXAMENES */
 -- copiar a syscap.examenes los registros de moodle19.mdl_quiz
@@ -720,7 +762,7 @@ TRUNCATE syscap.usuarios;
 INSERT INTO syscap.usuarios(syscap.usuarios.id_usuario, syscap.usuarios.nombre_usuario, syscap.usuarios.contrasena_usuario, syscap.usuarios.id_tipo_usuario, syscap.usuarios.nombres_usuario, syscap.usuarios.apellido1_usuario, syscap.usuarios.apellido2_usuario, syscap.usuarios.dui_usuario, syscap.usuarios.sexo_usuario, syscap.usuarios.id_profesion, syscap.usuarios.id_nivel_estudio, syscap.usuarios.correo_electronico_usuario, syscap.usuarios.telefono1_usuario, syscap.usuarios.telefono2_usuario, syscap.usuarios.id_centro_educativo, syscap.usuarios.id_departamento, syscap.usuarios.id_municipio, syscap.usuarios.pais_usuario, syscap.usuarios.direccion_usuario, syscap.usuarios.ciudad_usuario, syscap.usuarios.fecha_nacimiento_usuario, syscap.usuarios.modalidad_usuario)
 SELECT moodle19.mdl_user.id, moodle19.mdl_user.username, moodle19.mdl_user.password, moodle19.mdl_user.tipo, syscap.initcap(moodle19.mdl_user.firstname), syscap.initcap(moodle19.mdl_user.lastname), syscap.initcap(moodle19.mdl_user.apellido2), moodle19.mdl_user.dui, moodle19.mdl_user.sexo, moodle19.mdl_user.profesion, moodle19.mdl_user.nestudio, moodle19.mdl_user.email, moodle19.mdl_user.phone1, moodle19.mdl_user.phone2, moodle19.mdl_user.tinstitucion, moodle19.mdl_user.deptorec, moodle19.mdl_user.munirec, moodle19.mdl_user.country, syscap.initcap(moodle19.mdl_user.address), syscap.initcap(moodle19.mdl_user.city), moodle19.mdl_user.fnacimiento, IF(moodle19.mdl_user.auth = 'manual', 'tutorizado', IF(moodle19.mdl_user.auth = 'email', 'autoformacion', NULL)) auth
 FROM moodle19.mdl_user
-WHERE moodle19.mdl_user.id IS NOT NULL /*AND moodle19.mdl_user.username IS NOT NULL AND moodle19.mdl_user.password IS NOT NULL AND moodle19.mdl_user.tipo IS NOT NULL AND moodle19.mdl_user.firstname IS NOT NULL AND moodle19.mdl_user.lastname IS NOT NULL AND moodle19.mdl_user.apellido2 IS NOT NULL AND moodle19.mdl_user.dui IS NOT NULL AND moodle19.mdl_user.sexo IS NOT NULL AND moodle19.mdl_user.profesion IS NOT NULL AND moodle19.mdl_user.nestudio IS NOT NULL AND moodle19.mdl_user.email IS NOT NULL AND moodle19.mdl_user.phone1 IS NOT NULL AND moodle19.mdl_user.phone2 IS NOT NULL AND moodle19.mdl_user.tinstitucion IS NOT NULL AND moodle19.mdl_user.deptorec IS NOT NULL AND moodle19.mdl_user.munirec IS NOT NULL AND moodle19.mdl_user.country IS NOT NULL AND moodle19.mdl_user.address IS NOT NULL AND moodle19.mdl_user.city IS NOT NULL AND moodle19.mdl_user.fnacimiento IS NOT NULL*/;
+/*WHERE moodle19.mdl_user.id IS NOT NULL AND moodle19.mdl_user.username IS NOT NULL AND moodle19.mdl_user.password IS NOT NULL AND moodle19.mdl_user.tipo IS NOT NULL AND moodle19.mdl_user.firstname IS NOT NULL AND moodle19.mdl_user.lastname IS NOT NULL AND moodle19.mdl_user.apellido2 IS NOT NULL AND moodle19.mdl_user.dui IS NOT NULL AND moodle19.mdl_user.sexo IS NOT NULL AND moodle19.mdl_user.profesion IS NOT NULL AND moodle19.mdl_user.nestudio IS NOT NULL AND moodle19.mdl_user.email IS NOT NULL AND moodle19.mdl_user.phone1 IS NOT NULL AND moodle19.mdl_user.phone2 IS NOT NULL AND moodle19.mdl_user.tinstitucion IS NOT NULL AND moodle19.mdl_user.deptorec IS NOT NULL AND moodle19.mdl_user.munirec IS NOT NULL AND moodle19.mdl_user.country IS NOT NULL AND moodle19.mdl_user.address IS NOT NULL AND moodle19.mdl_user.city IS NOT NULL AND moodle19.mdl_user.fnacimiento IS NOT NULL*/;
 
 /* TIPOS_USUARIOS */
 -- copiar a syscap.tipos_usuarios los registros de la lista desplegable del formulario inscripcion de usuarios de EducaContinua

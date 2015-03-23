@@ -25,14 +25,13 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios a Nivel Nacional', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de indice a Nivel Nacional', 3, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
@@ -43,7 +42,7 @@
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
 					<table class="table table-striped table-bordered table-hover">
@@ -58,23 +57,20 @@
 						</thead>
 						<tbody>
 							<?php
-							$usuarios = 1;
+							$indice = 1;
 							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
-								if($usuario_nivel_nacional->nombre_municipio != 'TOTAL'){
+								if($usuario_nivel_nacional->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $usuarios++; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
 								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
 								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $usuarios++; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
 								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
 								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
@@ -86,18 +82,22 @@
 							?>
 						</tbody>
 					</table>
+					<?= (!empty($sin_departamento) && !empty($sin_municipio)) ? $sin_departamento.br().$sin_municipio : (!empty($sin_departamento) ? $sin_departamento : (!empty($sin_municipio) ? $sin_municipio : '')); ?>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if(count($usuarios_nivel_nacional) > 1){ ?>
 					<div id="morris-bar-chart-estadistica10-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
+		<?php if(count($usuarios_nivel_nacional) > 1){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica10-1',
 					data: [<?= $usuarios_nivel_nacional_json; ?>],
@@ -109,5 +109,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

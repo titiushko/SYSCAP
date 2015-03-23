@@ -8,7 +8,7 @@
 <?= $mapa['js']; ?>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header">Modulo de Mapa Estadístico</h1>
+		<h1 class="well page-header"><i class="fa fa-map-marker fa-fw"></i> Modulo de Mapa Estadístico</h1>
 	</div>
 </div>
 <div class="row">
@@ -53,9 +53,9 @@
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript">
 $(document).ready(function(){
 	$('#data-tables-mapa').dataTable({
 		language:{

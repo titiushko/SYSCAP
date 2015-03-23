@@ -17,7 +17,6 @@
 		?>
 		<title>SYSCAP</title>
 		<?= link_tag('resources/plugins/bootstrap/css/bootstrap.min.css'); ?>
-		<?= link_tag('resources/plugins/metis-menu/css/metis-menu.min.css'); ?>
 		<?= link_tag('resources/plugins/morris/css/morris.css'); ?>
 		<?= link_tag('resources/plugins/font-awesome/css/font-awesome.min.css'); ?>
 		<?= link_tag('resources/plugins/data-tables/css/data-tables.bootstrap.css'); ?>
@@ -32,13 +31,33 @@
 		<![endif]-->
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/metis-menu/js/metis-menu.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	    <script type="text/javascript" src="<?= base_url(); ?>resources/js/funciones.js"></script>
 		<script type="text/javascript">
+			var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+			var boton_menu = <?= $this->session->userdata('boton_menu') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+			$(document).ready(function(){
+				$(".fa.fa-bars.tooltips").click(function(){
+					if ($('#sidebar > ul').is(":visible") === true){
+						$.post('<?= base_url('index.php/ajax/boton_menu'); ?>', {boton_menu: "FALSE"}, function(resultado){
+							boton_menu = resultado;
+						});
+					}
+					else{
+						$.post('<?= base_url('index.php/ajax/boton_menu'); ?>', {boton_menu: "TRUE"}, function(resultado){
+							boton_menu = resultado;
+						});
+					}
+				});
+			});
 			$(function(){
-				var carousel = <?= $this->config->item('carousel') ? '\'TRUE\'' : '\'FALSE\''; ?>;
+				if(boton_menu == 'TRUE'){
+					mostrar_ocultar_menu(true);
+				}
+				else{
+					mostrar_ocultar_menu(false);
+				}
 				if(carousel == 'TRUE'){
 					$('.wrapper').css({
 						"margin-top": "0px"
@@ -55,21 +74,24 @@
 						"margin-top": "75px"
 					});
 				}
-				var nombre_corto_rol = <?= $this->session->userdata('nombre_corto_rol') == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
-				if(nombre_corto_rol == 'TRUE'){
+			});
+			function mostrar_ocultar_menu(opcion){
+				if(opcion){
+					$('#sidebar > ul').show();
+					$("#container").removeClass("sidebar-closed");
 					$('#main-content').css({
 						'margin-left': '307px'
 					});
 					$('#footer').css({
 						'margin-left': '307px'
 					});
-					$('#sidebar > ul').show();
 					$('#sidebar').css({
 						'margin-left': '0'
 					});
-					$("#container").removeClass("sidebar-closed");
 				}
 				else{
+					$('#sidebar > ul').hide();
+					$("#container").addClass("sidebar-closed");
 					$('#main-content').css({
 						'margin-left': '0px'
 					});
@@ -79,17 +101,8 @@
 					$('#footer').css({
 						'margin-left': '0px'
 					});
-					$('#sidebar > ul').hide();
-					$("#container").addClass("sidebar-closed");
 				}
-				/*
-				window.location.hash = "no-back-button";
-				window.location.hash = "again-no-back-button";
-				window.onhashchange = function(){
-					window.location.hash = "no-back-button";
-				}
-				*/
-			});
+			}
 		</script>
 	</head>
 	<body <?= @$eventos_body; ?>>
@@ -100,15 +113,13 @@
 			<!--header start-->
 			<header class="header black-bg navbar-fixed-top">
 				<div class="sidebar-toggle-box">
-				<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
-					<div class="btn btn-default">
-						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+					<div id="toggle-syscap" class="btn btn-default">
+						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Mostrar/Ocultar Menú"></div>
 					</div>
-				<?php } ?>
 				</div>
 				<!--logo start-->
 				<div>
-					<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
+					<?php if($this->session->userdata('nombre_corto_rol') == 'admin' && uri_string(1) != 'ayuda'){ ?>
 					<a class="logo" href="<?= base_url(); ?>inicio">
 					<?php } else{ ?>
 					<a class="logo">
@@ -136,21 +147,26 @@
 			MAIN SIDEBAR MENU
 			*********************************************************************************************************************************************************** -->
 			<!--sidebar start-->
-			<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 			<aside>
-				<div id="sidebar"  class="nav-collapse">
+				<div id="sidebar" class="nav-collapse">
 					<!-- sidebar menu start-->
 					<ul class="sidebar-menu" id="nav-accordion">
+					<?php if(uri_string(1) != 'ayuda'){ ?>
+						<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['inicio']; ?>" href="<?= base_url(); ?>inicio">
 								<i class="fa fa-home fa-fw"></i> Inicio
 							</a>
 						</li>
+						<?php } ?>
+						<?php if($this->session->userdata('nombre_corto_rol') != 'student'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_usuarios']; ?>" href="<?= base_url(); ?>usuarios">
 								<i class="fa fa-users fa-fw"></i> Modulo Usuarios
 							</a>
 						</li>
+						<?php } ?>
+						<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_centros_educativos']; ?>" href="<?= base_url(); ?>centros_educativos">
 								<i class="fa fa-university fa-fw"></i> Modulo Centros Educativos
@@ -165,13 +181,13 @@
 								<li class="<?= @$estadistica[2]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/2">Departamento y Rango de Fechas</a></li>
 								<li class="<?= @$estadistica[3]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/3">Total por Departamento y Rango de Fechas</a></li>
 								<li class="<?= @$estadistica[4]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/4">Departamento, Municipio y Rango de Fechas</a></li>
-								<!--<li class="<?= @$estadistica[5]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/5">Tipo de Capacitados y Fecha a Nivel Nacional</a></li>-->
+								<li class="<?= @$estadistica[5]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/5">Tipo de Capacitados y Fecha a Nivel Nacional</a></li>
 								<li class="<?= @$estadistica[6]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/6">Tipo de Capacitados, Departamento y Fecha</a></li>
 								<li class="<?= @$estadistica[7]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/7">Tipo de Capacitados, Departamento y Municipio</a></li>
 								<li class="<?= @$estadistica[8]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/8">Departamento, Tipo de Capacitados y Fecha</a></li>
 								<li class="<?= @$estadistica[9]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/9">Tipo de Capacitados y Centro Educativo</a></li>
 								<li class="<?= @$estadistica[10]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/10">Nivel Nacional</a></li>
-								<!--<li class="<?= @$estadistica[11]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/11">Grado Digital</a></li>-->
+								<li class="<?= @$estadistica[11]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/11">Grado Digital</a></li>
 							</ul>
 						</li>
 						<li class="sub-menu">
@@ -179,12 +195,21 @@
 								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
 							</a>
 						</li>
-						<li><?= anchor_popup('ayuda/modulo/opcion', '<i class="fa fa-life-ring fa-fw"></i> Ayuda', array('width'=>'600', 'height'=>'800', 'left'=>'50', 'top'=>'50', 'toolbar'=>'yes')); ?></li>
+						<?php } ?>
+						<li class="sub-menu">
+							<?= anchor_popup('ayuda'.uri_ayuda(uri_string()), '<i class="fa fa-life-ring fa-fw"></i> Ayuda', array('width'=>'600', 'height'=>'800', 'left'=>'50', 'top'=>'50', 'toolbar'=>'yes')); ?>
+						</li>
+					<?php } else{ ?>
+						<li class="sub-menu">
+							<a class="enlace" onclick="javascript:window.close();">
+								<i class="fa fa-times"></i> Cerrar Ayuda
+							</a>
+						</li>
+					<?php } ?>
 					</ul>
 					<!-- sidebar menu end-->
 				</div>
 			</aside>
-			<?php } ?>
 			<!--sidebar end-->
 			<!-- **********************************************************************************************************************************************************
 			MAIN CONTENT
@@ -230,26 +255,19 @@
 				<section class="wrapper">
 					<div id="page-wrapper">
 						<!-- Modal -->
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="modal fade" id="<?= @$id_modal; ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-									<div class="modal-dialog">
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-												<h4 class="modal-title" id="myModalLabel"><?= @$titulo_notificacion; ?></h4>
-											</div>
-											<div class="modal-body">
-												<?= @$mensaje_notificacion; ?>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
+						<?php
+						if(!empty($notificaciones)){
+							if(is_array($notificaciones)){
+								foreach(@$notificaciones as $indice => $notificacion){
+									echo $notificacion;
+								}
+							}
+							else{
+								echo @$notificaciones;
+							}
+						}
+						?>
+						<!-- Modal End -->
 						<?php
 						if(isset($pagina)){
 							$this->load->view(@$pagina);
@@ -263,7 +281,7 @@
 			<footer id="footer" class="site-footer">
 				<div class="text-center">
 					SYSCAP - 2015
-					<a href="<?= base_url().uri_string().'#'; ?>" class="go-top">
+					<a href="<?= current_url().'#'; ?>" class="go-top">
 						<i class="fa fa-angle-up"></i>
 					</a>
 				</div>

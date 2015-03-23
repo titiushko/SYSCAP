@@ -5,14 +5,15 @@ $formulario_consultar = array(
 	'role'		=> 'form'
 );
 $fecha = array(
-	'name'		=> '',
-	'id'		=> '',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> '',
-	'type'		=> 'date',
-	'required'	=> 'required',
-	'class'		=> 'form-control'
+	'name'			=> '',
+	'id'			=> '',
+	'maxlength'		=> '60',
+	'size'			=> '20',
+	'value'			=> '',
+	'type'			=> 'date',
+	'autocomplete'	=> 'off',
+	'required'		=> 'required',
+	'class'			=> 'form-control'
 );
 $boton_primario = array(
 	'name'		=> 'boton_primario',
@@ -106,29 +107,25 @@ $campos_ocultos_formulario = array(
 						</thead>
 						<tbody>
 							<?php
-							$cantidades = 1;
+							$indice = 1;
 							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
-								if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+								if($cantidad_municipio->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $cantidades; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
 								<td><?= bold($cantidad_municipio->capacitados); ?></td>
 								<td><?= bold($cantidad_municipio->certificados); ?></td>
 							</tr>
 							<?php
 								}
-							$cantidades++;
 							}
 							?>
 						</tbody>
@@ -136,7 +133,9 @@ $campos_ocultos_formulario = array(
 				</div>
 			</div>
 			<div class="col-lg-6">
+				<?php if(count($cantidad_usuarios_municipio) > 1){ ?>
 				<a data-toggle="modal" href="#myModalChart"><div id="morris-bar-chart-estadistica2-1"></div></a>
+				<?php } ?>
 			</div>
 		</div>
 	</div>
@@ -164,15 +163,12 @@ $campos_ocultos_formulario = array(
 							foreach($usuarios_municipio as $usuario_municipio){
 							?>
 							<tr>
-								<td><?= $usuarios; ?></td>
+								<td><?= $usuarios++; ?></td>
 								<td><?= utf8($usuario_municipio->nombre_municipio); ?></td>
 								<td><?= utf8($usuario_municipio->nombre_usuario); ?></td>
 								<td><?= utf8($usuario_municipio->modalidad_usuario); ?></td>
 							</tr>
-							<?php
-							$usuarios++;
-							}
-							?>
+							<?php } ?>
 						</tbody>
 					</table>
 				</div>
@@ -183,14 +179,14 @@ $campos_ocultos_formulario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(document).ready(function(){
 		$('#data-tables-estadistica2-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
 			"ordering":		false,
 			"info":			false,
-			"oLanguage": {
-				"oPaginate": {
+			"oLanguage":{
+				"oPaginate":{
 					"sFirst":		"<<",
 					"sLast":		">>",
 					"sNext":		">",
@@ -207,10 +203,11 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php if(count($cantidad_usuarios_municipio) > 1){ ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 <script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 <script type="text/javascript">
-	$(function() {
+	$(function(){
 		Morris.Bar({
 			element: 'morris-bar-chart-estadistica2-1',
 			data: [<?= $cantidad_usuarios_municipio_json; ?>],
@@ -231,3 +228,4 @@ $campos_ocultos_formulario = array(
 		});
 	});
 </script>
+<?php } ?>

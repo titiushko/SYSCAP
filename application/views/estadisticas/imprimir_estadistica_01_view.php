@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -44,7 +43,7 @@
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
 					<table class="table table-striped table-bordered table-hover">
@@ -63,21 +62,18 @@
 							<?php
 							$cantidades = 1;
 							foreach($modalidades_capacitados as $modalidad_capacitado){
-								if($modalidad_capacitado->tipos_capacitados != 'TOTAL'){
+								if($modalidad_capacitado->tipos_capacitados != 'Total'){
 							?>
 							<tr>
 								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
-								<td><?= $modalidad_capacitado->tutorizados; ?></td>
-								<td><?= $modalidad_capacitado->autoformacion; ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
+								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
 								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
-								<td><?= bold($modalidad_capacitado->tutorizados); ?></td>
-								<td><?= bold($modalidad_capacitado->autoformacion); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
+								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
 							</tr>
 							<?php
 								}
@@ -87,16 +83,19 @@
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 					<div id="morris-bar-chart-estadistica1-1"></div>
+					<?php } ?>
 				</div>
 			</div>
 		</div>
+		<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica1-1',
 					data: [<?= $modalidades_capacitados_json; ?>],
@@ -108,5 +107,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

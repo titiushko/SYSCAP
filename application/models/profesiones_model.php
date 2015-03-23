@@ -7,7 +7,7 @@ class Profesiones_model extends CI_Model{
 	
 	function lista_profesiones(){
 		$lista_profesiones[''] = '';
-		$query = $this->db->select('id_profesion, acentos(nombre_profesion) nombre_profesion');
+		$query = $this->db->select('id_profesion, nombre_profesion nombre_profesion');
 		$query = $this->db->order_by('nombre_profesion', 'asc');
 		$query = $this->db->get('profesiones');
 		foreach($query->result() as $profesion){
@@ -18,7 +18,7 @@ class Profesiones_model extends CI_Model{
 	
 	function nombre_profesion($codigo_profesion){
 		if($codigo_profesion != NULL){
-			$query = $this->db->select('acentos(nombre_profesion) nombre_profesion');
+			$query = $this->db->select('nombre_profesion nombre_profesion');
 			$query = $this->db->where('id_profesion', $codigo_profesion);
 			$query = $this->db->get('profesiones');
 			if($query->row())

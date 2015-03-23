@@ -9,7 +9,6 @@
 		<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
 		<title>SYSCAP</title>
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/metis-menu/css/metis-menu.min.css" rel="stylesheet" type="text/css" />
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/modern-business.css" rel="stylesheet" type="text/css" />
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 		<link href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/data-tables/css/data-tables.bootstrap.css" rel="stylesheet" type="text/css" />
@@ -23,55 +22,25 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/bootstrap/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/metis-menu/js/metis-menu.min.js"></script>
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.dcjqaccordion.js"></script>
 		<script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/plugins/jquery/jquery.scrollTo.min.js"></script>
 	    <script type="text/javascript" src="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/resources/js/funciones.js"></script>
-		<script type="text/javascript">
-			$(function(){
-				var nombre_corto_rol = <?= $role == 'admin' ? '\'TRUE\'' : '\'FALSE\''; ?>;
-				if(nombre_corto_rol == 'TRUE'){
-					$('#main-content').css({
-						'margin-left': '307px'
-					});
-					$('#footer').css({
-						'margin-left': '307px'
-					});
-					$('#sidebar > ul').show();
-					$('#sidebar').css({
-						'margin-left': '0'
-					});
-					$("#container").removeClass("sidebar-closed");
-				}
-				else{
-					$('#main-content').css({
-						'margin-left': '0px'
-					});
-					$('#sidebar').css({
-						'margin-left': '-307px'
-					});
-					$('#footer').css({
-						'margin-left': '0px'
-					});
-					$('#sidebar > ul').hide();
-					$("#container").addClass("sidebar-closed");
-				}
-			});
-		</script>
 	</head>
 	<body>
 		<section id="container" >
 			<header class="header black-bg navbar-fixed-top">
 				<div class="sidebar-toggle-box">
-				<?php if($role == 'admin'){ ?>
-					<div class="btn btn-default">
-						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+					<div id="toggle-syscap" class="btn btn-default">
+						<div class="fa fa-bars tooltips" data-placement="right" data-original-title="Mostrar/Ocultar Menú"></div>
 					</div>
-				<?php } ?>
 				</div>
 				<div>
+					<?php if(@$role == 'admin'){ ?>
 					<a class="logo" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/inicio">
+					<?php } else{ ?>
+					<a class="logo">
+					<?php } ?>
 						<b class="visible-desktop" title="Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones">Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones</b>
 						<b class="visible-phone visible-tablet" title="Sistema Inform&aacute;tico para apoyar el Control y Administraci&oacute;n de Capacitaciones">SYSCAP</b>
 					</a>
@@ -79,28 +48,36 @@
 				<div class="top-menu btn-toolbar dropdown-user">
 					<div class="btn-group">
 						<a class="btn btn-primary dropdown-toggle dropdown-user-name" data-toggle="dropdown" data-hover="dropdown">
-							<i class="fa fa-user fa-fw"></i><?= $username; ?><i class="caret"></i>
+							<i class="fa fa-user fa-fw"></i><?= @$username; ?><i class="caret"></i>
 						</a>
 						<ul class="dropdown-menu dropdown-user-name">
+							<?php if(isset($complete_role)){ ?>
+							<li><a><?= @$complete_role; ?></a></li>
+							<li class="divider"></li>
+							<?php } ?>
 							<li><a href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/sesion/cerrar_sesion"><i class="fa fa-sign-out fa-fw"></i> Salir</a></li>
 						</ul>
 					</div>
 				</div>
 			</header>
-			<?php if($role == 'admin'){ ?>
 			<aside>
-				<div id="sidebar"  class="nav-collapse">
+				<div id="sidebar" class="nav-collapse">
 					<ul class="error sidebar-menu" id="nav-accordion">
+						<?php if(@$role == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/inicio">
 								<i class="fa fa-home fa-fw"></i> Inicio
 							</a>
 						</li>
+						<?php } ?>
+						<?php if(@$role == 'admin' || @$role == 'moderador'){ ?>
 						<li class="sub-menu">
 							<a class="" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/usuarios">
 								<i class="fa fa-users fa-fw"></i> Modulo Usuarios
 							</a>
 						</li>
+						<?php } ?>
+						<?php if(@$role == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/centros_educativos">
 								<i class="fa fa-university fa-fw"></i> Modulo Centros Educativos
@@ -129,11 +106,15 @@
 								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
 							</a>
 						</li>
-						<li><a href='javascript:void(0);' onclick="window.open('<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/ayuda', '_blank', 'width=600,height=400,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0');" left="50" top="50" toolbar="yes"><i class="fa fa-life-ring fa-fw"></i> Ayuda</a></li>
+						<?php } ?>
+						<li class="sub-menu">
+							<a href="javascript:void(0);" onclick="window.open('<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/ayuda', '_blank', 'width=600,height=800,scrollbars=yes,status=yes,resizable=yes,screenx=0,screeny=0');" left="50" top="50" toolbar="yes">
+								<i class="fa fa-life-ring fa-fw"></i> Ayuda
+							</a>
+						</li>
 					</ul>
 				</div>
 			</aside>
-			<?php } ?>
 			<section id="main-content">
 				<section class="error wrapper">
 					<div id="page-wrapper">
@@ -149,9 +130,13 @@
 										<h3>P&aacute;gina no Encontrada</h3>
 									</div>
 									<div class="panel-body">
-										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= $page; ?></b> a la que intenta acceder no existe!</p>
+										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= @$page; ?></b> a la que intenta acceder no existe!</p>
 										<p><b>Si el problema persiste, por favor notificar al Administrador.</b></p>
+										<?php if(strpos($page, 'imprimir')){ ?>
+										<p><span class="enlace" onclick="javascript:window.close();">Cerrar p&aacute;gina.</span></p>
+										<?php } else{ ?>
 										<p><span class="enlace" onclick="redireccionar('javascript:window.history.back()');">Regresar a la p&aacute;gina anterior.</span></p>
+										<?php } ?>
 									</div>
 								</div>
 							</div>
@@ -161,7 +146,7 @@
 			</section>
 			<footer id="footer" class="site-footer">
 				<div class="text-center">
-					SYSCAP - 2014
+					SYSCAP - 2015
 					<a href="#" class="go-top">
 						<i class="fa fa-angle-up"></i>
 					</a>

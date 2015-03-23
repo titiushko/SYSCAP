@@ -25,8 +25,7 @@
 			<script type="text/javascript" src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 	</head>
-	<body onload="window.print(); window.close();">
-	<!--<body>-->
+	<body onload="window.print();">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
@@ -43,7 +42,7 @@
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
 					<table class="table table-striped table-bordered table-hover">
@@ -57,39 +56,37 @@
 						</thead>
 						<tbody>
 							<?php
-							$cantidades = 1;
+							$indice = 1;
 							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
-								if($cantidad_municipio->nombre_municipio != 'TOTAL'){
+								if($cantidad_municipio->nombre_municipio != 'Total'){
 							?>
 							<tr>
-								<td><?= $cantidades; ?></td>
+								<td><?= $indice++; ?></td>
 								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
 								<td><?= $cantidad_municipio->capacitados; ?></td>
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
-							<?php
-								}
-								else{
-							?>
+							<?php } else{ ?>
 							<tr>
-								<td style="opacity: 0.0;"><?= $cantidades; ?></td>
+								<td style="opacity: 0.0;"><?= $indice++; ?></td>
 								<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
 								<td><?= bold($cantidad_municipio->capacitados); ?></td>
 								<td><?= bold($cantidad_municipio->certificados); ?></td>
 							</tr>
 							<?php
 								}
-							$cantidades++;
 							}
 							?>
 						</tbody>
 					</table>
 				</div>
 				<div class="col-lg-6 text-center">
+					<?php if(count($cantidad_usuarios_municipio) > 1){ ?>
 					<div id="morris-bar-chart-estadistica2-1"></div>
+					<?php } ?>
 				</div>
 			</div>
-			<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
+			<div class="row"><div class="col-lg-12"><?= br(4); ?></div></div>
 			<div class="row">
 				<div class="col-lg-12">
 					<?= form_fieldset(heading('Listado de Usuarios por Municipio', 4)); ?>
@@ -123,12 +120,13 @@
 				</div>
 			</div>
 		</div>
+		<?php if(count($cantidad_usuarios_municipio) > 1){ ?>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/bootstrap/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/raphael.min.js"></script>
 		<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/morris/js/morris.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
+			$(function(){
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica2-1',
 					data: [<?= $cantidad_usuarios_municipio_json; ?>],
@@ -140,5 +138,6 @@
 				});
 			});
 		</script>
+		<?php } ?>
 	</body>
 </html>

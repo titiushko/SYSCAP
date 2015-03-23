@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header">Modulo de Centros Educativos</h1>
+		<h1 class="well page-header"><i class="fa fa-university fa-fw"></i> Modulo de Centros Educativos</h1>
 	</div>
 </div>
 <div class="row">
@@ -22,7 +22,7 @@
 						</thead>
 						<tbody>
 							<?php foreach($lista_centros_educativos as $centro_educativo){ ?>
-							<tr onclick="redireccionar('<?= base_url().'centros_educativos/mostrar/'.$centro_educativo->id_centro_educativo; ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($centro_educativo->nombre_centro_educativo); ?>">
+							<tr onclick="redireccionar('<?= base_url('centros_educativos/mostrar/'.$centro_educativo->id_centro_educativo); ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($centro_educativo->nombre_centro_educativo); ?>">
 								<td><?= utf8($centro_educativo->codigo_centro_educativo); ?></td>
 								<td><?= utf8($centro_educativo->nombre_centro_educativo); ?></td>
 								<td><?= utf8($this->departamentos_model->nombre_departamento($centro_educativo->id_departamento)); ?></td>
@@ -36,9 +36,9 @@
 		</div>
 	</div>
 </div>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
-<script src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
-<script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.jquery.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>resources/plugins/data-tables/js/data-tables.bootstrap.js"></script>
+<script type="text/javascript">
 $(document).ready(function() {
 	$('#data-tables-centros_educativos').dataTable({
 		language:{

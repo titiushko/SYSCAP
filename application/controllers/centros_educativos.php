@@ -11,7 +11,7 @@ class Centros_educativos extends MY_Controller{
 				$this->load->model(array('centros_educativos_model', 'departamentos_model', 'municipios_model'));
 			}
 			else{
-				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
 			}
 		}
 		else{
@@ -27,16 +27,18 @@ class Centros_educativos extends MY_Controller{
 	}
 	
 	public function mostrar($codigo_centro_educativo = NULL){
-		$datos = $this->datos_formulario_centros_educativos_view("Mostrar", $codigo_centro_educativo);
+		$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo, 'Mostrar');
 		if($this->notificacion){
-			$datos['id_modal'] = 'myModal';
-			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url().'centros_educativos/mostrar/'.$codigo_centro_educativo.'\');"';
-			$datos['titulo_notificacion'] = icono_notificacion('informacion').'Actualizaci&oacute;n de Centro Educativo';
-			$datos['mensaje_notificacion'] = 'Se guardaron los cambios de '.utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.';
+			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.$codigo_centro_educativo).'\');"';
+			$datos['notificaciones'] = mensaje_notificacion(
+				'myModal',
+				icono_notificacion('informacion').'Actualizaci&oacute;n de Centro Educativo',
+				'Se guardaron los cambios de '.utf8($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.'
+			);
 			$this->notificacion = FALSE;
 		}
 		if(empty($datos['centro_educativo'])){
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 		else{
 			$this->load->view('plantilla_pagina_view', $datos);
@@ -44,7 +46,7 @@ class Centros_educativos extends MY_Controller{
 	}
 	
 	public function modificar($codigo_centro_educativo = NULL){
-		$datos = $this->datos_formulario_centros_educativos_view("Editar", $codigo_centro_educativo);
+		$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo, 'Editar');
 		if($this->input->post('estado') == '1'){
 			$this->validaciones();
 			if($this->form_validation->run()){
@@ -60,7 +62,7 @@ class Centros_educativos extends MY_Controller{
 		}
 		else{
 			if(empty($datos['centro_educativo'])){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				$this->load->view('plantilla_pagina_view', $datos);
@@ -68,7 +70,7 @@ class Centros_educativos extends MY_Controller{
 		}
 	}
 	
-	private function datos_formulario_centros_educativos_view($operacion, $codigo_centro_educativo){
+	private function datos_formulario_centros_educativos_view($codigo_centro_educativo, $operacion = ''){
 		$validar_centro_educativo = $this->centros_educativos_model->validar_centro_educativo($codigo_centro_educativo);
 		if(empty($validar_centro_educativo)){
 			return NULL;
@@ -86,8 +88,8 @@ class Centros_educativos extends MY_Controller{
 				$datos['nombre_departamento'] = $this->departamentos_model->nombre_departamento($datos['centro_educativo'][0]->id_departamento);
 				$datos['nombre_municipio'] = $this->municipios_model->nombre_municipio($datos['centro_educativo'][0]->id_municipio);
 			}
-			$datos['lista_docentes_certificados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado');
-			$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado');
+			$datos['lista_docentes_capacitados'] = $this->centros_educativos_model->docentes_capacitados($codigo_centro_educativo);
+			$datos['lista_docentes_certificados'] = $this->centros_educativos_model->docentes_certificados($codigo_centro_educativo);
 			return $datos;
 		}
 	}
@@ -134,18 +136,18 @@ class Centros_educativos extends MY_Controller{
 		$centro_educativo = $this->centros_educativos_model->centro_educativo($codigo_centro_educativo);
 		$plantilla_pdf = read_file('resources/templates/pdf/centros_educativos.php');
 		if(empty($centro_educativo)){
-			show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 		}
 		else{
 			$lista_docentes_capacitados =  ''; $docentes_capacitados = 1;
-			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Evaluaci%', array('docentes'), 'tutorizado') as $docente_capacitado){
+			foreach($this->centros_educativos_model->docentes_capacitados($codigo_centro_educativo) as $docente_capacitado){
 				$lista_docentes_capacitados .='<tr><td>'.$docentes_capacitados++.'</td><td>'.utf8($docente_capacitado->nombre_completo_usuario).'</td></tr>';
 			}
 			if($lista_docentes_capacitados == ''){
 				$lista_docentes_capacitados = 'No hay docentes capacitados en el centro educativo.';
 			}
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
-			foreach($this->centros_educativos_model->tipos_capacitados_usuarios($codigo_centro_educativo, 7, 'Examen%', array('docentes'), 'tutorizado') as $docente_certificado){
+			foreach($this->centros_educativos_model->docentes_certificados($codigo_centro_educativo) as $docente_certificado){
 				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.utf8($docente_certificado->certificacion_usuario).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){
@@ -173,20 +175,20 @@ class Centros_educativos extends MY_Controller{
 	public function imprimir($codigo_centro_educativo = NULL){
 		if(!$this->session->userdata('dispositivo_movil')){
 			if(empty($codigo_centro_educativo)){
-				show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+				$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 			}
 			else{
 				if(is_numeric($codigo_centro_educativo)){
-					$datos = $this->datos_formulario_centros_educativos_view('', $codigo_centro_educativo);
+					$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo);
 					if(empty($datos['centro_educativo'])){
-						show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+						$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 					}
 					else{
 						$this->load->view('centros_educativos/imprimir_centros_educativos_view', $datos);
 					}
 				}
 				else{
-					show_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')));
+					$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
 				}
 			}
 		}

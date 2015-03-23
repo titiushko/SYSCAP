@@ -35,6 +35,7 @@
 					<ESTADITICAS_DEPARTAMENTO_FECHAS>
 				</tbody>
 			</table>
+			<SIN_DEPARTAMENTO>
 		</fieldset>
 	</body>
 </html>

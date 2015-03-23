@@ -30,7 +30,7 @@ class Sesion extends MY_Controller{
 		if($this->input->post()){
 			$this->form_validation->set_rules('nombre_usuario', 'Nombre de Usuario', 'required|trim|min_length[5]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('contrasena_usuario', 'Contrase&ntilde;a', 'required|trim|min_length[5]|max_length[50]|xss_clean');
-			$datos = null;
+			$datos = NULL;
 			if($this->form_validation->run()){
 				if($this->input->post('sesion_usuario') == $this->session->userdata('sesion_usuario')){
 					$datos['usuario'] = $this->sesion_model->conectar_usuario($this->input->post('nombre_usuario'), md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle')));
@@ -38,9 +38,10 @@ class Sesion extends MY_Controller{
 						$datos_sesion_usuario = array(
 							'conexion_usuario'			=> 	TRUE,
 							'id_usuario' 				=> 	$datos['usuario']->id_usuario,
-							'nombre_corto_rol'			=>	$datos['usuario']->nombre_corto_rol,
-							'nombre_completo_rol'		=>	$datos['usuario']->nombre_completo_rol,
-							'nombre_completo_usuario'	=> 	$datos['usuario']->nombre_completo_usuario
+							'nombre_corto_rol'			=>	$this->validar_rol_corto($datos['usuario']->nombre_corto_rol),
+							'nombre_completo_rol'		=>	$this->validar_rol_completo($datos['usuario']->nombre_completo_rol),
+							'nombre_completo_usuario'	=> 	$datos['usuario']->nombre_completo_usuario,
+							'boton_menu'				=>	TRUE
 						);
 						$this->session->set_userdata($datos_sesion_usuario);
 						$this->index();
@@ -71,6 +72,14 @@ class Sesion extends MY_Controller{
 	public function cerrar_sesion(){
 		$this->session->sess_destroy();
 		redirect();
+	}
+	
+	private function validar_rol_corto($nombre_corto_rol){
+		return is_null($nombre_corto_rol) || ($nombre_corto_rol != 'admin' && $nombre_corto_rol != 'moderador' && $nombre_corto_rol != 'student') ? 'student' : $nombre_corto_rol;
+	}
+	
+	private function validar_rol_completo(){
+		return is_null($nombre_completo_rol) || ($nombre_completo_rol != 'Administador' && $nombre_completo_rol != 'Moderador De Grado Digital' && $nombre_completo_rol != 'Estudiante') ? 'Estudiante' : $nombre_corto_rol;
 	}
 }
 

@@ -7,7 +7,7 @@ class Tipos_usuarios_model extends CI_Model{
 	
 	function lista_tipos_usuarios(){
 		$lista_tipos_usuarios[''] = '';
-		$query = $this->db->select('id_tipo_usuario, acentos(nombre_tipo_usuario) nombre_tipo_usuario');
+		$query = $this->db->select('id_tipo_usuario, nombre_tipo_usuario nombre_tipo_usuario');
 		$query = $this->db->order_by('nombre_tipo_usuario', 'asc');
 		$query = $this->db->get('tipos_usuarios');
 		foreach($query->result() as $tipo_usuario){
@@ -18,7 +18,7 @@ class Tipos_usuarios_model extends CI_Model{
 	
 	function nombre_tipo_usuario($codigo_tipo_usuario){
 		if($codigo_tipo_usuario != 0){
-			$query = $this->db->select('acentos(nombre_tipo_usuario) nombre_tipo_usuario');
+			$query = $this->db->select('nombre_tipo_usuario nombre_tipo_usuario');
 			$query = $this->db->where('id_tipo_usuario', $codigo_tipo_usuario);
 			$query = $this->db->get('tipos_usuarios');
 			if($query->row())
