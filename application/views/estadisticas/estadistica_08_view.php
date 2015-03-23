@@ -123,12 +123,14 @@ $campos_ocultos_formulario = array(
 								<td><?= $estaditica_departamento_fecha->certificados; ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice; ?></td>
-								<td><?= bold(utf8($estaditica_departamento_fecha->nombre_departamento)); ?></td>
-								<td><?= bold($estaditica_departamento_fecha->capacitados); ?></td>
-								<td><?= bold($estaditica_departamento_fecha->certificados); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($estaditica_departamento_fecha->nombre_departamento)); ?></td>
+									<td><?= bold($estaditica_departamento_fecha->capacitados); ?></td>
+									<td><?= bold($estaditica_departamento_fecha->certificados); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 								}
 							}
@@ -153,7 +155,6 @@ $campos_ocultos_formulario = array(
 		$('#data-tables-estadistica8-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
-			"ordering":		false,
 			"oLanguage":{
 				"oPaginate":{
 					"sFirst":		"<<",

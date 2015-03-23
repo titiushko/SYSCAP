@@ -115,11 +115,13 @@
 									<td><?= limpiar_nulo($certificacion_grado_digital->autoformacion); ?></td>
 								</tr>
 								<?php } else{ ?>
-								<tr>
-									<td colspan="3"><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
-									<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
-									<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
-								</tr>
+								<tfoot>
+									<tr>
+										<td colspan="3"><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
+										<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
+										<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
+									</tr>
+								</tfoot>
 								<?php
 									}
 								}

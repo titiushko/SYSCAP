@@ -67,12 +67,14 @@
 								<td><?= $cantidad_municipio->certificados; ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice++; ?></td>
-								<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
-								<td><?= bold($cantidad_municipio->capacitados); ?></td>
-								<td><?= bold($cantidad_municipio->certificados); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
+									<td><?= bold($cantidad_municipio->capacitados); ?></td>
+									<td><?= bold($cantidad_municipio->certificados); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 								}
 							}

@@ -174,13 +174,15 @@ $campos_ocultos_formulario = array(
 								<td><?= limpiar_nulo($certificacion_grado_digital->autoformacion); ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice++; ?></td>
-								<td><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
-								<td></td>
-								<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
+									<td></td>
+									<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
+									<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 									}
 								}

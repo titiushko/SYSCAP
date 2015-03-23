@@ -69,13 +69,15 @@
 								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice++; ?></td>
-								<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
-								<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
-								<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
-								<td><?= bold($usuario_nivel_nacional->autoformacion); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
+									<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
+									<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
+									<td><?= bold($usuario_nivel_nacional->autoformacion); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 								}
 							}

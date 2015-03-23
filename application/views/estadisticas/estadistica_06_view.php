@@ -134,12 +134,14 @@ $campos_ocultos_formulario = array(
 								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice++; ?></td>
-								<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
-								<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
-								<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
+									<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
+									<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 								}
 							}
@@ -163,7 +165,6 @@ $campos_ocultos_formulario = array(
 		$('#data-tables-estadistica6-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
-			"ordering":		false,
 			"info":			false,
 			"oLanguage":{
 				"oPaginate":{
