@@ -59,9 +59,19 @@ class Usuarios_model extends CI_Model{
 		return $query->result();
 	}
 	
-	function validar_usuario($codigo_usuario){
-		$query = $this->db->where('id_usuario', $codigo_usuario);
-		$query = $this->db->get('usuarios');
+	function validar_codigo_usuario($codigo_usuario){
+		$query = $this->db->get_where('usuarios', array('id_usuario' => $codigo_usuario));
+		return $query->result();
+	}
+	
+	function validar_nombre_usuario($nombre_usuario, $codigo_usuario){
+		$query = $this->db->where_not_in('id_usuario', $codigo_usuario);
+		$query = $this->db->get_where('usuarios', array('nombre_usuario' => $nombre_usuario));
+		return $query->result();
+	}
+	
+	function validar_contrasena_usuario($contrasena_usuario, $codigo_usuario){
+		$query = $this->db->get_where('usuarios', array('contrasena_usuario' => $contrasena_usuario, 'id_usuario' => $codigo_usuario));
 		return $query->result();
 	}
 }

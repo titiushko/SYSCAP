@@ -78,8 +78,8 @@ class Sesion extends MY_Controller{
 		return is_null($nombre_corto_rol) || ($nombre_corto_rol != 'admin' && $nombre_corto_rol != 'moderador' && $nombre_corto_rol != 'student') ? 'student' : $nombre_corto_rol;
 	}
 	
-	private function validar_rol_completo(){
-		return is_null($nombre_completo_rol) || ($nombre_completo_rol != 'Administador' && $nombre_completo_rol != 'Moderador De Grado Digital' && $nombre_completo_rol != 'Estudiante') ? 'Estudiante' : $nombre_corto_rol;
+	private function validar_rol_completo($nombre_completo_rol){
+		return is_null($nombre_completo_rol) || ($nombre_completo_rol != 'Administador' && $nombre_completo_rol != 'Moderador De Grado Digital' && $nombre_completo_rol != 'Estudiante') ? 'Estudiante' : $nombre_completo_rol;
 	}
 }
 
