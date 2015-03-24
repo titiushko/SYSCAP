@@ -9,7 +9,7 @@ class Sesion extends MY_Controller{
 	}
 	
 	public function index(){
-		switch($this->session->userdata('nombre_corto_rol')) {
+		switch($this->session->userdata('nombre_corto_rol')){
 			case '':
 				$datos['sesion_usuario'] = $this->token();
 				break;

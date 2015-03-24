@@ -69,7 +69,8 @@ class Usuarios extends MY_Controller{
 					}
 					if($this->form_validation->run()){
 						$update_usuario = $this->input->post();
-						if($this->input->post('contrasena_usuario') && empty($this->usuarios_model->validar_contrasena_usuario($this->input->post('contrasena_usuario'), $codigo_usuario)))
+						$validar_contrasena_usuario = $this->usuarios_model->validar_contrasena_usuario($this->input->post('contrasena_usuario'), $codigo_usuario);
+						if($this->input->post('contrasena_usuario') && empty($validar_contrasena_usuario))
 							$update_usuario['contrasena_usuario'] = md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle'));
 						unset($update_usuario['estado'], $update_usuario['nombre_centro_educativo'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 						$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
@@ -119,7 +120,8 @@ class Usuarios extends MY_Controller{
 	}
 	
 	private function datos_formulario_usuarios_view($codigo_usuario, $operacion = ''){
-		if(empty($this->usuarios_model->validar_codigo_usuario($codigo_usuario))){
+		$validar_codigo_usuario = $this->usuarios_model->validar_codigo_usuario($codigo_usuario);
+		if(empty($validar_codigo_usuario)){
 			return NULL;
 		}
 		else{
@@ -205,7 +207,8 @@ class Usuarios extends MY_Controller{
 	}
 	
 	public function validar_nombre_usuario($nombre_usuario, $codigo_usuario){
-		if(empty($this->usuarios_model->validar_nombre_usuario($nombre_usuario, $codigo_usuario))){
+		$validar_nombre_usuario = $this->usuarios_model->validar_nombre_usuario($nombre_usuario, $codigo_usuario);
+		if(empty($validar_nombre_usuario)){
 			return TRUE;
 		}
 		else{
