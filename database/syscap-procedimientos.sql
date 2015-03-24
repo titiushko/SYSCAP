@@ -60,8 +60,8 @@ BEGIN
 			moodle19.mdl_cat_educativa.row_id,
 			moodle19.mdl_cat_educativa.codigo_entidad,
 			syscap.initcap(moodle19.mdl_cat_educativa.nombre),
-			syscap.codigo_departamento(moodle19.mdl_cat_educativa.depto),
-			syscap.codigo_municipio(moodle19.mdl_cat_educativa.muni)
+			syscap.F_CodigoDepartamento(moodle19.mdl_cat_educativa.depto),
+			syscap.F_CodigoMunicipio(moodle19.mdl_cat_educativa.muni)
 		FROM
 			moodle19.mdl_cat_educativa;
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
@@ -251,8 +251,8 @@ BEGIN
 			ce.id_centro_educativo,
 			ce.codigo_centro_educativo,
 			UPPER(ce.nombre_centro_educativo),
-			nombre_departamento(ce.id_departamento),
-			nombre_municipio(ce.id_municipio)
+			F_NombreDepartamento(ce.id_departamento),
+			F_NombreMunicipio(ce.id_municipio)
 		FROM bitacoras b INNER JOIN centros_educativos ce ON b.id_centro_educativo = ce.id_centro_educativo
 		WHERE DATE_FORMAT(b.fecha_bitacora, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d');
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;

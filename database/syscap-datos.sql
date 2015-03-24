@@ -18,7 +18,7 @@ FROM moodle19.mdl_cat_municip;
 -- copiar a syscap.centros_educativos los registros de moodle19.mdl_cat_educativa
 TRUNCATE syscap.centros_educativos;
 INSERT INTO syscap.centros_educativos(syscap.centros_educativos.id_centro_educativo, syscap.centros_educativos.codigo_centro_educativo, syscap.centros_educativos.nombre_centro_educativo, syscap.centros_educativos.id_departamento, syscap.centros_educativos.id_municipio)
-SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.codigo_departamento(moodle19.mdl_cat_educativa.depto), syscap.codigo_municipio(moodle19.mdl_cat_educativa.muni)
+SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.F_CodigoDepartamento(moodle19.mdl_cat_educativa.depto), syscap.F_CodigoMunicipio(moodle19.mdl_cat_educativa.muni)
 FROM moodle19.mdl_cat_educativa;
 
 /* NIVELES_ESTUDIOS */

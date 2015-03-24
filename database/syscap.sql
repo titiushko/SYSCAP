@@ -270,7 +270,7 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS codigo_departamento $$
-CREATE FUNCTION codigo_departamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
+CREATE FUNCTION F_CodigoDepartamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
 COMMENT 'Función que devuelve el identificador de un departamento a partir del nombre.'
 DETERMINISTIC
 READS SQL DATA
@@ -300,7 +300,7 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS nombre_departamento $$
-CREATE FUNCTION nombre_departamento(p_codigo_departamento CHAR(2)) RETURNS VARCHAR(255)
+CREATE FUNCTION F_NombreDepartamento(p_codigo_departamento CHAR(2)) RETURNS VARCHAR(255)
 COMMENT 'Función que devuelve el nombre de un departamento a partir del identificador.'
 DETERMINISTIC
 READS SQL DATA
@@ -330,7 +330,7 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS codigo_municipio $$
-CREATE FUNCTION codigo_municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
+CREATE FUNCTION F_CodigoMunicipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
 COMMENT 'Función que devuelve el identificador de un municipio a partir del nombre.'
 DETERMINISTIC
 READS SQL DATA
@@ -360,7 +360,7 @@ DELIMITER ;
 
 DELIMITER $$
 DROP FUNCTION IF EXISTS nombre_municipio $$
-CREATE FUNCTION nombre_municipio(p_codigo_municipio CHAR(3)) RETURNS VARCHAR(255)
+CREATE FUNCTION F_NombreMunicipio(p_codigo_municipio CHAR(3)) RETURNS VARCHAR(255)
 COMMENT 'Función que devuelve el nombre de un municipio a partir del identificador.'
 DETERMINISTIC
 READS SQL DATA
@@ -451,8 +451,8 @@ BEGIN
 	DECLARE v_termina INT DEFAULT FALSE;
 	DECLARE c_nombre_compacto_usuario CURSOR FOR
 		SELECT
-			IF(LOCATE(' ', nombres_usuario) > 0, SUBSTRING(nombres_usuario, LOCATE(' ', nombres_usuario) + 1), nombres_usuario) nombres_usuario,
-			IF(LOCATE(' ', apellido1_usuario) > 0, SUBSTRING(apellido1_usuario, LOCATE(' ', apellido1_usuario) + 1), apellido1_usuario) apellido1_usuario
+			IF(LOCATE(' ', nombres_usuario) > 0, SUBSTRING(nombres_usuario, 1, LOCATE(' ', nombres_usuario) - 1), nombres_usuario) nombres_usuario,
+			IF(LOCATE(' ', apellido1_usuario) > 0, SUBSTRING(apellido1_usuario, 1, LOCATE(' ', apellido1_usuario) - 1), apellido1_usuario) apellido1_usuario
 		FROM usuarios
 		WHERE id_usuario = p_codigo_usuario;
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
@@ -530,8 +530,8 @@ BEGIN
 			moodle19.mdl_cat_educativa.row_id,
 			moodle19.mdl_cat_educativa.codigo_entidad,
 			syscap.initcap(moodle19.mdl_cat_educativa.nombre),
-			syscap.codigo_departamento(moodle19.mdl_cat_educativa.depto),
-			syscap.codigo_municipio(moodle19.mdl_cat_educativa.muni)
+			syscap.F_CodigoDepartamento(moodle19.mdl_cat_educativa.depto),
+			syscap.F_CodigoMunicipio(moodle19.mdl_cat_educativa.muni)
 		FROM
 			moodle19.mdl_cat_educativa;
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
@@ -721,8 +721,8 @@ BEGIN
 			ce.id_centro_educativo,
 			ce.codigo_centro_educativo,
 			UPPER(ce.nombre_centro_educativo),
-			nombre_departamento(ce.id_departamento),
-			nombre_municipio(ce.id_municipio)
+			F_NombreDepartamento(ce.id_departamento),
+			F_NombreMunicipio(ce.id_municipio)
 		FROM bitacoras b INNER JOIN centros_educativos ce ON b.id_centro_educativo = ce.id_centro_educativo
 		WHERE DATE_FORMAT(b.fecha_bitacora, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d');
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
@@ -906,7 +906,7 @@ FROM moodle19.mdl_cat_municip;
 -- copiar a syscap.centros_educativos los registros de moodle19.mdl_cat_educativa
 TRUNCATE syscap.centros_educativos;
 INSERT INTO syscap.centros_educativos(syscap.centros_educativos.id_centro_educativo, syscap.centros_educativos.codigo_centro_educativo, syscap.centros_educativos.nombre_centro_educativo, syscap.centros_educativos.id_departamento, syscap.centros_educativos.id_municipio)
-SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.codigo_departamento(moodle19.mdl_cat_educativa.depto), syscap.codigo_municipio(moodle19.mdl_cat_educativa.muni)
+SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.F_CodigoDepartamento(moodle19.mdl_cat_educativa.depto), syscap.F_CodigoMunicipio(moodle19.mdl_cat_educativa.muni)
 FROM moodle19.mdl_cat_educativa;
 
 /* NIVELES_ESTUDIOS */
