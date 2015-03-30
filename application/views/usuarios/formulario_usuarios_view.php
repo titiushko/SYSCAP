@@ -161,7 +161,7 @@ $modalidad_usuario = array(
 <script type="text/javascript" src="<?= base_url(); ?>resources/js/validaciones-usuarios.js"></script>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Modulo de Usuarios</h1>
+		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Módulo de Usuarios</h1>
 	</div>
 </div>
 <div class="row">

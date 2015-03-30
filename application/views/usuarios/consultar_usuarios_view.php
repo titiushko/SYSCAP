@@ -11,7 +11,7 @@ $centro_educativo = array (
 <div id="page-wrapper">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Modulo de Usuarios</h1>
+			<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Módulo de Usuarios</h1>
 		</div>
 	</div>
 	<div class="row">

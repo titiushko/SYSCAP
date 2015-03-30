@@ -13,7 +13,7 @@
 		<ENCABEZADO_REPORTE>
 		<h1 align="center">Reporte de Consulta Estadítica</h1>
 		<fieldset>
-			<legend><h3 align="center">Estadística de Usuarios por Departamento, Tipo de Capacitados y Fecha</h3></legend>
+			<legend><h2 align="center">Estadística de Usuarios por Departamento, Tipo de Capacitados y Fecha</h2></legend>
 			<hr/>
 			<table border="0">
 				<tr>

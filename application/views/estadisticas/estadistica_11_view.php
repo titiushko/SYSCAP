@@ -91,7 +91,7 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -116,14 +116,14 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<th><?= utf8($usuario_grado_digital->tipo_capacitado); ?></th>
-								<td><?= limpiar_nulo($usuario_grado_digital->tutorizados); ?></td>
-								<td><?= limpiar_nulo($usuario_grado_digital->autoformacion); ?></td>
+								<td><?= number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ','); ?></td>
+								<td><?= number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
 								<th><?= bold(utf8($usuario_grado_digital->tipo_capacitado)); ?></th>
-								<td><?= bold(limpiar_nulo($usuario_grado_digital->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($usuario_grado_digital->autoformacion)); ?></td>
+								<td><?= bold(number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ',')); ?></td>
+								<td><?= bold(number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ',')); ?></td>
 							</tr>
 							<?php
 								}
@@ -143,7 +143,7 @@ $campos_ocultos_formulario = array(
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Listado de Certificaciones por Grado Digital', 4); ?>
+		<?= heading('Listado de Certificaciones por Grado Digital', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -170,8 +170,8 @@ $campos_ocultos_formulario = array(
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($certificacion_grado_digital->nombre_curso_categoria); ?></td>
 								<td><?= utf8($certificacion_grado_digital->nombre_completo_curso); ?></td>
-								<td><?= limpiar_nulo($certificacion_grado_digital->tutorizados); ?></td>
-								<td><?= limpiar_nulo($certificacion_grado_digital->autoformacion); ?></td>
+								<td><?= number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ','); ?></td>
+								<td><?= number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tfoot>
@@ -179,8 +179,8 @@ $campos_ocultos_formulario = array(
 									<td></td>
 									<td><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
 									<td></td>
-									<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
-									<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
+									<td><?= bold(number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ',')); ?></td>
+									<td><?= bold(number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ',')); ?></td>
 								</tr>
 							</tfoot>
 							<?php

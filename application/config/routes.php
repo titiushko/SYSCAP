@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "sesion";
+$route['default_controller'] = 'sesion';
 $route['404_override'] = '';
 $route['ayuda/(:any)'] = 'ayuda/index/$1';
 

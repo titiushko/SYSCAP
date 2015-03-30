@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados, Departamento y Fecha', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados, Departamento y Fecha', 2, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
@@ -48,42 +48,44 @@
 			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Municipio</th>
-								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$indice = 1;
-							foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
-								if($estaditica_departamento_tipo_fecha->nombre_municipio != 'Total'){
-							?>
-							<tr>
-								<td><?= $indice++; ?></td>
-								<td><?= utf8($estaditica_departamento_tipo_fecha->nombre_municipio); ?></td>
-								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
-								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
-							</tr>
-							<?php } else{ ?>
-							<tfoot>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
 								<tr>
-									<td></td>
-									<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
-									<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
-									<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>
+									<th>#</th>
+									<th>Municipio</th>
+									<th>Tutorizados</th>
+									<th>Autoformaci&oacute;n</th>
 								</tr>
-							</tfoot>
-							<?php
+							</thead>
+							<tbody>
+								<?php
+								$indice = 1;
+								foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
+									if($estaditica_departamento_tipo_fecha->nombre_municipio != 'Total'){
+								?>
+								<tr>
+									<td><?= $indice++; ?></td>
+									<td><?= utf8($estaditica_departamento_tipo_fecha->nombre_municipio); ?></td>
+									<td><?= number_format($estaditica_departamento_tipo_fecha->tutorizado, 0, '', ','); ?></td>
+									<td><?= number_format($estaditica_departamento_tipo_fecha->autoformacion, 0, '', ','); ?></td>
+								</tr>
+								<?php } else{ ?>
+								<tfoot>
+									<tr>
+										<td></td>
+										<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
+										<td><?= bold(number_format($estaditica_departamento_tipo_fecha->tutorizado, 0, '', ',')); ?></td>
+										<td><?= bold(number_format($estaditica_departamento_tipo_fecha->autoformacion, 0, '', ',')); ?></td>
+									</tr>
+								</tfoot>
+								<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div class="col-lg-6 text-center">
 					<?php if(count($estaditicas_departamento_tipo_fechas) > 1){ ?>

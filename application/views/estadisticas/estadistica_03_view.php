@@ -84,7 +84,7 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -108,16 +108,16 @@ $campos_ocultos_formulario = array(
 							<tr>
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($estaditica_departamento_fecha->nombre_departamento); ?></td>
-								<td><?= $estaditica_departamento_fecha->capacitados; ?></td>
-								<td><?= $estaditica_departamento_fecha->certificados; ?></td>
+								<td><?= number_format($estaditica_departamento_fecha->capacitados, 0, '', ','); ?></td>
+								<td><?= number_format($estaditica_departamento_fecha->certificados, 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tfoot>
 								<tr>
 									<td></td>
 									<td><?= bold(utf8($estaditica_departamento_fecha->nombre_departamento)); ?></td>
-									<td><?= bold($estaditica_departamento_fecha->capacitados); ?></td>
-									<td><?= bold($estaditica_departamento_fecha->certificados); ?></td>
+									<td><?= bold(number_format($estaditica_departamento_fecha->capacitados, 0, '', ',')); ?></td>
+									<td><?= bold(number_format($estaditica_departamento_fecha->certificados, 0, '', ',')); ?></td>
 								</tr>
 							</tfoot>
 							<?php

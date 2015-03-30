@@ -31,14 +31,14 @@ class Mapas_model extends CI_Model{
 	function cantidad_usuarios_departamento($codigo_departamento){
 		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'capacitado\' AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)) capacitados
 								   UNION
 								   SELECT \'Certificados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
 								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
 								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'certificado\' AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)) certificados',
 								   array($codigo_departamento, $codigo_departamento));
 		return $query->result();
@@ -77,14 +77,14 @@ class Mapas_model extends CI_Model{
 	function cantidad_usuarios_municipio($codigo_municipio){
 		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'capacitado\' AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)) capacitados
 								   UNION
 								   SELECT \'Certificados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
 								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
 								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'certificado\' AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)) certificados',
 								   array($codigo_municipio, $codigo_municipio));
 		return $query->result();
@@ -114,14 +114,14 @@ class Mapas_model extends CI_Model{
 	function cantidad_usuarios_centro_educativo($codigo_centro_educativo){
 		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'capacitado\' AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo = ?) capacitados
 								   UNION
 								   SELECT \'Certificados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
 								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
 								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'certificado\' AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo = ?) certificados',
 								   array($codigo_centro_educativo, $codigo_centro_educativo));
 		return $query->result();

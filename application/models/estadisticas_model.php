@@ -6,6 +6,7 @@ class Estadisticas_model extends CI_Model{
 	}
 	
 	// Consulta Estadística 1: Usuarios por Modalidad de Capacitación
+	// Consulta Estadística 5: Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
 	function modalidades_capacitados($fecha1, $fecha2, $tipo_capacitado = ''){
 		if($tipo_capacitado != ''){
 			$filtro = ' AND tipo_capacitado = ?';
@@ -19,19 +20,19 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Evaluaci%\' AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
+								   WHERE tipo_capacitado LIKE \'capacitado\' AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   UNION
 								   SELECT \'Certificados\' tipos_capacitados,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND nombre_examen LIKE \'Examen%\' AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
+								   WHERE tipo_capacitado LIKE \'certificado\' AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   UNION
 								   SELECT \'Total\' tipos_capacitados,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
+								   WHERE fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
 		return $query->result();
 	}
 	
@@ -41,14 +42,14 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY nombre_municipio
 								   UNION
 								   SELECT DISTINCT \'Total\' nombre_municipio,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
+								   WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
 								   array($codigo_departamento, $fecha1, $fecha2, $codigo_departamento, $fecha1, $fecha2));
 		return $query->result();
 	}
@@ -57,7 +58,7 @@ class Estadisticas_model extends CI_Model{
 	function usuarios_municipio($codigo_departamento, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT nombre_municipio, nombre_usuario, initcap(modalidad_usuario) modalidad_usuario
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   ORDER BY nombre_municipio', array($codigo_departamento, $fecha1, $fecha2));
 		return $query->result();
 	}
@@ -77,7 +78,7 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
+								   WHERE id_departamento = ? AND id_municipio = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   GROUP BY nombre_centro_educativo
 								   UNION
@@ -85,7 +86,7 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
+								   WHERE id_departamento = ? AND id_municipio = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
 		return $query->result();
 	}
@@ -103,7 +104,7 @@ class Estadisticas_model extends CI_Model{
 		}
 		$query = $this->db->query('SELECT nombre_centro_educativo, nombre_usuario, tipo_capacitado, initcap(modalidad_usuario) modalidad_usuario
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND id_departamento = ? AND id_municipio = ?
+								   WHERE id_departamento = ? AND id_municipio = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
 		return $query->result();
 	}
@@ -123,14 +124,14 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
+								   WHERE fecha_examen_calificacion BETWEEN ? AND ?'.$filtro.'
 								   GROUP BY nombre_departamento
 								   UNION
 								   SELECT \'Total\' nombre_departamento,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'certificado\' THEN 1 ELSE 0 END) certificados
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
+								   WHERE fecha_examen_calificacion BETWEEN ? AND ?'.$filtro, $parametros);
 		return $query->result();
 	}
     
@@ -140,7 +141,7 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_departamento = ?
+								   WHERE tipo_capacitado = ? AND id_departamento = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY nombre_municipio
 								   UNION
@@ -148,7 +149,7 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_departamento = ?
+								   WHERE tipo_capacitado = ? AND id_departamento = ?
 								   AND fecha_examen_calificacion BETWEEN ? AND ?',
 								   array($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2, $tipo_capacitado, $codigo_departamento, $fecha1, $fecha2));
 		return $query->result();
@@ -158,15 +159,15 @@ class Estadisticas_model extends CI_Model{
 	function tipos_capacitados_centro_educativo($tipo_capacitado, $codigo_centro_educativo){
 		$query = $this->db->query('SELECT \'Tutorizado\' modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) total
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_centro_educativo = ?
+								   WHERE tipo_capacitado = ? AND id_centro_educativo = ?
 								   UNION
 								   SELECT \'Autoformación\' modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) total
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_centro_educativo = ?
+								   WHERE tipo_capacitado = ? AND id_centro_educativo = ?
 								   UNION
 								   SELECT \'Total\' modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) + SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) total
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND id_centro_educativo = ?',
+								   WHERE tipo_capacitado = ? AND id_centro_educativo = ?',
 								   array($tipo_capacitado, $codigo_centro_educativo, $tipo_capacitado, $codigo_centro_educativo, $tipo_capacitado, $codigo_centro_educativo));
 		return $query->result();
 	}
@@ -177,59 +178,61 @@ class Estadisticas_model extends CI_Model{
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   WHERE tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY nombre_departamento, nombre_municipio
 								   UNION
 								   SELECT NULL nombre_departamento, \'Total\' nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
 								   FROM V_Estadisticas
-								   WHERE nota_examen_calificacion >= 7.00 AND tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
+								   WHERE tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
 								   array($tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2));
 		return $query->result();
 	}
+	
 	// Consulta Estadística 11: Usuarios por Grado Digital
 	function usuarios_grado_digital($grado_digital, $fecha1, $fecha2){
-		$query = $this->db->query('SELECT IF(tipo_capacitado IS NULL, \'Capacitados\', tipo_capacitado) tipo_capacitado,
+		$query = $this->db->query('SELECT IF(tipo_capacitado IS NULL, \'capacitado\', tipo_capacitado) tipo_capacitado,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticasGradoDigital
-								   WHERE tipo_capacitado = \'Capacitados\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   FROM V_Estadisticas
+								   WHERE tipo_capacitado = \'capacitado\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   UNION
-								   SELECT IF(tipo_capacitado IS NULL, \'Certificados\', tipo_capacitado) tipo_capacitado,
+								   SELECT IF(tipo_capacitado IS NULL, \'certificado\', tipo_capacitado) tipo_capacitado,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticasGradoDigital
-								   WHERE tipo_capacitado = \'Certificados\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   FROM V_Estadisticas
+								   WHERE tipo_capacitado = \'certificado\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   UNION
 								   SELECT \'Total\' tipo_capacitado,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticasGradoDigital
+								   FROM V_Estadisticas
 								   WHERE grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
 								   array($grado_digital, $fecha1, $fecha2, $grado_digital, $fecha1, $fecha2, $grado_digital, $fecha1, $fecha2));
 		return $query->result();
 	}
 	
+	// Consulta Estadística 11: Usuarios por Grado Digital
 	function certificaciones_grado_digital($grado_digital, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT nombre_curso_categoria, nombre_completo_curso,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticasGradoDigital
-								   WHERE tipo_capacitado = \'Capacitados\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   FROM V_Estadisticas
+								   WHERE tipo_capacitado = \'capacitado\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY 1, 2
 								   UNION
 								   SELECT SUBSTRING(nombre_curso_categoria, 18), nombre_completo_curso,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticasGradoDigital
-								   WHERE tipo_capacitado = \'Certificados\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
+								   FROM V_Estadisticas
+								   WHERE tipo_capacitado = \'certificado\' AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?
 								   GROUP BY 1, 2
 								   UNION
 								   SELECT \'Total\' nombre_curso_categoria, \'Total\' nombre_completo_curso,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
-								   FROM V_EstadisticasGradoDigital
+								   FROM V_Estadisticas
 								   WHERE grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?',
 								   array($grado_digital, $fecha1, $fecha2, $grado_digital, $fecha1, $fecha2, $grado_digital, $fecha1, $fecha2));
 		return $query->result();

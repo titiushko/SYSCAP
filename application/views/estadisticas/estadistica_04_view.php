@@ -100,7 +100,7 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -124,16 +124,16 @@ $campos_ocultos_formulario = array(
 							<tr>
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
-								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
-								<td><?= $usuario_departamento_municipio->certificados; ?></td>
+								<td><?= number_format($usuario_departamento_municipio->capacitados, 0, '', ','); ?></td>
+								<td><?= number_format($usuario_departamento_municipio->certificados, 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tfoot>
 								<tr>
 									<td></td>
 									<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>
-									<td><?= bold($usuario_departamento_municipio->capacitados); ?></td>
-									<td><?= bold($usuario_departamento_municipio->certificados); ?></td>
+									<td><?= bold(number_format($usuario_departamento_municipio->capacitados, 0, '', ',')); ?></td>
+									<td><?= bold(number_format($usuario_departamento_municipio->certificados, 0, '', ',')); ?></td>
 								</tr>
 							</tfoot>
 							<?php
@@ -154,7 +154,7 @@ $campos_ocultos_formulario = array(
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Listado de Usuarios por Centro Educativo', 4); ?>
+		<?= heading('Listado de Usuarios por Centro Educativo', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">

@@ -6,17 +6,10 @@ if(!function_exists('bold')){
 	}
 }
 
-if ( ! function_exists('div') ) {
-	function div($data = '', $attributes = '') {
+if ( ! function_exists('tag') ) {
+	function tag($tag_name, $data = '', $attributes = '') {
 		$attributes = ($attributes != '') ? ' '.$attributes : $attributes;
-		return "<div".$attributes.">".$data."</div>";
-	}
-}
-
-if ( ! function_exists('p') ) {
-	function p($data = '', $attributes = '') {
-		$attributes = ($attributes != '') ? ' '.$attributes : $attributes;
-		return "<p".$attributes.">".$data."</p>";
+		return "<".$tag_name.$attributes.">".$data."</".$tag_name.">";
 	}
 }
 

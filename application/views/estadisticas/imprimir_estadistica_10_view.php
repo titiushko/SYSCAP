@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de indice a Nivel Nacional', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de indice a Nivel Nacional', 2, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
@@ -45,45 +45,47 @@
 			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Departamento</th>
-								<th>Municipio</th>
-								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$indice = 1;
-							foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
-								if($usuario_nivel_nacional->nombre_municipio != 'Total'){
-							?>
-							<tr>
-								<td><?= $indice++; ?></td>
-								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
-								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
-								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
-								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
-							</tr>
-							<?php } else{ ?>
-							<tfoot>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
 								<tr>
-									<td></td>
-									<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
-									<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
-									<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
-									<td><?= bold($usuario_nivel_nacional->autoformacion); ?></td>
+									<th>#</th>
+									<th>Departamento</th>
+									<th>Municipio</th>
+									<th>Tutorizados</th>
+									<th>Autoformaci&oacute;n</th>
 								</tr>
-							</tfoot>
-							<?php
+							</thead>
+							<tbody>
+								<?php
+								$indice = 1;
+								foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
+									if($usuario_nivel_nacional->nombre_municipio != 'Total'){
+								?>
+								<tr>
+									<td><?= $indice++; ?></td>
+									<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
+									<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
+									<td><?= number_format($usuario_nivel_nacional->tutorizado, 0, '', ','); ?></td>
+									<td><?= number_format($usuario_nivel_nacional->autoformacion, 0, '', ','); ?></td>
+								</tr>
+								<?php } else{ ?>
+								<tfoot>
+									<tr>
+										<td></td>
+										<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
+										<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
+										<td><?= bold(number_format($usuario_nivel_nacional->tutorizado, 0, '', ',')); ?></td>
+										<td><?= bold(number_format($usuario_nivel_nacional->autoformacion, 0, '', ',')); ?></td>
+									</tr>
+								</tfoot>
+								<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+					</div>
 					<?= (!empty($sin_departamento) && !empty($sin_municipio)) ? $sin_departamento.br().$sin_municipio : (!empty($sin_departamento) ? $sin_departamento : (!empty($sin_municipio) ? $sin_municipio : '')); ?>
 				</div>
 				<div class="col-lg-6 text-center">

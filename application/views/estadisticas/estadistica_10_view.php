@@ -95,12 +95,12 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="table-responsive" id="contenedor-tabla-princial">
+				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica10-1">
 						<thead>
 							<tr>
@@ -121,8 +121,8 @@ $campos_ocultos_formulario = array(
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_departamento); ?></td>
 								<td><?= utf8($usuario_nivel_nacional->nombre_municipio); ?></td>
-								<td><?= $usuario_nivel_nacional->tutorizado; ?></td>
-								<td><?= $usuario_nivel_nacional->autoformacion; ?></td>
+								<td><?= number_format($usuario_nivel_nacional->tutorizado, 0, '', ','); ?></td>
+								<td><?= number_format($usuario_nivel_nacional->autoformacion, 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tfoot>
@@ -130,8 +130,8 @@ $campos_ocultos_formulario = array(
 									<td></td>
 									<td><?= bold(utf8($usuario_nivel_nacional->nombre_departamento)); ?></td>
 									<td><?= bold(utf8($usuario_nivel_nacional->nombre_municipio)); ?></td>
-									<td><?= bold($usuario_nivel_nacional->tutorizado); ?></td>
-									<td><?= bold($usuario_nivel_nacional->autoformacion); ?></td>
+									<td><?= bold(number_format($usuario_nivel_nacional->tutorizado, 0, '', ',')); ?></td>
+									<td><?= bold(number_format($usuario_nivel_nacional->autoformacion, 0, '', ',')); ?></td>
 								</tr>
 							</tfoot>
 							<?php

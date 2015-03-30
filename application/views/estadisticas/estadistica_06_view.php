@@ -106,12 +106,12 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
 			<div class="col-lg-6">
-				<div class="table-responsive" id="contenedor-table">
+				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover" id="data-tables-estadistica6-1">
 						<thead>
 							<tr>
@@ -130,16 +130,16 @@ $campos_ocultos_formulario = array(
 							<tr>
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($estaditica_departamento_tipo_fecha->nombre_municipio); ?></td>
-								<td><?= $estaditica_departamento_tipo_fecha->tutorizado; ?></td>
-								<td><?= $estaditica_departamento_tipo_fecha->autoformacion; ?></td>
+								<td><?= number_format($estaditica_departamento_tipo_fecha->tutorizado, 0, '', ','); ?></td>
+								<td><?= number_format($estaditica_departamento_tipo_fecha->autoformacion, 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tfoot>
 								<tr>
 									<td></td>
 									<td><?= bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)); ?></td>
-									<td><?= bold($estaditica_departamento_tipo_fecha->tutorizado); ?></td>
-									<td><?= bold($estaditica_departamento_tipo_fecha->autoformacion); ?></td>
+									<td><?= bold(number_format($estaditica_departamento_tipo_fecha->tutorizado, 0, '', ',')); ?></td>
+									<td><?= bold(number_format($estaditica_departamento_tipo_fecha->autoformacion, 0, '', ',')); ?></td>
 								</tr>
 							</tfoot>
 							<?php

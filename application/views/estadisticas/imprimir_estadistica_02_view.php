@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento y Rango de Fechas', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento y Rango de Fechas', 2, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Departamento:</th><td class="column-value"><?= utf8(@$nombre_departamento); ?></td>
@@ -45,42 +45,44 @@
 			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Municipio</th>
-								<th>Capacitados</th>
-								<th>Certificados</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$indice = 1;
-							foreach($cantidad_usuarios_municipio as $cantidad_municipio){
-								if($cantidad_municipio->nombre_municipio != 'Total'){
-							?>
-							<tr>
-								<td><?= $indice++; ?></td>
-								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
-								<td><?= $cantidad_municipio->capacitados; ?></td>
-								<td><?= $cantidad_municipio->certificados; ?></td>
-							</tr>
-							<?php } else{ ?>
-							<tfoot>
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
 								<tr>
-									<td></td>
-									<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
-									<td><?= bold($cantidad_municipio->capacitados); ?></td>
-									<td><?= bold($cantidad_municipio->certificados); ?></td>
+									<th>#</th>
+									<th>Municipio</th>
+									<th>Capacitados</th>
+									<th>Certificados</th>
 								</tr>
-							</tfoot>
-							<?php
+							</thead>
+							<tbody>
+								<?php
+								$indice = 1;
+								foreach($cantidad_usuarios_municipio as $cantidad_municipio){
+									if($cantidad_municipio->nombre_municipio != 'Total'){
+								?>
+								<tr>
+									<td><?= $indice++; ?></td>
+									<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
+									<td><?= number_format($cantidad_municipio->capacitados, 0, '', ','); ?></td>
+									<td><?= number_format($cantidad_municipio->certificados, 0, '', ','); ?></td>
+								</tr>
+								<?php } else{ ?>
+								<tfoot>
+									<tr>
+										<td></td>
+										<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
+										<td><?= bold(number_format($cantidad_municipio->capacitados, 0, '', ',')); ?></td>
+										<td><?= bold(number_format($cantidad_municipio->certificados, 0, '', ',')); ?></td>
+									</tr>
+								</tfoot>
+								<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div class="col-lg-6 text-center">
 					<?php if(count($cantidad_usuarios_municipio) > 1){ ?>
@@ -91,7 +93,8 @@
 			<div class="row"><div class="col-lg-12"><?= br(4); ?></div></div>
 			<div class="row">
 				<div class="col-lg-12">
-					<?= form_fieldset(heading('Listado de Usuarios por Municipio', 4)); ?>
+					<?= form_fieldset(heading('Listado de Usuarios por Municipio', 3)); ?>
+					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
@@ -118,6 +121,7 @@
 								?>
 							</tbody>
 						</table>
+					</div>
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>

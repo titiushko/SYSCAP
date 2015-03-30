@@ -47,46 +47,33 @@ DELIMITER $$
 DROP VIEW IF EXISTS V_Estadisticas $$
 CREATE VIEW V_Estadisticas AS
 SELECT
+	u.id_usuario,
 	F_NombreCompletoUsuario(u.id_usuario) nombre_usuario,
-	ec.nota_examen_calificacion nota_examen_calificacion,
-	u.modalidad_usuario modalidad_usuario,
-	e.nombre_examen nombre_examen,
-	IF(e.nombre_examen LIKE 'Evaluaci%', 'Capacitado', 'Certificado') tipo_capacitado,
-	ec.fecha_examen_calificacion fecha_examen_calificacion,
-	d.id_departamento id_departamento,
-	d.nombre_departamento nombre_departamento,
-	m.id_municipio id_municipio,
-	m.nombre_municipio nombre_municipio,
-	ce.id_centro_educativo id_centro_educativo,
-	ce.nombre_centro_educativo nombre_centro_educativo,
+	u.sexo_usuario,
 	u.id_tipo_usuario,
-	u.id_usuario
+	u.modalidad_usuario,
+	IF(e.nombre_examen LIKE 'Evaluaci%', 'Capacitado', 'Certificado') tipo_capacitado,
+	ec.nota_examen_calificacion,
+	e.nombre_examen,
+	ec.fecha_examen_calificacion,
+	d.id_departamento,
+	d.nombre_departamento,
+	m.id_municipio,
+	m.nombre_municipio,
+	ce.id_centro_educativo,
+	ce.nombre_centro_educativo,
+	IF(cc.padre_curso_categoria = 26, 1, IF(cc.padre_curso_categoria = 23, 2, IF(cc.padre_curso_categoria = 24, 3, IF(cc.padre_curso_categoria = 25, 4, NULL)))) grado_digital,
+	cc.nombre_curso_categoria,
+	c.nombre_completo_curso
 FROM usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
 	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
 	LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
 	LEFT JOIN municipios m ON u.id_municipio = m.id_municipio
-	LEFT JOIN centros_educativos ce ON u.id_centro_educativo = ce.id_centro_educativo;
-$$
-DELIMITER ;
-
--- ------------------------------------------------------------------------------------------
-
-DELIMITER $$
-DROP VIEW IF EXISTS V_EstadisticasGradoDigital $$
-CREATE VIEW V_EstadisticasGradoDigital AS
-SELECT
-	IF(c.nombre_completo_curso LIKE 'Curso%', 'Capacitados', IF(c.nombre_completo_curso LIKE '%Certificaci%', 'Certificados', c.nombre_completo_curso)) tipo_capacitado,
-	u.modalidad_usuario,
-	IF(cc.padre_curso_categoria = 26, 1, IF(cc.padre_curso_categoria = 23, 2, IF(cc.padre_curso_categoria = 24, 3, IF(cc.padre_curso_categoria = 25, 4, cc.padre_curso_categoria)))) grado_digital,
-	ec.fecha_examen_calificacion,
-	cc.nombre_curso_categoria,
-	c.nombre_completo_curso
-FROM usuarios u
+	LEFT JOIN centros_educativos ce ON u.id_centro_educativo = ce.id_centro_educativo
 	LEFT JOIN roles_asignados ra ON u.id_usuario = ra.id_usuario
-	LEFT JOIN matriculas m ON ra.id_matricula = m.id_matricula
-	LEFT JOIN cursos c ON m.id_curso = c.id_curso
+	LEFT JOIN matriculas ma ON ra.id_matricula = ma.id_matricula
+	LEFT JOIN cursos c ON ma.id_curso = c.id_curso
 	LEFT JOIN cursos_categorias cc ON c.id_curso_categoria = cc.id_curso_categoria
-	LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
 WHERE ec.nota_examen_calificacion > 7.00;
 $$
 DELIMITER ;

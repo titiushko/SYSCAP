@@ -45,7 +45,7 @@ class Centros_educativos_model extends CI_Model{
 	function docentes_capacitados($codigo_centro_educativo){
 		$query = $this->db->query('SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario
 								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'capacitado\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo = ?
 								   ORDER BY nombre_completo_usuario', array($codigo_centro_educativo));
 		return $query->result();
@@ -55,7 +55,7 @@ class Centros_educativos_model extends CI_Model{
 		$query = $this->db->query('SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
 								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
 								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
+								   WHERE tipo_capacitado LIKE \'certificado\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
 								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo = ?
 								   ORDER BY nombre_completo_usuario', array($codigo_centro_educativo));
 		return $query->result();

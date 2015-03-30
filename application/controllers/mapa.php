@@ -127,10 +127,10 @@ class Mapa extends MY_Controller{
 		$total = 0;
 		$html = '<table border="1"><thead><tr><th>Tipo de Capacitado</th><th>Tutorizados</th></tr></thead><tbody>';
 		foreach($cantidad_usuarios as $cantidad){
-			$html .= '<tr><th>'.utf8($cantidad->tipos_capacitados).'</th><td>'.limpiar_nulo($cantidad->tutorizados).'</td></tr>';
+			$html .= '<tr><th>'.utf8($cantidad->tipos_capacitados).'</th><td>'.number_format(limpiar_nulo($cantidad->tutorizados), 0, '', ',').'</td></tr>';
 			$total += $cantidad->tutorizados;
 		}
-		$html .= '<tr><th>'.bold('Total').'</th><td>'.bold(limpiar_nulo($total)).'</td></tr>';
+		$html .= '<tr><th>'.bold('Total').'</th><td>'.bold(number_format(limpiar_nulo($total), 0, '', ',')).'</td></tr>';
 		$html .= '</tbody></table>';
 		return $html;
 	}

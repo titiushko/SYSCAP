@@ -1,13 +1,18 @@
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Modulo de Usuario</h1>
+		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Módulo de Usuario</h1>
 	</div>
 </div>
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<?= heading(utf8($this->session->userdata('nombre_completo_usuario')), 2); ?>
+				<?php
+				if($this->session->userdata('nombre_corto_rol') == 'student')
+					echo heading(utf8($this->session->userdata('nombre_completo_usuario')), 2);
+				else
+					echo heading($operacion.' Usuario', 2);
+				?>
 			</div>
 			<div class="panel-body">
 				<div class="row">

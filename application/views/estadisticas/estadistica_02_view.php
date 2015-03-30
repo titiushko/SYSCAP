@@ -90,7 +90,7 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -114,16 +114,16 @@ $campos_ocultos_formulario = array(
 							<tr>
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($cantidad_municipio->nombre_municipio); ?></td>
-								<td><?= $cantidad_municipio->capacitados; ?></td>
-								<td><?= $cantidad_municipio->certificados; ?></td>
+								<td><?= number_format($cantidad_municipio->capacitados, 0, '', ','); ?></td>
+								<td><?= number_format($cantidad_municipio->certificados, 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tfoot>
 								<tr>
 									<td></td>
 									<td><?= bold(utf8($cantidad_municipio->nombre_municipio)); ?></td>
-									<td><?= bold($cantidad_municipio->capacitados); ?></td>
-									<td><?= bold($cantidad_municipio->certificados); ?></td>
+									<td><?= bold(number_format($cantidad_municipio->capacitados, 0, '', ',')); ?></td>
+									<td><?= bold(number_format($cantidad_municipio->certificados, 0, '', ',')); ?></td>
 								</tr>
 							</tfoot>
 							<?php
@@ -144,7 +144,7 @@ $campos_ocultos_formulario = array(
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Listado de Usuarios por Municipio', 4); ?>
+		<?= heading('Listado de Usuarios por Municipio', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">

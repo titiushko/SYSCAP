@@ -95,7 +95,7 @@ $campos_ocultos_formulario = array(
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -120,14 +120,14 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
-								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
-								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
+								<td><?= number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ','); ?></td>
+								<td><?= number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
 								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
-								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
+								<td><?= bold(number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ',')); ?></td>
+								<td><?= bold(number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ',')); ?></td>
 							</tr>
 							<?php
 								}

@@ -8,7 +8,7 @@
 <?= $mapa['js']; ?>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header"><i class="fa fa-map-marker fa-fw"></i> Modulo de Mapa Estadístico</h1>
+		<h1 class="well page-header"><i class="fa fa-map-marker fa-fw"></i> Módulo de Mapa Estadístico</h1>
 	</div>
 </div>
 <div class="row">

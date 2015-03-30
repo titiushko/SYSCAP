@@ -55,7 +55,7 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 <script type="text/javascript" src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header"><i class="fa fa-university fa-fw"></i> Modulo de Centros Educativos</h1>
+		<h1 class="well page-header"><i class="fa fa-university fa-fw"></i> Módulo de Centros Educativos</h1>
 	</div>
 </div>
 <div class="row">
