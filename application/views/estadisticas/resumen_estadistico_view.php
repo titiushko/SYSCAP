@@ -94,7 +94,7 @@ $campos_ocultos_formulario = array(
 	'id_municipio_imprimir'				=> set_value('id_municipio_imprimir', @$campos['id_municipio']),
 	'id_centro_educativo_imprimir'		=> set_value('id_centro_educativo_imprimir', @$campos['id_centro_educativo']),
 	'tipo_capacitado_imprimir'			=> set_value('tipo_capacitado_imprimir', @$campos['tipo_capacitado']),
-	'modalidad_capacitacion_imprimir'	=> set_value('modalidad_capacitacion_imprimir', @$campos['modalidad_capacitacion']),
+	'modalidad_usuario_imprimir'	=> set_value('modalidad_usuario_imprimir', @$campos['modalidad_usuario']),
 	'grado_digital_imprimir'			=> set_value('grado_digital_imprimir', @$campos['grado_digital']),
 	'fecha1_imprimir'					=> set_value('fecha1_imprimir', @$campos['fecha1']),
 	'fecha2_imprimir'					=> set_value('fecha2_imprimir', @$campos['fecha2']),
@@ -155,8 +155,8 @@ $campos_ocultos_formulario = array(
 					<div class="col-lg-3">
 						<div class="form-group">
 							<?= form_label('Modalidad de Capacitaci&oacute;n:'); ?>
-							<?= form_dropdown('modalidad_capacitacion', $lista_modalidades_capacitaciones, set_value('modalidad_capacitacion', @$campos['modalidad_capacitacion']), 'class="form-control"'); ?>
-							<?= form_error('modalidad_capacitacion'); ?>
+							<?= form_dropdown('modalidad_usuario', $lista_modalidades_capacitaciones, set_value('modalidad_usuario', @$campos['modalidad_usuario']), 'class="form-control"'); ?>
+							<?= form_error('modalidad_usuario'); ?>
 						</div>
 					</div>
 					 <div class="col-lg-6">
@@ -302,7 +302,7 @@ $campos_ocultos_formulario = array(
 							</div>
 						</div>
 						<div class="row"><div class="col-lg-12"><?= nbs(); ?></div></div>
-						<?php } if(@$campos['busqueda'] != 'modalidad_capacitacion'){ ?>
+						<?php } if(@$campos['busqueda'] != 'modalidad_usuario'){ ?>
 						<div class="row">
 							<div class="col-lg-12">
 								<?= form_fieldset(heading('Modalidades de Capacitaci&oacute;n por '.$lista_busqueda[@$campos['busqueda']], 4)); ?>
@@ -327,7 +327,7 @@ $campos_ocultos_formulario = array(
 													<tbody>
 														<?php
 														$indice = 1;
-														foreach($modalidad_capacitacion_x_busqueda as $resultado){
+														foreach($modalidad_usuario_x_busqueda as $resultado){
 															if($resultado->nombre_campo != 'Total'){
 														?>
 														<tr>
@@ -356,7 +356,7 @@ $campos_ocultos_formulario = array(
 											</div>
 										</div>
 										<div class="col-lg-6">
-											<?php if(!estadistica_vacia($modalidad_capacitacion_x_busqueda)){ ?>
+											<?php if(!estadistica_vacia($modalidad_usuario_x_busqueda)){ ?>
 											<a data-toggle="modal" href="#myModalChart2"><div id="morris-bar-chart-estadistica2-1"></div></a>
 											<?php } ?>
 										</div>
@@ -606,10 +606,10 @@ $campos_ocultos_formulario = array(
 							hideHover: 'auto',
 							resize: true
 						});
-					<?php } if(!estadistica_vacia($modalidad_capacitacion_x_busqueda) && @$campos['busqueda'] != 'modalidad_capacitacion'){ ?>
+					<?php } if(!estadistica_vacia($modalidad_usuario_x_busqueda) && @$campos['busqueda'] != 'modalidad_usuario'){ ?>
 						Morris.Bar({
 							element: 'morris-bar-chart-estadistica2-1',
-							data: [<?= $modalidad_capacitacion_x_busqueda_json; ?>],
+							data: [<?= $modalidad_usuario_x_busqueda_json; ?>],
 							xkey: 'y',
 							ykeys: ['a', 'b'],
 							labels: ['Tutorizados', 'Autoformaci&oacute;n'],
@@ -618,7 +618,7 @@ $campos_ocultos_formulario = array(
 						});
 						Morris.Bar({
 							element: 'morris-bar-chart-estadistica2-2',
-							data: [<?= $modalidad_capacitacion_x_busqueda_json; ?>],
+							data: [<?= $modalidad_usuario_x_busqueda_json; ?>],
 							xkey: 'y',
 							ykeys: ['a', 'b'],
 							labels: ['Tutorizados', 'Autoformaci&oacute;n'],

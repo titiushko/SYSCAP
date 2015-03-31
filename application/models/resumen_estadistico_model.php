@@ -10,7 +10,7 @@ class Resumen_estadistico_model extends CI_Model{
 		$codigo_municipio,
 		$codigo_centro_educativo,
 		$tipo_capacitado,
-		$modalidad_capacitacion,
+		$modalidad_usuario,
 		$grado_digital,
 		$fecha1, $fecha2,
 		$sexo_usuario,
@@ -21,7 +21,7 @@ class Resumen_estadistico_model extends CI_Model{
 		$codigo_municipio = $codigo_municipio != '' ? $codigo_municipio : '%';
 		$codigo_centro_educativo = $codigo_centro_educativo != '' ? $codigo_centro_educativo : '%';
 		$tipo_capacitado = $tipo_capacitado != '' ? $tipo_capacitado : '%';
-		$modalidad_capacitacion = $modalidad_capacitacion != '' ? $modalidad_capacitacion : '%';
+		$modalidad_usuario = $modalidad_usuario != '' ? $modalidad_usuario : '%';
 		$grado_digital = $grado_digital != '' ? $grado_digital : '%';
 		$sexo_usuario = $sexo_usuario != '' ? $sexo_usuario : '%';
 		if($busqueda == 'sexo_usuario'){
@@ -40,7 +40,7 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$fecha1, $fecha2,
 				$sexo_usuario,
@@ -48,7 +48,7 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$fecha1, $fecha2,
 				$sexo_usuario
@@ -61,7 +61,7 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$fecha1,
 				$sexo_usuario,
@@ -69,7 +69,7 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$fecha1,
 				$sexo_usuario
@@ -82,7 +82,7 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$fecha2,
 				$sexo_usuario,
@@ -90,7 +90,7 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$fecha2,
 				$sexo_usuario
@@ -103,14 +103,14 @@ class Resumen_estadistico_model extends CI_Model{
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$sexo_usuario,
 				$codigo_departamento,
 				$codigo_municipio,
 				$codigo_centro_educativo,
 				$tipo_capacitado,
-				$modalidad_capacitacion,
+				$modalidad_usuario,
 				$grado_digital,
 				$sexo_usuario
 			);
@@ -165,7 +165,7 @@ class Resumen_estadistico_model extends CI_Model{
 		$codigo_municipio,
 		$codigo_centro_educativo,
 		$tipo_capacitado,
-		$modalidad_capacitacion,
+		$modalidad_usuario,
 		$grado_digital,
 		$fecha1, $fecha2,
 		$sexo_usuario,
@@ -176,7 +176,7 @@ class Resumen_estadistico_model extends CI_Model{
 			$codigo_municipio,
 			$codigo_centro_educativo,
 			$tipo_capacitado,
-			$modalidad_capacitacion,
+			$modalidad_usuario,
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
@@ -185,12 +185,12 @@ class Resumen_estadistico_model extends CI_Model{
 		);
 	}
 	
-	function modalidad_capacitacion_x_busqueda(
+	function modalidad_usuario_x_busqueda(
 		$codigo_departamento,
 		$codigo_municipio,
 		$codigo_centro_educativo,
 		$tipo_capacitado,
-		$modalidad_capacitacion,
+		$modalidad_usuario,
 		$grado_digital,
 		$fecha1, $fecha2,
 		$sexo_usuario,
@@ -201,7 +201,7 @@ class Resumen_estadistico_model extends CI_Model{
 			$codigo_municipio,
 			$codigo_centro_educativo,
 			$tipo_capacitado,
-			$modalidad_capacitacion,
+			$modalidad_usuario,
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
@@ -215,7 +215,7 @@ class Resumen_estadistico_model extends CI_Model{
 		$codigo_municipio,
 		$codigo_centro_educativo,
 		$tipo_capacitado,
-		$modalidad_capacitacion,
+		$modalidad_usuario,
 		$grado_digital,
 		$fecha1, $fecha2,
 		$sexo_usuario,
@@ -226,7 +226,7 @@ class Resumen_estadistico_model extends CI_Model{
 			$codigo_municipio,
 			$codigo_centro_educativo,
 			$tipo_capacitado,
-			$modalidad_capacitacion,
+			$modalidad_usuario,
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
@@ -240,7 +240,7 @@ class Resumen_estadistico_model extends CI_Model{
 		$codigo_municipio,
 		$codigo_centro_educativo,
 		$tipo_capacitado,
-		$modalidad_capacitacion,
+		$modalidad_usuario,
 		$grado_digital,
 		$fecha1, $fecha2,
 		$sexo_usuario,
@@ -251,7 +251,7 @@ class Resumen_estadistico_model extends CI_Model{
 			$codigo_municipio,
 			$codigo_centro_educativo,
 			$tipo_capacitado,
-			$modalidad_capacitacion,
+			$modalidad_usuario,
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,

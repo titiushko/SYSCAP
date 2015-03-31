@@ -40,7 +40,7 @@
 							</tr>
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= utf8(@$tipo_capacitado); ?></td>
-								<th class="column-title">Modalidad de Capacitaci&oacute;n:</th><td class="column-value"><?= utf8(@$modalidad_capacitacion); ?></td>
+								<th class="column-title">Modalidad de Capacitaci&oacute;n:</th><td class="column-value"><?= utf8(@$modalidad_usuario); ?></td>
 								<th class="column-title">Grado Digital:</th><td class="column-value"><?= utf8(@$grado_digital); ?></td>
 							</tr>
 							<tr>
@@ -119,7 +119,7 @@
 				</div>
 			</div>
 			<div class="row"><div class="col-lg-12"><?= form_fieldset_close(); ?></div></div>
-			<?php } if(@$busqueda != 'modalidad_capacitacion'){ ?>
+			<?php } if(@$busqueda != 'modalidad_usuario'){ ?>
 			<div class="row">
 				<div class="col-lg-12">
 					<?= form_fieldset(heading('Modalidad de Capacitaci&oacute;n por '.$lista_busqueda[@$busqueda], 4)); ?>
@@ -144,7 +144,7 @@
 									<tbody>
 										<?php
 										$indice = 1;
-										foreach($modalidad_capacitacion_x_busqueda as $resultado){
+										foreach($modalidad_usuario_x_busqueda as $resultado){
 											if($resultado->nombre_campo != 'Total'){
 										?>
 										<tr>
@@ -173,7 +173,7 @@
 							</div>
 						</div>
 						<div class="col-lg-6 text-center">
-							<?php if(!estadistica_vacia($modalidad_capacitacion_x_busqueda)){ ?>
+							<?php if(!estadistica_vacia($modalidad_usuario_x_busqueda)){ ?>
 							<div id="morris-bar-chart-estadistica2-1"></div>
 							<?php } ?>
 						</div>
@@ -332,10 +332,10 @@
 					hideHover: 'auto',
 					resize: true
 				});
-				<?php } if(!estadistica_vacia($modalidad_capacitacion_x_busqueda) && @$busqueda != 'modalidad_capacitacion'){ ?>
+				<?php } if(!estadistica_vacia($modalidad_usuario_x_busqueda) && @$busqueda != 'modalidad_usuario'){ ?>
 				Morris.Bar({
 					element: 'morris-bar-chart-estadistica2-1',
-					data: [<?= $modalidad_capacitacion_x_busqueda_json; ?>],
+					data: [<?= $modalidad_usuario_x_busqueda_json; ?>],
 					xkey: 'y',
 					ykeys: ['a', 'b'],
 					labels: ['Tutorizados', 'Autoformaci&oacute;n'],

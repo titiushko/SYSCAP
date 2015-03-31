@@ -96,7 +96,7 @@ FROM moodle19.mdl_user;
 TRUNCATE syscap.tipos_usuarios;
 INSERT INTO syscap.tipos_usuarios(syscap.tipos_usuarios.id_tipo_usuario, syscap.tipos_usuarios.nombre_tipo_usuario) VALUES
 (1, 'Ciudadano en General'),
-(2, 'Estudiante de Basica'),
+(2, 'Estudiante de Básica'),
 (3, 'Estudiante de Media'),
 (4, 'Estudiante Universitario'),
 (5, 'Docente de Básica'),

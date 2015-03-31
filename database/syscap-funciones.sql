@@ -3,7 +3,7 @@ USE syscap;
 DELIMITER $$
 DROP FUNCTION IF EXISTS initcap $$
 CREATE FUNCTION initcap(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
-COMMENT 'Función que devuelve la primera letra de cada palabra en mayúsculas.'
+COMMENT 'Funcion que devuelve la primera letra de cada palabra en mayusculas.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -24,7 +24,7 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_CodigoDepartamento $$
 CREATE FUNCTION F_CodigoDepartamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
-COMMENT 'Función que devuelve el identificador de un departamento a partir del nombre.'
+COMMENT 'Funcion que devuelve el identificador de un departamento a partir del nombre.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -54,7 +54,7 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreDepartamento $$
 CREATE FUNCTION F_NombreDepartamento(p_codigo_departamento CHAR(2)) RETURNS VARCHAR(255)
-COMMENT 'Función que devuelve el nombre de un departamento a partir del identificador.'
+COMMENT 'Funcion que devuelve el nombre de un departamento a partir del identificador.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -84,7 +84,7 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_CodigoMunicipio $$
 CREATE FUNCTION F_CodigoMunicipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
-COMMENT 'Función que devuelve el identificador de un municipio a partir del nombre.'
+COMMENT 'Funcion que devuelve el identificador de un municipio a partir del nombre.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -114,7 +114,7 @@ DELIMITER ;
 DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreMunicipio $$
 CREATE FUNCTION F_NombreMunicipio(p_codigo_municipio CHAR(3)) RETURNS VARCHAR(255)
-COMMENT 'Función que devuelve el nombre de un municipio a partir del identificador.'
+COMMENT 'Funcion que devuelve el nombre de un municipio a partir del identificador.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -146,7 +146,7 @@ DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
 CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(305)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'Función que devuelve el nombre completo (todos los nombres y todos los apellidos) de un usuario.'
+COMMENT 'Funcion que devuelve el nombre completo (todos los nombres y todos los apellidos) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -194,7 +194,7 @@ DROP FUNCTION IF EXISTS F_NombreCompactoUsuario $$
 CREATE FUNCTION F_NombreCompactoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(205)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'Función que devuelve el nombre compacto (un nombre y un apellido) de un usuario.'
+COMMENT 'Funcion que devuelve el nombre compacto (un nombre y un apellido) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -236,7 +236,7 @@ DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
 CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(150)
 DETERMINISTIC
 READS SQL DATA
-COMMENT 'Función que devuelve el nombre de un centro educativo.'
+COMMENT 'Funcion que devuelve el nombre de un centro educativo.'
 BEGIN
 	DECLARE v_nombre_centro_educativo VARCHAR(150);
 	DECLARE v_termina INT DEFAULT FALSE;
