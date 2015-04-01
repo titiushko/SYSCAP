@@ -81,7 +81,6 @@ CREATE TABLE IF NOT EXISTS roles(
 	nombre_completo_rol VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un rol de Moodle. Los valores de este campo se obtendran del campo <name> de Moodle usando ETL.',
 	nombre_corto_rol VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un rol de Moodle. Los valores de este campo se obtendran del campo <shortname> de Moodle usando ETL.',
 	descripcion_rol TEXT NOT NULL COMMENT 'Descripcion de un rol de Moodle. Los valores de este campo se obtendran del campo <description> de Moodle usando ETL.',
-	criterio_rol BIGINT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Criterio de un rol de Moodle. Los valores de este campo se obtendran del campo <sortorder> de Moodle usando ETL.',
 	PRIMARY KEY(id_rol)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catalogo de roles de Moodle. Los registros de esta tabla se obtendran de la tabla <mdl_role> de Moodle usando ETL.' AUTO_INCREMENT=1;
 

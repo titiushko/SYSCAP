@@ -34,4 +34,4 @@ $config['carousel'] = FALSE;
 $config['semilla_moodle'] = 'Mtx5;;1>0EWn:,,{go%~}=aPJ#Hky';
 
 /* End of file properties.php */
-/* Location: ./application/properties/properties.php */
+/* Location: ./application/config/properties.php */

@@ -1,4 +1,6 @@
 \.settings\
+\database\cargar-moodle.bat
+\database\cargar-moodle.sh
 \database\cargar-syscap.bat
 \database\importar-bd-syscap.bat
 \database\importar-bd-syscap.sh

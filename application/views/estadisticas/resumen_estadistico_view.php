@@ -94,7 +94,7 @@ $campos_ocultos_formulario = array(
 	'id_municipio_imprimir'				=> set_value('id_municipio_imprimir', @$campos['id_municipio']),
 	'id_centro_educativo_imprimir'		=> set_value('id_centro_educativo_imprimir', @$campos['id_centro_educativo']),
 	'tipo_capacitado_imprimir'			=> set_value('tipo_capacitado_imprimir', @$campos['tipo_capacitado']),
-	'modalidad_usuario_imprimir'	=> set_value('modalidad_usuario_imprimir', @$campos['modalidad_usuario']),
+	'modalidad_usuario_imprimir'		=> set_value('modalidad_usuario_imprimir', @$campos['modalidad_usuario']),
 	'grado_digital_imprimir'			=> set_value('grado_digital_imprimir', @$campos['grado_digital']),
 	'fecha1_imprimir'					=> set_value('fecha1_imprimir', @$campos['fecha1']),
 	'fecha2_imprimir'					=> set_value('fecha2_imprimir', @$campos['fecha2']),
@@ -535,7 +535,7 @@ $campos_ocultos_formulario = array(
 							}
 						});
 						$("#id_departamento").bind('change focusout', function(){
-							$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+							$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val() != '' ? $("#id_departamento").val() : '%'}, function(resultado){
 								$('#id_municipio').empty();
 								$("#id_municipio").append($("<option value=''></option>"));
 								$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){

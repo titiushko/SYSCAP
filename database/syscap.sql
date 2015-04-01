@@ -111,7 +111,6 @@ CREATE TABLE IF NOT EXISTS roles(
 	nombre_completo_rol VARCHAR(255) NOT NULL COMMENT 'Nombre completo de un rol de Moodle. Los valores de este campo se obtendran del campo <name> de Moodle usando ETL.',
 	nombre_corto_rol VARCHAR(100) NOT NULL COMMENT 'Nombre corto de un rol de Moodle. Los valores de este campo se obtendran del campo <shortname> de Moodle usando ETL.',
 	descripcion_rol TEXT NOT NULL COMMENT 'Descripcion de un rol de Moodle. Los valores de este campo se obtendran del campo <description> de Moodle usando ETL.',
-	criterio_rol BIGINT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'Criterio de un rol de Moodle. Los valores de este campo se obtendran del campo <sortorder> de Moodle usando ETL.',
 	PRIMARY KEY(id_rol)
 ) ENGINE=MyISAM	DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT 'Catalogo de roles de Moodle. Los registros de esta tabla se obtendran de la tabla <mdl_role> de Moodle usando ETL.' AUTO_INCREMENT=1;
 
@@ -961,8 +960,8 @@ FROM moodle19.mdl_quiz_grades;
 /* ROLES */
 -- copiar a syscap.roles los registros de moodle19.mdl_role
 TRUNCATE syscap.roles;
-INSERT INTO syscap.roles(syscap.roles.id_rol, syscap.roles.nombre_completo_rol, syscap.roles.nombre_corto_rol, syscap.roles.descripcion_rol, syscap.roles.criterio_rol)
-SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description, moodle19.mdl_role.sortorder
+INSERT INTO syscap.roles(syscap.roles.id_rol, syscap.roles.nombre_completo_rol, syscap.roles.nombre_corto_rol, syscap.roles.descripcion_rol)
+SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description
 FROM moodle19.mdl_role;
 
 /* ROLES_ASIGNADOS */
@@ -1426,7 +1425,7 @@ BEGIN
 	CALL P_ActualizarMoodleCatEducativa();
 	
 	/* MDL_USER */
-	-- copiar a moodle19.mdl_user los registros de syscap.usuarios
+	-- actualizar los registros de moodle19.mdl_user desde syscap.usuarios
 	CALL P_ActualizarMoodleUser();
 	
 	/* Actualizar la base de datos de SYSCAP a partir de los cambios en la base de datos de MOODLE. */
@@ -1435,12 +1434,12 @@ BEGIN
 	-- actualizar los registros de syscap.centros_educativos desde moodle19.mdl_cat_educativa
 	CALL P_ActualizarSyscapCentrosEducativos();
 	
-	/* MATRICULAS */
-	-- copiar a syscap.matriculas los registros de moodle19.mdl_context
-	TRUNCATE matriculas;
-	INSERT INTO matriculas(id_matricula, id_curso)
-	SELECT moodle19.mdl_context.id, moodle19.mdl_context.instanceid
-	FROM moodle19.mdl_context;
+	/* CURSOS_CATEGORIAS */
+	-- copiar a syscap.cursos_categorias los registros de moodle19.mdl_course_categories
+	TRUNCATE cursos_categorias;
+	INSERT INTO cursos_categorias(id_curso_categoria, nombre_curso_categoria, padre_curso_categoria)
+	SELECT moodle19.mdl_course_categories.id, moodle19.mdl_course_categories.name, moodle19.mdl_course_categories.parent
+	FROM moodle19.mdl_course_categories;
 	
 	/* CURSOS */
 	-- copiar a syscap.cursos los registros de moodle19.mdl_course
@@ -1448,6 +1447,13 @@ BEGIN
 	INSERT INTO cursos(id_curso, nombre_completo_curso, nombre_corto_curso)
 	SELECT moodle19.mdl_course.id, moodle19.mdl_course.fullname, moodle19.mdl_course.shortname
 	FROM moodle19.mdl_course;
+	
+	/* MATRICULAS */
+	-- copiar a syscap.matriculas los registros de moodle19.mdl_context
+	TRUNCATE matriculas;
+	INSERT INTO matriculas(id_matricula, id_curso)
+	SELECT moodle19.mdl_context.id, moodle19.mdl_context.instanceid
+	FROM moodle19.mdl_context;
 	
 	/* EXAMENES */
 	-- copiar a syscap.examenes los registros de moodle19.mdl_quiz
@@ -1466,8 +1472,8 @@ BEGIN
 	/* ROLES */
 	-- copiar a syscap.roles los registros de moodle19.mdl_role
 	TRUNCATE roles;
-	INSERT INTO roles(id_rol, nombre_completo_rol, nombre_corto_rol, descripcion_rol, criterio_rol)
-	SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description, moodle19.mdl_role.sortorder
+	INSERT INTO roles(id_rol, nombre_completo_rol, nombre_corto_rol, descripcion_rol)
+	SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description
 	FROM moodle19.mdl_role;
 	
 	/* ROLES_ASIGNADOS */
@@ -1478,7 +1484,7 @@ BEGIN
 	FROM moodle19.mdl_role_assignments;
 	
 	/* USUARIOS */
-	-- copiar a syscap.usuarios los registros de moodle19.mdl_user
+	-- actualizar los registros de syscap.usuarios desde moodle19.mdl_user
 	CALL P_ActualizarSyscapUsuarios();
 	
 	SET @DISABLE_TRIGGERS = NULL;
