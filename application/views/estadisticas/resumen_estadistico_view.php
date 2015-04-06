@@ -504,12 +504,12 @@ $campos_ocultos_formulario = array(
 								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
 								<a class="btn btn-success" onclick="document.formulario_imprimir.submit();"><i class="fa fa-print"></i> Imprimir</a>
 								<?php } ?>
-								<a class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<!--<a class="btn btn-success" onclick="document.formulario_exportar.submit();"><i class="fa fa-file-pdf-o"></i> Exportar</a>-->
 							<?php } else{ ?>
 								<?php if(!$this->session->userdata('dispositivo_movil')){ ?>
 								<a class="btn btn-success" data-toggle="modal" href="#myModalErrorReport"><i class="fa fa-print"></i> Imprimir</a>
 								<?php } ?>
-								<a class="btn btn-success" data-toggle="modal" href="#myModalErrorReport"><i class="fa fa-file-pdf-o"></i> Exportar</a>
+								<!--<a class="btn btn-success" data-toggle="modal" href="#myModalErrorReport"><i class="fa fa-file-pdf-o"></i> Exportar</a>-->
 							<?php } ?>
 							</div>
 						</div>

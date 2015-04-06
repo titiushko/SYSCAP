@@ -257,19 +257,6 @@
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						
-						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Generar Reporte Estadístico', 'name="estadisticas-generar_reporte"'), 3).br();
-						echo heading('Imprimir Consulta Estadística.', 4);
-						echo ol(array(
-						'Dentro del módulo de consultas estadísticas y desde la pantalla de resultado de una consulta estadística, dar clic en el botón '.tag('div', '<i class="fa fa-print"></i> Imprimir', 'class="btn btn-sm btn-success"').'.',
-						'SYSCAP mostrará un reporte generado con el resultado de la consulta estadística para ser enviado a impresión.',
-						)).br();
-						echo tag('p', 'El botón imprimir no está disponible sólo para dispositivos móviles.').br();
-						echo heading('Exportar a Archivo PDF Consulta Estadística.', 4);
-						echo ol(array(
-						'Dentro del módulo de consultas estadísticas y desde la pantalla de resultado de una consulta estadística, dar clic en el botón '.tag('div', '<i class="fa fa-file-pdf-o"></i> Exportar', 'class="btn btn-sm btn-success"').'.',
-						'SYSCAP mostrará un reporte generado con el resultado de la consulta estadística en archivo PDF para ser almacenado.',
-						)).br();
-						
 						echo heading(anchor(current_url().'#resumen_estadistico', 'Resumen Estadístico', 'name="resumen_estadistico"'), 3).br();
 						echo heading('Acceder al Resumen Estadístico.', 4);
 						echo tag('p', 'Método 1.');
@@ -292,6 +279,19 @@
 						'SYSCAP mostrará el resultado del resumen estadístico.',
 						'Cambiar la opción de la lista desplegable '.bold('Resultado por').', para ver el resultado del resumen estadístico por Departamento, Municipio, Centro Educativo, Tipo de Capacitado, Modalidad de Capacitación, Grado Digital o Sexo de Usuario.',
 						'Si se desea deshacer el resultado del resumen estadístico, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						)).br();
+						
+						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Generar Reporte Estadístico', 'name="estadisticas-generar_reporte"'), 3).br();
+						echo heading('Imprimir Consulta Estadística.', 4);
+						echo ol(array(
+						'Dentro del módulo de consultas estadísticas y desde la pantalla de resultado de una consulta estadística, dar clic en el botón '.tag('div', '<i class="fa fa-print"></i> Imprimir', 'class="btn btn-sm btn-success"').'.',
+						'SYSCAP mostrará un reporte generado con el resultado de la consulta estadística para ser enviado a impresión.',
+						)).br();
+						echo tag('p', 'El botón imprimir no está disponible sólo para dispositivos móviles.').br();
+						echo heading('Exportar a Archivo PDF Consulta Estadística.', 4);
+						echo ol(array(
+						'Dentro del módulo de consultas estadísticas y desde la pantalla de resultado de una consulta estadística, dar clic en el botón '.tag('div', '<i class="fa fa-file-pdf-o"></i> Exportar', 'class="btn btn-sm btn-success"').'.',
+						'SYSCAP mostrará un reporte generado con el resultado de la consulta estadística en archivo PDF para ser almacenado.',
 						)).br();
 						?>
 					</div>
@@ -323,7 +323,7 @@
 						echo tag('p', 'Método 2.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico, ubicarse en el mapa de El Salvador.',
-						'Navegar sobre el mapa de El Salvador y dar clic al '.bold('Marcador <font color="red" size="4"><i class="fa fa-map-marker fa-fw"></i></font>').' sobre el departamento que se desea consultar.',
+						'Navegar sobre el mapa de El Salvador y dar clic al '.bold('Marcador '.tag('font', '<i class="fa fa-map-marker fa-fw"></i>', 'color="red"')).' sobre el departamento que se desea consultar.',
 						'SYSCAP mostrará el departamento seleccionado en el mapa de El Salvador y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del departamento.',
 						'Dar clic al enlace '.bold('Ver departamento').' para ver los municipios del departamento.'
 						)).br();
@@ -340,7 +340,7 @@
 						echo tag('p', 'Método 2.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico y el mapa de un departamento, ubicarse en el mapa del departamento.',
-						'Navegar sobre el mapa del departamento y dar clic al '.bold('Marcador <font color="red" size="4"><i class="fa fa-map-marker fa-fw"></i></font>').' sobre el municipio que se desea consultar.',
+						'Navegar sobre el mapa del departamento y dar clic al '.bold('Marcador '.tag('font', '<i class="fa fa-map-marker fa-fw"></i>', 'color="red"')).' sobre el municipio que se desea consultar.',
 						'SYSCAP mostrará el municipio seleccionado en el mapa del departamento y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del municipio.',
 						'Dar clic al enlace '.bold('Ver municipio').' para ver los centros educativos del municipio.',
 						'Para regresar al mapa de El Salvador y realizar otra búsqueda con un departamento diferente, ubicarse sobre la parte superior izquierda del mapa y hacer clic al enlace '.bold('El Salvador').'.'
@@ -358,7 +358,7 @@
 						echo tag('p', 'Método 2.');
 						echo ol(array(
 						'Dentro del módulo de mapa estadístico y el mapa de un municipio, ubicarse en el mapa del municipio.',
-						'Navegar sobre el mapa del municipio y dar clic al '.bold('Marcador <font color="red" size="4"><i class="fa fa-map-marker fa-fw"></i></font>').' sobre el centro educativo que se desea consultar.',
+						'Navegar sobre el mapa del municipio y dar clic al '.bold('Marcador '.tag('font', '<i class="fa fa-map-marker fa-fw"></i>', 'color="red"')).' sobre el centro educativo que se desea consultar.',
 						'SYSCAP mostrará el centro educativo seleccionado en el mapa del municipio y en una viñeta mostrará la cantidad de docentes por tipo de capacitado de la modalidad de capacitación tutorizados del centro educativo.',
 						'Dar clic al enlace '.bold('Ver centro educativo').' para ir a la ficha del centro educativo y ver los docentes capacitados y docentes certificados.',
 						'Para regresar al mapa del departamento y realizar otra búsqueda con un municipio diferente, ubicarse sobre la parte superior izquierda del mapa y hacer clic al enlace con el '.bold('Nombre del Departamento').', o si desea realizar otra búsqueda con un departamento diferente, hacer clic al enlace '.bold('El Salvador').'.'

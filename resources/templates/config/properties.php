@@ -31,7 +31,7 @@ $config['carousel'] = FALSE;
 | 					moodle/config.php.
 |
 */
-$config['semilla_moodle'] = 'Mtx5;;1>0EWn:,,{go%~}=aPJ#Hky';
+$config['semilla_moodle'] = '<SEMILLA>';
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +44,7 @@ $config['semilla_moodle'] = 'Mtx5;;1>0EWn:,,{go%~}=aPJ#Hky';
 | Ajustar a cero para que no expire el tiempo de conexión de las sesiones.
 |
 */
-$config['sess_expiration'] = 600;
+$config['sess_expiration'] = <TIEMPO_CONEXION>;
 
 
 /* End of file configuracion.php */
