@@ -23,32 +23,81 @@ if($operacion == "Mostrar"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = $bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
-	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('usuarios/modificar/'.@$usuario[0]->id_usuario).'\');"';
-	$boton_secundario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario).'\');"';
+	$boton_primario = array(
+		'name'		=> 'boton_primario',
+		'id'		=> 'boton_primario',
+		'value'		=> 'true',
+		'type'		=> 'button',
+		'content'	=> '<i class="fa fa-pencil"></i> Editar',
+		'class'		=> 'btn btn-primary',
+		'onclick'	=> 'redireccionar(\''.base_url('usuarios/modificar/'.@$usuario[0]->id_usuario).'\');'
+	);
+	$boton_secundario = array(
+		'name'		=> 'boton_secundario',
+		'id'		=> 'boton_secundario',
+		'value'		=> 'true',
+		'type'		=> 'button',
+		'content'	=> '<i class="fa fa-pencil"></i> Recuperar Contraseña',
+		'class'		=> 'btn btn-primary',
+		'onclick'	=> 'redireccionar(\''.base_url('usuarios/recuperar_contrasena/'.@$usuario[0]->id_usuario).'\');'
+	);
+	$boton_regresar = array(
+		'name'		=> 'boton_regresar',
+		'id'		=> 'boton_regresar',
+		'value'		=> 'true',
+		'type'		=> 'button',
+		'content'	=> '<i class="fa fa-reply"></i> Regresar',
+		'class'		=> 'btn btn-danger',
+		'onclick'	=> ''
+	);
 	if($this->session->userdata('uri_usuarios')){
 		$uri_usuarios = $this->session->userdata('uri_usuarios');
 		if(strpos($uri_usuarios, 'mostrar') != FALSE){
-			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url($uri_usuarios).'\');"';
+			$boton_regresar['onclick'] = 'redireccionar(\''.base_url($uri_usuarios).'\');';
 		}
 		else{
-			$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios').'\');"';
+			$boton_regresar['onclick'] = 'redireccionar(\''.base_url('usuarios').'\');';
 		}
 	}
 	else{
-		$boton_regresar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios').'\');"';
+		$boton_regresar['onclick'] = 'redireccionar(\''.base_url('usuarios').'\');';
 	}
 }
 if($operacion == "Editar"){
 	$bloqueo_informacion_usuario = $valor_bloqueo_informacion_usuario = 'disabled';
 	$listas_informacion_usuario = $bloqueo_informacion_usuario.'="'.$valor_bloqueo_informacion_usuario.'"';
-	$boton_primario = 'class="btn btn-primary" onclick="document.datos_personales.estado.value=\'1\'; document.datos_personales.grupo_campos.value=\'datos_personales\';"';
+	$boton_primario = array(
+		'name'		=> 'boton_primario',
+		'id'		=> 'boton_primario',
+		'value'		=> 'true',
+		'type'		=> 'submit',
+		'content'	=> '<i class="fa fa-save"></i> Guardar',
+		'class'		=> 'btn btn-primary',
+		'onclick'	=> 'document.datos_personales.estado.value=\'1\'; document.datos_personales.grupo_campos.value=\'datos_personales\';'
+	);
 }
 if($operacion == "Recuperar Contraseña"){
 	$bloqueo_datos_personales = $valor_bloqueo_datos_personales = 'disabled';
 	$listas_datos_personales = $bloqueo_datos_personales.'="'.$valor_bloqueo_datos_personales.'"';
-	$boton_primario = 'class="btn btn-primary" onclick="document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';"';
+	$boton_primario = array(
+		'name'		=> 'boton_primario',
+		'id'		=> 'boton_primario',
+		'value'		=> 'true',
+		'type'		=> 'submit',
+		'content'	=> '<i class="fa fa-save"></i> Guardar',
+		'class'		=> 'btn btn-primary',
+		'onclick'	=> 'document.informacion_usuario.estado.value=\'1\'; document.informacion_usuario.grupo_campos.value=\'informacion_usuario\';'
+	);
 }
-$boton_cancelar = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.@$usuario[0]->id_usuario).'\');"';
+$boton_cancelar = array(
+	'name'		=> 'boton_cancelar',
+	'id'		=> 'boton_cancelar',
+	'value'		=> 'true',
+	'type'		=> 'button',
+	'content'	=> '<i class="fa fa-remove"></i> Cancelar',
+	'class'		=> 'btn btn-danger',
+	'onclick'	=> 'redireccionar(\''.base_url('usuarios/mostrar/'.@$usuario[0]->id_usuario).'\');'
+);
 // Definición de los campos Datos Personales
 $nombres_usuario = array(
 	'name'			=>	'nombres_usuario',
@@ -57,6 +106,7 @@ $nombres_usuario = array(
 	'size'			=>	'20',
 	'type'			=>	'text',
 	'autocomplete'	=>	'off',
+	'required'		=>	'required',
 	'value'			=>	utf8(set_value('nombres_usuario', @$usuario[0]->nombres_usuario)),
 	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
@@ -68,6 +118,7 @@ $apellido1_usuario = array(
 	'size'			=>	'20',
 	'type'			=>	'text',
 	'autocomplete'	=>	'off',
+	'required'		=>	'required',
 	'value'			=>	utf8(set_value('apellido1_usuario', @$usuario[0]->apellido1_usuario)),
 	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
@@ -79,6 +130,7 @@ $dui_usuario = array(
 	'size'			=>	'20',
 	'type'			=>	'text',
 	'autocomplete'	=>	'off',
+	'required'		=>	'required',
 	'value'			=>	set_value('dui_usuario', formato_dui(@$usuario[0]->dui_usuario)),
 	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
@@ -90,38 +142,41 @@ $correo_electronico_usuario = array(
 	'size'			=>	'30',
 	'type'			=>	'email',
 	'autocomplete'	=>	'off',
+	'required'		=>	'required',
 	'value'			=>	set_value('correo_electronico_usuario', @$usuario[0]->correo_electronico_usuario),
 	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
+$profesiones = 'class="form-control" id="id_profesion" required="required" '.@$listas_datos_personales;
 $nombre_centro_educativo = array (
-	'name'			=> 'nombre_centro_educativo',
-	'id'			=> 'nombre_centro_educativo',
-	'maxlength'		=> '60',
-	'size'			=> '20',
-	'value'			=> utf8(set_value('nombre_centro_educativo', $this->centros_educativos_model->nombre_centro_educativo(@$usuario[0]->id_centro_educativo))),
-	'onpaste'		=> 'return false',
-	'type'			=> 'text',
-	'autocomplete'	=> 'off',
-	'required'		=> 'required',
-	'placeholder'	=> 'Buscar Centro Educativo',
-	'class'			=> 'form-control',
+	'name'			=>	'nombre_centro_educativo',
+	'id'			=>	'nombre_centro_educativo',
+	'maxlength'		=>	'60',
+	'size'			=>	'20',
+	'value'			=>	utf8(set_value('nombre_centro_educativo', $this->centros_educativos_model->nombre_centro_educativo(@$usuario[0]->id_centro_educativo))),
+	'onpaste'		=>	'return false',
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'required'		=>	'required',
+	'placeholder'	=>	'Buscar Centro Educativo',
+	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 $codigo_centro_educativo = array (
-	'name'			=> 'id_centro_educativo',
-	'id'			=> 'id_centro_educativo',
-	'value'			=> set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo),
-	'type'			=> 'hidden',
-	'required'		=> 'required',
+	'name'			=>	'id_centro_educativo',
+	'id'			=>	'id_centro_educativo',
+	'value'			=>	set_value('id_centro_educativo', @$usuario[0]->id_centro_educativo),
+	'type'			=>	'hidden',
+	'required'		=>	'required',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 $direccion_usuario = array(
-	'name'		=>	'direccion_usuario',
-	'id'		=>	'direccion_usuario',
-	'rows'		=>	'3',
-	'value'		=>	utf8(set_value('direccion_usuario', @$usuario[0]->direccion_usuario)),
-	'class'		=>	'form-control',
+	'name'			=>	'direccion_usuario',
+	'id'			=>	'direccion_usuario',
+	'rows'			=>	'3',
+	'required'		=>	'required',
+	'value'			=>	utf8(set_value('direccion_usuario', @$usuario[0]->direccion_usuario)),
+	'class'			=>	'form-control',
 	$bloqueo_datos_personales	=>	$valor_bloqueo_datos_personales
 );
 // Definición de los campos Información de Usuario
@@ -132,6 +187,7 @@ $nombre_usuario = array(
 	'size'			=>	'20',
 	'type'			=>	'text',
 	'autocomplete'	=>	'off',
+	'required'		=>	'required',
 	'value'			=>	set_value('nombre_usuario', @$usuario[0]->nombre_usuario),
 	'class'			=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
@@ -143,10 +199,12 @@ $contrasena_usuario = array(
 	'size'			=>	'20',
 	'type'			=>	'text',
 	'autocomplete'	=>	'off',
+	'required'		=>	'required',
 	'value'			=>	set_value('contrasena_usuario', @$usuario[0]->contrasena_usuario),
 	'class'			=>	'form-control',
 	$bloqueo_informacion_usuario	=>	$valor_bloqueo_informacion_usuario
 );
+$tipos_usuarios = 'class="form-control" id="id_tipo_usuario" required="required" '.@$listas_informacion_usuario;
 // Definición de los campos Información de Cursos
 $modalidad_usuario = array(
 	'name'		=>	'modalidad_usuario',
@@ -211,7 +269,7 @@ $modalidad_usuario = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Profesión:'); ?>
-										<?= form_dropdown('id_profesion', $lista_profesiones, set_value('id_profesion', @$usuario[0]->id_profesion), 'class="form-control" '.@$listas_datos_personales); ?>
+										<?= form_dropdown('id_profesion', $lista_profesiones, set_value('id_profesion', @$usuario[0]->id_profesion), $profesiones); ?>
 										<?= form_error('id_profesion'); ?>
 									</div>
 								</div>
@@ -238,11 +296,11 @@ $modalidad_usuario = array(
 								<div class="col-lg-12">
 									<div class="form-group">
 										<?php if($operacion == "Mostrar"){ ?>
-										<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
-										<?= form_button('boton_regresar','Regresar', $boton_regresar); ?>
+										<?= form_button($boton_primario); ?>
+										<?= form_button($boton_regresar); ?>
 										<?php } else if($operacion == "Editar"){ ?>
-										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
-										<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
+										<?= form_button($boton_primario); ?>
+										<?= form_button($boton_cancelar); ?>
 										<?php } ?>
 									</div>
 								</div>
@@ -273,7 +331,7 @@ $modalidad_usuario = array(
 								<div class="col-lg-6">
 									<div class="form-group">
 										<?= form_label('Tipo de Usuario:'); ?>
-										<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), 'class="form-control" '.@$listas_informacion_usuario); ?>
+										<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, set_value('id_tipo_usuario', @$usuario[0]->id_tipo_usuario), $tipos_usuarios); ?>
 										<?= form_error('id_tipo_usuario'); ?>
 									</div>
 								</div>
@@ -284,10 +342,10 @@ $modalidad_usuario = array(
 								<div class="col-lg-12">
 									<div class="form-group">
 										<?php if($operacion == "Mostrar"){ ?>
-										<?= form_button('boton_primario', 'Recuperar Contraseña', $boton_secundario); ?>
+										<?= form_button($boton_secundario); ?>
 										<?php } else if($operacion == "Recuperar Contraseña"){ ?>
-										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
-										<?= form_button('boton_secundario', 'Cancelar', $boton_cancelar); ?>
+										<?= form_button($boton_primario); ?>
+										<?= form_button($boton_cancelar); ?>
 										<?php } ?>
 									</div>
 								</div>

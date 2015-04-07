@@ -2,23 +2,56 @@
 $bloqueo_informacion_general = $valor_bloqueo_informacion_general = '';
 if($operacion == "Mostrar"){
 	$bloqueo_informacion_general = $valor_bloqueo_informacion_general = 'disabled';
-	$boton_primario = 'class="btn btn-primary" onclick="redireccionar(\''.base_url('centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo).'\');"';
+	$boton_primario = array(
+		'name'		=> 'boton_primario',
+		'id'		=> 'boton_primario',
+		'value'		=> 'true',
+		'type'		=> 'button',
+		'content'	=> '<i class="fa fa-pencil"></i> Editar',
+		'class'		=> 'btn btn-primary',
+		'onclick'	=> 'redireccionar(\''.base_url('centros_educativos/modificar/'.@$centro_educativo[0]->id_centro_educativo).'\');'
+	);
+	$boton_secundario = array(
+		'name'		=> 'boton_secundario',
+		'id'		=> 'boton_secundario',
+		'value'		=> 'true',
+		'type'		=> 'button',
+		'content'	=> '<i class="fa fa-reply"></i> Regresar',
+		'class'		=> 'btn btn-danger',
+		'onclick'	=> ''
+	);
 	if($this->session->userdata('uri_centros_educativos')){
 		$uri_centros_educativos = $this->session->userdata('uri_centros_educativos');
 		if(strpos($uri_centros_educativos, 'municipio') != FALSE){
-			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url($uri_centros_educativos).'\');"';
+			$boton_secundario['onclick'] = 'redireccionar(\''.base_url($uri_centros_educativos).'\');';
 		}
 		else{
-			$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('centros_educativos').'\');"';
+			$boton_secundario['onclick'] = 'redireccionar(\''.base_url('centros_educativos').'\');';
 		}
 	}
 	else{
-		$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('centros_educativos').'\');"';
+		$boton_secundario['onclick'] = 'redireccionar(\''.base_url('centros_educativos').'\');';
 	}
 }
 else{
-	$boton_primario = 'class="btn btn-primary" onclick="document.centros_educativos.estado.value=\'1\';"';
-	$boton_secundario = 'class="btn btn-danger" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo).'\');"';
+	$boton_primario = array(
+		'name'		=> 'boton_primario',
+		'id'		=> 'boton_primario',
+		'value'		=> 'true',
+		'type'		=> 'submit',
+		'content'	=> '<i class="fa fa-pencil"></i> Guardar',
+		'class'		=> 'btn btn-primary',
+		'onclick'	=> 'document.centros_educativos.estado.value=\'1\';'
+	);
+	$boton_secundario = array(
+		'name'		=> 'boton_secundario',
+		'id'		=> 'boton_secundario',
+		'value'		=> 'true',
+		'type'		=> 'button',
+		'content'	=> '<i class="fa fa-reply"></i> Cancelar',
+		'class'		=> 'btn btn-danger',
+		'onclick'	=> 'redireccionar(\''.base_url('centros_educativos/mostrar/'.@$centro_educativo[0]->id_centro_educativo).'\');'
+	);
 }
 // Atributos del Formulario
 $formulario = array(
@@ -29,28 +62,29 @@ $formulario = array(
 $campos_ocultos = array('estado' => '0');
 // Definición de los campos Información General
 $nombre_centro_educativo = array(
-	'name'			=> 'nombre_centro_educativo',
-	'id'			=> 'nombre_centro_educativo',
-	'maxlength'		=> '60',
-	'size'			=> '20',
-	'value'			=> utf8(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo)),
-	'type'			=> 'text',
-	'autocomplete'	=> 'off',
-	'class'			=> 'form-control text-capitalize',
+	'name'			=>	'nombre_centro_educativo',
+	'id'			=>	'nombre_centro_educativo',
+	'maxlength'		=>	'60',
+	'size'			=>	'20',
+	'value'			=>	utf8(set_value('nombre_centro_educativo', @$centro_educativo[0]->nombre_centro_educativo)),
+	'type'			=>	'text',
+	'autocomplete'	=>	'off',
+	'required'		=>	'required',
+	'class'			=>	'form-control text-capitalize',
 	$bloqueo_informacion_general => $valor_bloqueo_informacion_general
 );
 $codigo_centro_educativo = array(
-	'name'		=> 'codigo_centro_educativo',
-	'id'		=> 'codigo_centro_educativo',
-	'maxlength'	=> '60',
-	'size'		=> '20',
-	'value'		=> set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo),
-	'type'		=> 'text',
-	'class'		=> 'form-control',
-	'disabled'	=> 'disabled'
+	'name'			=>	'codigo_centro_educativo',
+	'id'			=>	'codigo_centro_educativo',
+	'maxlength'		=>	'60',
+	'size'			=>	'20',
+	'value'			=>	set_value('codigo_centro_educativo', @$centro_educativo[0]->codigo_centro_educativo),
+	'type'			=>	'text',
+	'class'			=>	'form-control',
+	'disabled'		=>	'disabled'
 );
-$departamentos = 'id = "id_departamento" required = "required" class = "form-control" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
-$municipios = 'id = "id_municipio" required = "required" class = "form-control" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
+$departamentos = 'class="form-control" id="id_departamento" required="required" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
+$municipios = 'class="form-control" id="id_municipio" required="required" '.$bloqueo_informacion_general.'="'.$valor_bloqueo_informacion_general.'"';
 ?>
 <script type="text/javascript" src="<?= base_url(); ?>resources/js/validaciones-centros_educativos.js"></script>
 <div class="row">
@@ -104,13 +138,8 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 							<div class="row">
 								<div class="col-lg-12">
 									<div class="form-group">
-										<?php if($operacion == "Mostrar"){ ?>
-										<?= form_button('boton_primario', 'Editar', $boton_primario); ?>
-										<?= form_button('boton_secundario','Regresar', $boton_secundario); ?>
-										<?php } else{ ?>
-										<?= form_submit('boton_primario', 'Guardar', $boton_primario); ?>
-										<?= form_button('boton_secundario','Cancelar', $boton_secundario); ?>
-										<?php } ?>
+										<?= form_button($boton_primario); ?>
+										<?= form_button($boton_secundario); ?>
 									</div>
 								</div>
 							</div>
@@ -220,7 +249,7 @@ $municipios = 'id = "id_municipio" required = "required" class = "form-control" 
 			"oLanguage":		{"sEmptyTable": "No hay docentes certificados en el centro educativo."}
 		});
 		$("#id_departamento").change(function(){
-			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val() != '' ? $("#id_departamento").val() : '%'}, function(resultado){
 				$('#id_municipio').empty();
 				$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){
 					if(municipio.id_municipio == '<?= @$centro_educativo[0]->id_municipio; ?>'){

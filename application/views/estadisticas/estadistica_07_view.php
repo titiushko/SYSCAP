@@ -20,18 +20,22 @@ $lista_tipo_capacitados =  array(
 	'capacitado'	=> 'Capacitados',
 	'certificado'	=> 'Certificados'
 );
-$departamentos = 'id = "id_departamento" required = "required" class = "form-control"';
-$municipios = 'id = "id_municipio" required = "required" class = "form-control"';
+$departamentos = 'class="form-control" id="id_departamento" required="required"';
+$municipios = 'class="form-control" id="id_municipio" required="required"';
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
-	'value'		=> 'Consultar',
+	'value'		=> 'true',
+	'type'		=> 'submit',
+	'content'	=> '<i class="fa fa-filter"></i> Consultar',
 	'class'		=> 'btn btn-primary'
 );
 $boton_secundario = array(
 	'name'		=> 'boton_secundario',
 	'id'		=> 'boton_secundario',
-	'value'		=> 'Limpiar',
+	'value'		=> 'true',
+	'type'		=> 'reset',
+	'content'	=> '<i class="fa fa-eraser"></i> Limpiar',
 	'class'		=> 'btn btn-danger',
 	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/7\');'
 );
@@ -107,8 +111,8 @@ $campos_ocultos_formulario = array(
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
-				<?= form_submit($boton_primario); ?>
-				<?= form_reset($boton_secundario); ?>
+				<?= form_button($boton_primario); ?>
+				<?= form_button($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
@@ -232,7 +236,7 @@ $campos_ocultos_formulario = array(
 			}
 		});
 		$("#id_departamento").change(function(){
-			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val() != '' ? $("#id_departamento").val() : '%'}, function(resultado){
 				$('#id_municipio').empty();
 				$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){
 					if(municipio.id_municipio == '<?= @$campos['id_municipio']; ?>'){

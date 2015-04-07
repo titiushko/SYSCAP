@@ -18,13 +18,17 @@ $fecha = array(
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
-	'value'		=> 'Consultar',
+	'value'		=> 'true',
+	'type'		=> 'submit',
+	'content'	=> '<i class="fa fa-filter"></i> Consultar',
 	'class'		=> 'btn btn-primary'
 );
 $boton_secundario = array(
 	'name'		=> 'boton_secundario',
 	'id'		=> 'boton_secundario',
-	'value'		=> 'Limpiar',
+	'value'		=> 'true',
+	'type'		=> 'reset',
+	'content'	=> '<i class="fa fa-eraser"></i> Limpiar',
 	'class'		=> 'btn btn-danger',
 	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/1\');'
 );
@@ -76,8 +80,8 @@ $campos_ocultos_formulario = array(
 		<div class="col-lg-3 visible-desktop"><?= nbs(); ?></div>
 		<div class="col-lg-6">
 			<div class="form-group">
-				<?= form_submit($boton_primario); ?>
-				<?= form_reset($boton_secundario); ?>
+				<?= form_button($boton_primario); ?>
+				<?= form_button($boton_secundario); ?>
 			</div>
 		</div>
 	</div>

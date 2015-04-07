@@ -32,32 +32,34 @@ class Instalador extends MY_Controller{
 						array($this->input->post('semilla'), $this->input->post('tiempo_conexion')),
 						$properties
 					);
-					$datos['resultado_instalacion'] = '';
-					write_file('application/config/database.php', $database, 'w');
-					write_file('application/config/properties.php', $properties, 'w');
-					write_file('application/config/routes.php', $routes, 'w');
-					$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-database"></i> Configuraci&oacute;n de base de datos '.tag('font', '<i class="fa fa-check"></i>', 'color="green"'));
-					$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-clock-o"></i> Configuraci&oacute;n de sesi&oacute;n de usuario '.tag('font', '<i class="fa fa-check"></i>', 'color="green"'));
-					/*
+					$datos['resultado_instalacion'] = '<div class="row">';
 					if(write_file('application/config/database.php', $database, 'w')){
-						$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-database"></i> database.php '.tag('font', '<i class="fa fa-check"></i>', 'color="green"'));
+						$datos['resultado_instalacion'] .= tag('div', '<i class="fa fa-database"></i> Configuraci&oacute;n de base de datos', 'class="col-lg-8"');
+						$datos['resultado_instalacion'] .= tag('div', tag('font', '<i class="fa fa-check"></i>', 'color="green"'), 'class="col-lg-4"');
 					}
 					else{
-						$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-database"></i> database.php '.tag('font', '<i class="fa fa-times"></i>', 'color="red"'));
+						$datos['resultado_instalacion'] .= tag('div', '<i class="fa fa-database"></i> Configuraci&oacute;n de base de datos', 'class="col-lg-8"');
+						$datos['resultado_instalacion'] .= tag('div', tag('font', '<i class="fa fa-times"></i>', 'color="red"'), 'class="col-lg-4"');
 					}
+					$datos['resultado_instalacion'] .= '</div><div class="row">';
 					if(write_file('application/config/properties.php', $properties, 'w')){
-						$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-clock-o"></i> properties.php '.tag('font', '<i class="fa fa-check"></i>', 'color="green"'));
+						$datos['resultado_instalacion'] .= tag('div', '<i class="fa fa-clock-o"></i> Configuraci&oacute;n de sesi&oacute;n de usuario', 'class="col-lg-8"');
+						$datos['resultado_instalacion'] .= tag('div', tag('font', '<i class="fa fa-check"></i>', 'color="green"'), 'class="col-lg-4"');
 					}
 					else{
-						$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-clock-o"></i> properties.php '.tag('font', '<i class="fa fa-times"></i>', 'color="red"'));
+						$datos['resultado_instalacion'] .= tag('div', '<i class="fa fa-clock-o"></i> Configuraci&oacute;n de sesi&oacute;n de usuario', 'class="col-lg-8"');
+						$datos['resultado_instalacion'] .= tag('div', tag('font', '<i class="fa fa-times"></i>', 'color="red"'), 'class="col-lg-4"');
 					}
+					$datos['resultado_instalacion'] .= '</div><div class="row">';
 					if(write_file('application/config/routes.php', $routes, 'w')){
-						$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-link"></i> routes.php '.tag('font', '<i class="fa fa-check"></i>', 'color="green"'));
+						$datos['resultado_instalacion'] .= tag('div', '<i class="fa fa-wrench"></i> Configuraci&oacute;n de SYSCAP', 'class="col-lg-8"');
+						$datos['resultado_instalacion'] .= tag('div', tag('font', '<i class="fa fa-check"></i>', 'color="green"'), 'class="col-lg-4"');
 					}
 					else{
-						$datos['resultado_instalacion'] .= tag('p', '<i class="fa fa-link"></i> routes.php '.tag('font', '<i class="fa fa-times"></i>', 'color="red"'));
+						$datos['resultado_instalacion'] .= tag('div', '<i class="fa fa-wrench"></i> Configuraci&oacute;n de SYSCAP', 'class="col-lg-8"');
+						$datos['resultado_instalacion'] .= tag('div', tag('font', '<i class="fa fa-times"></i>', 'color="red"'), 'class="col-lg-4"');
 					}
-					*/
+					$datos['resultado_instalacion'] .= '</div>';
 					$this->load->view('instalador/resultado_instalador_view', $datos);
 				}
 				else{

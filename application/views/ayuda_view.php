@@ -21,35 +21,35 @@
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el nombre de usuario que corresponda al estudiante que se requiere consultar.',
 						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Nombre Completo.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el nombre completo, nombre o apellidos del usuario que corresponda al estudiante que se requiere consultar.',
 						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Número de DUI.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el número de DUI que corresponda al estudiante que se requiere consultar.',
 						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Correo Electrónico.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el correo electrónico que corresponda al estudiante que se requiere consultar.',
 						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Centro Educativo.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Centro Educativo').' ubicado en la parte superior del listado de usuarios.',
 						'Digitar el nombre del centro educativo que corresponda al estudiante que se requiere consultar.',
 						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						}
 						echo heading(anchor(current_url().'#usuarios-mostrar', 'Mostrar Usuario', 'name="usuarios-mostrar"'), 3).br();
@@ -67,16 +67,16 @@
 						if($this->session->userdata('nombre_corto_rol') == 'admin'){
 						echo heading(anchor(current_url().'#usuarios-modificar', 'Editar Usuario', 'name="usuarios-modificar"'), 3).br();
 						echo ol(array(
-						'Dentro del módulo de usuarios y desde la ficha de un estudiante, dar clic en el botón '.tag('div', 'Editar', 'class="btn btn-sm btn-primary"').'.',
-						'SYSCAP habilitará los campos de la ficha para modificar los '.bold('Datos Personales').' del estudiante. Modificar los datos que se necesitan actualizar, cuando se termine de realizar los cambios dar clic en el botón '.bold('Guardar').'; si se desea cancelar la edición, dar clic en el botón '.tag('div', 'Cancelar', 'class="btn btn-sm btn-danger"').'.',
-						'Luego de dar clic en el botón Guardar, SYSCAP mostrará un mensaje de confirmación notificando que se han guardado los datos del usuario.'
+						'Dentro del módulo de usuarios y desde la ficha de un estudiante, dar clic en el botón '.tag('div', '<i class="fa fa-pencil"></i> Editar', 'class="btn btn-sm btn-primary"').'.',
+						'SYSCAP habilitará los campos de la ficha para modificar los '.bold('Datos Personales').' del estudiante. Modificar los datos que se necesitan actualizar, cuando se termine de realizar los cambios dar clic en el botón '.tag('div', '<i class="fa fa-save"></i> Guardar', 'class="btn btn-sm btn-primary"').'; si se desea cancelar la edición, dar clic en el botón '.tag('div', 'Cancelar', 'class="btn btn-sm btn-danger"').'.',
+						'Luego de dar clic en el botón '.tag('div', '<i class="fa fa-save"></i> Guardar', 'class="btn btn-sm btn-primary"').', SYSCAP mostrará un mensaje de confirmación notificando que se han guardado los datos del usuario.'
 						)).br();
 						echo heading(anchor(current_url().'#usuarios-recuperar_contrasena', 'Recuperar Contraseña Usuario', 'name="usuarios-recuperar_contrasena"'), 3).br();
 						echo tag('p', 'Esta sección es útil para que el administrador proporcione una nueva contraseña a un estudiante que la ha olvidado o extraviado su contraseña.').br();
 						echo ol(array(
-						'Dentro del módulo de usuarios y desde la ficha de un estudiante, dar clic en el botón '.tag('div', 'Recuperar Contraseña', 'class="btn btn-sm btn-primary"').'.',
-						'SYSCAP habilitará los campos de la ficha para modificar los '.bold('Datos de Usuario').' del estudiante. Modificar la contraseña que se desea recuperar, cuando se termine de realizar los cambios dar clic en el botón '.bold('Guardar').'; si se desea cancelar la recuperación de contraseña, dar clic en el botón '.tag('div', 'Cancelar', 'class="btn btn-sm btn-danger"').'.',
-						'Luego de dar clic en el botón Guardar, SYSCAP mostrará un mensaje de confirmación notificando que se han guardado los datos del usuario.'
+						'Dentro del módulo de usuarios y desde la ficha de un estudiante, dar clic en el botón '.tag('div', '<i class="fa fa-pencil"></i> Recuperar Contraseña', 'class="btn btn-sm btn-primary"').'.',
+						'SYSCAP habilitará los campos de la ficha para modificar los '.bold('Datos de Usuario').' del estudiante. Modificar la contraseña que se desea recuperar, cuando se termine de realizar los cambios dar clic en el botón '.tag('div', '<i class="fa fa-save"></i> Guardar', 'class="btn btn-sm btn-primary"').'; si se desea cancelar la recuperación de contraseña, dar clic en el botón '.tag('div', 'Cancelar', 'class="btn btn-sm btn-danger"').'.',
+						'Luego de dar clic en el botón '.tag('div', '<i class="fa fa-save"></i> Guardar', 'class="btn btn-sm btn-primary"').', SYSCAP mostrará un mensaje de confirmación notificando que se han guardado los datos del usuario.'
 						)).br();
 						}
 						?>
@@ -104,28 +104,28 @@
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el código del centro educativo que se requiere consultar.',
 						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading('Búsqueda de Centro Educativo por Nombre.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el nombre del centro educativo que se requiere consultar.',
 						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading('Búsqueda de Centro Educativo por Departamento.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el nombre del departamento donde esta ubicado el centro educativo que se requiere consultar.',
 						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading('Búsqueda de Centro Educativo por Municipio.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el nombre del municipio donde esta ubicado el centro educativo que se requiere consultar.',
 						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
-						'Dar clic en el botón '.tag('div', 'Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
+						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading(anchor(current_url().'#centros_educativos-mostrar', 'Mostrar Centro Educativo', 'name="centros_educativos-mostrar"'), 3).br();
 						echo heading('Imprimir Ficha de Centro Educativo.', 4);
@@ -146,9 +146,9 @@
 						)).br();
 						echo heading(anchor(current_url().'#centros_educativos-modificar', 'Editar Centro Educativo', 'name="centros_educativos-modificar"'), 3).br();
 						echo ol(array(
-						'Dentro del módulo de centros educativos y desde la ficha de un centro educativo, dar clic en el botón '.tag('div', 'Editar', 'class="btn btn-sm btn-primary"').'.',
-						'SYSCAP habilitará los campos de la ficha para modificar la '.bold('Información General').' del centro educativo. Modificar los datos que se necesitan actualizar, cuando se termine de realizar los cambios dar clic en el botón '.bold('Guardar').'; si se desea cancelar la edición, dar clic en el botón '.tag('div', 'Cancelar', 'class="btn btn-sm btn-danger"').'.',
-						'Luego de dar clic en el botón Guardar, SYSCAP mostrará un mensaje de confirmación notificando que se han guardado los datos del centro educativo.'
+						'Dentro del módulo de centros educativos y desde la ficha de un centro educativo, dar clic en el botón '.tag('div', '<i class="fa fa-pencil"></i> Editar', 'class="btn btn-sm btn-primary"').'.',
+						'SYSCAP habilitará los campos de la ficha para modificar la '.bold('Información General').' del centro educativo. Modificar los datos que se necesitan actualizar, cuando se termine de realizar los cambios dar clic en el botón '.tag('div', '<i class="fa fa-save"></i> Guardar', 'class="btn btn-sm btn-primary"').'; si se desea cancelar la edición, dar clic en el botón '.tag('div', 'Cancelar', 'class="btn btn-sm btn-danger"').'.',
+						'Luego de dar clic en el botón '.tag('div', '<i class="fa fa-save"></i> Guardar', 'class="btn btn-sm btn-primary"').', SYSCAP mostrará un mensaje de confirmación notificando que se han guardado los datos del centro educativo.'
 						)).br();
 						?>
 					</div>
@@ -170,90 +170,90 @@
 						echo heading(anchor(current_url().'#estadisticas-consulta-1', 'Estadística de Usuarios por Modalidad de Capacitación', 'name="estadisticas-consulta-1"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Modalidad de Capacitación').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-2', 'Estadística de Usuarios por Departamento y Rango de Fechas', 'name="estadisticas-consulta-2"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Departamento y Rango de Fecha').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-3', 'Estadística de Total de Usuarios por Departamento y Rango de Fechas', 'name="estadisticas-consulta-3"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Total por Departamento y Rango de Fecha').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-4', 'Estadística de Usuarios por Departamento, Municipio y Rango de Fechas', 'name="estadisticas-consulta-4"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Departamento, Municipio y Rango de Fechas').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar el nombre del municipio de la lista desplegable Municipios, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar el nombre del municipio de la lista desplegable Municipios, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-5', 'Estadística de Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional', 'name="estadisticas-consulta-5"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Tipo de Capacitados y Fecha a Nivel Nacional').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-6', 'Estadística de Usuarios por Tipo de Capacitados, Departamento y Fecha', 'name="estadisticas-consulta-6"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Tipo de Capacitados, Departamento y Fecha').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-7', 'Estadística de Usuarios por Tipo de Capacitados, Departamento y Municipio', 'name="estadisticas-consulta-7"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Tipo de Capacitados, Departamento y Municipio').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar el nombre del municipio de la lista desplegable Municipios, seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar el nombre del departamento de la lista desplegable Departamentos, seleccionar el nombre del municipio de la lista desplegable Municipios, seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-8', 'Estadística de Usuarios por Departamento, Tipo de Capacitados y Fecha', 'name="estadisticas-consulta-8"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Departamento, Tipo de Capacitados y Fecha').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-9', 'Estadística de Usuarios por Tipo de Capacitados y Centro Educativo', 'name="estadisticas-consulta-9"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Tipo de Capacitados y Centro Educativo').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un centros educativo del campo Centros Educativos y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un centros educativo del campo Centros Educativos y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						echo heading(anchor(current_url().'#estadisticas-consulta-10', 'Estadística de Usuarios a Nivel Nacional', 'name="estadisticas-consulta-10"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Nivel Nacional').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar un tipo de capacitado de la lista desplegable Tipo de Capacitados, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						
 						echo heading(anchor(current_url().'#estadisticas-consulta-11', 'Estadística de Usuarios por Grado Digital', 'name="estadisticas-consulta-11"'), 3).br();
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas, dar clic a la opción '.bold('Grado Digital').' del sub menú del módulo de consultas estadísticas.',
-						'Seleccionar una categoría de grado digital de la lista desplegable Grado Digital, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Seleccionar una categoría de grado digital de la lista desplegable Grado Digital, seleccionar un rango de fechas en los calendarios (teniendo en cuenta que la fecha inicial debe de ser diferente y menor a la fecha final) y dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado de la consulta estadística.',
-						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado de la consulta estadística, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Hacer clic aquí para ver como Generar Reporte Estadístico.'), 4).br();
 						
@@ -275,10 +275,10 @@
 							'Si sólo se selecciona una fecha inicial, la fecha final es opcional.',
 							'Si sólo se selecciona una fecha final, la fecha inicial es opcional.'
 						)),
-						'Dar clic al botón '.tag('div', 'Consultar', 'class="btn btn-sm btn-primary"').'.',
+						'Dar clic al botón '.tag('div', '<i class="fa fa-filter"></i> Consultar', 'class="btn btn-sm btn-primary"').'.',
 						'SYSCAP mostrará el resultado del resumen estadístico.',
 						'Cambiar la opción de la lista desplegable '.bold('Resultado por').', para ver el resultado del resumen estadístico por Departamento, Municipio, Centro Educativo, Tipo de Capacitado, Modalidad de Capacitación, Grado Digital o Sexo de Usuario.',
-						'Si se desea deshacer el resultado del resumen estadístico, dar clic al botón '.tag('div', 'Limpiar', 'class="btn btn-sm btn-danger"').'.'
+						'Si se desea deshacer el resultado del resumen estadístico, dar clic al botón '.tag('div', '<i class="fa fa-eraser"></i> Limpiar', 'class="btn btn-sm btn-danger"').'.'
 						)).br();
 						
 						echo heading(anchor(current_url().'#estadisticas-generar_reporte', 'Generar Reporte Estadístico', 'name="estadisticas-generar_reporte"'), 3).br();

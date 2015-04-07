@@ -170,7 +170,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a href="<?= base_url('usuarios'); ?>" class="btn btn-danger">Regresar</a>
+								<a href="<?= base_url('usuarios'); ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Regresar</a>
 							</div>
 						</div>
 						<?php } ?>

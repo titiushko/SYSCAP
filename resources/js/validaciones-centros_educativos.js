@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	$('#nombre_centro_educativo').blur(function(){
-		var nombre_centro_educativo = $(this).val();
-		if(nombre_centro_educativo == ''){
+		if($(this).val() == ''){
 			$('#nombre_centro_educativo').addClass('error-validacion');
 		}
 		else{
@@ -10,8 +9,7 @@ $(document).ready(function(){
 	});
 	
 	$('#id_departamento').blur(function(){
-		var id_departamento = $(this).val();
-		if(id_departamento == ''){
+		if($(this).val() == ''){
 			$('#id_departamento').addClass('error-validacion');
 		}
 		else{
@@ -20,8 +18,7 @@ $(document).ready(function(){
 	});
 	
 	$('#id_municipio').blur(function(){
-		var id_municipio = $(this).val();
-		if(id_municipio == ''){
+		if($(this).val() == ''){
 			$('#id_municipio').addClass('error-validacion');
 		}
 		else{

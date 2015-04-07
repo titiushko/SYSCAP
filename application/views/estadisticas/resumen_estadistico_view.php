@@ -4,8 +4,8 @@ $formulario_consultar = array(
 	'id'		=> 'formulario_consultar',
 	'role'		=> 'form'
 );
-$departamentos = 'id = "id_departamento" class = "form-control"';
-$municipios = 'id = "id_municipio" class = "form-control"';
+$departamentos = 'class="form-control" id="id_departamento" required="required"';
+$municipios = 'class="form-control" id="id_municipio" required="required"';
 $nombre_centro_educativo = array (
 	'name'			=> 'nombre_centro_educativo',
 	'id'			=> 'nombre_centro_educativo',
@@ -66,13 +66,17 @@ $sexo_usuario = array(
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
-	'value'		=> 'Consultar',
+	'value'		=> 'true',
+	'type'		=> 'submit',
+	'content'	=> '<i class="fa fa-filter"></i> Consultar',
 	'class'		=> 'btn btn-primary'
 );
 $boton_secundario = array(
 	'name'		=> 'boton_secundario',
 	'id'		=> 'boton_secundario',
-	'value'		=> 'Limpiar',
+	'value'		=> 'true',
+	'type'		=> 'reset',
+	'content'	=> '<i class="fa fa-eraser"></i> Limpiar',
 	'class'		=> 'btn btn-danger',
 	'onclick'	=> 'redireccionar(\''.base_url().'resumen_estadistico\');'
 );
@@ -228,8 +232,8 @@ $campos_ocultos_formulario = array(
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="form-group">
-							<?= form_submit($boton_primario); ?>
-							<?= form_reset($boton_secundario); ?>
+							<?= form_button($boton_primario); ?>
+							<?= form_button($boton_secundario); ?>
 						</div>
 					</div>
 				</div>

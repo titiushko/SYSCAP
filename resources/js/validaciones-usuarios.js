@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	$('#nombres_usuario').blur(function(){
-		var nombres_usuario = $(this).val();
-		if(nombres_usuario == ''){
+		if($(this).val() == ''){
 			$('#nombres_usuario').addClass('error-validacion');
 		}
 		else{
@@ -10,8 +9,7 @@ $(document).ready(function(){
 	});
 	
 	$('#apellido1_usuario').blur(function(){
-		var apellido1_usuario = $(this).val();
-		if(apellido1_usuario == ''){
+		if($(this).val() == ''){
 			$('#apellido1_usuario').addClass('error-validacion');
 		}
 		else{
@@ -20,17 +18,16 @@ $(document).ready(function(){
 	});
 	
 	function validar_dui_usuario(dui_usuario){
-		var verify = new RegExp(/^\d{8}-\d$/ix);
+		var verify = new RegExp(/^\d{8}-\d$/i);
 		return verify.test(dui_usuario);
 	}
 	
 	$('#dui_usuario').blur(function(){
-		var dui_usuario = $(this).val();
-			if(dui_usuario == ''){
+			if($(this).val() == ''){
 			$('#dui_usuario').addClass('error-validacion');
 		}
 		else{
-			if(validar_dui_usuario(dui_usuario)){
+			if(validar_dui_usuario($(this).val())){
 				$('#dui_usuario').removeClass('error-validacion');
 			}
 			else{
@@ -40,8 +37,7 @@ $(document).ready(function(){
 	});
 	
 	$('#id_profesion').blur(function(){
-		var id_profesion = $(this).val();
-		if(id_profesion == ''){
+		if($(this).val() == ''){
 			$('#id_profesion').addClass('error-validacion');
 		}
 		else{
@@ -49,19 +45,17 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('#id_centro_educativo').blur(function(){
-		var id_centro_educativo = $(this).val();
-		if(id_centro_educativo == ''){
-			$('#id_centro_educativo').addClass('error-validacion');
+	$('#nombre_centro_educativo').blur(function(){
+		if($(this).val() == ''){
+			$('#nombre_centro_educativo').addClass('error-validacion');
 		}
 		else{
-			$('#id_centro_educativo').removeClass('error-validacion');
+			$('#nombre_centro_educativo').removeClass('error-validacion');
 		}
 	});
 	
 	$('#direccion_usuario').blur(function(){
-		var direccion_usuario = $(this).val();
-		if(direccion_usuario == ''){
+		if($(this).val() == ''){
 			$('#direccion_usuario').addClass('error-validacion');
 		}
 		else{
@@ -70,17 +64,16 @@ $(document).ready(function(){
 	});
 	
 	function validar_correo_electronico_usuario(correo_electronico_usuario){
-		var verify = new RegExp(/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix);
+		var verify = new RegExp(/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/i);
 		return verify.test(correo_electronico_usuario);
 	}
 	
 	$('#correo_electronico_usuario').blur(function(){
-		var correo_electronico_usuario = $(this).val();
-			if(correo_electronico_usuario == ''){
+			if($(this).val() == ''){
 			$('#correo_electronico_usuario').addClass('error-validacion');
 		}
 		else{
-			if(validar_correo_electronico_usuario(correo_electronico_usuario)){
+			if(validar_correo_electronico_usuario($(this).val())){
 				$('#correo_electronico_usuario').removeClass('error-validacion');
 			}
 			else{
@@ -90,8 +83,7 @@ $(document).ready(function(){
 	});
 	
 	$('#nombre_usuario').blur(function(){
-		var nombre_usuario = $(this).val();
-		if(nombre_usuario == ''){
+		if($(this).val() == ''){
 			$('#nombre_usuario').addClass('error-validacion');
 		}
 		else{
@@ -100,8 +92,7 @@ $(document).ready(function(){
 	});
 	
 	$('#contrasena_usuario').blur(function(){
-		var contrasena_usuario = $(this).val();
-		if(contrasena_usuario == ''){
+		if($(this).val() == ''){
 			$('#contrasena_usuario').addClass('error-validacion');
 		}
 		else{
@@ -110,8 +101,7 @@ $(document).ready(function(){
 	});
 	
 	$('#id_tipo_usuario').blur(function(){
-		var id_tipo_usuario = $(this).val();
-		if(id_tipo_usuario == ''){
+		if($(this).val() == ''){
 			$('#id_tipo_usuario').addClass('error-validacion');
 		}
 		else{

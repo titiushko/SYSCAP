@@ -206,7 +206,7 @@ if(!function_exists('mensaje_notificacion')){
 									</div>
 									<div class="modal-body">'.$mensaje.'</div>
 									<div class="modal-footer">
-										<button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+										<button type="button" class="btn btn-primary" data-dismiss="modal"><i class="fa fa-close"></i> Cerrar</button>
 									</div>
 								</div>
 							</div>

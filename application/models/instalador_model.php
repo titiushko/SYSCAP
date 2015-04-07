@@ -14,7 +14,7 @@ class Instalador_model extends CI_Model{
 			'dbdriver' => 'mysql',
 			'dbprefix' => '',
 			'pconnect' => TRUE,
-			'db_debug' => TRUE,
+			'db_debug' => FALSE,
 			'cache_on' => FALSE,
 			'cachedir' => '',
 			'char_set' => 'utf8',
@@ -22,7 +22,7 @@ class Instalador_model extends CI_Model{
 		);
 		$this->load->database($conexion);
 		$this->load->dbutil();
-		return !$this->dbutil->database_exists($base_datos);
+		return $this->dbutil->database_exists($base_datos);
 	}
 }
 
