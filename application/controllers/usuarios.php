@@ -202,8 +202,6 @@ class Usuarios extends MY_Controller{
 			)
 		);
 		$this->form_validation->set_rules($reglas[$grupo_campos]);
-		$this->form_validation->set_message('required', icono_notificacion('error').'El campo '.bold('%s').' es obligatorio.');
-		$this->form_validation->set_message('min_length', icono_notificacion('error').'El campo '.bold('%s').' debe tener al menos %s caracteres.');
 	}
 	
 	public function validar_nombre_usuario($nombre_usuario, $codigo_usuario){

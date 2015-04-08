@@ -124,7 +124,7 @@
 													<div class="form-group">
 														<?= form_label('Contraseña:', 'contrasena', array('class' => 'control-label col-lg-4')); ?>
 														<div class="col-lg-8">
-															<?= form_input(array('name' => 'contrasena', 'id' => 'contrasena', 'type' => 'password', 'autocomplete' => 'off', 'class' => 'form-control', 'value' => set_value('contrasena', @$campos[0]->contrasena)/*, 'required' => 'required'*/)); ?>
+															<?= form_input(array('name' => 'contrasena', 'id' => 'contrasena', 'type' => 'password', 'autocomplete' => 'off', 'class' => 'form-control', 'value' => set_value('contrasena', @$campos[0]->contrasena), 'required' => 'required')); ?>
 															<?= form_error('contrasena'); ?>
 														</div>
 													</div>
@@ -135,7 +135,7 @@
 													</div>
 													<span id="resultado">
 														<?php if(!empty($resultado_conexion)){ ?>
-														<div class="col-lg-12"><?= @$resultado_conexion; ?></div>
+														<div class="col-lg-12 text-center"><?= @$resultado_conexion; ?></div>
 														<?php } ?>
 													</span>
 												</div>
@@ -223,12 +223,12 @@
 							},
 							function(resultado){
 								if(resultado != ''){
-									$("#resultado").html('<div class="col-lg-12">' + resultado + '</div>');
+									$("#resultado").html('<div class="col-lg-12 text-center">' + resultado + '</div>');
 								}
 						});
 					}
 					else{
-						$("#resultado").html('<div class="col-lg-12"><?= icono_notificacion('error'); ?> Campos vac&iacute;os. Por favor, compruebe que no hayan campos vac&iacute;os.</div>');
+						$("#resultado").html('<div class="col-lg-12 text-center"><?= icono_notificacion('error'); ?> Campos vac&iacute;os. Por favor, complete los campos vac&iacute;os.</div>');
 					}
 				});
 				
@@ -244,11 +244,9 @@
 					validar_campo('usuario');
 				});
 				
-				/*
 				$('#contrasena').blur(function(){
 					validar_campo('contrasena');
 				});
-				*/
 				
 				$('#tiempo_conexion').blur(function(){
 					validar_campo('tiempo_conexion');
@@ -289,7 +287,7 @@
 			}
 			
 			function validar_campos_conexion(){
-				return validar_campo('servidor') && validar_campo('base_datos') && validar_campo('usuario')/* && validar_campo('contrasena')*/;
+				return validar_campo('servidor') && validar_campo('base_datos') && validar_campo('usuario') && validar_campo('contrasena');
 			}
 		</script>
 	</body>

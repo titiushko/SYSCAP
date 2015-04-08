@@ -113,7 +113,6 @@ class Centros_educativos extends MY_Controller{
 			)
 		);
 		$this->form_validation->set_rules($reglas);
-		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
 	}
 	
 	public function exportar($codigo_centro_educativo = NULL){

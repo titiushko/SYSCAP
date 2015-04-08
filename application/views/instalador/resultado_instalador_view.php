@@ -82,21 +82,17 @@
 								<div class="col-lg-12">
 									<div class="panel panel-primary">
 										<div class="panel-heading">
-											<?= heading('<i class="fa fa-gear"></i> Resultado de la Instalación de SYSCAP', 2); ?>
+											<?= heading('<i class="fa fa-gear"></i> '.@$resultado_instalador[0], 2); ?>
 										</div>
 										<div class="panel-body">
-											<div class="row">
-												<div class="col-lg-4 col-lg-offset-4 ">
-													<?= @$resultado_instalacion; ?>
-												</div>
-											</div>
+											<?= @$resultado_instalador[1]; ?>
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-lg-12 text-center">
-									<?= anchor(base_url(''), 'Finalizar', 'class="btn btn-primary"'); ?>
+									<?= @$resultado_instalador[2]; ?>
 								</div>
 							</div>
 						<?= form_close(); ?>
