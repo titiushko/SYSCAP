@@ -74,45 +74,76 @@ class Instalador extends MY_Controller{
 						// DOC: Se crea un array que almacenará el resultado de la instalación de SYSCAP para ser mostrado en la vista resultado
 						$datos['resultado_instalador'] = array('', '', '');
 						// DOC: El array con el resultado de la instalación en la posición cero tiene el título de la vista resultado
-						$datos['resultado_instalador'][0] .= 'Resultado de la Instalaci&oacute;n de SYSCAP';
+						$datos['resultado_instalador'][0] .= '<span style="color: #ffffff;"><i class="fa fa-info-circle"></i></span> Resultado de la Instalaci&oacute;n de SYSCAP';
 						// DOC: El array con el resultado de la instalación en la posición uno tiene que archivos se pudieron configurar
-						$datos['resultado_instalador'][1] .= '<div class="row"><div class="col-lg-4 col-lg-offset-4 "><div class="row">';
+						$datos['resultado_instalador'][1] .= '<div class="row"><div class="col-lg-4 col-lg-offset-4">';
 						// DOC: Si el archivo de configuración de la base de datos se pudo sobre escribir,
 						// entonces: mostrar con un cheque de correcto, si no: mostrar con una equis de error
 						if($basedatos){
+							$datos['resultado_instalador'][1] .= '<div class="row">';
 							$datos['resultado_instalador'][1] .= tag('div', '<i class="fa fa-database"></i> Configuraci&oacute;n de base de datos', 'class="col-lg-8"');
 							$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-check" title="Correcto"></i>', 'color="green"'), 'class="col-lg-4"');
+							$datos['resultado_instalador'][1] .= '</div>';
 						}
 						else{
+							$datos['resultado_instalador'][1] .= '<div class="row">';
 							$datos['resultado_instalador'][1] .= tag('div', '<i class="fa fa-database"></i> Configuraci&oacute;n de base de datos', 'class="col-lg-8"');
 							$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-times" title="Error"></i>', 'color="red"'), 'class="col-lg-4"');
+							$datos['resultado_instalador'][1] .= '</div>';
+							$datos['resultado_instalador'][1] .= tag('div', tag('div', 'Error de escritura en SYSCAP/application/config/database.php *', 'class="col-lg-12"'), 'class="row"');
 						}
-						$datos['resultado_instalador'][1] .= '</div><div class="row">';
+						$datos['resultado_instalador'][1] .= tag('div', tag('div', nbs(), 'class="col-lg-12"'), 'class="row"');
 						// DOC: Si el archivo de configuración de propiedades se pudo sobre escribir,
 						// entonces: mostrar con un cheque de correcto, si no: mostrar con una equis de error
 						if($propiedades){
+							$datos['resultado_instalador'][1] .= '<div class="row">';
 							$datos['resultado_instalador'][1] .= tag('div', '<i class="fa fa-clock-o"></i> Configuraci&oacute;n de sesi&oacute;n de usuario', 'class="col-lg-8"');
 							$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-check" title="Correcto"></i>', 'color="green"'), 'class="col-lg-4"');
+							$datos['resultado_instalador'][1] .= '</div>';
 						}
 						else{
+							$datos['resultado_instalador'][1] .= '<div class="row">';
 							$datos['resultado_instalador'][1] .= tag('div', '<i class="fa fa-clock-o"></i> Configuraci&oacute;n de sesi&oacute;n de usuario', 'class="col-lg-8"');
 							$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-times" title="Error"></i>', 'color="red"'), 'class="col-lg-4"');
+							$datos['resultado_instalador'][1] .= '</div>';
+							$datos['resultado_instalador'][1] .= tag('div', tag('div', 'Error de escritura en SYSCAP/application/config/properties.php *', 'class="col-lg-12"'), 'class="row"');
 						}
-						$datos['resultado_instalador'][1] .= '</div><div class="row">';
+						$datos['resultado_instalador'][1] .= tag('div', tag('div', nbs(), 'class="col-lg-12"'), 'class="row"');
 						// DOC: Si el archivo de configuración de rutas se pudo sobre escribir,
 						// entonces: mostrar con un cheque de correcto, si no: mostrar con una equis de error
 						if($rutas){
+							$datos['resultado_instalador'][1] .= '<div class="row">';
 							$datos['resultado_instalador'][1] .= tag('div', '<i class="fa fa-wrench"></i> Configuraci&oacute;n de SYSCAP', 'class="col-lg-8"');
 							$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-check" title="Correcto"></i>', 'color="green"'), 'class="col-lg-4"');
+							$datos['resultado_instalador'][1] .= '</div>';
 						}
 						else{
+							$datos['resultado_instalador'][1] .= '<div class="row">';
 							$datos['resultado_instalador'][1] .= tag('div', '<i class="fa fa-wrench"></i> Configuraci&oacute;n de SYSCAP', 'class="col-lg-8"');
 							$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-times" title="Error"></i>', 'color="red"'), 'class="col-lg-4"');
+							$datos['resultado_instalador'][1] .= '</div>';
+							$datos['resultado_instalador'][1] .= tag('div', tag('div', 'Error de escritura en SYSCAP/application/config/routes.php *', 'class="col-lg-12"'), 'class="row"');
 						}
-						$datos['resultado_instalador'][1] .= '</div></div></div>';
-						// DOC: El array con el resultado de la instalación en la posición dos tiene el botón para salir de la instalación de SYSCAP
-						// y mostrar la vista de inicio de sesión de usuario
-						$datos['resultado_instalador'][2] .= anchor(base_url(''), 'Finalizar', 'class="btn btn-primary"');
+						$datos['resultado_instalador'][1] .= '</div></div>';
+						// DOC: Si todos los archivos de configuración se pudieron sobre escribir,
+						// entonces: habilitar el botón para terminar con la instalación,
+						// si no: mostrar los mensajes de error y habilitar el botón para volver continuar la instalación
+						if($basedatos && $propiedades && $rutas){
+							// DOC: El array con el resultado de la instalación en la posición dos tiene el botón para completar la instalación de SYSCAP
+							// y mostrar la vista de inicio de sesión de usuario
+							$datos['resultado_instalador'][2] .= anchor(base_url(''), '<i class="fa fa-check-square-o"></i> Finalizar', 'class="btn btn-primary"');
+						}
+						else{
+							// DOC: Sobre escribir con el título del error el array con el resultado de la instalación en la posición cero
+							$datos['resultado_instalador'][0] = '<span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> Error de Instalaci&oacute;n de SYSCAP';
+							// DOC: Agregar el mensaje de error al array con el resultado de la instalación en la posición uno
+							$datos['resultado_instalador'][1] = '<div class="row"><div class="col-lg-12">'.tag('p', 'Por favor, aseg&uacute;rese de solucionar los siguientes errores y luego haga click al bot&oacute;n "Reintentar" para continuar con la instalaci&oacute;n:').'</div></div>'.$datos['resultado_instalador'][1];
+							$datos['resultado_instalador'][1] .= tag('div', tag('div', nbs(), 'class="col-lg-12"'), 'class="row"');
+							$datos['resultado_instalador'][1] .= tag('div', tag('div', '* Conceder permiso de escritura.', 'class="col-lg-12"'), 'class="row"');
+							// DOC: El array con el resultado de la instalación en la posición dos tiene el botón para recargar el controlador
+							// e intentar continuar con la instalación
+							$datos['resultado_instalador'][2] .= tag('span', '<i class="fa fa-refresh"></i> Reintentar', 'class="btn btn-primary" onclick="window.location.reload();"');
+						}
 						// DOC: Cargar la vista con el resultado de la instalación
 						$this->load->view('instalador/resultado_instalador_view', $datos);
 					}
@@ -140,46 +171,58 @@ class Instalador extends MY_Controller{
 			// DOC: Se crea un array que almacenará el resultado de los permisos de escritura
 			$datos['resultado_instalador'] = array('', '', '');
 			// DOC: El array con el resultado de los permisos de escritura en la posición cero tiene el título de la vista resultado
-			$datos['resultado_instalador'][0] .= 'Error Requerimientos de Instalaci&oacute;n de SYSCAP';
-			// DOC: El array con el resultado de los permisos de escritura en la posición uno tiene que archivos tienen permisos de escritura
-			$datos['resultado_instalador'][1] .= '<div class="row"><div class="col-lg-12">'.tag('p', 'Por favor, aseg&uacute;rese que los siguientes archivos existen y tengan permisos de escritura:').'</div></div>';
-			$datos['resultado_instalador'][1] .= '<div class="row"><div class="col-lg-4 col-lg-offset-4 "><div class="row">';
+			$datos['resultado_instalador'][0] .= '<span style="color: #d9534f;"><i class="fa fa-times-circle"></i></span> Error de Requerimientos de Instalaci&oacute;n de SYSCAP';
+			// DOC: El array con el resultado de los permisos de escritura en la posición uno contiene que archivos tienen permisos de escritura
+			$datos['resultado_instalador'][1] .= '<div class="row"><div class="col-lg-12">'.tag('p', 'Por favor, aseg&uacute;rese que los archivos con error existen y tengan permisos de escritura y luego haga click al bot&oacute;n "Reintentar" para continuar con la instalaci&oacute;n:').'</div></div>';
+			$datos['resultado_instalador'][1] .= '<div class="row"><div class="col-lg-4 col-lg-offset-4">';
 			// DOC: Si el archivo de configuración de la base de datos tiene permisos de escritura,
 			// entonces: mostrar con un cheque de correcto, si no: mostrar con una equis de error
 			if($basedatos){
+				$datos['resultado_instalador'][1] .= '<div class="row">';
 				$datos['resultado_instalador'][1] .= tag('div', 'SYSCAP/application/config/database.php', 'class="col-lg-8"');
 				$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-check" title="Correcto"></i>', 'color="green"'), 'class="col-lg-4"');
+				$datos['resultado_instalador'][1] .= '</div>';
 			}
 			else{
+				$datos['resultado_instalador'][1] .= '<div class="row">';
 				$datos['resultado_instalador'][1] .= tag('div', 'SYSCAP/application/config/database.php', 'class="col-lg-8"');
 				$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-times" title="Error"></i>', 'color="red"'), 'class="col-lg-4"');
+				$datos['resultado_instalador'][1] .= '</div>';
 			}
-			$datos['resultado_instalador'][1] .= '</div><div class="row">';
+			$datos['resultado_instalador'][1] .= tag('div', tag('div', nbs(), 'class="col-lg-12"'), 'class="row"');
 			// DOC: Si el archivo de configuración de propiedades tiene permisos de escritura,
 			// entonces: mostrar con un cheque de correcto, si no: mostrar con una equis de error
 			if($propiedades){
+				$datos['resultado_instalador'][1] .= '<div class="row">';
 				$datos['resultado_instalador'][1] .= tag('div', 'SYSCAP/application/config/properties.php', 'class="col-lg-8"');
 				$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-check" title="Correcto"></i>', 'color="green"'), 'class="col-lg-4"');
+				$datos['resultado_instalador'][1] .= '</div>';
 			}
 			else{
+				$datos['resultado_instalador'][1] .= '<div class="row">';
 				$datos['resultado_instalador'][1] .= tag('div', 'SYSCAP/application/config/properties.php', 'class="col-lg-8"');
 				$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-times" title="Error"></i>', 'color="red"'), 'class="col-lg-4"');
+				$datos['resultado_instalador'][1] .= '</div>';
 			}
-			$datos['resultado_instalador'][1] .= '</div><div class="row">';
+			$datos['resultado_instalador'][1] .= tag('div', tag('div', nbs(), 'class="col-lg-12"'), 'class="row"');
 			// DOC: Si el archivo de configuración de rutas tiene permisos de escritura, 
 			// entonces: mostrar con un cheque de correcto, si no: mostrar con una equis de error
 			if($rutas){
+				$datos['resultado_instalador'][1] .= '<div class="row">';
 				$datos['resultado_instalador'][1] .= tag('div', 'SYSCAP/application/config/routes.php', 'class="col-lg-8"');
 				$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-check" title="Correcto"></i>', 'color="green"'), 'class="col-lg-4"');
+				$datos['resultado_instalador'][1] .= '</div>';
 			}
 			else{
+				$datos['resultado_instalador'][1] .= '<div class="row">';
 				$datos['resultado_instalador'][1] .= tag('div', 'SYSCAP/application/config/routes.php', 'class="col-lg-8"');
 				$datos['resultado_instalador'][1] .= tag('div', tag('font', '<i class="fa fa-times" title="Error"></i>', 'color="red"'), 'class="col-lg-4"');
+				$datos['resultado_instalador'][1] .= '</div>';
 			}
-			$datos['resultado_instalador'][1] .= '</div></div></div>';
+			$datos['resultado_instalador'][1] .= '</div></div>';
 			// DOC: El array con el resultado de los permisos de escritura en la posición dos tiene un botón que permite recargar el controlador
 			// y volver a hacer la compronación de permisos de escritura en los archivos de configuración
-			$datos['resultado_instalador'][2] .= anchor(base_url(''), 'Volver a Probar', 'class="btn btn-primary" onclick="window.location.reload();"');
+			$datos['resultado_instalador'][2] .= tag('span', '<i class="fa fa-refresh"></i> Reintentar', 'class="btn btn-primary" onclick="window.location.reload();"');
 			// DOC: Cargar la vista con el resultado de permisos de escritura
 			$this->load->view('instalador/resultado_instalador_view', $datos);
 		}

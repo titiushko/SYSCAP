@@ -130,7 +130,7 @@
 													</div>
 													<div class="form-group">
 														<div class="col-lg-12">
-															<?= tag('span', 'Probar Conexión', 'class="btn btn-primary" id="probar_conexion"'); ?>
+															<?= tag('span', '<i class="fa fa-tachometer"></i> Probar Conexión', 'class="btn btn-primary" id="probar_conexion"'); ?>
 														</div>
 													</div>
 													<span id="resultado">
@@ -185,7 +185,7 @@
 							</div>
 							<div class="row">
 								<div class="col-lg-12 text-center">
-									<?= form_submit(array('name' => 'continuar', 'value' => 'Continuar', 'class' => 'btn btn-primary')); ?>
+									<?= form_button(array('name' => 'continuar', 'id' => 'continuar', 'value' => 'true', 'type' => 'submit', 'content' => '<i class="fa fa-toggle-right"></i> Continuar', 'class' => 'btn btn-primary')); ?>
 								</div>
 							</div>
 						<?= form_close(); ?>
