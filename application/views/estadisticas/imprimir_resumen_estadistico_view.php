@@ -49,6 +49,11 @@
 								<td class="column-nbs"><?= nbs(); ?></td>
 								<th class="column-title">Sexo de Usuario:</th><td class="column-value"><?= @$sexo_usuario; ?></td>
 							</tr>
+							<tr>
+								<th class="column-title">Tipo de Usuario:</th><td class="column-value"><?= utf8(@$nombre_tipo_usuario); ?></td>
+								<th class="column-title">Profeci&oacute;n:</th><td class="column-value"><?= utf8(@$nombre_profesion); ?></td>
+								<th class="column-title">Nivel de Estudio:</th><td class="column-value"><?= utf8(@$nombre_nivel_estudio); ?></td>
+							</tr>
 						</table>
 					<?= form_fieldset_close(); ?>
 				</div>

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* Genera el mapa estadístico utilizando la API de Google Mpas
+* Controlador que genera el mapa estadístico utilizando la API de Google Mpas
 */
 class Mapa extends MY_Controller{
 	function __construct(){

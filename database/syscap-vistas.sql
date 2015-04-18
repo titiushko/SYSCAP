@@ -64,7 +64,12 @@ SELECT
 	ce.nombre_centro_educativo,
 	IF(cc.padre_curso_categoria = 26, 1, IF(cc.padre_curso_categoria = 23, 2, IF(cc.padre_curso_categoria = 24, 3, IF(cc.padre_curso_categoria = 25, 4, NULL)))) grado_digital,
 	cc.nombre_curso_categoria,
-	c.nombre_completo_curso
+	c.nombre_completo_curso,
+	t.nombre_tipo_usuario,
+	u.id_profesion,
+	p.nombre_profesion,
+	u.id_nivel_estudio,
+	n.nombre_nivel_estudio
 FROM usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usuario
 	LEFT JOIN examenes e ON ec.id_examen = e.id_examen
 	LEFT JOIN departamentos d ON u.id_departamento = d.id_departamento
@@ -74,6 +79,9 @@ FROM usuarios u LEFT JOIN examenes_calificaciones ec ON u.id_usuario = ec.id_usu
 	LEFT JOIN matriculas ma ON ra.id_matricula = ma.id_matricula
 	LEFT JOIN cursos c ON ma.id_curso = c.id_curso
 	LEFT JOIN cursos_categorias cc ON c.id_curso_categoria = cc.id_curso_categoria
+	LEFT JOIN tipos_usuarios t ON u.id_tipo_usuario = t.id_tipo_usuario
+	LEFT JOIN profesiones p ON u.id_profesion = p.id_profesion
+	LEFT JOIN niveles_estudios n ON u.id_nivel_estudio = n.id_nivel_estudio
 WHERE ec.nota_examen_calificacion > 7.00;
 $$
 DELIMITER ;

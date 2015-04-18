@@ -6,7 +6,7 @@ class Resumen_estadistico extends MY_Controller{
 		$this->eliminar_cache();
 		if(isset($this->session->userdata['conexion_usuario'])){
 			if($this->session->userdata['nombre_corto_rol'] == 'admin'){
-				$this->load->model(array('resumen_estadistico_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model'));
+				$this->load->model(array('resumen_estadistico_model', 'departamentos_model', 'municipios_model', 'centros_educativos_model', 'tipos_usuarios_model', 'profesiones_model', 'niveles_estudios_model'));
 			}
 			else{
 				$this->acceso_denegado('sin_permiso', utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')));
@@ -37,6 +37,9 @@ class Resumen_estadistico extends MY_Controller{
 						$this->input->post('grado_digital'),
 						$this->input->post('fecha1'), $this->input->post('fecha2'),
 						$this->input->post('sexo_usuario'),
+						$this->input->post('id_tipo_usuario'),
+						$this->input->post('id_profesion'),
+						$this->input->post('id_nivel_estudio'),
 						$this->input->post('busqueda'),
 						'consulta'
 					), $datos);
@@ -55,6 +58,9 @@ class Resumen_estadistico extends MY_Controller{
 					$this->input->post('grado_digital'),
 					$this->input->post('fecha1'), $this->input->post('fecha2'),
 					$this->input->post('sexo_usuario'),
+					$this->input->post('id_tipo_usuario'),
+					$this->input->post('id_profesion'),
+					$this->input->post('id_nivel_estudio'),
 					$this->input->post('busqueda'),
 					'consulta'
 				), $datos);
@@ -94,6 +100,9 @@ class Resumen_estadistico extends MY_Controller{
 		$grado_digital = '',
 		$fecha1 = '', $fecha2 = '',
 		$sexo_usuario = '',
+		$codigo_tipo_usuario = '',
+		$codigo_profesion = '',
+		$codigo_nivel_estudio = '',
 		$busqueda = 'nombre_departamento',
 		$metodo = 'consulta'
 	){
@@ -106,6 +115,9 @@ class Resumen_estadistico extends MY_Controller{
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
+			$codigo_tipo_usuario,
+			$codigo_profesion,
+			$codigo_nivel_estudio,
 			$busqueda
 		);
 		$indice = 1; $datos['tipo_capacitado_x_busqueda_json'] = '';
@@ -124,6 +136,9 @@ class Resumen_estadistico extends MY_Controller{
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
+			$codigo_tipo_usuario,
+			$codigo_profesion,
+			$codigo_nivel_estudio,
 			$busqueda
 		);
 		$indice = 1; $datos['modalidad_usuario_x_busqueda_json'] = '';
@@ -142,6 +157,9 @@ class Resumen_estadistico extends MY_Controller{
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
+			$codigo_tipo_usuario,
+			$codigo_profesion,
+			$codigo_nivel_estudio,
 			$busqueda
 		);
 		$indice = 1; $datos['grado_digital_x_busqueda_json'] = '';
@@ -160,6 +178,9 @@ class Resumen_estadistico extends MY_Controller{
 			$grado_digital,
 			$fecha1, $fecha2,
 			$sexo_usuario,
+			$codigo_tipo_usuario,
+			$codigo_profesion,
+			$codigo_nivel_estudio,
 			$busqueda
 		);
 		$indice = 1; $datos['sexo_usuario_x_busqueda_json'] = '';
@@ -171,6 +192,9 @@ class Resumen_estadistico extends MY_Controller{
 		//--
 		$datos['lista_departamentos'] = $this->departamentos_model->lista_departamentos();
 		$datos['lista_municipios'] = $this->municipios_model->lista_municipios();
+		$datos['lista_tipos_usuarios'] = $this->tipos_usuarios_model->lista_tipos_usuarios();
+		$datos['lista_profesiones'] = $this->profesiones_model->lista_profesiones();
+		$datos['lista_niveles_estudios'] = $this->niveles_estudios_model->lista_niveles_estudios();
 		$datos['lista_busqueda'] = array(
 			'nombre_departamento'		=> 'Departamento',
 			'nombre_municipio'			=> 'Municipio',
@@ -178,7 +202,10 @@ class Resumen_estadistico extends MY_Controller{
 			'tipo_capacitado'			=> 'Tipo de Capacitado',
 			'modalidad_usuario'			=> 'Modalidad de Capacitaci&oacute;n',
 			'grado_digital'				=> 'Grado Digital',
-			'sexo_usuario'				=> 'Sexo de Usuario'
+			'sexo_usuario'				=> 'Sexo de Usuario',
+			'nombre_tipo_usuario'		=> 'Tipo de Usuario',
+			'nombre_profesion'			=> 'Profeci&oacute;n',
+			'nombre_nivel_estudio'		=> 'Nivel de Estudio',
 		);
 		$nombre_centro_educativo = $codigo_centro_educativo != '' ? $this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo) : '';
 		if($metodo == 'consulta'){
@@ -192,6 +219,9 @@ class Resumen_estadistico extends MY_Controller{
 				'grado_digital' => $grado_digital,
 				'fecha1' => $fecha1, 'fecha2' => $fecha2,
 				'sexo_usuario' => $sexo_usuario,
+				'id_tipo_usuario' => $codigo_tipo_usuario,
+				'id_profesion' => $codigo_profesion,
+				'id_nivel_estudio' => $codigo_nivel_estudio,
 				'busqueda' => $busqueda
 			);
 		}
@@ -212,6 +242,9 @@ class Resumen_estadistico extends MY_Controller{
 				$datos['periodo'] = 'Hasta '.date_format(new DateTime($fecha2), 'd/m/Y');
 			}
 			$datos['sexo_usuario'] = $sexo_usuario == 'H' ? 'Hombres' : ($sexo_usuario == 'M' ? 'Mujeres' : '');
+			$datos['nombre_tipo_usuario'] = $codigo_tipo_usuario != '' ? $this->tipos_usuarios_model->nombre_tipo_usuario($codigo_tipo_usuario) : '';
+			$datos['nombre_profesion'] = $codigo_profesion != '' ? $this->profesiones_model->nombre_profesion($codigo_profesion) : '';
+			$datos['nombre_nivel_estudio'] = $codigo_nivel_estudio != '' ? $this->niveles_estudios_model->nombre_nivel_estudio($codigo_nivel_estudio) : '';
 			$datos['busqueda'] = $busqueda;
 		}
 		return $datos;
@@ -228,6 +261,9 @@ class Resumen_estadistico extends MY_Controller{
 			$this->input->post('grado_digital_imprimir'),
 			$this->input->post('fecha1_imprimir'), $this->input->post('fecha2_imprimir'),
 			$this->input->post('sexo_usuario_imprimir'),
+			$this->input->post('id_tipo_usuario_imprimir'),
+			$this->input->post('id_profesion_imprimir'),
+			$this->input->post('id_nivel_estudio_imprimir'),
 			$this->input->post('busqueda_imprimir'),
 			'imprimir'
 		);

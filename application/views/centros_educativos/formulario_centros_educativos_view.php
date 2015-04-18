@@ -162,11 +162,10 @@ $municipios = 'class="form-control" id="id_municipio" required="required" '.$blo
 												foreach($lista_docentes_capacitados as $docente_capacitado){
 												?>
 												<tr onclick="redireccionar('<?= base_url('usuarios/mostrar/'.$docente_capacitado->id_usuario); ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_capacitado->nombre_completo_usuario); ?>">
-													<td><?= $docentes_capacitados; ?></td>
+													<td><?= $docentes_capacitados++; ?></td>
 													<td><?= utf8($docente_capacitado->nombre_completo_usuario); ?></td>
 												</tr>
 												<?php
-													$docentes_capacitados++;
 												}
 												?>
 											</tbody>
@@ -190,12 +189,11 @@ $municipios = 'class="form-control" id="id_municipio" required="required" '.$blo
 												foreach($lista_docentes_certificados as $docente_certificado){
 												?>
 												<tr onclick="redireccionar('<?= base_url('usuarios/mostrar/'.$docente_certificado->id_usuario); ?>');" style="cursor: pointer;" title="Clic para ver información de <?= utf8($docente_certificado->nombre_completo_usuario); ?>">
-													<td><?= $docentes_certificados; ?></td>
+													<td><?= $docentes_certificados++; ?></td>
 													<td><?= utf8($docente_certificado->nombre_completo_usuario); ?></td>
-													<td><?= utf8($docente_certificado->certificacion_usuario); ?></td>
+													<td><?= str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($docente_certificado->certificacion_usuario))); ?></td>
 												</tr>
 												<?php
-													$docentes_certificados++;
 												}
 												?>
 											</tbody>

@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* Gestiona el proceso de instalación de SYSCAP
+* Controlador que gestiona el proceso de instalación de SYSCAP
 */
 class Instalador extends MY_Controller{
 	function __construct(){

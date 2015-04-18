@@ -1,10 +1,17 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+* Modelo utilizado por el proceso de instalación de SYSCAP
+*/
 class Instalador_model extends CI_Model{
 	public function __construct(){
 		parent::__construct();
 	}
 	
+	/**
+	* Método que prueba si hay conexión a una la base de datos
+	* El método devuelve TRUE si se puede realizar la conexión, de lo contrario devuelve FALSE
+	*/
 	public function probar_conexion($servidor, $base_datos, $usuario, $contrasena){
 		$conexion = array(
 			'hostname' => $servidor,

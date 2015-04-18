@@ -82,7 +82,7 @@
 								<div class="col-lg-12">
 									<div class="panel panel-primary">
 										<div class="panel-heading">
-											<?= heading('<i class="fa fa-database"></i> Base de Datos', 2); ?>
+											<?= heading('<i class="fa fa-database"></i> Configuraci&oacute;n de Base de Datos', 2); ?>
 										</div>
 										<div class="panel-body" style="background-color: #f5f5f5;">
 											<?php
@@ -148,7 +148,7 @@
 								<div class="col-lg-12">
 									<div class="panel panel-primary">
 										<div class="panel-heading">
-											<?= heading('<i class="fa fa-clock-o"></i> Sesión de Usuario', 2); ?>
+											<?= heading('<i class="fa fa-clock-o"></i> Configuraci&oacute;n de Sesión de Usuario', 2); ?>
 										</div>
 										<div class="panel-body" style="background-color: #f5f5f5;">
 											<?php

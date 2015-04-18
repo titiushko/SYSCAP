@@ -384,11 +384,10 @@ $modalidad_usuario = array(
 												foreach($lista_certificaciones_usuario as $certificacion){
 												?>
 												<tr>
-													<td><?= $certificaciones; ?></td>
-													<td><?= utf8($certificacion->nombre); ?></td>
+													<td><?= $certificaciones++; ?></td>
+													<td><?= str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($certificacion->nombre))); ?></td>
 												</tr>
 												<?php
-													$certificaciones++;
 												}
 												?>
 											</tbody>
@@ -412,12 +411,11 @@ $modalidad_usuario = array(
 												foreach($lista_calificaciones_usuario as $curso){
 												?>
 												<tr>
-													<td><?= $cursos; ?></td>
-													<td><?= utf8($curso->nombre); ?></td>
-													<td><?= $curso->nota; ?></td>
+													<td><?= $cursos++; ?></td>
+													<td><?= str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($curso->nombre))); ?></td>
+													<td><?= number_format(limpiar_nulo($curso->nota), 2, '.', ','); ?></td>
 												</tr>
 												<?php
-													$cursos++;
 												}
 												?>
 											</tbody>

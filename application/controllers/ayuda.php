@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* Muestra la ayuda de SYSCAP
+* Controlador que muestra la ayuda de SYSCAP
 */
 class Ayuda extends MY_Controller{
 	function __construct(){

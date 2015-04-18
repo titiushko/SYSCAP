@@ -1,24 +1,38 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+* Modelo para obtener de la base de datos de SYSCAP la información de la tabla usuarios
+*/
 class Usuarios_model extends CI_Model{
 	function __construct(){
 		parent::__construct();
 		$this->load->database();
 	}
 	
-	function lista_usuarios(){
-		$query = $this->db->select('id_usuario, nombre_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario, dui_usuario, correo_electronico_usuario, F_NombreCentroEducativo(id_centro_educativo) nombre_centro_educativo');
-		$query = $this->db->get('usuarios');
+	/**
+	* Método que devuelve el listado de usuarios
+	* Método utilizado por el controlador: Usuarios
+	*/
+	function usuarios(){
+		$query = $this->db->select('id_usuario, nombre_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario, dui_usuario, correo_electronico_usuario, F_NombreCentroEducativo(id_centro_educativo) nombre_centro_educativo')
+						  ->get('usuarios');
 		return $query->result();
 	}
 	
+	/**
+	* Método que devuelve la información de un usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function usuario($codigo_usuario){
-		$query = $this->db->select('id_usuario, nombre_usuario, contrasena_usuario, id_tipo_usuario, nombres_usuario nombres_usuario, apellido1_usuario apellido1_usuario, dui_usuario, id_profesion, correo_electronico_usuario, id_centro_educativo, id_departamento, id_municipio, direccion_usuario direccion_usuario, initcap(modalidad_usuario) modalidad_usuario');
-		$query = $this->db->where('id_usuario', $codigo_usuario);
-		$query = $this->db->get('usuarios');
+		$query = $this->db->select('id_usuario, nombre_usuario, contrasena_usuario, id_tipo_usuario, nombres_usuario, apellido1_usuario, dui_usuario, id_profesion, correo_electronico_usuario, id_centro_educativo, id_departamento, id_municipio, direccion_usuario, initcap(modalidad_usuario) modalidad_usuario')
+						  ->get_where('usuarios', array('id_usuario' => $codigo_usuario));
 		return $query->result();
 	}
 	
+	/**
+	* Método que devuelve el nombre completo de un usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function nombre_completo_usuario($codigo_usuario){
 		$query = $this->db->query('SELECT F_NombreCompletoUsuario(?) nombre_completo_usuario', array($codigo_usuario));
 		if($query->row())
@@ -27,50 +41,61 @@ class Usuarios_model extends CI_Model{
 			return '';
 	}
 	
+	/**
+	* Método que realiza update a la tabla usuarios para actualizar la información de un usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function modificar($datos_usuario, $codigo_usuario){
-		$this->db->where('id_usuario', $codigo_usuario);
-		$this->db->update('usuarios', $datos_usuario);
+		$this->db->update('usuarios', $datos_usuario, array('id_usuario' => $codigo_usuario));
 	}
 	
 	/**
-	 * Método que utiliza la vista MySQL V_UsuariosCursosExamenesCalificaciones de la base de datos de SYSCAP y devuelve el listado de cursos recibidos y calificaciones obtenidas un usuario.
-	 * @param codigo_usuario: id_usuario.
-	 * @return array de objetos con el listado de cursos recibidos y calificaciones obtenidas de un usuario.
-	 */
+	* Método que devuelve el listado de calificaciones de un usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function calificaciones_usuario($codigo_usuario){
-		$query = $this->db->query('SELECT c_nombre_completo_curso nombre, ROUND(ec_nota_examen_calificacion, 2) nota
-								   FROM V_UsuariosCursosExamenesCalificaciones
-								   WHERE ec_id_usuario = ?', array($codigo_usuario));
+		$query = $this->db->select('c_nombre_completo_curso nombre, ec_nota_examen_calificacion nota')
+						  ->get_where('V_UsuariosCursosExamenesCalificaciones', array('ec_id_usuario' => $codigo_usuario));
 		return $query->result();
 	}
 	
 	/**
-	 * Método que utiliza la vista MySQL V_UsuariosCursosExamenesCalificaciones de la base de datos de SYSCAP y devuelve el listado de certificaciones obtenidas un usuario.
-	 * @param codigo_usuario: id_usuario.
-	 * @return array de objetos con el listado de certificaciones obtenidas de un usuario.
-	 */
+	* Método que devuelve el listado de certificaciones un usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function certificaciones_usuario($codigo_usuario){
-		$query = $this->db->query('SELECT DISTINCT (CASE WHEN c_nombre_completo_curso LIKE \'Examen%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso, LENGTH(\'Examen\') + 2) + 1) ELSE (CASE WHEN c_nombre_completo_curso LIKE \'Certificaci%\' THEN SUBSTRING(c_nombre_completo_curso, LOCATE(\' \', c_nombre_completo_curso) + 1) ELSE c_nombre_completo_curso END) END) nombre
-								   FROM V_UsuariosCursosExamenesCalificaciones
-								   WHERE u_id_usuario = ?
-								   AND e_nombre_examen LIKE \'Examen%\'
-								   AND ec_nota_examen_calificacion >= 7
-								   AND u_modalidad_usuario LIKE \'tutorizado\'
-								   ORDER BY c_nombre_completo_curso', array($codigo_usuario));
+		$query = $this->db->distinct(TRUE)
+						  ->select('c_nombre_completo_curso nombre')
+						  ->like('e_nombre_examen', 'Examen', 'after')
+						  ->like('u_modalidad_usuario', 'tutorizado', 'none')
+						  ->order_by('c_nombre_completo_curso', 'asc')
+						  ->get_where('V_UsuariosCursosExamenesCalificaciones', array('ec_nota_examen_calificacion >=' => '7.00', 'u_id_usuario' => $codigo_usuario));
 		return $query->result();
 	}
 	
+	/**
+	* Método que valida que el código de un usuario exista
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function validar_codigo_usuario($codigo_usuario){
 		$query = $this->db->get_where('usuarios', array('id_usuario' => $codigo_usuario));
 		return $query->result();
 	}
 	
+	/**
+	* Método para validar que no se repita un nombre de usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function validar_nombre_usuario($nombre_usuario, $codigo_usuario){
 		$query = $this->db->where_not_in('id_usuario', $codigo_usuario);
 		$query = $this->db->get_where('usuarios', array('nombre_usuario' => $nombre_usuario));
 		return $query->result();
 	}
 	
+	/**
+	* Método para validar si se ha cambiado la contraseña de un usuario
+	* Método utilizado por el controlador: Usuarios
+	*/
 	function validar_contrasena_usuario($contrasena_usuario, $codigo_usuario){
 		$query = $this->db->get_where('usuarios', array('contrasena_usuario' => $contrasena_usuario, 'id_usuario' => $codigo_usuario));
 		return $query->result();

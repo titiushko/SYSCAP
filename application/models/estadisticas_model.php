@@ -1,13 +1,20 @@
 <?php if(! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+* Modelo para obtener de la base de datos de SYSCAP la información para las consultas estadísticas
+*/
 class Estadisticas_model extends CI_Model{
 	function __construct(){
 		parent::__construct();
 		$this->load->database();
 	}
 	
-	// Consulta Estadística 1: Usuarios por Modalidad de Capacitación
-	// Consulta Estadística 5: Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+	/**
+	* Método que devuelve las siguientes consultas estadísticas:
+	* - 1: Usuarios por Modalidad de Capacitación
+	* - 5: Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function modalidades_capacitados($fecha1, $fecha2, $tipo_capacitado = ''){
 		if($tipo_capacitado != ''){
 			$filtro = ' AND tipo_capacitado = ?';
@@ -37,7 +44,11 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 2: Usuarios por Departamento y Rango de Fechas
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 2: Usuarios por Departamento y Rango de Fechas
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function cantidad_usuarios_municipio($codigo_departamento, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT DISTINCT nombre_municipio,
 								   SUM(CASE WHEN tipo_capacitado LIKE \'capacitado\' THEN 1 ELSE 0 END) capacitados,
@@ -55,7 +66,11 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 2: Usuarios por Departamento y Rango de Fechas
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 2: Usuarios por Departamento y Rango de Fechas
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function usuarios_municipio($codigo_departamento, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT nombre_municipio, nombre_usuario, initcap(modalidad_usuario) modalidad_usuario
 								   FROM V_Estadisticas
@@ -64,8 +79,12 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 4: Usuarios por Departamento, Municipio y Rango de Fechas
-	// Consulta Estadística 7: Usuarios por Tipo de Capacitados, Departamento y Municipio
+	/**
+	* Método que devuelve las siguientes consultas estadísticas:
+	* - 4: Usuarios por Departamento, Municipio y Rango de Fechas
+	* - 7: Usuarios por Tipo de Capacitados, Departamento y Municipio
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function usuarios_departamento_municipio($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = ''){
 		if($tipo_capacitado != ''){
 			$filtro = ' AND tipo_capacitado = ?';
@@ -92,8 +111,12 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 4: Usuarios por Departamento, Municipio y Rango de Fechas
-	// Consulta Estadística 7: Usuarios por Tipo de Capacitados, Departamento y Municipio
+	/**
+	* Método que devuelve las siguientes consultas estadísticas:
+	* - 4: Usuarios por Departamento, Municipio y Rango de Fechas
+	* - 7: Usuarios por Tipo de Capacitados, Departamento y Municipio
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function usuarios_centro_educativo($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = ''){
 		if($tipo_capacitado != ''){
 			$filtro = ' AND tipo_capacitado = ?';
@@ -110,8 +133,12 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 3: Total de Usuarios por Departamento y Rango de Fechas
-	// Consulta Estadística 8: Usuarios por Departamento, Tipo de Capacitados y Fecha
+	/**
+	* Método que devuelve las siguientes consultas estadísticas:
+	* - 3: Total de Usuarios por Departamento y Rango de Fechas
+	* - 8: Usuarios por Departamento, Tipo de Capacitados y Fecha
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function estaditicas_departamento_fechas($fecha1, $fecha2, $tipo_capacitado = ''){
 		if($tipo_capacitado != ''){
 			$filtro = ' AND tipo_capacitado = ?';
@@ -136,8 +163,12 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
     
-	// Consulta Estadística 6: Usuarios por Tipo de Capacitados, Departamento y Fecha
-    function estaditicas_departamento_tipo_fechas($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2){
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 6: Usuarios por Tipo de Capacitados, Departamento y Fecha
+	* Método utilizado por el controlador: Estadisticas
+	*/
+	function estaditicas_departamento_tipo_fechas($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT DISTINCT nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
 								   SUM(CASE WHEN modalidad_usuario = \'autoformacion\' THEN 1 ELSE 0 END) autoformacion
@@ -156,7 +187,11 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 9: Usuarios por Tipo de Capacitados y Centro Educativo
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 9: Usuarios por Tipo de Capacitados y Centro Educativo
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function tipos_capacitados_centro_educativo($tipo_capacitado, $codigo_centro_educativo){
 		$query = $this->db->query('SELECT \'Tutorizado\' modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) total
 								   FROM V_Estadisticas
@@ -173,7 +208,11 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 10: Usuarios a Nivel Nacional
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 10: Usuarios a Nivel Nacional
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT (CASE WHEN nombre_departamento IS NULL THEN \'Sin Departamento *\' ELSE nombre_departamento END) nombre_departamento, (CASE WHEN nombre_municipio IS NULL THEN \'Sin Municipio **\' ELSE nombre_municipio END) nombre_municipio,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizado,
@@ -191,7 +230,11 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 11: Usuarios por Grado Digital
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 11: Usuarios por Grado Digital
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function usuarios_grado_digital($grado_digital, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT IF(tipo_capacitado IS NULL, \'capacitado\', tipo_capacitado) tipo_capacitado,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,
@@ -214,7 +257,11 @@ class Estadisticas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	// Consulta Estadística 11: Usuarios por Grado Digital
+	/**
+	* Método que devuelve la siguiente consulta estadística:
+	* - 11: Usuarios por Grado Digital
+	* Método utilizado por el controlador: Estadisticas
+	*/
 	function certificaciones_grado_digital($grado_digital, $fecha1, $fecha2){
 		$query = $this->db->query('SELECT nombre_curso_categoria, nombre_completo_curso,
 								   SUM(CASE WHEN modalidad_usuario = \'tutorizado\' THEN 1 ELSE 0 END) tutorizados,

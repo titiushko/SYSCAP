@@ -552,7 +552,7 @@ class Estadisticas extends MY_Controller{
 			}
 			$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 			$nombre_archivo = utf8_decode(acentos('Estadística '.listado_estadisticas($opcion)).'.pdf');
-			$pdf->Output($nombre_archivo, 'I');
+			echo $plantilla_pdf; //$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
 			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));

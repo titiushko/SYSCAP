@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 /**
-* Devuelve resultado de peticiones que se realizan con AJAX
+* Controlador que devuelve resultado de peticiones que se realizan con AJAX
 */
 class Ajax extends MY_Controller{
 	function __construct(){

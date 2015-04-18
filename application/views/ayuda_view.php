@@ -20,35 +20,35 @@
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el nombre de usuario que corresponda al estudiante que se requiere consultar.',
-						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
+						'SYSCAP filtrará el listado de usuarios que coincidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Nombre Completo.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el nombre completo, nombre o apellidos del usuario que corresponda al estudiante que se requiere consultar.',
-						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
+						'SYSCAP filtrará el listado de usuarios que coincidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Número de DUI.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el número de DUI que corresponda al estudiante que se requiere consultar.',
-						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
+						'SYSCAP filtrará el listado de usuarios que coincidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Correo Electrónico.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de usuarios.',
 						'Digitar el correo electrónico que corresponda al estudiante que se requiere consultar.',
-						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
+						'SYSCAP filtrará el listado de usuarios que coincidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						echo heading('Búsqueda de Estudiante por Centro Educativo.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios, ubicarse en el campo de búsqueda '.bold('Centro Educativo').' ubicado en la parte superior del listado de usuarios.',
 						'Digitar el nombre del centro educativo que corresponda al estudiante que se requiere consultar.',
-						'SYSCAP filtrará el listado de usuarios que coicidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
+						'SYSCAP filtrará el listado de usuarios que coincidan con la búsqueda. Para acceder a la ficha del estudiante, hacer clic en la fila del registro del estudiante que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del estudiante y regresar al listado de usuarios.'
 						)).br();
 						}
@@ -58,7 +58,7 @@
 						'Dentro del módulo de usuarios y desde la ficha de un estudiante, dar clic en el botón '.tag('div', '<i class="fa fa-print"></i> Imprimir', 'class="btn btn-sm btn-success"').'.',
 						'SYSCAP mostrará un reporte generado con la ficha del estudiante para ser enviado a impresión.',
 						)).br();
-						echo tag('p', 'El botón imprimir no está disponible sólo para dispositivos móviles.').br();
+						echo tag('p', 'El botón imprimir no está disponible únicamente para dispositivos móviles.').br();
 						echo heading('Exportar a Archivo PDF Ficha de Estudiante.', 4);
 						echo ol(array(
 						'Dentro del módulo de usuarios y desde la ficha de un estudiante, dar clic en el botón '.tag('div', '<i class="fa fa-file-pdf-o"></i> Exportar', 'class="btn btn-sm btn-success"').'.',
@@ -103,28 +103,28 @@
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el código del centro educativo que se requiere consultar.',
-						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
+						'SYSCAP filtrará el listado de centros educativos que coincidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading('Búsqueda de Centro Educativo por Nombre.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el nombre del centro educativo que se requiere consultar.',
-						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
+						'SYSCAP filtrará el listado de centros educativos que coincidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading('Búsqueda de Centro Educativo por Departamento.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el nombre del departamento donde esta ubicado el centro educativo que se requiere consultar.',
-						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
+						'SYSCAP filtrará el listado de centros educativos que coincidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading('Búsqueda de Centro Educativo por Municipio.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos, ubicarse en el campo de búsqueda '.bold('Buscar').' ubicado en la parte superior derecha del listado de centros educativos.',
 						'Digitar el nombre del municipio donde esta ubicado el centro educativo que se requiere consultar.',
-						'SYSCAP filtrará el listado de centros educativos que coicidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
+						'SYSCAP filtrará el listado de centros educativos que coincidan con la búsqueda. Para acceder a la ficha del centro educativo, hacer clic en la fila del registro del centro educativo que se desea consultar.',
 						'Dar clic en el botón '.tag('div', '<i class="fa fa-reply"></i> Regresar', 'class="btn btn-sm btn-danger"').' para salir de la ficha del centro educativo y regresar al listado de centros educativos.'
 						)).br();
 						echo heading(anchor(current_url().'#centros_educativos-mostrar', 'Mostrar Centro Educativo', 'name="centros_educativos-mostrar"'), 3).br();
@@ -133,7 +133,7 @@
 						'Dentro del módulo de centros educativos y desde la ficha de un centro educativo, dar clic en el botón '.tag('div', '<i class="fa fa-print"></i> Imprimir', 'class="btn btn-sm btn-success"').'.',
 						'SYSCAP mostrará un reporte generado con la ficha del centro educativo para ser enviado a impresión.',
 						)).br();
-						echo tag('p', 'El botón imprimir no está disponible sólo para dispositivos móviles.').br();
+						echo tag('p', 'El botón imprimir no está disponible únicamente para dispositivos móviles.').br();
 						echo heading('Exportar a Archivo PDF Ficha de Centro Educativo.', 4);
 						echo ol(array(
 						'Dentro del módulo de centros educativos y desde la ficha de un centro educativo, dar clic en el botón '.tag('div', '<i class="fa fa-file-pdf-o"></i> Exportar', 'class="btn btn-sm btn-success"').'.',
@@ -287,7 +287,7 @@
 						'Dentro del módulo de consultas estadísticas y desde la pantalla de resultado de una consulta estadística, dar clic en el botón '.tag('div', '<i class="fa fa-print"></i> Imprimir', 'class="btn btn-sm btn-success"').'.',
 						'SYSCAP mostrará un reporte generado con el resultado de la consulta estadística para ser enviado a impresión.',
 						)).br();
-						echo tag('p', 'El botón imprimir no está disponible sólo para dispositivos móviles.').br();
+						echo tag('p', 'El botón imprimir no está disponible únicamente para dispositivos móviles.').br();
 						echo heading('Exportar a Archivo PDF Consulta Estadística.', 4);
 						echo ol(array(
 						'Dentro del módulo de consultas estadísticas y desde la pantalla de resultado de una consulta estadística, dar clic en el botón '.tag('div', '<i class="fa fa-file-pdf-o"></i> Exportar', 'class="btn btn-sm btn-success"').'.',

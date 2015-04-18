@@ -128,7 +128,7 @@ class Centros_educativos extends MY_Controller{
 		$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_centro_educativo);
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 		$nombre_archivo = utf8_decode(acentos($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.pdf');
-		$pdf->Output($nombre_archivo, 'I');
+		echo $plantilla_pdf; //$pdf->Output($nombre_archivo, 'I');
 	}
 	
 	private function cargar_plantilla_pdf($codigo_centro_educativo){
@@ -147,7 +147,7 @@ class Centros_educativos extends MY_Controller{
 			}
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
 			foreach($this->centros_educativos_model->docentes_certificados($codigo_centro_educativo) as $docente_certificado){
-				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.utf8($docente_certificado->certificacion_usuario).'</td></tr>';
+				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($docente_certificado->certificacion_usuario))).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){
 				$lista_docentes_certificados = 'No hay docentes certificados en el centro educativo.';

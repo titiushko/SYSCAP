@@ -4,8 +4,8 @@ $formulario_consultar = array(
 	'id'		=> 'formulario_consultar',
 	'role'		=> 'form'
 );
-$departamentos = 'class="form-control" id="id_departamento" required="required"';
-$municipios = 'class="form-control" id="id_municipio" required="required"';
+$departamentos = 'class="form-control" id="id_departamento"';
+$municipios = 'class="form-control" id="id_municipio"';
 $nombre_centro_educativo = array (
 	'name'			=> 'nombre_centro_educativo',
 	'id'			=> 'nombre_centro_educativo',
@@ -103,6 +103,9 @@ $campos_ocultos_formulario = array(
 	'fecha1_imprimir'					=> set_value('fecha1_imprimir', @$campos['fecha1']),
 	'fecha2_imprimir'					=> set_value('fecha2_imprimir', @$campos['fecha2']),
 	'sexo_usuario_imprimir'				=> set_value('sexo_usuario_imprimir', @$campos['sexo_usuario']),
+	'id_tipo_usuario_imprimir'			=> set_value('tipo_usuario_imprimir', @$campos['id_tipo_usuario']),
+	'id_profesion_imprimir'				=> set_value('profesion_imprimir', @$campos['id_profesion']),
+	'id_nivel_estudio_imprimir'			=> set_value('nivel_estudio_imprimir', @$campos['id_nivel_estudio']),
 	'busqueda_imprimir'					=> set_value('busqueda_imprimir', @$campos['busqueda'])
 );
 ?>
@@ -226,6 +229,29 @@ $campos_ocultos_formulario = array(
 								</div>
 							</div>
 							<?= form_error('sexo_usuario'); ?>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<div class="form-group">
+							<?= form_label('Tipo de Usuario:'); ?>
+							<?= form_dropdown('id_tipo_usuario', $lista_tipos_usuarios, set_value('id_tipo_usuario', @$campos['id_tipo_usuario']), 'class="form-control"'); ?>
+							<?= form_error('id_tipo_usuario'); ?>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="form-group">
+							<?= form_label('Profeci&oacute;n:'); ?>
+							<?= form_dropdown('id_profesion', $lista_profesiones, set_value('id_profesion', @$campos['id_profesion']), 'class="form-control"'); ?>
+							<?= form_error('id_profesion'); ?>
+						</div>
+					</div>
+					 <div class="col-lg-4">
+						<div class="form-group">
+							<?= form_label('Nivel de Estudio:'); ?>
+							<?= form_dropdown('id_nivel_estudio', $lista_niveles_estudios, set_value('id_nivel_estudio', @$campos['id_nivel_estudio']), 'class="form-control"'); ?>
+							<?= form_error('id_nivel_estudio'); ?>
 						</div>
 					</div>
 				</div>
