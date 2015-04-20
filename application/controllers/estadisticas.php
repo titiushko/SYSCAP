@@ -28,7 +28,7 @@ class Estadisticas extends MY_Controller{
 				mensaje_notificacion(
 					'myModalErrorReport',
 					icono_notificacion('error').'Error Reporte Estad&iacute;stica de '.$datos['nombre_estadistica'],
-					p('No se puede generar el reporte estad&iacute;stico sin resultados.').br().p('Por favor realice una consulta estad&iacute;stica.')
+					tag('p', 'No se puede generar el reporte estad&iacute;stico sin resultados.').br().tag('p', 'Por favor realice una consulta estad&iacute;stica o intente realizar otra consulta estad&iacute;stica con diferentes valores de b&uacute;squeda.')
 				)
 			);
 			$datos['resultado_estadistico'] = FALSE;
@@ -252,7 +252,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : ($tipo_capacitado == 'certificado' ? 'Certificados' : '');
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -295,7 +295,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : ($tipo_capacitado == 'certificado' ? 'Certificados' : '');
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -316,7 +316,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('id_departamento' => $codigo_departamento, 'id_municipio' => $codigo_municipio, 'fecha1' => $fecha1, 'fecha2' => $fecha2, 'tipo_capacitado' => $tipo_capacitado);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : ($tipo_capacitado == 'certificado' ? 'Certificados' : '');
 			$datos['nombre_departamento'] = $codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : '';
 			$datos['nombre_municipio'] = $codigo_municipio != '' ? $this->municipios_model->nombre_municipio($codigo_municipio) : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
@@ -337,7 +337,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_departamento' => $codigo_departamento, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : ($tipo_capacitado == 'certificado' ? 'Certificados' : '');
 			$datos['nombre_departamento'] = $codigo_departamento != '' ? $this->departamentos_model->nombre_departamento($codigo_departamento) : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
@@ -358,7 +358,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'id_centro_educativo' => $codigo_centro_educativo, 'nombre_centro_educativo' => $nombre_centro_educativo);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : ($tipo_capacitado == 'certificado' ? 'Certificados' : '');
 			$datos['nombre_centro_educativo'] = $nombre_centro_educativo;
 		}
 		return $datos;
@@ -386,7 +386,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('tipo_capacitado' => $tipo_capacitado, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : $tipo_capacitado == 'certificado' ? 'Certificados' : '';
+			$datos['tipo_capacitado'] = $tipo_capacitado == 'capacitado' ? 'Capacitados' : ($tipo_capacitado == 'certificado' ? 'Certificados' : '');
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -405,7 +405,7 @@ class Estadisticas extends MY_Controller{
 			$datos['campos'] = array('grado_digital' => $grado_digital, 'fecha1' => $fecha1, 'fecha2' => $fecha2);
 		}
 		elseif($metodo == 'imprimir'){
-			$datos['grado_digital'] = 'Grado Digital '.$grado_digital;
+			$datos['grado_digital'] = $grado_digital != '' ? 'Grado Digital '.$grado_digital : '';
 			$datos['periodo'] = $fecha1 != '' && $fecha2 != '' ? 'Del '.date_format(new DateTime($fecha1), 'd/m/Y').' al '.date_format(new DateTime($fecha2), 'd/m/Y') : '';
 		}
 		return $datos;
@@ -552,7 +552,7 @@ class Estadisticas extends MY_Controller{
 			}
 			$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 			$nombre_archivo = utf8_decode(acentos('Estadística '.listado_estadisticas($opcion)).'.pdf');
-			$pdf->Output($nombre_archivo, 'I');
+			echo $plantilla_pdf; //$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
 			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
@@ -566,10 +566,10 @@ class Estadisticas extends MY_Controller{
 				$lista_modalidades_capacitados = '';
 				foreach($modalidades_capacitados as $modalidad_capacitado){
 					if($modalidad_capacitado->tipos_capacitados != 'Total'){
-						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.limpiar_nulo($modalidad_capacitado->tutorizados).'</td><td>'.limpiar_nulo($modalidad_capacitado->autoformacion).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ',').'</td><td>'.number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold(limpiar_nulo($modalidad_capacitado->tutorizados)).'</td><td>'.bold(limpiar_nulo($modalidad_capacitado->autoformacion)).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold(number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ',')).'</td><td>'.bold(number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_modalidades_capacitados == ''){
@@ -589,10 +589,10 @@ class Estadisticas extends MY_Controller{
 				$indice = 1; $lista_cantidad_usuarios_municipio = '';
 				foreach($cantidad_usuarios_municipio as $cantidad_municipio){
 					if($cantidad_municipio->nombre_municipio != 'Total'){
-						$lista_cantidad_usuarios_municipio .= '<tr><td>'.$indice++.'</td><td>'.utf8($cantidad_municipio->nombre_municipio).'</td><td>'.$cantidad_municipio->capacitados.'</td><td>'.$cantidad_municipio->certificados.'</td></tr>';
+						$lista_cantidad_usuarios_municipio .= '<tr><td>'.$indice++.'</td><td>'.utf8($cantidad_municipio->nombre_municipio).'</td><td>'.number_format($cantidad_municipio->capacitados, 0, '', ',').'</td><td>'.number_format($cantidad_municipio->certificados, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_cantidad_usuarios_municipio .= '<tr><td></td><td>'.bold($cantidad_municipio->nombre_municipio).'</td><td>'.bold($cantidad_municipio->capacitados).'</td><td>'.bold($cantidad_municipio->certificados).'</td></tr>';
+						$lista_cantidad_usuarios_municipio .= '<tr><td></td><td>'.bold($cantidad_municipio->nombre_municipio).'</td><td>'.bold(number_format($cantidad_municipio->capacitados, 0, '', ',')).'</td><td>'.bold(number_format($cantidad_municipio->certificados, 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_cantidad_usuarios_municipio == ''){
@@ -625,10 +625,10 @@ class Estadisticas extends MY_Controller{
 				$bandera = TRUE; $sin_departamento = '';
 				foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
 					if($estaditica_departamento_fecha->nombre_departamento != 'Total'){
-						$lista_estaditicas_departamento_fechas .= '<tr><td>'.$indice++.'</td><td>'.utf8($estaditica_departamento_fecha->nombre_departamento).'</td><td>'.$estaditica_departamento_fecha->capacitados.'</td><td>'.$estaditica_departamento_fecha->certificados.'</td></tr>';
+						$lista_estaditicas_departamento_fechas .= '<tr><td>'.$indice++.'</td><td>'.utf8($estaditica_departamento_fecha->nombre_departamento).'</td><td>'.number_format($estaditica_departamento_fecha->capacitados, 0, '', ',').'</td><td>'.number_format($estaditica_departamento_fecha->certificados, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_estaditicas_departamento_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_fecha->nombre_departamento)).'</td><td>'.bold($estaditica_departamento_fecha->capacitados).'</td><td>'.bold($estaditica_departamento_fecha->certificados).'</td></tr>';
+						$lista_estaditicas_departamento_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_fecha->nombre_departamento)).'</td><td>'.bold(number_format($estaditica_departamento_fecha->capacitados, 0, '', ',')).'</td><td>'.bold(number_format($estaditica_departamento_fecha->certificados, 0, '', ',')).'</td></tr>';
 					}
 					if($estaditica_departamento_fecha->nombre_departamento == 'Sin Departamento *' && $bandera){
 						$sin_departamento = bold('*').' Usuarios no registrados a un Departamento.';
@@ -654,10 +654,10 @@ class Estadisticas extends MY_Controller{
 				$indice = 1; $lista_usuarios_departamento_municipio = '';
 				foreach($usuarios_departamento_municipio as $usuario_departamento_municipio){
 					if($usuario_departamento_municipio->nombre_centro_educativo != 'Total'){
-						$lista_usuarios_departamento_municipio .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.$usuario_departamento_municipio->capacitados.'</td><td>'.$usuario_departamento_municipio->certificados.'</td></tr>';
+						$lista_usuarios_departamento_municipio .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.number_format($usuario_departamento_municipio->capacitados, 0, '', ',').'</td><td>'.number_format($usuario_departamento_municipio->certificados, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_usuarios_departamento_municipio .= '<tr><td></td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold($usuario_departamento_municipio->capacitados).'</td><td>'.bold($usuario_departamento_municipio->certificados).'</td></tr>';
+						$lista_usuarios_departamento_municipio .= '<tr><td></td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold(number_format($usuario_departamento_municipio->capacitados, 0, '', ',')).'</td><td>'.bold(number_format($usuario_departamento_municipio->certificados, 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_usuarios_departamento_municipio == ''){
@@ -691,10 +691,10 @@ class Estadisticas extends MY_Controller{
 				$lista_modalidades_capacitados = '';
 				foreach($modalidades_capacitados as $modalidad_capacitado){
 					if($modalidad_capacitado->tipos_capacitados != 'Total'){
-						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.limpiar_nulo($modalidad_capacitado->tutorizados).'</td><td>'.limpiar_nulo($modalidad_capacitado->autoformacion).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold(utf8($modalidad_capacitado->tipos_capacitados)).'</th><td>'.number_format(limpiar_nulo($modalidad_capacitado->tutorizados, 0, '', ',')).'</td><td>'.number_format(limpiar_nulo($modalidad_capacitado->autoformacion, 0, '', ',')).'</td></tr>';
 					}
 					else{
-						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold(limpiar_nulo($modalidad_capacitado->tutorizados)).'</td><td>'.bold(limpiar_nulo($modalidad_capacitado->autoformacion)).'</td></tr>';
+						$lista_modalidades_capacitados .= '<tr><th>'.bold($modalidad_capacitado->tipos_capacitados).'</th><td>'.bold(number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ',')).'</td><td>'.bold(number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_modalidades_capacitados == ''){
@@ -716,10 +716,10 @@ class Estadisticas extends MY_Controller{
 				$indice = 1; $lista_estaditicas_departamento_tipo_fechas = '';
 				foreach($estaditicas_departamento_tipo_fechas as $estaditica_departamento_tipo_fecha){
 					if($estaditica_departamento_tipo_fecha->nombre_municipio != 'Total'){
-						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td>'.$indice++.'</td><td>'.utf8($estaditica_departamento_tipo_fecha->nombre_municipio).'</td><td>'.$estaditica_departamento_tipo_fecha->tutorizado.'</td><td>'.$estaditica_departamento_tipo_fecha->autoformacion.'</td></tr>';
+						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td>'.$indice++.'</td><td>'.utf8($estaditica_departamento_tipo_fecha->nombre_municipio).'</td><td>'.number_format($estaditica_departamento_tipo_fecha->tutorizado, 0, '', ',').'</td><td>'.number_format($estaditica_departamento_tipo_fecha->autoformacion, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)).'</td><td>'.bold($estaditica_departamento_tipo_fecha->tutorizado).'</td><td>'.bold($estaditica_departamento_tipo_fecha->autoformacion).'</td></tr>';
+						$lista_estaditicas_departamento_tipo_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_tipo_fecha->nombre_municipio)).'</td><td>'.bold(number_format($estaditica_departamento_tipo_fecha->tutorizado, 0, '', ',')).'</td><td>'.bold(number_format($estaditica_departamento_tipo_fecha->autoformacion, 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_estaditicas_departamento_tipo_fechas == ''){
@@ -743,10 +743,10 @@ class Estadisticas extends MY_Controller{
 				$indice = 1; $lista_usuarios_departamento_municipio = '';
 				foreach($usuarios_departamento_municipio as $usuario_departamento_municipio){
 					if($usuario_departamento_municipio->nombre_centro_educativo != 'Total'){
-						$lista_usuarios_departamento_municipio .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.$usuario_departamento_municipio->capacitados.'</td><td>'.$usuario_departamento_municipio->certificados.'</td></tr>';
+						$lista_usuarios_departamento_municipio .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.number_format($usuario_departamento_municipio->capacitados, 0, '', ',').'</td><td>'.number_format($usuario_departamento_municipio->certificados, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_usuarios_departamento_municipio .= '<tr><td></td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold($usuario_departamento_municipio->capacitados).'</td><td>'.bold($usuario_departamento_municipio->certificados).'</td></tr>';
+						$lista_usuarios_departamento_municipio .= '<tr><td></td><td>'.bold($usuario_departamento_municipio->nombre_centro_educativo).'</td><td>'.bold(number_format($usuario_departamento_municipio->capacitados, 0, '', ',')).'</td><td>'.bold(number_format($usuario_departamento_municipio->certificados, 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_usuarios_departamento_municipio == ''){
@@ -783,10 +783,10 @@ class Estadisticas extends MY_Controller{
 				$bandera = TRUE; $sin_departamento = '';
 				foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
 					if($estaditica_departamento_fecha->nombre_departamento != 'Total'){
-						$lista_estaditicas_departamento_fechas .= '<tr><td>'.$indice++.'</td><td>'.utf8($estaditica_departamento_fecha->nombre_departamento).'</td><td>'.$estaditica_departamento_fecha->capacitados.'</td><td>'.$estaditica_departamento_fecha->certificados.'</td></tr>';
+						$lista_estaditicas_departamento_fechas .= '<tr><td>'.$indice++.'</td><td>'.utf8($estaditica_departamento_fecha->nombre_departamento).'</td><td>'.number_format($estaditica_departamento_fecha->capacitados, 0, '', ',').'</td><td>'.number_format($estaditica_departamento_fecha->certificados, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_estaditicas_departamento_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_fecha->nombre_departamento)).'</td><td>'.bold($estaditica_departamento_fecha->capacitados).'</td><td>'.bold($estaditica_departamento_fecha->certificados).'</td></tr>';
+						$lista_estaditicas_departamento_fechas .= '<tr><td></td><td>'.bold(utf8($estaditica_departamento_fecha->nombre_departamento)).'</td><td>'.bold(number_format($estaditica_departamento_fecha->capacitados, 0, '', ',')).'</td><td>'.bold(number_format($estaditica_departamento_fecha->certificados, 0, '', ',')).'</td></tr>';
 					}
 					if($estaditica_departamento_fecha->nombre_departamento == 'Sin Departamento *' && $bandera){
 						$sin_departamento = bold('*').' Usuarios no registrados a un Departamento.';
@@ -811,10 +811,10 @@ class Estadisticas extends MY_Controller{
 				$lista_tipos_capacitados_centro_educativo = '';
 				foreach($tipos_capacitados_centro_educativo as $tipo_capacitado_centro_educativo){
 					if($tipo_capacitado_centro_educativo->modalidad_usuario != 'Total'){
-						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_usuario).'</td><td>'.limpiar_nulo($tipo_capacitado_centro_educativo->total).'</td></tr>';
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.utf8($tipo_capacitado_centro_educativo->modalidad_usuario).'</td><td>'.number_format(limpiar_nulo($tipo_capacitado_centro_educativo->total), 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_usuario)).'</td><td>'.bold(limpiar_nulo($tipo_capacitado_centro_educativo->total)).'</td></tr>';
+						$lista_tipos_capacitados_centro_educativo .= '<tr><td>'.bold(utf8($tipo_capacitado_centro_educativo->modalidad_usuario)).'</td><td>'.bold(number_format(limpiar_nulo($tipo_capacitado_centro_educativo->total), 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_tipos_capacitados_centro_educativo == ''){
@@ -838,10 +838,10 @@ class Estadisticas extends MY_Controller{
 				$bandera2 = TRUE; $datos['sin_municipio'] = '';
 				foreach($usuarios_nivel_nacional as $usuario_nivel_nacional){
 					if($usuario_nivel_nacional->nombre_municipio != 'Total'){
-						$lista_usuarios_nivel_nacional .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_nivel_nacional->nombre_departamento).'</td><td>'.utf8($usuario_nivel_nacional->nombre_municipio).'</td><td>'.$usuario_nivel_nacional->tutorizado.'</td><td>'.$usuario_nivel_nacional->autoformacion.'</td></tr>';
+						$lista_usuarios_nivel_nacional .= '<tr><td>'.$indice++.'</td><td>'.utf8($usuario_nivel_nacional->nombre_departamento).'</td><td>'.utf8($usuario_nivel_nacional->nombre_municipio).'</td><td>'.number_format($usuario_nivel_nacional->tutorizado, 0, '', ',').'</td><td>'.number_format($usuario_nivel_nacional->autoformacion, 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_usuarios_nivel_nacional .= '<tr><td></td><td>'.bold(utf8($usuario_nivel_nacional->nombre_departamento)).'</td><td>'.bold(utf8($usuario_nivel_nacional->nombre_municipio)).'</td><td>'.bold($usuario_nivel_nacional->tutorizado).'</td><td>'.bold($usuario_nivel_nacional->autoformacion).'</td></tr>';
+						$lista_usuarios_nivel_nacional .= '<tr><td></td><td>'.bold(utf8($usuario_nivel_nacional->nombre_departamento)).'</td><td>'.bold(utf8($usuario_nivel_nacional->nombre_municipio)).'</td><td>'.bold(number_format($usuario_nivel_nacional->tutorizado, 0, '', ',')).'</td><td>'.bold(number_format($usuario_nivel_nacional->autoformacion, 0, '', ',')).'</td></tr>';
 					}
 					if($usuario_nivel_nacional->nombre_departamento == 'Sin Departamento *' && $bandera1){
 						$sin_departamento = bold('*').' Usuarios no registrados a un Departamento.';
@@ -873,10 +873,10 @@ class Estadisticas extends MY_Controller{
 				$lista_usuarios_grado_digital = '';
 				foreach($usuarios_grado_digital as $usuario_grado_digital){
 					if($usuario_grado_digital->tipo_capacitado != 'Total'){
-						$lista_usuarios_grado_digital .= '<tr><th>'.bold(utf8($usuario_grado_digital->tipo_capacitado)).'</th><td>'.limpiar_nulo($usuario_grado_digital->tutorizados).'</td><td>'.limpiar_nulo($usuario_grado_digital->autoformacion).'</td></tr>';
+						$lista_usuarios_grado_digital .= '<tr><th>'.bold(utf8($usuario_grado_digital->tipo_capacitado)).'</th><td>'.number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ',').'</td><td>'.number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_usuarios_grado_digital .= '<tr><th>'.bold($usuario_grado_digital->tipo_capacitado).'</th><td>'.bold(limpiar_nulo($usuario_grado_digital->tutorizados)).'</td><td>'.bold(limpiar_nulo($usuario_grado_digital->autoformacion)).'</td></tr>';
+						$lista_usuarios_grado_digital .= '<tr><th>'.bold($usuario_grado_digital->tipo_capacitado).'</th><td>'.bold(number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ',')).'</td><td>'.bold(number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_usuarios_grado_digital == ''){
@@ -886,10 +886,10 @@ class Estadisticas extends MY_Controller{
 				$indice = 1; $lista_certificaciones_grado_digital = '';
 				foreach($certificaciones_grado_digital as $certificacion_grado_digital){
 					if($certificacion_grado_digital->nombre_curso_categoria != 'Total'){
-						$lista_certificaciones_grado_digital .= '<tr><td>'.$indice++.'</td><td>'.utf8($certificacion_grado_digital->nombre_curso_categoria).'</td><td>'.utf8($certificacion_grado_digital->nombre_completo_curso).'</td><td>'.limpiar_nulo($certificacion_grado_digital->tutorizados).'</td><td>'.limpiar_nulo($certificacion_grado_digital->autoformacion).'</td></tr>';
+						$lista_certificaciones_grado_digital .= '<tr><td>'.$indice++.'</td><td>'.utf8($certificacion_grado_digital->nombre_curso_categoria).'</td><td>'.utf8($certificacion_grado_digital->nombre_completo_curso).'</td><td>'.number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ',').'</td><td>'.number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ',').'</td></tr>';
 					}
 					else{
-						$lista_certificaciones_grado_digital .= '<tr><td colspan="3">'.bold(utf8($certificacion_grado_digital->nombre_curso_categoria)).'</td><td>'.bold(limpiar_nulo($certificacion_grado_digital->tutorizados)).'</td><td>'.bold(limpiar_nulo($certificacion_grado_digital->autoformacion)).'</td></tr>';
+						$lista_certificaciones_grado_digital .= '<tr><td colspan="3">'.bold(utf8($certificacion_grado_digital->nombre_curso_categoria)).'</td><td>'.bold(number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ',')).'</td><td>'.bold(number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ',')).'</td></tr>';
 					}
 				}
 				if($lista_certificaciones_grado_digital == ''){
@@ -913,6 +913,8 @@ class Estadisticas extends MY_Controller{
 	}
 	
 	public function validar_fechas($fecha1, $fecha2){
+		$fecha1 = empty($fecha1) ? '0000-00-00' : $fecha1;
+		$fecha2 = empty($fecha2) ? '0000-00-00' : $fecha2;
 		$valores_fecha1 = explode('-', $fecha1);
 		$valores_fecha2 = explode('-', $fecha2);
 		$dia1 = $valores_fecha1[2];

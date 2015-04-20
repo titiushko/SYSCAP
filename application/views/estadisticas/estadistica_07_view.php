@@ -20,18 +20,22 @@ $lista_tipo_capacitados =  array(
 	'capacitado'	=> 'Capacitados',
 	'certificado'	=> 'Certificados'
 );
-$departamentos = 'id = "id_departamento" required = "required" class = "form-control"';
-$municipios = 'id = "id_municipio" required = "required" class = "form-control"';
+$departamentos = 'class="form-control" id="id_departamento" required="required"';
+$municipios = 'class="form-control" id="id_municipio" required="required"';
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
-	'value'		=> 'Consultar',
+	'value'		=> 'true',
+	'type'		=> 'submit',
+	'content'	=> '<i class="fa fa-filter"></i> Consultar',
 	'class'		=> 'btn btn-primary'
 );
 $boton_secundario = array(
 	'name'		=> 'boton_secundario',
 	'id'		=> 'boton_secundario',
-	'value'		=> 'Limpiar',
+	'value'		=> 'true',
+	'type'		=> 'reset',
+	'content'	=> '<i class="fa fa-eraser"></i> Limpiar',
 	'class'		=> 'btn btn-danger',
 	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/7\');'
 );
@@ -107,15 +111,15 @@ $campos_ocultos_formulario = array(
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
-				<?= form_submit($boton_primario); ?>
-				<?= form_reset($boton_secundario); ?>
+				<?= form_button($boton_primario); ?>
+				<?= form_button($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -139,16 +143,18 @@ $campos_ocultos_formulario = array(
 							<tr>
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($usuario_departamento_municipio->nombre_centro_educativo); ?></td>
-								<td><?= $usuario_departamento_municipio->capacitados; ?></td>
-								<td><?= $usuario_departamento_municipio->certificados; ?></td>
+								<td><?= number_format($usuario_departamento_municipio->capacitados, 0, '', ','); ?></td>
+								<td><?= number_format($usuario_departamento_municipio->certificados, 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice++; ?></td>
-								<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>
-								<td><?= bold($usuario_departamento_municipio->capacitados); ?></td>
-								<td><?= bold($usuario_departamento_municipio->certificados); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($usuario_departamento_municipio->nombre_centro_educativo)); ?></td>
+									<td><?= bold(number_format($usuario_departamento_municipio->capacitados, 0, '', ',')); ?></td>
+									<td><?= bold(number_format($usuario_departamento_municipio->certificados, 0, '', ',')); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 								}
 							}
@@ -167,7 +173,7 @@ $campos_ocultos_formulario = array(
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Listado de Usuarios por Centro Educativo', 4); ?>
+		<?= heading('Listado de Usuarios por Centro Educativo', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -212,7 +218,6 @@ $campos_ocultos_formulario = array(
 		$('#data-tables-estadistica7-1').dataTable({
 			"searching":	false,
 			"lengthChange":	false,
-			"ordering":		false,
 			"info":			false,
 			"oLanguage":{
 				"oPaginate":{
@@ -231,7 +236,7 @@ $campos_ocultos_formulario = array(
 			}
 		});
 		$("#id_departamento").change(function(){
-			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val()}, function(resultado){
+			$.post('<?= base_url('index.php/ajax/lista_municipios'); ?>', {id_departamento: $("#id_departamento").val() != '' ? $("#id_departamento").val() : '%'}, function(resultado){
 				$('#id_municipio').empty();
 				$.each(jQuery.parseJSON(resultado), function(respuesta, municipio){
 					if(municipio.id_municipio == '<?= @$campos['id_municipio']; ?>'){

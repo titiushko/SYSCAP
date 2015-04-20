@@ -162,19 +162,19 @@
 						<?php if($this->session->userdata('nombre_corto_rol') != 'student'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_usuarios']; ?>" href="<?= base_url(); ?>usuarios">
-								<i class="fa fa-users fa-fw"></i> Modulo Usuarios
+								<i class="fa fa-users fa-fw"></i> Módulo Usuarios
 							</a>
 						</li>
 						<?php } ?>
 						<?php if($this->session->userdata('nombre_corto_rol') == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_centros_educativos']; ?>" href="<?= base_url(); ?>centros_educativos">
-								<i class="fa fa-university fa-fw"></i> Modulo Centros Educativos
+								<i class="fa fa-university fa-fw"></i> Módulo Centros Educativos
 							</a>
 						</li>
 						<li class="sub-menu">
-							<a class="<?= @$opcion_menu['modulo_consultas_estadisticas']; ?>" href="javascript:;" >
-								<i class="fa fa-bar-chart-o fa-fw"></i> Modulo Estadísticas
+							<a class="<?= @$opcion_menu['modulo_consultas_estadisticas']; ?>" href="javascript:;" ondblclick="redireccionar('<?= base_url('resumen_estadistico'); ?>');">
+								<i class="fa fa-bar-chart-o fa-fw"></i> Módulo Estadísticas
 							</a>
 							<ul class="sub">
 								<li class="<?= @$estadistica[1]; ?>"><a href="<?= base_url(); ?>estadisticas/consulta/1">Modalidad de Capacitación</a></li>
@@ -192,7 +192,7 @@
 						</li>
 						<li class="sub-menu">
 							<a class="<?= @$opcion_menu['modulo_mapa_estadistico']; ?>" href="<?= base_url(); ?>mapa">
-								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
+								<i class="fa fa-map-marker fa-fw"></i> Módulo Mapa
 							</a>
 						</li>
 						<?php } ?>

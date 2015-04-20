@@ -73,19 +73,19 @@
 						<?php if(@$role == 'admin' || @$role == 'moderador'){ ?>
 						<li class="sub-menu">
 							<a class="" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/usuarios">
-								<i class="fa fa-users fa-fw"></i> Modulo Usuarios
+								<i class="fa fa-users fa-fw"></i> Módulo Usuarios
 							</a>
 						</li>
 						<?php } ?>
 						<?php if(@$role == 'admin'){ ?>
 						<li class="sub-menu">
 							<a class="" href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/centros_educativos">
-								<i class="fa fa-university fa-fw"></i> Modulo Centros Educativos
+								<i class="fa fa-university fa-fw"></i> Módulo Centros Educativos
 							</a>
 						</li>
 						<li class="sub-menu">
 							<a class="" href="javascript:;" >
-								<i class="fa fa-bar-chart-o fa-fw"></i> Modulo Estad&iacute;sticas
+								<i class="fa fa-bar-chart-o fa-fw"></i> Módulo Estad&iacute;sticas
 							</a>
 							<ul class="sub">
 								<li class=""><a href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/estadisticas/consulta/1">Modalidad de Capacitaci&oacute;n</a></li>
@@ -103,7 +103,7 @@
 						</li>
 						<li class="sub-menu">
 							<a href="<?= (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST']; ?>/syscap/mapa">
-								<i class="fa fa-map-marker fa-fw"></i> Modulo Mapa
+								<i class="fa fa-map-marker fa-fw"></i> Módulo Mapa
 							</a>
 						</li>
 						<?php } ?>
@@ -130,8 +130,9 @@
 										<h3>P&aacute;gina no Disponible</h3>
 									</div>
 									<div class="panel-body">
-										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= $page; ?></b> a la que intenta acceder no es accesible desde dispositivos m&oacute;viles.</p>
-										<?php if(strpos($page, 'imprimir')){ ?>
+										<?php if(empty($page)) @$page = (isset($_SERVER['HTTPS'])?'https://':'http://').$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>
+										<p>&iexcl;Lo sentimos, ha ocurrido un error, la p&aacute;gina <b><?= @$page; ?></b> a la que intenta acceder no es accesible desde dispositivos m&oacute;viles.</p>
+										<?php if(strpos(@$page, 'imprimir')){ ?>
 										<p><span class="enlace" onclick="javascript:window.close();">Cerrar p&aacute;gina.</span></p>
 										<?php } else{ ?>
 										<p><span class="enlace" onclick="redireccionar('javascript:window.history.back()');">Regresar a la p&aacute;gina anterior.</span></p>

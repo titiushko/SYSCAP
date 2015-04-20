@@ -29,7 +29,7 @@ class Centros_educativos extends MY_Controller{
 	public function mostrar($codigo_centro_educativo = NULL){
 		$datos = $this->datos_formulario_centros_educativos_view($codigo_centro_educativo, 'Mostrar');
 		if($this->notificacion){
-			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.$codigo_centro_educativo).'\');"';
+			$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('centros_educativos/mostrar/'.$codigo_centro_educativo).'\');" onkeyup="redireccionar(\''.base_url('centros_educativos/mostrar/'.$codigo_centro_educativo).'\');"';
 			$datos['notificaciones'] = mensaje_notificacion(
 				'myModal',
 				icono_notificacion('informacion').'Actualizaci&oacute;n de Centro Educativo',
@@ -113,7 +113,6 @@ class Centros_educativos extends MY_Controller{
 			)
 		);
 		$this->form_validation->set_rules($reglas);
-		$this->form_validation->set_message('required', icono_notificacion('error').'El campo: '.bold('%s').', es obligatorio.');
 	}
 	
 	public function exportar($codigo_centro_educativo = NULL){
@@ -129,7 +128,7 @@ class Centros_educativos extends MY_Controller{
 		$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_centro_educativo);
 		$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 		$nombre_archivo = utf8_decode(acentos($this->centros_educativos_model->nombre_centro_educativo($codigo_centro_educativo)).'.pdf');
-		$pdf->Output($nombre_archivo, 'I');
+		echo $plantilla_pdf; //$pdf->Output($nombre_archivo, 'I');
 	}
 	
 	private function cargar_plantilla_pdf($codigo_centro_educativo){
@@ -148,7 +147,7 @@ class Centros_educativos extends MY_Controller{
 			}
 			$lista_docentes_certificados =  ''; $docentes_certificados= 1;
 			foreach($this->centros_educativos_model->docentes_certificados($codigo_centro_educativo) as $docente_certificado){
-				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.utf8($docente_certificado->certificacion_usuario).'</td></tr>';
+				$lista_docentes_certificados.= '<tr><td>'.$docentes_certificados++.'</td><td>'.utf8($docente_certificado->nombre_completo_usuario).'</td><td>'.str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($docente_certificado->certificacion_usuario))).'</td></tr>';
 			}
 			if($lista_docentes_certificados == ''){
 				$lista_docentes_certificados = 'No hay docentes certificados en el centro educativo.';

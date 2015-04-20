@@ -38,9 +38,10 @@
 |
 */
 
-$route['default_controller'] = "sesion";
+$route['default_controller'] = 'instalador';
 $route['404_override'] = '';
 $route['ayuda/(:any)'] = 'ayuda/index/$1';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

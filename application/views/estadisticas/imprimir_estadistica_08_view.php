@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento, Tipo de Capacitados y Fecha', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Departamento, Tipo de Capacitados y Fecha', 2, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
@@ -44,40 +44,44 @@
 			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>Departamento</th>
-								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$indice = 1;
-							foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
-								if($estaditica_departamento_fecha->nombre_departamento != 'Total'){
-							?>
-							<tr>
-								<td><?= $indice++; ?></td>
-								<td><?= utf8($estaditica_departamento_fecha->nombre_departamento); ?></td>
-								<td><?= $estaditica_departamento_fecha->capacitados; ?></td>
-								<td><?= $estaditica_departamento_fecha->certificados; ?></td>
-							</tr>
-							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice; ?></td>
-								<td><?= bold(utf8($estaditica_departamento_fecha->nombre_departamento)); ?></td>
-								<td><?= bold($estaditica_departamento_fecha->capacitados); ?></td>
-								<td><?= bold($estaditica_departamento_fecha->certificados); ?></td>
-							</tr>
-							<?php
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Departamento</th>
+									<th>Tutorizados</th>
+									<th>Autoformaci&oacute;n</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$indice = 1;
+								foreach($estaditicas_departamento_fechas as $estaditica_departamento_fecha){
+									if($estaditica_departamento_fecha->nombre_departamento != 'Total'){
+								?>
+								<tr>
+									<td><?= $indice++; ?></td>
+									<td><?= utf8($estaditica_departamento_fecha->nombre_departamento); ?></td>
+									<td><?= number_format($estaditica_departamento_fecha->capacitados, 0, '', ','); ?></td>
+									<td><?= number_format($estaditica_departamento_fecha->certificados, 0, '', ','); ?></td>
+								</tr>
+								<?php } else{ ?>
+								<tfoot>
+									<tr>
+										<td></td>
+										<td><?= bold(utf8($estaditica_departamento_fecha->nombre_departamento)); ?></td>
+										<td><?= bold(number_format($estaditica_departamento_fecha->capacitados, 0, '', ',')); ?></td>
+										<td><?= bold(number_format($estaditica_departamento_fecha->certificados, 0, '', ',')); ?></td>
+									</tr>
+								</tfoot>
+								<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+					</div>
 					<?= $sin_departamento; ?>
 				</div>
 				<div class="col-lg-6 text-center">

@@ -5,40 +5,35 @@ USE syscap;
 TRUNCATE syscap.departamentos;
 INSERT INTO syscap.departamentos(syscap.departamentos.id_departamento, syscap.departamentos.nombre_departamento)
 SELECT moodle19.mdl_cat_deptos.id, syscap.initcap(moodle19.mdl_cat_deptos.deptos)
-FROM moodle19.mdl_cat_deptos
-WHERE moodle19.mdl_cat_deptos.id IS NOT NULL AND moodle19.mdl_cat_deptos.deptos IS NOT NULL;
+FROM moodle19.mdl_cat_deptos;
 
 /* MUNICIPIOS */
 -- copiar a syscap.municipios los registros de moodle19.mdl_cat_municip
 TRUNCATE syscap.municipios;
 INSERT INTO syscap.municipios(syscap.municipios.id_municipio, syscap.municipios.id_departamento, syscap.municipios.nombre_municipio)
 SELECT moodle19.mdl_cat_municip.id, moodle19.mdl_cat_municip.relacion, syscap.initcap(moodle19.mdl_cat_municip.opcion)
-FROM moodle19.mdl_cat_municip
-WHERE moodle19.mdl_cat_municip.id IS NOT NULL AND moodle19.mdl_cat_municip.relacion IS NOT NULL AND moodle19.mdl_cat_municip.opcion IS NOT NULL;
+FROM moodle19.mdl_cat_municip;
 
 /* CENTROS_EDUCATIVOS */
 -- copiar a syscap.centros_educativos los registros de moodle19.mdl_cat_educativa
 TRUNCATE syscap.centros_educativos;
 INSERT INTO syscap.centros_educativos(syscap.centros_educativos.id_centro_educativo, syscap.centros_educativos.codigo_centro_educativo, syscap.centros_educativos.nombre_centro_educativo, syscap.centros_educativos.id_departamento, syscap.centros_educativos.id_municipio)
-SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.departamento(moodle19.mdl_cat_educativa.depto), syscap.municipio(moodle19.mdl_cat_educativa.muni)
-FROM moodle19.mdl_cat_educativa
-WHERE moodle19.mdl_cat_educativa.row_id IS NOT NULL AND moodle19.mdl_cat_educativa.codigo_entidad IS NOT NULL AND moodle19.mdl_cat_educativa.nombre IS NOT NULL AND moodle19.mdl_cat_educativa.depto IS NOT NULL AND moodle19.mdl_cat_educativa.muni IS NOT NULL LIMIT 0, 2000;
+SELECT moodle19.mdl_cat_educativa.row_id, moodle19.mdl_cat_educativa.codigo_entidad, syscap.initcap(moodle19.mdl_cat_educativa.nombre), syscap.F_CodigoDepartamento(moodle19.mdl_cat_educativa.depto), syscap.F_CodigoMunicipio(moodle19.mdl_cat_educativa.muni)
+FROM moodle19.mdl_cat_educativa;
 
 /* NIVELES_ESTUDIOS */
 -- copiar a syscap.niveles_estudios los registros de moodle19.mdl_cat_nestudio
 TRUNCATE syscap.niveles_estudios;
 INSERT INTO syscap.niveles_estudios(syscap.niveles_estudios.id_nivel_estudio, syscap.niveles_estudios.nombre_nivel_estudio)
 SELECT moodle19.mdl_cat_nestudio.cod_nestudio, syscap.initcap(moodle19.mdl_cat_nestudio.descripcion)
-FROM moodle19.mdl_cat_nestudio
-WHERE moodle19.mdl_cat_nestudio.cod_nestudio IS NOT NULL AND moodle19.mdl_cat_nestudio.descripcion IS NOT NULL;
+FROM moodle19.mdl_cat_nestudio;
 
 /* PROFESIONES */
 -- copiar a syscap.profesiones los registros de moodle19.mdl_cat_profesion
 TRUNCATE syscap.profesiones;
 INSERT INTO syscap.profesiones(syscap.profesiones.id_profesion, syscap.profesiones.nombre_profesion)
 SELECT IF(moodle19.mdl_cat_profesion.row_id < 10, CONCAT('0', moodle19.mdl_cat_profesion.row_id), moodle19.mdl_cat_profesion.row_id) row_id, syscap.initcap(moodle19.mdl_cat_profesion.descripcion)
-FROM moodle19.mdl_cat_profesion
-WHERE moodle19.mdl_cat_profesion.row_id IS NOT NULL AND moodle19.mdl_cat_profesion.descripcion IS NOT NULL;
+FROM moodle19.mdl_cat_profesion;
 
 /* CURSOS_CATEGORIAS */
 -- copiar a syscap.cursos_categorias los registros de moodle19.mdl_course_categories
@@ -52,63 +47,56 @@ FROM moodle19.mdl_course_categories;
 TRUNCATE syscap.cursos;
 INSERT INTO syscap.cursos(syscap.cursos.id_curso, syscap.cursos.id_curso_categoria, syscap.cursos.nombre_completo_curso, syscap.cursos.nombre_corto_curso)
 SELECT moodle19.mdl_course.id, moodle19.mdl_course.category, moodle19.mdl_course.fullname, moodle19.mdl_course.shortname
-FROM moodle19.mdl_course
-WHERE moodle19.mdl_course.id IS NOT NULL AND moodle19.mdl_course.fullname IS NOT NULL AND moodle19.mdl_course.shortname IS NOT NULL;
+FROM moodle19.mdl_course;
 
 /* MATRICULAS */
 -- copiar a syscap.matriculas los registros de moodle19.mdl_context
 TRUNCATE syscap.matriculas;
 INSERT INTO syscap.matriculas(syscap.matriculas.id_matricula, syscap.matriculas.id_curso)
 SELECT moodle19.mdl_context.id, moodle19.mdl_context.instanceid
-FROM moodle19.mdl_context
-WHERE moodle19.mdl_context.id IS NOT NULL AND moodle19.mdl_context.instanceid IS NOT NULL;
+FROM moodle19.mdl_context;
 
 /* EXAMENES */
 -- copiar a syscap.examenes los registros de moodle19.mdl_quiz
 TRUNCATE syscap.examenes;
 INSERT INTO syscap.examenes(syscap.examenes.id_examen, syscap.examenes.id_curso, syscap.examenes.nombre_examen)
 SELECT moodle19.mdl_quiz.id, moodle19.mdl_quiz.course, syscap.initcap(moodle19.mdl_quiz.name)
-FROM moodle19.mdl_quiz
-WHERE moodle19.mdl_quiz.id IS NOT NULL AND moodle19.mdl_quiz.course IS NOT NULL AND moodle19.mdl_quiz.name IS NOT NULL;
+FROM moodle19.mdl_quiz;
 
 /* EXAMENES_CALIFICACIONES */
 -- copiar a syscap.examenes_calificaciones los registros de moodle19.mdl_quiz_grades
 TRUNCATE syscap.examenes_calificaciones;
 INSERT INTO syscap.examenes_calificaciones(syscap.examenes_calificaciones.id_examen_calificacion, syscap.examenes_calificaciones.id_examen, syscap.examenes_calificaciones.id_usuario, syscap.examenes_calificaciones.nota_examen_calificacion, syscap.examenes_calificaciones.fecha_examen_calificacion)
 SELECT moodle19.mdl_quiz_grades.id, moodle19.mdl_quiz_grades.quiz, moodle19.mdl_quiz_grades.userid, moodle19.mdl_quiz_grades.grade, DATE_FORMAT(FROM_UNIXTIME(moodle19.mdl_quiz_grades.timemodified), '%Y-%m-%d')
-FROM moodle19.mdl_quiz_grades
-WHERE moodle19.mdl_quiz_grades.id IS NOT NULL AND moodle19.mdl_quiz_grades.quiz IS NOT NULL AND moodle19.mdl_quiz_grades.userid IS NOT NULL AND moodle19.mdl_quiz_grades.grade IS NOT NULL;
+FROM moodle19.mdl_quiz_grades;
 
 /* ROLES */
 -- copiar a syscap.roles los registros de moodle19.mdl_role
 TRUNCATE syscap.roles;
-INSERT INTO syscap.roles(syscap.roles.id_rol, syscap.roles.nombre_completo_rol, syscap.roles.nombre_corto_rol, syscap.roles.descripcion_rol, syscap.roles.criterio_rol)
-SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description, moodle19.mdl_role.sortorder
-FROM moodle19.mdl_role
-WHERE moodle19.mdl_role.id IS NOT NULL AND moodle19.mdl_role.name IS NOT NULL AND moodle19.mdl_role.shortname IS NOT NULL AND moodle19.mdl_role.description IS NOT NULL AND moodle19.mdl_role.sortorder IS NOT NULL;
+INSERT INTO syscap.roles(syscap.roles.id_rol, syscap.roles.nombre_completo_rol, syscap.roles.nombre_corto_rol, syscap.roles.descripcion_rol)
+SELECT moodle19.mdl_role.id, syscap.initcap(moodle19.mdl_role.name), moodle19.mdl_role.shortname, moodle19.mdl_role.description
+FROM moodle19.mdl_role;
 
 /* ROLES_ASIGNADOS */
 -- copiar a syscap.roles_asignados los registros de moodle19.mdl_role_assignments
 TRUNCATE syscap.roles_asignados;
 INSERT INTO syscap.roles_asignados(syscap.roles_asignados.id_rol_asignado, syscap.roles_asignados.id_rol, syscap.roles_asignados.id_matricula, syscap.roles_asignados.id_usuario)
 SELECT moodle19.mdl_role_assignments.id, syscap.initcap(moodle19.mdl_role_assignments.roleid), moodle19.mdl_role_assignments.contextid, moodle19.mdl_role_assignments.userid
-FROM moodle19.mdl_role_assignments
-WHERE moodle19.mdl_role_assignments.id IS NOT NULL AND moodle19.mdl_role_assignments.roleid IS NOT NULL AND moodle19.mdl_role_assignments.contextid IS NOT NULL AND moodle19.mdl_role_assignments.userid IS NOT NULL;
+FROM moodle19.mdl_role_assignments;
 
 /* USUARIOS */
 -- copiar a syscap.usuarios los registros de moodle19.mdl_user
 TRUNCATE syscap.usuarios;
 INSERT INTO syscap.usuarios(syscap.usuarios.id_usuario, syscap.usuarios.nombre_usuario, syscap.usuarios.contrasena_usuario, syscap.usuarios.id_tipo_usuario, syscap.usuarios.nombres_usuario, syscap.usuarios.apellido1_usuario, syscap.usuarios.apellido2_usuario, syscap.usuarios.dui_usuario, syscap.usuarios.sexo_usuario, syscap.usuarios.id_profesion, syscap.usuarios.id_nivel_estudio, syscap.usuarios.correo_electronico_usuario, syscap.usuarios.telefono1_usuario, syscap.usuarios.telefono2_usuario, syscap.usuarios.id_centro_educativo, syscap.usuarios.id_departamento, syscap.usuarios.id_municipio, syscap.usuarios.pais_usuario, syscap.usuarios.direccion_usuario, syscap.usuarios.ciudad_usuario, syscap.usuarios.fecha_nacimiento_usuario, syscap.usuarios.modalidad_usuario)
 SELECT moodle19.mdl_user.id, moodle19.mdl_user.username, moodle19.mdl_user.password, moodle19.mdl_user.tipo, syscap.initcap(moodle19.mdl_user.firstname), syscap.initcap(moodle19.mdl_user.lastname), syscap.initcap(moodle19.mdl_user.apellido2), moodle19.mdl_user.dui, moodle19.mdl_user.sexo, moodle19.mdl_user.profesion, moodle19.mdl_user.nestudio, moodle19.mdl_user.email, moodle19.mdl_user.phone1, moodle19.mdl_user.phone2, moodle19.mdl_user.tinstitucion, moodle19.mdl_user.deptorec, moodle19.mdl_user.munirec, moodle19.mdl_user.country, syscap.initcap(moodle19.mdl_user.address), syscap.initcap(moodle19.mdl_user.city), moodle19.mdl_user.fnacimiento, IF(moodle19.mdl_user.auth = 'manual', 'tutorizado', IF(moodle19.mdl_user.auth = 'email', 'autoformacion', NULL)) auth
-FROM moodle19.mdl_user
-/*WHERE moodle19.mdl_user.id IS NOT NULL AND moodle19.mdl_user.username IS NOT NULL AND moodle19.mdl_user.password IS NOT NULL AND moodle19.mdl_user.tipo IS NOT NULL AND moodle19.mdl_user.firstname IS NOT NULL AND moodle19.mdl_user.lastname IS NOT NULL AND moodle19.mdl_user.apellido2 IS NOT NULL AND moodle19.mdl_user.dui IS NOT NULL AND moodle19.mdl_user.sexo IS NOT NULL AND moodle19.mdl_user.profesion IS NOT NULL AND moodle19.mdl_user.nestudio IS NOT NULL AND moodle19.mdl_user.email IS NOT NULL AND moodle19.mdl_user.phone1 IS NOT NULL AND moodle19.mdl_user.phone2 IS NOT NULL AND moodle19.mdl_user.tinstitucion IS NOT NULL AND moodle19.mdl_user.deptorec IS NOT NULL AND moodle19.mdl_user.munirec IS NOT NULL AND moodle19.mdl_user.country IS NOT NULL AND moodle19.mdl_user.address IS NOT NULL AND moodle19.mdl_user.city IS NOT NULL AND moodle19.mdl_user.fnacimiento IS NOT NULL*/;
+FROM moodle19.mdl_user;
 
 /* TIPOS_USUARIOS */
 -- copiar a syscap.tipos_usuarios los registros de la lista desplegable del formulario inscripcion de usuarios de EducaContinua
 TRUNCATE syscap.tipos_usuarios;
 INSERT INTO syscap.tipos_usuarios(syscap.tipos_usuarios.id_tipo_usuario, syscap.tipos_usuarios.nombre_tipo_usuario) VALUES
 (1, 'Ciudadano en General'),
-(2, 'Estudiante de Basica'),
+(2, 'Estudiante de Básica'),
 (3, 'Estudiante de Media'),
 (4, 'Estudiante Universitario'),
 (5, 'Docente de Básica'),
@@ -197,19 +185,21 @@ INSERT INTO syscap.mapas(syscap.mapas.id_mapa, syscap.mapas.longitud_mapa, sysca
 (75, 13.5327463, -88.2550471),	-- Moncagua, San Miguel
 (76, 13.7804787, -89.7387114),	-- Nahuizalco, Sonsonate
 (77, 13.6193623, -89.7934429),	-- San Julian, Sonsonate
-(79, 13.921947, -89.8449174),	-- Centro Escolar Alfredo Espino
-(80, 13.6878632, -89.1868767),	-- Escuela De Educacion Parvularia San Jacinto
-(81, 13.714436, -89.205852),	-- Instituto Nacional Albert Camus
-(82, 13.7384192, -89.2206226),	-- Centro Escolar General Francisco Morazan
-(83, 13.700678, -89.180982),	-- Centro Escolar Accion Civica Militar
-(84, 13.713366, -89.180338),	-- Instituto Nacional General Francisco Menendez
-(85, 13.687911, -89.185976),	-- Instituto Nacional De Comercio
-(86, 13.7354, -89.196336),		-- Escuela De Educacion Parvularia  Comunidad El Prado
-(87, 13.6693496, -89.2090322),	-- Centro Escolar Canton San Cristobal
-(88, 13.7354, -89.196336),		-- Escuela De Educacion Parvularia Colonia Centro America
-(89, 13.7240354, -89.1248218),	-- Centro Escolar El Progreso
-(90, 13.717931, -89.167772),	-- Centro Escolar Juana Lopez
-(91, 13.8278963,-89.2777986);	-- Centro Escolar  Juan Ramon Jimenez
+(78, 13.921947, -89.8449174),	-- Centro Escolar Alfredo Espino
+(79, 13.6878632, -89.1868767),	-- Escuela De Educacion Parvularia San Jacinto
+(80, 13.714436, -89.205852),	-- Instituto Nacional Albert Camus
+(81, 13.7384192, -89.2206226),	-- Centro Escolar General Francisco Morazan
+(82, 13.700678, -89.180982),	-- Centro Escolar Accion Civica Militar
+(83, 13.713366, -89.180338),	-- Instituto Nacional General Francisco Menendez
+(84, 13.687911, -89.185976),	-- Instituto Nacional De Comercio
+(85, 13.7354, -89.196336),		-- Escuela De Educacion Parvularia  Comunidad El Prado
+(86, 13.6693496, -89.2090322),	-- Centro Escolar Canton San Cristobal
+(87, 13.7354, -89.196336),		-- Escuela De Educacion Parvularia Colonia Centro America
+(88, 13.7240354, -89.1248218),	-- Centro Escolar El Progreso
+(89, 13.717931, -89.167772),	-- Centro Escolar Juana Lopez
+(90, 13.8278963,-89.2777986);	-- Centro Escolar  Juan Ramon Jimenez
+
+-- actualizar syscap.municipios los registros de las coordenadas en el mapa
 UPDATE municipios SET id_mapa = 1 WHERE id_municipio = '188';
 UPDATE municipios SET id_mapa = 2 WHERE id_municipio = '01';
 UPDATE municipios SET id_mapa = 3 WHERE id_municipio = '241';
@@ -284,6 +274,8 @@ UPDATE municipios SET id_mapa = 74 WHERE id_municipio = '15';
 UPDATE municipios SET id_mapa = 75 WHERE id_municipio = '40';
 UPDATE municipios SET id_mapa = 76 WHERE id_municipio = '102';
 UPDATE municipios SET id_mapa = 77 WHERE id_municipio = '104';
+
+-- actualizar syscap.departamentos los registros de las coordenadas en el mapa
 UPDATE departamentos SET id_mapa = 2 WHERE id_departamento = '01';
 UPDATE departamentos SET id_mapa = 3 WHERE id_departamento = '13';
 UPDATE departamentos SET id_mapa = 7 WHERE id_departamento = '04';
@@ -298,19 +290,21 @@ UPDATE departamentos SET id_mapa = 30 WHERE id_departamento = '08';
 UPDATE departamentos SET id_mapa = 31 WHERE id_departamento = '14';
 UPDATE departamentos SET id_mapa = 32 WHERE id_departamento = '12';
 UPDATE departamentos SET id_mapa = 33 WHERE id_departamento = '07';
+
+-- actualizar syscap.centros_educativos los registros de las coordenadas en el mapa
 UPDATE centros_educativos SET id_mapa = 26 WHERE id_centro_educativo = 1;
 UPDATE centros_educativos SET id_mapa = 27 WHERE id_centro_educativo = 3;
 UPDATE centros_educativos SET id_mapa = 28 WHERE id_centro_educativo = 4;
-UPDATE centros_educativos SET id_mapa = 79 WHERE id_centro_educativo = 2;
-UPDATE centros_educativos SET id_mapa = 80 WHERE id_centro_educativo = 148;
-UPDATE centros_educativos SET id_mapa = 81 WHERE id_centro_educativo = 1128;
-UPDATE centros_educativos SET id_mapa = 82 WHERE id_centro_educativo = 1134;
-UPDATE centros_educativos SET id_mapa = 83 WHERE id_centro_educativo = 1135;
-UPDATE centros_educativos SET id_mapa = 84 WHERE id_centro_educativo = 1139;
-UPDATE centros_educativos SET id_mapa = 85 WHERE id_centro_educativo = 1141;
-UPDATE centros_educativos SET id_mapa = 86 WHERE id_centro_educativo = 1146;
-UPDATE centros_educativos SET id_mapa = 87 WHERE id_centro_educativo = 1163;
-UPDATE centros_educativos SET id_mapa = 88 WHERE id_centro_educativo = 1164;
-UPDATE centros_educativos SET id_mapa = 89 WHERE id_centro_educativo = 1170;
-UPDATE centros_educativos SET id_mapa = 90 WHERE id_centro_educativo = 1177;
-UPDATE centros_educativos SET id_mapa = 91 WHERE id_centro_educativo = 1180;
+UPDATE centros_educativos SET id_mapa = 78 WHERE id_centro_educativo = 2;
+UPDATE centros_educativos SET id_mapa = 79 WHERE id_centro_educativo = 148;
+UPDATE centros_educativos SET id_mapa = 80 WHERE id_centro_educativo = 1128;
+UPDATE centros_educativos SET id_mapa = 81 WHERE id_centro_educativo = 1134;
+UPDATE centros_educativos SET id_mapa = 82 WHERE id_centro_educativo = 1135;
+UPDATE centros_educativos SET id_mapa = 83 WHERE id_centro_educativo = 1139;
+UPDATE centros_educativos SET id_mapa = 84 WHERE id_centro_educativo = 1141;
+UPDATE centros_educativos SET id_mapa = 85 WHERE id_centro_educativo = 1146;
+UPDATE centros_educativos SET id_mapa = 86 WHERE id_centro_educativo = 1163;
+UPDATE centros_educativos SET id_mapa = 87 WHERE id_centro_educativo = 1164;
+UPDATE centros_educativos SET id_mapa = 88 WHERE id_centro_educativo = 1170;
+UPDATE centros_educativos SET id_mapa = 89 WHERE id_centro_educativo = 1177;
+UPDATE centros_educativos SET id_mapa = 90 WHERE id_centro_educativo = 1180;

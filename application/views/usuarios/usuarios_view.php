@@ -1,13 +1,18 @@
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Modulo de Usuario</h1>
+		<h1 class="well page-header"><i class="fa fa-users fa-fw"></i> Módulo de Usuario</h1>
 	</div>
 </div>
 <div class="row">
 	<div class="col-lg-12">
 		<div class="panel panel-primary">
 			<div class="panel-heading">
-				<?= heading(utf8($this->session->userdata('nombre_completo_usuario')), 2); ?>
+				<?php
+				if($this->session->userdata('nombre_corto_rol') == 'student')
+					echo heading(utf8($this->session->userdata('nombre_completo_usuario')), 2);
+				else
+					echo heading($operacion.' Usuario', 2);
+				?>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -106,11 +111,10 @@
 												foreach($lista_certificaciones_usuario as $certificacion){
 												?>
 												<tr>
-													<td><?= $certificaciones; ?></td>
-													<td><?= utf8($certificacion->nombre); ?></td>
+													<td><?= $certificaciones++; ?></td>
+													<td><?= str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($certificacion->nombre))); ?></td>
 												</tr>
 												<?php
-													$certificaciones++;
 												}
 												?>
 											</tbody>
@@ -134,12 +138,11 @@
 												foreach($lista_calificaciones_usuario as $curso){
 												?>
 												<tr>
-													<td><?= $cursos; ?></td>
-													<td><?= utf8($curso->nombre); ?></td>
-													<td><?= $curso->nota; ?></td>
+													<td><?= $cursos++; ?></td>
+													<td><?= str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($curso->nombre))); ?></td>
+													<td><?= number_format(limpiar_nulo($curso->nota), 2, '.', ','); ?></td>
 												</tr>
 												<?php
-													$cursos++;
 												}
 												?>
 											</tbody>
@@ -165,7 +168,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 text-center">
-								<a href="<?= base_url('usuarios'); ?>" class="btn btn-danger">Regresar</a>
+								<a href="<?= base_url('usuarios'); ?>" class="btn btn-danger"><i class="fa fa-reply"></i> Regresar</a>
 							</div>
 						</div>
 						<?php } ?>

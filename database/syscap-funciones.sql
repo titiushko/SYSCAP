@@ -3,7 +3,7 @@ USE syscap;
 DELIMITER $$
 DROP FUNCTION IF EXISTS initcap $$
 CREATE FUNCTION initcap(p_cadena CHAR(255)) RETURNS CHAR(255) CHARSET utf8
-COMMENT 'Función que devuelve la primera letra de cada palabra en mayúsculas.'
+COMMENT 'Funcion que devuelve la primera letra de cada palabra en mayusculas.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -22,18 +22,16 @@ DELIMITER ;
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP FUNCTION IF EXISTS departamento $$
-CREATE FUNCTION departamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
-COMMENT 'Función que devuelve el identificador de un departamento a partir del nombre.'
+DROP FUNCTION IF EXISTS F_CodigoDepartamento $$
+CREATE FUNCTION F_CodigoDepartamento(p_nombre_departamento VARCHAR(255)) RETURNS CHAR(2)
+COMMENT 'Funcion que devuelve el identificador de un departamento a partir del nombre.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
-	DECLARE v_id_departamento CHAR(2);
+	DECLARE v_id_departamento CHAR(2) DEFAULT '';
 	DECLARE v_termina INT DEFAULT FALSE;
 	DECLARE c_departamento CURSOR FOR
-		SELECT syscap.departamentos.id_departamento
-		FROM syscap.departamentos
-		WHERE initcap(syscap.departamentos.nombre_departamento) = syscap.initcap(p_nombre_departamento);
+		SELECT id_departamento FROM departamentos WHERE initcap(nombre_departamento) = initcap(p_nombre_departamento);
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
 	
 	OPEN c_departamento;
@@ -54,18 +52,46 @@ DELIMITER ;
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP FUNCTION IF EXISTS municipio $$
-CREATE FUNCTION municipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
-COMMENT 'Función que devuelve el identificador de un municipio a partir del nombre.'
+DROP FUNCTION IF EXISTS F_NombreDepartamento $$
+CREATE FUNCTION F_NombreDepartamento(p_codigo_departamento CHAR(2)) RETURNS VARCHAR(255)
+COMMENT 'Funcion que devuelve el nombre de un departamento a partir del identificador.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
-	DECLARE v_id_municipio CHAR(3);
+	DECLARE v_nombre_departamento VARCHAR(255) DEFAULT '';
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_departamento CURSOR FOR
+		SELECT UPPER(nombre_departamento) FROM departamentos WHERE id_departamento = p_codigo_departamento;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_departamento;
+	recorre_cursor: LOOP
+		FETCH c_departamento INTO v_nombre_departamento;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_departamento;
+	
+	RETURN v_nombre_departamento;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_CodigoMunicipio $$
+CREATE FUNCTION F_CodigoMunicipio(p_nombre_municipio VARCHAR(255)) RETURNS CHAR(3)
+COMMENT 'Funcion que devuelve el identificador de un municipio a partir del nombre.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_id_municipio CHAR(3) DEFAULT '';
 	DECLARE v_termina INT DEFAULT FALSE;
 	DECLARE c_municipio CURSOR FOR
-		SELECT syscap.municipios.id_municipio
-		FROM syscap.municipios
-		WHERE initcap(syscap.municipios.nombre_municipio) = syscap.initcap(p_nombre_municipio);
+		SELECT id_municipio FROM municipios WHERE initcap(nombre_municipio) = initcap(p_nombre_municipio);
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
 	
 	OPEN c_municipio;
@@ -86,11 +112,41 @@ DELIMITER ;
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreMunicipio $$
+CREATE FUNCTION F_NombreMunicipio(p_codigo_municipio CHAR(3)) RETURNS VARCHAR(255)
+COMMENT 'Funcion que devuelve el nombre de un municipio a partir del identificador.'
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+	DECLARE v_nombre_municipio VARCHAR(255) DEFAULT '';
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_municipio CURSOR FOR
+		SELECT UPPER(nombre_municipio) FROM municipios WHERE id_municipio = p_codigo_municipio;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_municipio;
+	recorre_cursor: LOOP
+		FETCH c_municipio INTO v_nombre_municipio;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_municipio;
+	
+	RETURN v_nombre_municipio;
+END$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCompletoUsuario $$
 CREATE FUNCTION F_NombreCompletoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(305)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'Función que devuelve el nombre completo (todos los nombres y todos los apellidos) de un usuario.'
+COMMENT 'Funcion que devuelve el nombre completo (todos los nombres y todos los apellidos) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -99,7 +155,6 @@ BEGIN
 	DECLARE v_apellido1_usuario VARCHAR(100);
 	DECLARE v_apellido2_usuario VARCHAR(100);
 	DECLARE v_termina INT DEFAULT FALSE;
-	
 	DECLARE c_nombre_completo_usuario CURSOR FOR
 		SELECT
 			IF(nombres_usuario IS NOT NULL, nombres_usuario, '') nombres_usuario,
@@ -107,7 +162,6 @@ BEGIN
 			IF(apellido2_usuario IS NOT NULL, apellido2_usuario, '') apellido2_usuario
 		FROM usuarios
 		WHERE id_usuario = p_codigo_usuario;
-	
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
 	
 	OPEN c_nombre_completo_usuario;
@@ -136,46 +190,11 @@ DELIMITER ;
 -- ------------------------------------------------------------------------------------------
 
 DELIMITER $$
-DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
-CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(150)
-DETERMINISTIC
-READS SQL DATA
-COMMENT 'Función que devuelve el nombre de un centro educativo.'
-BEGIN
-	DECLARE v_nombre_centro_educativo VARCHAR(150);
-	DECLARE v_termina INT DEFAULT FALSE;
-	
-	DECLARE c_nombre_centro_educativo CURSOR FOR
-		SELECT nombre_centro_educativo
-		FROM centros_educativos
-		WHERE id_centro_educativo = p_codigo_centro_educativo;
-	
-	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
-	
-	OPEN c_nombre_centro_educativo;
-	recorre_cursor: LOOP
-		FETCH c_nombre_centro_educativo INTO v_nombre_centro_educativo;
-		
-		IF v_termina THEN
-			LEAVE recorre_cursor;
-		END IF;
-		
-	END LOOP;
-	CLOSE c_nombre_centro_educativo;
-	
-	RETURN v_nombre_centro_educativo;
-END;
-$$
-DELIMITER ;
-
--- ------------------------------------------------------------------------------------------
-
-DELIMITER $$
 DROP FUNCTION IF EXISTS F_NombreCompactoUsuario $$
 CREATE FUNCTION F_NombreCompactoUsuario(p_codigo_usuario BIGINT(10)) RETURNS VARCHAR(205)
 NOT DETERMINISTIC
 SQL SECURITY DEFINER
-COMMENT 'Función que devuelve el nombre compacto (un nombre y un apellido) de un usuario.'
+COMMENT 'Funcion que devuelve el nombre compacto (un nombre y un apellido) de un usuario.'
 DETERMINISTIC
 READS SQL DATA
 BEGIN
@@ -183,14 +202,12 @@ BEGIN
 	DECLARE v_nombres_usuario VARCHAR(100);
 	DECLARE v_apellido1_usuario VARCHAR(100);
 	DECLARE v_termina INT DEFAULT FALSE;
-	
 	DECLARE c_nombre_compacto_usuario CURSOR FOR
 		SELECT
-			IF(LOCATE(' ', nombres_usuario) > 0, SUBSTRING(nombres_usuario, LOCATE(' ', nombres_usuario) + 1), nombres_usuario) nombres_usuario,
-			IF(LOCATE(' ', apellido1_usuario) > 0, SUBSTRING(apellido1_usuario, LOCATE(' ', apellido1_usuario) + 1), apellido1_usuario) apellido1_usuario
+			IF(LOCATE(' ', nombres_usuario) > 0, SUBSTRING(nombres_usuario, 1, LOCATE(' ', nombres_usuario) - 1), nombres_usuario) nombres_usuario,
+			IF(LOCATE(' ', apellido1_usuario) > 0, SUBSTRING(apellido1_usuario, 1, LOCATE(' ', apellido1_usuario) - 1), apellido1_usuario) apellido1_usuario
 		FROM usuarios
 		WHERE id_usuario = p_codigo_usuario;
-	
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
 	
 	OPEN c_nombre_compacto_usuario;
@@ -208,6 +225,37 @@ BEGIN
 	CLOSE c_nombre_compacto_usuario;
 	
 	RETURN v_nombre_compacto_usuario;
+END;
+$$
+DELIMITER ;
+
+-- ------------------------------------------------------------------------------------------
+
+DELIMITER $$
+DROP FUNCTION IF EXISTS F_NombreCentroEducativo $$
+CREATE FUNCTION F_NombreCentroEducativo(p_codigo_centro_educativo BIGINT(10)) RETURNS VARCHAR(150)
+DETERMINISTIC
+READS SQL DATA
+COMMENT 'Funcion que devuelve el nombre de un centro educativo.'
+BEGIN
+	DECLARE v_nombre_centro_educativo VARCHAR(150);
+	DECLARE v_termina INT DEFAULT FALSE;
+	DECLARE c_nombre_centro_educativo CURSOR FOR
+		SELECT nombre_centro_educativo FROM centros_educativos WHERE id_centro_educativo = p_codigo_centro_educativo;
+	DECLARE CONTINUE HANDLER FOR NOT FOUND SET v_termina = TRUE;
+	
+	OPEN c_nombre_centro_educativo;
+	recorre_cursor: LOOP
+		FETCH c_nombre_centro_educativo INTO v_nombre_centro_educativo;
+		
+		IF v_termina THEN
+			LEAVE recorre_cursor;
+		END IF;
+		
+	END LOOP;
+	CLOSE c_nombre_centro_educativo;
+	
+	RETURN v_nombre_centro_educativo;
 END;
 $$
 DELIMITER ;

@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios a Nivel Nacional', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios a Nivel Nacional', 2, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Grado Digital:</th><td class="column-value"><?= @$grado_digital; ?></td>
@@ -45,40 +45,42 @@
 			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th></th>
-								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
-							</tr>
-							<tr>
-								<th rowspan="2">Tipo de Capacitado</th>
-								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							foreach($usuarios_grado_digital as $usuario_grado_digital){
-								if($usuario_grado_digital->tipo_capacitado != 'Total'){
-							?>
-							<tr>
-								<th><?= utf8($usuario_grado_digital->tipo_capacitado); ?></th>
-								<td><?= limpiar_nulo($usuario_grado_digital->tutorizados); ?></td>
-								<td><?= limpiar_nulo($usuario_grado_digital->autoformacion); ?></td>
-							</tr>
-							<?php } else{ ?>
-							<tr>
-								<th><?= bold(utf8($usuario_grado_digital->tipo_capacitado)); ?></th>
-								<td><?= bold(limpiar_nulo($usuario_grado_digital->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($usuario_grado_digital->autoformacion)); ?></td>
-							</tr>
-							<?php
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th></th>
+									<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
+								</tr>
+								<tr>
+									<th rowspan="2">Tipo de Capacitado</th>
+									<th>Tutorizados</th>
+									<th>Autoformaci&oacute;n</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								foreach($usuarios_grado_digital as $usuario_grado_digital){
+									if($usuario_grado_digital->tipo_capacitado != 'Total'){
+								?>
+								<tr>
+									<th><?= utf8($usuario_grado_digital->tipo_capacitado); ?></th>
+									<td><?= number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ','); ?></td>
+									<td><?= number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ','); ?></td>
+								</tr>
+								<?php } else{ ?>
+								<tr>
+									<th><?= bold(utf8($usuario_grado_digital->tipo_capacitado)); ?></th>
+									<td><?= bold(number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ',')); ?></td>
+									<td><?= bold(number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ',')); ?></td>
+								</tr>
+								<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div class="col-lg-6 text-center">
 					<?php if(!estadistica_vacia($usuarios_grado_digital)){ ?>
@@ -90,7 +92,8 @@
 			<div class="row"><div class="col-lg-12"><?= br(4); ?></div></div>
 			<div class="row">
 				<div class="col-lg-12">
-					<?= form_fieldset(heading('Listado de Certificaciones por Grado Digital', 4)); ?>
+					<?= form_fieldset(heading('Listado de Certificaciones por Grado Digital', 3)); ?>
+					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover">
 							<thead>
 								<tr>
@@ -111,21 +114,24 @@
 									<td><?= $indice++; ?></td>
 									<td><?= utf8($certificacion_grado_digital->nombre_curso_categoria); ?></td>
 									<td><?= utf8($certificacion_grado_digital->nombre_completo_curso); ?></td>
-									<td><?= limpiar_nulo($certificacion_grado_digital->tutorizados); ?></td>
-									<td><?= limpiar_nulo($certificacion_grado_digital->autoformacion); ?></td>
+									<td><?= number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ','); ?></td>
+									<td><?= number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ','); ?></td>
 								</tr>
 								<?php } else{ ?>
-								<tr>
-									<td colspan="3"><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
-									<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
-									<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
-								</tr>
+								<tfoot>
+									<tr>
+										<td colspan="3"><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
+										<td><?= bold(number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ',')); ?></td>
+										<td><?= bold(number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ',')); ?></td>
+									</tr>
+								</tfoot>
 								<?php
 									}
 								}
 								?>
 							</tbody>
 						</table>
+					</div>
 					<?= form_fieldset_close(); ?>
 				</div>
 			</div>

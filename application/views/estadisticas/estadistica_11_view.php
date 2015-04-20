@@ -19,13 +19,17 @@ $lista_grados_digitales =  array('' => '', 1 => 1, 2 => 2, 3 => 3, 4 => 4);
 $boton_primario = array(
 	'name'		=> 'boton_primario',
 	'id'		=> 'boton_primario',
-	'value'		=> 'Consultar',
+	'value'		=> 'true',
+	'type'		=> 'submit',
+	'content'	=> '<i class="fa fa-filter"></i> Consultar',
 	'class'		=> 'btn btn-primary'
 );
 $boton_secundario = array(
 	'name'		=> 'boton_secundario',
 	'id'		=> 'boton_secundario',
-	'value'		=> 'Limpiar',
+	'value'		=> 'true',
+	'type'		=> 'reset',
+	'content'	=> '<i class="fa fa-eraser"></i> Limpiar',
 	'class'		=> 'btn btn-danger',
 	'onclick'	=> 'redireccionar(\''.base_url().'estadisticas/consulta/11\');'
 );
@@ -83,15 +87,15 @@ $campos_ocultos_formulario = array(
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="form-group">
-				<?= form_submit($boton_primario); ?>
-				<?= form_reset($boton_secundario); ?>
+				<?= form_button($boton_primario); ?>
+				<?= form_button($boton_secundario); ?>
 			</div>
 		</div>
 	</div>
 <?= form_close(); ?>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Resultado', 4); ?>
+		<?= heading('Resultado', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -116,14 +120,14 @@ $campos_ocultos_formulario = array(
 							?>
 							<tr>
 								<th><?= utf8($usuario_grado_digital->tipo_capacitado); ?></th>
-								<td><?= limpiar_nulo($usuario_grado_digital->tutorizados); ?></td>
-								<td><?= limpiar_nulo($usuario_grado_digital->autoformacion); ?></td>
+								<td><?= number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ','); ?></td>
+								<td><?= number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
 							<tr>
 								<th><?= bold(utf8($usuario_grado_digital->tipo_capacitado)); ?></th>
-								<td><?= bold(limpiar_nulo($usuario_grado_digital->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($usuario_grado_digital->autoformacion)); ?></td>
+								<td><?= bold(number_format(limpiar_nulo($usuario_grado_digital->tutorizados), 0, '', ',')); ?></td>
+								<td><?= bold(number_format(limpiar_nulo($usuario_grado_digital->autoformacion), 0, '', ',')); ?></td>
 							</tr>
 							<?php
 								}
@@ -143,7 +147,7 @@ $campos_ocultos_formulario = array(
 </div>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<?= heading('Listado de Certificaciones por Grado Digital', 4); ?>
+		<?= heading('Listado de Certificaciones por Grado Digital', 3); ?>
 	</div>
 	<div class="panel-body">
 		<div class="row">
@@ -170,17 +174,19 @@ $campos_ocultos_formulario = array(
 								<td><?= $indice++; ?></td>
 								<td><?= utf8($certificacion_grado_digital->nombre_curso_categoria); ?></td>
 								<td><?= utf8($certificacion_grado_digital->nombre_completo_curso); ?></td>
-								<td><?= limpiar_nulo($certificacion_grado_digital->tutorizados); ?></td>
-								<td><?= limpiar_nulo($certificacion_grado_digital->autoformacion); ?></td>
+								<td><?= number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ','); ?></td>
+								<td><?= number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ','); ?></td>
 							</tr>
 							<?php } else{ ?>
-							<tr>
-								<td style="opacity: 0.0;"><?= $indice++; ?></td>
-								<td><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
-								<td></td>
-								<td><?= bold(limpiar_nulo($certificacion_grado_digital->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($certificacion_grado_digital->autoformacion)); ?></td>
-							</tr>
+							<tfoot>
+								<tr>
+									<td></td>
+									<td><?= bold(utf8($certificacion_grado_digital->nombre_curso_categoria)); ?></td>
+									<td></td>
+									<td><?= bold(number_format(limpiar_nulo($certificacion_grado_digital->tutorizados), 0, '', ',')); ?></td>
+									<td><?= bold(number_format(limpiar_nulo($certificacion_grado_digital->autoformacion), 0, '', ',')); ?></td>
+								</tr>
+							</tfoot>
 							<?php
 									}
 								}

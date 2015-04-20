@@ -6,19 +6,19 @@
 <div class="row">
 	<div class="col-lg-6">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Modulo de Usuarios</div>
+			<div class="panel-heading">Módulo de Usuarios</div>
 			<div class="panel-body">
 				<p>Listado de los usuarios del aula virtual <?= anchor('http://noformal.gradodigital.edu.sv/educanoformal/index.php', 'EducaContinua', 'target="_blank" class="btn btn-default btn-sm"'); ?>. Permite realizar búsquedas de usuarios para verificar que su información este correcta y actualizada, realizando búsquedas por: Nombre de Usuario, Nombre Completo, Número de DUI, Correo Electrónico y Centro Educativo.</p>
-				Entrar al <?= anchor(base_url('usuarios'), '<i class="fa fa-users fa-fw"></i> Modulo de Usuarios', 'class="btn btn-primary btn-sm"'); ?>
+				Entrar al <?= anchor(base_url('usuarios'), '<i class="fa fa-users fa-fw"></i> Módulo de Usuarios', 'class="btn btn-primary btn-sm"'); ?>
 			</div>
 		</div>
 	</div>
 	<div class="col-lg-6">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Modulo de Centros Educativos</div>
+			<div class="panel-heading">Módulo de Centros Educativos</div>
 			<div class="panel-body">
 				<p>Permite consultar Centros Educativos de capacitación de docentes, realizando búsquedas por: Código, Nombre, Departamento y Municipio.</p>
-				Entrar al <?= anchor(base_url('centros_educativos'), '<i class="fa fa-university fa-fw"></i> Modulo de Centros Educativos', 'class="btn btn-primary btn-sm"'); ?>
+				Entrar al <?= anchor(base_url('centros_educativos'), '<i class="fa fa-university fa-fw"></i> Módulo de Centros Educativos', 'class="btn btn-primary btn-sm"'); ?>
 			</div>
 		</div>
 	</div>
@@ -26,13 +26,13 @@
 <div class="row">
 	<div class="col-lg-6">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Modulo de Consultas Estadísticas</div>
+			<div class="panel-heading">Módulo de Consultas Estadísticas</div>
 			<div class="panel-body">
 				<p>Consultas estadísticas de usuarios por diferentes tipos de búsqueda.</p>
 				Entrar al 
 				<div class="btn-group">
-					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-					<i class="fa fa-bar-chart-o fa-fw"></i> Modulo de Consultas Estadísticas <i class="caret"></i>
+					<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false" ondblclick="redireccionar('<?= base_url('resumen_estadistico'); ?>');">
+					<i class="fa fa-bar-chart-o fa-fw"></i> Módulo de Consultas Estadísticas <i class="caret"></i>
 					</button>
 					<ul class="dropdown-menu" role="menu">
 						<li><?= anchor(base_url('estadisticas/consulta/1'), 'Usuarios por Modalidad de Capacitación'); ?></li>
@@ -53,10 +53,10 @@
 	</div>
 	<div class="col-lg-6">
 		<div class="panel panel-primary">
-			<div class="panel-heading">Modulo de Mapa Estadístico</div>
+			<div class="panel-heading">Módulo de Mapa Estadístico</div>
 			<div class="panel-body">
 				<p>Muestra en el mapa de El Salvador el total de docentes de la modalidad de capacitación tutorizados y tipo de capacitado por departamento, municipio y centro educativo.</p>
-				Entrar al <?= anchor(base_url('mapa'), '<i class="fa fa-map-marker fa-fw"></i> Modulo de Mapa Estadístico', 'class="btn btn-primary btn-sm"'); ?>
+				Entrar al <?= anchor(base_url('mapa'), '<i class="fa fa-map-marker fa-fw"></i> Módulo de Mapa Estadístico', 'class="btn btn-primary btn-sm"'); ?>
 			</div>
 		</div>
 	</div>

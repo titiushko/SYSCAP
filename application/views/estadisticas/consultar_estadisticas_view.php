@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-lg-12">
-		<h1 class="well page-header"><i class="fa fa-bar-chart-o fa-fw"></i> Modulo de Consultas Estadísticas</h1>
+		<h1 class="well page-header"><i class="fa fa-bar-chart-o fa-fw"></i> Módulo de Consultas Estadísticas</h1>
 	</div>
 </div>
 <div class="row">

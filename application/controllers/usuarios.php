@@ -19,7 +19,7 @@ class Usuarios extends MY_Controller{
 		if($this->session->userdata['nombre_corto_rol'] == 'admin' || $this->session->userdata['nombre_corto_rol'] == 'moderador'){
 			$datos['pagina'] = 'usuarios/consultar_usuarios_view';
 			$datos['opcion_menu'] = modulo_actual('modulo_usuarios');
-			$datos['lista_usuarios'] = $this->usuarios_model->lista_usuarios();
+			$datos['lista_usuarios'] = $this->usuarios_model->usuarios();
 			$this->load->view('plantilla_pagina_view', $datos);
 		}
 		else{
@@ -34,7 +34,7 @@ class Usuarios extends MY_Controller{
 			}
 			$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Mostrar');
 			if($this->notificacion){
-				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');"';
+				$datos['eventos_body'] = 'onload="$(\'#myModal\').modal(\'show\');" onclick="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');" onkeyup="redireccionar(\''.base_url('usuarios/mostrar/'.$codigo_usuario).'\');"';
 				$datos['notificaciones'] = mensaje_notificacion(
 					'myModal',
 					icono_notificacion('informacion').'Actualizaci&oacute;n de Usuario',
@@ -64,12 +64,13 @@ class Usuarios extends MY_Controller{
 						$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Editar');
 					}
 					if($this->input->post('grupo_campos') == 'informacion_usuario'){
-						$this->validaciones('informacion_usuario');
+						$this->validaciones('informacion_usuario', $codigo_usuario);
 						$datos = $this->datos_formulario_usuarios_view($codigo_usuario, 'Recuperar Contraseña');
 					}
 					if($this->form_validation->run()){
 						$update_usuario = $this->input->post();
-						if($this->input->post('contrasena_usuario'))
+						$validar_contrasena_usuario = $this->usuarios_model->validar_contrasena_usuario($this->input->post('contrasena_usuario'), $codigo_usuario);
+						if($this->input->post('contrasena_usuario') && empty($validar_contrasena_usuario))
 							$update_usuario['contrasena_usuario'] = md5($this->input->post('contrasena_usuario').$this->config->item('semilla_moodle'));
 						unset($update_usuario['estado'], $update_usuario['nombre_centro_educativo'], $update_usuario['grupo_campos'], $update_usuario['boton_primario']);
 						$this->usuarios_model->modificar($update_usuario, $codigo_usuario);
@@ -119,8 +120,8 @@ class Usuarios extends MY_Controller{
 	}
 	
 	private function datos_formulario_usuarios_view($codigo_usuario, $operacion = ''){
-		$validar_usuario = $this->usuarios_model->validar_usuario($codigo_usuario);
-		if(empty($validar_usuario)){
+		$validar_codigo_usuario = $this->usuarios_model->validar_codigo_usuario($codigo_usuario);
+		if(empty($validar_codigo_usuario)){
 			return NULL;
 		}
 		else{
@@ -143,7 +144,7 @@ class Usuarios extends MY_Controller{
 		}
 	}
 	
-	private function validaciones($grupo_campos){
+	private function validaciones($grupo_campos, $codigo_usuario = NULL){
 		$reglas = array(
 			'datos_personales' => array(
 				array(
@@ -186,7 +187,7 @@ class Usuarios extends MY_Controller{
 				array(
 					'field' => 'nombre_usuario',
 					'label' => 'Nombre de Usuario',
-					'rules' => 'required|trim|min_length[5]|max_length[150]|xss_clean'
+					'rules' => 'required|trim|min_length[5]|max_length[150]|xss_clean|callback_validar_nombre_usuario['.$codigo_usuario.']'
 				),
 				array(
 					'field' => 'contrasena_usuario',
@@ -201,8 +202,17 @@ class Usuarios extends MY_Controller{
 			)
 		);
 		$this->form_validation->set_rules($reglas[$grupo_campos]);
-		$this->form_validation->set_message('required', icono_notificacion('error').'El campo '.bold('%s').' es obligatorio.');
-		$this->form_validation->set_message('min_length', icono_notificacion('error').'El campo '.bold('%s').' debe tener al menos %s caracteres.');
+	}
+	
+	public function validar_nombre_usuario($nombre_usuario, $codigo_usuario){
+		$validar_nombre_usuario = $this->usuarios_model->validar_nombre_usuario($nombre_usuario, $codigo_usuario);
+		if(empty($validar_nombre_usuario)){
+			return TRUE;
+		}
+		else{
+			$this->form_validation->set_message('validar_nombre_usuario', icono_notificacion('error').bold('%s').' ya existe.');
+			return FALSE;
+		}
 	}
 	
 	public function exportar($codigo_usuario = NULL){
@@ -222,7 +232,7 @@ class Usuarios extends MY_Controller{
 			$plantilla_pdf = $this->cargar_plantilla_pdf($codigo_usuario);
 			$pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $plantilla_pdf, $border = 0, $ln = 1, $fill = 0, $reseth = TRUE, $align = '', $autopadding = TRUE);
 			$nombre_archivo = utf8_decode(acentos($this->usuarios_model->nombre_completo_usuario($codigo_usuario)).'.pdf');
-			$pdf->Output($nombre_archivo, 'I');
+			echo $plantilla_pdf; //$pdf->Output($nombre_archivo, 'I');
 		}
 		else{
 			$this->error_404(current_url(), utf8($this->session->userdata('nombre_completo_usuario')), utf8($this->session->userdata('nombre_completo_rol')), $this->session->userdata('nombre_corto_rol'));
@@ -234,14 +244,14 @@ class Usuarios extends MY_Controller{
 		$plantilla_pdf = read_file('resources/templates/pdf/usuarios.php');
 		$lista_certificaciones_usuario = ''; $certificaciones = 1;
 		foreach($this->usuarios_model->certificaciones_usuario($codigo_usuario) as $certificacion){
-			$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.utf8($certificacion->nombre).'</td></tr>';
+			$lista_certificaciones_usuario .= '<tr><td>'.$certificaciones++.'</td><td>'.str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($certificacion->nombre))).'</td></tr>';
 		}
 		if($lista_certificaciones_usuario == ''){
 			$lista_certificaciones_usuario = 'El usuario no tiene certificaciones.';
 		}
 		$lista_cursos_usuario = ''; $cursos = 1;
 		foreach($this->usuarios_model->calificaciones_usuario($codigo_usuario) as $curso){
-			$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.utf8($curso->nombre).'</td><td>'.$curso->nota.'</td></tr>';
+			$lista_cursos_usuario .= '<tr><td>'.$cursos++.'</td><td>'.str_replace('Examen Certificacion', '', str_replace('Examen De Certificacion', '', utf8($curso->nombre))).'</td><td>'.number_format(limpiar_nulo($curso->nota), 2, '.', ',').'</td></tr>';
 		}
 		if($lista_cursos_usuario == ''){
 			$lista_cursos_usuario = 'El usuario no a recibido cursos.';

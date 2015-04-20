@@ -1,11 +1,19 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+/**
+* Modelo para obtener de la base de datos de SYSCAP la información de la tabla mapas
+*/
 class Mapas_model extends CI_Model{
-	public function __construct(){
+	function __construct(){
 		parent::__construct();
+		$this->load->database();
 	}
 	
-	public function coordenadas_departamentos(){
+	/**
+	* Método que devuelve las coordenadas de todos los departamentos
+	* Método utilizado por el controlador: Mapa
+	*/
+	function coordenadas_departamentos(){
 		$query = $this->db->query('SELECT ma.id_mapa id_mapa,
 								   ma.longitud_mapa longitud_mapa,
 								   ma.latitud_mapa latitud_mapa,
@@ -18,7 +26,11 @@ class Mapas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	public function coordenadas_departamento($codigo_departamento){
+	/**
+	* Método que devuelve las coordenadas de un departamento
+	* Método utilizado por el controlador: Mapa
+	*/
+	function coordenadas_departamento($codigo_departamento){
 		$query = $this->db->query('SELECT ma.longitud_mapa longitud_mapa,
 								   ma.latitud_mapa latitud_mapa
 								   FROM mapas ma INNER JOIN departamentos de ON ma.id_mapa = de.id_mapa
@@ -28,23 +40,19 @@ class Mapas_model extends CI_Model{
 		return $coordenadas_departamento;
 	}
 	
+	/**
+	* Método que devuelve la consulta estadística de docentes por departamento
+	* Método utilizado por el controlador: Mapa
+	*/
 	function cantidad_usuarios_departamento($codigo_departamento){
-		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, COUNT(*) tutorizados
-								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
-								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)) capacitados
-								   UNION
-								   SELECT \'Certificados\' tipos_capacitados, COUNT(*) tutorizados
-								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
-								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
-								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
-								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)) certificados',
-								   array($codigo_departamento, $codigo_departamento));
-		return $query->result();
+		return $this->_cantidad_usuarios($codigo_departamento, 'departamentos');
 	}
 	
-	public function coordenadas_municipios($codigo_departamento){
+	/**
+	* Método que devuelve las coordenadas de todos los municipios
+	* Método utilizado por el controlador: Mapa
+	*/
+	function coordenadas_municipios($codigo_departamento){
 		$query = $this->db->query('SELECT ma.id_mapa id_mapa,
 								   ma.longitud_mapa longitud_mapa,
 								   ma.latitud_mapa latitud_mapa,
@@ -64,7 +72,11 @@ class Mapas_model extends CI_Model{
 		return $query->result();
 	}
 	
-	public function coordenadas_municipio($codigo_municipio, $codigo_departamento){
+	/**
+	* Método que devuelve las coordenadas de un municipio
+	* Método utilizado por el controlador: Mapa
+	*/
+	function coordenadas_municipio($codigo_municipio, $codigo_departamento){
 		$query = $this->db->query('SELECT ma.longitud_mapa longitud_mapa,
 								   ma.latitud_mapa latitud_mapa
 								   FROM mapas ma INNER JOIN municipios mu ON ma.id_mapa = mu.id_mapa
@@ -74,23 +86,19 @@ class Mapas_model extends CI_Model{
 		return $coordenadas_municipio;
 	}
 	
+	/**
+	* Método que devuelve la consulta estadística de docentes por municipio
+	* Método utilizado por el controlador: Mapa
+	*/
 	function cantidad_usuarios_municipio($codigo_municipio){
-		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, COUNT(*) tutorizados
-								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
-								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)) capacitados
-								   UNION
-								   SELECT \'Certificados\' tipos_capacitados, COUNT(*) tutorizados
-								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
-								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
-								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
-								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)) certificados',
-								   array($codigo_municipio, $codigo_municipio));
-		return $query->result();
+		return $this->_cantidad_usuarios($codigo_municipio, 'municipios');
 	}
 	
-	public function coordenadas_centros_educativos($codigo_municipio){
+	/**
+	* Método que devuelve las coordenadas de todos los centros educativos
+	* Método utilizado por el controlador: Mapa
+	*/
+	function coordenadas_centros_educativos($codigo_municipio){
 		$query = $this->db->query('SELECT ma.id_mapa id_mapa,
 								   ma.longitud_mapa longitud_mapa,
 								   ma.latitud_mapa latitud_mapa,
@@ -111,19 +119,41 @@ class Mapas_model extends CI_Model{
 		return $query->result();
 	}
 	
+	/**
+	* Método que devuelve la consulta estadística de docentes por centro educativo
+	* Método utilizado por el controlador: Mapa
+	*/
 	function cantidad_usuarios_centro_educativo($codigo_centro_educativo){
+		return $this->_cantidad_usuarios($codigo_centro_educativo, 'centros_educativos');
+	}
+	
+	/**
+	* Método que devuelve el resultado la consulta estadística de docentes por departamento, municipio o centro educativo
+	*/
+	private function _cantidad_usuarios($codigo, $nivel_capa){
+		switch($nivel_capa){
+			case 'departamentos':
+				$filtro = 'IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_departamento = ?)';
+				break;
+			case 'municipios':
+				$filtro = 'IN(SELECT id_centro_educativo FROM centros_educativos WHERE id_municipio = ?)';
+				break;
+			case 'centros_educativos':
+				$filtro = '= ?';
+				break;
+		}
 		$query = $this->db->query('SELECT \'Capacitados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Evaluaci%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
-								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo = ?) capacitados
+								   WHERE tipo_capacitado LIKE \'capacitado\' AND id_tipo_usuario BETWEEN 5 AND 8
+								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo '.$filtro.') capacitados
 								   UNION
 								   SELECT \'Certificados\' tipos_capacitados, COUNT(*) tutorizados
 								   FROM (SELECT DISTINCT id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario,
 								   REPLACE(REPLACE(nombre_examen, \'Examen Certificación\', \'\'), \'Examen De Certificación\', \'\') certificacion_usuario
 								   FROM V_Estadisticas
-								   WHERE nombre_examen LIKE \'Examen%\' AND nota_examen_calificacion >= 7.00 AND id_tipo_usuario BETWEEN 5 AND 8
-								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo = ?) certificados',
-								   array($codigo_centro_educativo, $codigo_centro_educativo));
+								   WHERE tipo_capacitado LIKE \'certificado\' AND id_tipo_usuario BETWEEN 5 AND 8
+								   AND modalidad_usuario = \'tutorizado\' AND id_centro_educativo '.$filtro.') certificados',
+								   array($codigo, $codigo));
 		return $query->result();
 	}
 }

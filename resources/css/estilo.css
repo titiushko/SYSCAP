@@ -140,3 +140,28 @@ div.table-responsive table.table.table-striped.table-bordered.table-hover thead 
 	color: #ffffff;
 	background-color: #1e90ff;
 }
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo para opcion menu en ayuda									*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.opcion_menu {
+	background-color: #424a5d;
+	color: #ffffff;
+	padding: 2px 4px;
+	cursor: pointer;
+}
+
+.opcion_menu:hover {
+	background-color: #68dff0;
+	color: #000000;
+	padding: 2px 4px;
+	cursor: pointer;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*										estilo para lista despegable resultado por busqueda					*/
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+.busqueda {
+	background: #f5f5f5;
+	border-color: #f5f5f5;
+}

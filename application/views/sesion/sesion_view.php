@@ -32,7 +32,14 @@
 	    <?php
 			$formulario = array('name' => 'login', 'id' => 'login', 'role' => 'form');
 			$campos_ocultos = array('sesion_usuario' => @$sesion_usuario);
-	        $boton_primario = 'class="btn btn-lg btn-success btn-block"';
+			$boton_primario = array(
+				'name'		=> 'boton_primario',
+				'id'		=> 'boton_primario',
+				'value'		=> 'true',
+				'type'		=> 'submit',
+				'content'	=> '<i class="fa fa-sign-in"></i> Iniciar Sesi&oacute;n',
+				'class'		=> 'btn btn-lg btn-success btn-block'
+			);
 	        $nombre_usuario = array(
         		'name'			=> 'nombre_usuario',
         		'id'			=> 'nombre_usuario',
@@ -89,7 +96,7 @@
 											echo $this->session->flashdata('usuario_incorrecto');
 										?>
 									</div>
-									<?= form_submit('boton_primario', utf8('Iniciar Sesion'), $boton_primario); ?>
+									<?= form_button($boton_primario); ?>
 								<?= form_fieldset_close(); ?>
 							<?= form_close(); ?>
 						</div>

@@ -31,7 +31,7 @@
 				<div class="col-lg-12">
 					<?= encabezado_reporte(); ?>
 					<?= heading('Reporte de Consulta Estad&iacute;stica', 1, 'class="text-center"'); ?>
-					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional', 3, 'class="text-center"')); ?>
+					<?= form_fieldset(heading('Estad&iacute;stica de Usuarios por Tipo de Capacitados y Fecha a Nivel Nacional', 2, 'class="text-center"')); ?>
 						<table align="center" border="0" width="100%">
 							<tr>
 								<th class="column-title">Tipo de Capacitado:</th><td class="column-value"><?= @$tipo_capacitado; ?></td>
@@ -44,41 +44,43 @@
 			<div class="row"><div class="col-lg-12"><?= br(); ?></div></div>
 			<div class="row">
 				<div class="col-lg-6">
-					<table class="table table-striped table-bordered table-hover">
-						<thead>
-							<tr>
-								<th></th>
-								<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
-							</tr>
-							<tr>
-								<th rowspan="2">Tipo de Capacitado</th>
-								<th>Tutorizados</th>
-								<th>Autoformaci&oacute;n</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php
-							$cantidades = 1;
-							foreach($modalidades_capacitados as $modalidad_capacitado){
-								if($modalidad_capacitado->tipos_capacitados != 'Total'){
-							?>
-							<tr>
-								<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
-								<td><?= limpiar_nulo($modalidad_capacitado->tutorizados); ?></td>
-								<td><?= limpiar_nulo($modalidad_capacitado->autoformacion); ?></td>
-							</tr>
-							<?php } else{ ?>
-							<tr>
-								<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
-								<td><?= bold(limpiar_nulo($modalidad_capacitado->tutorizados)); ?></td>
-								<td><?= bold(limpiar_nulo($modalidad_capacitado->autoformacion)); ?></td>
-							</tr>
-							<?php
+					<div class="table-responsive">
+						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th></th>
+									<th colspan="2">Modalidad de Capacitaci&oacute;n</th>
+								</tr>
+								<tr>
+									<th rowspan="2">Tipo de Capacitado</th>
+									<th>Tutorizados</th>
+									<th>Autoformaci&oacute;n</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php
+								$cantidades = 1;
+								foreach($modalidades_capacitados as $modalidad_capacitado){
+									if($modalidad_capacitado->tipos_capacitados != 'Total'){
+								?>
+								<tr>
+									<th><?= utf8($modalidad_capacitado->tipos_capacitados); ?></th>
+									<td><?= number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ','); ?></td>
+									<td><?= number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ','); ?></td>
+								</tr>
+								<?php } else{ ?>
+								<tr>
+									<th><?= bold(utf8($modalidad_capacitado->tipos_capacitados)); ?></th>
+									<td><?= bold(number_format(limpiar_nulo($modalidad_capacitado->tutorizados), 0, '', ',')); ?></td>
+									<td><?= bold(number_format(limpiar_nulo($modalidad_capacitado->autoformacion), 0, '', ',')); ?></td>
+								</tr>
+								<?php
+									}
 								}
-							}
-							?>
-						</tbody>
-					</table>
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 				<div class="col-lg-6 text-center">
 					<?php if(!estadistica_vacia($modalidades_capacitados)){ ?>

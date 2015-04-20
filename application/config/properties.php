@@ -2,7 +2,7 @@
 
 /**
  * Archivo de propiedades de SYSCAP.
- * Almacena propiedades de configuraci髇 de SYSCAP.
+ * Almacena propiedades de configuraci贸n de SYSCAP.
  */
 
 /*
@@ -10,8 +10,8 @@
 | Carousel
 |--------------------------------------------------------------------------
 |
-| Esta propiedad de SYSCAP o variable de configuraci髇 establece si mostrar
-| o no el carrusel de im醙enes en 'application/views/plantilla_pagina_view.php'.
+| Esta propiedad de SYSCAP o variable de configuraci贸n establece si mostrar
+| o no el carrusel de im谩genes en 'application/views/plantilla_pagina_view.php'.
 |
 | 'carousel' = TRUE; muestra el carrusel.
 | 'carousel' = FALSE; no muestra el carrusel.
@@ -21,11 +21,11 @@ $config['carousel'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
-| Semilla de Encriptaci髇 de Moodle
+| Semilla de Encriptaci贸n de Moodle
 |--------------------------------------------------------------------------
 |
-| Esta propiedad de SYSCAP o variable de configuraci髇 establece la semilla
-| de encriptaci髇 de contrase馻s que utiliza Moodle. 
+| Esta propiedad de SYSCAP o variable de configuraci贸n establece la semilla
+| de encriptaci贸n de contrase帽as que utiliza Moodle.
 |
 | 'semilla_moodle': debe de ser igual a $CFG->passwordsaltmain del archivo
 | 					moodle/config.php.
@@ -33,5 +33,19 @@ $config['carousel'] = FALSE;
 */
 $config['semilla_moodle'] = 'Mtx5;;1>0EWn:,,{go%~}=aPJ#Hky';
 
-/* End of file properties.php */
-/* Location: ./application/properties/properties.php */
+/*
+|--------------------------------------------------------------------------
+| Tiempo de Conexi贸n de Sesi贸n
+|--------------------------------------------------------------------------
+|
+| Esta propiedad determina el n煤mero de segundos que desea que la sesi贸n dure.
+| Por defecto son 600 segundos (10 minutos).
+|
+| Ajustar a cero para que no expire el tiempo de conexi贸n de las sesiones.
+|
+*/
+$config['sess_expiration'] = 600;
+
+
+/* End of file configuracion.php */
+/* Location: ./application/config/configuracion.php */
