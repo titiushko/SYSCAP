@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAP/application/controllers/ayuda.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">4.2.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_cab57064927359b0dde53de0c62c4ec0.html">controllers</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">ayuda.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../de/de8/ayuda_8php.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php <span class="keywordflow">if</span> ( ! defined(<span class="stringliteral">&#39;BASEPATH&#39;</span>)) exit(<span class="stringliteral">&#39;No direct script access allowed&#39;</span>);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../db/d61/classAyuda.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../db/d61/classAyuda.html">Ayuda</a> <span class="keyword">extends</span> <a class="code" href="../../d1/d68/classMY__Controller.html">MY_Controller</a>{</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../db/d61/classAyuda.html#a095c5d389db211932136b53f25f39685">    7</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../db/d61/classAyuda.html#a095c5d389db211932136b53f25f39685">__construct</a>(){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        parent::__construct();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        $this-&gt;<a class="code" href="../../d1/d68/classMY__Controller.html#a64981b95ee27a75d8e0c6e1f047472b1">eliminar_cache</a>();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;        <span class="comment">// DOC: Si no hay una conexión de usuario, entonces: no permitir acceso al controlador y mostrar el error de acceso</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;        <span class="keywordflow">if</span>(!isset($this-&gt;session-&gt;userdata[<span class="stringliteral">&#39;conexion_usuario&#39;</span>])){</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;            $this-&gt;<a class="code" href="../../d1/d68/classMY__Controller.html#ae977ff8264488eb575520c51644b35ea">acceso_denegado</a>(<span class="stringliteral">&#39;sin_conexion&#39;</span>);</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        }</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    }</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../db/d61/classAyuda.html#a149eb92716c1084a935e04a8d95f7347">   19</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../db/d61/classAyuda.html#a149eb92716c1084a935e04a8d95f7347">index</a>(){</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        <span class="comment">// DOC: Cargar la vista de ayuda de SYSCAP</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        $this-&gt;load-&gt;view(<span class="stringliteral">&#39;plantilla_pagina_view&#39;</span>, array(<span class="stringliteral">&#39;pagina&#39;</span> =&gt; <span class="stringliteral">&#39;ayuda_view&#39;</span>));</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;}</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* End of file ayuda.php */</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">/* Location: ./application/controllers/ayuda.php */</span></div>
+<div class="ttc" id="classMY__Controller_html_ae977ff8264488eb575520c51644b35ea"><div class="ttname"><a href="../../d1/d68/classMY__Controller.html#ae977ff8264488eb575520c51644b35ea">MY_Controller\acceso_denegado</a></div><div class="ttdeci">acceso_denegado($tipo_acceso= '', $usuario_actual= '', $nombre_completo_rol= '')</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d66/MY__Controller_8php_source.html#l00015">MY_Controller.php:15</a></div></div>
+<div class="ttc" id="classAyuda_html_a149eb92716c1084a935e04a8d95f7347"><div class="ttname"><a href="../../db/d61/classAyuda.html#a149eb92716c1084a935e04a8d95f7347">Ayuda\index</a></div><div class="ttdeci">index()</div><div class="ttdef"><b>Definition:</b> <a href="../../de/de8/ayuda_8php_source.html#l00019">ayuda.php:19</a></div></div>
+<div class="ttc" id="classMY__Controller_html"><div class="ttname"><a href="../../d1/d68/classMY__Controller.html">MY_Controller</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d66/MY__Controller_8php_source.html#l00003">MY_Controller.php:3</a></div></div>
+<div class="ttc" id="classAyuda_html"><div class="ttname"><a href="../../db/d61/classAyuda.html">Ayuda</a></div><div class="ttdef"><b>Definition:</b> <a href="../../de/de8/ayuda_8php_source.html#l00006">ayuda.php:6</a></div></div>
+<div class="ttc" id="classMY__Controller_html_a64981b95ee27a75d8e0c6e1f047472b1"><div class="ttname"><a href="../../d1/d68/classMY__Controller.html#a64981b95ee27a75d8e0c6e1f047472b1">MY_Controller\eliminar_cache</a></div><div class="ttdeci">eliminar_cache()</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d66/MY__Controller_8php_source.html#l00008">MY_Controller.php:8</a></div></div>
+<div class="ttc" id="classAyuda_html_a095c5d389db211932136b53f25f39685"><div class="ttname"><a href="../../db/d61/classAyuda.html#a095c5d389db211932136b53f25f39685">Ayuda\__construct</a></div><div class="ttdeci">__construct()</div><div class="ttdef"><b>Definition:</b> <a href="../../de/de8/ayuda_8php_source.html#l00007">ayuda.php:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>

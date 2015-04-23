@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAPmodels/sesion_model.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">4.2.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_560a2433a989a7bc22cbf7568f0e17bc.html">models</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">sesion_model.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../df/d13/a00085.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php <span class="keywordflow">if</span> ( ! defined(<span class="stringliteral">&#39;BASEPATH&#39;</span>)) exit(<span class="stringliteral">&#39;No direct script access allowed&#39;</span>);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d3/d52/a00023.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d3/d52/a00023.html">Sesion_model</a> <span class="keyword">extends</span> CI_Model{</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d3/d52/a00023.html#a095c5d389db211932136b53f25f39685">    7</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023.html#a095c5d389db211932136b53f25f39685">__construct</a>(){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        parent::__construct();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        $this-&gt;load-&gt;database();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    </div>
+<div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="../../d3/d52/a00023.html#a2c35911f8ddae04f9f446330bce93102">   22</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d3/d52/a00023.html#a2c35911f8ddae04f9f446330bce93102">conectar_usuario</a>(<a class="code" href="../../de/d36/a00123.html#a1e8bdac960009835a91d924647b4b81b">$nombre_usuario</a>, <a class="code" href="../../de/d36/a00123.html#a13a436fbfc45e30e9b9db6d9609b2b10">$contrasena_usuario</a>){</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">if</span>($this-&gt;session-&gt;userdata(<span class="stringliteral">&#39;dispositivo_movil&#39;</span>)){</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;u.id_usuario, F_NombreCompactoUsuario(u.id_usuario) nombre_completo_usuario, r.nombre_completo_rol, r.nombre_corto_rol&#39;</span>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        }</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;u.id_usuario, F_NombreCompletoUsuario(u.id_usuario) nombre_completo_usuario, r.nombre_completo_rol, r.nombre_corto_rol&#39;</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        }</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        $query = $this-&gt;db-&gt;join(<span class="stringliteral">&#39;roles_asignados ra&#39;</span>, <span class="stringliteral">&#39;u.id_usuario = ra.id_usuario&#39;</span>, <span class="stringliteral">&#39;left&#39;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        $query = $this-&gt;db-&gt;join(<span class="stringliteral">&#39;roles r&#39;</span>, <span class="stringliteral">&#39;ra.id_rol = r.id_rol&#39;</span>, <span class="stringliteral">&#39;left&#39;</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        $query = $this-&gt;db-&gt;get_where(<span class="stringliteral">&#39;usuarios u&#39;</span>, array(<span class="stringliteral">&#39;u.nombre_usuario&#39;</span> =&gt; <a class="code" href="../../de/d36/a00123.html#a1e8bdac960009835a91d924647b4b81b">$nombre_usuario</a>, <span class="stringliteral">&#39;u.contrasena_usuario&#39;</span> =&gt; <a class="code" href="../../de/d36/a00123.html#a13a436fbfc45e30e9b9db6d9609b2b10">$contrasena_usuario</a>));</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <span class="keywordflow">if</span>($query-&gt;num_rows() != 0){</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            <span class="keywordflow">return</span> $query-&gt;row();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        }</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            $this-&gt;session-&gt;set_flashdata(<span class="stringliteral">&#39;usuario_incorrecto&#39;</span>, icono_notificacion(<span class="stringliteral">&#39;error&#39;</span>).<span class="stringliteral">&#39;Los datos introducidos son incorrectos.&#39;</span>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            redirect(<span class="stringliteral">&#39;sesion&#39;</span>, <span class="stringliteral">&#39;refresh&#39;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/* End of file sesion_model.php */</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">/* Location: ./application/models/sesion_model.php */</span></div>
+<div class="ttc" id="a00123_html_a1e8bdac960009835a91d924647b4b81b"><div class="ttname"><a href="../../de/d36/a00123.html#a1e8bdac960009835a91d924647b4b81b">$nombre_usuario</a></div><div class="ttdeci">$nombre_usuario</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d36/a00123_source.html#l00043">sesion_view.php:43</a></div></div>
+<div class="ttc" id="a00023_html"><div class="ttname"><a href="../../d3/d52/a00023.html">Sesion_model</a></div><div class="ttdef"><b>Definition:</b> <a href="../../df/d13/a00085_source.html#l00006">sesion_model.php:6</a></div></div>
+<div class="ttc" id="a00123_html_a13a436fbfc45e30e9b9db6d9609b2b10"><div class="ttname"><a href="../../de/d36/a00123.html#a13a436fbfc45e30e9b9db6d9609b2b10">$contrasena_usuario</a></div><div class="ttdeci">$contrasena_usuario</div><div class="ttdef"><b>Definition:</b> <a href="../../de/d36/a00123_source.html#l00053">sesion_view.php:53</a></div></div>
+<div class="ttc" id="a00023_html_a2c35911f8ddae04f9f446330bce93102"><div class="ttname"><a href="../../d3/d52/a00023.html#a2c35911f8ddae04f9f446330bce93102">Sesion_model\conectar_usuario</a></div><div class="ttdeci">conectar_usuario($nombre_usuario, $contrasena_usuario)</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d13/a00085_source.html#l00022">sesion_model.php:22</a></div></div>
+<div class="ttc" id="a00023_html_a095c5d389db211932136b53f25f39685"><div class="ttname"><a href="../../d3/d52/a00023.html#a095c5d389db211932136b53f25f39685">Sesion_model\__construct</a></div><div class="ttdeci">__construct()</div><div class="ttdef"><b>Definition:</b> <a href="../../df/d13/a00085_source.html#l00007">sesion_model.php:7</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>

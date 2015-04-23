@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['pdf_5fauthor',['PDF_AUTHOR',['../d5/dc0/tcpdf__config_8php.html#a86e5a205832e5759321fda51662f9df3',1,'tcpdf_config.php']]],
+  ['pdf_5fcreator',['PDF_CREATOR',['../d5/dc0/tcpdf__config_8php.html#a7d5e3a8282cba5a810dfbcefa1ecd225',1,'tcpdf_config.php']]],
+  ['pdf_5ffont_5fmonospaced',['PDF_FONT_MONOSPACED',['../d5/dc0/tcpdf__config_8php.html#a85c01a19e840c97b685f0be9bc0d6956',1,'tcpdf_config.php']]],
+  ['pdf_5ffont_5fname_5fdata',['PDF_FONT_NAME_DATA',['../d5/dc0/tcpdf__config_8php.html#abb5a1671295dcc5adab670400514bd7d',1,'tcpdf_config.php']]],
+  ['pdf_5ffont_5fname_5fmain',['PDF_FONT_NAME_MAIN',['../d5/dc0/tcpdf__config_8php.html#a24c5be6597b6e1ffd1a8011e2917ddf7',1,'tcpdf_config.php']]],
+  ['pdf_5ffont_5fsize_5fdata',['PDF_FONT_SIZE_DATA',['../d5/dc0/tcpdf__config_8php.html#ac4ecd6096280de577002af18d4855538',1,'tcpdf_config.php']]],
+  ['pdf_5ffont_5fsize_5fmain',['PDF_FONT_SIZE_MAIN',['../d5/dc0/tcpdf__config_8php.html#afc75e6123c7ed8ce5b1885f1a209db98',1,'tcpdf_config.php']]],
+  ['pdf_5fheader_5flogo',['PDF_HEADER_LOGO',['../d5/dc0/tcpdf__config_8php.html#aa43b014f6f3ca5e436c4fc5ab06c8aa5',1,'tcpdf_config.php']]],
+  ['pdf_5fheader_5fstring',['PDF_HEADER_STRING',['../d5/dc0/tcpdf__config_8php.html#a4bffcf3901abca59b0e211c989dcd700',1,'tcpdf_config.php']]],
+  ['pdf_5fheader_5ftitle',['PDF_HEADER_TITLE',['../d5/dc0/tcpdf__config_8php.html#a58fc362148cafa7e66cbf47f025db687',1,'tcpdf_config.php']]],
+  ['pdf_5fimage_5fscale_5fratio',['PDF_IMAGE_SCALE_RATIO',['../d5/dc0/tcpdf__config_8php.html#affb4eec14f1ad3e097cc83c2981c6e7a',1,'tcpdf_config.php']]],
+  ['pdf_5fmargin_5fbottom',['PDF_MARGIN_BOTTOM',['../d5/dc0/tcpdf__config_8php.html#a810f46b478a731d8b2d30339fcbfa3a1',1,'tcpdf_config.php']]],
+  ['pdf_5fmargin_5ffooter',['PDF_MARGIN_FOOTER',['../d5/dc0/tcpdf__config_8php.html#a40c9c00bdcd3338e63714212adc72778',1,'tcpdf_config.php']]],
+  ['pdf_5fmargin_5fheader',['PDF_MARGIN_HEADER',['../d5/dc0/tcpdf__config_8php.html#a6967da1488347cdae4e6e60578f413d0',1,'tcpdf_config.php']]],
+  ['pdf_5fmargin_5fleft',['PDF_MARGIN_LEFT',['../d5/dc0/tcpdf__config_8php.html#af1f4d5715609d494ab59647124bb720b',1,'tcpdf_config.php']]],
+  ['pdf_5fmargin_5fright',['PDF_MARGIN_RIGHT',['../d5/dc0/tcpdf__config_8php.html#a4782f71ca8482bc3c71854496a02ac40',1,'tcpdf_config.php']]],
+  ['pdf_5fmargin_5ftop',['PDF_MARGIN_TOP',['../d5/dc0/tcpdf__config_8php.html#a8969b13992173181aa447ad36d9f49c1',1,'tcpdf_config.php']]],
+  ['pdf_5fpage_5fformat',['PDF_PAGE_FORMAT',['../d5/dc0/tcpdf__config_8php.html#a48a70f03a2f0cc37d8ff07dfdef9adca',1,'tcpdf_config.php']]],
+  ['pdf_5fpage_5forientation',['PDF_PAGE_ORIENTATION',['../d5/dc0/tcpdf__config_8php.html#ac6b4034c3b7c856795c90fa29d24366b',1,'tcpdf_config.php']]],
+  ['pdf_5funit',['PDF_UNIT',['../d5/dc0/tcpdf__config_8php.html#ad9051ac3bb4636a64250aa3313ae97ee',1,'tcpdf_config.php']]]
+];

@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Campos de datos - Funciones</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="index.html"><span>Página&#160;principal</span></a></li>
+      <li class="current"><a href="annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li><a href="files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="annotated.html"><span>Estructura&#160;de&#160;datos</span></a></li>
+      <li><a href="classes.html"><span>Índice&#160;de&#160;estructura&#160;de&#160;datos</span></a></li>
+      <li><a href="hierarchy.html"><span>Jerarquía&#160;de&#160;la&#160;clase</span></a></li>
+      <li class="current"><a href="functions.html"><span>Campos&#160;de&#160;datos</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow3" class="tabs2">
+    <ul class="tablist">
+      <li><a href="functions.html"><span>Todo</span></a></li>
+      <li class="current"><a href="functions_func.html"><span>Funciones</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
+    </ul>
+  </div>
+  <div id="navrow4" class="tabs3">
+    <ul class="tablist">
+      <li><a href="functions_func.html#index__"><span>_</span></a></li>
+      <li><a href="functions_func_a.html#index_a"><span>a</span></a></li>
+      <li><a href="functions_func_b.html#index_b"><span>b</span></a></li>
+      <li><a href="functions_func_c.html#index_c"><span>c</span></a></li>
+      <li><a href="functions_func_d.html#index_d"><span>d</span></a></li>
+      <li><a href="functions_func_e.html#index_e"><span>e</span></a></li>
+      <li><a href="functions_func_f.html#index_f"><span>f</span></a></li>
+      <li class="current"><a href="functions_func_g.html#index_g"><span>g</span></a></li>
+      <li><a href="functions_func_h.html#index_h"><span>h</span></a></li>
+      <li><a href="functions_func_i.html#index_i"><span>i</span></a></li>
+      <li><a href="functions_func_l.html#index_l"><span>l</span></a></li>
+      <li><a href="functions_func_m.html#index_m"><span>m</span></a></li>
+      <li><a href="functions_func_n.html#index_n"><span>n</span></a></li>
+      <li><a href="functions_func_o.html#index_o"><span>o</span></a></li>
+      <li><a href="functions_func_p.html#index_p"><span>p</span></a></li>
+      <li><a href="functions_func_r.html#index_r"><span>r</span></a></li>
+      <li><a href="functions_func_s.html#index_s"><span>s</span></a></li>
+      <li><a href="functions_func_t.html#index_t"><span>t</span></a></li>
+      <li><a href="functions_func_u.html#index_u"><span>u</span></a></li>
+      <li><a href="functions_func_v.html#index_v"><span>v</span></a></li>
+      <li><a href="functions_func_w.html#index_w"><span>w</span></a></li>
+    </ul>
+  </div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="contents">
+&#160;
+
+<h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
+<li>get()
+: <a class="el" href="d5/dcc/classJSMin.html#adcd5b6e8efc1792816812168118f49ef">JSMin</a>
+</li>
+<li>get128ABsequence()
+: <a class="el" href="d1/d8c/classTCPDFBarcode.html#ac7c5399b9645d0ffbf8f4bb9d3aef2e8">TCPDFBarcode</a>
+</li>
+<li>get_lat_long_from_address()
+: <a class="el" href="d6/d5d/classGooglemaps.html#a54cd1c66ecb0ee0b253937e349312b9a">Googlemaps</a>
+</li>
+<li>getAbsFontMeasure()
+: <a class="el" href="d4/d40/classTCPDF.html#a2ade1952794fe6eb23191314fd74550c">TCPDF</a>
+</li>
+<li>GetAbsX()
+: <a class="el" href="d4/d40/classTCPDF.html#a5c834acaa7ef363abc6bca4ab8545432">TCPDF</a>
+</li>
+<li>getAliasNbPages()
+: <a class="el" href="d4/d40/classTCPDF.html#a3a6255516dcf07089fe29f13b3ef67bf">TCPDF</a>
+</li>
+<li>getAliasNumPage()
+: <a class="el" href="d4/d40/classTCPDF.html#ae11c5f52caa0df8609ec22c30cd54055">TCPDF</a>
+</li>
+<li>getAliasRightShift()
+: <a class="el" href="d4/d40/classTCPDF.html#ad089fa332b723086484ae0497ae90590">TCPDF</a>
+</li>
+<li>getAllInternalPageNumberAliases()
+: <a class="el" href="d4/d40/classTCPDF.html#af8fbad549f0384a7f76fa6db13193075">TCPDF</a>
+</li>
+<li>getAllSpotColors()
+: <a class="el" href="d4/d40/classTCPDF.html#a8e520f160f6725a4f0a7d7affc67cbd8">TCPDF</a>
+</li>
+<li>getAlpha()
+: <a class="el" href="d4/d40/classTCPDF.html#a1f5bcb7dd420836d8f1a287ff4b5a08e">TCPDF</a>
+</li>
+<li>GetArrStringWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#afe09291dfba7203e225a507e71e1d43e">TCPDF</a>
+</li>
+<li>getAutoPageBreak()
+: <a class="el" href="d4/d40/classTCPDF.html#a73f32971feef0aa29e061bac60a90e7a">TCPDF</a>
+</li>
+<li>getBarcode()
+: <a class="el" href="d4/d40/classTCPDF.html#aa3deb91c4ae36afa6253c831df589b3d">TCPDF</a>
+</li>
+<li>getBarcodeArray()
+: <a class="el" href="d5/d90/classTCPDF2DBarcode.html#a76e7d95d21642a369eacd6b510baddb1">TCPDF2DBarcode</a>
+, <a class="el" href="d1/d8c/classTCPDFBarcode.html#a128a9089ad2534d6ce4b68e41b0912f8">TCPDFBarcode</a>
+</li>
+<li>getBarcodeHTML()
+: <a class="el" href="d5/d90/classTCPDF2DBarcode.html#abc40de5994123a7b38d9a3babb726720">TCPDF2DBarcode</a>
+, <a class="el" href="d1/d8c/classTCPDFBarcode.html#a80fd7768cceee724b5643c9697112522">TCPDFBarcode</a>
+</li>
+<li>getBarcodePNG()
+: <a class="el" href="d5/d90/classTCPDF2DBarcode.html#ade0cf174655bae1612362be96681f057">TCPDF2DBarcode</a>
+, <a class="el" href="d1/d8c/classTCPDFBarcode.html#a2f82b71fdce3fbb664b9cde5100becee">TCPDFBarcode</a>
+</li>
+<li>getBarcodePngData()
+: <a class="el" href="d5/d90/classTCPDF2DBarcode.html#a1873246d9615f23c134f9eca349ed250">TCPDF2DBarcode</a>
+, <a class="el" href="d1/d8c/classTCPDFBarcode.html#a7cfa989c9cf84c9e89341064821f49d5">TCPDFBarcode</a>
+</li>
+<li>getBarcodeSVG()
+: <a class="el" href="d5/d90/classTCPDF2DBarcode.html#a0082ad15bc899d78f3097287c411ebcb">TCPDF2DBarcode</a>
+, <a class="el" href="d1/d8c/classTCPDFBarcode.html#a2d07a1f7c7e16e18634fb0a04630365b">TCPDFBarcode</a>
+</li>
+<li>getBarcodeSVGcode()
+: <a class="el" href="d5/d90/classTCPDF2DBarcode.html#a4eb592ed6449c2db001b0e4019c9f27b">TCPDF2DBarcode</a>
+, <a class="el" href="d1/d8c/classTCPDFBarcode.html#ace20574580be266236b3739da028f5a5">TCPDFBarcode</a>
+</li>
+<li>getBorderStartPosition()
+: <a class="el" href="d4/d40/classTCPDF.html#a5ff1d1bb3ba604c5cadff4388962432e">TCPDF</a>
+</li>
+<li>getBreakMargin()
+: <a class="el" href="d4/d40/classTCPDF.html#a8203a3a6bda94f38f973de2825b76ea3">TCPDF</a>
+</li>
+<li>getBrowsers()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a55c54a6f63cfe3fdb30b24c3164ffab5">Mobile_Detect</a>
+</li>
+<li>getBuffer()
+: <a class="el" href="d4/d40/classTCPDF.html#a24b714e8e56b4f8672886180e5037cd7">TCPDF</a>
+</li>
+<li>getCellBorder()
+: <a class="el" href="d4/d40/classTCPDF.html#a128e3d25eed996dbd78dd10be6f0c4c4">TCPDF</a>
+</li>
+<li>getCellCode()
+: <a class="el" href="d4/d40/classTCPDF.html#aa064c22c3ff653664433fc4e05fa8efc">TCPDF</a>
+</li>
+<li>getCellHeight()
+: <a class="el" href="d4/d40/classTCPDF.html#a25c7f71b3fcb19024497ea620f885346">TCPDF</a>
+</li>
+<li>getCellHeightRatio()
+: <a class="el" href="d4/d40/classTCPDF.html#a6e29d82b9a9e318c703370ec474499ad">TCPDF</a>
+</li>
+<li>getCellMargins()
+: <a class="el" href="d4/d40/classTCPDF.html#aebb91d5d8046cf1b91b65d3a2d8694be">TCPDF</a>
+</li>
+<li>getCellPaddings()
+: <a class="el" href="d4/d40/classTCPDF.html#ae34b176081245381bd47ba322a3a522e">TCPDF</a>
+</li>
+<li>getCharBBox()
+: <a class="el" href="d4/d40/classTCPDF.html#abc79f156bc4418c5446e81653519c632">TCPDF</a>
+</li>
+<li>GetCharWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#a281f922889bd1ae2dc96e421042ad8e4">TCPDF</a>
+</li>
+<li>getColumn()
+: <a class="el" href="d4/d40/classTCPDF.html#a7db0d9878a041a04273e251228540b56">TCPDF</a>
+</li>
+<li>getCSSBorderDashStyle()
+: <a class="el" href="d4/d40/classTCPDF.html#a7cd52df1697c10362b74645261fb38f1">TCPDF</a>
+</li>
+<li>getCSSBorderMargin()
+: <a class="el" href="d4/d40/classTCPDF.html#a7ec79640f33b5a1334632c2a893571b7">TCPDF</a>
+</li>
+<li>getCSSBorderStyle()
+: <a class="el" href="d4/d40/classTCPDF.html#a2e65a8cc55a9b4b9c9ac01e6513d64c7">TCPDF</a>
+</li>
+<li>getCSSBorderWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#a79695745bece08e32a7899f8217bf74d">TCPDF</a>
+</li>
+<li>getCSSFontSpacing()
+: <a class="el" href="d4/d40/classTCPDF.html#a4f4b2eb6bd3ea30b0cfa58a10396736b">TCPDF</a>
+</li>
+<li>getCSSFontStretching()
+: <a class="el" href="d4/d40/classTCPDF.html#a0d8075a3d1489875d600e7735c790929">TCPDF</a>
+</li>
+<li>getCSSMargin()
+: <a class="el" href="d4/d40/classTCPDF.html#a5667689bccca7385dc41c64040e59121">TCPDF</a>
+</li>
+<li>getCSSPadding()
+: <a class="el" href="d4/d40/classTCPDF.html#acd3d7dae873b9873302616698abafcf3">TCPDF</a>
+</li>
+<li>getDestination()
+: <a class="el" href="d4/d40/classTCPDF.html#a4a6a1902a07dbb6a98f107ae2b9574ce">TCPDF</a>
+</li>
+<li>getDocCreationTimestamp()
+: <a class="el" href="d4/d40/classTCPDF.html#ac93ed171cb920eca2d52c3afcedff82e">TCPDF</a>
+</li>
+<li>getDocModificationTimestamp()
+: <a class="el" href="d4/d40/classTCPDF.html#a5df552585bd6e930184e5e6e5bae19cd">TCPDF</a>
+</li>
+<li>getFontAscent()
+: <a class="el" href="d4/d40/classTCPDF.html#acf41c6c04c29e1323bb270fdea6b5a9f">TCPDF</a>
+</li>
+<li>getFontBBox()
+: <a class="el" href="d4/d40/classTCPDF.html#a0dba58ac6400cc0701127487b4e8dcf4">TCPDF</a>
+</li>
+<li>getFontBuffer()
+: <a class="el" href="d4/d40/classTCPDF.html#ac63fff093a17846764bbcc09af7c8640">TCPDF</a>
+</li>
+<li>getFontDescent()
+: <a class="el" href="d4/d40/classTCPDF.html#a0c8374150dbc8ca092618ca430713f70">TCPDF</a>
+</li>
+<li>getFontFamily()
+: <a class="el" href="d4/d40/classTCPDF.html#acf73334191df85e1c4effbc5cf257cf5">TCPDF</a>
+</li>
+<li>getFontFamilyName()
+: <a class="el" href="d4/d40/classTCPDF.html#a1454645fa7a1e35f6f8a634c0978ed2e">TCPDF</a>
+</li>
+<li>getFontSize()
+: <a class="el" href="d4/d40/classTCPDF.html#acd080ff16d09e445402c5bc8e831af7b">TCPDF</a>
+</li>
+<li>getFontSizePt()
+: <a class="el" href="d4/d40/classTCPDF.html#a8d34f3978888eaf89b4d78a361fb4416">TCPDF</a>
+</li>
+<li>getFontsList()
+: <a class="el" href="d4/d40/classTCPDF.html#ae87d16aa348205f2a1654cc2ac42367c">TCPDF</a>
+</li>
+<li>getFontSpacing()
+: <a class="el" href="d4/d40/classTCPDF.html#a917bed78601b25201a9c507d841fc538">TCPDF</a>
+</li>
+<li>getFontStretching()
+: <a class="el" href="d4/d40/classTCPDF.html#a6765cafbc343aeacdcbd0a97c6c90ca5">TCPDF</a>
+</li>
+<li>getFontStyle()
+: <a class="el" href="d4/d40/classTCPDF.html#a130bd080e3028082d43b4d1d64f6702e">TCPDF</a>
+</li>
+<li>getFontSubsetting()
+: <a class="el" href="d4/d40/classTCPDF.html#ad00f8a524481e110dd8b6da59934252c">TCPDF</a>
+</li>
+<li>getFooterFont()
+: <a class="el" href="d4/d40/classTCPDF.html#a3ff8e789876c7376f95a614c8e2a8a7d">TCPDF</a>
+</li>
+<li>getFooterMargin()
+: <a class="el" href="d4/d40/classTCPDF.html#a7f1fa220561198a793cdd56a3390438d">TCPDF</a>
+</li>
+<li>getFormDefaultProp()
+: <a class="el" href="d4/d40/classTCPDF.html#aca1da710f70d3b0e756be97adf23418c">TCPDF</a>
+</li>
+<li>getGDgamma()
+: <a class="el" href="d4/d40/classTCPDF.html#aff67c582d024c7d0ee6b61d479710635">TCPDF</a>
+</li>
+<li>getGraphicVars()
+: <a class="el" href="d4/d40/classTCPDF.html#a24d3c102468b6ab9d2f4859a8b01863a">TCPDF</a>
+</li>
+<li>getGroupPageNo()
+: <a class="el" href="d4/d40/classTCPDF.html#abb054390914b3cb23d207f4c36f0395c">TCPDF</a>
+</li>
+<li>getGroupPageNoFormatted()
+: <a class="el" href="d4/d40/classTCPDF.html#ac92bf6e625a271c53f17bf23c508613e">TCPDF</a>
+</li>
+<li>getHeaderData()
+: <a class="el" href="d4/d40/classTCPDF.html#a70437676b6ee2c9ff985b38d5789fb90">TCPDF</a>
+</li>
+<li>getHeaderFont()
+: <a class="el" href="d4/d40/classTCPDF.html#a2490e635d8ff11d41b6578bab46acba5">TCPDF</a>
+</li>
+<li>getHeaderMargin()
+: <a class="el" href="d4/d40/classTCPDF.html#af2bfd0376f18244ad8c7aa3a85399c58">TCPDF</a>
+</li>
+<li>getHtmlDomArray()
+: <a class="el" href="d4/d40/classTCPDF.html#a591ae03ca6c5202c19a36d3dccb1eb0a">TCPDF</a>
+</li>
+<li>getHTMLFontUnits()
+: <a class="el" href="d4/d40/classTCPDF.html#ac7f2c7f76bd73f9c6874ec6b3a738a2c">TCPDF</a>
+</li>
+<li>getHTMLUnitToUnits()
+: <a class="el" href="d4/d40/classTCPDF.html#a64e2ec56774d7d3554db999f1910c6b9">TCPDF</a>
+</li>
+<li>getHttpHeader()
+: <a class="el" href="d2/d64/classMobile__Detect.html#ad7c17629ea761134bf1e03217081b6af">Mobile_Detect</a>
+</li>
+<li>getHttpHeaders()
+: <a class="el" href="d2/d64/classMobile__Detect.html#ab034c46e2883f0895872551fecd4fe1b">Mobile_Detect</a>
+</li>
+<li>getImageBuffer()
+: <a class="el" href="d4/d40/classTCPDF.html#a1a003edf69be144993c85c07a220315c">TCPDF</a>
+</li>
+<li>getImageRBX()
+: <a class="el" href="d4/d40/classTCPDF.html#a67b4394647eef529a62e103d20324a76">TCPDF</a>
+</li>
+<li>getImageRBY()
+: <a class="el" href="d4/d40/classTCPDF.html#a0368d51e3742f13e5972b2e2f7d6fd28">TCPDF</a>
+</li>
+<li>getImageScale()
+: <a class="el" href="d4/d40/classTCPDF.html#a3cfc462353c8c404e621556232319d81">TCPDF</a>
+</li>
+<li>getIndirectObject()
+: <a class="el" href="dc/d97/classTCPDF__PARSER.html#a82261e6a27d39b7a9ca7c38695e24e30">TCPDF_PARSER</a>
+</li>
+<li>getInternalPageNumberAliases()
+: <a class="el" href="d4/d40/classTCPDF.html#adaef81b9b034e5d10c56b3f2fea83175">TCPDF</a>
+</li>
+<li>getLastH()
+: <a class="el" href="d4/d40/classTCPDF.html#afe93f88db5be010a17cdf7c5ba4b9b10">TCPDF</a>
+</li>
+<li>GetLineWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#a9dd28e7bb04ba8f881492d06f501bce5">TCPDF</a>
+</li>
+<li>getMargins()
+: <a class="el" href="d4/d40/classTCPDF.html#ae9bd660bf5b5e00eea82f1168cc67b5b">TCPDF</a>
+</li>
+<li>getMatchesArray()
+: <a class="el" href="d2/d64/classMobile__Detect.html#ad587697caea2aecc30fac7c5718ea7e8">Mobile_Detect</a>
+</li>
+<li>getMatchingRegex()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a367c007518aec320c368d74b7b1916e0">Mobile_Detect</a>
+</li>
+<li>getMobileDetectionRules()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a78c778135dd75bd74565ec7b7fa79785">Mobile_Detect</a>
+</li>
+<li>getMobileDetectionRulesExtended()
+: <a class="el" href="d2/d64/classMobile__Detect.html#ab8598553c0b260632f8f21851648fc7e">Mobile_Detect</a>
+</li>
+<li>getMobileHeaders()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a339389975b67bc981f39791b38cce6ef">Mobile_Detect</a>
+</li>
+<li>getNumberOfColumns()
+: <a class="el" href="d4/d40/classTCPDF.html#a32dee1790e5a2b68404a76c117872b57">TCPDF</a>
+</li>
+<li>GetNumChars()
+: <a class="el" href="d4/d40/classTCPDF.html#ac9dc6318fd217971aff282532ab91e43">TCPDF</a>
+</li>
+<li>getNumLines()
+: <a class="el" href="d4/d40/classTCPDF.html#af5cab8b0e1e29a3ee19a14007e37bd99">TCPDF</a>
+</li>
+<li>getNumPages()
+: <a class="el" href="d4/d40/classTCPDF.html#a9612d9b2bafafa217fc425a6dae4e5ac">TCPDF</a>
+</li>
+<li>getObjectVal()
+: <a class="el" href="dc/d97/classTCPDF__PARSER.html#a460eb622517934a3323a87b3d4d792a8">TCPDF_PARSER</a>
+</li>
+<li>getOperatingSystems()
+: <a class="el" href="d2/d64/classMobile__Detect.html#aef8223b63410cec4485b05e643c8c344">Mobile_Detect</a>
+</li>
+<li>getOriginalMargins()
+: <a class="el" href="d4/d40/classTCPDF.html#a0cee973f21b885929d2c71c28782adac">TCPDF</a>
+</li>
+<li>getOverprint()
+: <a class="el" href="d4/d40/classTCPDF.html#a26b593699320edd0a9e49fdf7acc0758">TCPDF</a>
+</li>
+<li>getPage()
+: <a class="el" href="d4/d40/classTCPDF.html#aa6e5b824889f7c484cc76ce1c134e2ed">TCPDF</a>
+</li>
+<li>getPageBuffer()
+: <a class="el" href="d4/d40/classTCPDF.html#a4d67b0a8681222f71fa9f9f6e65e0c56">TCPDF</a>
+</li>
+<li>getPageDimensions()
+: <a class="el" href="d4/d40/classTCPDF.html#a62e82c3bdf531f0c898926124696e77e">TCPDF</a>
+</li>
+<li>getPageGroupAlias()
+: <a class="el" href="d4/d40/classTCPDF.html#af73382321461f24798a639c2f433a67f">TCPDF</a>
+</li>
+<li>getPageHeight()
+: <a class="el" href="d4/d40/classTCPDF.html#a8c7be67402e96a5220556cfa9db8500a">TCPDF</a>
+</li>
+<li>getPageNumGroupAlias()
+: <a class="el" href="d4/d40/classTCPDF.html#a015d1f6a5d39877206bf2b12163eddcc">TCPDF</a>
+</li>
+<li>getPageRegions()
+: <a class="el" href="d4/d40/classTCPDF.html#aca0a3c26e95c17b68bd0a5420f88629b">TCPDF</a>
+</li>
+<li>getPageWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#a510ab21d6a373934bcd3bd4683704b7e">TCPDF</a>
+</li>
+<li>getParsedData()
+: <a class="el" href="dc/d97/classTCPDF__PARSER.html#a3a8f69d765e789ca035d7cc085ab0d3b">TCPDF_PARSER</a>
+</li>
+<li>getPDFData()
+: <a class="el" href="d4/d40/classTCPDF.html#a1cff8ee966955eb911a71e2535735683">TCPDF</a>
+</li>
+<li>getPhoneDevices()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a3db27adceaa61c338c269cd9e6ad1314">Mobile_Detect</a>
+</li>
+<li>getProperties()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a33bc58152e88e5a561e0f541f685cda7">Mobile_Detect</a>
+</li>
+<li>getRawCharWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#af484c6dc7debd34e2310f9f391448de7">TCPDF</a>
+</li>
+<li>getRawObject()
+: <a class="el" href="dc/d97/classTCPDF__PARSER.html#ae31adaa0b6bcc9e365dfe2b13ba0fa7a">TCPDF_PARSER</a>
+</li>
+<li>getRemainingWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#a56507b79d0b3c74332aaacc32dab873a">TCPDF</a>
+</li>
+<li>getRTL()
+: <a class="el" href="d4/d40/classTCPDF.html#af01238bb928c4e3de6ed6aaa855fd788">TCPDF</a>
+</li>
+<li>getRules()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a3e8110c07d23c388b09ecc7d841c65f7">Mobile_Detect</a>
+</li>
+<li>getScaleFactor()
+: <a class="el" href="d4/d40/classTCPDF.html#aae92c359fcd3d68b063b38de2a92aa51">TCPDF</a>
+</li>
+<li>getScriptVersion()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a94eb5944759153394f9a7566d8373ce5">Mobile_Detect</a>
+</li>
+<li>getSignatureAppearanceArray()
+: <a class="el" href="d4/d40/classTCPDF.html#ae80e86c6d3f113518cb28a1b0aa3bebc">TCPDF</a>
+</li>
+<li>getSpaceString()
+: <a class="el" href="d4/d40/classTCPDF.html#a623785c4dc57739d845b36e810704a89">TCPDF</a>
+</li>
+<li>getStringHeight()
+: <a class="el" href="d4/d40/classTCPDF.html#ad68e86a862fe437a8ac1728cecaaa2e9">TCPDF</a>
+</li>
+<li>GetStringWidth()
+: <a class="el" href="d4/d40/classTCPDF.html#a8075c1f04b6fbddc957cff786c4b16d9">TCPDF</a>
+</li>
+<li>getTabletDevices()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a0093c8973de532cdcb84e6cd4f97f398">Mobile_Detect</a>
+</li>
+<li>getTextShadow()
+: <a class="el" href="d4/d40/classTCPDF.html#aaabaabe0dbda7572c99b84af46a64a36">TCPDF</a>
+</li>
+<li>getUaHttpHeaders()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a80a107f0609e648e1214252f88c8be8f">Mobile_Detect</a>
+</li>
+<li>getUserAgent()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a338d945e766446b0a6ad1490f621ff12">Mobile_Detect</a>
+</li>
+<li>getUserAgents()
+: <a class="el" href="d2/d64/classMobile__Detect.html#a99c481499b511997e1f138f8fd71c7cc">Mobile_Detect</a>
+</li>
+<li>getUtilities()
+: <a class="el" href="d2/d64/classMobile__Detect.html#aa4dd3d079fcb2dc1ff5650105cc7cf7a">Mobile_Detect</a>
+</li>
+<li>GetX()
+: <a class="el" href="d4/d40/classTCPDF.html#a415a80a301208fa77552048b27d2e0ce">TCPDF</a>
+</li>
+<li>getXrefData()
+: <a class="el" href="dc/d97/classTCPDF__PARSER.html#ad21e0add72ffcd22636e9f9c2f6c18b8">TCPDF_PARSER</a>
+</li>
+<li>GetY()
+: <a class="el" href="d4/d40/classTCPDF.html#ae3b6169ba729309f289a5ac9680dd799">TCPDF</a>
+</li>
+<li>Googlemaps()
+: <a class="el" href="d6/d5d/classGooglemaps.html#a644a23994bbe692f180c7629947a0216">Googlemaps</a>
+</li>
+<li>Gradient()
+: <a class="el" href="d4/d40/classTCPDF.html#ab4f165583b4f50a0a0bbf81eb346e4bb">TCPDF</a>
+</li>
+<li>grado_digital_x_busqueda()
+: <a class="el" href="d7/d41/classResumen__estadistico__model.html#a70fc886d9f346191a4012c2bd3e290d0">Resumen_estadistico_model</a>
+</li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>
