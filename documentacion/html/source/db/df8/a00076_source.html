@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAPmodels/centros_educativos_model.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">4.2.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_560a2433a989a7bc22cbf7568f0e17bc.html">models</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">centros_educativos_model.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../db/df8/a00076.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php <span class="keywordflow">if</span>(! defined(<span class="stringliteral">&#39;BASEPATH&#39;</span>)) exit(<span class="stringliteral">&#39;No direct script access allowed&#39;</span>);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d0/d0b/a00004.html">Centros_educativos_model</a> <span class="keyword">extends</span> CI_Model{</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#a095c5d389db211932136b53f25f39685">    7</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#a095c5d389db211932136b53f25f39685">__construct</a>(){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        parent::__construct();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        $this-&gt;load-&gt;database();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#ad743ed9a36164565e2fb4db3edc05c81">   15</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#ad743ed9a36164565e2fb4db3edc05c81">lista_centros_educativos</a>(){</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        $lista_centros_educativos[<span class="stringliteral">&#39;&#39;</span>] = <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;id_centro_educativo, nombre_centro_educativo&#39;</span>)-&gt;order_by(<span class="stringliteral">&#39;nombre_centro_educativo&#39;</span>, <span class="stringliteral">&#39;asc&#39;</span>)-&gt;get(<span class="stringliteral">&#39;centros_educativos&#39;</span>);</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        <span class="keywordflow">foreach</span>($query-&gt;result() as <a class="code" href="../../da/d72/a00124.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a>){</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            $lista_centros_educativos[<a class="code" href="../../da/d72/a00124.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a>-&gt;id_centro_educativo] = utf8(<a class="code" href="../../da/d72/a00124.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a>-&gt;nombre_centro_educativo);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        }</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        <span class="keywordflow">return</span> $lista_centros_educativos;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    }</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#a02b1533d33c676a1b199bdc02fa760eb">   28</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#a02b1533d33c676a1b199bdc02fa760eb">centros_educativos</a>(){</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;id_centro_educativo, codigo_centro_educativo, nombre_centro_educativo, id_departamento, id_municipio&#39;</span>)-&gt;get(<span class="stringliteral">&#39;centros_educativos&#39;</span>);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    </div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#a93669b840329d6aff9714021cda28d6e">   37</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#a93669b840329d6aff9714021cda28d6e">centro_educativo</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;id_centro_educativo, codigo_centro_educativo, nombre_centro_educativo, id_departamento, id_municipio&#39;</span>)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                          -&gt;get_where(<span class="stringliteral">&#39;centros_educativos&#39;</span>, array(<span class="stringliteral">&#39;id_centro_educativo&#39;</span> =&gt; <a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>));</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    }</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#a1b7cc2149df2975fcfa7908a34c9d69f">   52</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#a1b7cc2149df2975fcfa7908a34c9d69f">nombre_centro_educativo</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT F_NombreCentroEducativo(?) nombre_centro_educativo&#39;</span>, array(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>));</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">if</span>($query-&gt;row())</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            <span class="keywordflow">return</span> utf8($query-&gt;result()[0]-&gt;nombre_centro_educativo);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#a237631ac494e8de2390823237e4bb67f">   64</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#a237631ac494e8de2390823237e4bb67f">modificar</a>($datos, <a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        $this-&gt;db-&gt;update(<span class="stringliteral">&#39;centros_educativos&#39;</span>, $datos, array(<span class="stringliteral">&#39;id_centro_educativo&#39;</span> =&gt; <a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    </div>
+<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#a17491c524b39e2607282e5f8d14fe44d">   72</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#a17491c524b39e2607282e5f8d14fe44d">docentes_capacitados</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">return</span> $this-&gt;<a class="code" href="../../d0/d0b/a00004.html#ac521e413e466506a482f42505612b279">_listado_docentes</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>, <span class="stringliteral">&#39;capacitado&#39;</span>);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    </div>
+<div class="line"><a name="l00080"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#ab4bb4338bca84d6fd8d488756ee2b164">   80</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#ab4bb4338bca84d6fd8d488756ee2b164">docentes_certificados</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="keywordflow">return</span> $this-&gt;<a class="code" href="../../d0/d0b/a00004.html#ac521e413e466506a482f42505612b279">_listado_docentes</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>, <span class="stringliteral">&#39;certificado&#39;</span>);</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#ac521e413e466506a482f42505612b279">   96</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#ac521e413e466506a482f42505612b279">_listado_docentes</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>, $tipo_capacitado){</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        $certificacion_usuario = $tipo_capacitado == <span class="stringliteral">&#39;certificado&#39;</span> ? <span class="stringliteral">&#39;, nombre_examen certificacion_usuario&#39;</span> : <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        $query = $this-&gt;db-&gt;distinct(TRUE)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                          -&gt;select(<span class="stringliteral">&#39;id_usuario, F_NombreCompletoUsuario(id_usuario) nombre_completo_usuario&#39;</span>.$certificacion_usuario)</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                          -&gt;like(<span class="stringliteral">&#39;tipo_capacitado&#39;</span>, $tipo_capacitado, <span class="stringliteral">&#39;none&#39;</span>)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;                          -&gt;where(array(<span class="stringliteral">&#39;id_tipo_usuario BETWEEN 5 AND 8 AND 1 =&#39;</span> =&gt; <span class="charliteral">&#39;1&#39;</span>, <span class="stringliteral">&#39;modalidad_usuario&#39;</span> =&gt; <span class="stringliteral">&#39;tutorizado&#39;</span>, <span class="stringliteral">&#39;id_centro_educativo&#39;</span> =&gt; <a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>))</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                          -&gt;order_by(<span class="stringliteral">&#39;nombre_completo_usuario&#39;</span>, <span class="stringliteral">&#39;asc&#39;</span>)</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                          -&gt;get(<span class="stringliteral">&#39;V_Estadisticas&#39;</span>);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    }</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    </div>
+<div class="line"><a name="l00111"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#ab6fa7cc0644ff069f12c78db3ba124d1">  111</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#ab6fa7cc0644ff069f12c78db3ba124d1">validar_centro_educativo</a>(<a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;        $query = $this-&gt;db-&gt;get_where(<span class="stringliteral">&#39;centros_educativos&#39;</span>, array(<span class="stringliteral">&#39;id_centro_educativo&#39;</span> =&gt; <a class="code" href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>));</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    }</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;    </div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="../../d0/d0b/a00004.html#ad9d1e82cd367defdee7ea76ca99928df">  120</a></span>&#160;    <span class="keyword">public</span> <span class="keyword">function</span> <a class="code" href="../../d0/d0b/a00004.html#ad9d1e82cd367defdee7ea76ca99928df">buscar_centro_educativo</a>(<a class="code" href="../../d9/dec/a00090.html#a083652d4ec03ea436d28f4d5537c3ca7">$nombre_centro_educativo</a>){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;id_centro_educativo, nombre_centro_educativo&#39;</span>)-&gt;like(<span class="stringliteral">&#39;LOWER(nombre_centro_educativo)&#39;</span>, strtolower(<a class="code" href="../../d9/dec/a00090.html#a083652d4ec03ea436d28f4d5537c3ca7">$nombre_centro_educativo</a>))-&gt;get(<span class="stringliteral">&#39;centros_educativos&#39;</span>, 50);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">if</span>($query-&gt;num_rows() &gt; 0) {</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">return</span> FALSE;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;        }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;}</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="comment">/* End of file centros_educativos_model.php */</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="comment">/* Location: ./application/models/centros_educativos_model.php */</span></div>
+<div class="ttc" id="a00004_html_a237631ac494e8de2390823237e4bb67f"><div class="ttname"><a href="../../d0/d0b/a00004.html#a237631ac494e8de2390823237e4bb67f">Centros_educativos_model\modificar</a></div><div class="ttdeci">modificar($datos, $codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00064">centros_educativos_model.php:64</a></div></div>
+<div class="ttc" id="a00090_html_ae23b5b4a32786317576d70be0121f5f6"><div class="ttname"><a href="../../d9/dec/a00090.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a></div><div class="ttdeci">$codigo_centro_educativo</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dec/a00090_source.html#l00076">formulario_centros_educativos_view.php:76</a></div></div>
+<div class="ttc" id="a00004_html_ad743ed9a36164565e2fb4db3edc05c81"><div class="ttname"><a href="../../d0/d0b/a00004.html#ad743ed9a36164565e2fb4db3edc05c81">Centros_educativos_model\lista_centros_educativos</a></div><div class="ttdeci">lista_centros_educativos()</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00015">centros_educativos_model.php:15</a></div></div>
+<div class="ttc" id="a00124_html_a27ab1abbd79ce3498c170958c4a10013"><div class="ttname"><a href="../../da/d72/a00124.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a></div><div class="ttdeci">$centro_educativo</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d72/a00124_source.html#l00002">consultar_usuarios_view.php:2</a></div></div>
+<div class="ttc" id="a00004_html_a17491c524b39e2607282e5f8d14fe44d"><div class="ttname"><a href="../../d0/d0b/a00004.html#a17491c524b39e2607282e5f8d14fe44d">Centros_educativos_model\docentes_capacitados</a></div><div class="ttdeci">docentes_capacitados($codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00072">centros_educativos_model.php:72</a></div></div>
+<div class="ttc" id="a00004_html_a095c5d389db211932136b53f25f39685"><div class="ttname"><a href="../../d0/d0b/a00004.html#a095c5d389db211932136b53f25f39685">Centros_educativos_model\__construct</a></div><div class="ttdeci">__construct()</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00007">centros_educativos_model.php:7</a></div></div>
+<div class="ttc" id="a00004_html_ab4bb4338bca84d6fd8d488756ee2b164"><div class="ttname"><a href="../../d0/d0b/a00004.html#ab4bb4338bca84d6fd8d488756ee2b164">Centros_educativos_model\docentes_certificados</a></div><div class="ttdeci">docentes_certificados($codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00080">centros_educativos_model.php:80</a></div></div>
+<div class="ttc" id="a00004_html_ab6fa7cc0644ff069f12c78db3ba124d1"><div class="ttname"><a href="../../d0/d0b/a00004.html#ab6fa7cc0644ff069f12c78db3ba124d1">Centros_educativos_model\validar_centro_educativo</a></div><div class="ttdeci">validar_centro_educativo($codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00111">centros_educativos_model.php:111</a></div></div>
+<div class="ttc" id="a00004_html_a02b1533d33c676a1b199bdc02fa760eb"><div class="ttname"><a href="../../d0/d0b/a00004.html#a02b1533d33c676a1b199bdc02fa760eb">Centros_educativos_model\centros_educativos</a></div><div class="ttdeci">centros_educativos()</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00028">centros_educativos_model.php:28</a></div></div>
+<div class="ttc" id="a00004_html_a1b7cc2149df2975fcfa7908a34c9d69f"><div class="ttname"><a href="../../d0/d0b/a00004.html#a1b7cc2149df2975fcfa7908a34c9d69f">Centros_educativos_model\nombre_centro_educativo</a></div><div class="ttdeci">nombre_centro_educativo($codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00052">centros_educativos_model.php:52</a></div></div>
+<div class="ttc" id="a00004_html_a93669b840329d6aff9714021cda28d6e"><div class="ttname"><a href="../../d0/d0b/a00004.html#a93669b840329d6aff9714021cda28d6e">Centros_educativos_model\centro_educativo</a></div><div class="ttdeci">centro_educativo($codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00037">centros_educativos_model.php:37</a></div></div>
+<div class="ttc" id="a00004_html_ad9d1e82cd367defdee7ea76ca99928df"><div class="ttname"><a href="../../d0/d0b/a00004.html#ad9d1e82cd367defdee7ea76ca99928df">Centros_educativos_model\buscar_centro_educativo</a></div><div class="ttdeci">buscar_centro_educativo($nombre_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00120">centros_educativos_model.php:120</a></div></div>
+<div class="ttc" id="a00004_html_ac521e413e466506a482f42505612b279"><div class="ttname"><a href="../../d0/d0b/a00004.html#ac521e413e466506a482f42505612b279">Centros_educativos_model\_listado_docentes</a></div><div class="ttdeci">_listado_docentes($codigo_centro_educativo, $tipo_capacitado)</div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00096">centros_educativos_model.php:96</a></div></div>
+<div class="ttc" id="a00004_html"><div class="ttname"><a href="../../d0/d0b/a00004.html">Centros_educativos_model</a></div><div class="ttdef"><b>Definition:</b> <a href="../../db/df8/a00076_source.html#l00006">centros_educativos_model.php:6</a></div></div>
+<div class="ttc" id="a00090_html_a083652d4ec03ea436d28f4d5537c3ca7"><div class="ttname"><a href="../../d9/dec/a00090.html#a083652d4ec03ea436d28f4d5537c3ca7">$nombre_centro_educativo</a></div><div class="ttdeci">$nombre_centro_educativo</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dec/a00090_source.html#l00064">formulario_centros_educativos_view.php:64</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>

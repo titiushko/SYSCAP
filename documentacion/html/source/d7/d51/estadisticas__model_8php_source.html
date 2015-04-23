@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAP/application/models/estadisticas_model.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">4.2.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_560a2433a989a7bc22cbf7568f0e17bc.html">models</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">estadisticas_model.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d7/d51/estadisticas__model_8php.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php <span class="keywordflow">if</span>(! defined(<span class="stringliteral">&#39;BASEPATH&#39;</span>)) exit(<span class="stringliteral">&#39;No direct script access allowed&#39;</span>);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/d7b/classEstadisticas__model.html">Estadisticas_model</a> <span class="keyword">extends</span> CI_Model{</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a095c5d389db211932136b53f25f39685">    7</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a095c5d389db211932136b53f25f39685">__construct</a>(){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        parent::__construct();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        $this-&gt;load-&gt;database();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a7d0b6985c5a9a6d6a0186c9393f1092a">   18</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a7d0b6985c5a9a6d6a0186c9393f1092a">modalidades_capacitados</a>($fecha1, $fecha2, $tipo_capacitado = <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        <span class="keywordflow">if</span>($tipo_capacitado != <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;            $filtro = <span class="stringliteral">&#39; AND tipo_capacitado = ?&#39;</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            $parametros = array($fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        }</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            $filtro = <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            $parametros = array($fecha1, $fecha2, $fecha1, $fecha2, $fecha1, $fecha2);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT \&#39;Capacitados\&#39; tipos_capacitados,</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado LIKE \&#39;capacitado\&#39; AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro.<span class="stringliteral">&#39;</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Certificados\&#39; tipos_capacitados,</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado LIKE \&#39;certificado\&#39; AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro.<span class="stringliteral">&#39;</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Total\&#39; tipos_capacitados,</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="stringliteral">                                   WHERE fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro, $parametros);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    </div>
+<div class="line"><a name="l00052"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a1f8f10ac27b24f3cfbe140ab39468bba">   52</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a1f8f10ac27b24f3cfbe140ab39468bba">cantidad_usuarios_municipio</a>($codigo_departamento, $fecha1, $fecha2){</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT DISTINCT nombre_municipio,</span></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;capacitado\&#39; THEN 1 ELSE 0 END) capacitados,</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;certificado\&#39; THEN 1 ELSE 0 END) certificados</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="stringliteral">                                   WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="stringliteral">                                   GROUP BY nombre_municipio</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="stringliteral">                                   SELECT DISTINCT \&#39;Total\&#39; nombre_municipio,</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;capacitado\&#39; THEN 1 ELSE 0 END) capacitados,</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;certificado\&#39; THEN 1 ELSE 0 END) certificados</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="stringliteral">                                   WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>,</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                                   array($codigo_departamento, $fecha1, $fecha2, $codigo_departamento, $fecha1, $fecha2));</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    }</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    </div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a1d12b5d6b3618127d6dd345eae8a4107">   74</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a1d12b5d6b3618127d6dd345eae8a4107">usuarios_municipio</a>($codigo_departamento, $fecha1, $fecha2){</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT nombre_municipio, nombre_usuario, initcap(modalidad_usuario) modalidad_usuario</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="stringliteral">                                   WHERE id_departamento = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="stringliteral">                                   ORDER BY nombre_municipio&#39;</span>, array($codigo_departamento, $fecha1, $fecha2));</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    </div>
+<div class="line"><a name="l00088"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#ac78ecabd7e7a1b74d74623a1a2331650">   88</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#ac78ecabd7e7a1b74d74623a1a2331650">usuarios_departamento_municipio</a>($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        <span class="keywordflow">if</span>($tipo_capacitado != <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;            $filtro = <span class="stringliteral">&#39; AND tipo_capacitado = ?&#39;</span>;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            $parametros = array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        }</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;            $filtro = <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            $parametros = array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $codigo_departamento, $codigo_municipio, $fecha1, $fecha2);</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        }</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT nombre_centro_educativo,</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;capacitado\&#39; THEN 1 ELSE 0 END) capacitados,</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;certificado\&#39; THEN 1 ELSE 0 END) certificados</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="stringliteral">                                   WHERE id_departamento = ? AND id_municipio = ?</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="stringliteral">                                   AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro.<span class="stringliteral">&#39;</span></div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="stringliteral">                                   GROUP BY nombre_centro_educativo</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Total\&#39; nombre_centro_educativo,</span></div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;capacitado\&#39; THEN 1 ELSE 0 END) capacitados,</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;certificado\&#39; THEN 1 ELSE 0 END) certificados</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="stringliteral">                                   WHERE id_departamento = ? AND id_municipio = ?</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="stringliteral">                                   AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro, $parametros);</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    </div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#ad1d27936ddd8b6292d606f411ee570f9">  120</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#ad1d27936ddd8b6292d606f411ee570f9">usuarios_centro_educativo</a>($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado = <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        <span class="keywordflow">if</span>($tipo_capacitado != <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            $filtro = <span class="stringliteral">&#39; AND tipo_capacitado = ?&#39;</span>;</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            $parametros = array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado);</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;        }</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            $filtro = <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;            $parametros = array($codigo_departamento, $codigo_municipio, $fecha1, $fecha2);</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        }</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT nombre_centro_educativo, nombre_usuario, tipo_capacitado, initcap(modalidad_usuario) modalidad_usuario</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="stringliteral">                                   WHERE id_departamento = ? AND id_municipio = ?</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="stringliteral">                                   AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro, $parametros);</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    }</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    </div>
+<div class="line"><a name="l00142"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a098f9fb9fbae78dcd3868667d0f7610d">  142</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a098f9fb9fbae78dcd3868667d0f7610d">estaditicas_departamento_fechas</a>($fecha1, $fecha2, $tipo_capacitado = <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        <span class="keywordflow">if</span>($tipo_capacitado != <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;            $filtro = <span class="stringliteral">&#39; AND tipo_capacitado = ?&#39;</span>;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            $parametros = array($fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        }</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            $filtro = <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;            $parametros = array($fecha1, $fecha2, $fecha1, $fecha2);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        }</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT (CASE WHEN nombre_departamento IS NULL THEN \&#39;Sin Departamento *\&#39; ELSE nombre_departamento END) nombre_departamento,</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;capacitado\&#39; THEN 1 ELSE 0 END) capacitados,</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;certificado\&#39; THEN 1 ELSE 0 END) certificados</span></div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="stringliteral">                                   WHERE fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro.<span class="stringliteral">&#39;</span></div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="stringliteral">                                   GROUP BY nombre_departamento</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Total\&#39; nombre_departamento,</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;capacitado\&#39; THEN 1 ELSE 0 END) capacitados,</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN tipo_capacitado LIKE \&#39;certificado\&#39; THEN 1 ELSE 0 END) certificados</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="stringliteral">                                   WHERE fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>.$filtro, $parametros);</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    }</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    </div>
+<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a00f749f9a956e0ba1c8836eb02b84490">  171</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a00f749f9a956e0ba1c8836eb02b84490">estaditicas_departamento_tipo_fechas</a>($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2){</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT DISTINCT nombre_municipio,</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizado,</span></div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND id_departamento = ?</span></div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="stringliteral">                                   AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;<span class="stringliteral">                                   GROUP BY nombre_municipio</span></div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="stringliteral">                                   SELECT DISTINCT \&#39;Total\&#39; nombre_municipio,</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizado,</span></div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND id_departamento = ?</span></div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="stringliteral">                                   AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>,</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                                   array($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2, $tipo_capacitado, $codigo_departamento, $fecha1, $fecha2));</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    }</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    </div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a9d1e5d7a51d6c7101c5f727275df0aa7">  195</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a9d1e5d7a51d6c7101c5f727275df0aa7">tipos_capacitados_centro_educativo</a>($tipo_capacitado, <a class="code" href="../../d2/dd8/formulario__centros__educativos__view_8php.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>){</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT \&#39;Tutorizado\&#39; modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) total</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND id_centro_educativo = ?</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Autoformación\&#39; modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) total</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND id_centro_educativo = ?</span></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Total\&#39; modalidad_usuario, SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) + SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) total</span></div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND id_centro_educativo = ?&#39;</span>,</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;                                   array($tipo_capacitado, <a class="code" href="../../d2/dd8/formulario__centros__educativos__view_8php.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>, $tipo_capacitado, <a class="code" href="../../d2/dd8/formulario__centros__educativos__view_8php.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>, $tipo_capacitado, <a class="code" href="../../d2/dd8/formulario__centros__educativos__view_8php.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a>));</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    </div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#a01b888efdb44be4d8ad4c1c83951bcc4">  216</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#a01b888efdb44be4d8ad4c1c83951bcc4">usuarios_nivel_nacional</a>($tipo_capacitado, $fecha1, $fecha2){</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT (CASE WHEN nombre_departamento IS NULL THEN \&#39;Sin Departamento *\&#39; ELSE nombre_departamento END) nombre_departamento, (CASE WHEN nombre_municipio IS NULL THEN \&#39;Sin Municipio **\&#39; ELSE nombre_municipio END) nombre_municipio,</span></div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizado,</span></div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="stringliteral">                                   GROUP BY nombre_departamento, nombre_municipio</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<span class="stringliteral">                                   SELECT NULL nombre_departamento, \&#39;Total\&#39; nombre_municipio,</span></div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizado,</span></div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = ? AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>,</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                   array($tipo_capacitado, $fecha1, $fecha2, $tipo_capacitado, $fecha1, $fecha2));</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    }</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    </div>
+<div class="line"><a name="l00238"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#aef276bfa6b7804081c5aadbe66027a60">  238</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#aef276bfa6b7804081c5aadbe66027a60">usuarios_grado_digital</a>(<a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2){</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT IF(tipo_capacitado IS NULL, \&#39;capacitado\&#39;, tipo_capacitado) tipo_capacitado,</span></div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = \&#39;capacitado\&#39; AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;<span class="stringliteral">                                   SELECT IF(tipo_capacitado IS NULL, \&#39;certificado\&#39;, tipo_capacitado) tipo_capacitado,</span></div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = \&#39;certificado\&#39; AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Total\&#39; tipo_capacitado,</span></div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;<span class="stringliteral">                                   WHERE grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>,</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                                   array(<a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2, <a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2, <a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2));</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    }</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    </div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="../../d5/d7b/classEstadisticas__model.html#ab9a9719be65feaa87b698f06c61c2416">  265</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d7b/classEstadisticas__model.html#ab9a9719be65feaa87b698f06c61c2416">certificaciones_grado_digital</a>(<a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2){</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        $query = $this-&gt;db-&gt;query(<span class="stringliteral">&#39;SELECT nombre_curso_categoria, nombre_completo_curso,</span></div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = \&#39;capacitado\&#39; AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;<span class="stringliteral">                                   GROUP BY 1, 2</span></div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;<span class="stringliteral">                                   SELECT SUBSTRING(nombre_curso_categoria, 18), nombre_completo_curso,</span></div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;<span class="stringliteral">                                   WHERE tipo_capacitado = \&#39;certificado\&#39; AND grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;<span class="stringliteral">                                   GROUP BY 1, 2</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;<span class="stringliteral">                                   UNION</span></div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;<span class="stringliteral">                                   SELECT \&#39;Total\&#39; nombre_curso_categoria, \&#39;Total\&#39; nombre_completo_curso,</span></div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;tutorizado\&#39; THEN 1 ELSE 0 END) tutorizados,</span></div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;<span class="stringliteral">                                   SUM(CASE WHEN modalidad_usuario = \&#39;autoformacion\&#39; THEN 1 ELSE 0 END) autoformacion</span></div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;<span class="stringliteral">                                   FROM V_Estadisticas</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;<span class="stringliteral">                                   WHERE grado_digital = ? AND fecha_examen_calificacion BETWEEN ? AND ?&#39;</span>,</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                                   array(<a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2, <a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2, <a class="code" href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a>, $fecha1, $fecha2));</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    }</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;}</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;<span class="comment">/* End of file estadisticas_model.php */</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;<span class="comment">/* Location: ./application/models/estadisticas_model.php */</span></div>
+<div class="ttc" id="classEstadisticas__model_html_ad1d27936ddd8b6292d606f411ee570f9"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#ad1d27936ddd8b6292d606f411ee570f9">Estadisticas_model\usuarios_centro_educativo</a></div><div class="ttdeci">usuarios_centro_educativo($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado= '')</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00120">estadisticas_model.php:120</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a098f9fb9fbae78dcd3868667d0f7610d"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a098f9fb9fbae78dcd3868667d0f7610d">Estadisticas_model\estaditicas_departamento_fechas</a></div><div class="ttdeci">estaditicas_departamento_fechas($fecha1, $fecha2, $tipo_capacitado= '')</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00142">estadisticas_model.php:142</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_aef276bfa6b7804081c5aadbe66027a60"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#aef276bfa6b7804081c5aadbe66027a60">Estadisticas_model\usuarios_grado_digital</a></div><div class="ttdeci">usuarios_grado_digital($grado_digital, $fecha1, $fecha2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00238">estadisticas_model.php:238</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a01b888efdb44be4d8ad4c1c83951bcc4"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a01b888efdb44be4d8ad4c1c83951bcc4">Estadisticas_model\usuarios_nivel_nacional</a></div><div class="ttdeci">usuarios_nivel_nacional($tipo_capacitado, $fecha1, $fecha2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00216">estadisticas_model.php:216</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_ab9a9719be65feaa87b698f06c61c2416"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#ab9a9719be65feaa87b698f06c61c2416">Estadisticas_model\certificaciones_grado_digital</a></div><div class="ttdeci">certificaciones_grado_digital($grado_digital, $fecha1, $fecha2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00265">estadisticas_model.php:265</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a1f8f10ac27b24f3cfbe140ab39468bba"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a1f8f10ac27b24f3cfbe140ab39468bba">Estadisticas_model\cantidad_usuarios_municipio</a></div><div class="ttdeci">cantidad_usuarios_municipio($codigo_departamento, $fecha1, $fecha2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00052">estadisticas_model.php:52</a></div></div>
+<div class="ttc" id="formulario__centros__educativos__view_8php_html_ae23b5b4a32786317576d70be0121f5f6"><div class="ttname"><a href="../../d2/dd8/formulario__centros__educativos__view_8php.html#ae23b5b4a32786317576d70be0121f5f6">$codigo_centro_educativo</a></div><div class="ttdeci">$codigo_centro_educativo</div><div class="ttdef"><b>Definition:</b> <a href="../../d2/dd8/formulario__centros__educativos__view_8php_source.html#l00076">formulario_centros_educativos_view.php:76</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a9d1e5d7a51d6c7101c5f727275df0aa7"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a9d1e5d7a51d6c7101c5f727275df0aa7">Estadisticas_model\tipos_capacitados_centro_educativo</a></div><div class="ttdeci">tipos_capacitados_centro_educativo($tipo_capacitado, $codigo_centro_educativo)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00195">estadisticas_model.php:195</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a7d0b6985c5a9a6d6a0186c9393f1092a"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a7d0b6985c5a9a6d6a0186c9393f1092a">Estadisticas_model\modalidades_capacitados</a></div><div class="ttdeci">modalidades_capacitados($fecha1, $fecha2, $tipo_capacitado= '')</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00018">estadisticas_model.php:18</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a095c5d389db211932136b53f25f39685"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a095c5d389db211932136b53f25f39685">Estadisticas_model\__construct</a></div><div class="ttdeci">__construct()</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00007">estadisticas_model.php:7</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a00f749f9a956e0ba1c8836eb02b84490"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a00f749f9a956e0ba1c8836eb02b84490">Estadisticas_model\estaditicas_departamento_tipo_fechas</a></div><div class="ttdeci">estaditicas_departamento_tipo_fechas($tipo_capacitado, $codigo_departamento, $fecha1, $fecha2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00171">estadisticas_model.php:171</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_a1d12b5d6b3618127d6dd345eae8a4107"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#a1d12b5d6b3618127d6dd345eae8a4107">Estadisticas_model\usuarios_municipio</a></div><div class="ttdeci">usuarios_municipio($codigo_departamento, $fecha1, $fecha2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00074">estadisticas_model.php:74</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html_ac78ecabd7e7a1b74d74623a1a2331650"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html#ac78ecabd7e7a1b74d74623a1a2331650">Estadisticas_model\usuarios_departamento_municipio</a></div><div class="ttdeci">usuarios_departamento_municipio($codigo_departamento, $codigo_municipio, $fecha1, $fecha2, $tipo_capacitado= '')</div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00088">estadisticas_model.php:88</a></div></div>
+<div class="ttc" id="resumen__estadistico__view_8php_html_aefe56eed02db6adde027fad20fb640c4"><div class="ttname"><a href="../../d0/de9/resumen__estadistico__view_8php.html#aefe56eed02db6adde027fad20fb640c4">$grado_digital</a></div><div class="ttdeci">$grado_digital</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/de9/resumen__estadistico__view_8php_source.html#l00037">resumen_estadistico_view.php:37</a></div></div>
+<div class="ttc" id="classEstadisticas__model_html"><div class="ttname"><a href="../../d5/d7b/classEstadisticas__model.html">Estadisticas_model</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d7/d51/estadisticas__model_8php_source.html#l00006">estadisticas_model.php:6</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>

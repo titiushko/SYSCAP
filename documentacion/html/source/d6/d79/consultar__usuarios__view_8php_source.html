@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAP/application/views/usuarios/consultar_usuarios_view.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">4.2.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>PÃ¡gina&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_2840c8f4bc0d8831d2fd44fe1dfaaed1.html">views</a></li><li class="navelem"><a class="el" href="../../dir_78dc929df72c8f089bcb8e7ba3fadc3d.html">usuarios</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">consultar_usuarios_view.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d6/d79/consultar__usuarios__view_8php.html">Ir a la documentaciÃ³n de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php</div>
+<div class="line"><a name="l00002"></a><span class="lineno"><a class="line" href="../../d6/d79/consultar__usuarios__view_8php.html#a27ab1abbd79ce3498c170958c4a10013">    2</a></span>&#160;<a class="code" href="../../d6/d79/consultar__usuarios__view_8php.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a> = array (</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;    <span class="stringliteral">&#39;name&#39;</span>          =&gt; <span class="stringliteral">&#39;centro_educativo&#39;</span>,</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <span class="stringliteral">&#39;id&#39;</span>            =&gt; <span class="stringliteral">&#39;centro_educativo&#39;</span>,</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <span class="stringliteral">&#39;type&#39;</span>          =&gt; <span class="stringliteral">&#39;text&#39;</span>,</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="stringliteral">&#39;autocomplete&#39;</span>  =&gt; <span class="stringliteral">&#39;off&#39;</span>,</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    <span class="stringliteral">&#39;placeholder&#39;</span>   =&gt; <span class="stringliteral">&#39;Buscar Centro Educativo&#39;</span>,</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    <span class="stringliteral">&#39;class&#39;</span>         =&gt; <span class="stringliteral">&#39;form-control&#39;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;?&gt;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;&lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;page-wrapper&quot;</span>&gt;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;row&quot;</span>&gt;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;col-lg-12&quot;</span>&gt;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;            &lt;h1 <span class="keyword">class</span>=<span class="stringliteral">&quot;well page-header&quot;</span>&gt;&lt;i <span class="keyword">class</span>=<span class="stringliteral">&quot;fa fa-users fa-fw&quot;</span>&gt;&lt;/i&gt; Módulo de <a class="code" href="../../df/daa/classUsuarios.html">Usuarios</a>&lt;/h1&gt;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        &lt;/div&gt;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;    &lt;/div&gt;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;row&quot;</span>&gt;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;col-lg-12&quot;</span>&gt;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;panel panel-primary&quot;</span>&gt;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;panel-heading&quot;</span>&gt;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;                    &lt;?= heading(<span class="stringliteral">&#39;Lista de Usuarios&#39;</span>, 2); ?&gt;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                &lt;/div&gt;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;panel-body&quot;</span>&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;row&quot;</span>&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                        &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;col-lg-12&quot;</span>&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                            &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;form-group&quot;</span>&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                &lt;?= form_label(<span class="stringliteral">&#39;Centro Educativo:&#39;</span>); ?&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                                &lt;?= form_input(<a class="code" href="../../d6/d79/consultar__usuarios__view_8php.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a>); ?&gt;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                                &lt;div <span class="keywordtype">id</span>=<span class="stringliteral">&quot;resultado-centro_educativo&quot;</span>&gt;&lt;/div&gt;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                            &lt;/div&gt;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                        &lt;/div&gt;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;                    &lt;/div&gt;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                    &lt;div <span class="keyword">class</span>=<span class="stringliteral">&quot;table-responsive&quot;</span>&gt;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                        &lt;table <span class="keyword">class</span>=<span class="stringliteral">&quot;table table-striped table-bordered table-hover&quot;</span> <span class="keywordtype">id</span>=<span class="stringliteral">&quot;data-tables-usuarios&quot;</span>&gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                            &lt;thead&gt;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                                &lt;tr&gt;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;                                    &lt;th&gt;Centro Educativo&lt;/th&gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                                    &lt;th&gt;Usuario&lt;/th&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                    &lt;th&gt;Nombre&lt;/th&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                                    &lt;th&gt;DUI&lt;/th&gt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                                    &lt;th&gt;Correo Electrónico&lt;/th&gt;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                &lt;/tr&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                            &lt;/thead&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                            &lt;tbody&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                                &lt;?php <span class="keywordflow">foreach</span>($lista_usuarios as $usuario){ ?&gt;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                                &lt;tr onclick=<span class="stringliteral">&quot;redireccionar(&#39;&lt;?= base_url(&#39;usuarios/mostrar/&#39;.$usuario-&gt;id_usuario); ?&gt;&#39;);&quot;</span> style=<span class="stringliteral">&quot;cursor: pointer;&quot;</span> title=<span class="stringliteral">&quot;Clic para ver información de &lt;?= utf8($this-&gt;usuarios_model-&gt;nombre_completo_usuario($usuario-&gt;id_usuario)); ?&gt;&quot;</span>&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                                    &lt;td&gt;&lt;?= utf8($usuario-&gt;nombre_centro_educativo); ?&gt;&lt;/td&gt;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                                    &lt;td&gt;&lt;?= utf8($usuario-&gt;nombre_usuario); ?&gt;&lt;/td&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                                    &lt;td&gt;&lt;?= utf8($usuario-&gt;nombre_completo_usuario); ?&gt;&lt;/td&gt;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                                    &lt;td&gt;&lt;?= formato_dui($usuario-&gt;dui_usuario); ?&gt;&lt;/td&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                                    &lt;td&gt;&lt;?= $usuario-&gt;correo_electronico_usuario; ?&gt;&lt;/td&gt;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                                &lt;/tr&gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                                &lt;?php } ?&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                            &lt;/tbody&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                        &lt;/table&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    &lt;/div&gt;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                &lt;/div&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            &lt;/div&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        &lt;/div&gt;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    &lt;/div&gt;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;&lt;/div&gt;</div>
+<div class="line"><a name="l00062"></a><span class="lineno"><a class="line" href="../../d6/d79/consultar__usuarios__view_8php.html#ac9ba029e37ded1de2aadc36c74f9cbb5">   62</a></span>&#160;&lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span> src=<span class="stringliteral">&quot;&lt;?= base_url(); ?&gt;resources/plugins/data-tables/js/data-tables.jquery.js&quot;</span>&gt;&lt;/script&gt;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;&lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span> src=<span class="stringliteral">&quot;&lt;?= base_url(); ?&gt;resources/plugins/data-tables/js/data-tables.bootstrap.js&quot;</span>&gt;&lt;/script&gt;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;&lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span> src=<span class="stringliteral">&quot;&lt;?= base_url(); ?&gt;resources/plugins/data-tables/js/data-tables.colvis.js&quot;</span>&gt;&lt;/script&gt;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;&lt;script type=<span class="stringliteral">&quot;text/javascript&quot;</span>&gt;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    $(document).ready(<span class="keyword">function</span>(){</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        $(<span class="stringliteral">&#39;#data-tables-usuarios&#39;</span>).dataTable({</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            language:{</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                url: <span class="stringliteral">&#39;&lt;?= base_url(); ?&gt;resources/plugins/data-tables/js/spanish_language.json&#39;</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;            },</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;            columnDefs: [{visible: <span class="keyword">false</span>, targets: 0}]</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        });</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        $(<span class="stringliteral">&quot;#centro_educativo&quot;</span>).bind(<span class="stringliteral">&#39;keyup click focusin&#39;</span>, <span class="keyword">function</span>(evento){</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            <span class="keywordflow">if</span>(evento.which != 27){</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                var v_centro_educativo = $(<span class="keyword">this</span>).val();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                $.post(<span class="stringliteral">&#39;&lt;?= base_url(&#39;</span>index.php/ajax/lista_centros_educativos<span class="stringliteral">&#39;); ?&gt;&#39;</span>, {nombre_centro_educativo: v_centro_educativo.length &gt; 0 ? v_centro_educativo : <span class="stringliteral">&#39;%&#39;</span>}, <span class="keyword">function</span>(resultado){</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                    if(resultado != <span class="stringliteral">&#39;&#39;</span>){</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                        var centros_educativos = jQuery.parseJSON(resultado);</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                        var clase = centros_educativos.length &lt; 5 ? <span class="stringliteral">&quot;contenedor-centro_educativo-1&quot;</span> : <span class="stringliteral">&quot;contenedor-centro_educativo-2&quot;</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                        $(<span class="stringliteral">&#39;#resultado-centro_educativo&#39;</span>).show();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                        $(<span class="stringliteral">&#39;#resultado-centro_educativo&#39;</span>).empty();</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                        $(<span class="stringliteral">&quot;#resultado-centro_educativo&quot;</span>).append($(<span class="stringliteral">&quot;&lt;div&gt;&lt;/div&gt;&quot;</span>).attr({<span class="stringliteral">&quot;class&quot;</span>: clase}));</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        $.each(centros_educativos, function(respuesta, centro_educativo){</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                            $(<span class="stringliteral">&quot;.&quot;</span> + clase).append($(<span class="stringliteral">&quot;&lt;p&gt;&lt;/p&gt;&quot;</span>).attr({<span class="stringliteral">&quot;onclick&quot;</span>: <span class="stringliteral">&quot;seleccionar_centro_educativo(&#39;&quot;</span> + centro_educativo.nombre_centro_educativo + <span class="stringliteral">&quot;&#39;);&quot;</span>}).text(centro_educativo.nombre_centro_educativo));</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                        });</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    }</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;                    <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;                        $(<span class="stringliteral">&#39;#resultado-centro_educativo&#39;</span>).hide();</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;                    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                });</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;            <span class="keywordflow">else</span>{</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                $(<span class="keyword">this</span>).val(<span class="stringliteral">&#39;&#39;</span>);</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                $(<span class="stringliteral">&#39;#resultado-centro_educativo&#39;</span>).hide();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            }</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;            buscar_centro_educativo($(<span class="keyword">this</span>).val());</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        });</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        $(<span class="stringliteral">&quot;#centro_educativo&quot;</span>).bind(<span class="stringliteral">&#39;focusout&#39;</span>, <span class="keyword">function</span>(){</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            buscar_centro_educativo($(<span class="keyword">this</span>).val());</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        });</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    });</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keyword">function</span> seleccionar_centro_educativo(nombre){</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;        $(<span class="stringliteral">&#39;#centro_educativo&#39;</span>).val(nombre);</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;        buscar_centro_educativo(nombre);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;        $(<span class="stringliteral">&#39;#resultado-centro_educativo&#39;</span>).hide();</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    }</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keyword">function</span> buscar_centro_educativo(nombre){</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        $(<span class="stringliteral">&#39;#data-tables-usuarios&#39;</span>).DataTable().column(0).search(nombre).draw();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    }</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;&lt;/script&gt;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;&lt;?php $this-&gt;session-&gt;set_userdata(<span class="stringliteral">&#39;uri_usuarios&#39;</span>, uri_string()); ?&gt;</div>
+<div class="ttc" id="consultar__usuarios__view_8php_html_a27ab1abbd79ce3498c170958c4a10013"><div class="ttname"><a href="../../d6/d79/consultar__usuarios__view_8php.html#a27ab1abbd79ce3498c170958c4a10013">$centro_educativo</a></div><div class="ttdeci">$centro_educativo</div><div class="ttdef"><b>Definition:</b> <a href="../../d6/d79/consultar__usuarios__view_8php_source.html#l00002">consultar_usuarios_view.php:2</a></div></div>
+<div class="ttc" id="classUsuarios_html"><div class="ttname"><a href="../../df/daa/classUsuarios.html">Usuarios</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d0a/usuarios_8php_source.html#l00003">usuarios.php:3</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+DocumentaciÃ³n SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>

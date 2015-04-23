@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAPlibraries/tcpdf/config/tcpdf_config.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_e10108077aaa9f056d90648ede8de600.html">libraries</a></li><li class="navelem"><a class="el" href="../../dir_7bc1fe1325c75e08aa7f68b2bd45cfd5.html">tcpdf</a></li><li class="navelem"><a class="el" href="../../dir_1dcfe36de5c799ef3cc41ffd770fee36.html">config</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">tcpdf_config.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../d5/dc0/tcpdf__config_8php.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">//============================================================+</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// File name   : tcpdf_config.php</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Begin       : 2004-06-11</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// Last Update : 2014-09-02</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// Description : Configuration file for TCPDF.</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">// Author      : Nicola Asuni - Tecnick.com LTD - www.tecnick.com - info@tecnick.com</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">// License     : GNU-LGPL v3 (http://www.gnu.org/copyleft/lesser.html)</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">// -------------------------------------------------------------------</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">// Copyright (C) 2004-2014  Nicola Asuni - Tecnick.com LTD</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// This file is part of TCPDF software library.</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">// TCPDF is free software: you can redistribute it and/or modify it</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">// under the terms of the GNU Lesser General Public License as</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="comment">// published by the Free Software Foundation, either version 3 of the</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="comment">// License, or (at your option) any later version.</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">// TCPDF is distributed in the hope that it will be useful, but</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="comment">// WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">// See the GNU Lesser General Public License for more details.</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">// You should have received a copy of the GNU Lesser General Public License</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">// along with TCPDF.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="comment">//</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="comment">// See LICENSE.TXT file for more information.</span></div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">//============================================================+</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">// IMPORTANT:</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">// If you define the constant K_TCPDF_EXTERNAL_CONFIG, all the following settings will be ignored.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// If you use the tcpdf_autoconfig.php, then you can overwrite some values here.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">//define (&#39;K_PATH_MAIN&#39;, &#39;&#39;);</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">//define (&#39;K_PATH_URL&#39;, &#39;&#39;);</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">//define (&#39;K_PATH_FONTS&#39;, K_PATH_MAIN.&#39;fonts/&#39;);</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">//define (&#39;K_PATH_IMAGES&#39;, &#39;&#39;);</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a82a1d9035f18432d5e17e0e56d188a52">   67</a></span>&#160;define (<span class="stringliteral">&#39;K_PATH_IMAGES&#39;</span>, base_url(<span class="stringliteral">&#39;resources/img/&#39;</span>));</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">//define (&#39;PDF_HEADER_LOGO&#39;, &#39;&#39;);</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#aa43b014f6f3ca5e436c4fc5ab06c8aa5">   74</a></span>&#160;define (<span class="stringliteral">&#39;PDF_HEADER_LOGO&#39;</span>, <span class="stringliteral">&#39;mined.png&#39;</span>);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="comment">//define (&#39;PDF_HEADER_LOGO_WIDTH&#39;, 0);</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="comment">//define (&#39;K_PATH_CACHE&#39;, &#39;/tmp/&#39;);</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#aec29ec2331d6b086a2aa2316be8b47f1">   89</a></span>&#160;define (<span class="stringliteral">&#39;K_BLANK_IMAGE&#39;</span>, <span class="stringliteral">&#39;_blank.png&#39;</span>);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;</div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a48a70f03a2f0cc37d8ff07dfdef9adca">   94</a></span>&#160;define (<span class="stringliteral">&#39;PDF_PAGE_FORMAT&#39;</span>, <span class="stringliteral">&#39;A4&#39;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;</div>
+<div class="line"><a name="l00099"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#ac6b4034c3b7c856795c90fa29d24366b">   99</a></span>&#160;define (<span class="stringliteral">&#39;PDF_PAGE_ORIENTATION&#39;</span>, <span class="charliteral">&#39;P&#39;</span>);</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a7d5e3a8282cba5a810dfbcefa1ecd225">  104</a></span>&#160;define (<span class="stringliteral">&#39;PDF_CREATOR&#39;</span>, <span class="stringliteral">&#39;TCPDF&#39;</span>);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a86e5a205832e5759321fda51662f9df3">  109</a></span>&#160;define (<span class="stringliteral">&#39;PDF_AUTHOR&#39;</span>, <span class="stringliteral">&#39;TCPDF&#39;</span>);</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a58fc362148cafa7e66cbf47f025db687">  114</a></span>&#160;define (<span class="stringliteral">&#39;PDF_HEADER_TITLE&#39;</span>, <span class="stringliteral">&#39;TCPDF Example&#39;</span>);</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">//define (&#39;PDF_HEADER_STRING&#39;, &quot;by Nicola Asuni - Tecnick.com\nwww.tcpdf.org&quot;);</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a4bffcf3901abca59b0e211c989dcd700">  120</a></span>&#160;define (<span class="stringliteral">&#39;PDF_HEADER_STRING&#39;</span>, <span class="stringliteral">&quot;Sistema Informático para Apoyar el Control y Administración de Capacitaciones&quot;</span>);</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;</div>
+<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#ad9051ac3bb4636a64250aa3313ae97ee">  125</a></span>&#160;define (<span class="stringliteral">&#39;PDF_UNIT&#39;</span>, <span class="stringliteral">&#39;cm&#39;</span>);</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;</div>
+<div class="line"><a name="l00130"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a6967da1488347cdae4e6e60578f413d0">  130</a></span>&#160;define (<span class="stringliteral">&#39;PDF_MARGIN_HEADER&#39;</span>, 5);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;</div>
+<div class="line"><a name="l00135"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a40c9c00bdcd3338e63714212adc72778">  135</a></span>&#160;define (<span class="stringliteral">&#39;PDF_MARGIN_FOOTER&#39;</span>, 5);</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;</div>
+<div class="line"><a name="l00140"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a8969b13992173181aa447ad36d9f49c1">  140</a></span>&#160;define (<span class="stringliteral">&#39;PDF_MARGIN_TOP&#39;</span>, 5);</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a810f46b478a731d8b2d30339fcbfa3a1">  145</a></span>&#160;define (<span class="stringliteral">&#39;PDF_MARGIN_BOTTOM&#39;</span>, 5);</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;</div>
+<div class="line"><a name="l00150"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#af1f4d5715609d494ab59647124bb720b">  150</a></span>&#160;define (<span class="stringliteral">&#39;PDF_MARGIN_LEFT&#39;</span>, 5);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;</div>
+<div class="line"><a name="l00155"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a4782f71ca8482bc3c71854496a02ac40">  155</a></span>&#160;define (<span class="stringliteral">&#39;PDF_MARGIN_RIGHT&#39;</span>, 5);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;</div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a24c5be6597b6e1ffd1a8011e2917ddf7">  160</a></span>&#160;define (<span class="stringliteral">&#39;PDF_FONT_NAME_MAIN&#39;</span>, <span class="stringliteral">&#39;helvetica&#39;</span>);</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;</div>
+<div class="line"><a name="l00165"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#afc75e6123c7ed8ce5b1885f1a209db98">  165</a></span>&#160;define (<span class="stringliteral">&#39;PDF_FONT_SIZE_MAIN&#39;</span>, 13);</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;</div>
+<div class="line"><a name="l00170"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#abb5a1671295dcc5adab670400514bd7d">  170</a></span>&#160;define (<span class="stringliteral">&#39;PDF_FONT_NAME_DATA&#39;</span>, <span class="stringliteral">&#39;helvetica&#39;</span>);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;</div>
+<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#ac4ecd6096280de577002af18d4855538">  175</a></span>&#160;define (<span class="stringliteral">&#39;PDF_FONT_SIZE_DATA&#39;</span>, 13);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;</div>
+<div class="line"><a name="l00180"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a85c01a19e840c97b685f0be9bc0d6956">  180</a></span>&#160;define (<span class="stringliteral">&#39;PDF_FONT_MONOSPACED&#39;</span>, <span class="stringliteral">&#39;courier&#39;</span>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;</div>
+<div class="line"><a name="l00185"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#affb4eec14f1ad3e097cc83c2981c6e7a">  185</a></span>&#160;define (<span class="stringliteral">&#39;PDF_IMAGE_SCALE_RATIO&#39;</span>, 1.25);</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;</div>
+<div class="line"><a name="l00190"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a9fae13b0caa3de4ed7f0b799c59dd8f9">  190</a></span>&#160;define(<span class="stringliteral">&#39;HEAD_MAGNIFICATION&#39;</span>, 1.1);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;</div>
+<div class="line"><a name="l00195"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#aa677efad07ef009287d0490aa2eb21a2">  195</a></span>&#160;define(<span class="stringliteral">&#39;K_CELL_HEIGHT_RATIO&#39;</span>, 1.5);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;</div>
+<div class="line"><a name="l00200"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a05cd1e759bc39292a316b6918417429c">  200</a></span>&#160;define(<span class="stringliteral">&#39;K_TITLE_MAGNIFICATION&#39;</span>, 1.3);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;</div>
+<div class="line"><a name="l00205"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#af5215614354b049d4e070e92194b8acc">  205</a></span>&#160;define(<span class="stringliteral">&#39;K_SMALL_RATIO&#39;</span>, 2/3);</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;</div>
+<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a47cb3659c4650130ba258727ca17f510">  210</a></span>&#160;define(<span class="stringliteral">&#39;K_THAI_TOPCHARS&#39;</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a2caf7ac30acb5a1d373ad91fadd6b0df">  216</a></span>&#160;define(<span class="stringliteral">&#39;K_TCPDF_CALLS_IN_HTML&#39;</span>, <span class="keyword">true</span>);</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;</div>
+<div class="line"><a name="l00221"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a08375f80cec3cc396da966460d2fdb64">  221</a></span>&#160;define(<span class="stringliteral">&#39;K_TCPDF_THROW_EXCEPTION_ERROR&#39;</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;</div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="../../d5/dc0/tcpdf__config_8php.html#a5b8d3c0b1e7d2d59ef7dbaec35f24301">  226</a></span>&#160;define(<span class="stringliteral">&#39;K_TIMEZONE&#39;</span>, <span class="stringliteral">&#39;UTC&#39;</span>);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;<span class="comment">//============================================================+</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;<span class="comment">// END OF FILE</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;<span class="comment">//============================================================+</span></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>

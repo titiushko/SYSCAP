@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.9.1"/>
+<title>SYSCAP: Fichero Fuente SYSCAP/application/models/municipios_model.php</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../search/searchdata.js"></script>
+<script type="text/javascript" src="../../search/search.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() { init_search(); });
+</script>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">SYSCAP
+   &#160;<span id="projectnumber">4.2.1</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.9.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "../../search",false,'Buscar');
+</script>
+  <div id="navrow1" class="tabs">
+    <ul class="tablist">
+      <li><a href="../../index.html"><span>Página&#160;principal</span></a></li>
+      <li><a href="../../annotated.html"><span>Estructuras&#160;de&#160;Datos</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Archivos</span></a></li>
+      <li>
+        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="../../search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="../../files.html"><span>Lista&#160;de&#160;archivos</span></a></li>
+      <li><a href="../../globals.html"><span>Globales</span></a></li>
+    </ul>
+  </div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_b16de32928bda842420f443066771e9c.html">syscap</a></li><li class="navelem"><a class="el" href="../../dir_1ad257335a35d4d2c12c935abad2321e.html">application</a></li><li class="navelem"><a class="el" href="../../dir_560a2433a989a7bc22cbf7568f0e17bc.html">models</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">municipios_model.php</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="../../dc/d53/municipios__model_8php.html">Ir a la documentación de este archivo.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;&lt;?php <span class="keywordflow">if</span>(! defined(<span class="stringliteral">&#39;BASEPATH&#39;</span>)) exit(<span class="stringliteral">&#39;No direct script access allowed&#39;</span>);</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
+<div class="line"><a name="l00006"></a><span class="lineno"><a class="line" href="../../d5/d73/classMunicipios__model.html">    6</a></span>&#160;<span class="keyword">class </span><a class="code" href="../../d5/d73/classMunicipios__model.html">Municipios_model</a> <span class="keyword">extends</span> CI_Model{</div>
+<div class="line"><a name="l00007"></a><span class="lineno"><a class="line" href="../../d5/d73/classMunicipios__model.html#a095c5d389db211932136b53f25f39685">    7</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d73/classMunicipios__model.html#a095c5d389db211932136b53f25f39685">__construct</a>(){</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;        parent::__construct();</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;        $this-&gt;load-&gt;database();</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    }</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../d5/d73/classMunicipios__model.html#ad66616b6d6b8180102af683cf3a638e6">   19</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d73/classMunicipios__model.html#ad66616b6d6b8180102af683cf3a638e6">lista_municipios</a>(){</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        $lista_municipios[<span class="stringliteral">&#39;&#39;</span>] = <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;id_municipio, nombre_municipio&#39;</span>)-&gt;order_by(<span class="stringliteral">&#39;nombre_municipio&#39;</span>, <span class="stringliteral">&#39;asc&#39;</span>)-&gt;get(<span class="stringliteral">&#39;municipios&#39;</span>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;        <span class="keywordflow">foreach</span>($query-&gt;result() as $municipio){</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;            $lista_municipios[$municipio-&gt;id_municipio] = utf8($municipio-&gt;nombre_municipio);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <span class="keywordflow">return</span> $lista_municipios;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    }</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    </div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="../../d5/d73/classMunicipios__model.html#a070db58896091ad00bc7af52837deca2">   36</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d73/classMunicipios__model.html#a070db58896091ad00bc7af52837deca2">nombre_municipio</a>($codigo_municipio){</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;nombre_municipio&#39;</span>)-&gt;where(<span class="stringliteral">&#39;id_municipio&#39;</span>, $codigo_municipio)-&gt;get(<span class="stringliteral">&#39;municipios&#39;</span>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <span class="keywordflow">if</span>($query-&gt;row())</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            <span class="keywordflow">return</span> $query-&gt;result()[0]-&gt;nombre_municipio;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            <span class="keywordflow">return</span> <span class="stringliteral">&#39;&#39;</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="../../d5/d73/classMunicipios__model.html#a96f059a079b901e7c515151153534fcb">   48</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d73/classMunicipios__model.html#a96f059a079b901e7c515151153534fcb">validar_municipio</a>($codigo_municipio, $codigo_departamento){</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        $query = $this-&gt;db-&gt;get_where(<span class="stringliteral">&#39;municipios&#39;</span>, array(<span class="stringliteral">&#39;id_municipio&#39;</span> =&gt; $codigo_municipio, <span class="stringliteral">&#39;id_departamento&#39;</span> =&gt; $codigo_departamento));</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="../../d5/d73/classMunicipios__model.html#aa9c278d6760a246c5c4922b6d268c8a1">   57</a></span>&#160;    <span class="keyword">function</span> <a class="code" href="../../d5/d73/classMunicipios__model.html#aa9c278d6760a246c5c4922b6d268c8a1">lista_municipios_departamento</a>($codigo_departamento){</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        $query = $this-&gt;db-&gt;select(<span class="stringliteral">&#39;id_municipio, nombre_municipio&#39;</span>)-&gt;order_by(<span class="stringliteral">&#39;nombre_municipio&#39;</span>, <span class="stringliteral">&#39;asc&#39;</span>)-&gt;get_where(<span class="stringliteral">&#39;municipios&#39;</span>, array(<span class="stringliteral">&#39;id_departamento&#39;</span> =&gt; $codigo_departamento));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> $query-&gt;result();</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">/* End of file municipios_model.php */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">/* Location: ./application/models/municipios_model.php */</span></div>
+<div class="ttc" id="classMunicipios__model_html_a095c5d389db211932136b53f25f39685"><div class="ttname"><a href="../../d5/d73/classMunicipios__model.html#a095c5d389db211932136b53f25f39685">Municipios_model\__construct</a></div><div class="ttdeci">__construct()</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d53/municipios__model_8php_source.html#l00007">municipios_model.php:7</a></div></div>
+<div class="ttc" id="classMunicipios__model_html"><div class="ttname"><a href="../../d5/d73/classMunicipios__model.html">Municipios_model</a></div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d53/municipios__model_8php_source.html#l00006">municipios_model.php:6</a></div></div>
+<div class="ttc" id="classMunicipios__model_html_a96f059a079b901e7c515151153534fcb"><div class="ttname"><a href="../../d5/d73/classMunicipios__model.html#a96f059a079b901e7c515151153534fcb">Municipios_model\validar_municipio</a></div><div class="ttdeci">validar_municipio($codigo_municipio, $codigo_departamento)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d53/municipios__model_8php_source.html#l00048">municipios_model.php:48</a></div></div>
+<div class="ttc" id="classMunicipios__model_html_aa9c278d6760a246c5c4922b6d268c8a1"><div class="ttname"><a href="../../d5/d73/classMunicipios__model.html#aa9c278d6760a246c5c4922b6d268c8a1">Municipios_model\lista_municipios_departamento</a></div><div class="ttdeci">lista_municipios_departamento($codigo_departamento)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d53/municipios__model_8php_source.html#l00057">municipios_model.php:57</a></div></div>
+<div class="ttc" id="classMunicipios__model_html_ad66616b6d6b8180102af683cf3a638e6"><div class="ttname"><a href="../../d5/d73/classMunicipios__model.html#ad66616b6d6b8180102af683cf3a638e6">Municipios_model\lista_municipios</a></div><div class="ttdeci">lista_municipios()</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d53/municipios__model_8php_source.html#l00019">municipios_model.php:19</a></div></div>
+<div class="ttc" id="classMunicipios__model_html_a070db58896091ad00bc7af52837deca2"><div class="ttname"><a href="../../d5/d73/classMunicipios__model.html#a070db58896091ad00bc7af52837deca2">Municipios_model\nombre_municipio</a></div><div class="ttdeci">nombre_municipio($codigo_municipio)</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/d53/municipios__model_8php_source.html#l00036">municipios_model.php:36</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Documentación SYSCAP 4.2.1 - Abril 2015
+</small></address>
+</body>
+</html>
