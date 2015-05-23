@@ -94,6 +94,13 @@ if(@$_GET["action"]=="getTime"){
 	<body>
 		<div class="container">
 			<div class="row">
+				<div class="col-sm-12 col-lg-12 text-center">
+					<img src="sources/img/after_defense.gif" class="img">
+				</div>
+			</div>
+			<div class="row"><div class="col-sm-12 col-lg-12">&nbsp;</div></div>
+			<div class="row"><div class="col-sm-12 col-lg-12">&nbsp;</div></div>
+			<div class="row">
 				<a target="_blank" href="http://178.62.28.189/syscap">
 					<div class="col-sm-3 col-lg-3">
 						<div class="dash-unit">
